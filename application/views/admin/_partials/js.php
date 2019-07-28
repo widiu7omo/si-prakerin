@@ -3,6 +3,9 @@
 <script src="<?php echo base_url('aset/vendor/js-cookie/js.cookie.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/jquery.scrollbar/jquery.scrollbar.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js') ?>"></script>
+<script src="<?php echo base_url('aset/vendor/chart.js/dist/Chart.min.js') ?>"></script>
+<script src="<?php echo base_url('aset/vendor/chart.js/dist/Chart.extension.js') ?>"></script>
+<script src="<?php echo base_url('aset/vendor/chart.js/dist/chartjs-plugin-datalabels.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/lavalamp/js/jquery.lavalamp.min.js') ?>"></script>
 <!-- Optional JS -->
 <script src="<?php echo base_url('aset/vendor/datatables.net/js/jquery.dataTables.min.js') ?>"></script>

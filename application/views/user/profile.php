@@ -140,7 +140,7 @@
 									<div class="col-8">
 										<h3 class="mb-0">Edit profile </h3>
 									</div>
-									<div class="col-4 text-right" id="container-button">
+									<div class="col-4 text-right">
 										<button type="button" id="btn-edit" class="btn btn-sm btn-primary"
 											onclick="enableInput()">Edit</button>
 									</div>
@@ -209,11 +209,17 @@
 											<div class="form-group">
 												<label class="form-control-label" for="input-city">Jenis
 													Kelamin</label>
+												<?php
+												$jk = null;
+												if(isset($profile->jenis_kelamin_mhs)){
+													$jk = $profile->jenis_kelamin_mhs;
+												}
+												?>
 												<select disabled name="jenis_kelamin_mhs" class="form-control"
-													placeholder="Laki-laki/Perempuan"
-													value="<?php echo isset($profile->jenis_kelamin_mhs)?$profile->jenis_kelamin_mhs:null ?>">
-													<option value="Laki-laki">Laki-laki</option>
-													<option value="Perempuan">Perempuan</option>
+													placeholder="Laki-laki/Perempuan">
+													<?php echo !$jk?'<option selected value="NULL">Jenis Kelamin</option>':null?>
+													<option <?php echo $jk == 'Laki-laki'?"selected":null ?> value="Laki-laki">Laki-laki</option>
+													<option <?php echo $jk == 'Perempuan'?"selected":null ?> value="Perempuan">Perempuan</option>
 												</select>
 											</div>
 										</div>
@@ -231,8 +237,8 @@
 												<label class="form-control-label" for="input-country">Tanggal
 													Lahir</label>
 												<input readonly type="text" name="tanggal_lahir_mhs"
-													id="tanggal_lahir_mhs" class="form-control datepicker"
-													placeholder="Pilih Tanggal"
+													id="tanggal_lahir_mhs" class="form-control"
+													placeholder="Pilih Tanggal" autocomplete="off"
 													value="<?php echo isset($profile->tanggal_lahir_mhs)?$profile->tanggal_lahir_mhs:null ?>">
 											</div>
 										</div>
@@ -263,6 +269,12 @@
 													type="text">
 											</div>
 										</div>
+										<div class="col-md-12">
+											<div class="d-flex justify-content-end" id="container-button">
+
+											</div>
+										</div>
+
 									</div>
 								</div>
 
@@ -279,6 +291,12 @@
 
 	<?php $this->load->view('user/_partials/js'); ?>
 	<script>
+		($(function(){
+		    $('#tanggal_lahir_mhs').datepicker({
+                startDate:"-60y",
+			    format:"yyyy-mm-dd"
+		    })
+		}));
 		function enableInput() {
 			$('input[name=nama_mahasiswa]').prop('readonly', false);
 			$('textarea[name=alamat_mhs]').prop('readonly', false);

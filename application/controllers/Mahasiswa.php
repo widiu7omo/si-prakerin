@@ -135,41 +135,47 @@ class Mahasiswa extends MY_Controller {
 
 
 	}
-	//status magang mahasiswa
-	public function index_status_magang(){
-		$join = [
-			['tb_program_studi tp','tp.id_program_studi = tm.id_program_studi','inner'],
-			['tb_mhs_pilih_perusahaan pilih','pilih.nim = tm.nim','left outer']
-		];
-		$belum = datajoin( '(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tm', 'pilih.nim is null','tm.*,tp.nama_program_studi,0 as status',$join);
-		$sudah = datajoin( '(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tm', 'pilih.nim is not null','tm.*,tp.nama_program_studi,1 as status ',$join);
 
-		$data['mahasiswas'] = array_merge( $belum,$sudah);
-		$data['sudah'] = count($sudah);
-		$data['belum'] = count($belum);
-		$data['all'] = count(array_merge( $belum,$sudah));
-		$this->load->view('admin/mahasiswa_status',$data);
+	//status magang mahasiswa
+	public function index_status_magang() {
+		$join  = array(
+			array( 'tb_program_studi tp', 'tp.id_program_studi = tm.id_program_studi', 'inner' ),
+			array( 'tb_mhs_pilih_perusahaan pilih', 'pilih.nim = tm.nim', 'left outer' )
+		);
+		$belum = datajoin( '(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tm', 'pilih.nim is null', 'tm.*,tp.nama_program_studi,0 as status', $join );
+		$sudah = datajoin( '(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tm', 'pilih.nim is not null', 'tm.*,tp.nama_program_studi,1 as status ', $join );
+
+		$data['mahasiswas'] = array_merge( $belum, $sudah );
+		$data['sudah']      = count( $sudah );
+		$data['belum']      = count( $belum );
+		$data['all']        = count( array_merge( $belum, $sudah ) );
+		$this->load->view( 'admin/mahasiswa_status', $data );
 	}
+
 	//sidang
 
-	public function index_sidang(){
-		var_dump("UNDER DEVELOPMENT");
+	public function index_sidang() {
+		var_dump( "UNDER DEVELOPMENT" );
 	}
 
 	//fix magang
 	public function index_fixmagang() {
-		$join               = [];
-		$join[0]            = [ '(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tb_mahasiswa', 'tb_mahasiswa.nim = tb_mhs_pilih_perusahaan.nim', 'inner' ];
-		$join[1]            = [
+		$join               = array();
+		$join[0]            = array(
+			'(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tb_mahasiswa',
+			'tb_mahasiswa.nim = tb_mhs_pilih_perusahaan.nim',
+			'inner'
+		);
+		$join[1]            = array(
 			'tb_perusahaan',
 			'tb_perusahaan.id_perusahaan = tb_mhs_pilih_perusahaan.id_perusahaan',
 			'inner'
-		];
-		$join[2]            = [
+		);
+		$join[2]            = array(
 			'tb_program_studi',
 			'tb_program_studi.id_program_studi = tb_perusahaan.id_program_studi',
 			'left outer'
-		];
+		);
 		$data['mahasiswas'] = $this->pilihperusahaan_model->getAll( null, null, $join );//need filter only magang
 		$this->load->view( 'admin/mahasiswa_magang_fix', $data );
 
@@ -254,6 +260,10 @@ class Mahasiswa extends MY_Controller {
 			$where['id_perusahaan'] = $id;
 			$data ['status']        = 'tolak';
 			$this->pengajuan_model->update_multi( $data, $where );
+			$nims = masterdata( 'tb_perusahaan_sementara',array('id_perusahaan'=>$id),'nim',true);
+			foreach ($nims as $nim){
+				dynamic_insert( 'tb_history_pemilihan', array('nim'=>$nim->nim,'id_perusahaan'=>$id));
+			}
 		}
 		redirect( site_url( 'mahasiswa?m=pengajuan' ) );
 
@@ -276,37 +286,39 @@ class Mahasiswa extends MY_Controller {
 		}
 	}
 
+	//ajax execution
 	public function daftar_pengajuan() {
 		$where['tb_perusahaan.status_perusahaan'] = 'whitelist';
-		$join                                     = [
+		$join                                     = array(
 			'tb_program_studi',
 			'tb_perusahaan.id_program_studi=tb_program_studi.id_program_studi',
 			'left outer'
-		];
-		$select                                   = [
+		);
+		$select                                   = array(
 			'id_perusahaan',
 			'nama_perusahaan',
 			'kuota_pkl',
 			'tb_program_studi.nama_program_studi',
-		];
+		);
 		$data['perusahaans']                      = datajoin( 'tb_perusahaan', $where, $select, $join, null );
 		foreach ( $data['perusahaans'] as $index => $perusahaan ) {
-			$where                                    = [
+			$where                                    = array(
 				'tb_perusahaan.status_perusahaan'       => 'whitelist',
 				'tb_perusahaan_sementara.id_perusahaan' => $perusahaan->id_perusahaan
-			];
-			$joins[0]                                 = [
+			);
+			$joins[0]                                 = array(
 				'tb_perusahaan',
 				'tb_perusahaan.id_perusahaan=tb_perusahaan_sementara.id_perusahaan',
 				'left outer'
-			];
-			$joins[1]                                 = [
+			);
+			$joins[1]                                 = array(
 				'(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik)tb_mahasiswa',
 				'tb_mahasiswa.nim=tb_perusahaan_sementara.nim',
 				'inner'
-			];
-			$select                                   = [ 'nama_mahasiswa', 'tanggal_pengajuan', 'status' ];
-			$data['perusahaans'][ $index ]->mahasiswa = datajoin( 'tb_perusahaan_sementara', $where, $select, $joins, null );
+			);
+			$select                                   = array( 'nama_mahasiswa', 'tanggal_pengajuan', 'status' );
+			$order                                    = 'tanggal_pengajuan';
+			$data['perusahaans'][ $index ]->mahasiswa = datajoin( 'tb_perusahaan_sementara', $where, $select, $joins, null ,$order);
 		}
 		//filter array , purge mahasiswa = []
 
@@ -315,7 +327,7 @@ class Mahasiswa extends MY_Controller {
 				return $perusahaan;
 			}
 		} );
-		$ajuan['perusahaans'] = [];
+		$ajuan['perusahaans'] = array();
 		foreach ( $pengajuans as $pengajuan ) {
 			array_push( $ajuan['perusahaans'], $pengajuan );
 		}
@@ -368,7 +380,7 @@ class Mahasiswa extends MY_Controller {
 	}
 
 	public function print_pengajuan() {
-		$get = $this->input->get();
+		$get  = $this->input->get();
 		$post = $this->input->post();
 		//id perusahaan
 
@@ -402,12 +414,12 @@ class Mahasiswa extends MY_Controller {
 		];
 		$data['permohonan']    = datajoin( 'tb_perusahaan_sementara', $where, $select, $joins, null );
 		$data['id_perusahaan'] = $get['id'];
-		$data['nomor_surat'] = masterdata( 'tb_jenis_surat', 'nama_jenis_surat = "Permohonan Magang"','suffix_no_surat');
+		$data['nomor_surat']   = masterdata( 'tb_jenis_surat', 'nama_jenis_surat = "Permohonan Magang"', 'suffix_no_surat' );
 //		var_dump( $data);
 		if ( isset( $post['button'] ) ) {
 			//update status proses permohonan if save is define
 			$id['id_perusahaan'] = $post['id'];
-			$data['urut'] = $post['urut'];
+			$data['urut']        = $post['urut'];
 			$update['status']    = 'cetak';
 			$this->pengajuan_model->update_multi( $update, $id );
 
@@ -453,12 +465,15 @@ class Mahasiswa extends MY_Controller {
 		$validation->set_rules( $mahasiswa->rules() );
 		if ( $validation->run() ) {
 			if ( $mahasiswa->insert() ) {
-				$this->session->set_flashdata( 'notif',(object) [
+				$this->session->set_flashdata( 'notif', (object) [
 					'message' => 'Data berhasil disimpan',
 					'type'    => 'success'
 				] );
 			} else {
-				$this->session->set_flashdata( 'notif',(object) [ 'message' => 'Data gagal disimpan', 'type' => 'fail' ] );
+				$this->session->set_flashdata( 'notif', (object) [
+					'message' => 'Data gagal disimpan',
+					'type'    => 'fail'
+				] );
 			}
 			redirect( 'mahasiswa?m=magang' );
 		}
@@ -473,14 +488,16 @@ class Mahasiswa extends MY_Controller {
 		$validation = $this->form_validation;
 		$validation->set_rules( $mahasiswa->rules() );
 		if ( $validation->run() ) {
-			if($mahasiswa->update()){
-				$this->session->set_flashdata( 'notif',(object) [
+			if ( $mahasiswa->update() ) {
+				$this->session->set_flashdata( 'notif', (object) [
 					'message' => 'Data berhasil disimpan',
 					'type'    => 'success'
 				] );
-			}
-			else{
-				$this->session->set_flashdata( 'notif',(object) [ 'message' => 'Data gagal disimpan', 'type' => 'fail' ] );
+			} else {
+				$this->session->set_flashdata( 'notif', (object) [
+					'message' => 'Data gagal disimpan',
+					'type'    => 'fail'
+				] );
 			}
 			redirect( 'mahasiswa?m=magang' );
 
@@ -497,11 +514,13 @@ class Mahasiswa extends MY_Controller {
 			show_404();
 		}
 		if ( $this->mahasiswa_model->delete( $id ) ) {
-			$this->session->set_flashdata( 'notif',(object) [ 'message' => 'Data berhasil dihapus', 'type' => 'success' ] );
+			$this->session->set_flashdata( 'notif', (object) [
+				'message' => 'Data berhasil dihapus',
+				'type'    => 'success'
+			] );
 			redirect( site_url( 'mahasiswa?m=magang' ) );
-		}
-		else{
-			$this->session->set_flashdata( 'notif',(object) [ 'message' => 'Data gagal dihapus', 'type' => 'fail' ] );
+		} else {
+			$this->session->set_flashdata( 'notif', (object) [ 'message' => 'Data gagal dihapus', 'type' => 'fail' ] );
 		}
 	}
 

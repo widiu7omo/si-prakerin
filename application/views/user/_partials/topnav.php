@@ -1,5 +1,12 @@
 <?php
 $this->load->helper('notification_helper');
+$nickname = 'User';
+if($_SESSION['level'] == 'mahasiswa'){
+	$nim = $this->session->userdata( 'id' );
+	$user = masterdata( 'tb_mahasiswa',"nim = '$nim'",'nama_mahasiswa');
+	$exploded_user = explode( " ", $user->nama_mahasiswa);
+	$nickname = $exploded_user[0];
+}
 $countNotification = count_notification($this->session->userdata('id'),0);
 $dataNotification = get_notification($this->session->userdata('id'),0);
  ?>
@@ -147,13 +154,13 @@ $dataNotification = get_notification($this->session->userdata('id'),0);
 								<img alt="Image placeholder" src="http://i.pravatar.cc/200">
 							</span>
 							<div class="media-body ml-2 d-none d-lg-block">
-								<span class="mb-0 text-sm  font-weight-bold"></span>
+								<span class="mb-0 text-sm  font-weight-bold"><?php echo $nickname?></span>
 							</div>
 						</div>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<div class="dropdown-header noti-title">
-							<h6 class="text-overflow m-0">Welcome!</h6>
+							<h6 class="text-overflow m-0">Welcome! <?php echo $nickname ?></h6>
 						</div>
 						<a href="<?php echo site_url('user/profile') ?>" class="dropdown-item">
 							<i class="ni ni-single-02"></i>

@@ -9,7 +9,7 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         //Do your magic here
         // $this->load->model('Model_dashboard');
-	    $this->load->helper('notification');
+	    $this->load->helper(array('notification','master'));
     }
     //dashboard admin
     public function index()

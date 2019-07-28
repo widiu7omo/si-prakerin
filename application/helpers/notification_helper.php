@@ -27,6 +27,7 @@ if ( ! function_exists('get_notification'))
             elseif($status == 1){
                 $ci->db->where(['status'=>$status]);
             }
+            $ci->db->order_by('waktu','DESC');
             return $ci->db->get()->result();
         }
 }

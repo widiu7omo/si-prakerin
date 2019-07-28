@@ -3,12 +3,16 @@
 
 <!-- Head PHP -->
 <?php $this->load->view( 'user/_partials/header.php' ); ?>
-<?php $this->load->helper( [ 'master', 'progress' ] );
-$get = $this->input->get();
+<?php $this->load->helper( array( 'master', 'progress' ) );
+$get      = $this->input->get();
 $nim      = $this->session->userdata( 'id' );
 $where    = "(status = 'proses' or status = 'terima' or status = 'cetak' or status = 'pending' or status = 'kirim') AND nim = '{$nim}'";
-$join     = [ 'tb_perusahaan', 'tb_perusahaan_sementara.id_perusahaan = tb_perusahaan.id_perusahaan', 'left outer' ];
-$select   = [ 'tb_perusahaan.nama_perusahaan', 'tb_perusahaan.id_perusahaan', 'tb_perusahaan_sementara.status' ];
+$join     = array(
+	'tb_perusahaan',
+	'tb_perusahaan_sementara.id_perusahaan = tb_perusahaan.id_perusahaan',
+	'left outer'
+);
+$select   = array( 'tb_perusahaan.nama_perusahaan', 'tb_perusahaan.id_perusahaan', 'tb_perusahaan_sementara.status' );
 $approval = datajoin( 'tb_perusahaan_sementara', $where, $select, $join );
 //    var_dump($countApproval);
 $exist         = false;
@@ -18,13 +22,13 @@ if ( count( $approval ) == 1 || count( $approval ) > 1 ) {
 	$id_perusahaan = $approval[0]->id_perusahaan;
 }
 function getTempMhs( $id ) {
-	$joins[0] = [
+	$joins[0] = array(
 		'tb_perusahaan',
 		'tb_perusahaan_sementara.id_perusahaan = tb_perusahaan.id_perusahaan',
 		'left outer'
-	];
-	$joins[1] = [ 'tb_mahasiswa', 'tb_perusahaan_sementara.nim = tb_mahasiswa.nim', 'left outer' ];
-	$select   = [ 'nama_mahasiswa' ];
+	);
+	$joins[1] = array( 'tb_mahasiswa', 'tb_perusahaan_sementara.nim = tb_mahasiswa.nim', 'left outer' );
+	$select   = array( 'nama_mahasiswa' );
 	$where    = "tb_perusahaan_sementara.id_perusahaan = {$id} 
 	              AND (tb_perusahaan_sementara.status = 'proses'
 	               OR tb_perusahaan_sementara.status = 'cetak'
@@ -71,7 +75,7 @@ function getTempMhs( $id ) {
 										   aria-controls="collapseExample">
 											Diterima
 										</a>
-										<a href="<?php echo site_url( 'mahasiswa/create' ) ?>"
+										<a href="<?php echo site_url( 'magang?m=pengajuan&status=decline&id=' . $approval[0]->id_perusahaan ) ?>"
 										   class="btn btn-sm btn-warning">Ditolak</a>
 									<?php endif; ?>
 								</div>
@@ -90,10 +94,6 @@ function getTempMhs( $id ) {
 													</div>
 												</div>
 											</div>
-											<!--                                            <div class="text-md-right align-content-end mt-3 mb-2">-->
-											<!--                                                <a id="btn_import" href="#"-->
-											<!--                                                   class="btn btn-success">Simpan</a>-->
-											<!--                                            </div>-->
 										</div>
 									</div>
 								</div>
@@ -121,6 +121,30 @@ function getTempMhs( $id ) {
 										aria-valuenow="<?php echo getProgress( isset( $approval[0] ) ? $approval[0]->status : null ) ?>"
 										aria-valuemin="0" aria-valuemax="100"
 										style="width: <?php echo getProgress( isset( $approval[0] ) ? $approval[0]->status : null ) ?>%;"></div>
+								</div>
+								<?php
+								$nim      = $this->session->userdata( 'id' );
+								$join     = array(
+									'tb_perusahaan as pr',
+									'pr.id_perusahaan = tb_history_pemilihan.id_perusahaan',
+									'LEFT OUTER'
+								);
+								$riwayats = datajoin( 'tb_history_pemilihan', "nim = '$nim'", 'pr.nama_perusahaan', $join );
+								?>
+								<?php if(count($riwayats) > 0):?>
+								<a class="btn btn-sm btn-primary" data-toggle="collapse"
+								   href="#collapse-history" role="button" aria-expanded="false"
+								   aria-controls="collapseExample">
+									Riwayat Pengajuan Perusahaan (Ditolak)
+								</a>
+								<?php endif;?>
+								<div class="collapse mt-3" id="collapse-history">
+									<ul class="list-group">
+										<?php foreach ( $riwayats as $key => $riwayat ): ?>
+											<li class="list-group-item text-danger h6"><?php echo $riwayat->nama_perusahaan ?></li>
+										<?php endforeach; ?>
+									</ul>
+
 								</div>
 							</div>
 						</div>
@@ -155,7 +179,7 @@ function getTempMhs( $id ) {
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fas fa-search"></i></span>
 									</div>
-									<?php echo form_hidden( array('m'=>'pengajuan'))?>
+									<?php echo form_hidden( array( 'm' => 'pengajuan' ) ) ?>
 									<input class="form-control" name="q" placeholder="Cari Perusahaan" type="text">
 								</div>
 							</div>
@@ -168,15 +192,18 @@ function getTempMhs( $id ) {
 				</div>
 			</div>
 			<div class="row">
-				<?php if(isset($get['q'])&&count($perusahaans)=== 0):?>
+				<?php if ( isset( $get['q'] ) && count( $perusahaans ) === 0 ): ?>
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h3>Pencarian untuk <span class="text-primary">"<?php echo $get['q'] ?>"</span> tidak ditemukan. <a class="text-warning" href="<?php echo site_url('magang?m=perusahaanbaru') ?>">Klik disini</a> untuk mengajukan perusahaan baru</h3>
+								<h3>Pencarian untuk <span class="text-primary">"<?php echo $get['q'] ?>"</span> tidak
+									ditemukan. <a class="text-warning"
+									              href="<?php echo site_url( 'magang?m=perusahaanbaru' ) ?>">Klik
+										disini</a> untuk mengajukan perusahaan baru</h3>
 							</div>
 						</div>
 					</div>
-				<?php endif;?>
+				<?php endif; ?>
 				<?php foreach ( $perusahaans as $index => $perusahaan ): ?>
 					<div class="col-md-4 col-xs-12 col-sm-12">
 						<div class="card">

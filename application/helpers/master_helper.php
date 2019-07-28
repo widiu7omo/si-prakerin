@@ -30,8 +30,23 @@ if ( ! function_exists( 'getCurrentTahun' ) ) {
 	}
 }
 
+if ( ! function_exists( 'dynamic_insert' ) ) {
+	function dynamic_insert($table,$data){
+		$ci =& get_instance();
+		$ci->db->insert($table,$data);
+	}
+}
+if ( ! function_exists( 'custom_query' ) ) {
+	function custom_query($query,$resultArray = false){
+		$ci =& get_instance();
+		if($resultArray){
+			return $ci->db->query($query)->result();
+		}
+		return $ci->db->query($query)->row();
+	}
+}
 if ( ! function_exists( 'datajoin' ) ) {
-	function datajoin( $table, $where = null, $select = null, $join = null, $orwhere = null ) {
+	function datajoin( $table, $where = null, $select = null, $join = null, $orwhere = null ,$order = null) {
 		$ci =& get_instance();
 		if ( $select != null ) {
 			$ci->db->select( $select );
@@ -51,7 +66,9 @@ if ( ! function_exists( 'datajoin' ) ) {
 				$ci->db->join( $join[0], $join[1], $join[2] );
 			}
 		}
-
+		if($order != null){
+			$ci->db->order_by($order);
+		}
 		return $ci->db->get( $table )->result();
 
 	}

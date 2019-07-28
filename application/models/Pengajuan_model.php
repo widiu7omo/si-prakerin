@@ -23,7 +23,7 @@ class Pengajuan_model extends CI_Model {
 		];
 	}
 
-	public function getAll( $select = null, $where = null, $join = null ) {
+	public function getAll( $select = null, $where = null, $join = null,$order = null ) {
 		if ( $select != null ) {
 			$this->db->select( $select );
 		}
@@ -33,7 +33,9 @@ class Pengajuan_model extends CI_Model {
 		if ( $join != null ) {
 			$this->db->join( $join[0], $join[1], $join[2] );
 		}
-
+		if($order != null){
+			$this->db->order_by($order);
+		}
 		return $this->db->get( $this->_table )->result();
 	}
 

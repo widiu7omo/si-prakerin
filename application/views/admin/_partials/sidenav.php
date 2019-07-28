@@ -4,7 +4,7 @@
 			style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 140px;">
 			<!-- Brand -->
 			<div class="sidenav-header d-flex align-items-center">
-				<a class="navbar-brand" href="../../pages/dashboards/dashboard.html">
+				<a class="navbar-brand" href="<?php echo site_url('dashboard') ?>">
 					<img src="<?php echo base_url('aset/img/brand/simblue.png') ?> " class="navbar-brand-img"
 						alt="...">
 				</a>
@@ -35,7 +35,7 @@
 							<div class="collapse show" id="navbar-dashboards">
 								<ul class="nav nav-sm flex-column">
 									<li class="nav-item">
-										<a href="<?php site_url('statistik') ?>" class="nav-link">Statistik</a>
+										<a href="<?php site_url('dashboard') ?>" class="nav-link">Statistik</a>
 									</li>
 									<li class="nav-item">
 										<a href="<?php site_url('informasi') ?>"
