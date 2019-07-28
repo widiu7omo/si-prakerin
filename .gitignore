@@ -11,7 +11,7 @@ application/logs/*
 composer.lock
 uploads
 file_upload
-foto_kuesioner
+foto_kuisioner
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
