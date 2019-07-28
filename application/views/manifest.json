@@ -1,0 +1,20 @@
+{"dir" : "ltr",
+    "lang" : "en",
+    "name" : "Simprakerin",
+    "scope" : "/",
+    "display" : "fullscreen",
+    "start_url" : "https://simprakerin.herokuapp.com/",
+    "short_name" : "SIMPRA",
+    "theme_color" : "transparent",
+    "description" : "Sistem Informasi Praktik Kerja Industri",
+    "orientation" : "any",
+    "background_color" : "transparent",
+    "related_applications" : "",
+    "prefer_related_applications" : "false",
+    "generated" : "true",
+    "icons" : [
+        {
+            "src": "https://simprakerin.herokuapp.com/aset/img/brand/favicon.png",
+            "sizes": "32x32"
+        }
+    ]}
