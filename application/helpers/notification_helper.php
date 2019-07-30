@@ -20,7 +20,7 @@ if ( ! function_exists('get_notification'))
 {
     function get_notification($receiver,$status = 0){
         $ci=& get_instance();
-            $ci->db->select(['uri','pesan','pengirim','waktu'])->from('tb_notification')->where(['penerima'=>$receiver]);
+            $ci->db->select(['id','uri','pesan','pengirim','waktu'])->from('tb_notification')->where(['penerima'=>$receiver]);
             if($status == 0){
                 $ci->db->where(['status'=>$status]);
             }

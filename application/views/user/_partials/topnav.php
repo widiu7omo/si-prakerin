@@ -71,7 +71,7 @@ $dataNotification = get_notification($this->session->userdata('id'),0);
 								notifications.</h6>
 						</div>
 						<!-- List group -->
-						<div <?php echo count($dataNotification)>3?'style="height: 350px;overflow: scroll;"':null?>  class="list-group list-group-flush">
+						<div <?php echo count($dataNotification)>3?'style="height: 350px;overflow: scroll;"':null?> class="list-group list-group-flush">
                             <?php foreach($dataNotification as $notification): ?>
 							<a href="<?php echo $notification->uri?site_url($notification->uri):'#'?>" class="list-group-item list-group-item-action">
 								<div class="row align-items-center">

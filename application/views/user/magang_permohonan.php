@@ -131,13 +131,13 @@ function getTempMhs( $id ) {
 								);
 								$riwayats = datajoin( 'tb_history_pemilihan', "nim = '$nim'", 'pr.nama_perusahaan', $join );
 								?>
-								<?php if(count($riwayats) > 0):?>
-								<a class="btn btn-sm btn-primary" data-toggle="collapse"
-								   href="#collapse-history" role="button" aria-expanded="false"
-								   aria-controls="collapseExample">
-									Riwayat Pengajuan Perusahaan (Ditolak)
-								</a>
-								<?php endif;?>
+								<?php if ( count( $riwayats ) > 0 ): ?>
+									<a class="btn btn-sm btn-primary" data-toggle="collapse"
+									   href="#collapse-history" role="button" aria-expanded="false"
+									   aria-controls="collapseExample">
+										Riwayat Pengajuan Perusahaan (Ditolak)
+									</a>
+								<?php endif; ?>
 								<div class="collapse mt-3" id="collapse-history">
 									<ul class="list-group">
 										<?php foreach ( $riwayats as $key => $riwayat ): ?>
@@ -192,14 +192,19 @@ function getTempMhs( $id ) {
 				</div>
 			</div>
 			<div class="row">
-				<?php if ( isset( $get['q'] ) && count( $perusahaans ) === 0 ): ?>
+				<?php if ( isset( $get['q'] ) && $get['q'] != "" ): ?>
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h3>Pencarian untuk <span class="text-primary">"<?php echo $get['q'] ?>"</span> tidak
-									ditemukan. <a class="text-warning"
-									              href="<?php echo site_url( 'magang?m=perusahaanbaru' ) ?>">Klik
-										disini</a> untuk mengajukan perusahaan baru</h3>
+								<?php if ( count( $perusahaans ) === 0 ): ?>
+									<h3>Pencarian untuk <span class="text-primary">"<?php echo $get['q'] ?>"</span>
+										tidak
+										ditemukan. <a class="text-warning"
+										              href="<?php echo site_url( 'magang?m=perusahaanbaru' ) ?>">Klik
+											disini</a> untuk mengajukan perusahaan baru</h3>
+								<?php elseif ( count( $perusahaans ) > 0 ): ?>
+									<h3>Berikut hasil pencarian dari <span class="text-primary">"<?php echo $get['q'] ?>"</span>.</h3>
+								<?php endif; ?>
 							</div>
 						</div>
 					</div>

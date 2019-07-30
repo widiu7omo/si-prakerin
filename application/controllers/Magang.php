@@ -163,7 +163,7 @@ class Magang extends CI_Controller {
 			$where['id_perusahaan']    = $id;
 			$data['status']            = 'tolak';
 			$this->pengajuan_model->update_multi( $data, $where );
-			dynamic_insert( 'history_pemilihan', array('nim'=>$nim,'id_perusahaan'=>$id));
+			dynamic_insert( 'tb_history_pemilihan', array('nim'=>$nim,'id_perusahaan'=>$id));
 		}
 		redirect( site_url( 'magang?m=pengajuan' ) );
 
