@@ -8,7 +8,6 @@ application/logs/*
 
 !application/*/.htaccess
 
-composer.lock
 uploads
 file_upload
 foto_kuisioner
