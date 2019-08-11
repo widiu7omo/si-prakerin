@@ -14,9 +14,7 @@ class Pilihperusahaan_model extends CI_Model {
 
 
 	public function rules() {
-		return [
-
-		];
+		return array();
 	}
 
 	public function getAll( $select = null, $where = null, $join = null ) {

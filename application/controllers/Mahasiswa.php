@@ -11,14 +11,14 @@ class Mahasiswa extends MY_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper( array( 'upload', 'master', 'notification' ) );
-		$this->load->model( [ 'mahasiswa_model', 'pengajuan_model', 'akun_model', 'pilihperusahaan_model' ] );
+		$this->load->model( array( 'mahasiswa_model', 'pengajuan_model', 'akun_model', 'pilihperusahaan_model' ) );
 		$this->load->library( 'form_validation' );
 		//middleware
 		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
 	}
 
 	public function index() {
-		$join          = [ 'tahun_akademik', 'tb_waktu.id_tahun_akademik = tahun_akademik.id_tahun_akademik', 'inner' ];
+		$join          = array('tahun_akademik', 'tb_waktu.id_tahun_akademik = tahun_akademik.id_tahun_akademik', 'inner' );
 		$tahunAkademik = datajoin( 'tb_waktu', null, 'tahun_akademik.tahun_akademik', $join, null );
 		$level         = $this->session->userdata( 'level' );
 		switch ( $level ) {

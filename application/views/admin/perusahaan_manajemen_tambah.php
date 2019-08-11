@@ -54,15 +54,6 @@ $prodies = masterdata( 'tb_program_studi');
                     <!-- Card body -->
                     <div class="card-body">
                         <form method="post" action="<?php site_url( 'perusahaan?m=manajemen&q=i' ) ?>">
-                            <!-- Input groups with icon
-							  `nama_perusahaan` varchar(100) DEFAULT NULL,
-							  `alamat_perusahaan` text DEFAULT NULL,
-							  `telepon_perusahaan` varchar(20) DEFAULT NULL,
-							  `long_perusahaan` varchar(10) DEFAULT NULL,
-							  `lat_perusahaan` varchar(10) DEFAULT NULL,
-							  `kuota_pkl` int(11) DEFAULT NULL,
-
-							-->
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">

@@ -24,6 +24,9 @@ $join[2] = array(
 );
 $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', null, '*', $join,null,"tb_mahasiswa.nama_mahasiswa");
 
+//mahasiswa berdasarakan tahun akademik
+
+//dosen by prodi
 $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', true);
 
 ?>
@@ -41,6 +44,16 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 	<?php $this->load->view('admin/_partials/breadcrumb.php');
 	?>
 	<!-- Page content -->
+	<style>
+		body.dragging, body.dragging * {
+			cursor: move !important;
+		}
+		.dragged {
+			position: absolute;
+			opacity: 0.5;
+			z-index: 999;
+		}
+	</style>
 	<div class="container-fluid mt--6">
 		<!-- Card -->
 		<!--        <form action=""></form>-->
@@ -64,10 +77,10 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 							<h4 class="card-title">Mahasiswa
 								Magang <?php echo $tahun_akademik[0]->tahun_akademik ?></h4>
 							<p class="card-text text-sm">*&nbsp;Drag dan Drop ke arah dosen yang diinginkan</p>
-							<ul class="list-group" id="mahasiswa"
+							<ul class="nested_with_switch list-group" id="mahasiswa"
 								style="height: 100%;max-height: 500px;overflow-y: scroll">
 								<?php foreach ($mahasiswas as $mahasiswa): ?>
-									<li data-idpilih="<?php echo $mahasiswa->id_mhs_pilih_perusahaan ?>"
+									<li data-idpilih="<?php echo $mahasiswa->id_mhs_pilih_perusahaan ?>" data-nim="<?php echo "$mahasiswa->nim" ?>"
 										class="list-group-item"><?php echo "$mahasiswa->nama_mahasiswa ($mahasiswa->nim)" ?></li>
 								<?php endforeach; ?>
 							</ul>
@@ -86,7 +99,7 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 										<div class="card-body">
 											<h4 class="card-title mb-0"><?php echo "$dosen->nama_pegawai" ?></h4>
 											<p class="card-text p-2 mb-0 text-sm text-center text-dark">Taruh disini</p>
-											<ul class="list-group" id="<?php echo "$dosen->nip_nik" ?>">
+											<ul class="nested_with_switch list-group" data-nip="<?php echo "$dosen->nip_nik" ?>" id="<?php echo "$dosen->nip_nik" ?>">
 											</ul>
 										</div>
 									</div>
@@ -113,97 +126,39 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 ?>
 
 <!-- Sortable Draggable -->
-<script src="<?php echo base_url('aset/vendor/sortablejs/Sortable.js') ?>"></script>
-<script src="<?php echo base_url('aset/vendor/sortablejs/jquery-sortable.js') ?>"></script>
+<script src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
+<!--<script src="--><?php //echo base_url('aset/vendor/sortablejs/Sortable.js') ?><!--"></script>-->
+<!--<script src="--><?php //echo base_url('aset/vendor/sortablejs/jquery-sortable.js') ?><!--"></script>-->
 <script>
-    let data_pembimbing_sementara = [];
-    $("button#simpan").on('click', () => {
-        if (data_pembimbing_sementara.length !== 0) {
-            console.log(data_pembimbing_sementara)
-            $.ajax({
-                url: "<?php echo site_url('dosen?m=pembimbing&q=bulk') ?>",
-                data: {pembimbing: data_pembimbing_sementara},
-                method: "POST"
-            }).done(function (response) {
-                console.log(response)
-            }).fail(function (err) {
-                console.log(err)
-            })
-        }
-    });
-    $('#mahasiswa').sortable({
-        filter: '.done',
-        group: {
-            name: 'shared',
-            pull: 'clone'
-        },
-        animation: 150,
-        onEnd: (evt) => {
-            let idpilih = $(evt.item).data('idpilih');
-            let nip = $(evt.to).attr('id');
-            // console.log(evt.to);
-            // console.log(idpilih,nip);
-            //if cancel drop to dosen, mean that it back to mahasiswa it selft, then cancel the operation
-            if ($(evt.to).attr('id') !== 'mahasiswa') {
-                //passing to an array
-                data_pembimbing_sementara.push({'nip_nik': nip, 'id_mhs_pilih_perusahaan': idpilih});
-                $(evt.clone).addClass(['done', 'disabled', 'bg-success', 'text-white']);
-                $(evt.item).addClass(['my-1', 'text-left', 'badge', 'badge-pill', 'badge-primary', 'badge-md']);
-                $(evt.item).removeClass('list-group-item');
+    let oldContainer;
+    let sortable = $(`ul.nested_with_switch`).sortable({
+        group: 'nested',
+        afterMove: function (placeholder, container) {
+            if(oldContainer !== container){
+                if(oldContainer)
+                    oldContainer.el.removeClass("active");
+                container.el.addClass("active");
+                oldContainer = container;
             }
-            console.log(data_pembimbing_sementara)
-
+        },
+        onCancel:function($item,container,_super,event){
+            $item.removeClass(['dragged','badge','badge-pill','badge-primary','badge-md']);
+		},
+        onDrop: function ($item, container, _super) {
+            let data = sortable.sortable("serialize").get();
+            console.log(data)
+			if(container.el[0].id !== 'mahasiswa'){
+                $item.removeClass('list-group-item');
+                $item.addClass(['badge','badge-pill','badge-primary','badge-md','m-1']);
+			}
+			else{
+			    $item.css('z-index',999999);
+                $item.removeClass(['badge','badge-pill','badge-primary','badge-md','m-1']);
+                $item.addClass('list-group-item');
+			}
+            _super($item, container);
         }
     });
-	<?php
-	function get_only_nip($dosen)
-	{
-		return '#' . $dosen->nip_nik;
-	}
-	$nip_dosen = array_map('get_only_nip', $dosens);
-	$joined_nip = join(', ', $nip_dosen);
-	?>
-    //list dosen
-    $("<?php echo $joined_nip ?>").sortable({
-        group: {
-            name: 'shared',
-            // pull:'clone'
-        },
-        onEnd: (evt) => {
-            //dragged item
-            let dragged = $(evt.item);
-            let draggedName = dragged.text();
-            let dataIdPilih = dragged.data('idpilih');
-            console.log(dataIdPilih);
-            data_pembimbing_sementara = data_pembimbing_sementara.filter((value) => {
-                if (value.id_mhs_pilih_perusahaan !== dataIdPilih) {
-                    return value;
-                }
-            });
-            console.log(data_pembimbing_sementara);
-            dragged.addClass('list-group-item');
-            dragged.removeClass(['my-1', 'text-left', 'badge', 'badge-pill', 'badge-primary', 'badge-md']);
-            //array from children of destination
-            let items = $(evt.to).children();
-            // console.time('each');
-            items.each((index, value) => {
-                let item = $(value);
-                // console.log(item.text());
-                let itemName = item.text();
-                // console.log(itemName === draggedName);
-
-                if (itemName === draggedName) {
-
-                    dragged.remove();
-                    item.removeClass(['done', 'disabled', 'bg-success', 'text-white']);
-                    item.css('background', 'white')
-                }
-            });
-            // console.timeEnd('each')
-        },
-        animation: 150
-    });
-
 </script>
 </body>
 

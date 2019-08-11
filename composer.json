@@ -12,7 +12,8 @@
 	},
 	"require": {
 		"php": ">=5.3.7",
-		"auth0/auth0-php": "^5.5"
+		"auth0/auth0-php": "^5.5",
+		"ext-json": "*"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

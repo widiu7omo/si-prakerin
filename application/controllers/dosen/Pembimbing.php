@@ -1,6 +1,6 @@
 <?php
 
 
-class Pembimbing extends CI_Controller{
+class Pembimbing extends Dosen{
 
 }
