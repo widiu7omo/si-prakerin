@@ -8,7 +8,7 @@ $tahun_akademik = datajoin('tb_waktu', null, 'tahun_akademik.tahun_akademik', $j
 
 $join = array();
 $join[0] = array(
-	'(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tb_mahasiswa',
+	'(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik WHERE tm.nim NOT IN(select tdbm.nim FROM tb_dosen_bimbingan_mhs tdbm) ) tb_mahasiswa',
 	'tb_mahasiswa.nim = tb_mhs_pilih_perusahaan.nim',
 	'inner'
 );
@@ -22,12 +22,15 @@ $join[2] = array(
 	'tb_program_studi.id_program_studi = tb_perusahaan.id_program_studi',
 	'left outer'
 );
-$mahasiswas = datajoin('tb_mhs_pilih_perusahaan', null, '*', $join,null,"tb_mahasiswa.nama_mahasiswa");
+$id_prodi = $this->session->userdata('prodi');
+$where = '';
+if (isset($id_prodi)) {
+	$where .= " AND tb_program_studi.id_program_studi = '$id_prodi'";
+}
+
+$mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_mahasiswa.nama_mahasiswa");
 
 //mahasiswa berdasarakan tahun akademik
-
-//dosen by prodi
-$dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', true);
 
 ?>
 
@@ -48,6 +51,7 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 		body.dragging, body.dragging * {
 			cursor: move !important;
 		}
+
 		.dragged {
 			position: absolute;
 			opacity: 0.5;
@@ -66,7 +70,7 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 					</p>
 				</div>
 				<div class="col-4 text-right">
-					<button id="simpan" class="btn btn-sm btn-neutral">Simpan</button>
+					<!--					<button id="simpan" class="btn btn-sm btn-neutral">Simpan</button>-->
 				</div>
 			</div>
 			<!-- Table -->
@@ -80,7 +84,8 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 							<ul class="nested_with_switch list-group" id="mahasiswa"
 								style="height: 100%;max-height: 500px;overflow-y: scroll">
 								<?php foreach ($mahasiswas as $mahasiswa): ?>
-									<li data-idpilih="<?php echo $mahasiswa->id_mhs_pilih_perusahaan ?>" data-nim="<?php echo "$mahasiswa->nim" ?>"
+									<li data-idpilih="<?php echo $mahasiswa->id_mhs_pilih_perusahaan ?>"
+										data-nim="<?php echo "$mahasiswa->nim" ?>"
 										class="list-group-item"><?php echo "$mahasiswa->nama_mahasiswa ($mahasiswa->nim)" ?></li>
 								<?php endforeach; ?>
 							</ul>
@@ -99,7 +104,19 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
 										<div class="card-body">
 											<h4 class="card-title mb-0"><?php echo "$dosen->nama_pegawai" ?></h4>
 											<p class="card-text p-2 mb-0 text-sm text-center text-dark">Taruh disini</p>
-											<ul class="nested_with_switch list-group" data-nip="<?php echo "$dosen->nip_nik" ?>" id="<?php echo "$dosen->nip_nik" ?>">
+											<ul class="nested_with_switch list-group"
+												data-nip="<?php echo "$dosen->nip_nik" ?>"
+												id="<?php echo "$dosen->nip_nik" ?>">
+												<?php
+												$join = array('tb_mahasiswa', 'tdbm.nim = tb_mahasiswa.nim', 'LEFT OUTER');
+												$mhs_bimbingan = datajoin('tb_dosen_bimbingan_mhs tdbm', "tdbm.nip_nik = $dosen->nip_nik", "tb_mahasiswa.nama_mahasiswa,tdbm.nim,tdbm.id_dosen_bimbingan_mhs", $join, null, 'tb_mahasiswa.nama_mahasiswa') ?>
+												<?php foreach ($mhs_bimbingan as $mhs): ?>
+													<li data-nim=""
+														data-idbimbingan="<?php echo $mhs->id_dosen_bimbingan_mhs ?>"
+														class="badge badge-pill badge-primary badge-md m-1"><?php echo $mhs->nama_mahasiswa ?>
+														(<?php echo $mhs->nim ?>)
+													</li>
+												<?php endforeach; ?>
 											</ul>
 										</div>
 									</div>
@@ -134,28 +151,43 @@ $dosens = masterdata('tb_pegawai', 'status = "dosen"', 'nama_pegawai,nip_nik', t
     let sortable = $(`ul.nested_with_switch`).sortable({
         group: 'nested',
         afterMove: function (placeholder, container) {
-            if(oldContainer !== container){
-                if(oldContainer)
+            if (oldContainer !== container) {
+                if (oldContainer)
                     oldContainer.el.removeClass("active");
                 container.el.addClass("active");
                 oldContainer = container;
             }
         },
-        onCancel:function($item,container,_super,event){
-            $item.removeClass(['dragged','badge','badge-pill','badge-primary','badge-md']);
-		},
+        onCancel: function ($item, container, _super, event) {
+            $item.removeClass(['dragged', 'badge', 'badge-pill', 'badge-primary', 'badge-md']);
+        },
         onDrop: function ($item, container, _super) {
-            let data = sortable.sortable("serialize").get();
-            console.log(data)
-			if(container.el[0].id !== 'mahasiswa'){
+            if (container.el[0].id !== 'mahasiswa') {
                 $item.removeClass('list-group-item');
-                $item.addClass(['badge','badge-pill','badge-primary','badge-md','m-1']);
-			}
-			else{
-			    $item.css('z-index',999999);
-                $item.removeClass(['badge','badge-pill','badge-primary','badge-md','m-1']);
+                $item.addClass(['badge', 'badge-pill', 'badge-primary', 'badge-md', 'm-1']);
+                let nip_nik = $(container.el).attr('id');
+                let nim = $($item).data('nim');
+                let id_mhs_pilih_perusahaan = $($item).data('idpilih');
+                let send = true;
+                $.ajax({
+                    url: "<?php echo site_url('dosen?m=pembimbing&q=u')?>",
+                    data: {nip_nik, nim, id_mhs_pilih_perusahaan, send},
+                    method: "POST",
+                    success: function (res) {
+                        console.log(res)
+                    },
+                    error: function (e) {
+                        console.log(e)
+                    }
+                })
+                //do insert or update
+
+            } else {
+                $item.css('z-index', 999999);
+                $item.removeClass(['badge', 'badge-pill', 'badge-primary', 'badge-md', 'm-1']);
                 $item.addClass('list-group-item');
-			}
+                //do delete
+            }
             _super($item, container);
         }
     });

@@ -1,83 +1,39 @@
 <?php
-defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pembimbing_model extends CI_Model {
+class Pembimbing_model extends CI_Model
+{
 
-	private $_table = 'tb_perusahaan_sementara';
+	private $_table = 'tb_dosen_bimbingan_mhs';
 
-	private $_primary_key = 'id_perusahaan_sementara';
+	private $_primary_key = 'id_dosen_bimbingan_mhs';
 
-	//add parameter here
-	public $id_perusahaan_sementara = null;//auto increment
-	public $nim;
-	public $id_perusahaan;
-
-
-	public function rules() {
-		return [
-			[
-				'field' => 'id_perusahaan',
-				'label' => 'ID Perusahaan',
-				'rules' => 'required'
-			],
-		];
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('master');
+		//Do your magic here
+	}
+	public function get($id = null,$id_prodi = null)
+	{
+		return $this->db->get($this->_table)->result();
 	}
 
-	public function getAll( $select = null, $where = null, $join = null ) {
-		if ( $select != null ) {
-			$this->db->select( $select );
-		}
-		if ( $where != null ) {
-			$this->db->where( $where );
-		}
-		if ( $join != null ) {
-			$this->db->join( $join[0], $join[1], $join[2] );
-		}
-
-		return $this->db->get( $this->_table )->result();
-	}
-
-	public function getById( $id = null, $select = null, $join = null ) {
-		if ( $select != null ) {
-			$this->db->select( $select );
-		}
-		if ( $join != null ) {
-			$this->db->join( $join[0], $join[1], $join[2] );
-		}
-
-		return $this->db->get_where( $this->_table, [ $this->_primary_key => $id ] )->row();
-	}
-
-	public function insert() {
-
+	public function replace()
+	{
 		$post = $this->input->post();
-		$this->nim = $this->session->userdata('id');
-		$this->id_perusahaan = $post['id_perusahaan'];
-		//id perusahaan sementara null (look at line 11)
+		$tahun_akademik = masterdata('tb_waktu',null,'id_tahun_akademik');
+		$data['id_tahun_akademik'] =$tahun_akademik[0]->id_tahun_akademik;
+		$data['id_mhs_pilih_perusahaan'] = $post['id_mhs_pilih_perusahaan'];
+		$data['nim'] = $post['nim'];
+		$data['nip_nik'] = $post['nip_nik'];
 		//add parameter here
-
-		return $this->db->insert( $this->_table, $this );
-	}
-
-	public function insert_batch(){
-		$post = $this->input->post();
-		var_dump( $post['pembimbing']);
-		return true;
-	}
-	public function update_multi($data,$where){
-		//add parameter here
-		return $this->db->update( $this->_table, $data, $where);
-	}
-	public function update() {
-		$post = $this->input->post();
-		$get = $this->input->get();
-		$this->changeHere = $post['changeHere'];
-		//add parameter here
-		return $this->db->update( $this->_table, $this, [ $this->_primary_key => $post['changeHere'] ] );
+		return $this->db->replace($this->_table, $data);
 	}
 
-	public function delete( $id ) {
-		return $this->db->delete( $this->_table, [ $this->_primary_key => $id ] );
+	public function delete($id)
+	{
+		return $this->db->delete($this->_table, array($this->_primary_key => $id));
 	}
 
 }

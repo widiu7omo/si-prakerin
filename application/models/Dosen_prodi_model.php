@@ -15,8 +15,12 @@ class Dosen_prodi_model extends CI_Model {
 		$this->load->helper('master');
 		//Do your magic here
 	}
-	public function get($id = null){
-		return datajoin($this->_table,null,'tb_pegawai.*,tb_program_studi.*',array(array('tb_pegawai','tb_pegawai.nip_nik = tb_dosen.nip_nik','RIGHT OUTER'),array('tb_program_studi','tb_program_studi.id_program_studi = tb_dosen.id_program_studi','LEFT OUTER')),null,'nama_pegawai');
+	public function get($id = null,$id_prodi = null){
+		$where = "tb_dosen.id_program_studi IS NOT NULL AND tb_dosen.id_program_studi <> ''";
+		if($id_prodi){
+			$where .= " AND tb_dosen.id_program_studi = '$id_prodi'";
+		}
+		return datajoin($this->_table,$where,'tb_pegawai.*,tb_program_studi.*',array(array('tb_pegawai','tb_pegawai.nip_nik = tb_dosen.nip_nik','RIGHT OUTER'),array('tb_program_studi','tb_program_studi.id_program_studi = tb_dosen.id_program_studi','LEFT OUTER')),null,'nama_pegawai');
 	}
 
 	public function insert(){

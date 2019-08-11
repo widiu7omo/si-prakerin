@@ -32,10 +32,7 @@
 								<button class="bg-warning btn btn-sm"></button>
 								<span class="text-sm text-warning"><i>Belum diatur</i></span>
 							</div>
-							<div class="col-4">
-								<a class="btn btn-primary btn-sm float-right"
-								   href="<?php echo site_url('dosen?m=dosen_prodi&q=manage') ?>">Kelola Dosen</a>
-							</div>
+
 						</div>
 					</div>
 					<div class="table-responsive py-4">
@@ -62,7 +59,7 @@
 									<td>
 										<select id="changeProdi" data-nip="<?php echo $dosen->nip_nik ?>"
 												class="form-control <?php echo !$dosen->nama_program_studi ? 'bg-warning text-white' : null ?>"">
-										<option>---Belum dipilih---</option>
+										<option value="">---Belum dipilih---</option>
 										<?php foreach ($prodies as $prody): ?>
 											<option <?php echo $dosen->nama_program_studi == $prody->nama_program_studi ? "selected" : null ?>
 												value="<?php echo $prody->id_program_studi ?>"><?php echo $prody->nama_program_studi ?></option>
@@ -95,7 +92,7 @@
 			data:{nip:$(this).data('nip'),prodi:$(this).val()},
 			success:function(res){
 			    if(JSON.parse(res).status === 'success'){
-                    self.removeClass(["bg-warning","text-white"])
+                    self.removeClass(["bg-warning","text-white"]);
                     $('#modalLabel').text("Berhasil mengganti program studi");
                     $('#statusModal').modal('show');
 				}
