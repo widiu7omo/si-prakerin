@@ -120,9 +120,9 @@ class Dosen extends MY_Controller
 		$nip_nik = $this->session->userdata('id');
 		$id_prodi = masterdata('tb_dosen', "nip_nik = '$nip_nik'", 'id_program_studi', false);
 		if ($id_prodi) {
-			$data['dosens'] = $dosen_prodi->get($id_prodi);
+			$data['dosens'] = $dosen_prodi->get($id_prodi,null,true);
 		} else {
-			$data['dosens'] = $dosen_prodi->get();
+			$data['dosens'] = $dosen_prodi->get(null,null,true);
 		}
 		//null, still consider how data goes
 		$this->load->view('admin/dosen_pembimbing2', $data);
@@ -142,7 +142,14 @@ class Dosen extends MY_Controller
 
 	public function remove_pembimbing()
 	{
-
+		$pembimbing = $this->pembimbing_model;
+		if(isset($_POST['id'])){
+			if($pembimbing->delete()){
+				echo json_encode(array('status'=>'success'));
+				return;
+			}
+			echo json_encode(array('status'=>'success'));
+		}
 	}
 
 

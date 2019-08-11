@@ -31,9 +31,14 @@ class Pembimbing_model extends CI_Model
 		return $this->db->replace($this->_table, $data);
 	}
 
-	public function delete($id)
+	public function delete()
 	{
-		return $this->db->delete($this->_table, array($this->_primary_key => $id));
+		$post = $this->input->post();
+		if(isset($post['id'])){
+			$id = $post['id'];
+			return $this->db->delete($this->_table, array($this->_primary_key => $id));
+		}
+		return false;
 	}
 
 }

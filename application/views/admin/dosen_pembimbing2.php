@@ -108,14 +108,16 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
 												data-nip="<?php echo "$dosen->nip_nik" ?>"
 												id="<?php echo "$dosen->nip_nik" ?>">
 												<?php
-												$join = array('tb_mahasiswa', 'tdbm.nim = tb_mahasiswa.nim', 'LEFT OUTER');
-												$mhs_bimbingan = datajoin('tb_dosen_bimbingan_mhs tdbm', "tdbm.nip_nik = $dosen->nip_nik", "tb_mahasiswa.nama_mahasiswa,tdbm.nim,tdbm.id_dosen_bimbingan_mhs", $join, null, 'tb_mahasiswa.nama_mahasiswa') ?>
+												$joins[0] = array('(select tm.*,tmpp.id_mhs_pilih_perusahaan from tb_mhs_pilih_perusahaan tmpp inner join tb_mahasiswa tm on tm.nim = tmpp.nim)tb_mahasiswa', 'tdbm.nim = tb_mahasiswa.nim', 'LEFT OUTER');
+												$mhs_bimbingan = datajoin('tb_dosen_bimbingan_mhs tdbm', "tdbm.nip_nik = $dosen->nip_nik", "tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.id_mhs_pilih_perusahaan,tdbm.nim,tdbm.id_dosen_bimbingan_mhs", $joins, null, 'tb_mahasiswa.nama_mahasiswa') ?>
 												<?php foreach ($mhs_bimbingan as $mhs): ?>
-													<li data-nim=""
+													<li data-nim="<?php echo $mhs->nim ?>"
+														data-idpilih="<?php echo $mhs->id_mhs_pilih_perusahaan ?>"
 														data-idbimbingan="<?php echo $mhs->id_dosen_bimbingan_mhs ?>"
 														class="badge badge-pill badge-primary badge-md m-1"><?php echo $mhs->nama_mahasiswa ?>
 														(<?php echo $mhs->nim ?>)
 													</li>
+													<!--TODO:Tambahkan id_mhs_pilih_perusahaan, tambahkan join ke tb_mhs_pilih_perusahaan, cek drag drop antar dosen, dan drop ke mhs untuk hapus dari tb_dosen_pembimbing-->
 												<?php endforeach; ?>
 											</ul>
 										</div>
@@ -187,6 +189,17 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
                 $item.removeClass(['badge', 'badge-pill', 'badge-primary', 'badge-md', 'm-1']);
                 $item.addClass('list-group-item');
                 //do delete
+				$.ajax({
+					url:"<?php echo site_url('dosen?m=pembimbing&q=d')?>",
+					method:"POST",
+					data:{id:$item.data('idbimbingan')},
+					success:function(res){
+					    console.log(res)
+					},
+					error:function(e){
+					    console.log(e)
+					}
+				})
             }
             _super($item, container);
         }

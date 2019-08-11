@@ -15,8 +15,11 @@ class Dosen_prodi_model extends CI_Model {
 		$this->load->helper('master');
 		//Do your magic here
 	}
-	public function get($id = null,$id_prodi = null){
-		$where = "tb_dosen.id_program_studi IS NOT NULL AND tb_dosen.id_program_studi <> ''";
+	public function get($id = null,$id_prodi = null,$filter_prodi = null){
+		$where = "";
+		if($filter_prodi){
+			$where .= "tb_dosen.id_program_studi IS NOT NULL AND tb_dosen.id_program_studi <> ''";
+		}
 		if($id_prodi){
 			$where .= " AND tb_dosen.id_program_studi = '$id_prodi'";
 		}
