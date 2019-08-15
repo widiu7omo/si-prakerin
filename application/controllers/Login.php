@@ -36,11 +36,7 @@ class Login extends CI_Controller {
 						$programstudi = masterdata( 'tb_mahasiswa', array( 'nim' => $isValidAkun[0]->id ), 'id_program_studi' );
 						$this->session->set_userdata( 'prodi', $programstudi->id_program_studi );
 						break;
-					case 'dosen':
-						$pegawai = masterdata( 'tb_pegawai', array( 'username' => $isValidAkun[0]->id ), 'tb_pegawai.nip_nik' );
-						//                  $programstudi = masterdata( 'tb_pegawai',array('tb_pegawai.username'=>$isValidAkun[0]->id),'id_program_studi');
-						break;
-					case 'admin':
+					case 'dosen' and 'admin':
 						$pegawai = masterdata( 'tb_pegawai', array( 'username' => $isValidAkun[0]->id ), 'tb_pegawai.nip_nik' );
 						//                  $programstudi = masterdata( 'tb_pegawai',array('tb_pegawai.username'=>$isValidAkun[0]->id),'id_program_studi');
 						break;

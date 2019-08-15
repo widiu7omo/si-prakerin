@@ -5,16 +5,18 @@ class Magang extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model( [ 'perusahaan_model', 'pengajuan_model' ] );
-		$this->load->helper( [ 'notification', 'master' ] );
+		$this->load->model( array( 'perusahaan_model', 'pengajuan_model' ) );
+		$this->load->helper( array( 'notification', 'master' ) );
 		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
 		$id        = $this->session->userdata( 'id' );
-		$mahasiswa = masterdata( 'tb_mahasiswa', [ 'nim' => $id ], [
+		$mahasiswa = masterdata( 'tb_mahasiswa', array( 'nim' => $id ), array(
 			'alamat_mhs',
 			'email_mhs',
 			'jenis_kelamin_mhs'
-		], false );
-		( $mahasiswa->alamat_mhs == null || $mahasiswa->email_mhs == null || $mahasiswa->jenis_kelamin_mhs == null ) ? redirect( site_url( 'user/profile' ) ) : null;
+		), false );
+		if($mahasiswa){
+			( $mahasiswa->alamat_mhs == null || $mahasiswa->email_mhs == null || $mahasiswa->jenis_kelamin_mhs == null ) ? redirect( site_url( 'user/profile' ) ) : null;
+		}
 		//Do your magic here
 	}
 

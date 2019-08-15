@@ -14,8 +14,10 @@
 <script src="<?php echo base_url('aset/vendor/datatables.net-buttons/js/buttons.flash.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/datatables.net-buttons/js/buttons.print.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/datatables.net-select/js/dataTables.select.min.js') ?>"></script>
+<script src="<?php echo base_url('aset/vendor/momentjs/moment.min.js')?>"></script>
 <script src="<?php echo base_url('aset/vendor/dropzone/dist/min/dropzone.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/select2/select2.min.js') ?>"></script>
+<script src="<?php echo base_url('aset/vendor/sweetalert/sweetalert2.min.js')?>"></script>
 <script src="<?php echo base_url('aset/vendor/introjs/intro.js') ?>"></script>
 <!-- Argon JS -->
 <script src="<?php echo base_url('aset/js/argonpro.js') ?>"></script>

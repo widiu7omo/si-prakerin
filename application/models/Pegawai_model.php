@@ -5,8 +5,8 @@ class Pegawai_model extends CI_Model {
 
     private $_table = 'tb_pegawai';
 
-    private $_primary_key = 'nip';
-    public $nip;
+    private $_primary_key = 'nip_nik';
+    public $nip_nik;
     public $username;
     public $id_status_pkl;
     public $id_pangkat_golongan;
@@ -23,7 +23,7 @@ class Pegawai_model extends CI_Model {
     public function rules(){
         return[
             [ 
-                'field'=>'nip',
+                'field'=>'nip_nik',
                 'label'=>'nip',
                 'rules'=>'required'
             ],
@@ -91,7 +91,7 @@ class Pegawai_model extends CI_Model {
     public function insert(){
 
         $post = $this->input->post();
-        $this->nip = $post['nip'];
+        $this->nip_nik = $post['nip'];
         $this->username = $post['username'];
         $this->id_status_pkl = $post['id_status_pkl'];
         $this->id_pangkat_golongan = $post['id_pangkat_golongan'];

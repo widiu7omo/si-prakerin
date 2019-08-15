@@ -24,12 +24,7 @@ class Main extends CI_Controller {
 
             break;
 
-            case 'dosen':
-            	//under development
-				redirect(site_url('development'));
-            break;
-
-            case 'mahasiswa':
+            case 'mahasiswa' and 'dosen':
                 redirect(site_url('user'));
             break;
 

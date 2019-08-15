@@ -14,7 +14,9 @@
     <!-- Optional CSS -->
     <link rel="stylesheet" href="<?php echo base_url('aset/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('aset/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
-    <link rel="stylesheet" href=" <?php echo base_url('aset/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css') ?>">
+	<link rel="stylesheet" href=" <?php echo base_url('aset/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css') ?>">
+	<link rel="stylesheet" href=" <?php echo base_url('aset/vendor/fullcalendar/fullcalendar.min.css') ?>">
+	<link rel="stylesheet" href=" <?php echo base_url('aset/vendor/sweetalert/sweetalert2.min.css') ?>">
 	<link rel="stylesheet" href=" <?php echo base_url('aset/vendor/introjs/introjs.css') ?>">
 	<!-- Argon CSS -->
     <link type="text/css" href="<?php echo base_url('aset/css/argonpro.css') ?>" rel="stylesheet">

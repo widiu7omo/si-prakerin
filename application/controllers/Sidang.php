@@ -6,12 +6,14 @@ class Sidang extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(['perusahaan_model','pengajuan_model']);
-		$this->load->helper(['notification','master']);
+		$this->load->model(array('perusahaan_model','pengajuan_model'));
+		$this->load->helper(array('notification','master'));
 		!$this->session->userdata('level')?redirect(site_url('main')):null;
 		$id = $this->session->userdata('id');
-		$mahasiswa = masterdata( 'tb_mahasiswa',['nim'=>$id],['alamat_mhs','email_mhs','jenis_kelamin_mhs'],false);
-		($mahasiswa->alamat_mhs == null || $mahasiswa->email_mhs == null || $mahasiswa->jenis_kelamin_mhs == null)?redirect(site_url('user/profile')):null;
+		$mahasiswa = masterdata( 'tb_mahasiswa',array('nim'=>$id),array('alamat_mhs','email_mhs','jenis_kelamin_mhs'),false);
+		if($mahasiswa){
+			($mahasiswa->alamat_mhs == null || $mahasiswa->email_mhs == null || $mahasiswa->jenis_kelamin_mhs == null)?redirect(site_url('user/profile')):null;
+		}
 		//Do your magic here
 	}
     public function index()
@@ -34,13 +36,15 @@ class Sidang extends CI_Controller {
             $data['menus'] = array(
                 array('name'=>'Monev Prakerin',
                     'href'=>'https://monev.prakerin.politala.ac.id',
-                    'desc'=>'Aplikasi monitoring tempat Praktik kerja lapangan'),
+					'icon'=>'fas fa-id-badge',
+					'desc'=>'Aplikasi monitoring tempat Praktik kerja lapangan'),
                 array('name'=>'Kuesioner Dosen',
                     'href'=>site_url('kuesioner?m=dsn'),
-                    'desc'=>'Kuesioner bagi dosen tentang bla bla bla')
+					'icon'=>'fas fa-id-badge',
+					'desc'=>'Kuesioner bagi dosen tentang bla bla bla')
             );
             break;
-            default:$data['menus']= [];
+            default:$data['menus']= array();
         }
         $this->load->view('user/magang',$data);
         

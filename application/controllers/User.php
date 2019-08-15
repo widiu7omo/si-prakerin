@@ -32,9 +32,11 @@ class User extends CI_Controller {
             $data['menus'] = array(
                 array('name'=>'Monev Prakerin',
                     'href'=>'https://monev.prakerin.politala.ac.id',
+					'icon'=>'ni ni-square-pin',
                     'desc'=>'Aplikasi monitoring tempat Praktik kerja lapangan'),
                 array('name'=>'Kuesioner Dosen',
                     'href'=>site_url('kuesioner?m=dsn'),
+					'icon'=>'ni ni-square-pin',
                     'desc'=>'Kuesioner bagi dosen tentang bla bla bla')
             );
             $data['dosen'] = $this->pegawai_model->getById();

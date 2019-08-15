@@ -82,8 +82,6 @@ class Dosen extends MY_Controller
 		}
 
 		$this->load->view('admin/dosen', $data);
-
-
 	}
 
 	//kelola dosen prodi
