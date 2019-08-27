@@ -145,8 +145,7 @@ $currentTahun = datajoin( 'tb_waktu', null, 'tb_waktu.*,ta.tahun_akademik', [
             "ajax": {
                 url: "<?php echo site_url( 'mahasiswa/daftar_pengajuan' ) ?>",
                 dataSrc: function (json) {
-                    let orderedData = json.perusahaans.sort((a, b) => (a.mahasiswa[a.mahasiswa.length - 1].tanggal_pengajuan < b.mahasiswa[b.mahasiswa.length - 1].tanggal_pengajuan) ? 1 : -1);
-                    return orderedData
+                    return json.perusahaans.sort((a, b) => (a.mahasiswa[a.mahasiswa.length - 1].tanggal_pengajuan < b.mahasiswa[b.mahasiswa.length - 1].tanggal_pengajuan) ? 1 : -1)
                 }
             },
             "bLengthChange": false,

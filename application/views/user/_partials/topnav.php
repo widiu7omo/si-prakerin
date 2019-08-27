@@ -151,7 +151,7 @@ $dataNotification = get_notification($this->session->userdata('id'),0);
 						<div class="media align-items-center"  data-step="3"
 						     data-intro="Klik foto profil, dan pergi ke My Profile, dan ubah profil anda ketika pertama kali login. Hal ini bertujuan agar kalian bisa melakukan proses pengajuan magang">
 							<span class="avatar avatar-sm rounded-circle">
-								<img alt="Image placeholder" src="http://i.pravatar.cc/200">
+								<img alt="Image placeholder" src="https://i.pravatar.cc/200">
 							</span>
 							<div class="media-body ml-2 d-none d-lg-block">
 								<span class="mb-0 text-sm  font-weight-bold"><?php echo $nickname?></span>

@@ -6,7 +6,7 @@ class Bimbingan extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('perusahaan_model','pengajuan_model','konsultasi_model'));
+		$this->load->model(array('perusahaan_model','pengajuan_model','konsultasi_model','pembimbing_model'));
 		$this->load->helper(array('notification','master'));
 		!$this->session->userdata('level')?redirect(site_url('main')):null;
 		$id = $this->session->userdata('id');
@@ -51,6 +51,12 @@ class Bimbingan extends CI_Controller {
 		if(isset($_GET['m'])){
 			switch ($_GET['m']){
 				case 'bimbinganmhs':
+					if(isset($_GET['a']) and $_GET['a'] == 'accept'){
+						return $this->acc_bimbingan_mhs();
+					}
+					if(isset($_GET['a']) and $_GET['a'] == 'decline'){
+						return $this->dec_bimbingan_mhs();
+					}
 					return $this->index_bimbingan_mhs();
 					break;
 				case 'approvesidang':
@@ -80,9 +86,38 @@ class Bimbingan extends CI_Controller {
 
 	// Dosen
 	function index_bimbingan_mhs(){
-
-		return $this->load->view('user/bimbingan_mahasiswa');
+		$konsultasi = $this->konsultasi_model;
+		$pembimbing = $this->pembimbing_model;
+		$nip_nik = $this->session->userdata('nip_nik');
+		$data['mahasiswas'] = array();
+		if(isset($nip_nik)){
+			$data['mahasiswas'] = $pembimbing->get_all_with_mhs($nip_nik);
+		}
+		return $this->load->view('user/bimbingan_mahasiswa',$data);
 	}
+	function acc_bimbingan_mhs(){
+		$konsultasi = $this->konsultasi_model;
+		if($konsultasi->accept()){
+			$this->session->set_flashdata('status',(object)array('status'=>'Success','message'=>'Konsultasi berhasil dikonfirmasi','alert'=>'success'));
+		}
+		else{
+			$this->session->set_flashdata('status',(object)array('status'=>'Error','message'=>'Konsultasi gagal dikonfirmasi','alert'=>'danger'));
+		}
+		redirect(site_url('bimbingan?m=bimbinganmhs'));
+
+	}
+	function dec_bimbingan_mhs(){
+		$konsultasi = $this->konsultasi_model;
+		if($konsultasi->accept()){
+			$this->session->set_flashdata('status',(object)array('status'=>'Success','message'=>'Konsultasi berhasil dikonfirmasi','alert'=>'success'));
+		}
+		else{
+			$this->session->set_flashdata('status',(object)array('status'=>'Error','message'=>'Konsultasi gagal dikonfirmasi','alert'=>'danger'));
+		}
+		redirect(site_url('bimbingan?m=bimbinganmhs'));
+
+	}
+
 	function index_approve_sidang(){
 //		return
 	}

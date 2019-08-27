@@ -32,6 +32,7 @@ class Dosen_prodi_model extends CI_Model {
 	public function replace(){
 		$data = array('id_program_studi'=>$_POST['prodi'],'nip_nik'=>$_POST['nip']);
 		return $this->db->replace('tb_dosen',$data);
+
 	}
 	public function update(){
 

@@ -180,7 +180,7 @@ function getTempMhs( $id ) {
 										<span class="input-group-text"><i class="fas fa-search"></i></span>
 									</div>
 									<?php echo form_hidden( array( 'm' => 'pengajuan' ) ) ?>
-									<input class="form-control" name="q" placeholder="Cari Perusahaan" type="text">
+									<input class="form-control" name="q" placeholder="Cari Perusahaan" autocomplete="off" type="text">
 								</div>
 							</div>
 							<button type="button" class="close" data-action="search-close"
@@ -191,7 +191,7 @@ function getTempMhs( $id ) {
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="max-height: 800px;height: 100%;overflow-x: scroll;-ms-overflow-x: scroll;padding-top: 20px">
 				<?php if ( isset( $get['q'] ) && $get['q'] != "" ): ?>
 					<div class="col-md-12">
 						<div class="card">
@@ -224,7 +224,7 @@ function getTempMhs( $id ) {
 								</div>
 							</div>
 							<div class="card-body py-2">
-								<p class="card-text mb-2"><?php echo $perusahaan->nama_perusahaan ?></p>
+								<p class="card-text mb-2 text-sm"><?php echo $perusahaan->nama_perusahaan ?></p>
 								<?php $tempMhs = getTempMhs( $perusahaan->id_perusahaan );
 								$countTempMhs  = (int) count( $tempMhs );
 								$countKuota    = (int) $perusahaan->kuota_pkl;

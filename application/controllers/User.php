@@ -4,7 +4,7 @@ class User extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('mahasiswa_model');
+        $this->load->model(array('mahasiswa_model','konsultasi_model'));
         $this->load->model('pegawai_model');
         $this->load->library('form_validation');
         $this->load->helper('notification');
@@ -27,6 +27,7 @@ class User extends CI_Controller {
                     'desc'=>'Lakukan review tempat magangmu, supaya adik kelasmu memperoleh refensi bagus')
             );
             $data['mahasiswa'] = $this->mahasiswa_model->getById();
+            $data['latest_bimbingan'] = $this->konsultasi_model->show_latest_bimbingan();
             break;
             case 'dosen':
             $data['menus'] = array(
@@ -40,8 +41,9 @@ class User extends CI_Controller {
                     'desc'=>'Kuesioner bagi dosen tentang bla bla bla')
             );
             $data['dosen'] = $this->pegawai_model->getById();
+            $data['all_latest_bimbingan'] = $this->konsultasi_model->show_all_latest_bimbingan();
             break;
-            default: $data['menus'] = []; redirect(site_url('main'));//@TODO:change this, clean code
+            default: $data['menus'] = array(); redirect(site_url('main'));//@TODO:change this, clean code
         }
         $this->load->view('user/dashboard',$data);
     }

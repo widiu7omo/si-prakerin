@@ -86,7 +86,7 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
 								<?php foreach ($mahasiswas as $mahasiswa): ?>
 									<li data-idpilih="<?php echo $mahasiswa->id_mhs_pilih_perusahaan ?>"
 										data-nim="<?php echo "$mahasiswa->nim" ?>"
-										class="list-group-item"><?php echo "$mahasiswa->nama_mahasiswa ($mahasiswa->nim)" ?></li>
+										class="placeholder list-group-item"><?php echo "$mahasiswa->nama_mahasiswa ($mahasiswa->nim)" ?></li>
 								<?php endforeach; ?>
 							</ul>
 						</div>
@@ -114,7 +114,7 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
 													<li data-nim="<?php echo $mhs->nim ?>"
 														data-idpilih="<?php echo $mhs->id_mhs_pilih_perusahaan ?>"
 														data-idbimbingan="<?php echo $mhs->id_dosen_bimbingan_mhs ?>"
-														class="badge badge-pill badge-primary badge-md m-1"><?php echo $mhs->nama_mahasiswa ?>
+														class="placeholder badge badge-pill badge-primary badge-md m-1"><?php echo $mhs->nama_mahasiswa ?>
 														(<?php echo $mhs->nim ?>)
 													</li>
 													<!--TODO:Tambahkan id_mhs_pilih_perusahaan, tambahkan join ke tb_mhs_pilih_perusahaan, cek drag drop antar dosen, dan drop ke mhs untuk hapus dari tb_dosen_pembimbing-->
@@ -149,7 +149,45 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
 <!--<script src="--><?php //echo base_url('aset/vendor/sortablejs/Sortable.js') ?><!--"></script>-->
 <!--<script src="--><?php //echo base_url('aset/vendor/sortablejs/jquery-sortable.js') ?><!--"></script>-->
 <script>
+    //mode = move_bimbingan/ delete_bimbingan
+    function showModalAlert(props, mode, data) {
+        $('.modal-title').text(props.title);
+        $('.modal-body > h5').text(props.detail);
+        $('#btn-delete').text('YA!!').attr('value', mode).addClass('text-white').data('data_dosen', data).val(mode);
+        $('#deleteModal').modal();
+    }
+
+    function handle_bimbingan(uri, data) {
+        $.ajax({
+            url: "<?php echo site_url('dosen?m=pembimbing&q=')?>" + uri,
+            method: "POST",
+            data: data,
+            success: function (res) {
+                console.log(res);
+                let resJSON = JSON.parse(res);
+                if (resJSON.status === 'moved' || resJSON.status === 'removed') {
+                    $('#deleteModal').modal('hide');
+                }
+            },
+            error: function (e) {
+                console.log(e)
+                $('#deleteModal').modal('hide');
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        $('#btn-delete').on('click', function () {
+            let mode = $('#btn-delete').val();
+            let dataDosen = $(this).data('data_dosen');
+            handle_bimbingan(mode, dataDosen);
+        });
+        $('#btn-close').text("Batal").on('click', function () {
+            window.location.reload();
+        })
+    });
     let oldContainer;
+    let beforeContainer;
     let sortable = $(`ul.nested_with_switch`).sortable({
         group: 'nested',
         afterMove: function (placeholder, container) {
@@ -159,6 +197,10 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
                 container.el.addClass("active");
                 oldContainer = container;
             }
+        },
+        onDragStart: function ($item, container) {
+            beforeContainer = container;
+            $item.addClass(['dragged', 'badge', 'badge-pill', 'badge-primary', 'badge-md']);
         },
         onCancel: function ($item, container, _super, event) {
             $item.removeClass(['dragged', 'badge', 'badge-pill', 'badge-primary', 'badge-md']);
@@ -176,10 +218,24 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
                     data: {nip_nik, nim, id_mhs_pilih_perusahaan, send},
                     method: "POST",
                     success: function (res) {
-                        console.log(res)
+                        console.log(res);
                     },
                     error: function (e) {
-                        console.log(e)
+                        let status = e.responseJSON;
+                        //error database constraint
+                        //mahasiswa sudah melakukan bimbingan, jadi error ketika dosen mau diganti
+                        if (status.error.message[0] === 'Error Number: 1451') {
+                            //handle, mindah mahasiswa dan riwayat konsultasi pada dosen yang lama ke dosen yang baru
+                            console.log('mahasiswa sudah melakukan bimbingan');
+                            let props = {};
+                            props.title = "Peringatan";
+                            props.detail = "Mahasiswa telah melakukan bimbingan sebelumnya pada dosen yang bersangkutan. Apakah anda ingin memindahkannya ke dosen lain ?";
+                            let oldDosen = $(beforeContainer.el).attr('id');
+                            let data = {newDosen:nip_nik,oldDosen,nim};
+                            console.log(data);
+                            showModalAlert(props, 'mv_bimbingan', data);
+
+                        }
                     }
                 })
                 //do insert or update
@@ -189,17 +245,19 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
                 $item.removeClass(['badge', 'badge-pill', 'badge-primary', 'badge-md', 'm-1']);
                 $item.addClass('list-group-item');
                 //do delete
-				$.ajax({
-					url:"<?php echo site_url('dosen?m=pembimbing&q=d')?>",
-					method:"POST",
-					data:{id:$item.data('idbimbingan')},
-					success:function(res){
-					    console.log(res)
-					},
-					error:function(e){
-					    console.log(e)
-					}
-				})
+                $.ajax({
+                    url: "<?php echo site_url('dosen?m=pembimbing&q=d')?>",
+                    method: "POST",
+                    data: {id: $item.data('idbimbingan')},
+                    success: function (res) {
+                        console.log(res)
+                    },
+                    error: function (e) {
+                        console.log(e);
+                        let props = {};
+                        showModalAlert(props, 'rm_bimbingan');
+                    }
+                })
             }
             _super($item, container);
         }

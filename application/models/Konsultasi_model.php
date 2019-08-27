@@ -10,7 +10,62 @@ class Konsultasi_model extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('master');
 		//Do your magic here
+	}
+
+	public function get_all_join()
+	{
+		$join = array('(
+				SELECT
+					tb_mahasiswa.nama_mahasiswa,
+					tb_dosen_bimbingan_mhs.*
+				FROM
+					tb_mahasiswa
+				INNER JOIN tb_dosen_bimbingan_mhs 
+				ON tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim)
+				tb_dosen_bimbingan_mhs',
+			'tb_konsultasi_bimbingan.id_dosen_bimbingan_mhs = tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs', 'LEFT OUTER');
+		return datajoin($this->_table, null, 'tb_konsultasi_bimbingan.*,
+				tb_dosen_bimbingan_mhs.nama_mahasiswa', $join);
+	}
+
+	public function show_latest_bimbingan()
+	{
+		$id = $this->session->userdata('id');
+		$where = array('tb_dosen_bimbingan_mhs.nim' => $id);
+		$join = array('(select tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.* from tb_dosen_bimbingan_mhs inner join tb_mahasiswa on tb_dosen_bimbingan_mhs.nim = tb_mahasiswa.nim) tb_dosen_bimbingan_mhs', 'tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs = tb_konsultasi_bimbingan.id_dosen_bimbingan_mhs', 'tb_dosen_bimbingan_mhs');
+		return datajoin('tb_konsultasi_bimbingan', $where, 'tb_konsultasi_bimbingan.*', $join, null, 'tb_konsultasi_bimbingan.start DESC');
+	}
+
+	public function show_all_latest_bimbingan()
+	{
+		$id = $this->session->userdata('nip_nik');
+		$where = array('tb_dosen_bimbingan_mhs.nip_nik' => $id);
+		$join = array('(select tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.* from tb_dosen_bimbingan_mhs inner join tb_mahasiswa on tb_dosen_bimbingan_mhs.nim = tb_mahasiswa.nim) tb_dosen_bimbingan_mhs', 'tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs = tb_konsultasi_bimbingan.id_dosen_bimbingan_mhs', 'tb_dosen_bimbingan_mhs');
+		return datajoin('tb_konsultasi_bimbingan', $where, 'tb_konsultasi_bimbingan.*,tb_dosen_bimbingan_mhs.nama_mahasiswa', $join, null, 'tb_konsultasi_bimbingan.start DESC');
+	}
+
+	public function accept()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$this->db->set(array('status' => 'accept'));
+			$this->db->where(array($this->_primary_key => $get['id']));
+			return $this->db->update($this->_table);
+		}
+		return false;
+	}
+
+	public function decline()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$this->db->set(array('status' => 'reject'));
+			$this->db->where(array($this->_primary_key => $get['id']));
+			return $this->db->update($this->_table);
+		}
+		return false;
 	}
 
 	public function get($id = null)
@@ -45,18 +100,18 @@ class Konsultasi_model extends CI_Model
 	{
 		$data = array(
 			'title' => $_POST['title'],
-			'id_dosen_bimbingan_mhs'=>$_POST['id_dosen_bimbingan'],
-			'masalah'=>$_POST['masalah'],
-			'solusi'=>$_POST['solusi'],
-			'tag'=>$_POST['tag']);
-		$where = array($this->_primary_key=>$_POST['id']);
+			'id_dosen_bimbingan_mhs' => $_POST['id_dosen_bimbingan'],
+			'masalah' => $_POST['masalah'],
+			'solusi' => $_POST['solusi'],
+			'tag' => $_POST['tag']);
+		$where = array($this->_primary_key => $_POST['id']);
 		$this->db->set($data);
 		$this->db->where($where);
-		if($this->db->update($this->_table)){
-			echo json_encode(array('status'=>'success'));
+		if ($this->db->update($this->_table)) {
+			echo json_encode(array('status' => 'success'));
 			return;
 		}
-		echo json_encode(array('status'=>'error'));
+		echo json_encode(array('status' => 'error'));
 	}
 
 	public function delete()

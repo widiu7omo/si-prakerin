@@ -4,10 +4,14 @@ if ( ! defined( 'BASEPATH' ) ) {
 }
 //change name to snake case
 if ( ! function_exists( 'masterdata' ) ) {
-	function masterdata( $table, $where = null, $select = null, $resultArray = false ) {
+	function masterdata( $table, $where = null, $select = null, $resultArray = false,$order = null ) {
 		$ci =& get_instance();
 		if ( $select != null ) {
 			$ci->db->select( $select );
+		}
+
+		if($order){
+			$ci->db->order_by($order);
 		}
 
 		if ( $where != null ) {
