@@ -32,7 +32,9 @@
 					<?php
 					$nim = $this->session->userdata('id');
 					$bimbingan = masterdata('tb_dosen_bimbingan_mhs',"nim = '$nim'",'id_dosen_bimbingan_mhs');
-					echo form_hidden('id_dosen_bimbingan',"$bimbingan->id_dosen_bimbingan_mhs");
+					if($bimbingan){
+						echo form_hidden('id_dosen_bimbingan',"$bimbingan->id_dosen_bimbingan_mhs");
+					}
 					?>
 					<input type="hidden" class="new-event--start" value="2019-08-05">
 					<input type="hidden" class="new-event--end" value="2019-08-05">

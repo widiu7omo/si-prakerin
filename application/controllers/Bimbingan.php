@@ -27,8 +27,12 @@ class Bimbingan extends CI_Controller {
                     'href'=>site_url('bimbingan?m=konsultasi'),
                     'icon'=>'fas fa-id-badge',
                     'desc'=>'Konsultasi bimbingan kepada dosen pembimbing masing-masing yang diwajibkan tiap minggunya'),
-                array('name'=>'Pengajuan Sidang',
-                    'href'=>site_url('bimbingan?m=pengajuan'),
+				array('name'=>'Pengajuan Judul',
+					'href'=>site_url('bimbingan?m=pengajuan_judul'),
+					'icon'=>'fas fa-building',
+					'desc'=>'Pengajuan judul ketika mahasiswa sudah mendapatkan kasus ditempat magang'),
+				array('name'=>'Pengajuan Sidang',
+                    'href'=>site_url('bimbingan?m=pengajuan_sidang'),
                     'icon'=>'fas fa-building',
                     'desc'=>'Pengajuan sidang wajib di konsultasikan kepada dosen pembimbing'),
             );
@@ -72,10 +76,19 @@ class Bimbingan extends CI_Controller {
 					elseif(isset($_GET['q']) and $_GET['q'] == 'd'){
 						return $this->delete_konsultasi();
 					}
+					elseif (isset($_GET['q']) and $_GET['q'] == 'is_exist'){
+						return $this->is_pembimbing_exist();
+					}
+					elseif(isset($_GET['q']) and $_GET['q'] == 'pengajuan_judul'){
+						return $this->pengajuan_judul();
+					}
 					return $this->index_konsultasi();
 					break;
-				case 'pengajuan':
-					return $this->index_pengajuan();
+				case 'pengajuan_sidang':
+					return $this->index_pengajuan_sidang();
+					break;
+				case 'pengajuan_judul':
+					return $this->index_pengajuan_judul();
 					break;
 				default:null;
 			}
@@ -108,7 +121,7 @@ class Bimbingan extends CI_Controller {
 	}
 	function dec_bimbingan_mhs(){
 		$konsultasi = $this->konsultasi_model;
-		if($konsultasi->accept()){
+		if($konsultasi->decline()){
 			$this->session->set_flashdata('status',(object)array('status'=>'Success','message'=>'Konsultasi berhasil dikonfirmasi','alert'=>'success'));
 		}
 		else{
@@ -123,13 +136,20 @@ class Bimbingan extends CI_Controller {
 	}
 
 	// Mahasiswa
+	function is_pembimbing_exist(){
+		$pembimbing = $this->pembimbing_model;
+		echo json_encode($pembimbing->is_has());
+	}
 	function index_konsultasi(){
 		$konsultasi = $this->konsultasi_model;
+		$pembimbing = $this->pembimbing_model;
 		if(isset($_POST['events'])){
 			echo json_encode($konsultasi->get());
 			return null;
 		}
-		return $this->load->view('user/bimbingan_konsultasi');
+		$data['pembimbing'] = $pembimbing->is_has();
+		$data['intro'] = array(array('step_intro'=>1,'message_intro'=>'Selamat datang di bimbingan, klik tanggal anda ingin mengajukan konsultasi'));
+		return $this->load->view('user/bimbingan_konsultasi',$data);
 	}
 	function insert_konsultasi(){
 		$konsultasi = $this->konsultasi_model;
@@ -149,10 +169,18 @@ class Bimbingan extends CI_Controller {
 			$konsultasi->delete();
 		}
 	}
-
-
-	function index_pengajuan(){
-
+	function index_pengajuan_sidang(){
+		$this->load->view('user/bimbingan_pengajuan_sidang');
+	}
+	function pengajuan_judul(){
+		$pembimbing = $this->pembimbing_model;
+		if($pembimbing->pengajuan_judul()){
+			$this->session->set_flashdata(array('status'=>(object)array('status'=>'Success','alert'=>'success','message'=>'Pengajuan judul berhasil, silahkan tunggu dosen untuk mengkonfirmasi')));
+		}
+		else{
+			$this->session->set_flashdata(array('status'=>(object)array('status'=>'Error','alert'=>'danger','message'=>'Pengajuan judul gagal dilakukan, silahkan coba lagi nanti')));
+		}
+		redirect(site_url('bimbingan?m=konsultasi'));
 	}
 
 }

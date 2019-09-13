@@ -2,9 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Model_file extends CI_Model {
-  
+
     public function tampil_file($id_file = NULL){
-      if($id_file != null){ 
+      if($id_file != null){
         $query = $this->db->select('*')
                 ->where('id_file', $id_file)
                 ->get('tabel_file');
@@ -15,8 +15,8 @@ class Model_file extends CI_Model {
                 ->get();
       }
       return $query->result();
-    }   
-    
+    }
+
     public function simpan_file($data){
       $query = $this->db->insert('tabel_file', $data);
       if($query){

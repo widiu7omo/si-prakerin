@@ -24,7 +24,7 @@
 
 					<?php foreach($menus as $menu): ?>
 					<div class="col-xl-4 col-lg-6">
-						<div class="card card-stats mb-4 mb-xl-0 my-3">
+						<div class="card card-stats mb-4 mb-xl-0 my-3" data-step="<?php echo $menu['step_intro'] ?>" data-intro="<?php echo $menu['message_intro'] ?>">
 							<a href="<?php echo $menu['href'] ?>">
 								<div class="card-body">
 									<div class="row">
@@ -59,7 +59,17 @@
 	<?php $this->load->view('user/_partials/modal.php');?>
 	<?php $this->load->view('user/_partials/js.php');?>
 	<!-- Demo JS - remove this in your project -->
-	<!-- <script src="../aset/js/demo.min.js"></script> -->
+	<script>
+        $(document).ready(function () {
+            if (!localStorage.getItem('menu_magang')) {
+                introJs().start().oncomplete(function () {
+                    localStorage.setItem('menu_magang', 'yes')
+                }).onexit(function () {
+                    localStorage.setItem('menu_magang', 'yes')
+                })
+            }
+        })
+	</script>
 </body>
 
 </html>

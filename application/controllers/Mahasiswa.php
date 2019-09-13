@@ -241,6 +241,7 @@ class Mahasiswa extends MY_Controller {
 		//id perusahaan
 		if ( isset( $id ) ) {
 			$data ['status']        = 'terima';
+			$data['tanggal_konfirmasi'] = date('Y-m-d H:i:s');
 			$where['id_perusahaan'] = $id;
 			$this->pengajuan_model->update_multi( $data, $where );
 			foreach ( $mahasiswaMagang as $mhsMagang ) {
@@ -259,6 +260,7 @@ class Mahasiswa extends MY_Controller {
 		if ( isset( $id ) ) {
 			$where['id_perusahaan'] = $id;
 			$data ['status']        = 'tolak';
+			$data['tanggal_konfirmasi'] = date('Y-m-d H:i:s');
 			$this->pengajuan_model->update_multi( $data, $where );
 			$nims = masterdata( 'tb_perusahaan_sementara',array('id_perusahaan'=>$id),'nim',true);
 			foreach ($nims as $nim){
@@ -304,7 +306,7 @@ class Mahasiswa extends MY_Controller {
 		foreach ( $data['perusahaans'] as $index => $perusahaan ) {
 			$where                                    = array(
 				'tb_perusahaan.status_perusahaan'       => 'whitelist',
-				'tb_perusahaan_sementara.id_perusahaan' => $perusahaan->id_perusahaan
+				'tb_perusahaan_sementara.id_perusahaan' => $perusahaan->id_perusahaan,
 			);
 			$joins[0]                                 = array(
 				'tb_perusahaan',

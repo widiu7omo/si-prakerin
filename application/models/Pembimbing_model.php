@@ -29,7 +29,19 @@ class Pembimbing_model extends CI_Model
 		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*', $join);
 	}
-
+	public function pengajuan_judul(){
+		$nim = $this->session->userdata('id');
+		$judul = $this->input->post('judul');
+		$data = array('judul_laporan_mhs'=>$judul);
+		$this->db->where(array('nim'=>$nim));
+		$this->db->set($data);
+		return $this->db->update($this->_table);
+	}
+	public function is_has(){
+		$nim = $this->session->userdata('id');
+		$join = array('tb_mahasiswa','tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim','inner join');
+		return datajoin('(select tb_dosen_bimbingan_mhs.*,tb_pegawai.nama_pegawai from tb_dosen_bimbingan_mhs inner join tb_pegawai on tb_dosen_bimbingan_mhs.nip_nik = tb_pegawai.nip_nik)tb_dosen_bimbingan_mhs',array('tb_dosen_bimbingan_mhs.nim'=>$nim),'tb_dosen_bimbingan_mhs.nama_pegawai,tb_dosen_bimbingan_mhs.judul_laporan_mhs',$join);
+	}
 	public function replace()
 	{
 		$post = $this->input->post();

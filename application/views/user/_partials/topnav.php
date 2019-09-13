@@ -56,8 +56,8 @@ $dataNotification = get_notification($this->session->userdata('id'),0);
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false" data-step="2"
-                       data-intro="Pastikan melihat informasi terlebih dahulu">
+						aria-expanded="false" <?php if(isset($intro_dashboard)) echo isset($intro)?"data-step='".$intro[0]['step_intro']."'":null ?>
+                       <?php if(isset($intro_dashboard)) echo isset($intro)?"data-intro='".$intro[0]['message_intro']."'":null ?>>
                         <i class="ni ni-bell-55"></i>
 						<?php $countNotif = isset($countNotification)?$countNotification:0;
 						if($countNotif > 0):?>
@@ -148,8 +148,8 @@ $dataNotification = get_notification($this->session->userdata('id'),0);
 				<li class="nav-item dropdown">
 					<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">
-						<div class="media align-items-center"  data-step="3"
-						     data-intro="Klik foto profil, dan pergi ke My Profile, dan ubah profil anda ketika pertama kali login. Hal ini bertujuan agar kalian bisa melakukan proses pengajuan magang">
+						<div class="media align-items-center" <?php if(isset($intro_dashboard)) echo isset($intro)?"data-step='".$intro[1]['step_intro']."'":null ?>
+							<?php if(isset($intro_dashboard)) echo isset($intro)?"data-intro='".$intro[0]['message_intro']."'":null ?>>
 							<span class="avatar avatar-sm rounded-circle">
 								<img alt="Image placeholder" src="https://i.pravatar.cc/200">
 							</span>
