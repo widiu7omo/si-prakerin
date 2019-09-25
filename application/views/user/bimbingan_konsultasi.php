@@ -69,16 +69,16 @@
 							<small>* Ajukan kasus kalian dengan form dibawah ini</small><br>
 						</div>
 						<div class="card-body pt-0">
-							<form action="<?php echo site_url('bimbingan?m=konsultasi&q=pengajuan_judul') ?>">
+							<form method="POST" action="<?php echo site_url('bimbingan?m=konsultasi&q=pengajuan_judul') ?>">
 								<div class="form-group">
 									<label for="judul" class="form-label">Judul yang akan diangkat sebagai kasus</label>
-									<textarea <?php echo count($pembimbing) == 0 ? "disabled" : null ?> name="judul"
+									<textarea <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" :""?> <?php echo count($pembimbing) == 0 ? "disabled" : null ?> name="judul"
 																										id="judul"
 																										class="form-control"
 																										placeholder="Masukkan Judul"></textarea>
 								</div>
 								<div class="form-group">
-									<button class="btn btn-primary btn-sm float-right"
+									<button <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" :""?> class="btn btn-primary btn-sm float-right"
 											type="submit" <?php echo count($pembimbing) == 0 ? "disabled" : null ?>>
 										Ajukan Judul
 									</button>
@@ -286,7 +286,8 @@
                     console.log(event);
                     $('#edit-event input[value=' + event.tag + ']').prop('checked', true);
                     $('#edit-event').modal('show');
-                    $('.edit-event--id').val(event.id);
+                    console.log(event.id_konsultasi_bimbingan)
+                    $('.edit-event--id').val(event.id_konsultasi_bimbingan);
                     $('.edit-event--title').val(event.title);
                     $('.edit-event--masalah').val(event.masalah);
                     $('.edit-event--solusi').val(event.solusi);
@@ -393,14 +394,17 @@
                 let currentClass = $('#edit-event .event-tag input:checked').val();
                 let currentEvent = $this.fullCalendar('clientEvents', currentId);
                 //Update
+				console.log(currentEvent);
                 if (calendarAction === 'update') {
                     if (currentTitle !== '') {
-                        currentEvent[0].title = currentTitle;
-                        currentEvent[0].masalah = currentMasalah;
-                        currentEvent[0].solusi = currentSolusi;
-                        currentEvent[0].tag = [currentClass];
+                        let data = {"title":currentTitle,"masalah":currentMasalah,"solusi":currentSolusi,"tag":[currentClass]};
+                        currentEvent.push(data);
+                        // currentEvent[0].title = currentTitle;
+                        // currentEvent[0].masalah = currentMasalah;
+                        // currentEvent[0].solusi = currentSolusi;
+                        // currentEvent[0].tag = [currentClass];
                         //update rendered item
-                        $this.fullCalendar('updateEvent', currentEvent[0]);
+                        $this.fullCalendar('updateEvent', data);
                         //push to database
                         $.ajax({
                             url: "<?php echo site_url('bimbingan?m=konsultasi&q=u')?>",

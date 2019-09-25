@@ -6,7 +6,7 @@
 				<form class="edit-event--form">
 					<div class="form-group">
 						<label class="form-control-label">Pengajuan Konsutasi</label>
-						<input type="text" class="form-control form-control-alternative edit-event--title" placeholder="Event Title">
+						<input type="text" class="form-control form-control-alternative edit-event--title" placeholder="Event Title"/>
 					</div>
 					<div class="form-group">
 						<label class="form-control-label d-block mb-3">Status color</label>
