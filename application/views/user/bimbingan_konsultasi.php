@@ -163,19 +163,30 @@
 					}
 				})
 			});
-            let mocks = $.ajax({
+            let mock = $.ajax({
 					url:"<?php echo site_url('ajax/check_bimbingan')?>",
 					method:"GET",
-				});
-            for (let i = 0; i < mocks.length; i++) {
-                let mock = mocks[i];
-                mock.accepted = true;
+				}).then(function(e){
+				    console.log(e);
+				    let response = JSON.parse(e);
 
-                this.files.push(mock);
-                this.emit('addedfile', mock);
-                this.createThumbnailFromUrl(mock, mock.url);
-                this.emit('complete', mock);
-            }
+                response.accepted = true;
+                console.log(Dropzone.files)
+                return response;
+
+			});
+			console.log(mock)
+            this.files.push(response);
+            this.emit('addedfile', response);
+            this.createThumbnailFromUrl(response, response.lembar_konsultasi);
+            this.emit('complete', response);
+            // for (let i = 0; i < mocks.length; i++) {
+            //     let mock = mocks[i];
+			// 	mock.then(function(){
+			//
+			// 	});
+
+            // }
 		},
         addRemoveLinks: true,
         dictRemoveFileConfirmation:"Apakah anda yakin ingin menghapus file bimbingan ?",
@@ -286,8 +297,7 @@
                     console.log(event);
                     $('#edit-event input[value=' + event.tag + ']').prop('checked', true);
                     $('#edit-event').modal('show');
-                    console.log(event.id_konsultasi_bimbingan)
-                    $('.edit-event--id').val(event.id_konsultasi_bimbingan);
+                    $('.edit-event--id').val(event.id);
                     $('.edit-event--title').val(event.title);
                     $('.edit-event--masalah').val(event.masalah);
                     $('.edit-event--solusi').val(event.solusi);
@@ -397,14 +407,14 @@
 				console.log(currentEvent);
                 if (calendarAction === 'update') {
                     if (currentTitle !== '') {
-                        let data = {"title":currentTitle,"masalah":currentMasalah,"solusi":currentSolusi,"tag":[currentClass]};
-                        currentEvent.push(data);
-                        // currentEvent[0].title = currentTitle;
-                        // currentEvent[0].masalah = currentMasalah;
-                        // currentEvent[0].solusi = currentSolusi;
-                        // currentEvent[0].tag = [currentClass];
+                        // let data = {"title":currentTitle,"masalah":currentMasalah,"solusi":currentSolusi,"tag":[currentClass]};
+                        // currentEvent.push(data);
+                        currentEvent[0].title = currentTitle;
+                        currentEvent[0].masalah = currentMasalah;
+                        currentEvent[0].solusi = currentSolusi;
+                        currentEvent[0].className = [currentClass];
                         //update rendered item
-                        $this.fullCalendar('updateEvent', data);
+                        $this.fullCalendar('updateEvent', currentEvent[0]);
                         //push to database
                         $.ajax({
                             url: "<?php echo site_url('bimbingan?m=konsultasi&q=u')?>",

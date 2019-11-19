@@ -90,7 +90,7 @@ class Konsultasi_model extends CI_Model
 			$where = "nim = '$id'";
 		}
 		$join = array('tb_dosen_bimbingan_mhs','tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs = tb_konsultasi_bimbingan.id_dosen_bimbingan_mhs','INNER');
-		return datajoin($this->_table, $where, 'tb_konsultasi_bimbingan.*',$join);
+		return datajoin($this->_table, $where, 'tb_konsultasi_bimbingan.*,tb_konsultasi_bimbingan.id_konsultasi_bimbingan as id,tb_konsultasi_bimbingan.tag as className',$join);
 	}
 
 	public function insert()
