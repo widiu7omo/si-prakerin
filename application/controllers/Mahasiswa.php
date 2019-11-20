@@ -259,12 +259,12 @@ class Mahasiswa extends MY_Controller {
 		//id perusahaan
 		if ( isset( $id ) ) {
 			$where['id_perusahaan'] = $id;
-			$data ['status']        = 'tolak';
+			$data ['status']        = 'kirim';
 			$data['tanggal_konfirmasi'] = date('Y-m-d H:i:s');
 			$this->pengajuan_model->update_multi( $data, $where );
 			$nims = masterdata( 'tb_perusahaan_sementara',array('id_perusahaan'=>$id),'nim',true);
 			foreach ($nims as $nim){
-				dynamic_insert( 'tb_history_pemilihan', array('nim'=>$nim->nim,'id_perusahaan'=>$id));
+				set_notification('Prakerin',$nim->nim,'Mohon untuk upload ulang bukti penerimaan magang, bukti yang di kirim tidak sesuai atau tidak bisa di baca','Upload Ulang Bukti Penerimaan','magang?m=pengajuan');
 			}
 		}
 		redirect( site_url( 'mahasiswa?m=pengajuan' ) );

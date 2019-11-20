@@ -72,7 +72,7 @@ function getTempMhs($id)
 
 								</div>
 								<div class="col-md-4 col-sm-4 text-right" id="div-btn-diterima">
-									<?php if (isset($approval[0]) && $approval[0]->status == 'kirim'): ?>
+									<?php if (isset($approval[0]) && $approval[0]->status == 'kirim' or isset($approval[0]) && $approval[0]->status == 'reupload'): ?>
 										<a class="btn btn-sm btn-primary" data-toggle="collapse"
 										   href="#collapse-bukti-diterima" role="button" aria-expanded="false"
 										   aria-controls="collapseExample">

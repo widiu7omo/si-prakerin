@@ -50,7 +50,7 @@ $perusahaan = masterdata( 'tb_perusahaan', "id_perusahaan = {$id}", 'nama_perusa
                                 <a href="<?php echo site_url( "mahasiswa?m=pengajuan&q=accept&id={$id}" ) ?>"
                                    class="btn btn-sm btn-success">Setujui bukti penerimaan</a>
                                 <a href="<?php echo site_url( "mahasiswa?m=pengajuan&q=decline&id={$id}" ) ?>"
-                                   class="btn btn-sm btn-danger">Tolak bukti penerimaan</a>
+                                   class="btn btn-sm btn-danger">Upload ulang bukti penerimaan</a>
 
                             </div>
                             <div class="col-3 col-xs-12 text-right">
