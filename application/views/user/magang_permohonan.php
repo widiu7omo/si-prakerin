@@ -59,7 +59,9 @@ function getTempMhs($id)
 			<!-- Card stats -->
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
-					<div class="card text-white bg-gradient-secondary" data-step="<?php echo isset($intro)?$intro[0]['step_intro']:null ?>" data-intro="<?php echo isset($intro)?$intro[0]['message_intro']:null ?>">
+					<div class="card text-white bg-gradient-secondary"
+						 data-step="<?php echo isset($intro) ? $intro[0]['step_intro'] : null ?>"
+						 data-intro="<?php echo isset($intro) ? $intro[0]['message_intro'] : null ?>">
 						<!--                        <img class="card-img-top" src="holder.js/100px180/" alt="">-->
 						<div class="card-body">
 							<div class="row">
@@ -95,6 +97,18 @@ function getTempMhs($id)
 													</div>
 												</div>
 											</div>
+											<div class="row">
+												<div class="col">
+													<button id="confirmation-bukti" disabled
+															class="btn btn-sm btn-success float-right ml-2">Simpan
+													</button>
+													<button class="btn btn-sm btn-danger float-right"
+															data-toggle="collapse"
+															href="#collapse-bukti-diterima">Batal
+													</button>
+												</div>
+											</div>
+
 										</div>
 									</div>
 								</div>
@@ -145,14 +159,12 @@ function getTempMhs($id)
 											<li class="list-group-item text-danger h6"><?php echo $riwayat->nama_perusahaan ?></li>
 										<?php endforeach; ?>
 									</ul>
-
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 			<div class="row">
 				<div class="col-md-12">
 					<?php if ($this->session->flashdata('status')): ?>
@@ -175,7 +187,9 @@ function getTempMhs($id)
 					<div class="d-flex justify-content-end">
 						<form method="GET" action="<?php echo site_url('magang') ?>"
 							  class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-							<div class="form-group mb-0" data-step="<?php echo isset($intro)?$intro[1]['step_intro']:null ?>" data-intro="<?php echo isset($intro)?$intro[1]['message_intro']:null ?>">
+							<div class="form-group mb-0"
+								 data-step="<?php echo isset($intro) ? $intro[1]['step_intro'] : null ?>"
+								 data-intro="<?php echo isset($intro) ? $intro[1]['message_intro'] : null ?>">
 								<div class="input-group-sm input-group input-group-alternative input-group-merge">
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -214,14 +228,16 @@ function getTempMhs($id)
 					</div>
 				<?php endif; ?>
 				<div class="col-md-4 col-xs-12 col-sm-12" id="contoh-perusahaan">
-					<div class="card" >
+					<div class="card">
 						<!-- Card header -->
 						<div class="card-header py-2">
 							<!-- Title -->
 							<div class="row">
 								<div class="col"><h5 class="h3 mb-0">Perusahaan</h5></div>
 								<div class="col-auto">
-									<div class="badge badge-info" data-step="<?php echo isset($intro)?$intro[2]['step_intro']:null ?>" data-intro="<?php echo isset($intro)?$intro[2]['message_intro']:null ?>">
+									<div class="badge badge-info"
+										 data-step="<?php echo isset($intro) ? $intro[2]['step_intro'] : null ?>"
+										 data-intro="<?php echo isset($intro) ? $intro[2]['message_intro'] : null ?>">
 										Kuota&nbsp;3
 									</div>
 								</div>
@@ -229,12 +245,16 @@ function getTempMhs($id)
 						</div>
 						<div class="card-body py-2">
 							<p class="card-text mb-2 text-sm">PT. Contoh Media</p>
-							<div class="h5 badge badge-success" data-step="<?php echo isset($intro)?$intro[3]['step_intro']:null ?>" data-intro="<?php echo isset($intro)?$intro[3]['message_intro']:null ?>">
+							<div class="h5 badge badge-success"
+								 data-step="<?php echo isset($intro) ? $intro[3]['step_intro'] : null ?>"
+								 data-intro="<?php echo isset($intro) ? $intro[3]['message_intro'] : null ?>">
 								Status : Tersisa 2 Slot
 							</div>
 							<div class="accordion mb-2" id="accordionExample">
 								<div class="card p-0 m-0 shadow-none">
-									<div class="card-header border-0 p-0 m-0" id="headingOne" data-step="<?php echo isset($intro)?$intro[4]['step_intro']:null ?>" data-intro="<?php echo isset($intro)?$intro[4]['message_intro']:null ?>"
+									<div class="card-header border-0 p-0 m-0" id="headingOne"
+										 data-step="<?php echo isset($intro) ? $intro[4]['step_intro'] : null ?>"
+										 data-intro="<?php echo isset($intro) ? $intro[4]['message_intro'] : null ?>"
 										 data-toggle="collapse"
 										 data-target="#collapse-contoh" aria-expanded="false"
 										 aria-controls="collapseOne">
@@ -259,7 +279,9 @@ function getTempMhs($id)
 						</div>
 						<div class="card-footer py-2">
 							<form action="#" method="post">
-								<button type="submit" name="insert" class=" float-right btn btn-sm btn-primary" data-step="<?php echo isset($intro)?$intro[5]['step_intro']:null ?>" data-intro="<?php echo isset($intro)?$intro[5]['message_intro']:null ?>">
+								<button type="submit" name="insert" class=" float-right btn btn-sm btn-primary"
+										data-step="<?php echo isset($intro) ? $intro[5]['step_intro'] : null ?>"
+										data-intro="<?php echo isset($intro) ? $intro[5]['message_intro'] : null ?>">
 									Ajukan
 								</button>
 							</form>
@@ -347,15 +369,14 @@ function getTempMhs($id)
         if (!localStorage.getItem('pengajuan_magang')) {
             introJs().start().oncomplete(function () {
                 localStorage.setItem('pengajuan_magang', 'yes');
-				$('#contoh-perusahaan').remove();
+                $('#contoh-perusahaan').remove();
             }).onexit(function () {
                 localStorage.setItem('pengajuan_magang', 'yes');
                 $('#contoh-perusahaan').remove();
             })
-        }
-        else{
+        } else {
             $('#contoh-perusahaan').remove();
-		}
+        }
     })
 </script>
 <script>
@@ -383,7 +404,54 @@ function getTempMhs($id)
                 url: $this.data('dropzone-url'),
                 maxFiles: (!multiple) ? 1 : 1,
                 acceptedFiles: '.pdf',
+                addRemoveLinks: true,
+                removedfile: function (file) {
+                    let _ref;
+                    let decodeFile;
+                    if (typeof file.id === 'undefined') {
+                        decodeFile = JSON.parse(file.xhr.response);
+                    } else {
+                        decodeFile = file;
+                        decodeFile.file_name = decodeFile.name;
+                    }
+                    $.ajax({
+                        url: "<?php echo site_url('ajax/remove_bukti')?>",
+                        method: 'POST',
+                        data: {
+                            id_perusahaan: decodeFile.id,
+                            file_name: decodeFile.file_name
+                        },
+                        dataType: "json",
+                        success: function () {
+                            $('#confirmation-bukti').attr('disabled', true);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+                    return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                },
                 init: function () {
+                    let previousFile = $.ajax({
+                        url: "<?php echo site_url('ajax/init_files')?>",
+                        data: {
+                            nim: "<?php echo $nim?>",
+                        },
+                        method: "POST",
+                        async: false,
+                        dataType: "json",
+                    }).done(function (res) {
+                        return res
+                    });
+                    let response = previousFile.responseJSON;
+                    if (response.name !== null) {
+                        let splited = response.name.split("/");
+                        response.name = splited[splited.length - 1];
+                        this.options.addedfile.call(this, response);
+                        this.options.thumbnail.call(this, response, 'https://image.flaticon.com/icons/svg/337/337946.svg');
+                        $('#confirmation-bukti').attr('disabled', false).data('id', response.id);
+                    }
+
                     this.on("addedfile", function (file) {
                         if (!multiple && currentFile) {
                             this.removeFile(currentFile);
@@ -391,17 +459,17 @@ function getTempMhs($id)
                         currentFile = file;
                     }),
                         this.on("processing", function (file, progress) {
-                            console.log('processing')
+                            // console.log('processing')
                             $('.dz-message').addClass('loading-overlay')
                         }),
                         this.on("success", function (file, response) {
-                            console.log(file)
-                            console.log(JSON.parse(response))
-                            var sheetNames = JSON.parse(response);
+                            var res = JSON.parse(response);
                             $('.dz-message').removeClass('loading-overlay')
                             $('.sheet-form-name').css('display', 'block')
-                            location.reload();
-
+                            $('#confirmation-bukti').attr('disabled', false).data('id', res.id);
+                        }),
+                        this.on("error", function (error) {
+                            console.log(error);
                         })
                 }
             }
@@ -433,6 +501,23 @@ function getTempMhs($id)
         }
 
     })();
+    $('#confirmation-bukti').on('click', function () {
+        $.ajax({
+            url: '<?php echo site_url("ajax/simpan_bukti")?>',
+            dataType: "json",
+            method: "POST",
+            data: {
+                id: $(this).data('id')
+            },
+			success:function(response){
+                alert('Bukti berhasil disimpan');
+				location.reload()
+			},
+			error:function(err){
+                alert('Bukti gagal disimpan, sedang terjadi kesalahan');
+			}
+        })
+    })
 </script>
 <!-- Demo JS - remove this in your project -->
 <!-- <script src="../aset/js/demo.min.js"></script> -->
