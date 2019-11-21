@@ -66,6 +66,7 @@
 						<!-- List group -->
 						<?php if ($level === 'mahasiswa') : //mahasiswa?>
 							<p class="text-center text-sm">Berikut daftar bimbingan terakhirmu</p>
+							<div id="div-mode-bimbingan" class="text-md-center text-warning font-weight-bold"></div>
 							<?php if (isset($latest_bimbingan)): ?>
 								<?php if (count($latest_bimbingan) == 0) : ?>
 									<div class="alert alert-primary alert-dismissible fade show m-3" role="alert">
@@ -110,13 +111,13 @@
 											<li class="list-group-item"><p class="h3">Anda belum mempunyai pembimbing</p>
 											</li>
 										<?php elseif (count($latest_bimbingan) == 0 and count($get_pembimbing) != 0) : ?>
-											<li class="list-group-item"><p class="h3">Belum mengajukan konsultasi</p>
+											<li id="belum-konsultasi" class="list-group-item"><p class="h3">Belum mengajukan konsultasi</p>
 											</li>
 										<?php endif; ?>
 									</ul>
 								</div>
 							<?php else: ?>
-								<div class="p-3"><p class="text-center text-lg">
+								<div id="belum-konsultasi" class="p-3"><p class="text-center text-lg">
 										Belum mengajukan konsultasi</p></div>
 							<?php endif; ?>
 						<?php elseif ($level === 'dosen') : //dosen?>
@@ -150,7 +151,7 @@
 											</li>
 										<?php endforeach; ?>
 										<?php if (count($all_latest_bimbingan) == 0) : ?>
-											<li class="list-group-item"><p class="h3">Belum mengajukan konsultasi</p>
+											<li id="belum-konsultasi" class="list-group-item"><p class="h3">Belum mengajukan konsultasi</p>
 											</li>
 										<?php endif; ?>
 									</ul>
@@ -178,6 +179,19 @@
                 localStorage.setItem('wizard', 'yes')
             })
         }
+        <?php if ($level === 'mahasiswa'): ?>
+        let checkBimbingan = $.ajax({
+			url:'<?php echo site_url("ajax/check_bimbingan")?>',
+			method:"GET",
+			dataType:'json',
+			async:false
+		}).done(function(res){return res});
+        let resJson = checkBimbingan.responseJSON;
+        if(resJson.data.mode === 'offline'){
+            $('#belum-konsultasi').remove();
+			$('#div-mode-bimbingan').append('Anda sedang melakukan bimbingan offline')
+		}
+		<?php endif ?>
     })
 </script>
 <!-- Demo JS - remove this in your project -->
