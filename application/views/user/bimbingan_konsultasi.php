@@ -47,7 +47,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="col-lg-6 col-md-6 col-sm-12" id="card-bimbingan-offline">
 					<div class="card">
 						<div class="card-header m-0">
 							<div class="h4">Bimbingan Offline</div>
@@ -63,24 +63,26 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12">
+				<div class="col-lg-6 col-md-6 col-sm-12" id="card-kasus">
 					<div class="card">
 						<div class="card-header m-0">
 							<div class="h4">Sudah mendapatkan kasus?</div>
 							<small>* Ajukan kasus kalian dengan form dibawah ini</small><br>
 						</div>
 						<div class="card-body pt-0">
-							<form method="POST" action="<?php echo site_url('bimbingan?m=konsultasi&q=pengajuan_judul') ?>">
+							<form method="POST"
+								  action="<?php echo site_url('bimbingan?m=konsultasi&q=pengajuan_judul') ?>">
 								<div class="form-group">
 									<label for="judul" class="form-label">Judul yang akan diangkat sebagai kasus</label>
-									<textarea <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" :""?> <?php echo count($pembimbing) == 0 ? "disabled" : null ?> name="judul"
-																										id="judul"
-																										class="form-control"
-																										placeholder="Masukkan Judul"></textarea>
+									<textarea <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" : "" ?> <?php echo count($pembimbing) == 0 ? "disabled" : null ?> name="judul"
+																																																			   id="judul"
+																																																			   class="form-control"
+																																																			   placeholder="Masukkan Judul"></textarea>
 								</div>
 								<div class="form-group">
-									<button <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" :""?> class="btn btn-primary btn-sm float-right"
-											type="submit" <?php echo count($pembimbing) == 0 ? "disabled" : null ?>>
+									<button <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" : "" ?>
+										class="btn btn-primary btn-sm float-right"
+										type="submit" <?php echo count($pembimbing) == 0 ? "disabled" : null ?>>
 										Ajukan Judul
 									</button>
 								</div>
@@ -89,7 +91,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="row-calendar">
 				<div class="col">
 					<div class="card card-calendar"
 						 data-step="<?php echo isset($intro) ? $intro[0]['step_intro'] : null ?>"
@@ -133,6 +135,7 @@
 
 <script>
     $(document).ready(function () {
+        let bimbinganMode = '';
         if (!localStorage.getItem('bimbingan_konsultasi')) {
             introJs().start().oncomplete(function () {
                 localStorage.setItem('bimbingan_konsultasi', 'yes');
@@ -142,56 +145,70 @@
         }
     });
     Dropzone.options.dropzoneBimbingan = {
-        init:function(){
+        init: function () {
             let fileName = undefined;
             let checkBimbingan = $.ajax({
-				url:"<?php echo site_url('ajax/check_bimbingan')?>",
-				async:false,
-				method:"GET",
-				dataType:"json"
-			}).done(res=>{return res});
+                url: "<?php echo site_url('ajax/check_bimbingan')?>",
+                async: false,
+                method: "GET",
+                dataType: "json"
+            }).done(res => {
+                return res
+            });
             let resJson = checkBimbingan.responseJSON;
-            if(resJson.data.status !== 'error'){
-                if(resJson.data.message === undefined){
-                    fileName = resJson.data.name;
-                    this.options.addedfile.call(this,resJson.data);
-                    this.options.thumbnail.call(this,resJson.data,'https://image.flaticon.com/icons/svg/337/337946.svg');
-				}
-			}
-            else{
-                $('#alert-bimbingan').append("<small>"+resJson.data.message+"</small>");
-                this.disable();
-			}
+            if (resJson.data.status !== 'error') {
 
-            this.on("success",function(file){
+                switch (resJson.data.mode) {
+					case 'online':
+                        $('#card-bimbingan-offline').remove();
+                        $('#card-kasus').removeClass('col-lg-6 col-md-6 col-sm-12').addClass('col');
+					    break;
+					case 'offline':
+                        if (typeof resJson.data.message === "undefined") {
+                            fileName = resJson.data.name;
+                            this.options.addedfile.call(this, resJson.data);
+                            this.options.thumbnail.call(this, resJson.data, 'https://image.flaticon.com/icons/svg/337/337946.svg');
+                        }
+                        $('#row-calendar').remove();
+					    break;
+                }
+
+            } else {
+                $('#alert-bimbingan').append("<small>" + resJson.data.message + "</small>");
+                this.disable();
+            }
+            this.on("success", function (file) {
                 let response = JSON.parse(file.xhr.response);
                 fileName = response.data.upload_data.file_name;
-			});
+                location.reload();
+            });
             this.on('maxfilesexceeded', function (file) {
                 this.removeAllFiles();
                 this.addFile(file);
             });
-            this.on("removedfile", function(file) {
-                if(fileName){
+            this.on("removedfile", function (file) {
+                if (fileName) {
                     $.ajax({
-                        url:"<?php echo site_url('ajax/remove_bimbingan')?>",
-                        method:"POST",
-                        data:{file_name:fileName},
-                        success:function(res){
+                        url: "<?php echo site_url('ajax/remove_bimbingan')?>",
+                        method: "POST",
+                        data: {
+                            file_name: fileName
+                        },
+                        success: function (res) {
                             console.log(res)
                         },
-                        error:function(e){
+                        error: function (e) {
                             console.log(e)
                         }
                     })
-				}
-			});
-		},
+                }
+            });
+        },
         addRemoveLinks: true,
-        dictRemoveFileConfirmation:"Apakah anda yakin ingin menghapus file bimbingan ?",
+        dictRemoveFileConfirmation: "Apakah anda yakin ingin menghapus file bimbingan ?",
         maxFilesize: 0.5,
-        uploadMultiple:false,
-		maxFiles:1,
+        uploadMultiple: false,
+        maxFiles: 1,
         acceptedFiles: '.pdf',
     };
 
@@ -364,6 +381,8 @@
                         method: "POST",
                         data: createdEvent,
                         success: function () {
+                            $('#card-bimbingan-offline').remove();
+                            $('#card-kasus').removeClass('col-lg-6 col-md-6 col-sm-12').addClass('col');
                             swal({
                                 title: 'Success',
                                 text: 'Konsultasi berhasil disimpan',
@@ -403,7 +422,7 @@
                 let currentClass = $('#edit-event .event-tag input:checked').val();
                 let currentEvent = $this.fullCalendar('clientEvents', currentId);
                 //Update
-				console.log(currentEvent);
+                console.log(currentEvent);
                 if (calendarAction === 'update') {
                     if (currentTitle !== '') {
                         // let data = {"title":currentTitle,"masalah":currentMasalah,"solusi":currentSolusi,"tag":[currentClass]};

@@ -46,14 +46,29 @@ class Konsultasi_model extends CI_Model
 	}
 	public function check_bimbingan(){
 		$nim = $this->session->userdata('id');
+		$post = $this->input->post();
 		$dosen_bimbingan_mhs = masterdata('tb_dosen_bimbingan_mhs',array('nim'=>$nim),'id_dosen_bimbingan_mhs as id',false);
 		if($dosen_bimbingan_mhs){
-			$result = masterdata('tb_konsultasi_bimbingan_offline',array('id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id),'lembar_konsultasi as name,"application/pdf" as type, 1234 as size',false);
-			if($result){
-				$result->status = 'success';
-				return $result;
+			//cek mode bimbingan offline || online
+			$offline = masterdata('tb_konsultasi_bimbingan_offline',array('id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id),'lembar_konsultasi as name,"application/pdf" as type, 1234 as size',false);
+			$online = masterdata('tb_konsultasi_bimbingan',array('id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id),'id_konsultasi_bimbingan',false);
+			if(!$offline and !$online){
+				$result = (object)array('status'=>'success','message'=>'Mahasiswa belum melakukan bimbingan');
 			}
-			return (object)array('status'=>'success','message'=>'Mahasiswa belum melakukan bimbingan');
+			elseif ($offline and !$online){
+				$result = $offline;
+				$result->mode = 'offline';
+				$result->status = 'success';
+			}
+			elseif (!$offline and $online){
+				$result = $online;
+				$result->mode = 'online';
+				$result->status = 'success';
+			}
+			else{
+				$result = (object)array('status'=>'error','message'=>'Error, both mode are used');
+			}
+			return $result;
 		}
 		else{
 			return (object)array('status'=>'error','message'=>'Mahasiswa belum mempunyai pembimbing');
