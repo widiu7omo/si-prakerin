@@ -47,7 +47,17 @@ class Konsultasi_model extends CI_Model
 	public function check_bimbingan(){
 		$nim = $this->session->userdata('id');
 		$dosen_bimbingan_mhs = masterdata('tb_dosen_bimbingan_mhs',array('nim'=>$nim),'id_dosen_bimbingan_mhs as id',false);
-		return masterdata('tb_konsultasi_bimbingan_offline',array('id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id),'lembar_konsultasi',false);
+		if($dosen_bimbingan_mhs){
+			$result = masterdata('tb_konsultasi_bimbingan_offline',array('id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id),'lembar_konsultasi as name,"application/pdf" as type, 1234 as size',false);
+			if($result){
+				$result->status = 'success';
+				return $result;
+			}
+			return (object)array('status'=>'success','message'=>'Mahasiswa belum melakukan bimbingan');
+		}
+		else{
+			return (object)array('status'=>'error','message'=>'Mahasiswa belum mempunyai pembimbing');
+		}
 	}
 	public function remove_bimbingan($file_name){
 		$this->db->where(array('lembar_konsultasi'=>$file_name));
@@ -56,8 +66,13 @@ class Konsultasi_model extends CI_Model
 	public function upload_bimbingan($file_name){
 		$nim = $this->session->userdata('id');
 		$dosen_bimbingan_mhs = masterdata('tb_dosen_bimbingan_mhs',array('nim'=>$nim),'id_dosen_bimbingan_mhs as id',false);
-		$data = array('lembar_konsultasi'=>$file_name,'id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id);
-		return $this->db->replace('tb_konsultasi_bimbingan_offline',$data);
+		if($dosen_bimbingan_mhs){
+			$data = array('lembar_konsultasi'=>$file_name,'id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id);
+			return $this->db->replace('tb_konsultasi_bimbingan_offline',$data);
+		}
+		else{
+			return false;
+		}
 	}
 	public function accept()
 	{

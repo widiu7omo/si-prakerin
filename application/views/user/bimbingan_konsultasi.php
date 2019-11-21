@@ -53,6 +53,7 @@
 							<div class="h4">Bimbingan Offline</div>
 							<small>* Pastikan file scan berformat .pdf</small><br>
 							<small>* Pastikan file tidak lebih dari 500kb</small>
+							<div class="text-sm-center text-danger" id="alert-bimbingan"></div>
 						</div>
 						<div class="card-body pt-0">
 							<form action="<?php echo site_url('ajax/upload_bimbingan') ?>" method="post"
@@ -142,51 +143,49 @@
     });
     Dropzone.options.dropzoneBimbingan = {
         init:function(){
+            let fileName = undefined;
+            let checkBimbingan = $.ajax({
+				url:"<?php echo site_url('ajax/check_bimbingan')?>",
+				async:false,
+				method:"GET",
+				dataType:"json"
+			}).done(res=>{return res});
+            let resJson = checkBimbingan.responseJSON;
+            if(resJson.data.status !== 'error'){
+                if(resJson.data.message === undefined){
+                    fileName = resJson.data.name;
+                    this.options.addedfile.call(this,resJson.data);
+                    this.options.thumbnail.call(this,resJson.data,'https://image.flaticon.com/icons/svg/337/337946.svg');
+				}
+			}
+            else{
+                $('#alert-bimbingan').append("<small>"+resJson.data.message+"</small>");
+                this.disable();
+			}
+
             this.on("success",function(file){
                 let response = JSON.parse(file.xhr.response);
-                file.response_file = response.data.upload_data.file_name;
+                fileName = response.data.upload_data.file_name;
 			});
             this.on('maxfilesexceeded', function (file) {
                 this.removeAllFiles();
                 this.addFile(file);
             });
             this.on("removedfile", function(file) {
-				$.ajax({
-					url:"<?php echo site_url('ajax/remove_bimbingan')?>",
-					method:"POST",
-					data:{file_name:file.response_file},
-					success:function(res){
-					    console.log(res)
-					},
-					error:function(e){
-					    console.log(e)
-					}
-				})
+                if(fileName){
+                    $.ajax({
+                        url:"<?php echo site_url('ajax/remove_bimbingan')?>",
+                        method:"POST",
+                        data:{file_name:fileName},
+                        success:function(res){
+                            console.log(res)
+                        },
+                        error:function(e){
+                            console.log(e)
+                        }
+                    })
+				}
 			});
-            let mock = $.ajax({
-					url:"<?php echo site_url('ajax/check_bimbingan')?>",
-					method:"GET",
-				}).then(function(e){
-				    console.log(e);
-				    let response = JSON.parse(e);
-
-                response.accepted = true;
-                console.log(Dropzone.files)
-                return response;
-
-			});
-			console.log(mock)
-            this.files.push(response);
-            this.emit('addedfile', response);
-            this.createThumbnailFromUrl(response, response.lembar_konsultasi);
-            this.emit('complete', response);
-            // for (let i = 0; i < mocks.length; i++) {
-            //     let mock = mocks[i];
-			// 	mock.then(function(){
-			//
-			// 	});
-
-            // }
 		},
         addRemoveLinks: true,
         dictRemoveFileConfirmation:"Apakah anda yakin ingin menghapus file bimbingan ?",
@@ -195,6 +194,7 @@
 		maxFiles:1,
         acceptedFiles: '.pdf',
     };
+
     var Fullcalendar = (function () {
 
         // Variables
@@ -294,7 +294,6 @@
                 // Edit calendar event action
 
                 eventClick: function (event, element) {
-                    console.log(event);
                     $('#edit-event input[value=' + event.tag + ']').prop('checked', true);
                     $('#edit-event').modal('show');
                     $('.edit-event--id').val(event.id);
