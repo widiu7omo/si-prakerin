@@ -21,19 +21,76 @@
 		<div class="header-body">
 			<!-- Card stats -->
 			<div class="row justify-content-center">
-				<div class="col-lg-10 col-md-10 col-sm-12">
+				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="card">
 						<div class="card-header m-0">
-							<div class="h4">Pengajuan Sidang</div>
-							<small><b>Persyaratan mengajukan sidang</b></small><br>
-							<small>* Setidaknya telah konsul minimal 4 kali kepada dosen pembimbing</small><br>
-							<small>* Sudah memiliki kasus yang akan diangkat</small>
+							<div class="h4">Daftar Mahasiswa yang siap untuk seminar</div>
 						</div>
 						<div class="card-body pt-0">
-							<ul class="list-group">
-								<li class="list-group-item list-group-item-primary"><span>Jumlah konsultasi saat ini</span><span class="float-right"><b>6</b></span></li>
-								<li class="list-group-item list-group-item-primary"><span>Sudah memiliki judul</span> checked</li>
-							</ul>
+							<div class="table-responsive py-4">
+								<table class="table table-flush" id="datatable-mhs-fix">
+									<thead class="thead-light">
+									<tr role="row">
+										<th>No</th>
+										<th>Mahasiswa</th>
+										<th>Jenis Konsultasi</th>
+										<th>Judul yang disetujui</th>
+										<th>Aksi</th>
+									</tr>
+									</thead>
+									<tfoot>
+									<tr>
+										<th>No</th>
+										<th>Mahasiswa</th>
+										<th>Jenis Konsultasi</th>
+										<th>Judul yang disetujui</th>
+										<th>Aksi</th>
+									</tr>
+									</tfoot>
+									<tbody>
+									<?php $mahasiswas = $mahasiswas ? $mahasiswas : array() ?>
+									<?php foreach ($mahasiswas as $key => $mahasiswa): ?>
+										<tr role="row" class="odd">
+											<td class="sorting_1"><?php echo $key + 1 ?></td>
+											<td><?php echo $mahasiswa->nama_mahasiswa ?></td>
+											<td class="<?php echo $mahasiswa->mode === 'online' ? 'text-success' : 'text-danger' ?>"><?php echo $mahasiswa->mode ?></td>
+											<td><?php echo $mahasiswa->judul_laporan_mhs ?></td>
+											<td>
+												<div class="btn-group-sm btn-group d-flex">
+													<?php if ($mahasiswa->mode === 'online'): ?>
+														<?php
+														$where = array('id_dosen_bimbingan_mhs' => $mahasiswa->id_dosen_bimbingan_mhs, 'status' => 'accept');
+														$bimbingans = masterdata('tb_konsultasi_bimbingan', $where, 'id_konsultasi_bimbingan', true, 'start ASC'); ?>
+														<?php if (count($bimbingans) < 4): ?>
+															<button
+																class="btn btn-sm btn-secondary"><?php echo count($bimbingans) ?>
+																X Konsultasi
+															</button>
+														<?php endif; ?>
+														<button
+															type="button" <?php echo count($bimbingans) >= 4 ? 'disabled':null ?>
+															class="w-100 btn btn-sm btn-<?php echo count($bimbingans) >= 4 ? 'success' : 'warning' ?>"
+															onclick="window.location.href='<?php echo site_url("bimbingan?m=approvesidang&a=acc&id=$mahasiswa->nim") ?>'">
+															<?php echo count($bimbingans) >= 4 ? 'Disetujui':'Setuju' ?>
+														</button>
+													<?php else: ?>
+														<?php if (!$mahasiswa->status_seminar): ?>
+															<a href="<?php echo site_url("bimbingan?m=view_bimbingan_offline&id=$mahasiswa->lembar_konsultasi") ?>"
+															   class="btn btn-sm btn-primary">Lihat Konsultasi</a>
+														<?php endif; ?>
+														<button <?php echo $mahasiswa->status_seminar ? 'disabled' : null ?>
+															class="btn btn-sm btn-success w-100"
+															onclick="window.location.href='<?php echo site_url("bimbingan?m=approvesidang&a=acc&id=$mahasiswa->nim") ?>'">
+															<?php echo $mahasiswa->status_seminar ? 'Disetujui' : 'Setuju' ?>
+														</button>
+													<?php endif; ?>
+												</div>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -52,7 +109,7 @@
 <script src="<?php echo base_url('aset/vendor/fullcalendar/locale-all.js') ?>"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         if (!localStorage.getItem('bimbingan_pengajuan')) {
             introJs().start().oncomplete(function () {
                 localStorage.setItem('bimbingan_pengajuan', 'yes');

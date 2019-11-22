@@ -41,7 +41,14 @@
 							</p>
 							<p>Judul&emsp;&emsp;&emsp;&emsp;:
 								<b><?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? $pembimbing[0]->judul_laporan_mhs : "Belum mengajukan kasus" ?></b>
+								<span
+									class="badge badge-<?php echo !$pembimbing[0]->status_judul ? 'info' : ($pembimbing[0]->status_judul == 'setuju' ? 'success' : 'danger') ?>"><?php echo !$pembimbing[0]->status_judul ? 'Belum dikonfirmasi' : ($pembimbing[0]->status_judul == 'setuju' ? $pembimbing[0]->status_judul : 'ditolak') ?></span>
 							</p>
+							<?php if ($pembimbing[0]->status_judul == 'ulang'): ?>
+								<small>Silahkan mengajukan judul lagi, karena judul anda <b
+										class="text-danger">ditolak</b></small>
+							<?php endif ?>
+
 						</div>
 					</div>
 				</div>
@@ -74,19 +81,87 @@
 								  action="<?php echo site_url('bimbingan?m=konsultasi&q=pengajuan_judul') ?>">
 								<div class="form-group">
 									<label for="judul" class="form-label">Judul yang akan diangkat sebagai kasus</label>
-									<textarea <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" : "" ?> <?php echo count($pembimbing) == 0 ? "disabled" : null ?> name="judul"
-																																																			   id="judul"
-																																																			   class="form-control"
-																																																			   placeholder="Masukkan Judul"></textarea>
+									<textarea <?php echo (count($pembimbing) == 0 or ($pembimbing[0]->judul_laporan_mhs != null and $pembimbing[0]->status_judul != 'ulang')) ? "disabled" : "" ?>
+										 name="judul"
+										 id="judul"
+										 class="form-control"
+										 placeholder="Masukkan Judul"></textarea>
 								</div>
 								<div class="form-group">
-									<button <?php echo (count($pembimbing) > 0 and $pembimbing[0]->judul_laporan_mhs != null) ? "disabled" : "" ?>
+									<button <?php echo (count($pembimbing) == 0 or ($pembimbing[0]->judul_laporan_mhs != null and $pembimbing[0]->status_judul != 'ulang')) ? "disabled" : "" ?>
 										class="btn btn-primary btn-sm float-right"
-										type="submit" <?php echo count($pembimbing) == 0 ? "disabled" : null ?>>
+										type="submit">
 										Ajukan Judul
 									</button>
 								</div>
 							</form>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body pt-0">
+							<div class="h4 mt-3">Status Seminar</div>
+							<div class="small">* Persetujuan seminar diverfikasi oleh dosen pembimbing</div>
+							<div>
+								<ul class="list-group list-group-flush">
+									<hr class="m-0">
+									<li class="list-group-item">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" disabled
+												   class="custom-control-input" <?php echo $pembimbing[0]->status_judul == 'setuju' ? 'checked' : null ?>>
+											<label class="custom-control-label text-black-50" for="customCheck1">Judul
+												sudah di acc dosen pembimbing</label>
+										</div>
+									</li>
+									<?php
+									$check_bimbingan = $check_bimbingan ? $check_bimbingan : array();
+									if (isset($check_bimbingan->mode) && $check_bimbingan->mode == 'offline'): ?>
+										<li class="list-group-item">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" disabled
+													   class="custom-control-input" <?php echo $pembimbing[0]->status_judul == 'setuju' ? 'checked' : null ?>>
+
+												<label class="custom-control-label text-black-50" for="customCheck1">Anda
+													melakukan bimbingan offline</label>
+												<div class="small text-warning">* Bimbingan offline akan di verifikasi
+													langsung dosen
+												</div>
+											</div>
+										</li>
+									<?php else: ?>
+										<?php
+										$where = array('id_dosen_bimbingan_mhs' => $pembimbing[0]->id_dosen_bimbingan_mhs,'status'=>'accept');
+										$bimbingans = masterdata('tb_konsultasi_bimbingan', $where, 'id_konsultasi_bimbingan', true, 'start ASC');
+										?>
+										<li class="list-group-item">
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" disabled
+													   class="custom-control-input" <?php echo count($bimbingans) >= 4 ? 'checked' : null ?>>
+
+												<label class="custom-control-label text-black-50" for="customCheck1">Melakukan
+													bimbingan lebih dari 4 kali</label>
+												<?php if (count($bimbingans) < 4): ?>
+													<div class="small text-warning">* Anda
+														melakukan bimbingan sebanyak <?php echo count($bimbingans) ?>
+														kali
+													</div>
+												<?php endif ?>
+											</div>
+										</li>
+									<?php endif ?>
+									<li class="list-group-item">
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" disabled
+												   class="custom-control-input" <?php echo $pembimbing[0]->status_seminar == 'setuju' ? 'checked' : null ?>>
+
+											<label class="custom-control-label text-black-50" for="customCheck1">Dosen pembimbing menyetujui untuk seminar</label>
+										</div>
+									</li>
+								</ul>
+<!--								<button --><?php //echo (isset($bimbingans) and count($bimbingans) < 4) ? "disabled" : null ?><!-- class="btn btn-primary btn-sm mt-2"-->
+<!--										type="button">-->
+<!--									Ajukan Seminar-->
+<!--								</button>-->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -159,18 +234,18 @@
             if (resJson.data.status !== 'error') {
 
                 switch (resJson.data.mode) {
-					case 'online':
+                    case 'online':
                         $('#card-bimbingan-offline').remove();
                         $('#card-kasus').removeClass('col-lg-6 col-md-6 col-sm-12').addClass('col');
-					    break;
-					case 'offline':
+                        break;
+                    case 'offline':
                         if (typeof resJson.data.message === "undefined") {
                             fileName = resJson.data.name;
                             this.options.addedfile.call(this, resJson.data);
                             this.options.thumbnail.call(this, resJson.data, 'https://image.flaticon.com/icons/svg/337/337946.svg');
                         }
                         $('#row-calendar').remove();
-					    break;
+                        break;
                 }
 
             } else {

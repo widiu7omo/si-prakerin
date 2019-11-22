@@ -94,9 +94,9 @@
 																<td>
 																	<?php if ($bimbingan->status == null): ?>
 																		<a class="btn btn-sm btn-success"
-																		   href="<?php echo site_url('bimbingan?m=bimbinganmhs&a=accept&id=' . $bimbingan->id_konsultasi_bimbingan) ?>">Terima</a>
+																		   href="<?php echo site_url('bimbingan?m=bimbingan_online&a=accept&id=' . $bimbingan->id_konsultasi_bimbingan) ?>">Terima</a>
 																		<a class="btn btn-sm btn-danger"
-																		   href="<?php echo site_url('bimbingan?m=bimbinganmhs&a=decline&id=' . $bimbingan->id_konsultasi_bimbingan) ?>">Tolak</a>
+																		   href="<?php echo site_url('bimbingan?m=bimbingan_online&a=decline&id=' . $bimbingan->id_konsultasi_bimbingan) ?>">Tolak</a>
 																	<?php else: ?>
 																		<p class="text-sm">Telah Dikonfirmasi</p>
 																	<?php endif; ?>

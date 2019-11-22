@@ -60,42 +60,22 @@
 								<table class="table table-flush" id="datatable-mhs-fix">
 									<thead class="thead-light">
 									<tr role="row">
-										<th style="width:30px">Aksi</th>
 										<th>No</th>
 										<th>Mahasiswa</th>
-										<th>Program Studi</th>
-										<th>Perusahaan</th>
 									</tr>
 									</thead>
 									<tfoot>
 									<tr>
-										<th style="width:30px">Aksi</th>
 										<th>No</th>
 										<th>Mahasiswa</th>
-										<th>Program Studi</th>
-										<th>Perusahaan</th>
 									</tr>
 									</tfoot>
 									<tbody>
 									<?php $belum_bimbingan = $belum_bimbingan?$belum_bimbingan:array() ?>
 									<?php foreach ( $belum_bimbingan as $key => $belum ): ?>
 										<tr role="row" class="odd">
-											<td>
-												<a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-												   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													<i class="fas fa-ellipsis-v"></i>
-												</a>
-												<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-													<a class="dropdown-item"
-													   href="<?php echo site_url( 'mahasiswa/edit/'  ) ?>">Edit</a>
-													<a class="dropdown-item" href="#"
-													   onclick="deleteConfirm('<?php echo site_url( 'mahasiswa/remove/'  ) ?>')">Hapus</a>
-												</div>
-											</td>
 											<td class="sorting_1"><?php echo $key + 1 ?></td>
 											<td><?php echo $belum->nama_mahasiswa ?></td>
-											<td></td>
-											<td></td>
 										</tr>
 									<?php endforeach; ?>
 									</tbody>

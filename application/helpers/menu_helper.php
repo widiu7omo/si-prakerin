@@ -16,7 +16,7 @@ if (!function_exists('getmenu')) {
 						'icon' => 'collection',
 						'color' => 'pink',
 						'href' => site_url('bimbingan')),
-					(object)array('name' => 'Sidang',
+					(object)array('name' => 'Seminar',
 						'icon' => 'calendar-grid-58',
 						'color' => 'green',
 						'href' => site_url('sidang'))

@@ -21,16 +21,69 @@
 		<div class="header-body">
 			<!-- Card stats -->
 			<div class="row justify-content-center">
-				<div class="col-lg-10 col-md-10 col-sm-12">
+				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="card">
 						<div class="card-header m-0">
-							<div class="h4">Pengajuan Judul Kasus pada tempat magang</div>
+							<div class="h4">Daftar Pengajuan Judul Kasus pada tempat magang</div>
 						</div>
 						<div class="card-body pt-0">
-							<ul class="list-group">
-								<li class="list-group-item list-group-item-primary"><span>Jumlah konsultasi saat ini</span><span class="float-right"><b>6</b></span></li>
-								<li class="list-group-item list-group-item-primary"><span>Sudah memiliki judul</span> checked</li>
-							</ul>
+							<div class="table-responsive py-4">
+								<table class="table table-flush" id="datatable-mhs-fix">
+									<thead class="thead-light">
+									<tr role="row">
+										<th>No</th>
+										<th>Mahasiswa</th>
+										<th>Judul</th>
+										<th>Status</th>
+										<th>Aksi</th>
+									</tr>
+									</thead>
+									<tfoot>
+									<tr>
+										<th>No</th>
+										<th>Mahasiswa</th>
+										<th>Judul</th>
+										<th>Status</th>
+										<th>Aksi</th>
+									</tr>
+									</tfoot>
+									<tbody>
+									<?php $mahasiswas = $mahasiswas ? $mahasiswas : array() ?>
+									<?php foreach ($mahasiswas as $key => $mahasiswa): ?>
+										<tr role="row" class="odd">
+											<td class="sorting_1"><?php echo $key + 1 ?></td>
+											<td><?php echo $mahasiswa->nama_mahasiswa ?></td>
+											<td class="<?php echo !$mahasiswa->judul_laporan_mhs ? 'text-warning' : null ?>"><?php echo $mahasiswa->judul_laporan_mhs ? $mahasiswa->judul_laporan_mhs : "Belum mengajukan" ?></td>
+											<td class="<?php echo !$mahasiswa->status_judul ? "text-warning" : null ?>"><?php echo !$mahasiswa->status_judul ? "Belum di approve" : $mahasiswa->status_judul ?></td>
+											<td>
+												<div class="btn-group-sm btn-group d-flex">
+													<?php if (!$mahasiswa->status_judul): ?>
+														<button
+															onclick="window.location.href = '<?php echo site_url("bimbingan?m=approvejudul&a=acc&id=$mahasiswa->nim") ?>'"
+															class="btn btn-sm btn-success w-100">Setuju
+														</button>
+														<button
+															onclick="window.location.href = '<?php echo site_url("bimbingan?m=approvejudul&a=dec&id=$mahasiswa->nim") ?>'"
+															class="btn btn-sm btn-danger w-100">Ajukan Ulang
+														</button>
+													<?php else: ?>
+														<?php if ($mahasiswa->status_judul == 'setuju'): ?>
+															<button
+																onclick="window.location.href = '<?php echo site_url("bimbingan?m=approvejudul&a=acc&id=$mahasiswa->nim") ?>'"
+																class="btn btn-sm btn-success w-100" <?php echo $mahasiswa->status_judul == 'setuju' ? "disabled" : null ?>><?php echo $mahasiswa->status_judul == 'setuju' ? "Disetujui" : "Setuju" ?></button>
+														<?php else: ?>
+															<button
+																onclick="window.location.href = '<?php echo site_url("bimbingan?m=approvejudul&a=dec&id=$mahasiswa->nim") ?>'"
+																class="btn btn-sm btn-danger w-100" <?php echo $mahasiswa->status_judul == 'ulang' ? "disabled" : null ?>><?php echo $mahasiswa->status_judul == 'ulang' ? "Pengajuan Ulang" : "Ajukan Ulang" ?></button>
+														<?php endif ?>
+													<?php endif ?>
+												</div>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -49,7 +102,7 @@
 <script src="<?php echo base_url('aset/vendor/fullcalendar/locale-all.js') ?>"></script>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         if (!localStorage.getItem('bimbingan_pengajuan')) {
             introJs().start().oncomplete(function () {
                 localStorage.setItem('bimbingan_pengajuan', 'yes');
