@@ -19,7 +19,7 @@ class Mahasiswa extends MY_Controller {
 
 	public function index() {
 		$join          = array('tahun_akademik', 'tb_waktu.id_tahun_akademik = tahun_akademik.id_tahun_akademik', 'inner' );
-		$tahunAkademik = datajoin( 'tb_waktu', null, 'tahun_akademik.tahun_akademik', $join, null );
+		$tahunAkademik = datajoin( 'tb_waktu', null, 'tahun_akademik.tahun_akademik', $join );
 		$level         = $this->session->userdata( 'level' );
 		switch ( $level ) {
 			case 'admin':

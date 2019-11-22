@@ -40,7 +40,7 @@ class Bimbingan extends CI_Controller {
             case 'dosen':
             $data['menus'] = array(
                 array('name'=>'Mahasiswa Bimbingan',
-                    'href'=>site_url('bimbingan?m=bimbinganmhs'),
+                    'href'=>site_url('bimbingan?m=bimbingan_online'),
 					'icon'=>'fas fa-id-badge',
 					'desc'=>'Bimbingan Prakerin masing-masing dosen'),
                 array('name'=>'Approval Sidang',
@@ -54,14 +54,26 @@ class Bimbingan extends CI_Controller {
         //Route
 		if(isset($_GET['m'])){
 			switch ($_GET['m']){
-				case 'bimbinganmhs':
+				case 'bimbingan_online':
 					if(isset($_GET['a']) and $_GET['a'] == 'accept'){
 						return $this->acc_bimbingan_mhs();
 					}
 					if(isset($_GET['a']) and $_GET['a'] == 'decline'){
 						return $this->dec_bimbingan_mhs();
 					}
-					return $this->index_bimbingan_mhs();
+					return $this->index_bimbingan_online();
+					break;
+				case 'daftar_bimbingan':
+					return $this->index_daftar_bimbingan();
+					break;
+				case 'bimbingan_offline':
+					return $this->index_bimbingan_offline();
+					break;
+				case 'belum_bimbingan':
+					return $this->index_belum_bimbingan();
+					break;
+				case 'view_bimbingan_offline':
+					return $this->index_view_bimbingan_offline();
 					break;
 				case 'approvesidang':
 					return $this->index_approve_sidang();
@@ -98,15 +110,53 @@ class Bimbingan extends CI_Controller {
     }
 
 	// Dosen
-	function index_bimbingan_mhs(){
+	function index_daftar_bimbingan()
+	{
+		$konsultasi = $this->konsultasi_model;
+		$pembimbing = $this->pembimbing_model;
+		$nip_nik = $this->session->userdata('nip_nik');
+		$data['mahasiswas'] = array();
+		if (isset($nip_nik)) {
+			$data['daftar_mahasiswa'] = $pembimbing->get_all_with_mhs($nip_nik);
+		}
+		return $this->load->view('user/bimbingan_mahasiswa', $data);
+	}
+	function index_view_bimbingan_offline(){
+		$nip_nik = $this->session->userdata('nip_nik');
+		$get = $this->input->get();
+		$pembimbing = $this->pembimbing_model;
+		$data['mahasiswa'] = $pembimbing->get_mhs_bimbingan_offline($nip_nik,$get['id']);
+		return $this->load->view('user/bimbingan_view_offline');
+	}
+	function index_bimbingan_online(){
 		$konsultasi = $this->konsultasi_model;
 		$pembimbing = $this->pembimbing_model;
 		$nip_nik = $this->session->userdata('nip_nik');
 		$data['mahasiswas'] = array();
 		if(isset($nip_nik)){
-			$data['mahasiswas'] = $pembimbing->get_all_with_mhs($nip_nik);
+			$data['bimbingan_online'] = $pembimbing->get_mhs_bimbingan_online($nip_nik);
 		}
-		return $this->load->view('user/bimbingan_mahasiswa',$data);
+		return $this->load->view('user/bimbingan_online',$data);
+	}
+	function index_bimbingan_offline(){
+		$konsultasi = $this->konsultasi_model;
+		$pembimbing = $this->pembimbing_model;
+		$nip_nik = $this->session->userdata('nip_nik');
+		$data['mahasiswas'] = array();
+		if(isset($nip_nik)){
+			$data['bimbingan_offline'] = $pembimbing->get_mhs_bimbingan_offline($nip_nik);
+		}
+		return $this->load->view('user/bimbingan_offline',$data);
+	}
+	function index_belum_bimbingan(){
+		$konsultasi = $this->konsultasi_model;
+		$pembimbing = $this->pembimbing_model;
+		$nip_nik = $this->session->userdata('nip_nik');
+		$data['mahasiswas'] = array();
+		if(isset($nip_nik)){
+			$data['belum_bimbingan'] = $pembimbing->get_mhs_belum_bimbingan($nip_nik);
+		}
+		return $this->load->view('user/bimbingan_belum',$data);
 	}
 	function acc_bimbingan_mhs(){
 		$konsultasi = $this->konsultasi_model;

@@ -26,25 +26,22 @@
 						<div class="card-header">
 							<ul class="nav nav-pills nav-fill">
 								<li class="nav-item ">
-									<a class="nav-link active" href="<?php echo site_url('bimbingan?m=daftar_bimbingan')?>">Semua Bimbingan</a>
+									<a class="nav-link" href="<?php echo site_url('bimbingan?m=daftar_bimbingan')?>">Semua Mahasiswa Bimbingan</a>
 								</li>
 								<li class="nav-item ">
-									<a class="nav-link" href="<?php echo site_url('bimbingan?m=bimbingan_online') ?>">Bimbingan
-										Online</a>
+									<a class="nav-link active" href="<?php echo site_url('bimbingan?m=bimbingan_online') ?>">Bimbingan Online</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="<?php echo site_url('bimbingan?m=bimbingan_offline') ?>">Bimbingan
-										Offline</a>
+									<a class="nav-link" href="<?php echo site_url('bimbingan?m=bimbingan_offline') ?>">Bimbingan Offline</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link"
-									   href="<?php echo site_url('bimbingan?m=belum_bimbingan') ?>">Belum Bimbingan</a>
+									<a class="nav-link" href="<?php echo site_url('bimbingan?m=belum_bimbingan') ?>">Belum Bimbingan</a>
 								</li>
 							</ul>
 
 						</div>
 						<div class="card-body">
-							<p class="h4 bold m-0 mb-2">Daftar semua mahasiswa bimbingan</p>
+							<p class="h4 bold m-0 mb-4">Konsultasi Mahasiswa Bimbingan PKL Online</p>
 							<?php if ($this->session->flashdata('status')): ?>
 								<?php $status = $this->session->flashdata('status'); ?>
 								<div class="alert alert-<?php echo $status->alert ?> alert-dismissible fade show"
@@ -56,50 +53,64 @@
 									<strong><?php echo $status->status ?></strong>&nbsp;<?php echo $status->message ?>
 								</div>
 							<?php endif; ?>
-							<div class="table-responsive py-4">
-								<table class="table table-flush" id="datatable-mhs-fix">
-									<thead class="thead-light">
-									<tr role="row">
-										<th style="width:30px">Aksi</th>
-										<th>No</th>
-										<th>Mahasiswa</th>
-										<th>Program Studi</th>
-										<th>Perusahaan</th>
-									</tr>
-									</thead>
-									<tfoot>
-									<tr>
-										<th style="width:30px">Aksi</th>
-										<th>No</th>
-										<th>Mahasiswa</th>
-										<th>Program Studi</th>
-										<th>Perusahaan</th>
-									</tr>
-									</tfoot>
-									<tbody>
-									<?php $daftar_mahasiswa = $daftar_mahasiswa?$daftar_mahasiswa:array() ?>
-									<?php foreach ( $daftar_mahasiswa as $key => $mahasiswa ): ?>
-										<tr role="row" class="odd">
-											<td>
-												<a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-												   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													<i class="fas fa-ellipsis-v"></i>
-												</a>
-												<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-													<a class="dropdown-item"
-													   href="<?php echo site_url( 'mahasiswa/edit/'  ) ?>">Edit</a>
-													<a class="dropdown-item" href="#"
-													   onclick="deleteConfirm('<?php echo site_url( 'mahasiswa/remove/'  ) ?>')">Hapus</a>
+							<div class="accordion" id="accordionBimbingan">
+								<?php $bimbingan_online = $bimbingan_online ? $bimbingan_online : array();
+								if ($bimbingan_online): ?>
+									<?php foreach ($bimbingan_online as $mahasiswa): ?>
+										<div class="card"
+											 style="box-shadow: rgba(0,0,0,.1) 0 0 0 1px, rgba(0,0,0,.1) 0 4px 16px;">
+											<div class="card-header" id="headingOne" data-toggle="collapse"
+												 data-target="#<?php echo $mahasiswa->nim ?>" aria-expanded="true"
+												 aria-controls="<?php echo $mahasiswa->nim ?>">
+												<h5 class="mb-0"><?php echo $mahasiswa->nama_mahasiswa ?></h5>
+											</div>
+											<div id="<?php echo $mahasiswa->nim ?>" class="collapse"
+												 aria-labelledby="headingOne"
+												 data-parent="#accordionBimbingan">
+												<div class="card-body">
+													<table class="table table-bordered">
+														<tr>
+															<th style="width:5%">Bimbingan ke</th>
+															<th style="width:5%">Tanggal</th>
+															<th>Judul</th>
+															<th>Aksi</th>
+														</tr>
+														<?php
+														$where = array('id_dosen_bimbingan_mhs' => $mahasiswa->id_dosen_bimbingan_mhs);
+														$bimbingans = masterdata('tb_konsultasi_bimbingan', $where, '*', true, 'start ASC'); ?>
+														<?php if (count($bimbingans) == 0): ?>
+															<tr>
+																<td colspan="3">
+																	<h4 class="text-center">Mahasiswa belum melakukan
+																		konsultasi</h4>
+																</td>
+															</tr>
+														<?php endif ?>
+														<?php foreach ($bimbingans as $key => $bimbingan): ?>
+															<tr>
+																<td><?php echo $key + 1 ?></td>
+																<td><?php echo $bimbingan->start ?></td>
+																<td><?php echo $bimbingan->title ?></td>
+																<td>
+																	<?php if ($bimbingan->status == null): ?>
+																		<a class="btn btn-sm btn-success"
+																		   href="<?php echo site_url('bimbingan?m=bimbinganmhs&a=accept&id=' . $bimbingan->id_konsultasi_bimbingan) ?>">Terima</a>
+																		<a class="btn btn-sm btn-danger"
+																		   href="<?php echo site_url('bimbingan?m=bimbinganmhs&a=decline&id=' . $bimbingan->id_konsultasi_bimbingan) ?>">Tolak</a>
+																	<?php else: ?>
+																		<p class="text-sm">Telah Dikonfirmasi</p>
+																	<?php endif; ?>
+																</td>
+
+															</tr>
+														<?php endforeach; ?>
+													</table>
+
 												</div>
-											</td>
-											<td class="sorting_1"><?php echo $key + 1 ?></td>
-											<td><?php echo $mahasiswa->nama_mahasiswa ?></td>
-											<td></td>
-											<td></td>
-										</tr>
+											</div>
+										</div>
 									<?php endforeach; ?>
-									</tbody>
-								</table>
+								<?php endif; ?>
 							</div>
 						</div>
 					</div>

@@ -50,16 +50,19 @@ if ( ! function_exists( 'custom_query' ) ) {
 	}
 }
 if ( ! function_exists( 'datajoin' ) ) {
-	function datajoin( $table, $where = null, $select = null, $join = null, $orwhere = null ,$order = null) {
+	function datajoin( $table, $where = null, $select = null, $join = null, $orwhere = null ,$order = null, $wherein = null, $group = null) {
 		$ci =& get_instance();
 		if ( $select != null ) {
 			$ci->db->select( $select );
 		}
 		if ( $where != null ) {
-			$ci->db->where( $where );
+			$ci->db->where( $where);
 		}
 		if ( $orwhere != null ) {
 			$ci->db->or_where( $orwhere );
+		}
+		if( $wherein != null){
+			$ci->db->where_in ($wherein[0],$wherein[1],false);
 		}
 		if ( $join != null ) {
 			if ( is_array( $join[0] ) ) {
@@ -70,10 +73,13 @@ if ( ! function_exists( 'datajoin' ) ) {
 				$ci->db->join( $join[0], $join[1], $join[2] );
 			}
 		}
+		if($group != null){
+			$ci->db->group_by($group);
+		}
 		if($order != null){
 			$ci->db->order_by($order);
 		}
-		return $ci->db->get( $table )->result();
+		return $ci->db->from( $table )->get()->result();
 
 	}
 }

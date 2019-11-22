@@ -22,6 +22,7 @@ class Pembimbing_model extends CI_Model
 
 	public function get_all_with_mhs($id = null)
 	{
+		$this->db->reset_query();
 		$where = null;
 		if ($id) {
 			$where = array('tb_dosen_bimbingan_mhs.nip_nik' => $id);
@@ -29,19 +30,69 @@ class Pembimbing_model extends CI_Model
 		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*', $join);
 	}
-	public function pengajuan_judul(){
+
+	public function get_mhs_belum_bimbingan($id = null)
+	{
+		$this->db->reset_query();
+		$where = null;
+		if ($id) {
+			$where = "tb_dosen_bimbingan_mhs.nip_nik = $id AND (tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs NOT IN (SELECT id_dosen_bimbingan_mhs from tb_konsultasi_bimbingan_offline) AND tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs NOT IN (SELECT id_dosen_bimbingan_mhs from tb_konsultasi_bimbingan))";
+		}
+		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
+		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*', $join);
+	}
+
+	public function get_mhs_bimbingan_online($id = null)
+	{
+		$this->db->reset_query();
+		$where = null;
+		$wherein = null;
+		if ($id) {
+			$where = array('tb_dosen_bimbingan_mhs.nip_nik' => $id);
+			$wherein = array('tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs','select id_dosen_bimbingan_mhs FROM tb_konsultasi_bimbingan');
+		}
+		$join = array(
+			array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join')
+		);
+		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*', $join, null, null, $wherein);
+	}
+
+	public function get_mhs_bimbingan_offline($id = null,$pdf = null)
+	{
+		$this->db->reset_query();
+		$where = null;
+		if ($id) {
+			$where = array('tb_dosen_bimbingan_mhs.nip_nik' => $id);
+			if($pdf){
+				$where['tb_konsultasi_bimbingan_offline.lembar_konsultasi'] = $pdf;
+			}
+			$wherein = array('tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs', 'select id_dosen_bimbingan_mhs FROM tb_konsultasi_bimbingan_offline');
+		}
+		$join = array(
+			array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join'),
+			array('tb_konsultasi_bimbingan_offline', 'tb_konsultasi_bimbingan_offline.id_dosen_bimbingan_mhs = tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs', 'inner join')
+		);
+		$group = 'tb_mahasiswa.nama_mahasiswa';
+		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*,tb_konsultasi_bimbingan_offline.lembar_konsultasi', $join, null, null, $wherein, $group);
+	}
+
+	public function pengajuan_judul()
+	{
 		$nim = $this->session->userdata('id');
 		$judul = $this->input->post('judul');
-		$data = array('judul_laporan_mhs'=>$judul);
-		$this->db->where(array('nim'=>$nim));
+		$data = array('judul_laporan_mhs' => $judul);
+		$this->db->where(array('nim' => $nim));
 		$this->db->set($data);
 		return $this->db->update($this->_table);
 	}
-	public function is_has(){
+
+	public function is_has()
+	{
 		$nim = $this->session->userdata('id');
-		$join = array('tb_mahasiswa','tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim','inner join');
-		return datajoin('(select tb_dosen_bimbingan_mhs.*,tb_pegawai.nama_pegawai from tb_dosen_bimbingan_mhs inner join tb_pegawai on tb_dosen_bimbingan_mhs.nip_nik = tb_pegawai.nip_nik)tb_dosen_bimbingan_mhs',array('tb_dosen_bimbingan_mhs.nim'=>$nim),'tb_dosen_bimbingan_mhs.nama_pegawai,tb_dosen_bimbingan_mhs.judul_laporan_mhs',$join);
+		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
+		return datajoin('(select tb_dosen_bimbingan_mhs.*,tb_pegawai.nama_pegawai from tb_dosen_bimbingan_mhs inner join tb_pegawai on tb_dosen_bimbingan_mhs.nip_nik = tb_pegawai.nip_nik)tb_dosen_bimbingan_mhs', array('tb_dosen_bimbingan_mhs.nim' => $nim), 'tb_dosen_bimbingan_mhs.nama_pegawai,tb_dosen_bimbingan_mhs.judul_laporan_mhs', $join);
 	}
+
 	public function replace()
 	{
 		$post = $this->input->post();

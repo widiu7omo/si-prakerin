@@ -25,8 +25,8 @@
 					<div class="card">
 						<div class="card-header">
 							<ul class="nav nav-pills nav-fill">
-								<li class="nav-item ">
-									<a class="nav-link active" href="<?php echo site_url('bimbingan?m=daftar_bimbingan')?>">Semua Bimbingan</a>
+								<li class="nav-item">
+									<a class="nav-link" href="<?php echo site_url('bimbingan?m=daftar_bimbingan')?>">Semua Mahasiswa Bimbingan</a>
 								</li>
 								<li class="nav-item ">
 									<a class="nav-link" href="<?php echo site_url('bimbingan?m=bimbingan_online') ?>">Bimbingan
@@ -36,15 +36,15 @@
 									<a class="nav-link" href="<?php echo site_url('bimbingan?m=bimbingan_offline') ?>">Bimbingan
 										Offline</a>
 								</li>
-								<li class="nav-item">
-									<a class="nav-link"
+								<li class="nav-item active">
+									<a class="nav-link active"
 									   href="<?php echo site_url('bimbingan?m=belum_bimbingan') ?>">Belum Bimbingan</a>
 								</li>
 							</ul>
 
 						</div>
 						<div class="card-body">
-							<p class="h4 bold m-0 mb-2">Daftar semua mahasiswa bimbingan</p>
+							<p class="h4 bold m-0 mb-4">Daftar mahasiswa yang belum bimbingan sama sekali</p>
 							<?php if ($this->session->flashdata('status')): ?>
 								<?php $status = $this->session->flashdata('status'); ?>
 								<div class="alert alert-<?php echo $status->alert ?> alert-dismissible fade show"
@@ -77,8 +77,8 @@
 									</tr>
 									</tfoot>
 									<tbody>
-									<?php $daftar_mahasiswa = $daftar_mahasiswa?$daftar_mahasiswa:array() ?>
-									<?php foreach ( $daftar_mahasiswa as $key => $mahasiswa ): ?>
+									<?php $belum_bimbingan = $belum_bimbingan?$belum_bimbingan:array() ?>
+									<?php foreach ( $belum_bimbingan as $key => $belum ): ?>
 										<tr role="row" class="odd">
 											<td>
 												<a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -93,7 +93,7 @@
 												</div>
 											</td>
 											<td class="sorting_1"><?php echo $key + 1 ?></td>
-											<td><?php echo $mahasiswa->nama_mahasiswa ?></td>
+											<td><?php echo $belum->nama_mahasiswa ?></td>
 											<td></td>
 											<td></td>
 										</tr>
