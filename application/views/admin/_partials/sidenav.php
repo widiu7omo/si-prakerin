@@ -78,8 +78,14 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo site_url('dosen') ?>">
-									<i class="fas fa-university text-primary"></i>
+									<i class="fas fa-university text-danger"></i>
 									<span class="nav-link-text">Dosen</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo site_url('seminar') ?>">
+									<i class="fas fa-calendar-alt text-green"></i>
+									<span class="nav-link-text">Seminar</span>
 								</a>
 							</li>
 							<li class="nav-item">

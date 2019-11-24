@@ -95,7 +95,6 @@ class Ajax extends CI_Controller
 			$this->output->set_status_header(400);
 			echo json_encode(array('status' => $file));
 		}
-
-
 	}
+
 }

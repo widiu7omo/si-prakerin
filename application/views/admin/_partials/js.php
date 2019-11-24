@@ -8,6 +8,7 @@
 <script src="<?php echo base_url('aset/vendor/chart.js/dist/chartjs-plugin-datalabels.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/lavalamp/js/jquery.lavalamp.min.js') ?>"></script>
 <!-- Optional JS -->
+<script src="<?php echo base_url('aset/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/datatables.net-buttons/js/dataTables.buttons.min.js') ?>"></script>
