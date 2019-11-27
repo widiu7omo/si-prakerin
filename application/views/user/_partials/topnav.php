@@ -151,7 +151,7 @@ $dataNotification = get_notification($this->session->userdata('id'),0);
 						<div class="media align-items-center" <?php if(isset($intro_dashboard)) echo isset($intro)?"data-step='".$intro[1]['step_intro']."'":null ?>
 							<?php if(isset($intro_dashboard)) echo isset($intro)?"data-intro='".$intro[0]['message_intro']."'":null ?>>
 							<span class="avatar avatar-sm rounded-circle">
-								<img alt="Image placeholder" src="https://i.pravatar.cc/200">
+								<img alt="Image placeholder" src="https://randomuser.me/api/portraits/lego/5.jpg">
 							</span>
 							<div class="media-body ml-2 d-none d-lg-block">
 								<span class="mb-0 text-sm  font-weight-bold"><?php echo $nickname?></span>

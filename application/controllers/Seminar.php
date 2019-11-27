@@ -13,7 +13,7 @@ class Seminar extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('upload', 'master', 'notification'));
-		$this->load->model(array('pembimbing_model', 'akun_model', 'pilihperusahaan_model', 'dosen_prodi_model','seminar_model'));
+		$this->load->model(array('pembimbing_model', 'akun_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
 		$this->load->library('form_validation');
 		//middleware
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
@@ -106,6 +106,21 @@ class Seminar extends MY_Controller
 					}
 					return $this->get_tanggal();
 					break;
+				case 'penguji':
+					if (isset($get['q']) && $get['q'] == 'i') {
+						return $this->add_penguji();
+					}
+					if (isset($get['q']) && $get['q'] == 'd') {
+						return $this->delete_penguji();
+					}
+					if (isset($get['q']) && $get['q'] == 'i_bulk') {
+						return $this->add_bulk_penguji();
+					}
+					if (isset($get['q']) && $get['q'] == 'd_bulk') {
+						return $this->delete_bulk_penguji();
+					}
+					return $this->get_penguji();
+					break;
 				default:
 					redirect(site_url('seminar'));
 			}
@@ -113,80 +128,172 @@ class Seminar extends MY_Controller
 
 		$this->load->view('admin/seminar', $data);
 	}
-	public function get_tempat(){
-		$seminar = $this->seminar_model;
-		echo json_encode(array('data'=>$seminar->get_tempat_seminar()));
+
+	public function get_penguji()
+	{
+		return null;
 	}
-	public function add_tempat(){
+
+	public function add_penguji()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->add_tempat_seminar()){
-			echo json_encode(array('status'=>'success'));
+		if ($seminar->add_penguji()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		} else {
+			echo json_encode(array('status' => 'error'));
 			return;
 		}
 	}
-	public function update_tempat(){
+
+	public function add_bulk_penguji()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->update_tempat_seminar()){
-			echo json_encode(array('status'=>'success'));
-		}
-	}
-	public function delete_tempat(){
-		$seminar = $this->seminar_model;
-		if($seminar->delete_tempat_seminar()){
-			echo json_encode(array('status'=>'success'));
-		}
-	}
-	public function get_waktu(){
-		$seminar = $this->seminar_model;
-		echo json_encode(array('data'=>$seminar->get_waktu_seminar()));
-	}
-	public function add_waktu(){
-		$seminar = $this->seminar_model;
-		if($seminar->add_waktu_seminar()){
-			echo json_encode(array('status'=>'success'));
+		if ($seminar->add_bulk_penguji()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		} else {
+			echo json_encode(array('status' => 'error'));
 			return;
 		}
 	}
-	public function update_waktu(){
+
+	public function delete_bulk_penguji()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->update_waktu_seminar()){
-			echo json_encode(array('status'=>'success'));
-		}
-	}
-	public function delete_waktu(){
-		$seminar = $this->seminar_model;
-		if($seminar->delete_waktu_seminar()){
-			echo json_encode(array('status'=>'success'));
-		}
-	}
-	public function get_tanggal(){
-		$seminar = $this->seminar_model;
-		echo json_encode(array('data'=>$seminar->get_tanggal_seminar()));
-	}
-	public function add_tanggal(){
-		$seminar = $this->seminar_model;
-		if($seminar->add_tanggal_seminar()){
-			echo json_encode(array('status'=>'success'));
+		if ($seminar->delete_bulk_penguji()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		} else {
+			echo json_encode(array('status' => 'error'));
 			return;
 		}
 	}
-	public function update_tanggal(){
+
+	public function delete_penguji()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->update_tanggal_seminar()){
-			echo json_encode(array('status'=>'success'));
+		if ($seminar->delete_penguji()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		} else {
+			echo json_encode(array('status' => 'error'));
+			return;
 		}
 	}
-	public function delete_tanggal(){
+
+	public function get_tempat()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->delete_tanggal_seminar()){
-			echo json_encode(array('status'=>'success'));
+		echo json_encode(array('data' => $seminar->get_tempat_seminar()));
+	}
+
+	public function add_tempat()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->add_tempat_seminar()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		}
+	}
+
+	public function update_tempat()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->update_tempat_seminar()) {
+			echo json_encode(array('status' => 'success'));
+		}
+	}
+
+	public function delete_tempat()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->delete_tempat_seminar()) {
+			echo json_encode(array('status' => 'success'));
+		}
+	}
+
+	public function get_waktu()
+	{
+		$seminar = $this->seminar_model;
+		echo json_encode(array('data' => $seminar->get_waktu_seminar()));
+	}
+
+	public function add_waktu()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->add_waktu_seminar()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		}
+	}
+
+	public function update_waktu()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->update_waktu_seminar()) {
+			echo json_encode(array('status' => 'success'));
+		}
+	}
+
+	public function delete_waktu()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->delete_waktu_seminar()) {
+			echo json_encode(array('status' => 'success'));
+		}
+	}
+
+	public function get_tanggal()
+	{
+		$seminar = $this->seminar_model;
+		echo json_encode(array('data' => $seminar->get_tanggal_seminar()));
+	}
+
+	public function add_tanggal()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->add_tanggal_seminar()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		}
+	}
+
+	public function update_tanggal()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->update_tanggal_seminar()) {
+			echo json_encode(array('status' => 'success'));
+		}
+	}
+
+	public function delete_tanggal()
+	{
+		$seminar = $this->seminar_model;
+		if ($seminar->delete_tanggal_seminar()) {
+			echo json_encode(array('status' => 'success'));
 		}
 	}
 
 
 	public function index_kelola_jadwal()
 	{
-		return $this->load->view('admin/seminar_jadwal');
+		$prodies = masterdata('tb_program_studi', null, '*');
+		$data['prodies'] = $prodies;
+		foreach ($prodies as $prodi) {
+			$select = 'tb_dosen.id,tb_pegawai.nama_pegawai,tb_pegawai.nip_nik';
+			$where = "id_program_studi = '$prodi->id_program_studi'";
+			$join = array(
+				array('tb_pegawai', 'tb_dosen.nip_nik = tb_pegawai.nip_nik', 'INNER'),
+			);
+			$dosens = datajoin('tb_dosen', $where, $select, $join);
+			$data['dosens'][$prodi->id_program_studi] = $dosens;
+			foreach ($dosens as $dosen) {
+				$data['penguji'][$dosen->id] = masterdata('tb_seminar_penguji', "id_dosen = $dosen->id", '*', true, 'status');
+			}
+
+		}
+		return $this->load->view('admin/seminar_jadwal', $data);
 	}
 
 } ?>

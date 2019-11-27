@@ -71,4 +71,33 @@ class Seminar_model extends CI_Model {
 		$where = "id = $post[id]";
 		return $this->db->delete('tb_seminar_tanggal',$where);
 	}
+	public function add_penguji(){
+		$post = $this->input->post();
+		$data = array('id_dosen'=>$post['id'],'status'=>$post['mode']);
+		return $this->db->insert('tb_seminar_penguji',$data);
+	}
+	public function add_bulk_penguji(){
+		$post = $this->input->post();
+		$data = array();
+		foreach ($post['ids'] as $id_dosen){
+			array_push($data,array('id_dosen'=>$id_dosen,'status'=>$post['mode']));
+		}
+		return $this->db->insert_batch('tb_seminar_penguji',$data);
+	}
+	public function delete_bulk_penguji(){
+		$post = $this->input->post();
+		$data = array();
+		foreach ($post['ids'] as $id){
+			$where = "id = $id";
+			if(!$this->db->delete('tb_seminar_penguji',$where)){
+				return false;
+			}
+		}
+		return true;
+	}
+	public function delete_penguji(){
+		$post = $this->input->post();
+		$where = array('id'=>$post['id']);
+		return $this->db->delete('tb_seminar_penguji',$where);
+	}
 }

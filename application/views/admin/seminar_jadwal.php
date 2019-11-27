@@ -155,7 +155,8 @@
 										<div class="row d-flex justify-content-end mt-3">
 											<div class="col-lg-3 col-md-3 col-sm-12">
 												<div class="form-group collapse" id="form-waktu">
-													<input class="form-control form-control-sm" type="time" name="waktu" value=""
+													<input class="form-control form-control-sm" type="time" name="waktu"
+														   value=""
 														   placeholder="Masukkan jam"/>
 												</div>
 											</div>
@@ -184,7 +185,87 @@
 										<?php break ?>
 
 									<?php case 'penguji': ?>
-										<h3 class="m-0 p-0 text-primary">Kelola Waktu Seminar</h3>
+										<h3 class="m-0 p-0 text-primary mb-2">Kelola Dosen Penguji</h3>
+										<ul class="nav nav-tabs">
+											<?php if (isset($prodies)):
+												foreach ($prodies as $prody):
+													?>
+													<li class="nav-item">
+														<a href="<?php echo site_url("seminar?m=kelola&section=penguji&prodi=$prody->id_program_studi") ?>"
+														   class="nav-link <?php echo isset($_GET['prodi']) && $_GET['prodi'] == $prody->id_program_studi ? 'active' : null ?>"><?php echo $prody->nama_program_studi ?></a>
+													</li>
+												<?php endforeach; ?>
+											<?php endif; ?>
+										</ul>
+										<?php if (isset($_GET['prodi'])): ?>
+											<div class="table-responsive">
+												<table class="table" id="table-penguji">
+													<thead>
+													<tr>
+														<th>Nama Dosen</th>
+														<th>Pembimbing 1</th>
+														<th>Pembimbing 2</th>
+													</tr>
+													</thead>
+													<tbody>
+													<tr>
+														<td></td>
+														<td class="p-0">
+															<div class="custom-control custom-checkbox mt-1">
+																<input class="custom-control-input" id="check-all-p1"
+																	   type="checkbox">
+																<label class="custom-control-label" for="check-all-p1">Pilih
+																	Semua</label>
+															</div>
+														</td>
+														<td class="p-0">
+															<div class="custom-control custom-checkbox mt-1">
+																<input class="custom-control-input" id="check-all-p2"
+																	   type="checkbox">
+																<label class="custom-control-label" for="check-all-p2">Pilih
+																	Semua</label>
+															</div>
+														</td>
+													</tr>
+													<?php if (isset($dosens)): ?>
+														<?php foreach ($dosens[$_GET['prodi']] as $dosen): ?>
+															<tr>
+																<td><?php echo $dosen->nama_pegawai; ?></td>
+																<?php
+																$penguji = isset($penguji) ? $penguji : array();
+																$pengujis = $penguji[$dosen->id] ? $penguji[$dosen->id] : array();
+																$keys_penguji = array('p1', 'p2');
+																if (count($pengujis) == 1 and isset($pengujis[0]->status)) {
+																	$status = $pengujis[0]->status;
+																	if ($status == 'p2') {
+																		array_unshift($pengujis, (object)array("id" => null, 'status' => null));
+																	} else {
+																		array_push($pengujis, (object)array("id" => null, 'status' => null));
+																	}
+																}
+																foreach ($keys_penguji as $key => $peng):?>
+																	<td id="checkbox-<?php echo $peng ?>">
+																		<label
+																			class="custom-toggle custom-toggle-primary">
+																			<input class="checkbox-<?php echo $peng ?>"
+																				   type="checkbox"
+																				   data-id="<?php echo $dosen->id ?>"
+																				   id="<?php echo isset($pengujis[$key]->id) ? $pengujis[$key]->id : null ?>" <?php echo (isset($pengujis[$key]->status) and $pengujis[$key]->status != null) ? 'checked' : null ?>
+																				   data-mode="<?php echo $peng ?>">
+																			<span
+																				class="custom-toggle-slider rounded-circle"
+																				data-label-off="No"
+																				data-label-on="Yes"></span>
+																		</label>
+																	</td>
+																<?php endforeach; ?>
+															</tr>
+														<?php endforeach; ?>
+													<?php endif; ?>
+													</tbody>
+												</table>
+											</div>
+										<?php endif; ?>
 										<?php break ?>
 
 									<?php case 'generate': ?>
@@ -433,7 +514,7 @@
                         case 'Simpan':
                             $.ajax({
                                 url: '<?php echo site_url('seminar?m=tanggal&q=i') ?>',
-                                data: {tanggal: inputValue,hari:inputHari},
+                                data: {tanggal: inputValue, hari: inputHari},
                                 method: "POST",
                                 success: function (res) {
                                     alert('Tanggal telah disimpan');
@@ -446,7 +527,7 @@
                             let idInput = $('input[name="tanggal"]').data('id');
                             $.ajax({
                                 url: '<?php echo site_url('seminar?m=tanggal&q=u') ?>',
-                                data: {tanggal: inputValue,hari:inputHari, id: idInput},
+                                data: {tanggal: inputValue, hari: inputHari, id: idInput},
                                 method: "POST",
                                 success: function (res) {
                                     alert('Tanggal telah update');
@@ -494,12 +575,117 @@
         $('#tanggal-datepicker').datepicker({
             startDate: "-60y",
             format: "yyyy-mm-dd",
-        }).on('changeDate',function(e){
-            var dayName = ['Minggu','Senin','Selasa','Rabu','Kamis',"Jum'at",'Sabtu','Minggu'];
+        }).on('changeDate', function (e) {
+            var dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu', 'Minggu'];
             $('input[name="hari"]').val(dayName[e.date.getDay()])
-		})
+        })
 		<?php endif?>
+		<?php if($section == 'penguji'): ?>
+        if ($('input.checkbox-p1').not(':checked').length === 0) {
+            $('#check-all-p1').prop('checked', true);
+        }
+        if ($('input.checkbox-p2').not(':checked').length === 0) {
+            $('#check-all-p2').prop('checked', true);
+        }
+        $(document).on('change', 'input[type="checkbox"]', function () {
+            //mean that user select one by one;
+            let data_bulk = [];
+            let mode = '';
+            let query = '';
+            let input_checked = '';
+            switch (this.id) {
+                case "check-all-p1":
+                    input_checked = $('input.checkbox-p1');
+                    mode = 'p1';
+                    let not_checked = $('input.checkbox-p1').not(':checked');
+                    let are_checked = $('input.checkbox-p1:checked');
+                    if(!not_checked.length || !are_checked.length){
+                    input_checked.map(function () {
+                        if (this.checked) {
+                            this.checked = false;
+                            data_bulk.push(this.id);
+                            query = 'd_bulk';
+                        } else {
+                            this.checked = true;
+                            data_bulk.push($(this).data('id'));
+                            query = 'i_bulk';
+                        }
+                    });
+                    }
+                    else{
+                        if(this.checked){
+                            not_checked.prop('checked',true);
+                            data_bulk.push($(not_checked).data('id'));
+                            query = 'i_bulk';
+						}
+					}
+                    console.log(data_bulk);
+                    $.ajax({
+                        url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
+                        method: "POST",
+                        data: {mode: mode, ids: data_bulk},
+                        dataType: 'json',
+                        success: function (res) {
+                            console.log(res)
+                        }
+                    })
+                    break;
+                case "check-all-p2":
+                    input_checked = $('input.checkbox-p2');
+                    mode = 'p2';
+                    input_checked.map(function () {
+                        if (this.checked) {
+                            this.checked = false;
+                            query = 'd_bulk';
+                            data_bulk.push(this.id);
+                        } else {
+                            this.checked = true;
+                            query = 'i_bulk';
+                            data_bulk.push($(this).data('id'));
+                        }
+                    });
+                    $.ajax({
+                        url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
+                        method: "POST",
+                        data: {mode: mode, ids: data_bulk},
+                        dataType: 'json',
+                        success: function (res) {
+                            console.log(res)
+                        }
+                    })
+                    break;
+                default:
+                    if (!this.checked) {
+                        let id = this.id;
+                        let query = 'd';
+                        $.ajax({
+                            url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
+                            method: "POST",
+                            data: {id: id},
+                            dataType: 'json',
+                            success: function (res) {
+                                console.log(res)
+                            }
+                        })
+                    } else {
+                        let id = $(this).data('id');
+                        let query = 'i';
+                        let mode = $(this).data('mode');
+                        $.ajax({
+                            url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
+                            method: "POST",
+                            data: {id: id, mode: mode},
+                            dataType: 'json',
+                            success: function (res) {
+                                console.log(res)
+                            }
+                        })
+                    }
+                    break;
 
+            }
+        })
+		<?php endif; ?>
     })
 
 </script>
