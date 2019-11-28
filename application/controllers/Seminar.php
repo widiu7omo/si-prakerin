@@ -274,10 +274,9 @@ class Seminar extends MY_Controller
 			echo json_encode(array('status' => 'success'));
 		}
 	}
-
-
 	public function index_kelola_jadwal()
 	{
+		$seminar = $this->seminar_model;
 		$prodies = masterdata('tb_program_studi', null, '*');
 		$data['prodies'] = $prodies;
 		foreach ($prodies as $prodi) {
@@ -291,7 +290,10 @@ class Seminar extends MY_Controller
 			foreach ($dosens as $dosen) {
 				$data['penguji'][$dosen->id] = masterdata('tb_seminar_penguji', "id_dosen = $dosen->id", '*', true, 'status');
 			}
-
+			$data['tempat'] = $seminar->count_tempat();
+			$data['waktu'] = $seminar->count_waktu();
+			$data['penguji_1'] = $seminar->count_penguji('p1');
+			$data['penguji_2'] = $seminar->count_penguji('p2');
 		}
 		return $this->load->view('admin/seminar_jadwal', $data);
 	}

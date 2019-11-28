@@ -95,9 +95,27 @@ class Seminar_model extends CI_Model {
 		}
 		return true;
 	}
+	public function get_all_penguji($status){
+		$select = 'tb_dosen.id,tb_pegawai.nama_pegawai,tb_pegawai.nip_nik';
+		$join = array(
+			array('tb_dosen','tb_dosen.id = tb_seminar_penguji.id_dosen','INNER'),
+			array('tb_pegawai', 'tb_dosen.nip_nik = tb_pegawai.nip_nik', 'INNER')
+		);
+		$where = "tb_seminar_penguji.status = '$status'";
+		return datajoin('tb_seminar_penguji', $where, $select, $join);
+	}
 	public function delete_penguji(){
 		$post = $this->input->post();
 		$where = array('id'=>$post['id']);
 		return $this->db->delete('tb_seminar_penguji',$where);
+	}
+	public function count_tempat(){
+		return $this->db->query('SELECT COUNT(*) as jumlah FROM tb_seminar_tempat')->row();
+	}
+	public function count_waktu(){
+		return $this->db->query('SELECT COUNT(*) as jumlah FROM tb_seminar_waktu')->row();
+	}
+	public function count_penguji($status){
+		return $this->db->query("SELECT COUNT(*) as jumlah FROM tb_seminar_penguji WHERE status = '$status'")->row();
 	}
 }

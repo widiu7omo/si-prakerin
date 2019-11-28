@@ -39,6 +39,15 @@ class Pembimbing_model extends CI_Model
 		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.nim,tb_dosen_bimbingan_mhs.*', $join);
 	}
+	public function get_all_approved_judul(){
+		$this->db->reset_query();
+		$where = "tb_dosen_bimbingan_mhs.status_seminar = 'setuju'";
+		$join = array(
+			array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join'),
+			array('tb_pegawai','tb_pegawai.nip_nik = tb_dosen_bimbingan_mhs.nip_nik','inner join')
+		);
+		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.nim,tb_pegawai.nama_pegawai,tb_dosen_bimbingan_mhs.*', $join);
+	}
 	public function get_all_pengajuan_sidang($id){
 		$this->db->reset_query();
 		$where = null;

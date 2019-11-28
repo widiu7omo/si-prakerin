@@ -146,7 +146,7 @@
 										<div class="row">
 											<div class="col-12 d-flex justify-content-between">
 												<h5>Jam pelaksanaan</h5>
-												<button id="button-waktu" data-target="#form-waktu"
+												<button id="button-waktu" data-target="#form-waktu1,#form-waktu2"
 														data-toggle="collapse" aria-expanded="false"
 														aria-controls="form-waktu" class="btn btn-sm btn-success">Tambah
 												</button>
@@ -154,10 +154,18 @@
 										</div>
 										<div class="row d-flex justify-content-end mt-3">
 											<div class="col-lg-3 col-md-3 col-sm-12">
-												<div class="form-group collapse" id="form-waktu">
-													<input class="form-control form-control-sm" type="time" name="waktu"
+												<div class="form-group collapse" id="form-waktu1">
+													<label for="" class="form-label">Waktu Mulai</label>
+													<input class="form-control form-control-sm" type="time" name="waktu1"
 														   value=""
-														   placeholder="Masukkan jam"/>
+														   placeholder="Masukkan Mulai"/>
+												</div>
+												<p></p>
+												<div class="form-group collapse" id="form-waktu2">
+													<label for="" class="form-label">Waktu Selesai</label>
+													<input class="form-control form-control-sm" type="time" name="waktu2"
+														   value=""
+														   placeholder="Masukkan Selesai"/>
 												</div>
 											</div>
 										</div>
@@ -203,8 +211,8 @@
 													<thead>
 													<tr>
 														<th>Nama Dosen</th>
-														<th>Pembimbing 1</th>
-														<th>Pembimbing 2</th>
+														<th>Penguji 1</th>
+														<th>Penguji 2</th>
 													</tr>
 													</thead>
 													<tbody>
@@ -269,7 +277,35 @@
 										<?php break ?>
 
 									<?php case 'generate': ?>
-										<p>Generate</p>
+										<div>
+											<h4>Overview</h4>
+											<div class="row">
+												<div class="col-sm-12 col-md-3">
+													<div class="card bg-primary text-white">
+														<div class="card-body">Jumlah tempat = <?php echo isset($tempat)?$tempat->jumlah:null ?></div>
+													</div>
+												</div>
+												<div class="col-sm-12 col-md-3">
+													<div class="card bg-warning text-white">
+														<div class="card-body">Jumlah Waktu = <?php echo isset($waktu)?$waktu->jumlah:null ?></div>
+													</div>
+												</div>
+												<div class="col-sm-12 col-md-3">
+													<div class="card bg-default text-white">
+														<div class="card-body">Jumlah Penguji 1 = <?php echo isset($penguji_1)?$penguji_1->jumlah:null ?></div>
+													</div>
+												</div>
+												<div class="col-sm-12 col-md-3">
+													<div class="card bg-success text-white">
+														<div class="card-body">Jumlah Penguji 2 = <?php echo isset($penguji_2)?$penguji_2->jumlah:null ?></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div>
+											<h4>Generate Jadwal Sidang</h4>
+
+										</div>
 										<?php break ?>
 
 									<?php default:
@@ -436,8 +472,8 @@
                 //it mean expand
                 $(this).text('Simpan').removeClass('btn-primary').removeClass('btn-danger').addClass('btn-success');
             } else {
-                let inputValue = $('input[name="waktu"]').val();
-                if (inputValue !== '') {
+                let inputValue = $('input[name="waktu1"]').val() + " - " +$('input[name="waktu2"]').val();
+                if (inputValue !== ' - ') {
                     let buttonName = $(this).text();
                     switch (buttonName) {
                         case 'Simpan':
@@ -453,7 +489,7 @@
                             $(this).text('Tambah').removeClass('btn-success').addClass('btn-primary');
                             break;
                         case 'Edit':
-                            let idInput = $('input[name="waktu"]').data('id');
+                            let idInput = $('input[name="waktu1"]').data('id');
                             $.ajax({
                                 url: '<?php echo site_url('seminar?m=waktu&q=u') ?>',
                                 data: {jam: inputValue, id: idInput},
@@ -479,8 +515,12 @@
             let row = $(this).parents('tr');
             let id = $(row).children('td.sorting_1').text();
             let jam = $(row).children('td:nth-child(2)').text();
-            $('#form-waktu').collapse('show');
-            $('input[name="waktu"]').val(jam).data('id', id);
+            console.log(jam);
+            let splitedJam = jam.split(' - ');
+            $('#form-waktu1').collapse('show');
+            $('#form-waktu2').collapse('show');
+            $('input[name="waktu1"]').val(splitedJam[0]).data('id', id);
+            $('input[name="waktu2"]').val(splitedJam[1]);
             $('#button-waktu').text('Edit').removeClass('btn-primary').addClass('btn-success');
         })
         $(document).on('click', '#btn-waktu-delete', function () {
