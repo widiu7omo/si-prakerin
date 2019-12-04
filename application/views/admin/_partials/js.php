@@ -22,6 +22,10 @@
 <script src="<?php echo base_url('aset/vendor/dropzone/dist/min/dropzone.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/select2/select2.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/introjs/intro.js') ?>"></script>
+<script src="<?php echo base_url('aset/vendor/momentjs/moment.min.js')?>"></script>
+<script src="<?php echo base_url('aset/vendor/sweetalert/sweetalert2.min.js')?>"></script>
+<script src="<?php echo base_url('aset/vendor/clockpicker/bootstrap-clockpicker.min.js') ?>"></script>
+
 <!-- Argon JS -->
 <script src="<?php echo base_url('aset/js/argonpro.js') ?>"></script>
 <script>

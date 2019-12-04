@@ -24,7 +24,7 @@
 			<!-- Card stats -->
 			<div class="row">
 				<div class="col-md-12 col-lg-12 col-sm-12">
-					<div class="card">
+					<div class="card card-calendar">
 						<div class="card-header">
 							<ul class="nav nav-pills">
 								<li class="nav-item">
@@ -40,697 +40,539 @@
 									   class="nav-link <?php echo $section == 'penguji' ? 'active' : null ?>">Penguji</a>
 								</li>
 								<li class="nav-item">
-									<a href="<?php echo site_url('seminar?m=kelola&section=generate') ?>"
-									   class="nav-link <?php echo $section == 'generate' ? 'active' : null ?>">Generate
-										Penguji dan tempat</a>
+									<a href="<?php echo site_url('seminar?m=kelola&section=jadwal') ?>"
+									   class="nav-link <?php echo $section == 'jadwal' ? 'active' : null ?>">Buat Jadwal
+										Sidang</a>
 								</li>
 							</ul>
+							<!-- Title -->
+							<div class="row">
+								<div class="col-md-8 col-sm-8">
+									<h5 class="h3 mb-0">Kalender Konsutasi</h5>
+									<small>* Jika anda ingin melakukan bimbingan online</small><br>
+								</div>
+								<div class="col-md-4 col-sm-4 text-right">
+									<a href="#" class="fullcalendar-btn-prev btn btn-sm btn-primary">
+										<i class="fas fa-angle-left"></i>&nbsp;Previous
+									</a>
+									<a href="#" class="fullcalendar-btn-next btn btn-sm btn-primary">
+										Next&nbsp;<i class="fas fa-angle-right"></i>
+									</a><br>
+									<h6 class="h5 d-inline-block mb-0 mr-2" id="fullcalendar-title"></h6>
+								</div>
+							</div>
 						</div>
-						<div class="card-body">
-							<?php if (isset($section)): ?>
-								<?php switch ($section):
-									case 'tempat': ?>
-										<div class="row">
-											<div class="col-12 d-flex justify-content-between">
-												<h3 class="m-0 p-0 text-primary">Kelola Tempat Seminar</h3>
-												<button id="button-tempat" class="btn btn-sm btn-primary"
-														data-toggle="collapse" data-target="#form-ruangan"
-														aria-expanded="false" aria-controls="form-ruangan">Tambah
-												</button>
-											</div>
-										</div>
-										<div class="row d-flex justify-content-end mt-3">
-											<div class="col-lg-4 col-md-4 col-sm-12">
-												<div class="form-group collapse" id="form-ruangan">
-													<input class="form-control form-control-sm" name="ruangan" value=""
-														   placeholder="Masukkan Nama Ruangan"/>
-												</div>
-											</div>
-										</div>
-										<div class="table-responsive py-4">
-											<table class="table table-flush" id="datatable-tempat">
-												<thead class="thead-light">
-												<tr role="row">
-													<th>No</th>
-													<th>Ruangan</th>
-													<th>Aksi</th>
-												</tr>
-												</thead>
-												<tfoot>
-												<tr>
-													<th>No</th>
-													<th>Ruangan</th>
-													<th>Aksi</th>
-												</tr>
-												</tfoot>
-												<tbody>
-
-												</tbody>
-											</table>
-										</div>
-										<?php break ?>
-									<?php case 'waktu': ?>
-										<h3 class="m-0 p-0 text-primary">Kelola Waktu Seminar</h3>
-										<div class="row">
-											<div class="col-12 d-flex justify-content-between">
-												<h5>Tanggal dan Hari</h5>
-												<button id="button-tanggal" data-target="#form-tanggal"
-														data-toggle="collapse" aria-expanded="false"
-														aria-controls="form-tanggal" class="btn btn-sm btn-success">
-													Tambah
-												</button>
-											</div>
-										</div>
-										<div class="row d-flex justify-content-end mt-3">
-											<div class="col-lg-4 col-md-4 col-sm-12">
-												<div class="form-group collapse" id="form-tanggal">
-													<div class="row">
-														<div class="col-4">
-															<input class="form-control form-control-sm" name="hari"
-																   value=""/>
-														</div>
-														<div class="col-auto">
-															<input id="tanggal-datepicker"
-																   class="form-control form-control-sm" type="text"
-																   name="tanggal" value=""
-																   placeholder="dd/mm/yyyy"/>
-														</div>
-													</div>
-
-
-												</div>
-											</div>
-										</div>
-										<div class="table-responsive py-4">
-											<table class="table table-flush" id="datatable-tanggal">
-												<thead class="thead-light">
-												<tr role="row">
-													<th>No</th>
-													<th>Hari</th>
-													<th>Tanggal</th>
-													<th>Aksi</th>
-												</tr>
-												</thead>
-												<tfoot>
-												<tr>
-													<th>No</th>
-													<th>Hari</th>
-													<th>Tanggal</th>
-													<th>Aksi</th>
-												</tr>
-												</tfoot>
-												<tbody>
-												</tbody>
-											</table>
-										</div>
-										<div class="row">
-											<div class="col-12 d-flex justify-content-between">
-												<h5>Jam pelaksanaan</h5>
-												<button id="button-waktu" data-target="#form-waktu1,#form-waktu2"
-														data-toggle="collapse" aria-expanded="false"
-														aria-controls="form-waktu" class="btn btn-sm btn-success">Tambah
-												</button>
-											</div>
-										</div>
-										<div class="row d-flex justify-content-end mt-3">
-											<div class="col-lg-3 col-md-3 col-sm-12">
-												<div class="form-group collapse" id="form-waktu1">
-													<label for="" class="form-label">Waktu Mulai</label>
-													<input class="form-control form-control-sm" type="time" name="waktu1"
-														   value=""
-														   placeholder="Masukkan Mulai"/>
-												</div>
-												<p></p>
-												<div class="form-group collapse" id="form-waktu2">
-													<label for="" class="form-label">Waktu Selesai</label>
-													<input class="form-control form-control-sm" type="time" name="waktu2"
-														   value=""
-														   placeholder="Masukkan Selesai"/>
-												</div>
-											</div>
-										</div>
-										<div class="table-responsive py-4">
-											<table class="table table-flush" id="datatable-waktu">
-												<thead class="thead-light">
-												<tr role="row">
-													<th>No</th>
-													<th>Waktu</th>
-													<th>Aksi</th>
-												</tr>
-												</thead>
-												<tfoot>
-												<tr>
-													<th>No</th>
-													<th>Waktu</th>
-													<th>Aksi</th>
-												</tr>
-												</tfoot>
-												<tbody>
-
-												</tbody>
-											</table>
-										</div>
-										<?php break ?>
-
-									<?php case 'penguji': ?>
-										<h3 class="m-0 p-0 text-primary mb-2">Kelola Dosen Penguji</h3>
-										<ul class="nav nav-tabs">
-											<?php if (isset($prodies)):
-												foreach ($prodies as $prody):
-													?>
-													<li class="nav-item">
-														<a href="<?php echo site_url("seminar?m=kelola&section=penguji&prodi=$prody->id_program_studi") ?>"
-														   class="nav-link <?php echo isset($_GET['prodi']) && $_GET['prodi'] == $prody->id_program_studi ? 'active' : null ?>"><?php echo $prody->nama_program_studi ?></a>
-													</li>
-												<?php endforeach; ?>
-											<?php endif; ?>
-										</ul>
-										<?php if (isset($_GET['prodi'])): ?>
-											<div class="table-responsive">
-												<table class="table" id="table-penguji">
-													<thead>
-													<tr>
-														<th>Nama Dosen</th>
-														<th>Penguji 1</th>
-														<th>Penguji 2</th>
-													</tr>
-													</thead>
-													<tbody>
-													<tr>
-														<td></td>
-														<td class="p-0">
-															<div class="custom-control custom-checkbox mt-1">
-																<input class="custom-control-input" id="check-all-p1"
-																	   type="checkbox">
-																<label class="custom-control-label" for="check-all-p1">Pilih
-																	Semua</label>
-															</div>
-														</td>
-														<td class="p-0">
-															<div class="custom-control custom-checkbox mt-1">
-																<input class="custom-control-input" id="check-all-p2"
-																	   type="checkbox">
-																<label class="custom-control-label" for="check-all-p2">Pilih
-																	Semua</label>
-															</div>
-														</td>
-													</tr>
-													<?php if (isset($dosens)): ?>
-														<?php foreach ($dosens[$_GET['prodi']] as $dosen): ?>
-															<tr>
-																<td><?php echo $dosen->nama_pegawai; ?></td>
-																<?php
-																$penguji = isset($penguji) ? $penguji : array();
-																$pengujis = $penguji[$dosen->id] ? $penguji[$dosen->id] : array();
-																$keys_penguji = array('p1', 'p2');
-																if (count($pengujis) == 1 and isset($pengujis[0]->status)) {
-																	$status = $pengujis[0]->status;
-																	if ($status == 'p2') {
-																		array_unshift($pengujis, (object)array("id" => null, 'status' => null));
-																	} else {
-																		array_push($pengujis, (object)array("id" => null, 'status' => null));
-																	}
-																}
-																foreach ($keys_penguji as $key => $peng):?>
-																	<td id="checkbox-<?php echo $peng ?>">
-																		<label
-																			class="custom-toggle custom-toggle-primary">
-																			<input class="checkbox-<?php echo $peng ?>"
-																				   type="checkbox"
-																				   data-id="<?php echo $dosen->id ?>"
-																				   id="<?php echo isset($pengujis[$key]->id) ? $pengujis[$key]->id : null ?>" <?php echo (isset($pengujis[$key]->status) and $pengujis[$key]->status != null) ? 'checked' : null ?>
-																				   data-mode="<?php echo $peng ?>">
-																			<span
-																				class="custom-toggle-slider rounded-circle"
-																				data-label-off="No"
-																				data-label-on="Yes"></span>
-																		</label>
-																	</td>
-																<?php endforeach; ?>
-															</tr>
-														<?php endforeach; ?>
-													<?php endif; ?>
-													</tbody>
-												</table>
-											</div>
-										<?php endif; ?>
-										<?php break ?>
-
-									<?php case 'generate': ?>
-										<div>
-											<h4>Overview</h4>
-											<div class="row">
-												<div class="col-sm-12 col-md-3">
-													<div class="card bg-primary text-white">
-														<div class="card-body">Jumlah tempat = <?php echo isset($tempat)?$tempat->jumlah:null ?></div>
-													</div>
-												</div>
-												<div class="col-sm-12 col-md-3">
-													<div class="card bg-warning text-white">
-														<div class="card-body">Jumlah Waktu = <?php echo isset($waktu)?$waktu->jumlah:null ?></div>
-													</div>
-												</div>
-												<div class="col-sm-12 col-md-3">
-													<div class="card bg-default text-white">
-														<div class="card-body">Jumlah Penguji 1 = <?php echo isset($penguji_1)?$penguji_1->jumlah:null ?></div>
-													</div>
-												</div>
-												<div class="col-sm-12 col-md-3">
-													<div class="card bg-success text-white">
-														<div class="card-body">Jumlah Penguji 2 = <?php echo isset($penguji_2)?$penguji_2->jumlah:null ?></div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div>
-											<h4>Generate Jadwal Sidang</h4>
-
-										</div>
-										<?php break ?>
-
-									<?php default:
-										redirect('seminar?m=kelola'); ?>
-									<?php endswitch; ?>
-							<?php else: ?>
-								<p>Silahkan pilih menu diatas</p>
-							<?php endif; ?>
+						<div class="card-body p-0">
+							<div id="calendar" class="calendar"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Footer PHP -->
+		<?php $this->load->view('admin/_partials/modal_add_event.php') ?>
+		<?php $this->load->view('admin/_partials/modal_edit_event.php') ?>
 		<?php $this->load->view('admin/_partials/footer.php'); ?>
 	</div>
-</div>
-<!-- Scripts PHP-->
-<?php $this->load->view('admin/_partials/modal.php'); ?>
-<?php $this->load->view('admin/_partials/js.php'); ?>
-<?php
-//	require APPPATH."libraries/hotreloader.php";
-//	$reloader = new HotReloader();
-//	$reloader->setRoot(__DIR__);
-//	$reloader->currentConfig();
-//	$reloader->init();
-?>
-<script>
-	<?php if($section == 'tempat'):?>
-    function data_tempat() {
-        $('#datatable-tempat').dataTable({
-            ajax: '<?php echo site_url('seminar?m=tempat') ?>',
-            columns: [
-                {'data': 'id'},
-                {'data': 'nama'},
-                {
-                    "data": null,
-                    "defaultContent": '' +
-                        '<div class="btn-group">' +
-                        '<button id="btn-tempat-edit" class="btn btn-sm btn-primary">Edit</button>' +
-                        '<button id="btn-tempat-delete" class="btn btn-sm btn-danger">Delete</button>' +
-                        '</div>'
-                }
-            ],
-        })
-    }
-	<?php endif?>
-	<?php if($section == 'waktu'):?>
-    function data_waktu() {
-        $('#datatable-waktu').dataTable({
-            ajax: '<?php echo site_url('seminar?m=waktu') ?>',
-            columns: [
-                {'data': 'id'},
-                {'data': 'jam'},
-                {
-                    "data": null,
-                    "defaultContent": '' +
-                        '<div class="btn-group">' +
-                        '<button id="btn-waktu-edit" class="btn btn-sm btn-primary">Edit</button>' +
-                        '<button id="btn-waktu-delete" class="btn btn-sm btn-danger">Delete</button>' +
-                        '</div>'
-                }
-            ],
-        })
-        $('#datatable-tanggal').dataTable({
-            ajax: '<?php echo site_url('seminar?m=tanggal') ?>',
-            columns: [
-                {'data': 'id'},
-                {'data': 'hari'},
-                {'data': 'tanggal'},
-                {
-                    "data": null,
-                    "defaultContent": '' +
-                        '<div class="btn-group">' +
-                        '<button id="btn-tanggal-edit" class="btn btn-sm btn-primary">Edit</button>' +
-                        '<button id="btn-tanggal-delete" class="btn btn-sm btn-danger">Delete</button>' +
-                        '</div>'
-                }
-            ],
-        })
-    }
-	<?php endif?>
-
-    $(document).ready(function () {
-        //tempat
-		<?php if($section == 'tempat'):?>
-        data_tempat();
-        $('#button-tempat').on('click', function () {
-            let isCollapse = $(this).attr('aria-expanded');
-            if (isCollapse === "false") {
-                //it mean expand
-                $(this).text('Simpan').removeClass('btn-primary').removeClass('btn-danger').addClass('btn-success');
-            } else {
-                let inputValue = $('input[name="ruangan"]').val();
-                if (inputValue !== '') {
-                    let buttonName = $(this).text();
-                    switch (buttonName) {
-                        case 'Simpan':
-                            $.ajax({
-                                url: '<?php echo site_url('seminar?m=tempat&q=i') ?>',
-                                data: {tempat: inputValue},
-                                method: "POST",
-                                success: function (res) {
-                                    alert('Tempat telah disimpan');
-                                    window.location.reload();
-                                }
-                            })
-                            $(this).text('Tambah').removeClass('btn-success').addClass('btn-primary');
-                            break;
-                        case 'Edit':
-                            let idInput = $('input[name="ruangan"]').data('id');
-                            $.ajax({
-                                url: '<?php echo site_url('seminar?m=tempat&q=u') ?>',
-                                data: {tempat: inputValue, id: idInput},
-                                method: "POST",
-                                success: function (res) {
-                                    alert('Tempat telah update');
-                                    window.location.reload();
-                                }
-                            })
-                            $(this).text('Tambah').removeClass('btn-success').addClass('btn-primary');
-                            break;
-                        default:
-                            return;
-                    }
-
-                } else {
-                    $(this).text('Error').removeClass('btn-success').addClass('btn-danger');
-                }
-
-            }
-        })
-        $(document).on('click', '#btn-tempat-edit', function () {
-            let row = $(this).parents('tr');
-            let id = $(row).children('td.sorting_1').text();
-            let name = $(row).children('td:nth-child(2)').text();
-            $('#form-ruangan').collapse('show');
-            $('input[name="ruangan"]').val(name).data('id', id);
-            $('#button-tempat').text('Edit').removeClass('btn-primary').addClass('btn-success');
-        })
-        $(document).on('click', '#btn-tempat-delete', function () {
-            if (confirm('Apakah yakin ingin menghapus data ini?')) {
-                let row = $(this).parents('tr');
-                let id = $(row).children('td.sorting_1').text();
-                $.ajax({
-                    url: '<?php echo site_url('seminar?m=tempat&q=d') ?>',
-                    data: {id: id},
-                    method: "POST",
-                    success: function (res) {
-                        alert('Data berhasil di hapus');
-                        window.location.reload();
-                    }
-                })
-            }
-
-        })
-		<?php endif?>
-        //waktu
-		<?php if($section == 'waktu'):?>
-        data_waktu();
-        $('#button-waktu').on('click', function () {
-            let isCollapse = $(this).attr('aria-expanded');
-            if (isCollapse === "false") {
-                //it mean expand
-                $(this).text('Simpan').removeClass('btn-primary').removeClass('btn-danger').addClass('btn-success');
-            } else {
-                let inputValue = $('input[name="waktu1"]').val() + " - " +$('input[name="waktu2"]').val();
-                if (inputValue !== ' - ') {
-                    let buttonName = $(this).text();
-                    switch (buttonName) {
-                        case 'Simpan':
-                            $.ajax({
-                                url: '<?php echo site_url('seminar?m=waktu&q=i') ?>',
-                                data: {jam: inputValue},
-                                method: "POST",
-                                success: function (res) {
-                                    alert('Waktu telah disimpan');
-                                    window.location.reload();
-                                }
-                            })
-                            $(this).text('Tambah').removeClass('btn-success').addClass('btn-primary');
-                            break;
-                        case 'Edit':
-                            let idInput = $('input[name="waktu1"]').data('id');
-                            $.ajax({
-                                url: '<?php echo site_url('seminar?m=waktu&q=u') ?>',
-                                data: {jam: inputValue, id: idInput},
-                                method: "POST",
-                                success: function (res) {
-                                    alert('Waktu telah update');
-                                    window.location.reload();
-                                }
-                            })
-                            $(this).text('Tambah').removeClass('btn-success').addClass('btn-primary');
-                            break;
-                        default:
-                            return;
-                    }
-
-                } else {
-                    $(this).text('Error').removeClass('btn-success').addClass('btn-danger');
-                }
-
-            }
-        })
-        $(document).on('click', '#btn-waktu-edit', function () {
-            let row = $(this).parents('tr');
-            let id = $(row).children('td.sorting_1').text();
-            let jam = $(row).children('td:nth-child(2)').text();
-            console.log(jam);
-            let splitedJam = jam.split(' - ');
-            $('#form-waktu1').collapse('show');
-            $('#form-waktu2').collapse('show');
-            $('input[name="waktu1"]').val(splitedJam[0]).data('id', id);
-            $('input[name="waktu2"]').val(splitedJam[1]);
-            $('#button-waktu').text('Edit').removeClass('btn-primary').addClass('btn-success');
-        })
-        $(document).on('click', '#btn-waktu-delete', function () {
-            if (confirm('Apakah yakin ingin menghapus data ini?')) {
-                let row = $(this).parents('tr');
-                let id = $(row).children('td.sorting_1').text();
-                $.ajax({
-                    url: '<?php echo site_url('seminar?m=waktu&q=d') ?>',
-                    data: {id: id},
-                    method: "POST",
-                    success: function (res) {
-                        alert('Waktu berhasil di hapus');
-                        window.location.reload();
-                    }
-                })
-            }
-
-        })
-        //tanggal
-        $('#button-tanggal').on('click', function () {
-            let isCollapse = $(this).attr('aria-expanded');
-            if (isCollapse === "false") {
-                //it mean expand
-                $(this).text('Simpan').removeClass('btn-primary').removeClass('btn-danger').addClass('btn-success');
-            } else {
-                let inputValue = $('input[name="tanggal"]').val();
-                let inputHari = $('input[name="hari"]').val();
-                if (inputValue !== '') {
-                    let buttonName = $(this).text();
-                    switch (buttonName) {
-                        case 'Simpan':
-                            $.ajax({
-                                url: '<?php echo site_url('seminar?m=tanggal&q=i') ?>',
-                                data: {tanggal: inputValue, hari: inputHari},
-                                method: "POST",
-                                success: function (res) {
-                                    alert('Tanggal telah disimpan');
-                                    window.location.reload();
-                                }
-                            })
-                            $(this).text('Tambah').removeClass('btn-success').addClass('btn-primary');
-                            break;
-                        case 'Edit':
-                            let idInput = $('input[name="tanggal"]').data('id');
-                            $.ajax({
-                                url: '<?php echo site_url('seminar?m=tanggal&q=u') ?>',
-                                data: {tanggal: inputValue, hari: inputHari, id: idInput},
-                                method: "POST",
-                                success: function (res) {
-                                    alert('Tanggal telah update');
-                                    window.location.reload();
-                                }
-                            })
-                            $(this).text('Tambah').removeClass('btn-success').addClass('btn-primary');
-                            break;
-                        default:
-                            return;
-                    }
-
-                } else {
-                    $(this).text('Error').removeClass('btn-success').addClass('btn-danger');
-                }
-
-            }
-        })
-        $(document).on('click', '#btn-tanggal-edit', function () {
-            let row = $(this).parents('tr');
-            let id = $(row).children('td.sorting_1').text();
-            let hari = $(row).children('td:nth-child(2)').text();
-            let tanggal = $(row).children('td:nth-child(3)').text();
-            $('#form-tanggal').collapse('show');
-            $('input[name="hari"]').val(hari);
-            $('input[name="tanggal"]').val(tanggal).data('id', id);
-            $('#button-tanggal').text('Edit').removeClass('btn-primary').addClass('btn-success');
-        })
-        $(document).on('click', '#btn-tanggal-delete', function () {
-            if (confirm('Apakah yakin ingin menghapus data ini?')) {
-                let row = $(this).parents('tr');
-                let id = $(row).children('td.sorting_1').text();
-                $.ajax({
-                    url: '<?php echo site_url('seminar?m=tanggal&q=d') ?>',
-                    data: {id: id},
-                    method: "POST",
-                    success: function (res) {
-                        alert('Tanggal berhasil di hapus');
-                        window.location.reload();
-                    }
-                })
-            }
-
-        })
-        $('#tanggal-datepicker').datepicker({
+	<!-- Scripts PHP-->
+	<?php $this->load->view('admin/_partials/modal.php'); ?>
+	<?php $this->load->view('admin/_partials/js.php'); ?>
+	<!--	<script src="--><?php //echo base_url('aset/vendor/fullcalendar/fullcalendar.min.js') ?><!--"></script>-->
+	<!--	<script src="--><?php //echo base_url('aset/vendor/fullcalendar/locale-all.js') ?><!--"></script>-->
+	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/core/main.min.js') ?>"></script>
+	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/daygrid/main.min.js')?>"></script>
+	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/timegrid/main.min.js')?>"></script>
+	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/interaction/main.min.js')?>"></script>
+	<script>
+        $('.clockpicker').clockpicker();
+        $('#tanggal-seminar').datepicker({
             startDate: "-60y",
-            format: "yyyy-mm-dd",
-        }).on('changeDate', function (e) {
-            var dayName = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu', 'Minggu'];
-            $('input[name="hari"]').val(dayName[e.date.getDay()])
-        })
-		<?php endif?>
-		<?php if($section == 'penguji'): ?>
-        if ($('input.checkbox-p1').not(':checked').length === 0) {
-            $('#check-all-p1').prop('checked', true);
-        }
-        if ($('input.checkbox-p2').not(':checked').length === 0) {
-            $('#check-all-p2').prop('checked', true);
-        }
-        $(document).on('change', 'input[type="checkbox"]', function () {
-            //mean that user select one by one;
-            let data_bulk = [];
-            let mode = '';
-            let query = '';
-            let input_checked = '';
-            switch (this.id) {
-                case "check-all-p1":
-                    input_checked = $('input.checkbox-p1');
-                    mode = 'p1';
-                    let not_checked = $('input.checkbox-p1').not(':checked');
-                    let are_checked = $('input.checkbox-p1:checked');
-                    if(!not_checked.length || !are_checked.length){
-                    input_checked.map(function () {
-                        if (this.checked) {
-                            this.checked = false;
-                            data_bulk.push(this.id);
-                            query = 'd_bulk';
-                        } else {
-                            this.checked = true;
-                            data_bulk.push($(this).data('id'));
-                            query = 'i_bulk';
-                        }
-                    });
-                    }
-                    else{
-                        if(this.checked){
-                            not_checked.prop('checked',true);
-                            data_bulk.push($(not_checked).data('id'));
-                            query = 'i_bulk';
-						}
-					}
-                    console.log(data_bulk);
-                    $.ajax({
-                        url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
-                        method: "POST",
-                        data: {mode: mode, ids: data_bulk},
-                        dataType: 'json',
-                        success: function (res) {
-                            console.log(res)
-                        }
-                    })
-                    break;
-                case "check-all-p2":
-                    input_checked = $('input.checkbox-p2');
-                    mode = 'p2';
-                    input_checked.map(function () {
-                        if (this.checked) {
-                            this.checked = false;
-                            query = 'd_bulk';
-                            data_bulk.push(this.id);
-                        } else {
-                            this.checked = true;
-                            query = 'i_bulk';
-                            data_bulk.push($(this).data('id'));
-                        }
-                    });
-                    $.ajax({
-                        url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
-                        method: "POST",
-                        data: {mode: mode, ids: data_bulk},
-                        dataType: 'json',
-                        success: function (res) {
-                            console.log(res)
-                        }
-                    })
-                    break;
-                default:
-                    if (!this.checked) {
-                        let id = this.id;
-                        let query = 'd';
-                        $.ajax({
-                            url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
-                            method: "POST",
-                            data: {id: id},
-                            dataType: 'json',
-                            success: function (res) {
-                                console.log(res)
+            format: "yyyy-mm-dd"
+        });
+        $('#select-penguji1').select2({
+            placeholder: "Penguji 1",
+            ajax: {
+                url: '<?php echo site_url("seminar?m=penguji") ?>',
+                dataType: 'json',
+                data: {status: "p1"},
+                processResults: function (res) {
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: $.map(res.data, function (item) {
+                            return {
+                                text: item.nama_pegawai,
+                                id: item.id
                             }
                         })
-                    } else {
-                        let id = $(this).data('id');
-                        let query = 'i';
-                        let mode = $(this).data('mode');
-                        $.ajax({
-                            url: '<?php echo site_url('seminar?m=penguji&q=') ?>' + query,
-                            method: "POST",
-                            data: {id: id, mode: mode},
-                            dataType: 'json',
-                            success: function (res) {
-                                console.log(res)
-                            }
-                        })
-                    }
-                    break;
-
+                    };
+                }
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
+        }).on('select2:select', function ({params}) {
+            $('#id_p1').val(params.data.id)
+        });
+        $('#select-penguji2').select2({
+            placeholder: "Penguji 2",
+            ajax: {
+                url: '<?php echo site_url("seminar?m=penguji") ?>',
+                dataType: 'json',
+                data: {status: "p2"},
+                processResults: function (res) {
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: $.map(res.data, function (item) {
+                            return {
+                                text: item.nama_pegawai,
+                                id: item.id,
+                            }
+                        })
+                    };
+                }
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            }
+        }).on('select2:select', function ({params}) {
+            $('#id_p2').val(params.data.id)
         })
-		<?php endif; ?>
-    })
+        $('#select-mahasiswa').select2({
+            placeholder: 'Mahasiswa seminar',
+            ajax: {
+                url: '<?php echo site_url("seminar?m=mahasiswa") ?>',
+                dataType: 'json',
+                processResults: function (res) {
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: $.map(res.data, function (item) {
+                            return {
+                                text: item.nama_mahasiswa,
+                                id: item.id_dosen_bimbingan_mhs,
+                                laporan: item.judul_laporan_mhs
+                            }
+                        })
+                    };
+                }
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            }
+        }).on('select2:select', function ({params}) {
+            $('#id_dosen_bimbingan_mhs').val(params.data.id)
+            $('#input-judul').val(params.data.laporan)
+        });
+        $('#select-ruangan').select2({
+            placeholder: 'Ruang seminar',
+            ajax: {
+                url: '<?php echo site_url("seminar?m=tempat") ?>',
+                dataType: 'json',
+                processResults: function (res) {
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: $.map(res.data, function (item) {
+                            return {
+                                text: item.nama,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            }
+        }).on('select2:select', function ({params}) {
+            $('#id_ruangan').val(params.data.id)
+        })
+        //var Fullcalendar = (function () {
+        //
+        //            // Variables
+        //
+        //            let $calendar = $('[data-toggle="calendar-konsultasi"]');
+        //
+        //            //
+        //            // Methods
+        //            //
+        //
+        //            // Init
+        //            function init($this) {
+        //
+        //                // Calendar events
+        //
+        //                // Full calendar options
+        //                // For more options read the official docs: https://fullcalendar.io/docs
+        //
+        //                options = {
+        //                    plugins: [ 'timeGrid' ],
+        //                    locale: 'id',
+        //                    defaultView: 'timeGridWeek',
+        //                    header: {
+        //                        left: 'prev,next today',
+        //                        center: 'title',
+        //                        right: 'timeGridWeek,timeGridDay'
+        //                    },
+        //                    buttonIcons: {
+        //                        prev: 'calendar--prev',
+        //                        next: 'calendar--next'
+        //                    },
+        //                    theme: false,
+        //                    selectable: true,
+        //                    selectHelper: true,
+        //                    editable: true,
+        //                    events: {
+        //                        url: "<?php echo site_url('seminar?m=jadwal') ?>",
+        //                        cache: true,
+        //                        type: "POST",
+        //                        data: {events: true},
+        //                        error: function () {
+        //                            alert('Gagal akses jadwal seminar');
+        //                        }
+        //                    },
+        //                    dayClick: function (date, jsEvent, view) {
+        //                        // if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+        //                        // This allows today and future date
+        //                        let isoDate = moment(date).toISOString();
+        //                        $('#tanggal-seminar').val(isoDate);
+        //                        $('#new-event').modal('show');
+        //                        //ajax to update current data
+        //                        //$.ajax({
+        //                        //    url: "<?php //echo site_url('bimbingan?m=konsultasi&q=is_exist') ?>//",
+        //                        //    method: "POST",
+        //                        //    success: function (data) {
+        //                        //        let parsedData = JSON.parse(data);
+        //                        //        if (parsedData.length !== 0) {
+        //                        //            $('#new-event').modal('show');
+        //                        //        } else {
+        //                        //            alert('Anda belum mendapatkan pembimbing')
+        //                        //        }
+        //                        //    },
+        //                        //    error: function () {
+        //						//
+        //                        //    }
+        //                        //});
+        //                        // } else {
+        //                        //     Else part is for past dates
+        //                        // alert('Tidak bisa mengajukan konsultasi pada tanggal ini');
+        //                        // }
+        //
+        //                    },
+        //
+        //                    viewRender: function (view) {
+        //                        var calendarDate = $this.fullCalendar('getDate');
+        //                        var calendarMonth = calendarDate.month();
+        //
+        //                        //Set data attribute for header. This is used to switch header images using css
+        //                        // $this.find('.fc-toolbar').attr('data-calendar-month', calendarMonth);
+        //
+        //                        //Set title in page header
+        //                        $('#fullcalendar-title').text(view.title);
+        //                    },
+        //
+        //                    // Edit calendar event action
+        //
+        //                    eventClick: function (event, element) {
+        //                        $('#edit-event input[value=' + event.tag + ']').prop('checked', true);
+        //                        $('#edit-event').modal('show');
+        //                        $('.edit-event--id').val(event.id);
+        //                        $('.edit-event--title').val(event.title);
+        //                        $('.edit-event--masalah').val(event.masalah);
+        //                        $('.edit-event--solusi').val(event.solusi);
+        //                    }
+        //                };
+        //
+        //                // Initalize the calendar plugin
+        //                $this.fullCalendar(options);
+        //
+        //
+        //                //
+        //                // Calendar actions
+        //                //
+        //
+        //
+        //                //Add new Event
+        //
+        //                $('body').on('click', '.new-event--add', function () {
+        //                    let eventDate = $('#tanggal-seminar').val();
+        //                    let eventStart = $('#waktu-mulai').val();
+        //                    let eventEnd = $('#waktu-selesai').val();
+        //                    let eventId = $('#id_dosen_bimbingan_mhs').val();
+        //                    let eventRuangan = $('#id_ruangan').val();
+        //                    let eventPenguji1 = $('#id_p1').val();
+        //                    let eventPenguji2 = $('#id_p2').val();
+        //                    let mahasiswa = $('#select-mahasiswa').val();
+        //
+        //                    // Generate ID
+        //                    let GenRandom = {
+        //                        Stored: [],
+        //                        /**
+        //                         * @return {string}
+        //                         */
+        //                        Job: function () {
+        //                            let newId = Date.now().toString().substr(6); // or use any method that you want to achieve this string
+        //
+        //                            if (!this.Check(newId)) {
+        //                                this.Stored.push(newId);
+        //                                return newId;
+        //                            }
+        //                            return this.Job();
+        //                        },
+        //                        /**
+        //                         * @return {boolean}
+        //                         */
+        //                        Check: function (id) {
+        //                            for (let i = 0; i < this.Stored.length; i++) {
+        //                                if (this.Stored[i] === id) return true;
+        //                            }
+        //                            return false;
+        //                        }
+        //                    };
+        //
+        //                    if (eventDate !== '' && eventEnd !== '' && eventStart !== '') {
+        //                        let createdEvent = {
+        //                            id: GenRandom.Job(),
+        //                            id_dosen_bimbingan_mhs: eventId,
+        //                            id_seminar_ruangan: eventRuangan,
+        //							mulai:eventDate+"T"+eventStart,
+        //							berakhir:eventDate+"T"+eventEnd,
+        //							id_penguji: [eventPenguji1,eventPenguji2]
+        //                        };
+        //                        //render event to calendar
+        //                        $this.fullCalendar('renderEvent', createdEvent, true);
+        //                        //push to database
+        //                        $.ajax({
+        //                            url: "<?php echo site_url('seminar?m=jadwal&q=i')?>",
+        //                            method: "POST",
+        //                            data: createdEvent,
+        //                            success: function () {
+        //                                swal({
+        //                                    title: 'Success',
+        //                                    text: 'Jadwal '+mahasiswa+' berhasil dibuat',
+        //                                    type: 'success',
+        //                                    buttonsStyling: false,
+        //                                    confirmButtonClass: 'btn btn-primary btn-sm'
+        //                                });
+        //                            },
+        //                            error: function () {
+        //                                swal({
+        //                                    title: 'Error',
+        //                                    text: 'Jadwal '+mahasiswa+' gagal dibuat',
+        //                                    type: 'error',
+        //                                    buttonsStyling: false,
+        //                                    confirmButtonClass: 'btn btn-primary btn-sm'
+        //                                });
+        //                            }
+        //                        });
+        //                        $('.new-event--form')[0].reset();
+        //                        $('.new-event--title').closest('.form-group').removeClass('has-danger');
+        //                        $('#new-event').modal('hide');
+        //                    } else if (eventTitle !== '' && eventProblem === '') {
+        //                        $('#add-masalah').closest('.form-group').addClass('has-danger').focus();
+        //                    } else {
+        //                        $('.new-event--title').closest('.form-group').addClass('has-danger').focus();
+        //                    }
+        //                });
+        //
+        //
+        //                //Update/Delete an Event
+        //                $('body').on('click', '[data-calendar]', function () {
+        //                    let calendarAction = $(this).data('calendar');
+        //                    let currentId = $('.edit-event--id').val();
+        //                    let currentTitle = $('.edit-event--title').val();
+        //                    let currentMasalah = $('.edit-event--masalah').val();
+        //                    let currentSolusi = $('.edit-event--solusi').val();
+        //                    let currentClass = $('#edit-event .event-tag input:checked').val();
+        //                    let currentEvent = $this.fullCalendar('clientEvents', currentId);
+        //                    //Update
+        //                    if (calendarAction === 'update') {
+        //                        if (currentTitle !== '') {
+        //                            // let data = {"title":currentTitle,"masalah":currentMasalah,"solusi":currentSolusi,"tag":[currentClass]};
+        //                            // currentEvent.push(data);
+        //                            currentEvent[0].title = currentTitle;
+        //                            currentEvent[0].masalah = currentMasalah;
+        //                            currentEvent[0].solusi = currentSolusi;
+        //                            currentEvent[0].className = [currentClass];
+        //                            //update rendered item
+        //                            $this.fullCalendar('updateEvent', currentEvent[0]);
+        //                            //push to database
+        //                            $.ajax({
+        //                                url: "<?php echo site_url('bimbingan?m=konsultasi&q=u')?>",
+        //                                method: "POST",
+        //                                data: {
+        //                                    id: currentId,
+        //                                    title: currentTitle,
+        //                                    id_dosen_bimbingan: $('[name="id_dosen_bimbingan"]').val(),
+        //                                    masalah: currentMasalah,
+        //                                    solusi: currentSolusi,
+        //                                    allDay: true,
+        //                                    tag: currentClass,
+        //                                },
+        //                                success: function (res) {
+        //                                    console.log(res);
+        //                                    swal({
+        //                                        title: 'Success',
+        //                                        text: 'Konsultasi berhasil diubah',
+        //                                        type: 'success',
+        //                                        buttonsStyling: false,
+        //                                        confirmButtonClass: 'btn btn-primary btn-sm'
+        //                                    });
+        //                                },
+        //                                error: function (err) {
+        //                                    console.log(err);
+        //                                    swal({
+        //                                        title: 'Gagal',
+        //                                        text: 'Konsultasi gagal diubah',
+        //                                        type: 'error',
+        //                                        buttonsStyling: false,
+        //                                        confirmButtonClass: 'btn btn-danger btn-sm'
+        //                                    });
+        //                                }
+        //                            });
+        //                            $('#edit-event').modal('hide');
+        //                        } else {
+        //                            $('.edit-event--title').closest('.form-group').addClass('has-error').focus();
+        //                        }
+        //                    }
+        //
+        //                    //Delete
+        //                    if (calendarAction === 'delete') {
+        //                        $('#edit-event').modal('hide');
+        //
+        //                        // Show confirm dialog
+        //                        setTimeout(function () {
+        //                            swal({
+        //                                title: 'Apakah anda yakin menghapus ini?',
+        //                                text: "Konsultasi yang sudah hapus tidak bisa dikembalikan lagi",
+        //                                type: 'warning',
+        //                                showCancelButton: true,
+        //                                buttonsStyling: false,
+        //                                confirmButtonClass: 'btn btn-danger btn-sm',
+        //                                confirmButtonText: 'Yes, hapus!',
+        //                                cancelButtonClass: 'btn btn-secondary btn-sm'
+        //                            }).then((result) => {
+        //                                if (result.value) {
+        //                                    // Delete event
+        //                                    $this.fullCalendar('removeEvents', currentId);
+        //                                    console.log(currentId);
+        //
+        //                                    // Delete from database
+        //                                    $.ajax({
+        //                                        url: "<?php echo site_url('bimbingan?m=konsultasi&q=d')?>",
+        //                                        method: "POST",
+        //                                        data: {id: currentId},
+        //                                        success: function (res) {
+        //                                            console.log(res);
+        //                                            swal({
+        //                                                title: 'Success',
+        //                                                text: 'Konsultasi berhasil dihapus',
+        //                                                type: 'success',
+        //                                                buttonsStyling: false,
+        //                                                confirmButtonClass: 'btn btn-primary btn-sm'
+        //                                            });
+        //                                        },
+        //                                        error: function () {
+        //                                            swal({
+        //                                                title: 'Error',
+        //                                                text: 'Konsultasi Gagal dihapus',
+        //                                                type: 'error',
+        //                                                buttonsStyling: false,
+        //                                                confirmButtonClass: 'btn btn-primary btn-sm'
+        //                                            });
+        //                                        }
+        //                                    })
+        //                                }
+        //                            })
+        //                        }, 200);
+        //                    }
+        //                });
+        //
+        //
+        //                //Calendar views switch
+        //                $('body').on('click', '[data-calendar-view]', function (e) {
+        //                    e.preventDefault();
+        //
+        //                    $('[data-calendar-view]').removeClass('active');
+        //                    $(this).addClass('active');
+        //
+        //                    var calendarView = $(this).attr('data-calendar-view');
+        //                    $this.fullCalendar('changeView', calendarView);
+        //                });
+        //
+        //
+        //                //Calendar Next
+        //                $('body').on('click', '.fullcalendar-btn-next', function (e) {
+        //                    e.preventDefault();
+        //                    $this.fullCalendar('next');
+        //                });
+        //
+        //
+        //                //Calendar Prev
+        //                $('body').on('click', '.fullcalendar-btn-prev', function (e) {
+        //                    e.preventDefault();
+        //                    $this.fullCalendar('prev');
+        //                });
+        //            }
+        //
+        //
+        //            //
+        //            // Events
+        //            //
+        //
+        //            // Init
+        //            if ($calendar.length) {
+        //                init($calendar);
+        //            }
+        //
+        //        })();
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['timeGrid', 'dayGrid','interaction'],
+                defaultView: 'dayGridMonth',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay'
+                },
+                selectable: true,
+                selectHelper: true,
+                editable: true,
+                events: {
+                    url: "<?php echo site_url('seminar?m=jadwal') ?>",
+                    cache: true,
+                    type: "POST",
+                    data: {events: true},
+                    error: function () {
+                        alert('Gagal akses jadwal seminar');
+                    }
+                },
+                select: function (info) {
+                    console.log(info);
+                },
+                dateClick: function (info, jsEvent, view) {
+                    // if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+                    // This allows today and future date
+                    let isoDate = info.date.toISOString();
+                    $('#tanggal-seminar').val(isoDate);
+                    $('#new-event').modal('show');
+                    //ajax to update current data
+                    //$.ajax({
+                    //    url: "<?php echo site_url('bimbingan?m=konsultasi&q=is_exist') ?>",
+                    //    method: "POST",
+                    //    success: function (data) {
+                    //        let parsedData = JSON.parse(data);
+                    //        if (parsedData.length !== 0) {
+                    //            $('#new-event').modal('show');
+                    //        } else {
+                    //            alert('Anda belum mendapatkan pembimbing')
+                    //        }
+                    //    },
+                    //    error: function () {
+                    //
+                    //    }
+                    //});
+                    // } else {
+                    //     Else part is for past dates
+                    // alert('Tidak bisa mengajukan konsultasi pada tanggal ini');
+                    // }
 
-</script>
-<!-- Demo JS - remove this in your project -->
-<!-- <script src="../aset/js/demo.min.js"></script> -->
+                },
+            });
+            calendar.render();
+        })
+	</script>
 </body>
-
+z
 </html>

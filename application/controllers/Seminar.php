@@ -121,6 +121,21 @@ class Seminar extends MY_Controller
 					}
 					return $this->get_penguji();
 					break;
+				case 'mahasiswa':
+					return $this->get_all_mhs_seminar();
+					break;
+				case 'jadwal':
+					if (isset($get['q']) && $get['q'] == 'i') {
+						return $this->add_jadwal();
+					}
+					if (isset($get['q']) && $get['q'] == 'd') {
+						return $this->delete_jadwal();
+					}
+					if (isset($get['q']) && $get['q'] == 'u') {
+						return $this->update_jadwal();
+					}
+					return $this->get_jadwal();
+					break;
 				default:
 					redirect(site_url('seminar'));
 			}
@@ -129,9 +144,34 @@ class Seminar extends MY_Controller
 		$this->load->view('admin/seminar', $data);
 	}
 
+	public function get_jadwal(){
+		$seminar = $this->seminar_model;
+		echo json_encode($seminar->get_jadwal());
+	}
+	public function add_jadwal(){
+		$seminar = $this->seminar_model;
+		if($seminar->add_jadwal()){
+			echo json_encode(array('status'=>'success'));
+			return;
+
+		}
+		echo json_encode(array('status'=>'error'));
+	}
+	public function update_jadwal(){
+
+	}
+	public function delete_jadwal(){
+
+	}
+	public function get_all_mhs_seminar(){
+		$seminar = $this->seminar_model;
+		echo json_encode(array('data'=>$seminar->get_all_mhs_seminar()));
+	}
 	public function get_penguji()
 	{
-		return null;
+		$status = isset($_GET['status'])?$_GET['status']:null;
+		$seminar = $this->seminar_model;
+		echo json_encode(array('data' => $seminar->get_all_penguji($status)));
 	}
 
 	public function add_penguji()

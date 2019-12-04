@@ -17,6 +17,13 @@
 	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/introjs/introjs.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/dropzone/dist/min/dropzone.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/fullcalendar/fullcalendar.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/sweetalert/sweetalert2.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/clockpicker/bootstrap-clockpicker.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/select2/select2.min.css') ?>">
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/@fullcalendar/core@4.3.1/main.min.css">
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/@fullcalendar/daygrid@4.3.0/main.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/@fullcalendar/timegrid@4.3.0/main.min.css" />
     <!-- Argon CSS -->
     <link type="text/css" href="<?php echo base_url('aset/css/argonpro.css') ?>" rel="stylesheet">
 	<style>
