@@ -51,7 +51,7 @@
 												data-calendar-view="month" id="btn-bulan">Bulan
 										</button>
 										<button type="button" class="btn btn-sm btn-primary"
-												data-calendar-view="agendaDay" id="btn-ruangan">Ruangan
+												data-calendar-view="timelineDay" id="btn-ruangan">Ruangan
 										</button>
 									</div>
 								</div>
@@ -131,6 +131,12 @@
 				selectable: true,
 				selectHelper: true,
 				editable: false,
+				resourceColumns: [
+					{
+						labelText: 'Ruangan',
+						field: 'title'
+					}
+				],
 				resources: <?php echo json_encode($tempat) ?>,
 				events: {
 					url: "<?php echo site_url('seminar?m=jadwal')?>",
