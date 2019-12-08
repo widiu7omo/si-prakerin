@@ -135,7 +135,11 @@ class Seminar_model extends CI_Model
 
 	public function get_all_mhs_seminar()
 	{
-		return $this->db->query("select tm.nama_mahasiswa,tdbm.id_dosen_bimbingan_mhs,tdbm.judul_laporan_mhs from tb_dosen_bimbingan_mhs tdbm INNER JOIN tb_mahasiswa tm on tm.nim = tdbm.nim where tdbm.status_seminar = 'setuju' and tdbm.id_dosen_bimbingan_mhs NOT IN (select id_dosen_bimbingan_mhs from tb_seminar_jadwal)")->result();
+		return $this->db->query("
+			select tm.nama_mahasiswa,tp.nama_pegawai nama_pembimbing, tdbm.id_dosen_bimbingan_mhs,tdbm.judul_laporan_mhs from tb_dosen_bimbingan_mhs tdbm 
+			INNER JOIN tb_mahasiswa tm on tm.nim = tdbm.nim 
+			INNER JOIN tb_pegawai tp ON tdbm.nip_nik = tp.nip_nik
+			where tdbm.status_seminar = 'setuju' and tdbm.id_dosen_bimbingan_mhs NOT IN (select id_dosen_bimbingan_mhs from tb_seminar_jadwal)")->result();
 	}
 
 	public function get_all_penguji($status)
@@ -206,17 +210,22 @@ class Seminar_model extends CI_Model
 	public function get_jadwal($where = null)
 	{
 		$post = $this->input->post();
-		$select = "tsj.id, tst.id id_tempat, tst.nama nama_tempat, tm.nama_mahasiswa title, tdbm.judul_laporan_mhs laporan, 
+		$select = "tsj.id, tst.id id_tempat, tp3.nama_pegawai nama_pembimbing, tst.nama nama_tempat, tm.nama_mahasiswa title, tdbm.judul_laporan_mhs laporan, 
 		tsj.id_dosen_bimbingan_mhs, tsj.mulai start, tsj.berakhir end, tsj.id_penguji_1, tsj.id_penguji_2, 'bg-info' as className, 
 		tp1.nama_pegawai p1, tp2.nama_pegawai p2";
-		if(isset($post['view'])){
-			$select = "tsj.id, tst.id resourceId, tst.nama nama_tempat, tm.nama_mahasiswa title, tdbm.judul_laporan_mhs laporan, 
+		if (isset($post['view'])) {
+			$select = "tsj.id, tst.id resourceId, tp3.nama_pegawai nama_pembimbing, tst.nama nama_tempat, tm.nama_mahasiswa title, tdbm.judul_laporan_mhs laporan, 
 		tsj.id_dosen_bimbingan_mhs, tsj.mulai start, tsj.berakhir end, tsj.id_penguji_1, tsj.id_penguji_2, 'bg-info' as className, 
 		tp1.nama_pegawai p1, tp2.nama_pegawai p2";
+		}
+		if ((isset($post['filter']) and $post['filter'] == 'penguji')) {
+			$nip = $this->session->userdata('nip_nik');
+			$where = "WHERE td1.nip_nik = '$nip' OR td2.nip_nik = '$nip'";
 		}
 		return $this->db->query("SELECT $select FROM tb_seminar_jadwal tsj
 			INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
 			INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+    		INNER JOIN tb_pegawai tp3 ON tp3.nip_nik = tdbm.nip_nik
 			INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
 			INNER JOIN tb_seminar_penguji penguji_1 ON penguji_1.id = tsj.id_penguji_1
 			INNER JOIN tb_seminar_penguji penguji_2 ON penguji_2.id = tsj.id_penguji_2

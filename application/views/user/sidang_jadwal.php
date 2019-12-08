@@ -64,16 +64,13 @@
 								<?php endif; ?>
 								<?php if ($this->session->userdata('level') == "dosen"): ?>
 									<div class="col-xm-12 col-sm-6 col-md-6 text-right">
-										<div class="h5 mt-2">Lihat jadwal uji sendiri</div>
+										<div class="h5 mt-2">Lihat jadwal berdasarkan :</div>
 										<div class="btn-group" role="group" aria-label="Basic example">
-											<button type="button" class="btn btn-sm btn-primary" id="btn-hari">Hari
-											</button>
-											<button type="button" class="btn btn-sm btn-primary active" id="btn-bulan">
-												Bulan
-											</button>
-											<button type="button" class="btn btn-sm btn-primary" id="btn-ruangan">
-												Ruangan
-											</button>
+											<a href="<?php echo site_url('sidang?m=jadwal&filter=semua') ?>" class="btn btn-sm btn-info <?php echo (isset($_GET['filter']) and $_GET['filter']=='semua')?'active':null?> <?php echo !isset($_GET['filter'])?'active':null ?>" id="btn-semua">Semua
+											</a>
+											<a href="<?php echo site_url('sidang?m=jadwal&filter=penguji') ?>" class="btn btn-sm btn-info <?php echo (isset($_GET['filter']) and $_GET['filter']=='penguji')?'active':null?>" id="btn-penguji">
+												Sebagai Penguji
+											</a>
 										</div>
 									</div>
 								<?php endif; ?>
@@ -112,7 +109,7 @@
 	var Fullcalendar = (function () {
 
 		let $calendar = $('[data-toggle="calendar-seminar"]');
-
+		let filter = '<?php echo isset($_GET['filter'])?$_GET['filter']:'semua' ?>';
 		function init($this) {
 
 			options = {
@@ -142,7 +139,7 @@
 					url: "<?php echo site_url('seminar?m=jadwal')?>",
 					cache: true,
 					type: "POST",
-					data: {id: "<?php echo $this->session->userdata('id') ?>",view:"list"},
+					data: {id: "<?php echo $this->session->userdata('id') ?>",view:"list",filter:filter},
 					error: function () {
 						alert('Gagal akses data jadwal');
 					}
@@ -201,7 +198,7 @@
 			});
 			$('body').on('click','#btn-hari',function(e){
 				e.preventDefault();
-				let eventId = "<?php echo (isset($jadwalku) and count($jadwalku) != 0)?$jadwalku[0]->id:(object)array(); ?>";
+				let eventId = "<?php echo (isset($jadwalku) and count($jadwalku) != 0)?$jadwalku[0]->id:null; ?>";
 				let events = $this.fullCalendar('clientEvents',parseInt(eventId));
 				console.log(events);
 				if(events.length !== 0){

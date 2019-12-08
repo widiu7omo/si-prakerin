@@ -50,6 +50,11 @@
 						</div>
 						<div class="col-12">
 							<div class="form-group">
+								<input type="text" class="form-control" id="input-pembimbing-edit" placeholder="Pembimbing" readonly/>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
 								<select id="select-ruangan-edit" class="form-control"></select>
 							</div>
 						</div>

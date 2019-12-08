@@ -489,7 +489,8 @@
 								return {
 									text: item.nama_mahasiswa,
 									id: item.id_dosen_bimbingan_mhs,
-									laporan: item.judul_laporan_mhs
+									laporan: item.judul_laporan_mhs,
+									pembimbing: item.nama_pembimbing
 								}
 							})
 						};
@@ -498,7 +499,8 @@
 				}
 			}).on('select2:select', function ({params}) {
 				$('#id_dosen_bimbingan_mhs,#id_dosen_bimbingan_mhs_edit').val(params.data.id)
-				$('#input-judul').val(params.data.laporan)
+				$('#input-laporan').val(params.data.laporan?params.data.laporan:"Belum ada judul");
+				$('#input-pembimbing').val(params.data.pembimbing)
 			});
 			$('#select-ruangan, #select-ruangan-edit').empty().select2({
 				placeholder: 'Ruang seminar',
@@ -606,11 +608,11 @@
 						$('#id_p1_edit').val(event.extendedProps.id_penguji_1);
 						$('#id_p2_edit').val(event.extendedProps.id_penguji_2);
 						$('#tanggal-seminar-edit').val(tanggal);
+						$('#input-pembimbing-edit').val(event.extendedProps.nama_pembimbing);
 						$('#waktu-mulai-edit').val(mulai);
 						$('#waktu-selesai-edit').val(selesai);
 					},
 					eventDrop: function (info) {
-						console.log(info);
 						swal({
 							title: 'Apakah anda yakin memindah ' + info.event.title + ' ?',
 							text: "Pemindahan jadwal bisa di batalkan",
@@ -662,6 +664,59 @@
 							}
 
 						})
+					},
+					eventResize:function(info){
+						swal({
+							title: 'Apakah anda yakin mengubah waktu ' + info.event.title + ' ?',
+							text: "Pemindahan waktu bisa di batalkan",
+							type: 'warning',
+							showCancelButton: true,
+							buttonsStyling: false,
+							confirmButtonClass: 'btn btn-warning btn-sm',
+							confirmButtonText: 'Ya, ubah!',
+							cancelButtonClass: 'btn btn-secondary btn-sm'
+						}).then((result) => {
+							if (result.value) {
+								let {event} = info;
+								let eventDate = moment(event.start).format('YYYY-MM-DD');
+								let eventStart = moment(event.start).format('HH:mm:ss');
+								let eventEnd = moment(event.end).format('HH:mm:ss');
+								let updateEvent = {
+									id: event.id,
+									id_dosen_bimbingan_mhs: event.extendedProps.id_dosen_bimbingan_mhs,
+									id_seminar_ruangan: event.extendedProps.id_tempat,
+									mulai: eventDate + "T" + eventStart,
+									berakhir: eventDate + "T" + eventEnd,
+									id_penguji: [event.extendedProps.id_penguji_1, event.extendedProps.id_penguji_2]
+								};
+								$.ajax({
+									url: "<?php echo site_url('seminar?m=jadwal&q=u')?>",
+									method: "POST",
+									data: updateEvent,
+									success: function () {
+										swal({
+											title: 'Success',
+											text: 'Jadwal ' + event.title + ' berhasil diubah',
+											type: 'success',
+											buttonsStyling: false,
+											confirmButtonClass: 'btn btn-primary btn-sm'
+										});
+									},
+									error: function () {
+										swal({
+											title: 'Error',
+											text: 'Jadwal ' + event.title + ' gagal diubah',
+											type: 'error',
+											buttonsStyling: false,
+											confirmButtonClass: 'btn btn-primary btn-sm'
+										});
+									}
+								});
+							} else {
+								info.revert();
+							}
+
+						})
 					}
 				});
 				calendar.render();
@@ -672,6 +727,7 @@
 					let eventEnd = $('#waktu-selesai').val();
 					let eventId = $('#id_dosen_bimbingan_mhs').val();
 					let eventRuangan = $('#id_ruangan').val();
+					let eventPembimbing = $('#input-pembimbing').val();
 					let eventPenguji1 = $('#id_p1').val();
 					let eventPenguji2 = $('#id_p2').val();
 					let mahasiswa = $('#select-mahasiswa').text();
@@ -724,8 +780,9 @@
 								id_penguji_1: eventPenguji1,
 								id_penguji_2: eventPenguji2,
 								nama_tempat: ruangan,
+								nama_pembimbing:eventPembimbing,
 								p1: p1,
-								p2: p2
+								p2: p2,
 							}
 						});
 						//push to database
@@ -779,6 +836,7 @@
 					let eventEnd = $('#waktu-selesai-edit').val();
 					let eventBimbingan = $('#id_dosen_bimbingan_mhs_edit').val();
 					let eventRuangan = $('#id_ruangan_edit').val();
+					let eventPembimbing = $('#input-pembimbing-edit').val();
 					let eventRuanganName = $('#select-ruangan-edit option:selected').text();
 					let eventPenguji1 = $('#id_p1_edit').val();
 					let eventPenguji2 = $('#id_p2_edit').val();
@@ -805,6 +863,7 @@
 							currentEvent.setEnd(updateEvent.berakhir);
 							currentEvent.setExtendedProp('id_tempat', updateEvent.id_seminar_ruangan);
 							currentEvent.setExtendedProp('nama_tempat', eventRuanganName);
+							currentEvent.setExtendedProp('nama_pembimbing', eventPembimbing);
 							currentEvent.setExtendedProp('id_penguji_1', updateEvent.id_penguji[0]);
 							currentEvent.setExtendedProp('id_penguji_2', updateEvent.id_penguji[1]);
 							currentEvent.setExtendedProp('p1', eventPenguji1Name);

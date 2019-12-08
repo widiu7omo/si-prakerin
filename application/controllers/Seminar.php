@@ -58,6 +58,13 @@ class Seminar extends MY_Controller
             Server", 403, "Forbidden, you don't have pemission");
 				}
 				break;
+			case 'dosen':
+				$post = $this->input->post();
+				if(!isset($post['id'])){
+					show_error("Access Denied. You Do Not Have The Permission To Access This Page On This
+            Server", 403, "Forbidden, you don't have pemission");
+				}
+				break;
 			//if there are not level except in case, it will throw to error with code 403
 			default:
 				show_error("Access Denied. You Do Not Have The Permission To Access This Page On This

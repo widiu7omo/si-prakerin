@@ -25,7 +25,8 @@
 								<label class="form-control-label">Mulai Seminar</label>
 								<div class="input-group clockpicker input-group-merge" data-placement="left"
 									 data-align="top" data-autoclose="true">
-									<input required id="waktu-mulai" class="form-control" placeholder="Waktu Seminar" type="time">
+									<input required id="waktu-mulai" class="form-control" placeholder="Waktu Seminar"
+										   type="time">
 									<div class="input-group-append">
 										<span class="input-group-text"><i class="fas fa-clock"></i></span>
 									</div>
@@ -37,7 +38,8 @@
 								<label class="form-control-label">Selesai Seminar</label>
 								<div class="input-group clockpicker input-group-merge" data-placement="left"
 									 data-align="top" data-autoclose="true">
-									<input required id="waktu-selesai" class="form-control" placeholder="Waktu Seminar" type="time">
+									<input required id="waktu-selesai" class="form-control" placeholder="Waktu Seminar"
+										   type="time">
 									<div class="input-group-append">
 										<span class="input-group-text"><i class="fas fa-clock"></i></span>
 									</div>
@@ -47,6 +49,16 @@
 						<div class="col-12">
 							<div class="form-group">
 								<select required id="select-mahasiswa" class="form-control"></select>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<input type="text" class="form-control" id="input-laporan" placeholder="Judul Laporan" readonly/>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<input type="text" class="form-control" id="input-pembimbing" placeholder="Pembimbing" readonly/>
 							</div>
 						</div>
 						<div class="col-12">
