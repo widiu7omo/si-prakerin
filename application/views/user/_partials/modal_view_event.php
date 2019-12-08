@@ -19,6 +19,10 @@
 							<p class="h3"><i class="fas fa-location-arrow" aria-hidden="true"></i> &nbsp;<b id="detail-ruangan">Bootstrap</b></p>
 						</li>
 						<li class="list-group-item p-1 pl-3">
+							<p class="h4">Pembimbing : <b></b></p>
+							<p class="h3"><i class="fas fa-user-secret" aria-hidden="true"></i> &nbsp;<b id="detail-pembimbing">Dr. Dosen</b></p>
+						</li>
+						<li class="list-group-item p-1 pl-3">
 							<p class="h4">Penguji 1 : <b></b></p>
 							<p class="h3"><i class="fas fa-user" aria-hidden="true"></i> &nbsp;<b id="detail-p2">Dr. Dosen</b></p>
 						</li>

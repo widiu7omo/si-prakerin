@@ -164,6 +164,7 @@
 					$('#detail-jadwal').text('Detail jadwal '+event.title);
 					$('#detail-tanggal').text(date);
 					$('#detail-waktu').text(timeRange);
+					$('#detail-pembimbing').text(event.nama_pembimbing);
 					$('#detail-p1').text(event.p1?event.p1:'-');
 					$('#detail-p2').text(event.p2?event.p2:'-');
 				}
@@ -208,6 +209,7 @@
 					$('#detail-jadwal').text('Detail jadwal '+event.title);
 					$('#detail-tanggal').text(date);
 					$('#detail-waktu').text(timeRange);
+					$('#detail-pembimbing').text(event.nama_pembimbing);
 					$('#detail-p1').text(event.p1?event.p1:'-');
 					$('#detail-p2').text(event.p2?event.p2:'-');
 					$('#view-event').modal('show');
