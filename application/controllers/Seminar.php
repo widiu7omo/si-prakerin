@@ -153,15 +153,24 @@ class Seminar extends MY_Controller
 		if($seminar->add_jadwal()){
 			echo json_encode(array('status'=>'success'));
 			return;
-
 		}
 		echo json_encode(array('status'=>'error'));
 	}
 	public function update_jadwal(){
-
+		$seminar = $this->seminar_model;
+		if($seminar->update_jadwal()){
+			echo json_encode(array('status'=>'success'));
+			return;
+		}
+		echo json_encode(array('status'=>'error'));
 	}
 	public function delete_jadwal(){
-
+		$seminar = $this->seminar_model;
+		if($seminar->delete_jadwal()){
+			echo json_encode(array('status'=>'success'));
+			return;
+		}
+		echo json_encode(array('status'=>'error'));
 	}
 	public function get_all_mhs_seminar(){
 		$seminar = $this->seminar_model;

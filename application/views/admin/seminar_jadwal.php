@@ -89,7 +89,7 @@
             startDate: "-60y",
             format: "yyyy-mm-dd"
         });
-        $('#select-penguji1').select2({
+        $('#select-penguji1,#select-penguji1-edit').empty().select2({
             placeholder: "Penguji 1",
             ajax: {
                 url: '<?php echo site_url("seminar?m=penguji") ?>',
@@ -109,9 +109,9 @@
                 // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
         }).on('select2:select', function ({params}) {
-            $('#id_p1').val(params.data.id)
+            $('#id_p1,#id_p1_edit').val(params.data.id)
         });
-        $('#select-penguji2').select2({
+        $('#select-penguji2,#select-penguji2-edit').empty().select2({
             placeholder: "Penguji 2",
             ajax: {
                 url: '<?php echo site_url("seminar?m=penguji") ?>',
@@ -131,9 +131,9 @@
                 // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
         }).on('select2:select', function ({params}) {
-            $('#id_p2').val(params.data.id)
+            $('#id_p2,#id_p2_edit').val(params.data.id)
         })
-        $('#select-mahasiswa').select2({
+        $('#select-mahasiswa,#select-mahasiswa-edit').empty().select2({
             placeholder: 'Mahasiswa seminar',
             ajax: {
                 url: '<?php echo site_url("seminar?m=mahasiswa") ?>',
@@ -153,10 +153,10 @@
                 // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
         }).on('select2:select', function ({params}) {
-            $('#id_dosen_bimbingan_mhs').val(params.data.id)
+            $('#id_dosen_bimbingan_mhs,#id_dosen_bimbingan_mhs_edit').val(params.data.id)
             $('#input-judul').val(params.data.laporan)
         });
-        $('#select-ruangan').select2({
+        $('#select-ruangan, #select-ruangan-edit').empty().select2({
             placeholder: 'Ruang seminar',
             ajax: {
                 url: '<?php echo site_url("seminar?m=tempat") ?>',
@@ -175,347 +175,9 @@
                 // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
         }).on('select2:select', function ({params}) {
-            $('#id_ruangan').val(params.data.id)
-        })
-        //var Fullcalendar = (function () {
-        //
-        //            // Variables
-        //
-        //            let $calendar = $('[data-toggle="calendar-konsultasi"]');
-        //
-        //            //
-        //            // Methods
-        //            //
-        //
-        //            // Init
-        //            function init($this) {
-        //
-        //                // Calendar events
-        //
-        //                // Full calendar options
-        //                // For more options read the official docs: https://fullcalendar.io/docs
-        //
-        //                options = {
-        //                    plugins: [ 'timeGrid' ],
-        //                    locale: 'id',
-        //                    defaultView: 'timeGridWeek',
-        //                    header: {
-        //                        left: 'prev,next today',
-        //                        center: 'title',
-        //                        right: 'timeGridWeek,timeGridDay'
-        //                    },
-        //                    buttonIcons: {
-        //                        prev: 'calendar--prev',
-        //                        next: 'calendar--next'
-        //                    },
-        //                    theme: false,
-        //                    selectable: true,
-        //                    selectHelper: true,
-        //                    editable: true,
-        //                    events: {
-        //                        url: "<?php echo site_url('seminar?m=jadwal') ?>",
-        //                        cache: true,
-        //                        type: "POST",
-        //                        data: {events: true},
-        //                        error: function () {
-        //                            alert('Gagal akses jadwal seminar');
-        //                        }
-        //                    },
-        //                    dayClick: function (date, jsEvent, view) {
-        //                        // if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
-        //                        // This allows today and future date
-        //                        let isoDate = moment(date).toISOString();
-        //                        $('#tanggal-seminar').val(isoDate);
-        //                        $('#new-event').modal('show');
-        //                        //ajax to update current data
-        //                        //$.ajax({
-        //                        //    url: "<?php //echo site_url('bimbingan?m=konsultasi&q=is_exist') ?>//",
-        //                        //    method: "POST",
-        //                        //    success: function (data) {
-        //                        //        let parsedData = JSON.parse(data);
-        //                        //        if (parsedData.length !== 0) {
-        //                        //            $('#new-event').modal('show');
-        //                        //        } else {
-        //                        //            alert('Anda belum mendapatkan pembimbing')
-        //                        //        }
-        //                        //    },
-        //                        //    error: function () {
-        //						//
-        //                        //    }
-        //                        //});
-        //                        // } else {
-        //                        //     Else part is for past dates
-        //                        // alert('Tidak bisa mengajukan konsultasi pada tanggal ini');
-        //                        // }
-        //
-        //                    },
-        //
-        //                    viewRender: function (view) {
-        //                        var calendarDate = $this.fullCalendar('getDate');
-        //                        var calendarMonth = calendarDate.month();
-        //
-        //                        //Set data attribute for header. This is used to switch header images using css
-        //                        // $this.find('.fc-toolbar').attr('data-calendar-month', calendarMonth);
-        //
-        //                        //Set title in page header
-        //                        $('#fullcalendar-title').text(view.title);
-        //                    },
-        //
-        //                    // Edit calendar event action
-        //
-        //                    eventClick: function (event, element) {
-        //                        $('#edit-event input[value=' + event.tag + ']').prop('checked', true);
-        //                        $('#edit-event').modal('show');
-        //                        $('.edit-event--id').val(event.id);
-        //                        $('.edit-event--title').val(event.title);
-        //                        $('.edit-event--masalah').val(event.masalah);
-        //                        $('.edit-event--solusi').val(event.solusi);
-        //                    }
-        //                };
-        //
-        //                // Initalize the calendar plugin
-        //                $this.fullCalendar(options);
-        //
-        //
-        //                //
-        //                // Calendar actions
-        //                //
-        //
-        //
-        //                //Add new Event
-        //
-        //                $('body').on('click', '.new-event--add', function () {
-        //                    let eventDate = $('#tanggal-seminar').val();
-        //                    let eventStart = $('#waktu-mulai').val();
-        //                    let eventEnd = $('#waktu-selesai').val();
-        //                    let eventId = $('#id_dosen_bimbingan_mhs').val();
-        //                    let eventRuangan = $('#id_ruangan').val();
-        //                    let eventPenguji1 = $('#id_p1').val();
-        //                    let eventPenguji2 = $('#id_p2').val();
-        //                    let mahasiswa = $('#select-mahasiswa').val();
-        //
-        //                    // Generate ID
-        //                    let GenRandom = {
-        //                        Stored: [],
-        //                        /**
-        //                         * @return {string}
-        //                         */
-        //                        Job: function () {
-        //                            let newId = Date.now().toString().substr(6); // or use any method that you want to achieve this string
-        //
-        //                            if (!this.Check(newId)) {
-        //                                this.Stored.push(newId);
-        //                                return newId;
-        //                            }
-        //                            return this.Job();
-        //                        },
-        //                        /**
-        //                         * @return {boolean}
-        //                         */
-        //                        Check: function (id) {
-        //                            for (let i = 0; i < this.Stored.length; i++) {
-        //                                if (this.Stored[i] === id) return true;
-        //                            }
-        //                            return false;
-        //                        }
-        //                    };
-        //
-        //                    if (eventDate !== '' && eventEnd !== '' && eventStart !== '') {
-        //                        let createdEvent = {
-        //                            id: GenRandom.Job(),
-        //                            id_dosen_bimbingan_mhs: eventId,
-        //                            id_seminar_ruangan: eventRuangan,
-        //							mulai:eventDate+"T"+eventStart,
-        //							berakhir:eventDate+"T"+eventEnd,
-        //							id_penguji: [eventPenguji1,eventPenguji2]
-        //                        };
-        //                        //render event to calendar
-        //                        $this.fullCalendar('renderEvent', createdEvent, true);
-        //                        //push to database
-        //                        $.ajax({
-        //                            url: "<?php echo site_url('seminar?m=jadwal&q=i')?>",
-        //                            method: "POST",
-        //                            data: createdEvent,
-        //                            success: function () {
-        //                                swal({
-        //                                    title: 'Success',
-        //                                    text: 'Jadwal '+mahasiswa+' berhasil dibuat',
-        //                                    type: 'success',
-        //                                    buttonsStyling: false,
-        //                                    confirmButtonClass: 'btn btn-primary btn-sm'
-        //                                });
-        //                            },
-        //                            error: function () {
-        //                                swal({
-        //                                    title: 'Error',
-        //                                    text: 'Jadwal '+mahasiswa+' gagal dibuat',
-        //                                    type: 'error',
-        //                                    buttonsStyling: false,
-        //                                    confirmButtonClass: 'btn btn-primary btn-sm'
-        //                                });
-        //                            }
-        //                        });
-        //                        $('.new-event--form')[0].reset();
-        //                        $('.new-event--title').closest('.form-group').removeClass('has-danger');
-        //                        $('#new-event').modal('hide');
-        //                    } else if (eventTitle !== '' && eventProblem === '') {
-        //                        $('#add-masalah').closest('.form-group').addClass('has-danger').focus();
-        //                    } else {
-        //                        $('.new-event--title').closest('.form-group').addClass('has-danger').focus();
-        //                    }
-        //                });
-        //
-        //
-        //                //Update/Delete an Event
-        //                $('body').on('click', '[data-calendar]', function () {
-        //                    let calendarAction = $(this).data('calendar');
-        //                    let currentId = $('.edit-event--id').val();
-        //                    let currentTitle = $('.edit-event--title').val();
-        //                    let currentMasalah = $('.edit-event--masalah').val();
-        //                    let currentSolusi = $('.edit-event--solusi').val();
-        //                    let currentClass = $('#edit-event .event-tag input:checked').val();
-        //                    let currentEvent = $this.fullCalendar('clientEvents', currentId);
-        //                    //Update
-        //                    if (calendarAction === 'update') {
-        //                        if (currentTitle !== '') {
-        //                            // let data = {"title":currentTitle,"masalah":currentMasalah,"solusi":currentSolusi,"tag":[currentClass]};
-        //                            // currentEvent.push(data);
-        //                            currentEvent[0].title = currentTitle;
-        //                            currentEvent[0].masalah = currentMasalah;
-        //                            currentEvent[0].solusi = currentSolusi;
-        //                            currentEvent[0].className = [currentClass];
-        //                            //update rendered item
-        //                            $this.fullCalendar('updateEvent', currentEvent[0]);
-        //                            //push to database
-        //                            $.ajax({
-        //                                url: "<?php echo site_url('bimbingan?m=konsultasi&q=u')?>",
-        //                                method: "POST",
-        //                                data: {
-        //                                    id: currentId,
-        //                                    title: currentTitle,
-        //                                    id_dosen_bimbingan: $('[name="id_dosen_bimbingan"]').val(),
-        //                                    masalah: currentMasalah,
-        //                                    solusi: currentSolusi,
-        //                                    allDay: true,
-        //                                    tag: currentClass,
-        //                                },
-        //                                success: function (res) {
-        //                                    console.log(res);
-        //                                    swal({
-        //                                        title: 'Success',
-        //                                        text: 'Konsultasi berhasil diubah',
-        //                                        type: 'success',
-        //                                        buttonsStyling: false,
-        //                                        confirmButtonClass: 'btn btn-primary btn-sm'
-        //                                    });
-        //                                },
-        //                                error: function (err) {
-        //                                    console.log(err);
-        //                                    swal({
-        //                                        title: 'Gagal',
-        //                                        text: 'Konsultasi gagal diubah',
-        //                                        type: 'error',
-        //                                        buttonsStyling: false,
-        //                                        confirmButtonClass: 'btn btn-danger btn-sm'
-        //                                    });
-        //                                }
-        //                            });
-        //                            $('#edit-event').modal('hide');
-        //                        } else {
-        //                            $('.edit-event--title').closest('.form-group').addClass('has-error').focus();
-        //                        }
-        //                    }
-        //
-        //                    //Delete
-        //                    if (calendarAction === 'delete') {
-        //                        $('#edit-event').modal('hide');
-        //
-        //                        // Show confirm dialog
-        //                        setTimeout(function () {
-        //                            swal({
-        //                                title: 'Apakah anda yakin menghapus ini?',
-        //                                text: "Konsultasi yang sudah hapus tidak bisa dikembalikan lagi",
-        //                                type: 'warning',
-        //                                showCancelButton: true,
-        //                                buttonsStyling: false,
-        //                                confirmButtonClass: 'btn btn-danger btn-sm',
-        //                                confirmButtonText: 'Yes, hapus!',
-        //                                cancelButtonClass: 'btn btn-secondary btn-sm'
-        //                            }).then((result) => {
-        //                                if (result.value) {
-        //                                    // Delete event
-        //                                    $this.fullCalendar('removeEvents', currentId);
-        //                                    console.log(currentId);
-        //
-        //                                    // Delete from database
-        //                                    $.ajax({
-        //                                        url: "<?php echo site_url('bimbingan?m=konsultasi&q=d')?>",
-        //                                        method: "POST",
-        //                                        data: {id: currentId},
-        //                                        success: function (res) {
-        //                                            console.log(res);
-        //                                            swal({
-        //                                                title: 'Success',
-        //                                                text: 'Konsultasi berhasil dihapus',
-        //                                                type: 'success',
-        //                                                buttonsStyling: false,
-        //                                                confirmButtonClass: 'btn btn-primary btn-sm'
-        //                                            });
-        //                                        },
-        //                                        error: function () {
-        //                                            swal({
-        //                                                title: 'Error',
-        //                                                text: 'Konsultasi Gagal dihapus',
-        //                                                type: 'error',
-        //                                                buttonsStyling: false,
-        //                                                confirmButtonClass: 'btn btn-primary btn-sm'
-        //                                            });
-        //                                        }
-        //                                    })
-        //                                }
-        //                            })
-        //                        }, 200);
-        //                    }
-        //                });
-        //
-        //
-        //                //Calendar views switch
-        //                $('body').on('click', '[data-calendar-view]', function (e) {
-        //                    e.preventDefault();
-        //
-        //                    $('[data-calendar-view]').removeClass('active');
-        //                    $(this).addClass('active');
-        //
-        //                    var calendarView = $(this).attr('data-calendar-view');
-        //                    $this.fullCalendar('changeView', calendarView);
-        //                });
-        //
-        //
-        //                //Calendar Next
-        //                $('body').on('click', '.fullcalendar-btn-next', function (e) {
-        //                    e.preventDefault();
-        //                    $this.fullCalendar('next');
-        //                });
-        //
-        //
-        //                //Calendar Prev
-        //                $('body').on('click', '.fullcalendar-btn-prev', function (e) {
-        //                    e.preventDefault();
-        //                    $this.fullCalendar('prev');
-        //                });
-        //            }
-        //
-        //
-        //            //
-        //            // Events
-        //            //
-        //
-        //            // Init
-        //            if ($calendar.length) {
-        //                init($calendar);
-        //            }
-        //
-        //        })();
+            $('#id_ruangan,#id_ruangan_edit').val(params.data.id)
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -524,7 +186,7 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'timeGridWeek,timeGridDay'
+                    right: 'timeGridWeek,dayGridMonth'
                 },
                 selectable: true,
                 selectHelper: true,
@@ -545,32 +207,334 @@
                     // if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
                     // This allows today and future date
                     let isoDate = info.date.toISOString();
-                    $('#tanggal-seminar').val(isoDate);
-                    $('#new-event').modal('show');
+                    $('#tanggal-seminar').val(moment(isoDate).format('YYYY-MM-DD'));
                     //ajax to update current data
-                    //$.ajax({
-                    //    url: "<?php echo site_url('bimbingan?m=konsultasi&q=is_exist') ?>",
-                    //    method: "POST",
-                    //    success: function (data) {
-                    //        let parsedData = JSON.parse(data);
-                    //        if (parsedData.length !== 0) {
-                    //            $('#new-event').modal('show');
-                    //        } else {
-                    //            alert('Anda belum mendapatkan pembimbing')
-                    //        }
-                    //    },
-                    //    error: function () {
-                    //
-                    //    }
-                    //});
-                    // } else {
-                    //     Else part is for past dates
-                    // alert('Tidak bisa mengajukan konsultasi pada tanggal ini');
-                    // }
+                    $.ajax({
+						url: '<?php echo site_url("seminar?m=mahasiswa") ?>',
+						dataType: 'json',
+                        success: function ({data}) {
+                            let parsedData = data;
+                            if (parsedData.length !== 0) {
+                                $('#new-event').modal('show');
+                            } else {
+								swal({
+									title: 'Error',
+									text: 'Semua mahasiswa sudah mendapatkan jadwal seminar',
+									type: 'error',
+									buttonsStyling: false,
+									confirmButtonClass: 'btn btn-primary btn-sm'
+								});
+                            }
+                        },
+                        error: function (e) {
+							console.log(e)
+                        }
+                    });
+                     // } else {
+                     //     Else part is for past dates
+                     // alert('Tidak bisa mengajukan konsultasi pada tanggal ini');
+                     // }
 
                 },
+                eventClick: function (info, element) {
+                    let {event} = info;
+                    let mulai = moment(event.start).format('HH:mm:ss');
+                    let selesai = moment(event.end).format('HH:mm:ss');
+                    let tanggal = moment(event.start).format('YYYY-MM-DD');
+                    // $('#edit-event input[value=' + event.tag + ']').prop('checked', true);
+                    $('#edit-event').modal('show');
+                    $('.edit-event--id').val(event.id);
+                    $('#select-mahasiswa-edit').empty().prepend('<option value='+event.id+'>'+event.title+'</option>');
+                    $('#select-ruangan-edit').empty().prepend('<option value='+event.extendedProps.id_tempat+'>'+event.extendedProps.nama_tempat+'</option>');
+					$('#select-penguji1-edit').empty().prepend('<option value='+event.extendedProps.id_penguji_1+'>'+event.extendedProps.p1+'</option>');
+					$('#select-penguji2-edit').empty().prepend('<option value='+event.extendedProps.id_penguji_2+'>'+event.extendedProps.p2+'</option>');
+					$('#id_dosen_bimbingan_mhs_edit').val(event.extendedProps.id_dosen_bimbingan_mhs);
+					$('#id_ruangan_edit').val(event.extendedProps.id_tempat);
+					$('#id_p1_edit').val(event.extendedProps.id_penguji_1);
+					$('#id_p2_edit').val(event.extendedProps.id_penguji_2);
+                    $('#tanggal-seminar-edit').val(tanggal);
+                    $('#waktu-mulai-edit').val(mulai);
+                    $('#waktu-selesai-edit').val(selesai);
+                },
+				eventDrop:function(info){
+                	console.log(info);
+					swal({
+						title: 'Apakah anda yakin memindah '+info.event.title+' ?',
+						text: "Pemindahan jadwal bisa di batalkan",
+						type: 'warning',
+						showCancelButton: true,
+						buttonsStyling: false,
+						confirmButtonClass: 'btn btn-warning btn-sm',
+						confirmButtonText: 'Ya, pindah!',
+						cancelButtonClass: 'btn btn-secondary btn-sm'
+					}).then((result) => {
+						if(result.value){
+							let {event} = info;
+							let eventDate = moment(event.start).format('YYYY-MM-DD');
+							let eventStart = moment(event.start).format('HH:mm:ss');
+							let eventEnd = moment(event.end).format('HH:mm:ss');
+							let updateEvent = {
+								id: event.id,
+								id_dosen_bimbingan_mhs: event.extendedProps.id_dosen_bimbingan_mhs,
+								id_seminar_ruangan: event.extendedProps.id_tempat,
+								mulai: eventDate + "T" + eventStart,
+								berakhir: eventDate + "T" + eventEnd,
+								id_penguji: [event.extendedProps.id_penguji_1, event.extendedProps.id_penguji_2]
+							};
+							$.ajax({
+								url: "<?php echo site_url('seminar?m=jadwal&q=u')?>",
+								method: "POST",
+								data: updateEvent,
+								success: function () {
+									swal({
+										title: 'Success',
+										text: 'Jadwal ' + event.title + ' berhasil dibuat',
+										type: 'success',
+										buttonsStyling: false,
+										confirmButtonClass: 'btn btn-primary btn-sm'
+									});
+								},
+								error: function () {
+									swal({
+										title: 'Error',
+										text: 'Jadwal ' + event.title + ' gagal dibuat',
+										type: 'error',
+										buttonsStyling: false,
+										confirmButtonClass: 'btn btn-primary btn-sm'
+									});
+								}
+							});
+						}
+						else{
+							info.revert();
+						}
+
+					})
+				}
             });
             calendar.render();
+            $('body').on('click', '.new-event--add', function () {
+                let eventDate = $('#tanggal-seminar').val();
+                let eventStart = $('#waktu-mulai').val();
+                let eventEnd = $('#waktu-selesai').val();
+                let eventId = $('#id_dosen_bimbingan_mhs').val();
+                let eventRuangan = $('#id_ruangan').val();
+                let eventPenguji1 = $('#id_p1').val();
+                let eventPenguji2 = $('#id_p2').val();
+                let mahasiswa = $('#select-mahasiswa').text();
+
+                // Generate ID
+                let GenRandom = {
+                    Stored: [],
+                    /**
+                     * @return {string}
+                     */
+                    Job: function () {
+                        let newId = Date.now().toString().substr(6); // or use any method that you want to achieve this string
+
+                        if (!this.Check(newId)) {
+                            this.Stored.push(newId);
+                            return newId;
+                        }
+                        return this.Job();
+                    },
+                    /**
+                     * @return {boolean}
+                     */
+                    Check: function (id) {
+                        for (let i = 0; i < this.Stored.length; i++) {
+                            if (this.Stored[i] === id) return true;
+                        }
+                        return false;
+                    }
+                };
+
+                if (eventDate !== '' && eventEnd !== '' && eventStart !== '') {
+                    let createdEvent = {
+                        id: GenRandom.Job(),
+                        id_dosen_bimbingan_mhs: eventId,
+                        id_seminar_ruangan: eventRuangan,
+                        mulai: eventDate + "T" + eventStart,
+                        berakhir: eventDate + "T" + eventEnd,
+                        id_penguji: [eventPenguji1, eventPenguji2]
+                    };
+                    //render event to calendar
+                    calendar.addEvent({
+						title:mahasiswa,
+						start:createdEvent.mulai,
+						end:createdEvent.berakhir,
+						extendedProps:{
+							id_tempat:id_seminar_ruangan,
+							id_penguji_1:eventPenguji1,
+							id_penguji_2:eventPenguji2
+						}
+					});
+                    //push to database
+                    $.ajax({
+                        url: "<?php echo site_url('seminar?m=jadwal&q=i')?>",
+                        method: "POST",
+                        data: createdEvent,
+                        success: function () {
+                            swal({
+                                title: 'Success',
+                                text: 'Jadwal ' + mahasiswa + ' berhasil dibuat',
+                                type: 'success',
+                                buttonsStyling: false,
+                                confirmButtonClass: 'btn btn-primary btn-sm'
+                            });
+                        },
+                        error: function () {
+                            swal({
+                                title: 'Error',
+                                text: 'Jadwal ' + mahasiswa + ' gagal dibuat',
+                                type: 'error',
+                                buttonsStyling: false,
+                                confirmButtonClass: 'btn btn-primary btn-sm'
+                            });
+                        }
+                    });
+                    $('.new-event--form')[0].reset();
+                    $('.new-event--title').closest('.form-group').removeClass('has-danger');
+                    $('#new-event').modal('hide');
+                } else if (eventDate !== '' || eventEnd !== '' || eventStart !== '') {
+                	console.log('Lengkapi data');
+					$('#tanggal-seminar').closest('.form-group').addClass('has-danger').focus();
+					$('#waktu-mulai').closest('.form-group').addClass('has-danger').focus();
+					$('#waktu-selesai').closest('.form-group').addClass('has-danger').focus();
+					$('#select-ruangan').closest('.form-group').addClass('has-danger').focus();
+					$('#select-mahasiswa').closest('.form-group').addClass('has-danger').focus();
+					$('#select-penguji1').closest('.form-group').addClass('has-danger').focus();
+					$('#select-penguji2').closest('.form-group').addClass('has-danger').focus();
+                } else {
+                    $('.new-event--title').closest('.form-group').addClass('has-danger').focus();
+                }
+            });
+
+
+            //Update/Delete an Event
+            $('body').on('click', '[data-calendar]', function () {
+                let calendarAction = $(this).data('calendar');
+                let currentId = $('.edit-event--id').val();
+				let eventDate = $('#tanggal-seminar-edit').val();
+				let eventStart = $('#waktu-mulai-edit').val();
+				let eventEnd = $('#waktu-selesai-edit').val();
+				let eventBimbingan = $('#id_dosen_bimbingan_mhs_edit').val();
+				let eventRuangan = $('#id_ruangan_edit').val();
+				let eventRuanganName = $('#select-ruangan-edit option:selected').text();
+				let eventPenguji1 = $('#id_p1_edit').val();
+				let eventPenguji2 = $('#id_p2_edit').val();
+				let eventPenguji1Name = $('#select-penguji1-edit option:selected').text();
+				let eventPenguji2Name = $('#select-penguji2-edit option:selected').text();
+				let mahasiswa = $('#select-mahasiswa-edit').text();
+				let currentEvent = calendar.getEventById(currentId);
+                //Update
+                if (calendarAction === 'update') {
+                    if (currentId !== '') {
+                        // let data = {"title":currentTitle,"masalah":currentMasalah,"solusi":currentSolusi,"tag":[currentClass]};
+                        // currentEvent.push(data);
+						let updateEvent = {
+							id:currentId,
+							id_dosen_bimbingan_mhs: eventBimbingan,
+							id_seminar_ruangan: eventRuangan,
+							mulai: eventDate + "T" + eventStart,
+							berakhir: eventDate + "T" + eventEnd,
+							id_penguji: [eventPenguji1, eventPenguji2]
+						};
+						//render event to calendar
+						currentEvent.setProp('title',mahasiswa);
+						currentEvent.setStart(updateEvent.mulai);
+						currentEvent.setEnd(updateEvent.berakhir);
+						currentEvent.setExtendedProp('id_tempat',updateEvent.id_seminar_ruangan);
+						currentEvent.setExtendedProp('nama_tempat',eventRuanganName);
+						currentEvent.setExtendedProp('id_penguji_1',updateEvent.id_penguji[0]);
+						currentEvent.setExtendedProp('id_penguji_2',updateEvent.id_penguji[1]);
+						currentEvent.setExtendedProp('p1',eventPenguji1Name);
+						currentEvent.setExtendedProp('p2',eventPenguji2Name);
+						console.log(currentEvent);
+                        //update rendered item
+                        //push to database
+						$.ajax({
+							url: "<?php echo site_url('seminar?m=jadwal&q=u')?>",
+							method: "POST",
+							data: updateEvent,
+							success: function () {
+								swal({
+									title: 'Success',
+									text: 'Jadwal ' + mahasiswa + ' berhasil diupdate',
+									type: 'success',
+									buttonsStyling: false,
+									confirmButtonClass: 'btn btn-primary btn-sm'
+								});
+							},
+							error: function () {
+								swal({
+									title: 'Error',
+									text: 'Jadwal ' + mahasiswa + ' gagal diupdate',
+									type: 'error',
+									buttonsStyling: false,
+									confirmButtonClass: 'btn btn-primary btn-sm'
+								});
+							}
+						});
+						$('.edit-event--form')[0].reset();
+						$('.edit-event--title').closest('.form-group').removeClass('has-danger');
+                        $('#edit-event').modal('hide');
+                    } else {
+                        $('.edit-event--title').closest('.form-group').addClass('has-error').focus();
+                    }
+                }
+
+                ////Delete
+                if (calendarAction === 'delete') {
+                    $('#edit-event').modal('hide');
+
+                    // Show confirm dialog
+                    setTimeout(function () {
+                        swal({
+                            title: 'Apakah anda yakin menghapus ini?',
+                            text: "Jadwal sidang yang sudah hapus tidak bisa dikembalikan lagi",
+                            type: 'warning',
+                            showCancelButton: true,
+                            buttonsStyling: false,
+                            confirmButtonClass: 'btn btn-danger btn-sm',
+                            confirmButtonText: 'Yes, hapus!',
+                            cancelButtonClass: 'btn btn-secondary btn-sm'
+                        }).then((result) => {
+                            if (result.value) {
+                                // Delete event
+                                currentEvent.remove();
+                                console.log(currentId);
+
+                                // Delete from database
+                                $.ajax({
+                                    url: "<?php echo site_url('seminar?m=jadwal&q=d')?>",
+                                    method: "POST",
+                                    data: {id: currentId},
+                                    success: function (res) {
+                                        console.log(res);
+                                        swal({
+                                            title: 'Success',
+                                            text: 'Jadwal berhasil dihapus',
+                                            type: 'success',
+                                            buttonsStyling: false,
+                                            confirmButtonClass: 'btn btn-primary btn-sm'
+                                        });
+                                    },
+                                    error: function () {
+                                        swal({
+                                            title: 'Error',
+                                            text: 'Jadwal Gagal dihapus',
+                                            type: 'error',
+                                            buttonsStyling: false,
+                                            confirmButtonClass: 'btn btn-primary btn-sm'
+                                        });
+                                    }
+                                })
+                            }
+                        })
+                    }, 200);
+                }
+            });
         })
 	</script>
 </body>

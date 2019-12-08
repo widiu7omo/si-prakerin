@@ -175,14 +175,33 @@ class Seminar_model extends CI_Model
 			'id_penguji_2' => $post['id_penguji'][1]);
 		return $this->db->insert('tb_seminar_jadwal', $data);
 	}
+	public function update_jadwal()
+	{
+		$post = $this->input->post();
+		$id = $post['id'];
+		$data = array('id_dosen_bimbingan_mhs' => $post['id_dosen_bimbingan_mhs'],
+			'id_seminar_ruangan' => $post['id_seminar_ruangan'],
+			'mulai' => $post['mulai'],
+			'berakhir' => $post['berakhir'],
+			'id_penguji_1' => $post['id_penguji'][0],
+			'id_penguji_2' => $post['id_penguji'][1]);
+		return $this->db->update('tb_seminar_jadwal', $data,"id = $id");
+	}
+	public function delete_jadwal(){
+		$post = $this->input->post();
+		$id = $post['id'];
+		return $this->db->delete('tb_seminar_jadwal',"id=$id");
+	}
 
 	public function get_jadwal()
 	{
 		return $this->db->query("SELECT
-    tst.id,
+    tsj.id,
+    tst.id id_tempat,
 	tst.nama nama_tempat,
 	tm.nama_mahasiswa title,
     tdbm.judul_laporan_mhs laporan,
+    tsj.id_dosen_bimbingan_mhs,
 	tsj.mulai start,
 	tsj.berakhir end,
 	tsj.id_penguji_1,

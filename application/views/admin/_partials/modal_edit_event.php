@@ -4,30 +4,69 @@
 			<!-- Modal body -->
 			<div class="modal-body pb-1">
 				<form class="edit-event--form">
-					<div class="form-group">
-						<label class="form-control-label">Pengajuan Konsutasi</label>
-						<input type="text" class="form-control form-control-alternative edit-event--title" placeholder="Event Title"/>
-					</div>
-					<div class="form-group">
-						<label class="form-control-label d-block mb-3">Status color</label>
-						<div class="btn-group btn-group-toggle btn-group-colors event-tag mb-0" data-toggle="buttons">
-							<label class="btn bg-info active"><input type="radio" name="event-tag" value="bg-info" autocomplete="off" checked=""></label>
-							<label class="btn bg-warning"><input type="radio" name="event-tag" value="bg-warning" autocomplete="off"></label>
-							<label class="btn bg-danger"><input type="radio" name="event-tag" value="bg-danger" autocomplete="off"></label>
-							<label class="btn bg-success"><input type="radio" name="event-tag" value="bg-success" autocomplete="off"></label>
-							<label class="btn bg-default"><input type="radio" name="event-tag" value="bg-default" autocomplete="off"></label>
-							<label class="btn bg-primary"><input type="radio" name="event-tag" value="bg-primary" autocomplete="off"></label>
+					<div class="row">
+						<div class="col-4">
+							<div class="form-group">
+								<label class="form-control-label">Tanggal Seminar</label>
+								<div class="input-group input-group-merge">
+									<input type="text" name="tanggal_seminar"
+										   id="tanggal-seminar-edit" class="form-control"
+										   placeholder="Pilih Tanggal" autocomplete="off"
+										   value="yyyy-mm-dd">
+									<div class="input-group-append">
+										<span class="input-group-text"><i class="fas fa-calendar"></i></span>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="keluhan" class="form-control-label">Keluhan</label>
-						<textarea rows="4" class="form-control form-control-alternative edit-event--masalah textarea-autosize" placeholder="Sampaikan keluhan disini"></textarea>
-						<i class="form-group--bar"></i>
-					</div>
-					<div class="form-group">
-						<label for="solusi" class="form-control-label">Solusi</label>
-						<textarea rows="4" class="form-control form-control-alternative edit-event--solusi textarea-autosize" placeholder="Solusi yang kamu dapatkan dari dosen (Jika sudah konsultasi)"></textarea>
-						<i class="form-group--bar"></i>
+						<div class="col-4">
+							<div class="form-group">
+								<label class="form-control-label">Mulai Seminar</label>
+								<div class="input-group clockpicker input-group-merge" data-placement="left"
+									 data-align="top" data-autoclose="true">
+									<input id="waktu-mulai-edit" class="form-control" placeholder="Waktu Seminar" type="time">
+									<div class="input-group-append">
+										<span class="input-group-text"><i class="fas fa-clock"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-4">
+							<div class="form-group">
+								<label class="form-control-label">Selesai Seminar</label>
+								<div class="input-group clockpicker input-group-merge" data-placement="left"
+									 data-align="top" data-autoclose="true">
+									<input id="waktu-selesai-edit" class="form-control" placeholder="Waktu Seminar" type="time">
+									<div class="input-group-append">
+										<span class="input-group-text"><i class="fas fa-clock"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<select id="select-mahasiswa-edit" class="form-control"></select>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<select id="select-ruangan-edit" class="form-control"></select>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<select id="select-penguji1-edit" class="form-control"></select>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="from-group">
+								<select id="select-penguji2-edit" class="form-control"></select>
+							</div>
+						</div>
+						<input type="hidden" id="id_dosen_bimbingan_mhs_edit">
+						<input type="hidden" id="id_ruangan_edit">
+						<input type="hidden" id="id_p1_edit">
+						<input type="hidden" id="id_p2_edit">
 					</div>
 					<input type="hidden" class="edit-event--id">
 				</form>

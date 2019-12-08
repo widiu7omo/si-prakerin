@@ -10,7 +10,7 @@
 							<div class="form-group">
 								<label class="form-control-label">Tanggal Seminar</label>
 								<div class="input-group input-group-merge">
-									<input type="text" name="tanggal_seminar"
+									<input required type="text" name="tanggal_seminar"
 										   id="tanggal-seminar" class="form-control"
 										   placeholder="Pilih Tanggal" autocomplete="off"
 										   value="yyyy-mm-dd">
@@ -25,7 +25,7 @@
 								<label class="form-control-label">Mulai Seminar</label>
 								<div class="input-group clockpicker input-group-merge" data-placement="left"
 									 data-align="top" data-autoclose="true">
-									<input id="waktu-mulai" class="form-control" placeholder="Waktu Seminar" type="time">
+									<input required id="waktu-mulai" class="form-control" placeholder="Waktu Seminar" type="time">
 									<div class="input-group-append">
 										<span class="input-group-text"><i class="fas fa-clock"></i></span>
 									</div>
@@ -37,7 +37,7 @@
 								<label class="form-control-label">Selesai Seminar</label>
 								<div class="input-group clockpicker input-group-merge" data-placement="left"
 									 data-align="top" data-autoclose="true">
-									<input id="waktu-selesai" class="form-control" placeholder="Waktu Seminar" type="time">
+									<input required id="waktu-selesai" class="form-control" placeholder="Waktu Seminar" type="time">
 									<div class="input-group-append">
 										<span class="input-group-text"><i class="fas fa-clock"></i></span>
 									</div>
@@ -46,27 +46,22 @@
 						</div>
 						<div class="col-12">
 							<div class="form-group">
-								<select id="select-mahasiswa" class="form-control"></select>
+								<select required id="select-mahasiswa" class="form-control"></select>
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="form-group">
-								<input readonly id="input-judul" class="form-control" placeholder="Judul Laporan"/>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="form-group">
-								<select id="select-ruangan" class="form-control"></select>
+								<select required id="select-ruangan" class="form-control"></select>
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="form-group">
-								<select id="select-penguji1" class="form-control"></select>
+								<select required id="select-penguji1" class="form-control"></select>
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="from-group">
-								<select id="select-penguji2" class="form-control"></select>
+								<select required id="select-penguji2" class="form-control"></select>
 							</div>
 						</div>
 						<input type="hidden" id="id_dosen_bimbingan_mhs">
