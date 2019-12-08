@@ -130,7 +130,6 @@ class Mahasiswa extends MY_Controller {
 					redirect( site_url( 'mahasiswa' ) );
 			}
 		}
-
 		$this->load->view( 'admin/mahasiswa', $data );
 
 

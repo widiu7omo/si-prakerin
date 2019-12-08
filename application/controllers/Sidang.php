@@ -7,7 +7,7 @@ class Sidang extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('perusahaan_model', 'pengajuan_model','seminar_model'));
+		$this->load->model(array('perusahaan_model', 'pengajuan_model','seminar_model','penilaian_model'));
 		$this->load->helper(array('notification', 'master'));
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
 		$id = $this->session->userdata('id');
@@ -41,7 +41,7 @@ class Sidang extends CI_Controller
 						'icon' => 'fas fa-id-badge',
 						'desc' => 'Informasi terkait jadwal seminar peserta prakerin'),
 					array('name' => 'Penilaian',
-						'href' => site_url('sidang?m=Penilaian'),
+						'href' => site_url('sidang?m=penilaian'),
 						'icon' => 'fas fa-id-badge',
 						'desc' => 'Penilaian mahasiswa seminar')
 				);
@@ -60,6 +60,15 @@ class Sidang extends CI_Controller
 					}
 					return $this->index_jadwal_seminar();
 					break;
+				case 'penilaian':
+					if (isset($_GET['a']) and $_GET['a'] == 'accept') {
+//						return $this->acc_bimbingan_mhs();
+					}
+					if (isset($_GET['a']) and $_GET['a'] == 'decline') {
+//						return $this->dec_bimbingan_mhs();
+					}
+					return $this->index_penilaian_seminar();
+					break;
 				default:
 					null;
 			}
@@ -67,6 +76,11 @@ class Sidang extends CI_Controller
 		$data['intro'] = array(array('step_intro' => 1, 'message_intro' => 'Selamat datang di bimbingan, klik tanggal anda ingin mengajukan konsultasi'));
 		$this->load->view('user/sidang', $data);
 
+	}
+
+	public function index_penilaian_seminar(){
+		$data = array();
+		$this->load->view('user/sidang_penilaian',$data);
 	}
 
 	public function index_jadwal_seminar()
