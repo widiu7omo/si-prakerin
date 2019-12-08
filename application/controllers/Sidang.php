@@ -72,7 +72,16 @@ class Sidang extends CI_Controller
 	public function index_jadwal_seminar()
 	{
 		$data = array();
+		$id = $this->session->userdata('id');
+		$level = $this->session->userdata('level');
+		if($level === 'mahasiswa'){
+			$where = "WHERE tm.nim = '$id'";
+		}
+		elseif($level === 'dosen'){
+			$where = "WHERE td1.nip_nik = '$id' OR td2.nip_nik = '$id'";
+		}
 		$data['tempat'] = $this->seminar_model->get_tempat_seminar($alias = "title");
+		$data['jadwalku'] = $this->seminar_model->get_jadwal($where);
 		$this->load->view('user/sidang_jadwal',$data);
 	}
 }

@@ -57,14 +57,14 @@
 								</div>
 								<?php if ($this->session->userdata('level') == "mahasiswa"): ?>
 									<div class="col-xm-12 col-sm-6 col-md-6 text-right">
-										<div class="h5 mt-2">Lihat jadwal berdasarkan :</div>
+										<div class="h5 mt-2">Lihat jadwal sendiri :</div>
 										<button type="button" class="btn btn-sm btn-warning" id="btn-hari">Lihat
 										</button>
 									</div>
 								<?php endif; ?>
 								<?php if ($this->session->userdata('level') == "dosen"): ?>
 									<div class="col-xm-12 col-sm-6 col-md-6 text-right">
-										<div class="h5 mt-2">Lihat jadwal anda sendiri</div>
+										<div class="h5 mt-2">Lihat jadwal uji sendiri</div>
 										<div class="btn-group" role="group" aria-label="Basic example">
 											<button type="button" class="btn btn-sm btn-primary" id="btn-hari">Hari
 											</button>
@@ -137,7 +137,7 @@
 						field: 'title'
 					}
 				],
-				resources: <?php echo json_encode($tempat) ?>,
+				resources: <?php echo json_encode(isset($tempat)?$tempat:array()) ?>,
 				events: {
 					url: "<?php echo site_url('seminar?m=jadwal')?>",
 					cache: true,
@@ -161,24 +161,19 @@
 				// Edit calendar event action
 
 				eventClick: function (event, element) {
-					console.log(event);
 					$('#view-event').modal('show');
-					$('.new-event--form').empty().append(
-						$('<ul></ul>').addClass('list-group').append(
-							$('<li><li>').addClass('list-group-item').text(event.title)
-						)
-					);
+					let timeRange = moment(event.start._i).locale('id').format('HH:mm')+' - '+moment(event.end._i).format('HH:mm');
+					let date = moment(event.start._i).locale('id').format('LL');
+					$('#detail-jadwal').text('Detail jadwal '+event.title);
+					$('#detail-tanggal').text(date);
+					$('#detail-waktu').text(timeRange);
+					$('#detail-p1').text(event.p1?event.p1:'-');
+					$('#detail-p2').text(event.p2?event.p2:'-');
 				}
 			};
 
 			// Initalize the calendar plugin
 			$this.fullCalendar(options);
-
-
-			//
-			// Calendar actions
-			//
-
 
 			//Calendar views switch
 			$('body').on('click', '[data-calendar-view]', function (e) {
@@ -204,6 +199,31 @@
 				e.preventDefault();
 				$this.fullCalendar('prev');
 			});
+			$('body').on('click','#btn-hari',function(e){
+				e.preventDefault();
+				let eventId = "<?php echo (isset($jadwalku) and count($jadwalku) != 0)?$jadwalku[0]->id:(object)array(); ?>";
+				let events = $this.fullCalendar('clientEvents',parseInt(eventId));
+				console.log(events);
+				if(events.length !== 0){
+					let event = events[0];
+					let timeRange = moment(event.start._i).locale('id').format('HH:mm')+' - '+moment(event.end._i).format('HH:mm');
+					let date = moment(event.start._i).locale('id').format('LL');
+					$('#detail-jadwal').text('Detail jadwal '+event.title);
+					$('#detail-tanggal').text(date);
+					$('#detail-waktu').text(timeRange);
+					$('#detail-p1').text(event.p1?event.p1:'-');
+					$('#detail-p2').text(event.p2?event.p2:'-');
+					$('#view-event').modal('show');
+				}
+				else{
+					swal({
+						title:"Jadwal anda belum tersedia",
+						type:"warning",
+						buttonsStyling: false,
+						confirmButtonClass:'btn btn-danger'
+					})
+				}
+			})
 		}
 
 

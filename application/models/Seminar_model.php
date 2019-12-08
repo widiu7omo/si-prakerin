@@ -203,7 +203,7 @@ class Seminar_model extends CI_Model
 		return $this->db->delete('tb_seminar_jadwal', "id=$id");
 	}
 
-	public function get_jadwal()
+	public function get_jadwal($where = null)
 	{
 		$post = $this->input->post();
 		$select = "tsj.id, tst.id id_tempat, tst.nama nama_tempat, tm.nama_mahasiswa title, tdbm.judul_laporan_mhs laporan, 
@@ -223,6 +223,6 @@ class Seminar_model extends CI_Model
 			INNER JOIN tb_dosen td1 ON td1.id = penguji_1.id_dosen
 			INNER JOIN tb_dosen td2 ON td2.id = penguji_2.id_dosen
 			INNER JOIN tb_pegawai tp1 ON tp1.nip_nik = td1.nip_nik
-			INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik")->result();
+			INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik $where")->result();
 	}
 }
