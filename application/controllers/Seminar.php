@@ -51,6 +51,13 @@ class Seminar extends MY_Controller
 					)
 				);
 				break;
+			case 'mahasiswa':
+				$post = $this->input->post();
+				if(!isset($post['id'])){
+					show_error("Access Denied. You Do Not Have The Permission To Access This Page On This
+            Server", 403, "Forbidden, you don't have pemission");
+				}
+				break;
 			//if there are not level except in case, it will throw to error with code 403
 			default:
 				show_error("Access Denied. You Do Not Have The Permission To Access This Page On This
@@ -144,41 +151,51 @@ class Seminar extends MY_Controller
 		$this->load->view('admin/seminar', $data);
 	}
 
-	public function get_jadwal(){
+	public function get_jadwal()
+	{
 		$seminar = $this->seminar_model;
 		echo json_encode($seminar->get_jadwal());
 	}
-	public function add_jadwal(){
+
+	public function add_jadwal()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->add_jadwal()){
-			echo json_encode(array('status'=>'success'));
+		if ($seminar->add_jadwal()) {
+			echo json_encode(array('status' => 'success'));
 			return;
 		}
-		echo json_encode(array('status'=>'error'));
+		echo json_encode(array('status' => 'error'));
 	}
-	public function update_jadwal(){
+
+	public function update_jadwal()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->update_jadwal()){
-			echo json_encode(array('status'=>'success'));
+		if ($seminar->update_jadwal()) {
+			echo json_encode(array('status' => 'success'));
 			return;
 		}
-		echo json_encode(array('status'=>'error'));
+		echo json_encode(array('status' => 'error'));
 	}
-	public function delete_jadwal(){
+
+	public function delete_jadwal()
+	{
 		$seminar = $this->seminar_model;
-		if($seminar->delete_jadwal()){
-			echo json_encode(array('status'=>'success'));
+		if ($seminar->delete_jadwal()) {
+			echo json_encode(array('status' => 'success'));
 			return;
 		}
-		echo json_encode(array('status'=>'error'));
+		echo json_encode(array('status' => 'error'));
 	}
-	public function get_all_mhs_seminar(){
+
+	public function get_all_mhs_seminar()
+	{
 		$seminar = $this->seminar_model;
-		echo json_encode(array('data'=>$seminar->get_all_mhs_seminar()));
+		echo json_encode(array('data' => $seminar->get_all_mhs_seminar()));
 	}
+
 	public function get_penguji()
 	{
-		$status = isset($_GET['status'])?$_GET['status']:null;
+		$status = isset($_GET['status']) ? $_GET['status'] : null;
 		$seminar = $this->seminar_model;
 		echo json_encode(array('data' => $seminar->get_all_penguji($status)));
 	}
@@ -323,6 +340,7 @@ class Seminar extends MY_Controller
 			echo json_encode(array('status' => 'success'));
 		}
 	}
+
 	public function index_kelola_jadwal()
 	{
 		$seminar = $this->seminar_model;

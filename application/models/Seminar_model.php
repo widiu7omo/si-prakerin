@@ -3,11 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Seminar_model extends CI_Model
 {
-	public function get_tempat_seminar()
+	public function get_tempat_seminar($alias = null)
 	{
+		$post = $this->input->post();
 		if (isset($_GET['id'])) {
 			$where = "id = $_GET[id]";
 			$this->db->where($where);
+		}
+		if (isset($post['destination'])) {
+			$this->db->select('id,nama title');
+		}
+		if ($alias) {
+			$this->db->select("id,nama $alias");
 		}
 		return $this->db->get('tb_seminar_tempat')->result();
 	}
@@ -175,6 +182,7 @@ class Seminar_model extends CI_Model
 			'id_penguji_2' => $post['id_penguji'][1]);
 		return $this->db->insert('tb_seminar_jadwal', $data);
 	}
+
 	public function update_jadwal()
 	{
 		$post = $this->input->post();
@@ -185,40 +193,36 @@ class Seminar_model extends CI_Model
 			'berakhir' => $post['berakhir'],
 			'id_penguji_1' => $post['id_penguji'][0],
 			'id_penguji_2' => $post['id_penguji'][1]);
-		return $this->db->update('tb_seminar_jadwal', $data,"id = $id");
+		return $this->db->update('tb_seminar_jadwal', $data, "id = $id");
 	}
-	public function delete_jadwal(){
+
+	public function delete_jadwal()
+	{
 		$post = $this->input->post();
 		$id = $post['id'];
-		return $this->db->delete('tb_seminar_jadwal',"id=$id");
+		return $this->db->delete('tb_seminar_jadwal', "id=$id");
 	}
 
 	public function get_jadwal()
 	{
-		return $this->db->query("SELECT
-    tsj.id,
-    tst.id id_tempat,
-	tst.nama nama_tempat,
-	tm.nama_mahasiswa title,
-    tdbm.judul_laporan_mhs laporan,
-    tsj.id_dosen_bimbingan_mhs,
-	tsj.mulai start,
-	tsj.berakhir end,
-	tsj.id_penguji_1,
-	tsj.id_penguji_2,
-    'bg-info' as className,
-	tp1.nama_pegawai p1,
-	tp2.nama_pegawai p2
-FROM
-	tb_seminar_jadwal tsj
-	INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
-	INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
-	INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
-	INNER JOIN tb_seminar_penguji penguji_1 ON penguji_1.id = tsj.id_penguji_1
-	INNER JOIN tb_seminar_penguji penguji_2 ON penguji_2.id = tsj.id_penguji_2
-	INNER JOIN tb_dosen td1 ON td1.id = penguji_1.id_dosen
-	INNER JOIN tb_dosen td2 ON td2.id = penguji_2.id_dosen
-	INNER JOIN tb_pegawai tp1 ON tp1.nip_nik = td1.nip_nik
-	INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik")->result();
+		$post = $this->input->post();
+		$select = "tsj.id, tst.id id_tempat, tst.nama nama_tempat, tm.nama_mahasiswa title, tdbm.judul_laporan_mhs laporan, 
+		tsj.id_dosen_bimbingan_mhs, tsj.mulai start, tsj.berakhir end, tsj.id_penguji_1, tsj.id_penguji_2, 'bg-info' as className, 
+		tp1.nama_pegawai p1, tp2.nama_pegawai p2";
+		if(isset($post['view'])){
+			$select = "tsj.id, tst.id resourceId, tst.nama nama_tempat, tm.nama_mahasiswa title, tdbm.judul_laporan_mhs laporan, 
+		tsj.id_dosen_bimbingan_mhs, tsj.mulai start, tsj.berakhir end, tsj.id_penguji_1, tsj.id_penguji_2, 'bg-info' as className, 
+		tp1.nama_pegawai p1, tp2.nama_pegawai p2";
+		}
+		return $this->db->query("SELECT $select FROM tb_seminar_jadwal tsj
+			INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
+			INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+			INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
+			INNER JOIN tb_seminar_penguji penguji_1 ON penguji_1.id = tsj.id_penguji_1
+			INNER JOIN tb_seminar_penguji penguji_2 ON penguji_2.id = tsj.id_penguji_2
+			INNER JOIN tb_dosen td1 ON td1.id = penguji_1.id_dosen
+			INNER JOIN tb_dosen td2 ON td2.id = penguji_2.id_dosen
+			INNER JOIN tb_pegawai tp1 ON tp1.nip_nik = td1.nip_nik
+			INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik")->result();
 	}
 }
