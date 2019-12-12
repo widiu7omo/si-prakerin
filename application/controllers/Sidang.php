@@ -107,63 +107,79 @@ class Sidang extends CI_Controller
 		$post = $this->input->post();
 		$get = $this->input->get();
 		$seminar = $this->seminar_model;
-		$id = $this->session->userdata('nip_nik');
-		$date = date('Y-m-d');
-		$time = date('H:i');
-		if (isset($get['section']) and $get['section'] == 'history') {
-			//history revisi
-			$riwayat_uji = $seminar->get_jadwal_past($id, $date, $time);
-			$pegawai = masterdata('tb_pegawai', "nip_nik = '$id'", 'nama_pegawai', false);
-			if (count($riwayat_uji) > 0) {
-				foreach ($riwayat_uji as $index => $uji) {
-					$riwayat_uji[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
-					$riwayat_uji[$index]->session = $id;
+		$level = $this->session->userdata('level');
+		switch ($level) {
+			case 'mahasiswa':
+				$id = $this->session->userdata('nim');
+				$penilaian = $this->penilaian_model;
+				$data['penilaian'] = $penilaian->get_penilaian_seminar($id);
+				break;
+			case 'dosen':
+				$id = $this->session->userdata('nip_nik');
+				$date = date('Y-m-d');
+				$time = date('H:i');
+				if (isset($get['section']) and $get['section'] == 'history') {
+					//history revisi
+					$riwayat_uji = $seminar->get_jadwal_past($id, $date, $time);
+					$pegawai = masterdata('tb_pegawai', "nip_nik = '$id'", 'nama_pegawai', false);
+					if (count($riwayat_uji) > 0) {
+						foreach ($riwayat_uji as $index => $uji) {
+							$riwayat_uji[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
+							$riwayat_uji[$index]->session = $id;
+						}
+					}
+					$data['riwayat_uji'] = $riwayat_uji;
+					if (isset($post['req']) and $post['req'] === 'ajax') {
+						echo json_encode($riwayat_uji);
+						return;
+					}
+				} else {
+					$pegawai = masterdata('tb_pegawai', "nip_nik = '$id'", 'nama_pegawai', false);
+					$jadwaluji = $seminar->get_jadwal_today($id, $date);
+					if (count($jadwaluji) > 0) {
+						foreach ($jadwaluji as $index => $uji) {
+							$jadwaluji[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
+							$jadwaluji[$index]->session = $id;
+						}
+					}
+					$datetime = new DateTime($date);
+					$datetime->modify('+1 day');
+					$tomorrow = $datetime->format('Y-m-d');
+					$jadwaluji_besok = $seminar->get_jadwal_today($id, $tomorrow);
+					if (count($jadwaluji_besok) > 0) {
+						foreach ($jadwaluji_besok as $index => $uji) {
+							$jadwaluji_besok[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
+							$jadwaluji_besok[$index]->session = $id;
+						}
+					}
+					$data['jadwaluji'] = $jadwaluji;
+					$data['besok'] = $jadwaluji_besok;
+					if (isset($post['req']) and $post['req'] === 'ajax') {
+						echo json_encode($jadwaluji);
+						return;
+					}
+					//penilaian terlewat
+					$riwayat_uji_terlewat = $seminar->get_jadwal_past_left($id, $date, $time);
+					if (count($riwayat_uji_terlewat) > 0) {
+						foreach ($riwayat_uji_terlewat as $index => $uji) {
+							$riwayat_uji_terlewat[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
+							$riwayat_uji_terlewat[$index]->session = $id;
+						}
+					}
+					//untuk request ajax, tanpa perlu filter nilai seminar == null
+					if (isset($post['req']) and $post['req'] === 'ajax_left') {
+						echo json_encode($riwayat_uji_terlewat);
+						return;
+					}
+					//data riwayat_terlewat yang sudah di filter nilai_seminarnya == null;
+					$data['riwayat_uji_terlewat'] = $riwayat_uji_terlewat;
 				}
-			}
-			$data['riwayat_uji'] = $riwayat_uji;
-			if (isset($post['req']) and $post['req'] === 'ajax') {
-				echo json_encode($riwayat_uji);
-				return;
-			}
-		} else {
-			$pegawai = masterdata('tb_pegawai', "nip_nik = '$id'", 'nama_pegawai', false);
-			$jadwaluji = $seminar->get_jadwal_today($id, $date);
-			if (count($jadwaluji) > 0) {
-				foreach ($jadwaluji as $index => $uji) {
-					$jadwaluji[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
-					$jadwaluji[$index]->session = $id;
-				}
-			}
-			$datetime = new DateTime($date);
-			$datetime->modify('+1 day');
-			$tomorrow = $datetime->format('Y-m-d');
-			$jadwaluji_besok = $seminar->get_jadwal_today($id, $tomorrow);
-			if (count($jadwaluji_besok) > 0) {
-				foreach ($jadwaluji_besok as $index => $uji) {
-					$jadwaluji_besok[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
-					$jadwaluji_besok[$index]->session = $id;
-				}
-			}
-			$data['jadwaluji'] = $jadwaluji;
-			$data['besok'] = $jadwaluji_besok;
-			if (isset($post['req']) and $post['req'] === 'ajax') {
-				echo json_encode($jadwaluji);
-				return;
-			}
-			//penilaian terlewat
-			$riwayat_uji_terlewat = $seminar->get_jadwal_past_left($id, $date, $time);
-			if (count($riwayat_uji_terlewat) > 0) {
-				foreach ($riwayat_uji_terlewat as $index => $uji) {
-					$riwayat_uji_terlewat[$index]->sebagai = array_search($pegawai->nama_pegawai, (array)$uji);
-					$riwayat_uji_terlewat[$index]->session = $id;
-				}
-			}
-			if (isset($post['req']) and $post['req'] === 'ajax_left') {
-				echo json_encode($riwayat_uji_terlewat);
-				return;
-			}
-			$data['riwayat_uji_terlewat'] = $riwayat_uji_terlewat;
+				break;
+			default:
+				return 0;
+				break;
 		}
+
 		$this->load->view('user/sidang_penilaian', $data);
 	}
 

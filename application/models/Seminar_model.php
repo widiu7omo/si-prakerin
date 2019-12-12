@@ -218,7 +218,7 @@ class Seminar_model extends CI_Model
 		if (isset($post['ij'])) {
 			$where .= "AND tsj.id = '$post[ij]'";
 		}
-		$where .= " AND tsj.id IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian)";
+		$where .= " AND tsp.id IN (SELECT id FROM tb_seminar_penilaian WHERE id_dosen = '$id' AND id_seminar_jadwal = tsj.id )";
 		return $this->db->query("SELECT
     		tsp.id id,
 			tsj.id ij,
@@ -267,7 +267,7 @@ class Seminar_model extends CI_Model
 		if (isset($post['ij'])) {
 			$where .= "AND tsj.id = '$post[ij]'";
 		}
-		$where .= " AND tsj.id NOT IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian)";
+		$where .= " AND tsj.id NOT IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian WHERE id_dosen='$id' AND id_seminar_jadwal = tsj.id)";
 		return $this->db->query("SELECT
 			tsj.id ij,
 			tp3.nama_pegawai p3,
@@ -308,7 +308,7 @@ class Seminar_model extends CI_Model
 		if (isset($post['ij'])) {
 			$where .= " AND tsj.id = '$post[ij]'";
 		}
-		$where .= " AND tsj.id NOT IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian)";
+//		$where .= " AND tsj.id NOT IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian)";
 		return $this->db->query("SELECT
 			tsj.id ij,
 			tp3.nama_pegawai p3,
@@ -317,6 +317,8 @@ class Seminar_model extends CI_Model
     		tdbm.judul_laporan_mhs laporan,
 			tst.nama nama_tempat,
 			tm.nama_mahasiswa,
+       		tsp.nilai_seminar,
+       		tsp.detail_nilai_seminar,
        		tps.nama_program_studi,
        		tm.nim,
 			tsj.mulai start,
@@ -324,6 +326,7 @@ class Seminar_model extends CI_Model
 		FROM
 			tb_seminar_jadwal tsj
 		INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
+		LEFT OUTER JOIN tb_seminar_penilaian tsp ON tsp.id_seminar_jadwal = tsj.id
 		INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
 		INNER JOIN tb_pegawai tp3 ON tp3.nip_nik = tdbm.nip_nik
 		INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim

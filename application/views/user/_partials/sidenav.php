@@ -1,8 +1,11 @@
 <?php $this->load->helper('master');
 $id = $this->session->userdata('id');
-$mahasiswa = masterdata('tb_mahasiswa', array('nim' => $id), array('alamat_mhs', 'email_mhs', 'jenis_kelamin_mhs'), false);
 $level = $this->session->userdata('level');
 $menus = getmenu($level);
+if($level == 'mahasiswa'){
+	$mahasiswa = masterdata('tb_mahasiswa', array('nim' => $id), array('alamat_mhs', 'email_mhs', 'jenis_kelamin_mhs'), false);
+}
+
 ?>
 <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
 	<div class="scroll-wrapper scrollbar-inner" style="position: relative;">
@@ -37,7 +40,7 @@ $menus = getmenu($level);
 								<span class="nav-link-text">Home</span>
 							</a>
 						</li>
-						<?php if ($mahasiswa): ?>
+						<?php if (isset($mahasiswa)): ?>
 							<?php if ($mahasiswa->alamat_mhs != null || $mahasiswa->email_mhs != null || $mahasiswa->jenis_kelamin_mhs != null): ?>
 								<?php foreach ($menus as $menu): ?>
 									<li class="nav-item">

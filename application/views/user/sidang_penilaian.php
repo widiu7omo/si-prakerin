@@ -36,6 +36,8 @@
 									Menguji dan Nilai Revisi</a>
 							</li>
 						</ul>
+					<?php else: ?>
+						<div class="h2">Penilaian seminar</div>
 					<?php endif; ?>
 				</div>
 				<div class="card-body">
@@ -302,9 +304,116 @@
 						<?php endif; ?>
 							<?php break ?>
 						<?php case 'mahasiswa': ?>
-							<div
-								class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-								<div class="h1 font-weight-bold">80</div>
+							<div class="row">
+								<div class="col-xs-12 col-md-12 col-lg-12">
+									<div class="h3 ml-3">Rincian detail penilaian</div>
+									<ul class="list-group">
+										<li class="list-group-item accordion" id="accordionP3">
+											<div id="accordion-title" class="justify-content-between d-flex">
+												<span>Pembimbing</span>
+												<span data-toggle="collapse" data-target="#accordionBody"
+													  aria-expanded="false" aria-controls="accordionBody"><a
+														href="javascript:void(0);"
+														class="text-primary">Rincian</a></span>
+											</div>
+											<div id="accordionBody" class="collapse" aria-labelledby="accordionBody"
+												 data-parent="#accordionP3">
+												<hr class="mt-3 mb-1">
+												<div class="row">
+													<div class="col-md-6 col-xs-12 col-sm-12">
+														<div class="p-3 border-default my-2"
+															 style="border:1px #525f7f40 solid !important;border-radius: 4px;">
+															<div class="h3">Penilaian Seminar</div>
+															<div class="row">
+																<div class="col-7">
+																	<p><span>1. Penilaian 1 </span></p>
+																</div>
+																<div class="col-5">
+																	<span>: </span>
+																	<span> 90 </span>
+																	<span>X 10%</span>
+																	<span> = </span>
+																	<span> 90 </span>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-7">
+																	<p><span>1. Penilaian 1 </span></p>
+																</div>
+																<div class="col-5">
+																	<span>: </span>
+																	<span> 90 </span>
+																	<span>X 10%</span>
+																	<span> = </span>
+																	<span> 90 </span>
+																</div>
+															</div>
+															<hr class="mt-3 mb-1 ml-0">
+															<div class="row">
+																<div class="col-7">
+																	<p><span>Total</span></p>
+																</div>
+																<div class="col-5">
+																	<span>: </span>
+																	<span> 90 </span>
+																	<span>X 10%</span>
+																	<span> = </span>
+																	<span> 90 </span>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6 col-xs-12 col-sm-12">
+														<div class="p-3 border-default my-2"
+															 style="border:1px #525f7f40 solid !important;border-radius: 4px;">
+															<div class="h3">Penilaian Revisi</div>
+															<div class="row">
+																<div class="col-7">
+																	<p><span>1. Penilaian 1 </span></p>
+																</div>
+																<div class="col-5">
+																	<span>: </span>
+																	<span> 90 </span>
+																	<span>X 10%</span>
+																	<span> = </span>
+																	<span> 90 </span>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-7">
+																	<p><span>1. Penilaian 1 </span></p>
+																</div>
+																<div class="col-5">
+																	<span>: </span>
+																	<span> 90 </span>
+																	<span>X 10%</span>
+																	<span> = </span>
+																	<span> 90 </span>
+																</div>
+															</div>
+															<hr class="mt-3 mb-1 ml-0">
+															<div class="row">
+																<div class="col-7">
+																	<p><span>Total</span></p>
+																</div>
+																<div class="col-5">
+																	<span>: </span>
+																	<span> 90 </span>
+																	<span>X 10%</span>
+																	<span> = </span>
+																	<span> 90 </span>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</li>
+										<li class="list-group-item">Penguji 1</li>
+										<li class="list-group-item">Penguji 2</li>
+									</ul>
+								</div>
 							</div>
 							<?php break ?>
 						<?php endswitch; ?>
@@ -356,7 +465,12 @@
 			});
 		};
 	}(jQuery));
+	//mahasiswa
+	<?php if($level === 'mahasiswa'): ?>
 
+	<?php endif; ?>
+	<?php if($level === 'dosen'): ?>
+	//dosen
 	function get_total() {
 		let p5 = $('#p5-tot').text();
 		let p4 = $('#p4-tot').text();
@@ -519,6 +633,7 @@
 
 		})
 	})
+	<?php endif; ?>
 </script>
 <!-- Demo JS - remove this in your project -->
 <!-- <script src="../aset/js/demo.min.js"></script> -->
