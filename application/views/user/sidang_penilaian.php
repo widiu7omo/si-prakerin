@@ -133,6 +133,7 @@
 									</div>
 								<?php endif ?>
 								<?php foreach (isset($jadwaluji) ? $jadwaluji : array() as $item): ?>
+
 									<div class="col-md-6 col-sm-12 col-xs-12">
 										<div class="card">
 											<!-- Card body -->
@@ -304,114 +305,136 @@
 						<?php endif; ?>
 							<?php break ?>
 						<?php case 'mahasiswa': ?>
+							<?php $penilaian = isset($penilaian) ? $penilaian : array(); ?>
 							<div class="row">
 								<div class="col-xs-12 col-md-12 col-lg-12">
 									<div class="h3 ml-3">Rincian detail penilaian</div>
 									<ul class="list-group">
-										<li class="list-group-item accordion" id="accordionP3">
-											<div id="accordion-title" class="justify-content-between d-flex">
-												<span>Pembimbing</span>
-												<span data-toggle="collapse" data-target="#accordionBody"
-													  aria-expanded="false" aria-controls="accordionBody"><a
-														href="javascript:void(0);"
-														class="text-primary">Rincian</a></span>
-											</div>
-											<div id="accordionBody" class="collapse" aria-labelledby="accordionBody"
-												 data-parent="#accordionP3">
-												<hr class="mt-3 mb-1">
-												<div class="row">
-													<div class="col-md-6 col-xs-12 col-sm-12">
-														<div class="p-3 border-default my-2"
-															 style="border:1px #525f7f40 solid !important;border-radius: 4px;">
-															<div class="h3">Penilaian Seminar</div>
-															<div class="row">
-																<div class="col-7">
-																	<p><span>1. Penilaian 1 </span></p>
-																</div>
-																<div class="col-5">
-																	<span>: </span>
-																	<span> 90 </span>
-																	<span>X 10%</span>
-																	<span> = </span>
-																	<span> 90 </span>
-																</div>
-															</div>
-															<div class="row">
-																<div class="col-7">
-																	<p><span>1. Penilaian 1 </span></p>
-																</div>
-																<div class="col-5">
-																	<span>: </span>
-																	<span> 90 </span>
-																	<span>X 10%</span>
-																	<span> = </span>
-																	<span> 90 </span>
-																</div>
-															</div>
-															<hr class="mt-3 mb-1 ml-0">
-															<div class="row">
-																<div class="col-7">
-																	<p><span>Total</span></p>
-																</div>
-																<div class="col-5">
-																	<span>: </span>
-																	<span> 90 </span>
-																	<span>X 10%</span>
-																	<span> = </span>
-																	<span> 90 </span>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-6 col-xs-12 col-sm-12">
-														<div class="p-3 border-default my-2"
-															 style="border:1px #525f7f40 solid !important;border-radius: 4px;">
-															<div class="h3">Penilaian Revisi</div>
-															<div class="row">
-																<div class="col-7">
-																	<p><span>1. Penilaian 1 </span></p>
-																</div>
-																<div class="col-5">
-																	<span>: </span>
-																	<span> 90 </span>
-																	<span>X 10%</span>
-																	<span> = </span>
-																	<span> 90 </span>
-																</div>
-															</div>
-															<div class="row">
-																<div class="col-7">
-																	<p><span>1. Penilaian 1 </span></p>
-																</div>
-																<div class="col-5">
-																	<span>: </span>
-																	<span> 90 </span>
-																	<span>X 10%</span>
-																	<span> = </span>
-																	<span> 90 </span>
-																</div>
-															</div>
-															<hr class="mt-3 mb-1 ml-0">
-															<div class="row">
-																<div class="col-7">
-																	<p><span>Total</span></p>
-																</div>
-																<div class="col-5">
-																	<span>: </span>
-																	<span> 90 </span>
-																	<span>X 10%</span>
-																	<span> = </span>
-																	<span> 90 </span>
-																</div>
-															</div>
-														</div>
-													</div>
+										<?php foreach ($penilaian as $nilai): ?>
+											<li class="list-group-item accordion" id="accordion<?php echo $nilai->status_dosen?>">
+												<div id="accordion-title" class="justify-content-between d-flex">
+													<span><?php echo $nilai->status_dosen == 'p1' ? "Penguji 1 - ".$nilai->p1 : ($nilai->status_dosen == 'p2' ? 'Penguji 2 - '.$nilai->p2 : "Pembimbing - ".$nilai->p3) ?></span>
+													<span data-toggle="collapse" data-target="#accordionBody<?php echo $nilai->status_dosen?>"
+														  aria-expanded="false" aria-controls="accordionBody<?php echo $nilai->status_dosen?>"><a
+															href="javascript:void(0);"
+															class="text-primary">Rincian</a></span>
 												</div>
+												<div id="accordionBody<?php echo $nilai->status_dosen?>" class="collapse" aria-labelledby="accordionBody<?php echo $nilai->status_dosen?>"
+													 data-parent="#accordion<?php echo $nilai->status_dosen?>">
+													<hr class="mt-3 mb-1">
+													<div class="row">
+														<div class="col-md-6 col-xs-12 col-sm-12 <?php echo !$nilai->nilai_seminar?'d-flex justify-content-center align-items-center flex-grow-1':null ?>">
+															<?php if ($nilai->nilai_seminar == null): ?>
+																<div class="d-flex justify-content-center align-items-center flex-grow-1">
+																	<p class="h3">Belum ada penilaian seminar dari
+																		dosen</p>
+																</div>
+															<?php elseif ($nilai->nilai_seminar != null):
+																$percentsPembimbing = array('20%', '25%', '15%', '20%', '20%');
+																$percentsPenguji = array('10%', '15%', '40%', '20%', '15%');
+																$detail_nilai = array();
+																$nilai_total = 0;
+																$i = 0;
+																if ($nilai->nilai_seminar_past == null) {
+																	//belum revisi
+																	$detail_nilai = json_decode($nilai->detail_nilai_seminar);
+																	$nilai_total = $nilai->nilai_seminar;
+																} else {
+																	//sudah revisi
+																	$detail_nilai = json_decode($nilai->detail_nilai_seminar_past);
+																	$nilai_total = $nilai->nilai_seminar_past;
+																}
+																?>
+																<div class="p-3 border-default my-2"
+																	 style="border:1px #525f7f40 solid !important;border-radius: 4px;">
+																	<div class="h3">Penilaian Seminar</div>
+																	<?php foreach ($detail_nilai as $dnbr): ?>
+																		<div class="row">
+																			<div class="col-7">
+																				<p>
+																					<span><?php echo $dnbr->name ?></span>
+																				</p>
+																			</div>
+																			<div class="col-5">
+																				<span>: </span>
+																				<span> <?php echo $dnbr->value ?> </span>
+																				<span>X <?php echo $percentsPenguji[$i] ?></span>
+																				<span> = </span>
+																				<span> <?php echo $dnbr->res ?> </span>
+																			</div>
+																		</div>
+																		<?php $i++?>
+																		<?php if ($i === count($detail_nilai)): ?>
+																			<hr class="mt-3 mb-1 ml-0">
+																			<div class="row">
+																				<div class="col-7">
+																					<p><span>Total</span></p>
+																				</div>
+																				<div class="col-5">
+																					<span>: </span>
+																					<span> <?php echo $nilai_total ?> </span>
+																				</div>
+																			</div>
+																		<?php endif; ?>
+																	<?php endforeach; ?>
+																</div>
+															<?php endif; ?>
+														</div>
+														<div class="col-md-6 col-xs-12 col-sm-12 <?php echo !$nilai->nilai_seminar_past?'d-flex justify-content-center align-items-center flex-grow-1':null ?>">
+															<?php if ($nilai->nilai_seminar_past == null): ?>
+																<div class="">
+																	<p class="h3">Belum ada penilaian revisi dari
+																		dosen</p>
+																</div>
+															<?php elseif ($nilai->nilai_seminar_past != null):
+																$percentsPembimbing = array('20%', '25%', '15%', '20%', '20%');
+																$percentsPenguji = array('10%', '15%', '40%', '20%', '15%');
+																$detail_nilai = array();
+																$i = 0;
+																//sudah revisi
+																$detail_nilai = json_decode($nilai->detail_nilai_seminar);
+																$nilai_total = $nilai->nilai_seminar;
+																?>
+																<div class="p-3 border-default my-2"
+																	 style="border:1px #525f7f40 solid !important;border-radius: 4px;">
+																	<div class="h3">Penilaian Revisi</div>
+																	<?php foreach ($detail_nilai as $dnbr): ?>
+																		<div class="row">
+																			<div class="col-7">
+																				<p>
+																					<span><?php echo $dnbr->name ?></span>
+																				</p>
+																			</div>
+																			<div class="col-5">
+																				<span>: </span>
+																				<span> <?php echo $dnbr->value ?> </span>
+																				<span>X <?php echo $percentsPenguji[$i] ?></span>
+																				<span> = </span>
+																				<span> <?php echo $dnbr->res ?> </span>
+																			</div>
+																		</div>
+																		<?php $i++ ?>
+																		<?php if ($i === count($detail_nilai)): ?>
+																			<hr class="mt-3 mb-1 ml-0">
+																			<div class="row">
+																				<div class="col-7">
+																					<p><span>Total</span></p>
+																				</div>
+																				<div class="col-5">
+																					<span>: </span>
+																					<span> <?php echo $nilai_total ?> </span>
+																				</div>
+																			</div>
+																		<?php endif; ?>
+																	<?php endforeach; ?>
+																</div>
+															<?php endif; ?>
+														</div>
+													</div>
 
-											</div>
-										</li>
-										<li class="list-group-item">Penguji 1</li>
-										<li class="list-group-item">Penguji 2</li>
+												</div>
+											</li>
+										<?php endforeach; ?>
 									</ul>
 								</div>
 							</div>

@@ -11,9 +11,10 @@ class Penilaian_model extends CI_Model
 	public function get_penilaian_seminar($id = null)
 	{
 		$where = "WHERE ";
-		if ($id) {
+		if ($id != null) {
 			$where .= "tm.nim = '$id'";
 		}
+		$where .= "AND tsj.id IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian)";
 		return $this->db->query("
 		SELECT
 			tsj.id ij,
@@ -48,12 +49,6 @@ class Penilaian_model extends CI_Model
 			INNER JOIN tb_pegawai tp1 ON tp1.nip_nik = td1.nip_nik
 			INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik
 		$where
-		AND tsj.id IN (
-			SELECT
-				id_seminar_jadwal
-			FROM
-				tb_seminar_penilaian)
-		ORDER BY
-			START")->result();
+			ORDER BY status_dosen")->result();
 	}
 }

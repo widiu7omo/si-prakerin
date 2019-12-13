@@ -110,7 +110,7 @@ class Sidang extends CI_Controller
 		$level = $this->session->userdata('level');
 		switch ($level) {
 			case 'mahasiswa':
-				$id = $this->session->userdata('nim');
+				$id = $this->session->userdata('id');
 				$penilaian = $this->penilaian_model;
 				$data['penilaian'] = $penilaian->get_penilaian_seminar($id);
 				break;
