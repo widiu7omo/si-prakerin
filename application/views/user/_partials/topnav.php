@@ -9,6 +9,7 @@ if($_SESSION['level'] == 'mahasiswa'){
 }
 $countNotification = count_notification($this->session->userdata('id'),0);
 $dataNotification = get_notification($this->session->userdata('id'),0);
+$level = $this->session->userdata('level');
  ?>
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
 	<div class="container-fluid">
@@ -162,10 +163,12 @@ $dataNotification = get_notification($this->session->userdata('id'),0);
 						<div class="dropdown-header noti-title">
 							<h6 class="text-overflow m-0">Welcome! <?php echo $nickname ?></h6>
 						</div>
+						<?php if($level == 'mahasiswa'): ?>
 						<a href="<?php echo site_url('user/profile') ?>" class="dropdown-item">
 							<i class="ni ni-single-02"></i>
 							<span>My profile</span>
 						</a>
+						<?php endif; ?>
 <!--						<a href="#!" class="dropdown-item">-->
 <!--							<i class="ni ni-settings-gear-65"></i>-->
 <!--							<span>Settings</span>-->
