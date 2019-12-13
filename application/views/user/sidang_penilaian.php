@@ -311,21 +311,28 @@
 									<div class="h3 ml-3">Rincian detail penilaian</div>
 									<ul class="list-group">
 										<?php foreach ($penilaian as $nilai): ?>
-											<li class="list-group-item accordion" id="accordion<?php echo $nilai->status_dosen?>">
+											<li class="list-group-item accordion"
+												id="accordion<?php echo $nilai->status_dosen ?>">
 												<div id="accordion-title" class="justify-content-between d-flex">
-													<span><?php echo $nilai->status_dosen == 'p1' ? "Penguji 1 - ".$nilai->p1 : ($nilai->status_dosen == 'p2' ? 'Penguji 2 - '.$nilai->p2 : "Pembimbing - ".$nilai->p3) ?></span>
-													<span data-toggle="collapse" data-target="#accordionBody<?php echo $nilai->status_dosen?>"
-														  aria-expanded="false" aria-controls="accordionBody<?php echo $nilai->status_dosen?>"><a
+													<span><?php echo $nilai->status_dosen == 'p1' ? "Penguji 1 - " . $nilai->p1 : ($nilai->status_dosen == 'p2' ? 'Penguji 2 - ' . $nilai->p2 : "Pembimbing - " . $nilai->p3) ?></span>
+													<span data-toggle="collapse"
+														  data-target="#accordionBody<?php echo $nilai->status_dosen ?>"
+														  aria-expanded="false"
+														  aria-controls="accordionBody<?php echo $nilai->status_dosen ?>"><a
 															href="javascript:void(0);"
 															class="text-primary">Rincian</a></span>
 												</div>
-												<div id="accordionBody<?php echo $nilai->status_dosen?>" class="collapse" aria-labelledby="accordionBody<?php echo $nilai->status_dosen?>"
-													 data-parent="#accordion<?php echo $nilai->status_dosen?>">
+												<div id="accordionBody<?php echo $nilai->status_dosen ?>"
+													 class="collapse"
+													 aria-labelledby="accordionBody<?php echo $nilai->status_dosen ?>"
+													 data-parent="#accordion<?php echo $nilai->status_dosen ?>">
 													<hr class="mt-3 mb-1">
 													<div class="row">
-														<div class="col-md-6 col-xs-12 col-sm-12 <?php echo !$nilai->nilai_seminar?'d-flex justify-content-center align-items-center flex-grow-1':null ?>">
+														<div
+															class="col-md-6 col-xs-12 col-sm-12 <?php echo !$nilai->nilai_seminar ? 'd-flex justify-content-center align-items-center flex-grow-1' : null ?>">
 															<?php if ($nilai->nilai_seminar == null): ?>
-																<div class="d-flex justify-content-center align-items-center flex-grow-1">
+																<div
+																	class="d-flex justify-content-center align-items-center flex-grow-1">
 																	<p class="h3">Belum ada penilaian seminar dari
 																		dosen</p>
 																</div>
@@ -363,7 +370,7 @@
 																				<span> <?php echo $dnbr->res ?> </span>
 																			</div>
 																		</div>
-																		<?php $i++?>
+																		<?php $i++ ?>
 																		<?php if ($i === count($detail_nilai)): ?>
 																			<hr class="mt-3 mb-1 ml-0">
 																			<div class="row">
@@ -380,7 +387,8 @@
 																</div>
 															<?php endif; ?>
 														</div>
-														<div class="col-md-6 col-xs-12 col-sm-12 <?php echo !$nilai->nilai_seminar_past?'d-flex justify-content-center align-items-center flex-grow-1':null ?>">
+														<div
+															class="col-md-6 col-xs-12 col-sm-12 <?php echo !$nilai->nilai_seminar_past ? 'd-flex justify-content-center align-items-center flex-grow-1' : null ?>">
 															<?php if ($nilai->nilai_seminar_past == null): ?>
 																<div class="">
 																	<p class="h3">Belum ada penilaian revisi dari
@@ -513,6 +521,20 @@
 		return nilai;
 	}
 
+	let komponenPembimbing = [
+		{name: "1. Penguasaan teori", percentage: "20%"},
+		{name: "2. Kemampuan analisis dan pemecahan masalah", percentage: "25%"},
+		{name: "3. Keaktifan bimbingan", percentage: "15%"},
+		{name: "4. Kemampuan penulisan laporan", percentage: "20%"},
+		{name: "5. Sikap / Etika", percentage: "20%"}
+	];
+	let komponenPenguji = [
+		{name:"1. Penyajian Presentasi",percentage:"10%"},
+		{name:"2. Pemahaman Materi",percentage:"15%"},
+		{name:"3. Hasil yang dicapai",percentage:"40%"},
+		{name:"4. Objektifitas menganggapi pertanyaan",percentage:"20%"},
+		{name:"5. Penulisan laporan",percentage:"15%"}
+	];
 	$(document).ready(function () {
 		$('#p1').inputFilter(function (value) {
 			if (parseInt(value) <= 100 || value === '') {
@@ -605,7 +627,6 @@
 						$('#detail-nim').text(res[0].nim);
 						$('#detail-laporan').text(res[0].laporan);
 						$('#detail-prodi').text(res[0].nama_program_studi);
-						$('#modal-seminar-penilaian').modal('show');
 						$('#status-penilaian').data('status', res[0].sebagai);
 						$('#session-penilaian').data('session', res[0].session);
 						if (section === 'history') {
@@ -621,6 +642,35 @@
 							}
 							$('#pn-tot').text(total_nilai);
 						}
+						let label = $('#komponen-penilaian>label');
+						let percentage =$('span#percent-value');
+						let percentHelp = $('b#percent-help');
+						if (res[0].sebagai === 'p3') {
+							label.map(function(index){
+								if(index < label.length-1){
+									$(this).text(komponenPembimbing[index].name)
+								}
+							})
+							percentage.map(function(index){
+								$(this).text(komponenPembimbing[index].percentage);
+							})
+							percentHelp.map(function (index) {
+								$(this).text(komponenPembimbing[index].percentage);
+							})
+						} else {
+							label.map(function(index){
+								if(index < label.length-1){
+									$(this).text(komponenPenguji[index].name)
+								}
+							})
+							percentage.map(function(index){
+								$(this).text(komponenPenguji[index].percentage);
+							})
+							percentHelp.map(function (index) {
+								$(this).text(komponenPenguji[index].percentage);
+							})
+						}
+						$('#modal-seminar-penilaian').modal('show');
 					}
 				},
 				error: function (err) {

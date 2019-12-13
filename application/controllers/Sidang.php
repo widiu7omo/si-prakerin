@@ -108,6 +108,22 @@ class Sidang extends CI_Controller
 		$get = $this->input->get();
 		$seminar = $this->seminar_model;
 		$level = $this->session->userdata('level');
+		$dataModalPembimbing = json_decode('[
+			{name:"1. Penguasaan teori",percentage:"20%"},
+			{name:"2. Kemampuan analisis dan pemecahan masalah",percentage:"25%"},
+			{name:"3. Keaktifan bimbingan",percentage:"15%"},
+			{name:"4. Kemampuan penulisan laporan",percentage:"20%"},
+			{name:"5. Sikap / Etika",percentage:"20%"}
+		]');
+		$dataModelPenguji = json_decode('[
+			{name:"1. Penyajian Presentasi",percentage:"10%"},
+			{name:"2. Pemahaman Materi",percentage:"15%"},
+			{name:"3. Hasil yang dicapai",percentage:"40%"},
+			{name:"4. Objektifitas menganggapi pertanyaan",percentage:"20%"},
+			{name:"5. Penulisan laporan",percentage:"15%"}
+		]');
+		$data['komponen_pembimbing'] = $dataModalPembimbing;
+		$data['komponen_penguji'] = $dataModelPenguji;
 		switch ($level) {
 			case 'mahasiswa':
 				$id = $this->session->userdata('id');

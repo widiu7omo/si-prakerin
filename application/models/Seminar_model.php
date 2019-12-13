@@ -308,7 +308,7 @@ class Seminar_model extends CI_Model
 		if (isset($post['ij'])) {
 			$where .= " AND tsj.id = '$post[ij]'";
 		}
-//		$where .= " AND tsj.id NOT IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian)";
+		$where .= " AND tsj.id NOT IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian WHERE id_dosen = '$id')";
 		return $this->db->query("SELECT
 			tsj.id ij,
 			tp3.nama_pegawai p3,

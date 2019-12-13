@@ -28,7 +28,7 @@
 						</li>
 						<li class="list-group-item p-1 pl-3">
 							<p class="h4">Penilaian : <b></b></p>
-							<div class="form-group">
+							<div id="komponen-penilaian" class="form-group">
 								<label for="" class="form-control-label" id="name-p1">1. Penyajian Presentasi</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="p1" autocomplete="off"
@@ -36,14 +36,14 @@
 										   placeholder="Masukkan Nilai">
 									<div class="input-group-append">
 										<span class="input-group-text">X</span>
-										<span class="input-group-text">10%</span>
+										<span class="input-group-text" id="percent-value">10%</span>
 										<span class="input-group-text">=</span>
 										<span class="input-group-text" id="res-p1">0</span>
 									</div>
 								</div>
-								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar 10%</small>
+								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar <b id="percent-help">10%</b></small>
 							</div>
-							<div class="form-group">
+							<div id="komponen-penilaian" class="form-group">
 								<label for="" class="form-control-label" id="name-p2">2. Pemahaman Materi</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="p2" autocomplete="off"
@@ -51,14 +51,14 @@
 										   placeholder="Masukkan Nilai">
 									<div class="input-group-append">
 										<span class="input-group-text">X</span>
-										<span class="input-group-text">15%</span>
+										<span class="input-group-text" id="percent-value">15%</span>
 										<span class="input-group-text">=</span>
 										<span class="input-group-text" id="res-p2">0</span>
 									</div>
 								</div>
-								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar 15%</small>
+								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar <b id="percent-help">15%</b></small>
 							</div>
-							<div class="form-group">
+							<div id="komponen-penilaian" class="form-group">
 								<label for="" class="form-control-label" id="name-p3">3. Hasil yang dicapai</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="p3" autocomplete="off"
@@ -66,14 +66,14 @@
 										   placeholder="Masukkan Nilai">
 									<div class="input-group-append">
 										<span class="input-group-text">X</span>
-										<span class="input-group-text">40%</span>
+										<span class="input-group-text" id="percent-value">40%</span>
 										<span class="input-group-text">=</span>
 										<span class="input-group-text" id="res-p3">0</span>
 									</div>
 								</div>
-								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar 40%</small>
+								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar <b id="percent-help">40%</b></small>
 							</div>
-							<div class="form-group">
+							<div id="komponen-penilaian" class="form-group">
 								<label for="" class="form-control-label" id="name-p4">4. Objektifitas menganggapi pertanyaan</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="p4" autocomplete="off"
@@ -81,14 +81,14 @@
 										   placeholder="Masukkan Nilai">
 									<div class="input-group-append">
 										<span class="input-group-text">X</span>
-										<span class="input-group-text">20%</span>
+										<span class="input-group-text" id="percent-value">20%</span>
 										<span class="input-group-text">=</span>
 										<span class="input-group-text" id="res-p4">0</span>
 									</div>
 								</div>
-								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar 20%</small>
+								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar <b id="percent-help">20%</b></small>
 							</div>
-							<div class="form-group">
+							<div id="komponen-penilaian" class="form-group">
 								<label for="" class="form-control-label" id="name-p5">5. Penulisan laporan</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="p5" autocomplete="off"
@@ -96,14 +96,14 @@
 										   placeholder="Masukkan Nilai">
 									<div class="input-group-append">
 										<span class="input-group-text">X</span>
-										<span class="input-group-text">15%</span>
+										<span class="input-group-text" id="percent-value">15%</span>
 										<span class="input-group-text">=</span>
 										<span class="input-group-text" id="res-p5">0</span>
 									</div>
 								</div>
-								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar 15%</small>
+								<small id="helpId" class="form-text text-muted">Bobot penilaian sebesar <b id="percent-help">15%</b></small>
 							</div>
-							<div class="form-group">
+							<div id="komponen-penilaian" class="form-group">
 								<label for="" class="form-control-label">Total keseluruhan</label>
 								<p class="h3 font-weight-bold">
 									<span id="p1-tot">P1</span>&nbsp;+
