@@ -44,10 +44,13 @@ class Konsultasi_model extends CI_Model
 		$join = array('(select tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.* from tb_dosen_bimbingan_mhs inner join tb_mahasiswa on tb_dosen_bimbingan_mhs.nim = tb_mahasiswa.nim) tb_dosen_bimbingan_mhs', 'tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs = tb_konsultasi_bimbingan.id_dosen_bimbingan_mhs', 'tb_dosen_bimbingan_mhs');
 		return datajoin('tb_konsultasi_bimbingan', $where, 'tb_konsultasi_bimbingan.*,tb_dosen_bimbingan_mhs.nama_mahasiswa', $join, null, 'tb_konsultasi_bimbingan.start DESC');
 	}
-	public function check_bimbingan(){
+	public function check_bimbingan($directly = null){
 		$nim = $this->session->userdata('id');
 		$post = $this->input->post();
 		$dosen_bimbingan_mhs = masterdata('tb_dosen_bimbingan_mhs',array('nim'=>$nim),'id_dosen_bimbingan_mhs as id',false);
+		if($directly){
+			return $dosen_bimbingan_mhs;
+		}
 		if($dosen_bimbingan_mhs){
 			//cek mode bimbingan offline || online
 			$offline = masterdata('tb_konsultasi_bimbingan_offline',array('id_dosen_bimbingan_mhs'=>$dosen_bimbingan_mhs->id),'lembar_konsultasi as name,"application/pdf" as type, 1234 as size',false);

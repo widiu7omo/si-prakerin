@@ -7,7 +7,7 @@ class Magang extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('perusahaan_model', 'pengajuan_model'));
+		$this->load->model(array('perusahaan_model', 'pengajuan_model', 'konsultasi_model', 'penilaian_model'));
 		$this->load->helper(array('notification', 'master'));
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
 		$id = $this->session->userdata('id');
@@ -120,16 +120,17 @@ class Magang extends CI_Controller
 					}
 					break;
 				case 'penilaian':
-					$post = $this->input->post();
-					if (isset($post['insert'])) {
-						$this->create_pengajuan($post);
+					$get = $this->input->get();
+					if (isset($get['q']) and $get['q'] == 'i') {
+						return $this->create_penilaian();
 					}
-					if (isset($post['update'])) {
-						$this->edit_pengajuan($post);
+					if (isset($get['q']) and $get['q'] == 'u') {
+						return $this->edit_penilaian();
 					}
-					if (isset($post['delete'])) {
-						$this->remove_pengajuan($post);
+					if (isset($get['q']) and $get['q'] == 'd') {
+						return $this->remove_penilaian();
 					}
+					return $this->index_penilaian();
 					break;
 				default:
 					redirect(site_url('magang'));
@@ -137,6 +138,43 @@ class Magang extends CI_Controller
 		}
 		$this->load->view('user/magang', $data);
 
+	}
+
+	public function create_penilaian()
+	{
+		$penilaian = $this->penilaian_model;
+		if ($penilaian->insert_penilaian_perusahaan()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		}
+		echo json_encode(array('status' => 'error'));
+	}
+
+	public function edit_penilaian()
+	{
+		$penilaian = $this->penilaian_model;
+		if ($penilaian->update_penilaian_perusahaan()) {
+			echo json_encode(array('status' => 'success'));
+			return;
+		}
+		echo json_encode(array('status' => 'error'));
+	}
+
+	public function remove_penilaian()
+	{
+		$penilaian = $this->penilaian_model;
+	}
+
+	public function index_penilaian()
+	{
+		$bimbingan = $this->konsultasi_model;
+		$penilaian = $this->penilaian_model;
+		$cek_bimbingan = $bimbingan->check_bimbingan(true);
+		if (isset($cek_bimbingan->id)) {
+			$data['nilai_pkl'] = $penilaian->get_penilaian_perusahaan("id_dosen_bimbingan_mhs = '$cek_bimbingan->id'");
+		}
+		$data['bimbingan'] = $cek_bimbingan;
+		$this->load->view('user/magang_penilaian', $data);
 	}
 
 	public function index_pengajuan()
@@ -210,21 +248,21 @@ class Magang extends CI_Controller
 		$post = $this->input->post();
 		if (isset($post['insert'])) {
 			$id = $this->session->userdata('id');
-			$mahasiswa = masterdata('tb_mahasiswa', ['nim' => $id], 'nama_mahasiswa');
+			$mahasiswa = masterdata('tb_mahasiswa', array('nim' => $id), 'nama_mahasiswa');
 			$pengajuan = $this->pengajuan_model;
 			if ($pengajuan->insert()) {
 				$pesan = $mahasiswa->nama_mahasiswa . " ({$id})" . ' mengajukan permohonan magang';
 				$uri = 'mahasiswa?m=pengajuan';
 				set_notification($id, 'admin', $pesan, 'pengajuan magang', $uri);
-				$this->session->set_flashdata('status', [
+				$this->session->set_flashdata('status', array(
 					'message' => 'Pengajuan sedang diproses',
 					'type' => 'success'
-				]);
+				));
 			} else {
-				$this->session->set_flashdata('status', [
+				$this->session->set_flashdata('status', array(
 					'message' => 'Maaf, sementara ini belum bisa melakukan pengajuan',
 					'type' => 'fail'
-				]);
+				));
 			}
 			redirect(site_url('magang?m=pengajuan'));
 		}
@@ -241,32 +279,32 @@ class Magang extends CI_Controller
 			$validation = $this->form_validation;
 			$validation->set_rules($perusahaan->rules());
 			if ($validation->run() == false) {
-				$this->session->set_flashdata('status', [
+				$this->session->set_flashdata('status', array(
 					'message' => 'Gagal memvalidasi data',
 					'type' => 'danger'
-				]);
+				));
 			} else {
 				$perusahaan->update() ?
-					$this->session->set_flashdata('status', [
+					$this->session->set_flashdata('status', array(
 						'message' => 'Data Perusahaan berhasil dirubah',
 						'type' => 'success'
-					]) :
-					$this->session->set_flashdata('status', [
+					)) :
+					$this->session->set_flashdata('status', array(
 						'message' => 'Data Perusahaan gagal dirubah',
 						'type' => 'fail'
-					]);
+					));
 			}
 			redirect(site_url("magang?m=pengajuan&q=u&id={$id}"));
 		}
 
 		if (isset($id)) {
 			$perusahaan = $this->perusahaan_model;
-			$join = [
+			$join = array(
 				'tb_program_studi',
 				'tb_perusahaan.id_program_studi = tb_program_studi.id_program_studi',
 				'left outer'
-			];
-			$select = ['tb_perusahaan.*', 'tb_program_studi.nama_program_studi'];
+			);
+			$select = array('tb_perusahaan.*', 'tb_program_studi.nama_program_studi');
 			$data['perusahaan'] = $perusahaan->getById($id, $select, $join);
 		}
 
@@ -280,14 +318,14 @@ class Magang extends CI_Controller
 			show_404();
 		}
 		$this->perusahaan_model->delete($id) ?
-			$this->session->set_flashdata('status', [
+			$this->session->set_flashdata('status', array(
 				'message' => 'Data Perusahaan berhasil dihapus',
 				'type' => 'success'
-			]) :
-			$this->session->set_flashdata('status', [
+			)) :
+			$this->session->set_flashdata('status', array(
 				'message' => 'Data Perusahaan gagal dihapus',
 				'type' => 'fail'
-			]);
+			));
 		redirect(site_url('magang?m=pengajuan'));
 
 	}
@@ -317,10 +355,10 @@ class Magang extends CI_Controller
 		if (isset($post['insert'])) {
 			$this->perusahaan_model->insert();
 			set_notification($id, 'admin', $pesan, 'pengajuan magang', $uri);
-			$this->session->set_flashdata('status', [
+			$this->session->set_flashdata('status', array(
 				'message' => 'Data Pengajuan perusahaan berhasil disimpan',
 				'type' => 'success'
-			]);
+			));
 			redirect('magang?m=perusahaanbaru');
 		}
 		//set notification to admin
@@ -343,22 +381,6 @@ class Magang extends CI_Controller
 	{
 
 	}
-
-	public function create_penilaian()
-	{
-
-	}
-
-	public function edit_penilaian()
-	{
-
-	}
-
-	public function remove_penilaian()
-	{
-
-	}
-
 
 }
 

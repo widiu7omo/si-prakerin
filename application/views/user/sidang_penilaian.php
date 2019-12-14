@@ -503,6 +503,7 @@
 	<?php if($level === 'dosen'): ?>
 	//dosen
 	function get_total() {
+		//TODO: clean this code
 		let p5 = $('#p5-tot').text();
 		let p4 = $('#p4-tot').text();
 		let p3 = $('#p3-tot').text();
@@ -536,6 +537,7 @@
 		{name:"5. Penulisan laporan",percentage:"15%"}
 	];
 	$(document).ready(function () {
+		//TODO:clean this code
 		$('#p1').inputFilter(function (value) {
 			if (parseInt(value) <= 100 || value === '') {
 				let nilai = (parseInt(value) * 10) / 100;

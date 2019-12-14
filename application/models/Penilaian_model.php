@@ -8,6 +8,41 @@ class Penilaian_model extends CI_Model
 		parent::__construct();
 	}
 
+	public function insert_penilaian_perusahaan()
+	{
+		$post = $this->input->post();
+		$data = array("nilai_pkl" => $post['tnp'],
+			"detail_nilai_pkl" => $post['dnp'],
+			"id_dosen_bimbingan_mhs" => $post['idbm']);
+		return $this->db->insert('tb_perusahaan_penilaian', $data);
+	}
+
+	public function update_penilaian_perusahaan()
+	{
+		$post = $this->input->post();
+		if($post['id']){
+			$data = array("nilai_pkl" => $post['tnp'],
+				"detail_nilai_pkl" => $post['dnp'],
+				"id_dosen_bimbingan_mhs" => $post['idbm']);
+			$this->db->set($data);
+			$this->db->where("id = '$post[id]'");
+			return $this->db->update('tb_perusahaan_penilaian');
+		}
+	}
+
+	public function delete_penilaian_perusahaan()
+	{
+
+	}
+
+	public function get_penilaian_perusahaan($id = null)
+	{
+		if($id){
+			$this->db->where($id);
+		}
+		return $this->db->select('id,nilai_pkl,detail_nilai_pkl,id_dosen_bimbingan_mhs idbm')->from('tb_perusahaan_penilaian')->get()->result();
+	}
+
 	public function get_penilaian_seminar($id = null)
 	{
 		$where = "WHERE ";
