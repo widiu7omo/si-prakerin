@@ -33,20 +33,20 @@
 								<table class="table table-flush" id="datatable-jadwal">
 									<thead class="thead-light">
 									<tr>
+										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
-										<th>Nama Dosen</th>
-										<th>Sebagai</th>
-										<th>Nilai Seminar</th>
-										<th>Nilai Revisi</th>
+										<th>Pembimbing</th>
+										<th>Total Nilai</th>
+										<th>Detail Nilai</th>
 									</tr>
 									</thead>
 									<tfoot>
 									<tr>
+										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
-										<th>Nama Dosen</th>
-										<th>Sebagai</th>
-										<th>Nilai Seminar</th>
-										<th>Nilai Revisi</th>
+										<th>Pembimbing</th>
+										<th>Total Nilai</th>
+										<th>Detail Nilai</th>
 									</tr>
 									</tfoot>
 									<tbody></tbody>
@@ -73,7 +73,7 @@
 				}
 			},
 			ajax: {
-				url: "<?php echo site_url("seminar?m=data_penilaian") ?>",
+				url: "<?php echo site_url("perusahaan?m=penilaian") ?>",
 				type: "POST",
 				data: {
 					"ajax": "true"
@@ -84,43 +84,20 @@
 			],
 			"order": [[0, 'asc']],
 			columns: [
+				{"data":"nim"},
 				{"data": "nama_mahasiswa"},
+				{"data": "nama_pembimbing"},
+				{"data": "nilai_pkl"},
 				{
-					"data": null,
-					"render": function (data, type, row) {
-						if (row.status_dosen === 'p1') {
-							return row.p1;
-						} else if (row.status_dosen === 'p2') {
-							return row.p2;
-						} else {
-							return row.p3
-						}
+					"data": "detail_nilai_pkl",
+					"render": function (data) {
+						let encodedData = JSON.parse(data);
+						let lists = encodedData.map(function (item) {
+							return '<li><span>'+item.name+'</span> : <span>'+item.res+'</span></li>'
+						});
+						return '<ul>'+lists.join(" ")+'</ul>';
 					}
 				},
-				{
-					"data": null,
-					"render": function (data, type, row) {
-						if (row.status_dosen === 'p1') {
-							return 'Penguji 1';
-						} else if (row.status_dosen === 'p2') {
-							return 'Penguji 2';
-						} else {
-							return 'Pembimbing'
-						}
-					}
-				},
-				{
-					"data": "nilai_seminar",
-					"render": function (data, type, row) {
-						return data !== null ? data : "Tidak ada penilaian"
-					}
-				},
-				{
-					"data": "nilai_seminar_past",
-					"render": function (data, type, row) {
-						return data !== null ? data : "Tidak ada penilaian"
-					}
-				}
 			]
 		}).on('init.dt', function () {
 			$('.dt-buttons .btn').removeClass('btn-secondary').addClass('btn-sm btn-default');

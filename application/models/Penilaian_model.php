@@ -35,10 +35,23 @@ class Penilaian_model extends CI_Model
 
 	}
 
-	public function get_penilaian_perusahaan($id = null)
+	public function get_penilaian_perusahaan($id = null,$detail = false)
 	{
 		if($id){
 			$this->db->where($id);
+		}
+		if($detail){
+			return $this->db->query('SELECT
+				tm.nim,
+				tm.nama_mahasiswa,
+				tp.nama_pegawai nama_pembimbing,
+				tpp.nilai_pkl,
+				tpp.detail_nilai_pkl
+			FROM
+				tb_perusahaan_penilaian tpp
+				INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tdbm.id_dosen_bimbingan_mhs = tpp.id_dosen_bimbingan_mhs
+				INNER JOIN tb_pegawai tp ON tdbm.nip_nik = tp.nip_nik
+				INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim')->result();
 		}
 		return $this->db->select('id,nilai_pkl,detail_nilai_pkl,id_dosen_bimbingan_mhs idbm')->from('tb_perusahaan_penilaian')->get()->result();
 	}

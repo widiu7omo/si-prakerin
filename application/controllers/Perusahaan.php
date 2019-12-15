@@ -8,7 +8,7 @@ class Perusahaan extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('perusahaan_model');
+        $this->load->model(array('perusahaan_model','penilaian_model'));
 	    $this->load->library( 'form_validation');
 	    //middleware
         !$this->session->userdata('level')?redirect(site_url('main')):null;
@@ -31,7 +31,7 @@ class Perusahaan extends CI_Controller {
                     'desc'=>'Detail informasi terkait perusahaan tempat magang kalian'),
                 array('name'=>'Penilaian',
                     'href'=>site_url('perusahaan?m=penilaian'),
-                    'icon'=>'fas fa-star',
+                    'icon'=>'fas fa-file-excel',
                     'desc'=>'Penilaian yang diperoleh dari tempat magang yang bersangkutan')
             );
             break;
@@ -81,6 +81,7 @@ class Perusahaan extends CI_Controller {
                     if(isset($post['delete'])){
                         $this->remove_manajemen($post);
                     }
+                    return $this->index_penilaian();
                 break;
                 default:redirect(site_url('perusahaan'));
             }
@@ -89,6 +90,16 @@ class Perusahaan extends CI_Controller {
         $this->load->view('admin/perusahaan',$data);
 
     }
+    public function index_penilaian(){
+    	$post = $this->input->post();
+    	$penilaian = $this->penilaian_model;
+    	$data_penilaian = $penilaian->get_penilaian_perusahaan(null,true);
+		if (isset($post['ajax'])) {
+			echo json_encode((object)array('data' => $data_penilaian));
+			return;
+		}
+    	$this->load->view('admin/perusahaan_list_penilaian');
+	}
 	public function index_manajemen(){
     	$level = $this->session->userdata('level');
     	switch ($level){
