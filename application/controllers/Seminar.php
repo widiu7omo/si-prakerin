@@ -13,7 +13,7 @@ class Seminar extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('upload', 'master', 'notification'));
-		$this->load->model(array('pembimbing_model', 'akun_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
+		$this->load->model(array('pembimbing_model', 'akun_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
 		$this->load->library('form_validation');
 		//middleware
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
@@ -34,10 +34,10 @@ class Seminar extends MY_Controller
 						'desc' => 'Pemilihan dosen berdasarkan program studi'
 					),
 					array(
-						'name' => 'Kelola Pembimbing ' . $tahunAkademik[0]->tahun_akademik,
-						'href' => site_url('dosen?m=pembimbing'),
-						'icon' => 'fas fa-users',
-						'desc' => 'Manajemen dosen pembimbing mahasiswa  ' . $tahunAkademik[0]->tahun_akademik
+						'name' => 'Data Jadwal Seminar ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=data'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Data jadwal terkini mahasiswa seminar  ' . $tahunAkademik[0]->tahun_akademik
 					),
 				);
 				break;
@@ -53,14 +53,14 @@ class Seminar extends MY_Controller
 				break;
 			case 'mahasiswa':
 				$post = $this->input->post();
-				if(!isset($post['id'])){
+				if (!isset($post['id'])) {
 					show_error("Access Denied. You Do Not Have The Permission To Access This Page On This
             Server", 403, "Forbidden, you don't have pemission");
 				}
 				break;
 			case 'dosen':
 				$post = $this->input->post();
-				if(!isset($post['id'])){
+				if (!isset($post['id'])) {
 					show_error("Access Denied. You Do Not Have The Permission To Access This Page On This
             Server", 403, "Forbidden, you don't have pemission");
 				}
@@ -150,12 +150,29 @@ class Seminar extends MY_Controller
 					}
 					return $this->get_jadwal();
 					break;
+				case 'data':
+
+					return $this->get_list_jadwal();
+					break;
+					break;
 				default:
 					redirect(site_url('seminar'));
 			}
 		}
 
 		$this->load->view('admin/seminar', $data);
+	}
+
+	public function get_list_jadwal()
+	{
+		$post = $this->input->post();
+		$seminar = $this->seminar_model;
+		$data_jadwal = $seminar->get_jadwal();
+		if (isset($post['ajax'])) {
+			echo json_encode((object)array('data'=>$data_jadwal));
+			return;
+		}
+		$this->load->view('admin/seminar_list_jadwal');
 	}
 
 	public function get_jadwal()
