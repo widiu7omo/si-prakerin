@@ -28,8 +28,7 @@
 								<div class="col-8">
 									<h3 class="mb-0">Program Studi</h3>
 									<p class="text-sm mb-0">
-										This is an example of user management. This is a minimal setup in order to get
-										started fast.
+										Manajemen data program studi
 									</p>
 								</div>
 								<div class="col-4 text-right">
@@ -46,6 +45,7 @@
 										<th>No</th>
 										<th>ID</th>
 										<th>Program Studi</th>
+										<th>Alias</th>
 									</tr>
 								</thead>
 								<tfoot>
@@ -54,6 +54,7 @@
 										<th>No</th>
 										<th>ID</th>
 										<th>Program Studi</th>
+										<th>Alias</th>
 									</tr>
 								</tfoot>
 								<tbody>
@@ -71,6 +72,7 @@
 										<td class="sorting_1"><?php echo $key +1?></td>
 										<td><?php echo $prodi->id_program_studi?></td>
 										<td><?php echo $prodi->nama_program_studi?></td>
+										<td><?php echo $prodi->alias?></td>
 									</tr>
 									<?php endforeach; ?>
 								</tbody>

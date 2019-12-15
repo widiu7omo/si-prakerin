@@ -33,7 +33,8 @@ class Prodi_model extends CI_Model {
 
         $post = $this->input->post();
         $this->id_program_studi = $post['id'];
-        $this->nama_program_studi = $post['name'];
+		$this->nama_program_studi = $post['name'];
+		$this->alias = $post['alias'];
         //add parameter here
         $this->db->insert($this->_table,$this);
     }
@@ -43,7 +44,8 @@ class Prodi_model extends CI_Model {
 
         $this->id_program_studi = $post['id'];
         $this->nama_program_studi = $post['name'];
-        //add parameter here
+		$this->alias = $post['alias'];
+		//add parameter here
         $this->db->update($this->_table,$this,[$this->_primary_key=>$post['id']]);
     }
 

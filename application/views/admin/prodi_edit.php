@@ -78,6 +78,19 @@
 											</div>
 										</div>
 									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<div class="input-group input-group-merge">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+															class="fas fa-university"></i></span>
+												</div>
+												<input class="form-control" name="alias"
+													   value="<?php echo $prodi->alias ?>"
+													   placeholder="Nama Alias Baru" type="text">
+											</div>
+										</div>
+									</div>
 									<div class="col-md-12 text-md-right align-content-end">
 										<button type="submit" class="btn btn-success">Simpan</button>
 									</div>

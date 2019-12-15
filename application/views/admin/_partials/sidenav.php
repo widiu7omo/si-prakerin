@@ -71,6 +71,12 @@
 								</div>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link" href="<?php echo site_url('perusahaan') ?>">
+									<i class="fas fa-industry text-info"></i>
+									<span class="nav-link-text">Perusahaan</span>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="<?php echo site_url('mahasiswa') ?>">
 									<i class="fas fa-user-graduate text-primary"></i>
 									<span class="nav-link-text">Mahasiswa</span>
@@ -86,12 +92,6 @@
 								<a class="nav-link" href="<?php echo site_url('seminar') ?>">
 									<i class="fas fa-calendar-alt text-green"></i>
 									<span class="nav-link-text">Seminar</span>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="<?php echo site_url('perusahaan') ?>">
-									<i class="fas fa-industry text-primary"></i>
-									<span class="nav-link-text">Perusahaan</span>
 								</a>
 							</li>
 							<li class="nav-item">
