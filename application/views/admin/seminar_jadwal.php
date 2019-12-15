@@ -228,6 +228,12 @@
 		function data_tempat() {
 			$('#datatable-tempat').dataTable({
 				ajax: '<?php echo site_url('seminar?m=tempat') ?>',
+				language: {
+					paginate: {
+						previous: "<i class='fas fa-angle-left'>",
+						next: "<i class='fas fa-angle-right'>"
+					}
+				},
 				columns: [
 					{'data': 'id'},
 					{'data': 'nama'},

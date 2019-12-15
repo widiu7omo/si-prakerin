@@ -45,9 +45,9 @@ class Penilaian_model extends CI_Model
 
 	public function get_penilaian_seminar($id = null)
 	{
-		$where = "WHERE ";
+		$where = "";
 		if ($id != null) {
-			$where .= "tm.nim = '$id'";
+			$where .= "WHERE tm.nim = '$id'";
 		}
 		$where .= "AND tsj.id IN (SELECT id_seminar_jadwal FROM tb_seminar_penilaian)";
 		return $this->db->query("

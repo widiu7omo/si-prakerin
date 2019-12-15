@@ -13,7 +13,7 @@ class Seminar extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('upload', 'master', 'notification'));
-		$this->load->model(array('pembimbing_model', 'akun_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
+		$this->load->model(array('pembimbing_model', 'akun_model','penilaian_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
 		$this->load->library('form_validation');
 		//middleware
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
@@ -35,9 +35,15 @@ class Seminar extends MY_Controller
 					),
 					array(
 						'name' => 'Data Jadwal Seminar ' . $tahunAkademik[0]->tahun_akademik,
-						'href' => site_url('seminar?m=data'),
+						'href' => site_url('seminar?m=data_jadwal'),
 						'icon' => 'fas fa-file-excel',
 						'desc' => 'Data jadwal terkini mahasiswa seminar  ' . $tahunAkademik[0]->tahun_akademik
+					),
+					array(
+						'name' => 'Data Penilaian Seminar ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=data_penilaian'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Data penilaian seminar terkini  ' . $tahunAkademik[0]->tahun_akademik
 					),
 				);
 				break;
@@ -150,10 +156,11 @@ class Seminar extends MY_Controller
 					}
 					return $this->get_jadwal();
 					break;
-				case 'data':
-
+				case 'data_jadwal':
 					return $this->get_list_jadwal();
 					break;
+				case 'data_penilaian':
+					return $this->get_list_penilaian();
 					break;
 				default:
 					redirect(site_url('seminar'));
@@ -163,13 +170,23 @@ class Seminar extends MY_Controller
 		$this->load->view('admin/seminar', $data);
 	}
 
+	public function get_list_penilaian(){
+		$post = $this->input->post();
+		$penilaian = $this->penilaian_model;
+		$data_penilaian = $penilaian->get_penilaian_seminar();
+		if (isset($post['ajax'])) {
+			echo json_encode((object)array('data' => $data_penilaian));
+			return;
+		}
+		$this->load->view('admin/seminar_list_penilaian');
+	}
 	public function get_list_jadwal()
 	{
 		$post = $this->input->post();
 		$seminar = $this->seminar_model;
 		$data_jadwal = $seminar->get_jadwal();
 		if (isset($post['ajax'])) {
-			echo json_encode((object)array('data'=>$data_jadwal));
+			echo json_encode((object)array('data' => $data_jadwal));
 			return;
 		}
 		$this->load->view('admin/seminar_list_jadwal');

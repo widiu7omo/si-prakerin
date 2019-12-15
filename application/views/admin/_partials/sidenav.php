@@ -95,6 +95,12 @@
 								</a>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link" href="<?php echo site_url('rekap') ?>">
+									<i class="fas fa-file-alt text-danger"></i>
+									<span class="nav-link-text">Rekap</span>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="<?php echo site_url('akun') ?>">
 									<i class="fas fa-user text-primary"></i>
 									<span class="nav-link-text">Akun</span>

@@ -34,23 +34,19 @@
 									<thead class="thead-light">
 									<tr>
 										<th>Nama Mahasiswa</th>
-										<th>Tempat</th>
-										<th>Tanggal</th>
-										<th>Waktu</th>
-										<th>Pembimbing</th>
-										<th>Penguji 1</th>
-										<th>Penguji 2</th>
+										<th>Nama Dosen</th>
+										<th>Sebagai</th>
+										<th>Nilai Seminar</th>
+										<th>Nilai Revisi</th>
 									</tr>
 									</thead>
 									<tfoot>
 									<tr>
 										<th>Nama Mahasiswa</th>
-										<th>Tempat</th>
-										<th>Tanggal</th>
-										<th>Waktu</th>
-										<th>Pembimbing</th>
-										<th>Penguji 1</th>
-										<th>Penguji 2</th>
+										<th>Nama Dosen</th>
+										<th>Sebagai</th>
+										<th>Nilai Seminar</th>
+										<th>Nilai Revisi</th>
 									</tr>
 									</tfoot>
 									<tbody></tbody>
@@ -77,7 +73,7 @@
 				}
 			},
 			ajax: {
-				url: "<?php echo site_url("seminar?m=data_jadwal") ?>",
+				url: "<?php echo site_url("seminar?m=data_penilaian") ?>",
 				type: "POST",
 				data: {
 					"ajax": "true"
@@ -86,23 +82,45 @@
 			buttons: [
 				'excel', 'pdf', 'print'
 			],
-			"order": [[ 2, 'asc' ]],
+			"order": [[0, 'asc']],
 			columns: [
-				{"data": "title"},
-				{"data": "nama_tempat"},
-				{"data": "start",
-				"render":function(data,type,row){
-					return moment(data).locale('id').format('DD-MM-YYYY');
-				}},
-				{"data": null,
-				"render":function(data,type,row){
-					let start = moment(row.start).locale('id').format('HH:mm');
-					let end = moment(row.end).locale('id').format('HH:mm');
-					return start+" - "+end;
-				}},
-				{"data": "nama_pembimbing"},
-				{"data": "p1"},
-				{"data": "p2"},
+				{"data": "nama_mahasiswa"},
+				{
+					"data": null,
+					"render": function (data, type, row) {
+						if (row.status_dosen === 'p1') {
+							return row.p1;
+						} else if (row.status_dosen === 'p2') {
+							return row.p2;
+						} else {
+							return row.p3
+						}
+					}
+				},
+				{
+					"data": null,
+					"render": function (data, type, row) {
+						if (row.status_dosen === 'p1') {
+							return 'Penguji 1';
+						} else if (row.status_dosen === 'p2') {
+							return 'Penguji 2';
+						} else {
+							return 'Pembimbing'
+						}
+					}
+				},
+				{
+					"data": "nilai_seminar",
+					"render": function (data, type, row) {
+						return data !== null ? data : "Tidak ada penilaian"
+					}
+				},
+				{
+					"data": "nilai_seminar_past",
+					"render": function (data, type, row) {
+						return data !== null ? data : "Tidak ada penilaian"
+					}
+				}
 			]
 		}).on('init.dt', function () {
 			$('.dt-buttons .btn').removeClass('btn-secondary').addClass('btn-sm btn-default');
