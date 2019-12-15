@@ -7,6 +7,7 @@ class Rekap extends CI_Controller
 		parent::__construct();
 		$this->load->model('seminar_model');
 		$this->load->helper('master');
+		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
 	}
 
 	public function index()
@@ -43,7 +44,7 @@ class Rekap extends CI_Controller
 						'name' => "Penilaian Keseluruhan",
 						'href' => site_url('rekap?m=penilaian'),
 						'icon' => 'fas fa-exchange-alt',
-						'desc' => 'Penilaian seminar, termasuk penilaian revisi'
+						'desc' => 'Penghitungan nilai akhir dari perusahaan dan seminar'
 					),
 					array(
 						'name' => "Mahasiswa selesai PKL",

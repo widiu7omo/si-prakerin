@@ -9,7 +9,7 @@ class User extends CI_Controller
 		$this->load->model('pegawai_model');
 		$this->load->library('form_validation');
 		$this->load->helper('notification');
-
+		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
 	}
 
 	//dashboard user

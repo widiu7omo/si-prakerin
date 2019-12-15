@@ -9,6 +9,7 @@ class Dashboard extends CI_Controller {
         //Do your magic here
         // $this->load->model('Model_dashboard');
 	    $this->load->helper(array('notification','master'));
+		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
     }
     //dashboard admin
     public function index()

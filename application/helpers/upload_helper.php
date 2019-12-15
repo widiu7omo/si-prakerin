@@ -53,12 +53,35 @@ if (!function_exists('do_upload_bimbingan')) {
 	{
 		$ci =& get_instance();
 		$config['upload_path'] = './file_upload/bimbingan/';
-		$config['allowed_types'] = 'pdf';
+		$config['allowed_types'] = 'zip|rar';
 		$config['max_size'] = 512;
 		$config['encrypt_name'] = TRUE;
 		$ci->load->library('upload', $config);
 
 		if (!$ci->upload->do_upload('file')) {
+			$error = array('error' => $ci->upload->display_errors());
+			// var_dump($error);
+			return $error;
+			// $ci->load->view('upload_form', $error);
+		} else {
+			$data = array('upload_data' => $ci->upload->data());
+			// var_dump($data);
+			return $data;
+			// $ci->load->view('upload_success', $data);
+		}
+	}
+}
+if (!function_exists('do_upload_berkas')) {
+	function do_upload_berkas()
+	{
+		$ci =& get_instance();
+		$config['upload_path'] = './file_upload/berkas/';
+		$config['allowed_types'] = 'zip';
+		$config['max_size'] = 10240;
+		$config['encrypt_name'] = FALSE;
+		$ci->load->library('upload', $config);
+
+		if (!$ci->upload->do_upload('filepond')) {
 			$error = array('error' => $ci->upload->display_errors());
 			// var_dump($error);
 			return $error;

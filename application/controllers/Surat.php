@@ -7,6 +7,7 @@ class Surat extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('master');
 		$this->load->model( 'surat_model' );
+		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
 		//Do your magic here
 	}
 	public function index(){

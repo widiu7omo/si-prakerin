@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/sweetalert/sweetalert2.min.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/introjs/introjs.css') ?>">
 	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/dropzone/dist/min/dropzone.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('aset/vendor/filepond/filepond.min.css') ?>">
 	<!-- Argon CSS -->
     <link type="text/css" href="<?php echo base_url('aset/css/argonpro.css') ?>" rel="stylesheet">
 	<style>

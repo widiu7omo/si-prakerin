@@ -32,14 +32,14 @@ if (!function_exists('getmenu')) {
 						'icon' => 'collection',
 						'color' => 'pink',
 						'href' => site_url('bimbingan')),
-					(object)array('name' => 'Laporan',
-						'icon' => 'book-bookmark',
-						'color' => 'info',
-						'href' => site_url('laporan')),
 					(object)array('name' => 'Sidang',
 						'icon' => 'calendar-grid-58',
 						'color' => 'green',
-						'href' => site_url('sidang'))
+						'href' => site_url('sidang')),
+					(object)array('name' => 'Kelengkapan berkas',
+						'icon' => 'book-bookmark',
+						'color' => 'info',
+						'href' => site_url('kelengkapan'))
 				);
 				break;
 			default:

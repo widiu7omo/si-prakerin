@@ -1,5 +1,6 @@
 <?php $section = isset($_GET['section']) ? $_GET['section'] : null ?>
 <?php $prodies = isset($prodies) ? $prodies : array() ?>
+<?php $post_prodi = isset($_POST['prodi'])?$_POST['prodi']:"all" ?>
 <!DOCTYPE html>
 <html>
 
@@ -44,11 +45,11 @@
 							<div class="h3">Status Mahasiswa Magang</div>
 							<form action="<?php echo site_url('rekap?m=magang_status') ?>" method="POST">
 								<div class="float-right btn-group" role="group" aria-label="Basic example">
-									<button type="submit" name="prodi" value="all" class="btn btn-sm btn-primary <?php echo (!isset($_POST['prodi']) or $_POST['prodi']=='all')?'active':null ?>">Semua</button>
+									<button type="submit" name="prodi" value="all" class="btn btn-sm btn-primary <?php echo ($post_prodi=='all')?'active':null ?>">Semua</button>
 									<?php $pr = masterdata('tb_program_studi', null, 'alias,id_program_studi'); ?>
 									<?php foreach ($pr as $p): ?>
 										<button type="submit" name="prodi" value="<?php echo $p->id_program_studi ?>"
-												class="btn btn-sm btn-primary <?php echo $p->id_program_studi == $_POST['prodi']?"active":null?>"><?php echo $p->alias ?></button>
+												class="btn btn-sm btn-primary <?php echo $p->id_program_studi == $post_prodi?"active":null?>"><?php echo $p->alias ?></button>
 									<?php endforeach; ?>
 								</div>
 							</form>
@@ -134,7 +135,7 @@
 				type: "POST",
 				data: {
 					"ajax": "true",
-					"prodi":"<?php echo !isset($_POST['prodi'])?'all':$_POST['prodi'] ?>"
+					"prodi":"<?php echo $post_prodi ==='all'?'all':$_POST['prodi'] ?>"
 				}
 			},
 			buttons: [

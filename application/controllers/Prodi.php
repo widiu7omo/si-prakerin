@@ -6,6 +6,7 @@ class Prodi extends CI_Controller {
         parent::__construct();
         $this->load->model('prodi_model');
         $this->load->library('form_validation');
+		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
     }
     public function index()
     {
