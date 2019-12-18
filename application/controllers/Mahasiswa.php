@@ -1,11 +1,6 @@
 <?php
 
-use Tools\Excel;
-
-require APPPATH . 'libraries/Excel.php';
 defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
-
-// Use upload Library and Excel library
 
 class Mahasiswa extends MY_Controller {
 	public function __construct() {

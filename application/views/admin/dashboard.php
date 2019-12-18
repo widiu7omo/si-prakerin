@@ -77,10 +77,10 @@
 <script>
 	<?php
 	$total = custom_query( "SELECT COUNT(*) as jumlah FROM tb_mahasiswa" );
-	$ditolak = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'tolak' GROUP BY nim) tps " );
-	$masuk = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'masuk' GROUP BY nim) tps " );
-	$diterima = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'terima' GROUP BY nim) tps " );
-	$pending = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'pending' OR status = 'kirim'  GROUP BY nim) tps " );
+	$ditolak = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'tolak') tps " );
+	$masuk = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'masuk') tps " );
+	$diterima = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'terima') tps " );
+	$pending = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'pending' OR status = 'kirim') tps " );
 	$belum = $total->jumlah - ( $ditolak->jumlah + $pending->jumlah + $diterima->jumlah + $masuk->jumlah );
 	$datachart = array(
 		(int) $masuk->jumlah,

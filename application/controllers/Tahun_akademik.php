@@ -45,7 +45,7 @@ class Tahun_akademik extends CI_Controller {//change class
     }
     public function set(){
         $currentTahun = getCurrentTahun();
-        if(count($currentTahun) > 1) show_404();
+        if(!isset($currentTahun->id)) show_error(500);
         if($this->tahunakademik_model->update_waktu()){
             redirect(site_url('tahunakademik'));
         }

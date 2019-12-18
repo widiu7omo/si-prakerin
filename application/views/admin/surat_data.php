@@ -39,21 +39,22 @@
                     </div>
                     <div class="accordion" id="accordionExample1">
                         <div class="card">
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                            <div id="collapseTwo" class="collapse <?php echo isset($surat->nomor)?'show':null ?>" aria-labelledby="headingTwo"
                                  data-parent="#accordionExample1">
                                 <div class="card-body">
-                                    <form action="<?php echo site_url( 'surat/save_jenis_surat' ) ?>" method="POST">
+                                    <form action="<?php echo site_url( !isset($surat->id)?'surat/save_jenis_surat':'surat/update_jenis_surat' ) ?>" method="POST">
+                                        <input type="hidden" name="id" value="<?php echo isset($surat->id)?$surat->id:null ?>">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input type="text" class="form-control form-control-sm" name="no_surat" placeholder="Nomor Surat"
-                                                       aria-label="Nomor Surat" aria-describedby="basic-addon1">
+                                                       aria-label="Nomor Surat" aria-describedby="basic-addon1" value="<?php echo isset($surat->nomor)?$surat->nomor:null ?>">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input type="text" class="form-control form-control-sm" name="jenis_surat" placeholder="Jenis Surat"
-                                                       aria-describedby="basic-addon2">
+                                                       aria-describedby="basic-addon2" value="<?php echo isset($surat->nama)?$surat->nama:null ?>">
                                             </div>
                                         </div>
                                         <button class="btn btn-primary btn-sm" type="submit" name="surat">Simpan</button>
@@ -69,16 +70,16 @@
                                 <tr role="row">
                                     <th style="width:30px">Aksi</th>
                                     <th>No</th>
-                                    <th>Nomor Surat</th>
                                     <th>Jenis Surat</th>
+                                    <th>Nomor Surat</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th style="width:30px">Aksi</th>
                                     <th>No</th>
-                                    <th>Nomor Surat</th>
                                     <th>Jenis Surat</th>
+                                    <th>Nomor Surat</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -116,27 +117,28 @@
                     </div>
                     <div class="accordion" id="accordionExample">
                         <div class="card">
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                            <div id="collapseOne" class="collapse <?php echo isset($ttd->id)?'show':null ?>" aria-labelledby="headingOne"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <form action="<?php echo site_url( 'surat/save_ttd' ) ?>" method="post">
+                                    <form action="<?php echo site_url( isset($ttd->id)?'surat/update_ttd':'surat/save_ttd' ) ?>" method="post">
+                                        <input type="hidden" name="id" value="<?php echo isset($ttd->id)?$ttd->id:null ?>">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input type="text" name="nip" class="form-control form-control-sm" placeholder="NIP"
-                                                       aria-label="Username" aria-describedby="basic-addon1">
+                                                       aria-label="Username" aria-describedby="basic-addon1" value="<?php echo isset($ttd->nip)?$ttd->nip:null ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input type="text" name="nama_pegawai" class="form-control form-control-sm" placeholder="Nama Pegawai"
-                                                       aria-label="Username" aria-describedby="basic-addon1">
+                                                       aria-label="Username" aria-describedby="basic-addon1" value="<?php echo isset($ttd->nama_pegawai)?$ttd->nama_pegawai:null ?>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <input type="text" name="jabatan" class="form-control form-control-sm"
                                                        placeholder="Jabatan"
-                                                       aria-describedby="basic-addon2">
+                                                       aria-describedby="basic-addon2" value="<?php echo isset($ttd->jabatan)?$ttd->jabatan:null ?>">
                                             </div>
                                         </div>
                                         <button class="btn btn-primary btn-sm" type="submit" name="ttd">Simpan</button>

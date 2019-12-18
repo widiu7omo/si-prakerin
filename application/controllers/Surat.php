@@ -20,6 +20,42 @@ class Surat extends CI_Controller {
 		$surat->save_ttd();
 		redirect(site_url('surat'));
 	}
+	public function update_ttd(){
+		$surat = $this->surat_model;
+		if($surat->update_ttd()){
+			redirect(site_url('surat'));
+		}
+		redirect(site_url('surat'));
+
+	}
+	public function surat_edit($id){
+		$data = array();
+		$surat = $this->surat_model;
+		if(isset($id)){
+			$data['surat'] = $surat->show_jenis_surat($id);
+		}
+		$data['ttds'] = $this->surat_model->show_ttd();
+		$data['jenis_surats'] = $this->surat_model->show_jenis_surat();
+		$this->load->view('admin/surat_data',$data);
+	}
+	public function ttd_edit($id){
+		$data = array();
+		$surat = $this->surat_model;
+		if(isset($id)){
+			$data['ttd'] = $surat->show_ttd($id);
+		}
+		$data['ttds'] = $this->surat_model->show_ttd();
+		$data['jenis_surats'] = $this->surat_model->show_jenis_surat();
+		$this->load->view('admin/surat_data',$data);
+	}
+	public function update_jenis_surat(){
+		$surat = $this->surat_model;
+		if($surat->update_jenis_surat()){
+			redirect(site_url('surat'));
+		}
+		redirect(site_url('surat'));
+
+	}
 	public function save_jenis_surat(){
 		$surat = $this->surat_model;
 		$surat->save_jenis_surat();
