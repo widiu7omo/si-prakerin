@@ -17,7 +17,7 @@ class Sync extends CI_Controller {
 		if ( isset( $get['do'] ) ) {
 			$level_dosen  = masterdata( 'tb_master_level', 'nama_master_level = "dosen"' );//dosen master level id
 			$kepegawaian  = $this->load->database( 'kepegawaian', true );
-			$pegawais     = $kepegawaian->query( 'select tb_user.nip,tb_user.UserName,tb_user.Password,tb_user.nama_lengkap, tb_biodata.alamat,tb_biodata.tempat_lahir,tb_biodata.tgl_lahir,tb_biodata.jk from tb_user inner join tb_biodata on tb_user.id_user = tb_biodata.id_user where tb_user.on_off = \'on\' AND UserName REGEXP \'[\@]*politala\.ac\.(.+)\' AND tb_user.id_status_kerja = 1 -- status kerja 1 = dosen' )->result();
+			$pegawais     = $kepegawaian->query( "select tb_user.nip,tb_user.UserName,tb_user.Password,tb_user.nama_lengkap, tb_biodata.alamat,tb_biodata.tempat_lahir,tb_biodata.tgl_lahir,tb_biodata.jk from tb_user inner join tb_biodata on tb_user.id_user = tb_biodata.id_user where tb_user.on_off = 'on' AND UserName REGEXP '[\@]*politala\.ac\.(.+)' AND tb_user.id_status_kerja = 1 -- status kerja 1 = dosen")->result();
 			$data_akun    = new stdClass();
 			$data_level   = new stdClass();
 			$data_pegawai = new stdClass();
