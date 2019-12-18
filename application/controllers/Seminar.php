@@ -31,7 +31,7 @@ class Seminar extends MY_Controller
 						'name' => 'Kelola Jadwal Sidang',
 						'href' => site_url('seminar?m=kelola'),
 						'icon' => 'fas fa-calendar-alt',
-						'desc' => 'Pemilihan dosen berdasarkan program studi'
+						'desc' => 'Pengolahan data jadwal untuk seminar meliputi penguji, tempat dan waktu'
 					),
 					array(
 						'name' => 'Data Jadwal Seminar ' . $tahunAkademik[0]->tahun_akademik,

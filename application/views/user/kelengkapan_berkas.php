@@ -31,9 +31,6 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama')?>
 					<div class="card-body">
 						<!-- List group -->
 						<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
-						<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
-						<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
-						<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
 						<input type="file" class="my-pond">
 					</div>
 				</div>
@@ -75,6 +72,11 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama')?>
 		let pond = $('.my-pond').filepond({
 			server: "<?php echo site_url('kelengkapan?m=upload') ?>"
 		})
+		<?php if(isset($file)): ?>
+		setTimeout(function(){
+			$('.my-pond').filepond('addFile','<?php echo base_url('file_upload/berkas/').$file->nama_file ?>')
+		},1250)
+		<?php endif ?>
 	})
 </script>
 <!-- Demo JS - remove this in your project -->

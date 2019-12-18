@@ -22,7 +22,13 @@ class Kelengkapan extends CI_Controller
 					redirect(site_url('kelengkapan'));
 			}
 		}
-		$this->load->view('user/kelengkapan_berkas');
+		$nim = $this->session->userdata('id');
+		$dsn_bimbingan = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs id');
+		if(isset($dsn_bimbingan->id)){
+			$file = masterdata('tb_kelengkapan_berkas',"id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'",'nama_file');
+		}
+		$data['file'] = $file;
+		$this->load->view('user/kelengkapan_berkas',$data);
 	}
 
 	public function upload_berkas()
@@ -32,16 +38,12 @@ class Kelengkapan extends CI_Controller
 		$file_name = isset($res['upload_data']['file_name']) ? $res['upload_data']['file_name'] : null;
 		$dsn_bimbingan = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs id');
 		$is_exits = masterdata('tb_kelengkapan_berkas', "id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'", 'id');
-		if ($is_exits == null) {
-			$id = isset($is_exits->id)?$is_exits->id:null;
-			if($this->db->query("REPLACE INTO tb_kelengkapan_berkas VALUES('$id','$dsn_bimbingan->id','$file_name')")){
-				echo $this->db->insert_id();
-			}
-			else{
-				show_error('failed upload',500);
-			}
+		$id = isset($is_exits->id) ? $is_exits->id : null;
+		if ($this->db->query("REPLACE INTO tb_kelengkapan_berkas VALUES('$id','$dsn_bimbingan->id','$file_name')")) {
+			echo $this->db->insert_id();
+		} else {
+			show_error('failed upload', 500);
 		}
 
-//		var_dump($res);
 	}
 }

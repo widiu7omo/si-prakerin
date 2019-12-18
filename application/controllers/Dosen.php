@@ -37,7 +37,7 @@ class Dosen extends MY_Controller
 						'name' => 'Kelola Pembimbing ' . $tahunAkademik[0]->tahun_akademik,
 						'href' => site_url('dosen?m=pembimbing'),
 						'icon' => 'fas fa-users',
-						'desc' => 'Manajemen dosen pembimbing mahasiswa  ' . $tahunAkademik[0]->tahun_akademik
+						'desc' => 'Manajemen dosen pembimbing mahasiswa'
 					),
 				);
 				break;
@@ -122,6 +122,7 @@ class Dosen extends MY_Controller
 
 		//id harus nip nik, karena mereka pegawai yang login pada tampilan backend
 		$nip_nik = $this->session->userdata('id');
+//		var_dump($_SESSION);
 		$id_prodi = masterdata('tb_dosen', "nip_nik = '$nip_nik'", 'id_program_studi', false);
 		if ($id_prodi) {
 			$data['dosens'] = $dosen_prodi->get($id_prodi, null, true);

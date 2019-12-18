@@ -25,35 +25,29 @@ class Mahasiswa extends MY_Controller {
 			case 'admin':
 				$data['menus'] = array(
 					array(
-						'name' => 'Pengajuan Magang',
-						'href' => site_url( 'mahasiswa?m=pengajuan' ),
-						'icon' => 'fas fa-users',
-						'desc' => 'Daftar perserta pengajuan magang seluruh program studi'
-					),
-					array(
-						'name' => 'Berhak Magang',
+						'name' => 'Kelola Data Mahasiswa Magang',
 						'href' => site_url( 'mahasiswa?m=magang' ),
 						'icon' => 'fas fa-user-graduate',
 						'desc' => 'Pengelolaan mahasiswa yang berhak untuk melaksanakan magang'
 					),
 					array(
-						'name' => 'Berhak Sidang',
-						'href' => site_url( 'mahasiswa?m=sidang' ),
-						'icon' => 'fas fa-user-graduate',
-						'desc' => 'Pengelolaan mahasiswa yang berhak dan tidak berhak untuk melaksanakan sidang'
+						'name' => 'Proses Pengajuan Magang',
+						'href' => site_url( 'mahasiswa?m=pengajuan' ),
+						'icon' => 'fas fa-users',
+						'desc' => 'Daftar perserta pengajuan magang seluruh program studi'
 					),
+//					array(
+//						'name' => 'Berhak Sidang',
+//						'href' => site_url( 'mahasiswa?m=sidang' ),
+//						'icon' => 'fas fa-user-graduate',
+//						'desc' => 'Pengelolaan mahasiswa yang berhak dan tidak berhak untuk melaksanakan sidang'
+//					),
 					array(
-						'name' => "Mahasiswa Magang (FIX) tahun {$tahunAkademik[0]->tahun_akademik}",
+						'name' => "Data Mahasiswa Magang {$tahunAkademik[0]->tahun_akademik}",
 						'href' => site_url( 'mahasiswa?m=fixmagang' ),
 						'icon' => 'fas fa-chalkboard-teacher',
 						'desc' => 'Daftar mahasiswa yang sudah diterima oleh perusahaan'
-					),
-					array(
-						'name' => "Status Mahasiswa Magang tahun {$tahunAkademik[0]->tahun_akademik}",
-						'href' => site_url( 'mahasiswa?m=status' ),
-						'icon' => 'fas fa-exchange-alt',
-						'desc' => 'Daftar status mahasiswa yang saat ini sedang proses melakukan pengajuan magang pada perusahaan'
-					),
+					)
 				);
 				break;
 			//if there are not level except in case, it will throw to error with code 403

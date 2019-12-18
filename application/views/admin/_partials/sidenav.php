@@ -38,10 +38,6 @@
 										<li class="nav-item">
 											<a href="<?php echo site_url('dashboard') ?>" class="nav-link">Statistik</a>
 										</li>
-										<li class="nav-item">
-											<a href="<?php echo site_url('informasi') ?>"
-											   class="nav-link">Informasi</a>
-										</li>
 									</ul>
 								</div>
 							</li>

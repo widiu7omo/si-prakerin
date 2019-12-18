@@ -57,6 +57,9 @@ $route['sig/perusahaan/(:any)'] = 'sig/perusahaan/detail_perusahaan/$1';
 
 $route['tahunakademik'] = 'Tahun_akademik';
 $route['tahunakademik/(:any)'] = 'Tahun_akademik/$1';
+$route['tahunakademik/(:any)/(:any)'] = 'Tahun_akademik/$1/$2';
+$route['surat/(:any)'] = 'Surat/$1';
+$route['surat/(:any)/(:any)'] = 'Surat/$1/$2';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

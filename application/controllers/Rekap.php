@@ -23,34 +23,34 @@ class Rekap extends CI_Controller
 						'desc' => 'Mahasiswa yang berhak magang yang telah memiliki tempat magang'
 					),
 					array(
-						'name' => 'Mahasiswa Perusahaan',
-						'href' => site_url('rekap?m=perusahaan'),
-						'icon' => 'fas fa-user-graduate',
-						'desc' => 'Mengisi data perusahaan, upload penilaian perusahaan'
-					),
-					array(
 						'name' => 'Mahasiswa Bimbingan',
 						'href' => site_url('rekap?m=bimbingan'),
 						'icon' => 'fas fa-user-graduate',
 						'desc' => 'Bimbingan dengan dosen, pengajuan judul, pengajuan seminar'
 					),
 					array(
-						'name' => "Mahasiswa Seminar",
+						'name' => "Mahasiswa Seminar dan Revisi",
 						'href' => site_url('rekap?m=seminar'),
 						'icon' => 'fas fa-chalkboard-teacher',
-						'desc' => 'Status seminar, Penilaian Seminar'
+						'desc' => 'Daftar mahasiswa yang melakukan seminar dan revisi'
 					),
 					array(
-						'name' => "Penilaian Keseluruhan",
+						'name' => "Penilaian Akhir Keseluruhan",
 						'href' => site_url('rekap?m=penilaian'),
 						'icon' => 'fas fa-exchange-alt',
-						'desc' => 'Penghitungan nilai akhir dari perusahaan dan seminar'
+						'desc' => 'Data Penghitungan nilai akhir dari perusahaan dan seminar'
 					),
 					array(
-						'name' => "Mahasiswa selesai PKL",
+						'name' => "Mahasiswa Selesai PKL",
 						'href' => site_url('rekap?m=finishing'),
 						'icon' => 'fas fa-exchange-alt',
-						'desc' => 'Kelengkapan berkas, upload dokumen, persyaratan selesai PKL'
+						'desc' => 'Data mahasiswa yang telah menyelesaikan prakerin dan seminar prakerin'
+					),
+					array(
+						'name' => "Mahasiswa Belum Lulus",
+						'href' => site_url('rekap?m=belum_lulus'),
+						'icon' => 'fas fa-exchange-alt',
+						'desc' => 'Data mahasiswa yang menyelesaikan PKL dari beberapa kategori'
 					),
 				);
 				break;
