@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e5c286a81d9e4772c400cc249b77574",
+    "content-hash": "5bfaff644680c94c5358055c5b4026d1",
     "packages": [
         {
             "name": "auth0/auth0-php",
@@ -286,6 +286,49 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "lukascivil/treewalker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lukascivil/TreeWalker.git",
+                "reference": "1480f127824bc658d2c2052ee1148e1b8606d591"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lukascivil/TreeWalker/zipball/1480f127824bc658d2c2052ee1148e1b8606d591",
+                "reference": "1480f127824bc658d2c2052ee1148e1b8606d591",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "lucas cordeiro da Silva",
+                    "email": "lukas_civil@hotmail.com"
+                }
+            ],
+            "description": "TreeWalker is a simple and small Library that will help you to work faster with manipulation of structures in PHP",
+            "keywords": [
+                "array",
+                "diff",
+                "dynamically",
+                "json",
+                "merge",
+                "objects",
+                "recursivelly",
+                "struct"
+            ],
+            "time": "2018-09-24T14:32:34+00:00"
         },
         {
             "name": "psr/http-message",
@@ -2356,11 +2399,15 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "lukascivil/treewalker": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.7"
+        "php": ">=5.3.7",
+        "ext-json": "*",
+        "ext-curl": "*"
     },
     "platform-dev": []
 }

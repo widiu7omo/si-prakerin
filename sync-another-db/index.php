@@ -1,39 +1,50 @@
 <?php
-define("HOST","localhost");
-// define("DB","pegawai");
-define("DB","simprakerin");
-// define('UNAME', 'prakerin');
-define('UNAME', 'root');
-// define('PASS', 's1mpr4k3r1n');
-define('PASS', '');
+include("includes/defines.php");
+include("includes/connect.php");
 
-$connection = new mysqli(HOST,UNAME,PASS,DB);
-if($connection->connect_error){
-    die("Cant connect to database, check your configuration ".$connection->connection_error);
+function generate_key(){
+	return uniqid().uniqid().uniqid();
 }
-
-$query = "SELECT  `nip_nik`,  
-                  `username`,  
-                  `status`,  
-                  `id_pangkat_golongan`,  
-                  `nama_pegawai`, 
-                  `alamat_pegawai`,  
-                  `jk_pegawai`,  
-                  `email_pegawai`,  
-                  `tempat_lahir_pegawai`,  
-                  `tanggal_lahir_pegawai`,  
-                  `no_hp_pegawai`,  
-                  `id_jabatan`,  
-                  `id_golongan` 
-                  FROM `simprakerin`.`tb_pegawai`";
-        
-$result = $connection->query($query);
-
-$rows = array();
-if($result->num_rows > 0){
-    while($row = $result->fetch_assoc()){
-        array_push($rows,$row);
-    }
+function writeout_key(){
+	$handle = fopen('./.key.text','w');
+	fwrite($handle,generate_key());
+	fclose($handle);
+	return true;
 }
-echo json_encode($rows);
-$connection->close();  
+if(isset($_POST['generate'])){
+	if(writeout_key()){
+		echo json_encode(array('status'=>'success'));
+	}
+}
+$openKey = fopen('./.key.text','r');
+$key = fgets($openKey);
+if(isset($_POST['key'])){
+	if($key == $_POST['key']){
+		$query = "select 
+        tb_user.nip,
+        tb_user.UserName,
+        tb_user.Password,
+        tb_user.nama_lengkap, 
+        tb_biodata.alamat,
+        tb_biodata.tempat_lahir,
+        tb_biodata.tgl_lahir,
+        tb_biodata.jk 
+        from tb_user 
+            inner join tb_biodata on tb_user.id_user = tb_biodata.id_user 
+            where tb_user.on_off = 'on' 
+            AND UserName REGEXP '[\@]*politala\.ac\.(.+)' 
+            AND tb_user.id_status_kerja = 1";
+
+		$result = mysql_query($query);
+
+		$rows = array();
+		while ($row = mysql_fetch_array($result)) {
+			array_push($rows,$row);
+		}
+		echo json_encode($rows);
+
+	}
+	else{
+		echo json_encode(array('status'=>'error','message'=>'Wrong key'));
+	}
+}
