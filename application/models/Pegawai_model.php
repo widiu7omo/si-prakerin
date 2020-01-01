@@ -96,7 +96,7 @@ class Pegawai_model extends CI_Model
 		if ($order) {
 			$this->db->order_by($order);
 		}
-		$this->db->join('tb_akun ta','ta.username = tb_pegawai.username','INNER');
+		$this->db->join('tb_akun ta', 'ta.username = tb_pegawai.username', 'INNER');
 		return $this->db->get($this->_table)->result();
 	}
 
@@ -158,6 +158,87 @@ class Pegawai_model extends CI_Model
 	public function delete($id)
 	{
 		return $this->db->delete($this->_table, [$this->_primary_key => $id]);
+	}
+
+	public function generate_query_data($mode,$datas,$key)
+	{
+		$data_query = "";
+		switch ($mode) {
+			case 'akun':
+				$key = array('username','password');
+				$keys = implode(",", $key);
+				foreach ($datas as $key => $data) {
+					$data_query .= "(";
+					$data_query .= "'$data->email_pegawai','$data->password'";
+					$data_query .= ")";
+					if ($key < count($datas) - 1) {
+						$data_query .= ",";
+					}
+				}
+				return (object)array("key"=>$keys,"data_query"=>$data_query);
+				break;
+			case 'level':
+				$key = array('username','id_master_level');
+				$keys = implode(",", $key);
+				foreach ($datas as $key => $data) {
+					$data_query .= "(";
+					$data_query .= "'$data->email_pegawai','IML005'";
+					$data_query .= ")";
+					if ($key < count($datas) - 1) {
+						$data_query .= ",";
+					}
+				}
+				return (object)array("key"=>$keys,"data_query"=>$data_query);
+				break;
+			case 'pegawai':
+				$result_key = array_search('password',$key);
+				if($result_key){
+					unset($key[$result_key]);
+				}
+				$keys = implode(",", $key);
+				foreach ($datas as $key => $data) {
+					unset($data->password);
+					$data_query .= "(";
+					$data_query .= implode(',', array_map(function ($d) {
+						return '"' . $d . '"';
+					}, (array)$data));
+					$data_query .= ")";
+					if ($key < count($datas) - 1) {
+						$data_query .= ",";
+					}
+				}
+				return (object)array("key"=>$keys,"data_query"=>$data_query);
+				break;
+			default:
+				return true;
+		}
+	}
+
+	public function insert_batch($datas)
+	{
+		$key = count($datas) > 0 ? array_keys((array)$datas[0]) : null;
+		$keys_akun = $this->generate_query_data('akun',$datas,$key)->key;
+		$data_query_akun = $this->generate_query_data('akun',$datas,$key)->data_query;
+		$keys_level = $this->generate_query_data('level',$datas,$key)->key;
+		$data_query_level = $this->generate_query_data('level',$datas,$key)->data_query;
+		$keys_pegawai = $this->generate_query_data('pegawai',$datas,$key)->key;
+		$data_query_pegawai = $this->generate_query_data('pegawai',$datas,$key)->data_query;
+		$this->db->trans_start();
+		//insert into akun
+		$this->db->query("INSERT INTO tb_akun ($keys_akun) VALUES $data_query_akun");
+		//insert into level
+		$this->db->query("INSERT INTO tb_level ($keys_level) VALUES $data_query_level");
+		//insert into pegawai
+		$this->db->query("INSERT INTO tb_pegawai ($keys_pegawai) VALUES $data_query_pegawai");
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE) {
+			// generate an error... or use the log_message() function to log your error
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 }

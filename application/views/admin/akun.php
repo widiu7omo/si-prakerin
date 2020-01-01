@@ -36,8 +36,8 @@ $akuns = array_merge($pegawais,$mahasiswas);
 								</p>
 							</div>
 							<div class="col-4 text-right">
-								<a href="<?php echo site_url('akun/management') ?>"
-								   class="btn btn-sm btn-primary">Kelola Akun</a>
+								<a href="<?php echo site_url('akun/tambah') ?>"
+								   class="btn btn-sm btn-primary">Tambah Akun</a>
 							</div>
 						</div>
 					</div>
@@ -69,8 +69,8 @@ $akuns = array_merge($pegawais,$mahasiswas);
 											<i class="fas fa-ellipsis-v"></i>
 										</a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-											<a class="dropdown-item" href="<?php echo site_url('akun/management/'.$akun->username) ?>">Edit</a>
-											<a class="dropdown-item" href="#" onclick="deleteConfirm('<?php echo site_url('akun/hapus_level/'.$akun->id_level) ?>')">Hapus Level</a>
+											<a class="dropdown-item" href="<?php echo site_url('akun/edit/'.$akun->id) ?>">Edit</a>
+											<a class="dropdown-item" href="#" onclick="deleteConfirm('<?php echo site_url('akun/hapus_akun/'.$akun->id) ?>')">Hapus Akun</a>
 										</div>
 									</td>
 									<td class="sorting_1"><?php echo $key +1?></td>
@@ -93,6 +93,7 @@ $akuns = array_merge($pegawais,$mahasiswas);
 <!-- Scripts PHP-->
 <?php $this->load->view('admin/_partials/modal.php');?>
 <?php $this->load->view('admin/_partials/js.php');?>
+
 <!-- Demo JS - remove this in your project -->
 <!-- <script src="../aset/js/demo.min.js"></script> -->
 </body>

@@ -38,10 +38,11 @@ class Login extends CI_Controller {
 						break;
 					case 'dosen':
 						$pegawai = masterdata( 'tb_pegawai', array( 'username' => $isValidAkun[0]->id ), 'tb_pegawai.nip_nik' );
-						//                  $programstudi = masterdata( 'tb_pegawai',array('tb_pegawai.username'=>$isValidAkun[0]->id),'id_program_studi');
+						$this->session->set_userdata( 'nip_nik', $pegawai->nip_nik );
 						break;
 					case 'admin':
 						$pegawai = masterdata( 'tb_pegawai', array( 'username' => $isValidAkun[0]->id ), 'tb_pegawai.nip_nik' );
+						$this->session->set_userdata( 'nip_nik', $pegawai->nip_nik );
 						//                  $programstudi = masterdata( 'tb_pegawai',array('tb_pegawai.username'=>$isValidAkun[0]->id),'id_program_studi');
 						break;
 					default:
@@ -77,11 +78,11 @@ class Login extends CI_Controller {
 						break;
 					case 'dosen':
 						$pegawai = masterdata( 'tb_pegawai', array( 'username' => $isValidAkun[0]->id ), 'tb_pegawai.nip_nik' );
-						//                  $programstudi = masterdata( 'tb_pegawai',array('tb_pegawai.username'=>$isValidAkun[0]->id),'id_program_studi');
+						$this->session->set_userdata( 'nip_nik', $pegawai->nip_nik );
 						break;
 					case 'admin':
 						$pegawai = masterdata( 'tb_pegawai', array( 'username' => $isValidAkun[0]->id ), 'tb_pegawai.nip_nik' );
-						//                  $programstudi = masterdata( 'tb_pegawai',array('tb_pegawai.username'=>$isValidAkun[0]->id),'id_program_studi');
+						$this->session->set_userdata( 'nip_nik', $pegawai->nip_nik );
 						break;
 					default:
 						redirect( site_url( 'login' ) );

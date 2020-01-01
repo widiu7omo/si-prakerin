@@ -26,9 +26,9 @@
 		<div class="row">
 			<div class="col-md-12 col-lg-md-12 col-sm-12 col-xs-12">
 				<?php if ($this->session->flashdata('status')): ?>
-					<div class="alert alert-success alert-dismissible fade show" role="alert">
+					<div class="alert alert-<?php echo $this->session->flashdata('status')->type ?> alert-dismissible fade show" role="alert">
 						<span class="alert-icon"><i class="ni ni-like-2"></i></span>
-						<span class="alert-text"><strong>Success!
+						<span class="alert-text"><strong><?php echo $this->session->flashdata('status')->type ?>!
 								&nbsp;</strong><?php echo $this->session->flashdata('status')->message; ?></span><br>
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
