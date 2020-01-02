@@ -345,33 +345,34 @@ class Mahasiswa extends MY_Controller
 	{
 		$get = $this->input->get();
 		$level = $this->session->userdata('level');
-		$where = [
+		$where = array(
 			'tb_perusahaan.status_perusahaan' => 'whitelist',
 			'tb_perusahaan_sementara.id_perusahaan' => $get['id']
-		];
-		$joins[0] = [
+		);
+		$joins[0] = array(
 			'tb_perusahaan',
 			'tb_perusahaan.id_perusahaan=tb_perusahaan_sementara.id_perusahaan',
 			'left outer'
-		];
-		$joins[1] = [
+		);
+		$joins[1] = array(
 			'tb_mahasiswa',
 			'tb_mahasiswa.nim=tb_perusahaan_sementara.nim',
 			'left outer'
-		];
-		$joins[2] = [
+		);
+		$joins[2] = array(
 			'tb_program_studi',
 			'tb_program_studi.id_program_studi=tb_perusahaan.id_program_studi',
 			'left outer'
-		];
-		$select = [
+		);
+		$select = array(
 			'tb_program_studi.nama_program_studi',
 			'tb_perusahaan.nama_perusahaan',
 			'tb_perusahaan.kuota_pkl',
 			'nama_mahasiswa',
 			'tb_mahasiswa.nim',
+			'tb_perusahaan_sementara.nomor_surat',
 			'tanggal_pengajuan'
-		];
+		);
 		$data['permohonan'] = datajoin('tb_perusahaan_sementara', $where, $select, $joins, null);
 		$data['id_perusahaan'] = $get['id'];
 		if (isset($get['save'])) {

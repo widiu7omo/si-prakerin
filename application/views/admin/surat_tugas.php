@@ -63,9 +63,9 @@
         <tr>
             <td colspan="4">
                 <br>
-
+				<?php $convert_date = strtotime($permohonan[0]->tanggal_pengajuan) ?>
                 <p style="text-align: justify; font-size: 12pt;line-height: 150%;">Berdasarkan surat balasan diterimanya
-                    dari perusahaan <?php echo $permohonan[0]->nama_perusahaan ?> dengan nomor xxx pada tanggal xxx,
+                    dari perusahaan <?php echo $permohonan[0]->nama_perusahaan ?> dengan nomor <?php echo $permohonan[0]->nomor_surat ?> pada tanggal <?php echo date( 'd-m-Y', $convert_date ) ?>,
                     maka Direktur Politeknik Negeri Tanah Laut
                     memberikan tugas kepada : </p>
             </td>
@@ -109,7 +109,7 @@
             <tbody>
             <tr>
                 <td>
-                    Direktur, <?php echo date( "d-M-Y" ); ?>
+                    Direktur, <?php echo date( "d-m-Y" ); ?>
                 </td>
             </tr>
             <tr>
