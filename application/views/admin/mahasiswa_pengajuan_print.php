@@ -7,12 +7,13 @@
 <?php $this->load->helper('master_helper');
 $prodies = masterdata('tb_program_studi');
 $currentTahun = masterdata('tb_waktu');
-$permohonan_surat = isset($permohonan[0]) ? $permohonan[0]->nomor_surat : null;
+$permohonan_surat = custom_query('select nomor_surat from tb_perusahaan_sementara WHERE nomor_surat is not null order by nomor_surat DESC limit 1');
 $current_count_surat = 0;
-if ($permohonan_surat != null) {
-	$count_surat = explode('/', $permohonan_surat);
+if (count((array)$permohonan_surat )>0) {
+	$count_surat = explode('/', $permohonan_surat->nomor_surat);
 	$current_count_surat = (int)$count_surat[1];
 }
+
 ?>
 
 <style>
@@ -86,15 +87,18 @@ if ($permohonan_surat != null) {
 											</div>
 											<input type="hidden" value="B/" name="prefix">
 											<input class="form-control" placeholder="Nomor Urut Surat" type="text"
-												   name="urut" required value="<?php echo $current_count_surat+1 ?>">
+												   name="urut" required value="<?php echo $current_count_surat + 1 ?>">
 											<input type="hidden" name="id" value="<?php echo $id_perusahaan ?>">
 											<div class="input-group-append">
 												<span class="input-group-text"><small
 														class="font-weight-bold"><?php echo $nomor_surat->suffix_no_surat . date('Y') ?></small></span>
 											</div>
-											<input type="hidden" value="<?php echo $nomor_surat->suffix_no_surat . date('Y') ?>" name="suffix">
+											<input type="hidden"
+												   value="<?php echo $nomor_surat->suffix_no_surat . date('Y') ?>"
+												   name="suffix">
 										</div>
-										<small class="font-weight-normal text-danger">* Edit nomor untuk mengubah</small>
+										<small class="font-weight-normal text-danger">* Edit nomor untuk
+											mengubah</small>
 									</div>
 									<ol class="list-group my-2">
 										<?php foreach ($permohonan as $perm): ?>

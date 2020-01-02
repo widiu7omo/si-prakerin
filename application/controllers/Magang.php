@@ -199,13 +199,11 @@ class Magang extends CI_Controller
 				$nim = $this->session->userdata('id');
 				$history_ditolak = masterdata('tb_history_pemilihan', "nim = '$nim'", 'id_perusahaan', true);
 				foreach ($history_ditolak as $history) {
-					$found = false;
 					foreach ($perusahaans as $index => $perusahaan) {
-						if ($perusahaan->id_perusahaan == $history->id_perusahaan) {
-							$found = true;
+						if ($perusahaan->id_perusahaan === $history->id_perusahaan) {
+							unset($perusahaans[$index]);
 						}
 					}
-					if ($found) unset($perusahaans[$index]);
 				}
 				$data['perusahaans'] = $perusahaans;
 				break;
@@ -231,7 +229,7 @@ class Magang extends CI_Controller
 	{
 		$nim = $this->session->userdata('id');
 		$id = $this->input->get('id');
-		array_push($history_perusahaan, $id);
+//		array_push($history_perusahaan, $id);
 		//id perusahaan
 		if (isset($id)) {
 			$where['id_perusahaan'] = $id;
