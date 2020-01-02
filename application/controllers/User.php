@@ -20,17 +20,11 @@ class User extends CI_Controller
 			case 'mahasiswa':
 				$data['menus'] = array(
 					array('name' => 'SIG Perusahaan',
-						'href' => 'https://sig.prakerin.politala.ac.id',
+						'href' => 'https://simpkl.politala.ac.id/sig/home',
 						'icon' => 'ni ni-square-pin',
 						'step_intro' => '2',
-						'message_intro' => 'Menu SIG Perusahaan merupakan menu yang digunakan mengakses aplikasi geografis perusahaan, meliputi letak geografis, dan data penting terkait perusahaan magang anda',
+						'message_intro' => 'SIG Perusahaan merupakan aplikasi geografis perusahaan, meliputi letak geografis, dan data penting terkait perusahaan magang anda',
 						'desc' => 'Sistem Informasi Pemetaan Mahasiswa yang melaksanakan Praktik Kerja Industri Politeknik Negeri Tanah Laut'),
-					array('name' => 'Kuesioner Perusahaan',
-						'href' => site_url('user/kuesioner?m=mhs'),
-						'icon' => 'ni ni-single-copy-04',
-						'step_intro' => '3',
-						'message_intro' => 'Dalam menu Kuesioner perusahaan ini, kalian diminta untuk menjawab pertanyaan seputar perusahaan anda magang.',
-						'desc' => 'Lakukan review tempat magangmu, supaya adik kelasmu memperoleh refensi bagus')
 				);
 				$data['mahasiswa'] = $this->mahasiswa_model->getById();
 				$data['latest_bimbingan'] = $this->konsultasi_model->show_latest_bimbingan();

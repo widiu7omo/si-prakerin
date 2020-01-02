@@ -29,14 +29,14 @@
 						<!-- Surtitle -->
 						<h6 class="surtitle">Overview</h6>
 						<!-- Title -->
-						<h5 class="h3 mb-0">Total sales</h5>
+						<h5 class="h3 mb-0">Daftar Mengikuti seminar</h5>
 					</div>
 					<!-- Card body -->
 					<div class="card-body">
 						<div class="chart">
 
 							<!-- Chart wrapper -->
-							<canvas id="chart-sales"></canvas>
+<!--							<canvas id="chart-sales"></canvas>-->
 						</div>
 					</div>
 				</div>
@@ -63,6 +63,50 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-xl-6">
+				<!--* Card header *-->
+				<!--* Card body *-->
+				<!--* Card init *-->
+				<div class="card">
+					<!-- Card header -->
+					<div class="card-header">
+						<!-- Surtitle -->
+						<h6 class="surtitle">Overview</h6>
+						<!-- Title -->
+						<h5 class="h3 mb-0">Daftar Bimbingan</h5>
+					</div>
+					<!-- Card body -->
+					<div class="card-body">
+						<div class="chart">
+
+							<!-- Chart wrapper -->
+							<!--							<canvas id="chart-sales"></canvas>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-6">
+				<!--* Card header *-->
+				<!--* Card body *-->
+				<!--* Card init *-->
+				<div class="card">
+					<!-- Card header -->
+					<div class="card-header">
+						<!-- Surtitle -->
+						<h6 class="surtitle">Overview</h6>
+						<!-- Title -->
+						<h5 class="h3 mb-0">Status PKL Mahasiswa</h5>
+					</div>
+					<!-- Card body -->
+					<div class="card-body">
+						<div class="chart">
+
+							<!-- Chart wrapper -->
+							<!--							<canvas id="chart-sales"></canvas>-->
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- Footer -->
 		<?php $this->load->view('admin/_partials/footer.php')?>
@@ -76,11 +120,11 @@
 ?>
 <script>
 	<?php
-	$total = custom_query( "SELECT COUNT(*) as jumlah FROM tb_mahasiswa" );
-	$ditolak = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'tolak') tps " );
-	$masuk = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'masuk') tps " );
-	$diterima = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'terima') tps " );
-	$pending = custom_query( "SELECT  COUNT(*) as jumlah FROM ( SELECT *  FROM tb_perusahaan_sementara  WHERE status = 'pending' OR status = 'kirim') tps " );
+	$total = custom_query( "SELECT COUNT(*) as jumlah FROM tb_mahasiswa WHERE id_tahun_akademik = (select id_tahun_akademik from tb_waktu)" );
+	$ditolak = custom_query( "SELECT  COUNT(*) as jumlah FROM tb_perusahaan_sementara  WHERE status = 'tolak'" );
+	$masuk = custom_query( "SELECT  COUNT(*) as jumlah FROM tb_perusahaan_sementara  WHERE status = 'masuk'" );
+	$diterima = custom_query( "SELECT  COUNT(*) as jumlah FROM tb_perusahaan_sementara  WHERE status = 'terima'" );
+	$pending = custom_query( "SELECT  COUNT(*) as jumlah FROM tb_perusahaan_sementara  WHERE status = 'pending' OR status = 'kirim'" );
 	$belum = $total->jumlah - ( $ditolak->jumlah + $pending->jumlah + $diterima->jumlah + $masuk->jumlah );
 	$datachart = array(
 		(int) $masuk->jumlah,
@@ -90,10 +134,6 @@
 		$belum
 	);
 	?>
-    let randomScalingFactor = function () {
-        return Math.round(Math.random() * 100);
-    };
-
     let config = {
         type: 'pie',
         data: {

@@ -70,7 +70,7 @@ class Login extends CI_Controller {
 				switch ( $isValidAkun[0]->level ) {
 					case 'mahasiswa':
 						$programstudi_by_year = masterdata( '(select tm.*,tw.`id_tahun_akademik` as id_ta from tb_mahasiswa tm join tb_waktu tw on tm.id_tahun_akademik =tw.id_tahun_akademik) tb_mahasiswa', array( 'nim' => $isValidAkun[0]->id ), 'id_program_studi' );
-						if(count( $programstudi_by_year) == 0){
+						if(count( (array)$programstudi_by_year) == 0){
 							$this->session->set_flashdata( 'fail', 'Gagal untuk Login, Anda tidak dijinkan login pada semester ini' );
 							redirect( site_url( 'login' ) );
 						}
