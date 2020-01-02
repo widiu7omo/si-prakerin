@@ -70,13 +70,13 @@ if($level == 'mahasiswa'){
 					<!-- Navigation -->
 					<ul class="navbar-nav mb-md-3">
 						<li class="nav-item">
-							<a class="nav-link" href="../../docs/getting-started/overview.html" target="_blank">
+							<a class="nav-link" href="<?php echo site_url('blog/home') ?>" target="_blank">
 								<i class="ni ni-support-16"></i>
 								<span class="nav-link-text">Informasi</span>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="../../docs/foundation/colors.html" target="_blank">
+							<a class="nav-link" href="<?php echo site_url('blog/download') ?>" target="_blank">
 								<i class="ni ni-archive-2"></i>
 								<span class="nav-link-text">Download Berkas</span>
 							</a>

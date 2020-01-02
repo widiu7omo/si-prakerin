@@ -20,8 +20,17 @@ class Dashboard extends CI_Controller {
     }
     public function clearnotif(){
     	$users = $this->session->userdata('level');
-	    clear_notification($users);
-	    redirect(site_url($this->uri->segment(1)));
+    	$penerima = '';
+    	switch ($users){
+			case 'mahasiswa':
+				$penerima = $this->session->userdata('id');
+				break;
+			case 'admin':
+				$penerima = $users;
+				break;
+		}
+	    clear_notification($penerima);
+	    redirect(site_url());
     }
 
 }

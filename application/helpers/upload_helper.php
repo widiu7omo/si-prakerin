@@ -53,7 +53,7 @@ if (!function_exists('do_upload_bimbingan')) {
 	{
 		$ci =& get_instance();
 		$config['upload_path'] = './file_upload/bimbingan/';
-		$config['allowed_types'] = 'zip|rar';
+		$config['allowed_types'] = 'pdf|zip|rar';
 		$config['max_size'] = 512;
 		$config['encrypt_name'] = TRUE;
 		$ci->load->library('upload', $config);

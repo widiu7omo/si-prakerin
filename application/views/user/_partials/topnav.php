@@ -71,12 +71,14 @@ $level = $this->session->userdata('level');
 								class="pulsate badge badge-circle badge-floating badge-danger border-white badge-top-right"><?php echo $countNotif ?></span>
 						<?php endif; ?>
 					</a>
+
 					<div class="dropdown-menu dropdown-menu-xl dropdown-menu-right py-0 overflow-hidden">
 						<!-- Dropdown header -->
-						<div class="px-3 py-3">
+						<div class="px-3 py-3 d-flex justify-content-between">
 							<h6 class="text-sm text-muted m-0">You have <strong
 									class="text-primary"><?php echo isset($countNotification) ? $countNotification : 0 ?></strong>
 								notifications.</h6>
+							<a href="<?php echo site_url('dashboard/clearnotif')?>" class="text-sm text-muted m-0">Clear All Notifications</a>
 						</div>
 						<!-- List group -->
 						<div <?php echo count($dataNotification) > 3 ? 'style="height: 350px;overflow: scroll;"' : null ?>
