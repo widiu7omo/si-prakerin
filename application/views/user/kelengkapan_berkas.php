@@ -30,8 +30,13 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama')?>
 					<!-- Card body -->
 					<div class="card-body">
 						<!-- List group -->
+						<?php $allow = isset($allow)?$allow:false; ?>
+						<?php if (!$allow): ?>
+							<div class="h2">Anda belum bisa upload kelengkapan berkas</div>
+						<?php else: ?>
 						<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
 						<input type="file" class="my-pond">
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

@@ -31,7 +31,7 @@ if (!function_exists('getmenu')) {
 					(object)array('name' => 'Bimbingan',
 						'icon' => 'collection',
 						'color' => 'pink',
-						'href' => site_url('bimbingan')),
+						'href' => site_url('bimbingan?m=konsultasi')),
 					(object)array('name' => 'Sidang',
 						'icon' => 'calendar-grid-58',
 						'color' => 'green',

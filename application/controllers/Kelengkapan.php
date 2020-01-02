@@ -12,6 +12,8 @@ class Kelengkapan extends CI_Controller
 
 	public function index()
 	{
+		$data = array();
+		$data['allow'] = false;
 		$level = $this->session->userdata('level');
 		if (isset($_GET['m'])) {
 			switch ($_GET['m']) {
@@ -26,8 +28,9 @@ class Kelengkapan extends CI_Controller
 		$dsn_bimbingan = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs id');
 		if(isset($dsn_bimbingan->id)){
 			$file = masterdata('tb_kelengkapan_berkas',"id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'",'nama_file');
+			$data['file'] = $file;
+			$data['allow'] = true;
 		}
-		$data['file'] = $file;
 		$this->load->view('user/kelengkapan_berkas',$data);
 	}
 
