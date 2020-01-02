@@ -15,7 +15,8 @@
 		"auth0/auth0-php": "^5.5",
 		"ext-json": "*",
       "ext-curl": "*",
-		"lukascivil/treewalker": "dev-master"
+		"lukascivil/treewalker": "dev-master",
+		"pusher/pusher-php-server": "^4.1"
     },
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
