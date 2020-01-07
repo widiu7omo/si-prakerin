@@ -20,6 +20,8 @@ $id_perusahaan = null;
 if (count($approval) == 1 || count($approval) > 1) {
 	$exist = true;
 	$id_perusahaan = $approval[0]->id_perusahaan;
+	$join_mahasiswa = array('tb_mahasiswa','tb_mahasiswa.nim = tb_perusahaan_sementara.nim','INNER JOIN');
+	$mahasiswa_perusahaan_sama = datajoin('tb_perusahaan_sementara',"id_perusahaan = '$id_perusahaan'",'tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.nim',$join_mahasiswa);
 }
 function getTempMhs($id)
 {
@@ -85,18 +87,35 @@ function getTempMhs($id)
 								<div class="col-md-12 col-sm-12">
 									<div class="collapse" id="collapse-bukti-diterima">
 										<div class="card card-body">
-											<div class="dropzone dropzone-multiple dz-clickable"
-												 data-toggle="dropzone" data-dropzone-multiple=""
-												 data-dropzone-url="<?php echo site_url('ajax/uploadbukti?id=' . $id_perusahaan) ?>">
-												<ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush"></ul>
-												<div class="dz-default dz-message">
-													<span>Upload bukti diterima magang</span><br>
-													<small class="text-danger">*format harus .pdf</small>
-													<div class="spinner-border text-danger" role="status">
-														<span class="sr-only">Loading...</span>
+											<div class="h4">Proses upload bukti penerimaan boleh dilakukan salah satu mahasiswa, atau semua mahasiswa yang bersangkutan</div>
+											<div class="row">
+												<div class="col-xs-12 col-sm-6">
+													<div class="h4 font-weight-300">Silahkan pilih mahasiswa yang diterima ditempat magang</div>
+													<div class="ml-4 mt-4">
+														<?php foreach (isset($mahasiswa_perusahaan_sama)?$mahasiswa_perusahaan_sama:array() as $mhs_sama): ?>
+														<div class="custom-control custom-checkbox mb-3 ">
+															<input class="custom-control-input" id="customCheck-<?php echo $mhs_sama->nim ?>" name="mahasiswa[]" type="checkbox" value="<?php echo $mhs_sama->nim ?>">
+															<label class="custom-control-label text-primary" for="customCheck-<?php echo $mhs_sama->nim ?>"><?php echo $mhs_sama->nama_mahasiswa ?></label>
+														</div>
+														<?php endforeach; ?>
+													</div>
+												</div>
+												<div class="col-xs-12 col-sm-6">
+													<div class="dropzone dropzone-multiple dz-clickable"
+														 data-toggle="dropzone" data-dropzone-multiple=""
+														 data-dropzone-url="<?php echo site_url('ajax/uploadbukti?id=' . $id_perusahaan) ?>">
+														<ul class="dz-preview dz-preview-multiple list-group list-group-lg list-group-flush"></ul>
+														<div class="dz-default dz-message">
+															<span>Upload bukti diterima magang</span><br>
+															<small class="text-danger">*format harus .pdf</small>
+															<div class="spinner-border text-danger" role="status">
+																<span class="sr-only">Loading...</span>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
+
 											<div class="row">
 												<div class="col">
 													<button id="confirmation-bukti" disabled
@@ -502,21 +521,37 @@ function getTempMhs($id)
 
     })();
     $('#confirmation-bukti').on('click', function () {
-        $.ajax({
-            url: '<?php echo site_url("ajax/simpan_bukti")?>',
-            dataType: "json",
-            method: "POST",
-            data: {
-                id: $(this).data('id')
-            },
-			success:function(response){
-                alert('Bukti berhasil disimpan');
-				location.reload()
-			},
-			error:function(err){
-                alert('Bukti gagal disimpan, sedang terjadi kesalahan');
+		let data_select =  [];
+		$('[name="mahasiswa[]"]').map(function (index,val) {
+			data_select.push({status:val.checked,value:val.value})
+		});
+		let checked = false;
+		data_select.forEach(function (e) {
+			if(e.status){
+				checked = true;
 			}
-        })
+		})
+		if(checked){
+			$.ajax({
+				url: '<?php echo site_url("ajax/simpan_bukti")?>',
+				dataType: "json",
+				method: "POST",
+				data: {
+					id: $(this).data('id'),
+					mahasiswa:data_select,
+				},
+				success:function(response){
+					alert('Bukti berhasil disimpan');
+					location.reload()
+				},
+				error:function(err){
+					alert('Bukti gagal disimpan, sedang terjadi kesalahan');
+				}
+			})
+		}else{
+			alert('Cek list terlebih dahulu beberapa mahasiswa yang diterima. Jika tidak diterima semua silahkan klik tombol tolak');
+		}
+
     })
 </script>
 <!-- Demo JS - remove this in your project -->

@@ -56,15 +56,27 @@ class Ajax extends CI_Controller
 	public function simpan_bukti(){
 		$post = $this->input->post();
 		$nim = $this->session->userdata('id');
-		$mhs = masterdata('tb_mahasiswa', "nim = '{$nim}'", 'nama_mahasiswa', false);
 		$pengajuan = $this->pengajuan_model;
-		if($pengajuan->update_multi(array('status'=>'pending'),array('id_perusahaan'=>$post['id']))){
-			set_notification($nim, 'admin', "{$mhs->nama_mahasiswa} ({$nim}) telah mengirim bukti penerimaan magang", 'bukti diterima', 'mahasiswa?m=pengajuan');
-			echo json_encode(array('status'=>'success'));
+		foreach ($post['mahasiswa'] as $mhs){
+			$data_mhs = masterdata('tb_mahasiswa', "nim = '{$mhs['value']}'", 'nama_mahasiswa', false);
+			if($mhs['status'] == "true"){
+				$pengajuan->update_multi(array('status'=>'pending'),array('id_perusahaan'=>$post['id'],'nim'=>$mhs['value']));
+				set_notification($nim, 'admin', "{$data_mhs->nama_mahasiswa} ({$mhs['value']}) telah mengirim bukti penerimaan magang", 'bukti diterima', 'mahasiswa?m=pengajuan');
+			}
+			else{
+				$pengajuan->update_multi(array('status'=>'tolak'),array('id_perusahaan'=>$post['id'],'nim'=>$mhs['value']));
+				set_notification($nim, 'admin', "{$data_mhs->nama_mahasiswa} ({$mhs['value']}) telah ditolak oleh perusahaan yang bersangkutan", 'bukti diterima', 'mahasiswa?m=pengajuan');
+				dynamic_insert('tb_history_pemilihan', array('nim' => $mhs['value'], 'id_perusahaan' => $post['id']));
+			}
 		}
-		else{
-			echo json_encode(array('status'=>'error'));
-		}
+		echo json_encode(array('status'=>'success'));
+//		if($pengajuan->update_multi(array('status'=>'pending'),array('id_perusahaan'=>$post['id']))){
+//			set_notification($nim, 'admin', "{$mhs->nama_mahasiswa} ({$nim}) telah mengirim bukti penerimaan magang", 'bukti diterima', 'mahasiswa?m=pengajuan');
+//			echo json_encode(array('status'=>'success'));
+//		}
+//		else{
+//			echo json_encode(array('status'=>'error'));
+//		}
 	}
 	public function upload_bimbingan()
 	{

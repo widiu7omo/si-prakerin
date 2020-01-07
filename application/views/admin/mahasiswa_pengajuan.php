@@ -77,7 +77,7 @@ $currentTahun = datajoin('tb_waktu', null, 'tb_waktu.*,ta.tahun_akademik', [
 								<small>Dicetak</small>
 								<button class="btn btn-sm btn-info"></button>
 								<small>Dikirim</small>
-								<button class="btn btn-sm btn-warning"></button>
+								<button class="btn btn-sm btn-default"></button>
 								<small>Pending</small>
 								<button class="btn btn-sm btn-success"></button>
 								<small>Diterima</small>
@@ -181,7 +181,7 @@ $currentTahun = datajoin('tb_waktu', null, 'tb_waktu.*,ta.tahun_akademik', [
                     $(row).addClass('text-white bg-info');
                 }
                 if (data.mahasiswa[0].status === 'pending') {
-                    $(row).addClass('text-white bg-warning');
+                    $(row).addClass('text-white bg-default');
                 }
                 if (data.mahasiswa[0].status === 'tolak') {
                     $(row).addClass('text-white bg-danger');
