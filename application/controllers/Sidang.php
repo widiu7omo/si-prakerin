@@ -24,6 +24,10 @@ class Sidang extends CI_Controller
 		switch ($level) {
 			case 'mahasiswa':
 				$data['menus'] = array(
+					array('name' => 'Pendaftaran Seminar',
+						'href' => site_url('sidang?m=pendaftaran'),
+						'icon' => 'fas fa-id-badge',
+						'desc' => 'Proses pendaftaran sidang dan penguploadan berkas yang diperlukan'),
 					array('name' => 'Jadwal Seminar',
 						'href' => site_url('sidang?m=jadwal'),
 						'icon' => 'fas fa-id-badge',

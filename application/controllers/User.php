@@ -35,17 +35,11 @@ class User extends CI_Controller
 			case 'dosen':
 				$data['menus'] = array(
 					array('name' => 'Monev Prakerin',
-						'href' => 'https://monev.prakerin.politala.ac.id',
+						'href' => 'https://simpkl.politala.ac.id/monev/login',
 						'icon' => 'ni ni-square-pin',
 						'step_intro' => '3',
 						'message_intro' => 'Menu .',
-						'desc' => 'Aplikasi monitoring tempat Praktik kerja lapangan'),
-					array('name' => 'Kuesioner Dosen',
-						'href' => site_url('kuesioner?m=dsn'),
-						'icon' => 'ni ni-square-pin',
-						'step_intro' => '3',
-						'message_intro' => 'Menu',
-						'desc' => 'Kuesioner bagi dosen tentang bla bla bla')
+						'desc' => 'Aplikasi monitoring tempat Praktik kerja lapangan')
 				);
 				$data['dosen'] = $this->pegawai_model->getById();
 				$data['all_latest_bimbingan'] = $this->konsultasi_model->show_all_latest_bimbingan();

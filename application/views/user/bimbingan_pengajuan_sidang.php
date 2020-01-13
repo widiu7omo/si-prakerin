@@ -50,6 +50,7 @@
 									<tbody>
 									<?php $mahasiswas = $mahasiswas ? $mahasiswas : array() ?>
 									<?php foreach ($mahasiswas as $key => $mahasiswa): ?>
+									<?php if ($mahasiswa->status_judul == 'setuju'): ?>
 										<tr role="row" class="odd">
 											<td class="sorting_1"><?php echo $key + 1 ?></td>
 											<td><?php echo $mahasiswa->nama_mahasiswa ?></td>
@@ -87,6 +88,7 @@
 												</div>
 											</td>
 										</tr>
+									<?php endif; ?>
 									<?php endforeach; ?>
 									</tbody>
 								</table>

@@ -58,11 +58,11 @@
 											<td>
 												<div class="btn-group-sm btn-group d-flex">
 													<?php if (!$mahasiswa->status_judul): ?>
-														<button
+														<button <?php echo $mahasiswa->judul_laporan_mhs ? "" : "disabled" ?>
 															onclick="window.location.href = '<?php echo site_url("bimbingan?m=approvejudul&a=acc&id=$mahasiswa->nim") ?>'"
 															class="btn btn-sm btn-success w-100">Setuju
 														</button>
-														<button
+														<button <?php echo $mahasiswa->judul_laporan_mhs ? "" : "disabled" ?>
 															onclick="window.location.href = '<?php echo site_url("bimbingan?m=approvejudul&a=dec&id=$mahasiswa->nim") ?>'"
 															class="btn btn-sm btn-danger w-100">Ajukan Ulang
 														</button>
@@ -102,15 +102,15 @@
 <script src="<?php echo base_url('aset/vendor/fullcalendar/locale-all.js') ?>"></script>
 
 <script>
-    $(document).ready(function () {
-        if (!localStorage.getItem('bimbingan_pengajuan')) {
-            introJs().start().oncomplete(function () {
-                localStorage.setItem('bimbingan_pengajuan', 'yes');
-            }).onexit(function () {
-                localStorage.setItem('bimbingan_pengajuan', 'yes');
-            })
-        }
-    })
+	$(document).ready(function () {
+		if (!localStorage.getItem('bimbingan_pengajuan')) {
+			introJs().start().oncomplete(function () {
+				localStorage.setItem('bimbingan_pengajuan', 'yes');
+			}).onexit(function () {
+				localStorage.setItem('bimbingan_pengajuan', 'yes');
+			})
+		}
+	})
 </script>
 <!-- Demo JS - remove this in your project -->
 <!-- <script src="../aset/js/demo.min.js"></script> -->

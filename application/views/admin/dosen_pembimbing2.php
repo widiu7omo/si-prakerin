@@ -99,6 +99,7 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
 							<p class="card-text text-sm">*&nbsp;Drag dan Drop ke arah mahasiswa untuk mengembalikan</p>
 							<div style="height: 100%;max-height: 500px;overflow-y: scroll;padding:10px">
 								<?php foreach ($dosens as $dosen): ?>
+									<?php $mhs_bimbingan = array(); ?>
 									<div class="card"
 										 style="box-shadow: rgba(0,0,0,.1) 0 0 0 1px, rgba(0,0,0,.1) 0 4px 16px;">
 										<div class="card-body">
@@ -109,7 +110,7 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
 												id="<?php echo "$dosen->nip_nik" ?>">
 												<?php
 												$joins[0] = array('(select tm.*,tmpp.id_mhs_pilih_perusahaan from tb_mhs_pilih_perusahaan tmpp inner join tb_mahasiswa tm on tm.nim = tmpp.nim)tb_mahasiswa', 'tdbm.nim = tb_mahasiswa.nim', 'LEFT OUTER');
-												$mhs_bimbingan = datajoin('tb_dosen_bimbingan_mhs tdbm', "tdbm.nip_nik = $dosen->nip_nik", "tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.id_mhs_pilih_perusahaan,tdbm.nim,tdbm.id_dosen_bimbingan_mhs", $joins, null, 'tb_mahasiswa.nama_mahasiswa') ?>
+												$mhs_bimbingan = datajoin('tb_dosen_bimbingan_mhs tdbm', "tdbm.nip_nik = '$dosen->nip_nik'", "tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.id_mhs_pilih_perusahaan,tdbm.nim,tdbm.id_dosen_bimbingan_mhs", $joins, null, 'tb_mahasiswa.nama_mahasiswa') ?>
 												<?php foreach ($mhs_bimbingan as $mhs): ?>
 													<li data-nim="<?php echo $mhs->nim ?>"
 														data-idpilih="<?php echo $mhs->id_mhs_pilih_perusahaan ?>"
