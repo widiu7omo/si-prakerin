@@ -47,9 +47,9 @@
 						</div>
 						<div class="card-body">
 							<p class="h4 bold m-0 mb-4">Konsultasi Mahasiswa Bimbingan PKL Offline</p>
-							<?php $bimbingan_offline = $bimbingan_offline ? $bimbingan_offline : array();
-							foreach ($bimbingan_offline as $offline): ?>
-								<div class="row">
+							<div class="row">
+								<?php $bimbingan_offline = $bimbingan_offline ? $bimbingan_offline : array();
+								foreach ($bimbingan_offline as $offline): ?>
 									<div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
 										<div class="card">
 											<!-- Card body -->
@@ -76,8 +76,8 @@
 											</div>
 										</div>
 									</div>
-								</div>
-							<?php endforeach; ?>
+								<?php endforeach; ?>
+							</div>
 						</div>
 					</div>
 				</div>

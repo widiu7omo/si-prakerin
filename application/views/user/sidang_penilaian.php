@@ -523,24 +523,35 @@
 	}
 
 	let komponenPembimbing = [
-		{name: "1. Penguasaan teori", percentage: "20%"},
-		{name: "2. Kemampuan analisis dan pemecahan masalah", percentage: "25%"},
-		{name: "3. Keaktifan bimbingan", percentage: "15%"},
-		{name: "4. Kemampuan penulisan laporan", percentage: "20%"},
-		{name: "5. Sikap / Etika", percentage: "20%"}
+		{name: "1. Penguasaan teori", percentage: "20%", value: 20},
+		{name: "2. Kemampuan analisis dan pemecahan masalah", percentage: "25%", value: 25},
+		{name: "3. Keaktifan bimbingan", percentage: "15%", value: 15},
+		{name: "4. Kemampuan penulisan laporan", percentage: "20%", value: 20},
+		{name: "5. Sikap / Etika", percentage: "20%", value: 20}
 	];
 	let komponenPenguji = [
-		{name:"1. Penyajian Presentasi",percentage:"10%"},
-		{name:"2. Pemahaman Materi",percentage:"15%"},
-		{name:"3. Hasil yang dicapai",percentage:"40%"},
-		{name:"4. Objektifitas menganggapi pertanyaan",percentage:"20%"},
-		{name:"5. Penulisan laporan",percentage:"15%"}
+		{name: "1. Penyajian Presentasi", percentage: "10%", value: 10},
+		{name: "2. Pemahaman Materi", percentage: "15%", value: 15},
+		{name: "3. Hasil yang dicapai", percentage: "40%", value: 40},
+		{name: "4. Objektifitas menganggapi pertanyaan", percentage: "20%", value:20},
+		{name: "5. Penulisan laporan", percentage: "15%", value: 15}
 	];
+
+	function get_value_penilaian(index) {
+		let value_penilaian = $('#status-penilaian').data('status');
+		if (value_penilaian === 'p3') {
+			return komponenPembimbing[index].value
+		} else {
+			return komponenPenguji[index].value
+		}
+	}
+
 	$(document).ready(function () {
 		//TODO:clean this code
 		$('#p1').inputFilter(function (value) {
 			if (parseInt(value) <= 100 || value === '') {
-				let nilai = (parseInt(value) * 10) / 100;
+				let percentageValue = get_value_penilaian(0)
+				nilai = (parseInt(value) * percentageValue) / 100;
 				if (isNaN(nilai)) {
 					nilai = 0;
 				}
@@ -552,7 +563,8 @@
 		})
 		$('#p2').inputFilter(function (value) {
 			if (parseInt(value) <= 100 || value === '') {
-				let nilai = (parseInt(value) * 15) / 100;
+				let percentageValue = get_value_penilaian(1);
+				let nilai = (parseInt(value) * percentageValue) / 100;
 				if (isNaN(nilai)) {
 					nilai = 0;
 				}
@@ -564,7 +576,8 @@
 		})
 		$('#p3').inputFilter(function (value) {
 			if (parseInt(value) <= 100 || value === '') {
-				let nilai = (parseInt(value) * 40) / 100;
+				let percentageValue = get_value_penilaian(2);
+				let nilai = (parseInt(value) * percentageValue) / 100;
 				if (isNaN(nilai)) {
 					nilai = 0;
 				}
@@ -576,7 +589,8 @@
 		})
 		$('#p4').inputFilter(function (value) {
 			if (parseInt(value) <= 100 || value === '') {
-				let nilai = (parseInt(value) * 20) / 100;
+				let percentageValue = get_value_penilaian(3);
+				let nilai = (parseInt(value) * percentageValue) / 100;
 				if (isNaN(nilai)) {
 					nilai = 0;
 				}
@@ -588,7 +602,8 @@
 		})
 		$('#p5').inputFilter(function (value) {
 			if (parseInt(value) <= 100 || value === '') {
-				let nilai = (parseInt(value) * 15) / 100;
+				let percentageValue = get_value_penilaian(4);
+				let nilai = (parseInt(value) * percentageValue) / 100;
 				if (isNaN(nilai)) {
 					nilai = 0;
 				}
@@ -645,27 +660,27 @@
 							$('#pn-tot').text(total_nilai);
 						}
 						let label = $('#komponen-penilaian>label');
-						let percentage =$('span#percent-value');
+						let percentage = $('span#percent-value');
 						let percentHelp = $('b#percent-help');
 						if (res[0].sebagai === 'p3') {
-							label.map(function(index){
-								if(index < label.length-1){
+							label.map(function (index) {
+								if (index < label.length - 1) {
 									$(this).text(komponenPembimbing[index].name)
 								}
 							})
-							percentage.map(function(index){
+							percentage.map(function (index) {
 								$(this).text(komponenPembimbing[index].percentage);
 							})
 							percentHelp.map(function (index) {
 								$(this).text(komponenPembimbing[index].percentage);
 							})
 						} else {
-							label.map(function(index){
-								if(index < label.length-1){
+							label.map(function (index) {
+								if (index < label.length - 1) {
 									$(this).text(komponenPenguji[index].name)
 								}
 							})
-							percentage.map(function(index){
+							percentage.map(function (index) {
 								$(this).text(komponenPenguji[index].percentage);
 							})
 							percentHelp.map(function (index) {

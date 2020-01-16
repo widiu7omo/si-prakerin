@@ -263,7 +263,7 @@ class Seminar_model extends CI_Model
 			$where .= "(tp1.nip_nik = '$id' OR tp2.nip_nik = '$id' OR tp3.nip_nik = '$id') AND";
 		}
 		$datetime = $time ? $date . 'T' . $time : $date;
-		$where .= " tsj.mulai < '$datetime'";
+		$where .= " tsj.berakhir < '$datetime'";
 		if (isset($post['ij'])) {
 			$where .= "AND tsj.id = '$post[ij]'";
 		}

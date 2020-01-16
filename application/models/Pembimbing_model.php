@@ -30,7 +30,9 @@ class Pembimbing_model extends CI_Model
 		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*', $join);
 	}
-	public function get_all_pengajuan_judul($id){
+
+	public function get_all_pengajuan_judul($id)
+	{
 		$this->db->reset_query();
 		$where = null;
 		if ($id) {
@@ -39,16 +41,20 @@ class Pembimbing_model extends CI_Model
 		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.nim,tb_dosen_bimbingan_mhs.*', $join);
 	}
-	public function get_all_approved_judul(){
+
+	public function get_all_approved_judul()
+	{
 		$this->db->reset_query();
 		$where = "tb_dosen_bimbingan_mhs.status_seminar = 'setuju'";
 		$join = array(
 			array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join'),
-			array('tb_pegawai','tb_pegawai.nip_nik = tb_dosen_bimbingan_mhs.nip_nik','inner join')
+			array('tb_pegawai', 'tb_pegawai.nip_nik = tb_dosen_bimbingan_mhs.nip_nik', 'inner join')
 		);
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.nim,tb_pegawai.nama_pegawai,tb_dosen_bimbingan_mhs.*', $join);
 	}
-	public function get_all_pengajuan_sidang($id){
+
+	public function get_all_pengajuan_sidang($id)
+	{
 		$this->db->reset_query();
 		$where = null;
 		if ($id) {
@@ -57,6 +63,7 @@ class Pembimbing_model extends CI_Model
 		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_mahasiswa.nim,tb_dosen_bimbingan_mhs.*', $join);
 	}
+
 	public function get_mhs_belum_bimbingan($id = null)
 	{
 		$this->db->reset_query();
@@ -75,7 +82,7 @@ class Pembimbing_model extends CI_Model
 		$wherein = null;
 		if ($id) {
 			$where = array('tb_dosen_bimbingan_mhs.nip_nik' => $id);
-			$wherein = array('tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs','select id_dosen_bimbingan_mhs FROM tb_konsultasi_bimbingan');
+			$wherein = array('tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs', 'select id_dosen_bimbingan_mhs FROM tb_konsultasi_bimbingan');
 		}
 		$join = array(
 			array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join')
@@ -83,13 +90,13 @@ class Pembimbing_model extends CI_Model
 		return datajoin($this->_table, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*,"online" as mode', $join, null, null, $wherein);
 	}
 
-	public function get_mhs_bimbingan_offline($id = null,$pdf = null)
+	public function get_mhs_bimbingan_offline($id = null, $pdf = null)
 	{
 		$this->db->reset_query();
 		$where = null;
 		if ($id) {
 			$where = array('tb_dosen_bimbingan_mhs.nip_nik' => $id);
-			if($pdf){
+			if ($pdf) {
 				$where['tb_konsultasi_bimbingan_offline.lembar_konsultasi'] = $pdf;
 			}
 			$wherein = array('tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs', 'select id_dosen_bimbingan_mhs FROM tb_konsultasi_bimbingan_offline');
@@ -106,21 +113,25 @@ class Pembimbing_model extends CI_Model
 	{
 		$nim = $this->session->userdata('id');
 		$judul = $this->input->post('judul');
-		$data = array('judul_laporan_mhs' => $judul,'status_judul'=>NULL);
+		$data = array('judul_laporan_mhs' => $judul, 'status_judul' => NULL);
 		$this->db->where(array('nim' => $nim));
 		$this->db->set($data);
 		return $this->db->update($this->_table);
 	}
-	public function change_status_seminar($action){
+
+	public function change_status_seminar($action)
+	{
 		$nim = $this->input->get('id');
 		$data = array('status_seminar' => $action);
 		$this->db->where(array('nim' => $nim));
 		$this->db->set($data);
 		return $this->db->update($this->_table);
 	}
-	public function change_status_judul($action){
+
+	public function change_status_judul($action)
+	{
 		$nim = $this->input->get('id');
-		if($action == 'ulang'){
+		if ($action == 'ulang') {
 			$this->insert_history_judul($nim);
 		}
 		$data = array('status_judul' => $action);
@@ -128,13 +139,16 @@ class Pembimbing_model extends CI_Model
 		$this->db->set($data);
 		return $this->db->update($this->_table);
 	}
-	private function insert_history_judul($nim){
-		$data_judul = masterdata('tb_dosen_bimbingan_mhs',"nim = '$nim'",'id_dosen_bimbingan_mhs,judul_laporan_mhs as judul',false);
-		if(gettype($data_judul) == 'object'){
+
+	private function insert_history_judul($nim)
+	{
+		$data_judul = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs,judul_laporan_mhs as judul', false);
+		if (gettype($data_judul) == 'object') {
 			$data_judul->id = 0;
-			$this->db->insert('tb_history_judul',$data_judul);
+			$this->db->insert('tb_history_judul', $data_judul);
 		}
 	}
+
 	public function is_has()
 	{
 		$nim = $this->session->userdata('id');
@@ -148,10 +162,22 @@ class Pembimbing_model extends CI_Model
 		$tahun_akademik = masterdata('tb_waktu', null, 'id_tahun_akademik');
 		$data['id_tahun_akademik'] = $tahun_akademik[0]->id_tahun_akademik;
 		$data['id_mhs_pilih_perusahaan'] = $post['id_mhs_pilih_perusahaan'];
-		$data['nim'] = $post['nim'];
+//		$data['nim'] = $post['nim'];
 		$data['nip_nik'] = $post['nip_nik'];
 		//add parameter here
-		return $this->db->replace($this->_table, $data);
+		$where = array(
+			'id_tahun_akademik' => $data['id_tahun_akademik'],
+			'id_mhs_pilih_perusahaan' => $post['id_mhs_pilih_perusahaan'],
+			'nim' => $post['nim']);
+		$this->db->where($where);
+		if ($this->db->delete($this->_table)) {
+			$this->db->set(array('nip_nik' => $post['nip_nik'], 'id_tahun_akademik' => $data['id_tahun_akademik'],
+				'id_mhs_pilih_perusahaan' => $post['id_mhs_pilih_perusahaan'],
+				'nim' => $post['nim']));
+			return $this->db->insert($this->_table);
+		};
+		return false;
+
 	}
 
 	public function move_bimbingan()
