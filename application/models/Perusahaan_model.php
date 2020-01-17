@@ -109,6 +109,12 @@ class Perusahaan_model extends CI_Model {
 	public function delete($id){
 		return $this->db->delete($this->_table,[$this->_primary_key=>$id]);
 	}
+	public function get_current_perusahaan(){
+		$id = $this->session->userdata('id');
+		$this->db->where(array('nim'=>$id));
+		$this->db->select('id_mhs_pilih_perusahaan id');
+		return $this->db->get('tb_mhs_pilih_perusahaan')->row();
+	}
 
 }
 /* End of file suffix_model.php */ ?>

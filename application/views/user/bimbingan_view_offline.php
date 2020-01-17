@@ -25,7 +25,7 @@
 					<div class="card">
 						<div class="card-header">
 							<p class="h4 bold m-0">Konsultasi Mahasiswa Bimbingan PKL Offline</p>
-							<a href="<?php echo site_url('bimbingan?m=bimbinganmhs') ?>" class="btn btn-primary btn-sm float-right">Kembali</a>
+							<a href="<?php echo site_url('bimbingan?m=approvesidang') ?>" class="btn btn-primary btn-sm float-right">Kembali</a>
 						</div>
 						<div class="card-body">
 							<div class="row">

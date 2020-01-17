@@ -223,6 +223,7 @@
 	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/timegrid/main.min.js') ?>"></script>
 	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/interaction/main.min.js') ?>"></script>
 	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/locales-all.min.js') ?>"></script>
+	<script src="<?php echo base_url('aset/vendor/fullcalendar/4/google-calendar/main.min.js') ?>"></script>
 	<script>
 		<?php if($section == 'tempat'):?>
 		function data_tempat() {
@@ -505,7 +506,7 @@
 				}
 			}).on('select2:select', function ({params}) {
 				$('#id_dosen_bimbingan_mhs,#id_dosen_bimbingan_mhs_edit').val(params.data.id)
-				$('#input-laporan').val(params.data.laporan?params.data.laporan:"Belum ada judul");
+				$('#input-laporan').val(params.data.laporan ? params.data.laporan : "Belum ada judul");
 				$('#input-pembimbing').val(params.data.pembimbing)
 			});
 			$('#select-ruangan, #select-ruangan-edit').empty().select2({
@@ -535,7 +536,8 @@
 				var calendarEl = document.getElementById('calendar');
 				var calendar = new FullCalendar.Calendar(calendarEl, {
 					locale: 'id',
-					plugins: ['timeGrid', 'dayGrid', 'interaction'],
+					plugins: ['timeGrid', 'dayGrid', 'interaction','googleCalendarPlugin'],
+					googleCalendarApiKey: "AIzaSyBb6zaTEuiQnWNcFbo1eY4YhyOoqD9UxBA",
 					defaultView: 'dayGridMonth',
 					header: {
 						left: 'prev,next today',
@@ -543,20 +545,35 @@
 						right: 'timeGridWeek,dayGridMonth'
 					},
 					loading: function (isLoading) {
-						console.log(isLoading?"Sedang meload jadwal":"Sukses")
+						console.log(isLoading ? "Sedang meload jadwal" : "Sukses")
 					},
 					selectable: true,
 					selectHelper: true,
 					editable: true,
-					events: {
-						url: "<?php echo site_url('seminar?m=jadwal') ?>",
-						cache: true,
-						type: "POST",
-						data: {events: true},
-						error: function () {
-							alert('Gagal akses jadwal seminar');
+					eventSources: [
+						{
+							url: "<?php echo site_url('seminar?m=jadwal') ?>",
+							cache: true,
+							type: "POST",
+							data: {events: true},
+							error: function () {
+								alert('Gagal akses jadwal seminar');
+							}
+						},
+						{
+							googleCalendarId: 'id.indonesian#holiday@group.v.calendar.google.com',
+							className: 'bg-warning disabled'
 						}
-					},
+					],
+					//events: {
+					//	url: "<?php //echo site_url('seminar?m=jadwal') ?>//",
+					//	cache: true,
+					//	type: "POST",
+					//	data: {events: true},
+					//	error: function () {
+					//		alert('Gagal akses jadwal seminar');
+					//	}
+					//},
 					select: function (info) {
 						console.log(info);
 					},
@@ -671,7 +688,7 @@
 
 						})
 					},
-					eventResize:function(info){
+					eventResize: function (info) {
 						swal({
 							title: 'Apakah anda yakin mengubah waktu ' + info.event.title + ' ?',
 							text: "Pemindahan waktu bisa di batalkan",
@@ -786,7 +803,7 @@
 								id_penguji_1: eventPenguji1,
 								id_penguji_2: eventPenguji2,
 								nama_tempat: ruangan,
-								nama_pembimbing:eventPembimbing,
+								nama_pembimbing: eventPembimbing,
 								p1: p1,
 								p2: p2,
 							}

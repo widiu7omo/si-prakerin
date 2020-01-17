@@ -6,21 +6,22 @@ if ( ! defined( 'BASEPATH' ) ) {
 
 if ( ! function_exists( 'getProgress' ) ) {
 	function getProgress( $status ) {
+		$progress_percentage = 100/5;
 		switch ($status){
 			case 'proses':
-				$percent = 20;
+				$percent = $progress_percentage;
 				break;
 			case 'cetak':
-				$percent = 50;
+				$percent = $progress_percentage*2;
 				break;
 			case 'kirim':
-				$percent = 75;
+				$percent = $progress_percentage*3;
 				break;
 			case 'pending':
-				$percent = 95;
+				$percent = $progress_percentage*4;
 				break;
 			case 'terima':
-				$percent = 100;
+				$percent = $progress_percentage*5;
 				break;
 			case 'tolak':
 				$percent = 98;

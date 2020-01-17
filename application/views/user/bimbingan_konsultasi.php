@@ -2,7 +2,10 @@
 <html>
 <!-- Head PHP -->
 <?php $this->load->view('user/_partials/header.php'); ?>
-<?php $pembimbing = isset($pembimbing) ? $pembimbing : array(); ?>
+<?php
+$pembimbing = isset($pembimbing) ? $pembimbing : array();
+$check_bimbingan = isset($check_bimbingan) ? $check_bimbingan : array();
+?>
 <body class="g-sidenav-hidden">
 <!-- Sidenav PHP-->
 <?php $this->load->view('user/_partials/sidenav.php'); ?>
@@ -65,22 +68,6 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-12" id="card-bimbingan-offline">
-						<div class="card">
-							<div class="card-header m-0">
-								<div class="h4">Bimbingan Offline</div>
-								<small>* Pastikan file scan berformat .pdf</small><br>
-								<small>* Pastikan file tidak lebih dari 500kb</small>
-								<div class="text-sm-center text-danger" id="alert-bimbingan"></div>
-							</div>
-							<div class="card-body pt-0">
-								<form action="<?php echo site_url('ajax/upload_bimbingan') ?>" method="post"
-									  enctype="multipart/form-data"
-									  class="dropzone"
-									  id="dropzone-bimbingan"></form>
-							</div>
-						</div>
-					</div>
 					<div class="col-lg-6 col-md-6 col-sm-12" id="card-kasus">
 						<div class="card">
 							<div class="card-header m-0">
@@ -109,28 +96,28 @@
 								</form>
 							</div>
 						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12">
 						<div class="card">
 							<div class="card-body pt-0">
 								<div class="h4 mt-3">Status Seminar</div>
-								<div class="small">* Persetujuan seminar diverfikasi oleh dosen pembimbing</div>
 								<div>
 									<ul class="list-group list-group-flush">
 										<hr class="m-0">
 										<li class="list-group-item">
 											<div class="custom-control custom-checkbox">
 												<input type="checkbox" disabled
-													   class="custom-control-input" <?php echo $pembimbing[0]->status_judul == 'setuju' ? 'checked' : null ?>>
+													   class="check-status-seminar custom-control-input" <?php echo $pembimbing[0]->status_judul == 'setuju' ? 'checked' : null ?>>
 												<label class="custom-control-label text-black-50" for="customCheck1">Judul
 													sudah di acc dosen pembimbing</label>
 											</div>
 										</li>
 										<?php
-										$check_bimbingan = isset($check_bimbingan) ? $check_bimbingan : array();
 										if (isset($check_bimbingan->mode) && $check_bimbingan->mode == 'offline'): ?>
 											<li class="list-group-item">
 												<div class="custom-control custom-checkbox">
 													<input type="checkbox" disabled
-														   class="custom-control-input" <?php echo $pembimbing[0]->status_judul == 'setuju' ? 'checked' : null ?>>
+														   class="check-status-seminar custom-control-input" <?php echo $pembimbing[0]->status_judul == 'setuju' ? 'checked' : null ?>>
 
 													<label class="custom-control-label text-black-50"
 														   for="customCheck1">Anda
@@ -149,13 +136,13 @@
 											<li class="list-group-item">
 												<div class="custom-control custom-checkbox">
 													<input type="checkbox" disabled
-														   class="custom-control-input" <?php echo count($bimbingans) >= 4 ? 'checked' : null ?>>
+														   class="check-status-seminar custom-control-input" <?php echo count($bimbingans) >= 4 ? 'checked' : null ?>>
 
 													<label class="custom-control-label text-black-50"
 														   for="customCheck1">Melakukan
 														bimbingan lebih dari 4 kali</label>
 													<?php if (count($bimbingans) < 4): ?>
-														<div class="small text-warning">* Anda
+														<div class="h5 font-weight-normal mb-0 text-warning">* Anda
 															melakukan bimbingan
 															sebanyak <?php echo count($bimbingans) ?>
 															kali
@@ -167,7 +154,7 @@
 										<li class="list-group-item">
 											<div class="custom-control custom-checkbox">
 												<input type="checkbox" disabled
-													   class="custom-control-input" <?php echo $pembimbing[0]->status_seminar == 'setuju' ? 'checked' : null ?>>
+													   class="check-status-seminar custom-control-input" <?php echo $pembimbing[0]->status_seminar == 'setuju' ? 'checked' : null ?>>
 
 												<label class="custom-control-label text-black-50" for="customCheck1">Dosen
 													pembimbing menyetujui untuk seminar</label>
@@ -179,6 +166,48 @@
 									<!--										type="button">-->
 									<!--									Ajukan Seminar-->
 									<!--								</button>-->
+								</div>
+								<div class="h5">*Catatan</div>
+								<div class="h6 mb-0 font-weight-normal">- Konsultasi online akan di verfikasi oleh dosen
+									pembimbing
+								</div>
+								<div class="h6 font-weight-normal">- Persetujuan seminar diverfikasi oleh dosen
+									pembimbing
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="h2">Pilih mode kalian bimbingan. <span class="text-success">ONLINE</span> atau <span
+						class="text-danger">OFFLINE</span></div>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12" id="card-bimbingan-offline">
+						<div class="card">
+							<div class="card-header m-0">
+								<div class="h4">Bimbingan Offline</div>
+								<small>* Pastikan file scan berformat .pdf</small><br>
+								<small>* Pastikan file tidak lebih dari 500kb</small>
+								<div class="text-sm-center text-danger" id="alert-bimbingan"></div>
+							</div>
+							<div class="card-body pt-0">
+								<form action="<?php echo site_url('ajax/upload_bimbingan') ?>" method="post"
+									  enctype="multipart/form-data"
+									  class="dropzone"
+									  id="dropzone-bimbingan"></form>
+								<div>
+									<?php $file = isset($check_bimbingan->name) ? $check_bimbingan->name : null ?>
+									<?php if ($file): ?>
+										<button class="btn btn-primary btn-sm mb-3" type="button" data-toggle="collapse"
+												data-target="#contentId" aria-expanded="false"
+												aria-controls="contentId">
+											Lihat Bimbingan Sebelumnya
+										</button>
+										<div class="collapse" id="contentId">
+											<iframe class="col-md-12 px-0" style="border-radius: 6px" height="500px"
+													src="<?php echo base_url('/ViewerJS/#../file_upload/bimbingan/' . $file) ?>"
+													frameborder="0"></iframe>
+										</div>
+									<?php endif; ?>
 								</div>
 							</div>
 						</div>
@@ -193,7 +222,7 @@
 								<!-- Title -->
 								<div class="row">
 									<div class="col-md-8 col-sm-8">
-										<h5 class="h3 mb-0">Kalender Konsutasi</h5>
+										<h5 class="h3 mb-0">Bimbingan Online</h5>
 										<small>* Jika anda ingin melakukan bimbingan online</small><br>
 									</div>
 									<div class="col-md-4 col-sm-4 text-right">
@@ -225,6 +254,7 @@
 <!-- Scripts PHP-->
 <?php $this->load->view('user/_partials/js.php'); ?>
 <script src="<?php echo base_url('aset/vendor/fullcalendar/fullcalendar.min.js') ?>"></script>
+<script src="<?php echo base_url('aset/vendor/fullcalendar/gcal.min.js') ?>"></script>
 <script src="<?php echo base_url('aset/vendor/fullcalendar/locale-all.js') ?>"></script>
 
 <script>
@@ -238,6 +268,13 @@
 			})
 		}
 	});
+	let status = false;
+	$('input.check-status-seminar').map(function (index, data) {
+		console.log(data);
+		if (!$(data).prop('checked')) {
+			console.log('false')
+		}
+	})
 	Dropzone.options.dropzoneBimbingan = {
 		init: function () {
 			let fileName = undefined;
@@ -335,19 +372,35 @@
 					prev: 'calendar--prev',
 					next: 'calendar--next'
 				},
+				googleCalendarApiKey: "AIzaSyBb6zaTEuiQnWNcFbo1eY4YhyOoqD9UxBA",
 				theme: false,
 				selectable: true,
 				selectHelper: true,
 				editable: true,
-				events: {
-					url: "<?php echo site_url('bimbingan?m=konsultasi&id=' . $this->session->userdata('id')) ?>",
-					cache: true,
-					type: "POST",
-					data: {events: true},
-					error: function () {
-						alert('Gagal akses data bimbingan');
+				eventSources: [
+					{
+						url: "<?php echo site_url('bimbingan?m=konsultasi&id=' . $this->session->userdata('id')) ?>",
+						cache: true,
+						type: "POST",
+						data: {events: true},
+						error: function () {
+							alert('Gagal akses data bimbingan');
+						}
+					},
+					{
+						googleCalendarId: 'id.indonesian#holiday@group.v.calendar.google.com',
+						className: 'bg-warning disabled'
 					}
-				},
+				],
+				//events: {
+				//	url: "<?php //echo site_url('bimbingan?m=konsultasi&id=' . $this->session->userdata('id')) ?>//",
+				//	cache: true,
+				//	type: "POST",
+				//	data: {events: true},
+				//	error: function () {
+				//		alert('Gagal akses data bimbingan');
+				//	}
+				//},
 				//events: async function () {
 				//    let res = await $.ajax({
 				//        url: "<?php //site_url('bimbingan?m=konsultasi') ?>//",
@@ -411,6 +464,10 @@
 					$('.edit-event--title').val(event.title);
 					$('.edit-event--masalah').val(event.masalah);
 					$('.edit-event--solusi').val(event.solusi);
+					if (event.solusi) {
+						$('#update-konsul-btn').prop('disabled', true);
+						$('#delete-konsul-btn').prop('disabled', true);
+					}
 				}
 			};
 
@@ -465,7 +522,7 @@
 						masalah: $('#add-masalah').val(),
 						solusi: $('#solusi').val(),
 						allDay: true,
-						tag: $('.event-tag input:checked').val()
+						tag: $('input[name="tag"]').val()
 					};
 					//render event to calendar
 					$this.fullCalendar('renderEvent', createdEvent, true);
@@ -513,7 +570,7 @@
 				let currentTitle = $('.edit-event--title').val();
 				let currentMasalah = $('.edit-event--masalah').val();
 				let currentSolusi = $('.edit-event--solusi').val();
-				let currentClass = $('#edit-event .event-tag input:checked').val();
+				let currentClass = $('input[name="tag"]').val();
 				let currentEvent = $this.fullCalendar('clientEvents', currentId);
 				//Update
 				console.log(currentEvent);

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-
+<?php $bimbingan = isset($bimbingan) ? $bimbingan : null;
+$perusahaan = isset($perusahaan_terpilih)?$perusahaan_terpilih:null;
+?>
 <!-- Head PHP -->
 <?php $this->load->view('user/_partials/header.php'); ?>
 
@@ -40,6 +42,7 @@
 					</div>
 					<!-- Card body -->
 					<div class="card-body">
+						<?php if (isset($perusahaan->id) && $perusahaan->id != null): ?>
 						<!-- Input groups with icon -->
 						<?php $nilai_pkl = isset($nilai_pkl) ? $nilai_pkl : array();
 						$nilai = array();
@@ -50,8 +53,8 @@
 						?>
 						<input type="hidden" name="idbm"
 							   value="<?php echo isset($bimbingan) ? $bimbingan->id : null ?>">
-						<input type="hidden" name="id" value="<?php echo isset($nilai->id)?$nilai->id:0 ?>">
-						<input type="hidden" name="mode" value="<?php echo isset($nilai->id)?"u":"i" ?>">
+						<input type="hidden" name="id" value="<?php echo isset($nilai->id) ? $nilai->id : 0 ?>">
+						<input type="hidden" name="mode" value="<?php echo isset($nilai->id) ? "u" : "i" ?>">
 						<div class="row">
 							<div class="col-md-6">
 								<div id="komponen-penilaian" class="form-group">
@@ -232,6 +235,9 @@
 								</button>
 							</div>
 						</div>
+						<?php else: ?>
+						<div class="h3 text-warning">Anda belum bisa mengisi penilaian karena anda belum mendapatkan tempat magang</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
@@ -278,13 +284,13 @@
 			detailNilai.shift();
 			let mode = $('input[name="mode"]').val();
 			let data = {
-				id:$('input[name="id"]').val(),
+				id: $('input[name="id"]').val(),
 				tnp: tn,
 				dnp: JSON.stringify(detailNilai),
 				idbm: $('input[name="idbm"]').val()
 			}
 			$.ajax({
-				url: "<?php echo site_url('magang?m=penilaian&q=') ?>"+mode,
+				url: "<?php echo site_url('magang?m=penilaian&q=') ?>" + mode,
 				method: "POST",
 				dataType: "json",
 				data: data,

@@ -29,7 +29,7 @@ class Magang extends CI_Controller
 			case 'mahasiswa':
 				$data['menus'] = array(
 					array(
-						'name' => 'Pengajuan Magang',
+						'name' => 'Pengajuan Magang Perusahaan',
 						'step_intro' => '1',
 						'message_intro' => 'Pada menu ini, anda bisa mengajukan permohonan magang. Terdapat ratusan perusahaan yang bisa anda pilih untuk dijadikan tempat magang.',
 						'href' => site_url('magang?m=pengajuan'),
@@ -42,7 +42,7 @@ class Magang extends CI_Controller
 						'message_intro' => 'Bagi mahasiswa yang tidak bisa menemukan nama perusahaan pada saat proses pengajuan magang, anda bisa mengajukan perusahaan baru pada menu ini.',
 						'href' => site_url('magang?m=perusahaanbaru'),
 						'icon' => 'fas fa-star',
-						'desc' => 'Pengajuan perusahaan baru, ketika pilihan perusahaan mahasiswa tidak tersedia di daftar perusahaan'
+						'desc' => 'Pengajuan perusahaan baru, ketika pilihan perusahaan mahasiswa tidak tersedia'
 					),
 					array(
 						'name' => 'Informasi Perusahaan',
@@ -53,11 +53,11 @@ class Magang extends CI_Controller
 						'desc' => 'Detail informasi terkait perusahaan tempat magang kalian'
 					),
 					array(
-						'name' => 'Penilaian',
+						'name' => 'Penilaian Perusahaan',
 						'step_intro' => '4',
 						'message_intro' => 'Penilaian ini adalah nilai yang diberikan oleh pembimbing lapangan kalian pada saat magang. Jadi pastikan bahwa data yang kalian input sudah benar atau belum.',
 						'href' => site_url('magang?m=penilaian'),
-						'icon' => 'fas fa-star',
+						'icon' => 'fas fa-book',
 						'desc' => 'Penilaian yang diperoleh dari tempat magang yang bersangkutan'
 					),
 				);
@@ -169,11 +169,13 @@ class Magang extends CI_Controller
 	{
 		$bimbingan = $this->konsultasi_model;
 		$penilaian = $this->penilaian_model;
+		$perusahaan = $this->perusahaan_model;
 		$cek_bimbingan = $bimbingan->check_bimbingan(true);
 		if (isset($cek_bimbingan->id)) {
 			$data['nilai_pkl'] = $penilaian->get_penilaian_perusahaan("id_dosen_bimbingan_mhs = '$cek_bimbingan->id'");
 		}
 		$data['bimbingan'] = $cek_bimbingan;
+		$data['perusahaan_terpilih'] = $perusahaan->get_current_perusahaan();
 		$this->load->view('user/magang_penilaian', $data);
 	}
 

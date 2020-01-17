@@ -9,15 +9,7 @@
 						<input type="text" class="form-control form-control-sm form-control-alternative new-event--title" placeholder="Title">
 					</div>
 					<div class="form-group mb-0">
-						<label class="form-control-label d-block mb-3">Status color</label>
-						<div class="btn-group btn-group-toggle btn-group-colors event-tag" data-toggle="buttons">
-							<label class="btn bg-info active"><input type="radio" name="event-tag" value="bg-info" autocomplete="off" checked=""></label>
-							<label class="btn bg-warning"><input type="radio" name="event-tag" value="bg-warning" autocomplete="off"></label>
-							<label class="btn bg-danger"><input type="radio" name="event-tag" value="bg-danger" autocomplete="off"></label>
-							<label class="btn bg-success"><input type="radio" name="event-tag" value="bg-success" autocomplete="off"></label>
-							<label class="btn bg-default"><input type="radio" name="event-tag" value="bg-default" autocomplete="off"></label>
-							<label class="btn bg-primary"><input type="radio" name="event-tag" value="bg-primary" autocomplete="off"></label>
-						</div>
+						<input type="hidden" name="tag" value="bg-info" autocomplete="off" checked="">
 					</div>
 					<div class="form-group">
 						<label for="keluhan" class="form-control-label">Keluhan</label>
@@ -26,7 +18,7 @@
 					</div>
 					<div class="form-group">
 						<label for="solusi" class="form-control-label">Solusi</label>
-						<textarea rows="4" id="add-solusi" class="form-control form-control-alternative edit-event--description textarea-autosize" placeholder="Solusi yang kamu dapatkan dari dosen (Jika sudah konsultasi)"></textarea>
+						<textarea rows="4" id="add-solusi" disabled class="form-control form-control-alternative edit-event--description textarea-autosize" placeholder="Solusi akan diberikan oleh dosen pembimbing"></textarea>
 						<i class="form-group--bar"></i>
 					</div>
 					<?php
@@ -42,7 +34,7 @@
 			</div>
 			<!-- Modal footer -->
 			<div class="modal-footer mt-0 pt-0">
-				<button type="submit" class="btn btn-primary btn-sm new-event--add">Add event</button>
+				<button type="submit" class="btn btn-primary btn-sm new-event--add">Konsultasikan</button>
 				<button type="button" class="btn btn-link btn-sm ml-auto" data-dismiss="modal">Close</button>
 			</div>
 		</div>
