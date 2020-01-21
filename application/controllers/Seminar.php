@@ -82,6 +82,12 @@ class Seminar extends MY_Controller
 		if (isset($get['m'])) {
 			switch ($get['m']) {
 				case 'pendaftaran':
+					if (isset($get['q']) && $get['q'] == 'acc') {
+						return $this->acc_verifikasi_pendaftaran();
+					}
+					if (isset($get['q']) && $get['q'] == 'dec') {
+						return $this->dec_verifikasi_pendaftaran();
+					}
 					return $this->index_verifikasi_pendaftaran();
 					break;
 				case 'kelola':
@@ -172,10 +178,43 @@ class Seminar extends MY_Controller
 
 		$this->load->view('admin/seminar', $data);
 	}
-	public function index_verifikasi_pendaftaran(){
-		$data = array();
-		$this->load->view('admin/seminar_verifikasi_pendaftaran',$data);
+
+	public function acc_verifikasi_pendaftaran()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$seminar = $this->seminar_model;
+			if ($seminar->acc_verifikasi_pendaftaran($get['id'])) {
+				$this->session->set_flashdata(array('status' => 'success', 'message' => 'Berhasil'));
+			} else {
+				$this->session->set_flashdata(array('status' => 'error', 'message' => 'Gagal'));
+			}
+		}
+		redirect('seminar?m=pendaftaran');
 	}
+
+	public function dec_verifikasi_pendaftaran()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$seminar = $this->seminar_model;
+			if ($seminar->dec_verifikasi_pendaftaran($get['id'])) {
+				$this->session->set_flashdata(array('status' => 'success', 'message' => 'Berhasil'));
+			} else {
+				$this->session->set_flashdata(array('status' => 'error', 'message' => 'Gagal'));
+			}
+		}
+		redirect(site_url('seminar?m=pendaftaran'));
+	}
+	public function index_verifikasi_pendaftaran()
+	{
+		$data = array();
+		$seminar = $this->seminar_model;
+		$tanggal_seminar = $seminar->get_all_seminar_date();
+		$data['tanggal_seminar'] = $tanggal_seminar;
+		$this->load->view('admin/seminar_verifikasi_pendaftaran', $data);
+	}
+
 	public function get_list_penilaian()
 	{
 		$post = $this->input->post();

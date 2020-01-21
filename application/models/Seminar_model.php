@@ -19,15 +19,56 @@ class Seminar_model extends CI_Model
 		return $this->db->get('tb_seminar_tempat')->result();
 	}
 
+	public function acc_verifikasi_pendaftaran($id){
+		$this->db->where('id',$id);
+		$this->db->set(array('status'=>'accept'));
+		return $this->db->update('tb_seminar_pendaftaran');
+	}
+	public function dec_verifikasi_pendaftaran($id){
+		$this->db->where('id',$id);
+		$this->db->set(array('status'=>'reupload'));
+		return $this->db->update('tb_seminar_pendaftaran');
+	}
+	public function get_all_seminar_date()
+	{
+		return $this->db->query("SELECT
+					tsj.id id_jadwal,
+       				mulai,
+					DATE(tsj.mulai) as tanggal_seminar
+				FROM
+					tb_seminar_jadwal tsj
+				GROUP BY
+					tanggal_seminar")->result();
+	}
+
+	public function get_current_status_pendaftaran_seminar()
+	{
+		return $this->db->query("SELECT
+				tsj.*,tsp.file,tsp.size
+			FROM (
+				SELECT
+					tsj.id id_jadwal,
+					tsj.mulai,
+					tm.nama_mahasiswa
+				FROM
+					tb_seminar_jadwal tsj
+					INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+					INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim) tsj
+				LEFT OUTER JOIN tb_seminar_pendaftaran tsp ON tsj.id_jadwal = tsp.id_jadwal_seminar
+			ORDER BY mulai")->result();
+	}
+
 	public function get_self_mahasiswa_seminar()
 	{
 		$id = $this->session->userdata('id');
-		return $this->db->query("select tsj.mulai tanggal_seminar,status_seminar,nim,nip_nik,judul_laporan_mhs 
+		return $this->db->query("select tsj.mulai tanggal_seminar,tsj.id id_jadwal,status_seminar,nim,nip_nik,judul_laporan_mhs 
 								from tb_dosen_bimbingan_mhs tdbm 
 								inner join tb_seminar_jadwal tsj 
 								on tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs where tdbm.nim = '$id'")->result();
 	}
-	public function get_status_pendaftaran(){
+
+	public function get_status_pendaftaran()
+	{
 		$id = $this->session->userdata('id');
 		return $this->db->query("select tsp.* 
 								from tb_dosen_bimbingan_mhs tdbm 
@@ -36,6 +77,7 @@ class Seminar_model extends CI_Model
 								inner join tb_seminar_pendaftaran tsp
 								on tsp.id_jadwal_seminar = tsj.id where tdbm.nim = '$id'")->row();
 	}
+
 	public function save_pendaftaran($file)
 	{
 		$id = $this->session->userdata('id');
@@ -51,7 +93,7 @@ class Seminar_model extends CI_Model
 			$data = array(
 				'id_jadwal_seminar' => $id_jadwal,
 				'file' => $file['file_name'],
-				'size'=>$file['file_size']
+				'size' => $file['file_size']
 			);
 			return $this->db->insert('tb_seminar_pendaftaran', $data);
 		} else {
