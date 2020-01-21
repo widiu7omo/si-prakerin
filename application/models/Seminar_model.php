@@ -442,6 +442,10 @@ class Seminar_model extends CI_Model
 			$nip = $this->session->userdata('nip_nik');
 			$where = "WHERE td1.nip_nik = '$nip' OR td2.nip_nik = '$nip'";
 		}
+		if ((isset($post['filter']) and $post['filter'] == 'pembimbing')) {
+			$nip = $this->session->userdata('nip_nik');
+			$where = "WHERE tdbm.nip_nik = '$nip'";
+		}
 		return $this->db->query("SELECT $select FROM tb_seminar_jadwal tsj
 			INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
 			INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs

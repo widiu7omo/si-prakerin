@@ -71,6 +71,9 @@
 											<a href="<?php echo site_url('sidang?m=jadwal&filter=penguji') ?>" class="btn btn-sm btn-info <?php echo (isset($_GET['filter']) and $_GET['filter']=='penguji')?'active':null?>" id="btn-penguji">
 												Sebagai Penguji
 											</a>
+											<a href="<?php echo site_url('sidang?m=jadwal&filter=pembimbing') ?>" class="btn btn-sm btn-info <?php echo (isset($_GET['filter']) and $_GET['filter']=='pembimbing')?'active':null?>" id="btn-penguji">
+												Sebagai Pembimbing
+											</a>
 										</div>
 									</div>
 								<?php endif; ?>
@@ -135,6 +138,7 @@
 					}
 				],
 				resources: <?php echo json_encode(isset($tempat)?$tempat:array()) ?>,
+				eventLimit: true,
 				events: {
 					url: "<?php echo site_url('seminar?m=jadwal')?>",
 					cache: true,
