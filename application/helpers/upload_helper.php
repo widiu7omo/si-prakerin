@@ -94,4 +94,27 @@ if (!function_exists('do_upload_berkas')) {
 		}
 	}
 }
+if (!function_exists('do_upload_pendaftaran_seminar')) {
+	function do_upload_pendaftaran_seminar()
+	{
+		$ci =& get_instance();
+		$config['upload_path'] = './file_upload/pendaftaran_seminar/';
+		$config['allowed_types'] = 'pdf';
+		$config['max_size'] = 2048;
+		$config['encrypt_name'] = FALSE;
+		$ci->load->library('upload', $config);
+
+		if (!$ci->upload->do_upload('filepond')) {
+			$error = array('error' => $ci->upload->display_errors());
+			// var_dump($error);
+			return $error;
+			// $ci->load->view('upload_form', $error);
+		} else {
+			$data = array('upload_data' => $ci->upload->data());
+			// var_dump($data);
+			return $data;
+			// $ci->load->view('upload_success', $data);
+		}
+	}
+}
 ?>

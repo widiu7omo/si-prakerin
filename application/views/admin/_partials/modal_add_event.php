@@ -48,7 +48,7 @@
 						</div>
 						<div class="col-12">
 							<div class="form-group">
-								<select required id="select-mahasiswa" class="form-control"></select>
+								<select required id="select-mahasiswa" class="form-control" data-toggle="select" title="Mahasiswa Seminar" data-live-search="true" data-live-search-placeholder="Search ..."></select>
 							</div>
 						</div>
 						<div class="col-12">

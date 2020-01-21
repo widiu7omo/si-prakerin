@@ -17,17 +17,20 @@ class Akun extends CI_Controller
 		$data['mahasiswas'] = $this->akun_model->getAllAccounts('mahasiswa');
 		$this->load->view('admin/akun', $data);
 	}
-	public function tambah(){
+
+	public function tambah()
+	{
 		$data = array();
 		$post = $this->input->post();
 		$akun = $this->akun_model;
-		if(isset($post['submit'])){
-			if($akun->tambah_akun()){
+		if (isset($post['submit'])) {
+			if ($akun->tambah_akun()) {
 				redirect('akun/add');
 			}
 		}
-		$this->load->view('admin/akun_tambah',$data);
+		$this->load->view('admin/akun_tambah', $data);
 	}
+
 	public function management()
 	{
 		$get = $this->input->get();
@@ -43,45 +46,48 @@ class Akun extends CI_Controller
 		$account = $this->akun_model->get_detail_account($id);
 		$data = array();
 		if (count((array)$account) > 0) {
-			if (strpos($account->username,'@') !== false){
-				$data['akuns'] = $this->akun_model->getAllAccounts('pegawai',$id);
-			}
-			else{
-				$data['akuns'] = $this->akun_model->getAllAccounts('mahasiswa',$id);
+			if (strpos($account->username, '@') !== false) {
+				$data['akuns'] = $this->akun_model->getAllAccounts('pegawai', $id);
+			} else {
+				$data['akuns'] = $this->akun_model->getAllAccounts('mahasiswa', $id);
 			}
 		}
-		$this->load->view('admin/akun_management',$data);
+		$this->load->view('admin/akun_management', $data);
 	}
-	public function edit_password(){
-		if(isset($_POST['submit'])) {
+
+	public function edit_password()
+	{
+		if (isset($_POST['submit'])) {
 			$akun = $this->akun_model;
 			$post = $this->input->post();
-			if($akun->edit_password()){
-				$this->session->set_flashdata('status',(object)array('status'=>'success'));
-				redirect('akun/edit/'.$post['id']);
+			if ($akun->edit_password()) {
+				$this->session->set_flashdata('status', (object)array('status' => 'success'));
+				redirect('akun/edit/' . $post['id']);
 			}
 		}
 	}
-	public function edit_level(){
-		if(isset($_POST['submit'])){
+
+	public function edit_level()
+	{
+		if (isset($_POST['submit'])) {
 			$akun = $this->akun_model;
-			if($akun->edit_level()){
-				echo json_encode(array('status'=>'success'));
-			}
-			else{
-				echo json_encode(array('status'=>'error'));
+			if ($akun->edit_level()) {
+				echo json_encode(array('status' => 'success'));
+			} else {
+				echo json_encode(array('status' => 'error'));
 			}
 			return;
 		}
 	}
-	public function hapus_level(){
-		if(isset($_POST['submit'])){
+
+	public function hapus_level()
+	{
+		if (isset($_POST['submit'])) {
 			$akun = $this->akun_model;
-			if($akun->hapus_level()){
-				echo json_encode(array('status'=>'success'));
-			}
-			else{
-				echo json_encode(array('status'=>'error'));
+			if ($akun->hapus_level()) {
+				echo json_encode(array('status' => 'success'));
+			} else {
+				echo json_encode(array('status' => 'error'));
 			}
 			return;
 		}

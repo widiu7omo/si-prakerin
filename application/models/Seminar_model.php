@@ -19,6 +19,47 @@ class Seminar_model extends CI_Model
 		return $this->db->get('tb_seminar_tempat')->result();
 	}
 
+	public function get_self_mahasiswa_seminar()
+	{
+		$id = $this->session->userdata('id');
+		return $this->db->query("select tsj.mulai tanggal_seminar,status_seminar,nim,nip_nik,judul_laporan_mhs 
+								from tb_dosen_bimbingan_mhs tdbm 
+								inner join tb_seminar_jadwal tsj 
+								on tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs where tdbm.nim = '$id'")->result();
+	}
+	public function get_status_pendaftaran(){
+		$id = $this->session->userdata('id');
+		return $this->db->query("select tsp.* 
+								from tb_dosen_bimbingan_mhs tdbm 
+								inner join tb_seminar_jadwal tsj 
+								on tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs 
+								inner join tb_seminar_pendaftaran tsp
+								on tsp.id_jadwal_seminar = tsj.id where tdbm.nim = '$id'")->row();
+	}
+	public function save_pendaftaran($file)
+	{
+		$id = $this->session->userdata('id');
+		$jadwal = datajoin('tb_seminar_jadwal tsj', array('nim' => $id), 'id', array('tb_dosen_bimbingan_mhs tdbm', 'tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs', 'inner'));
+		if (count($jadwal) > 0) {
+			$id_jadwal = $jadwal[0]->id;
+		} else {
+			return false;
+		}
+		$this->db->where('id_jadwal_seminar', $id_jadwal);
+		if ($this->db->delete('tb_seminar_pendaftaran')) {
+			$this->db->reset_query();
+			$data = array(
+				'id_jadwal_seminar' => $id_jadwal,
+				'file' => $file['file_name'],
+				'size'=>$file['file_size']
+			);
+			return $this->db->insert('tb_seminar_pendaftaran', $data);
+		} else {
+			return false;
+		}
+
+	}
+
 	public function add_tempat_seminar()
 	{
 		$post = $this->input->post();
@@ -139,7 +180,7 @@ class Seminar_model extends CI_Model
 			select tm.nama_mahasiswa,tp.nama_pegawai nama_pembimbing, tdbm.id_dosen_bimbingan_mhs,tdbm.judul_laporan_mhs from tb_dosen_bimbingan_mhs tdbm 
 			INNER JOIN tb_mahasiswa tm on tm.nim = tdbm.nim 
 			INNER JOIN tb_pegawai tp ON tdbm.nip_nik = tp.nip_nik
-			where tdbm.status_seminar = 'setuju' and tdbm.id_dosen_bimbingan_mhs NOT IN (select id_dosen_bimbingan_mhs from tb_seminar_jadwal)")->result();
+			where tdbm.status_seminar = 'setuju' and tdbm.id_dosen_bimbingan_mhs NOT IN (select id_dosen_bimbingan_mhs from tb_seminar_jadwal) order by tm.nama_mahasiswa")->result();
 	}
 
 	public function get_all_penguji($status)
@@ -150,7 +191,7 @@ class Seminar_model extends CI_Model
 			array('tb_pegawai', 'tb_dosen.nip_nik = tb_pegawai.nip_nik', 'INNER')
 		);
 		$where = "tb_seminar_penguji.status = '$status'";
-		return datajoin('tb_seminar_penguji', $where, $select, $join);
+		return datajoin('tb_seminar_penguji', $where, $select, $join, null, 'tb_pegawai.nama_pegawai');
 	}
 
 	public function delete_penguji()
@@ -206,6 +247,7 @@ class Seminar_model extends CI_Model
 		$id = $post['id'];
 		return $this->db->delete('tb_seminar_jadwal', "id=$id");
 	}
+
 	public function get_jadwal_past($id = null, $date, $time)
 	{
 		$post = $this->input->post();
@@ -255,6 +297,7 @@ class Seminar_model extends CI_Model
 			$where
 		ORDER BY start")->result();
 	}
+
 	public function get_jadwal_past_left($id = null, $date, $time)
 	{
 		$post = $this->input->post();
@@ -296,6 +339,7 @@ class Seminar_model extends CI_Model
 			$where
 		ORDER BY start")->result();
 	}
+
 	public function get_jadwal_today($id = null, $date, $time = null)
 	{
 		$post = $this->input->post();

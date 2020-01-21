@@ -24,11 +24,11 @@
 						</li>
 						<li class="list-group-item p-1 pl-3">
 							<p class="h4">Penguji 1 : <b></b></p>
-							<p class="h3"><i class="fas fa-user" aria-hidden="true"></i> &nbsp;<b id="detail-p2">Dr. Dosen</b></p>
+							<p class="h3"><i class="fas fa-user" aria-hidden="true"></i> &nbsp;<b id="detail-p1">Dr. Dosen</b></p>
 						</li>
 						<li class="list-group-item p-1 pl-3">
 							<p class="h4">Penguji 2 : </p>
-							<p class="h3"><i class="fas fa-user" aria-hidden="true"></i> &nbsp;<b id="detail-p1">Dr. Dosen</b></p>
+							<p class="h3"><i class="fas fa-user" aria-hidden="true"></i> &nbsp;<b id="detail-p2">Dr. Dosen</b></p>
 						</li>
 					</ul>
 				</form>

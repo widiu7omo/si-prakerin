@@ -8,7 +8,7 @@ class Seminar extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('upload', 'master', 'notification'));
-		$this->load->model(array('pembimbing_model', 'akun_model','penilaian_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
+		$this->load->model(array('pembimbing_model', 'akun_model', 'penilaian_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
 		$this->load->library('form_validation');
 		//middleware
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
@@ -23,11 +23,16 @@ class Seminar extends MY_Controller
 			case 'admin':
 				$data['menus'] = array(
 					array(
-						'name' => 'Kelola Jadwal Sidang',
+						'name' => 'Kelola Jadwal Seminar Prakerin',
 						'href' => site_url('seminar?m=kelola'),
 						'icon' => 'fas fa-calendar-alt',
 						'desc' => 'Pengolahan data jadwal untuk seminar meliputi penguji, tempat dan waktu'
 					),
+					array(
+						'name' => 'Verifikasi Pendaftaran',
+						'href' => site_url('seminar?m=pendaftaran'),
+						'icon' => 'fas fa-calendar',
+						'desc' => 'Verfikasi pendaftaran mahasiswa seminar 2 hari sebelum seminar dimulai'),
 					array(
 						'name' => 'Data Jadwal Seminar ' . $tahunAkademik[0]->tahun_akademik,
 						'href' => site_url('seminar?m=data_jadwal'),
@@ -76,6 +81,9 @@ class Seminar extends MY_Controller
 		$get = $this->input->get();
 		if (isset($get['m'])) {
 			switch ($get['m']) {
+				case 'pendaftaran':
+					return $this->index_verifikasi_pendaftaran();
+					break;
 				case 'kelola':
 					if (isset($get['q']) && $get['q'] == 'u') {
 
@@ -164,8 +172,12 @@ class Seminar extends MY_Controller
 
 		$this->load->view('admin/seminar', $data);
 	}
-
-	public function get_list_penilaian(){
+	public function index_verifikasi_pendaftaran(){
+		$data = array();
+		$this->load->view('admin/seminar_verifikasi_pendaftaran',$data);
+	}
+	public function get_list_penilaian()
+	{
 		$post = $this->input->post();
 		$penilaian = $this->penilaian_model;
 		$data_penilaian = $penilaian->get_penilaian_seminar();
@@ -175,6 +187,7 @@ class Seminar extends MY_Controller
 		}
 		$this->load->view('admin/seminar_list_penilaian');
 	}
+
 	public function get_list_jadwal()
 	{
 		$post = $this->input->post();

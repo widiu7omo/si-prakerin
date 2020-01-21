@@ -158,11 +158,13 @@
 				// Edit calendar event action
 
 				eventClick: function (event, element) {
+					console.log(event);
 					$('#view-event').modal('show');
 					let timeRange = moment(event.start._i).locale('id').format('HH:mm')+' - '+moment(event.end._i).format('HH:mm');
 					let date = moment(event.start._i).locale('id').format('LL');
 					$('#detail-jadwal').text('Detail jadwal '+event.title);
 					$('#detail-tanggal').text(date);
+					$('#detail-ruangan').text(event.nama_tempat);
 					$('#detail-waktu').text(timeRange);
 					$('#detail-pembimbing').text(event.nama_pembimbing);
 					$('#detail-p1').text(event.p1?event.p1:'-');

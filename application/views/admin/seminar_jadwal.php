@@ -456,7 +456,8 @@
 								}
 							})
 						};
-					}
+					},
+					cache:true,
 					// Additional AJAX parameters go here; see the end of this chapter for the full code of this example
 				}
 			}).on('select2:select', function ({params}) {
@@ -478,7 +479,8 @@
 								}
 							})
 						};
-					}
+					},
+					cache:true,
 					// Additional AJAX parameters go here; see the end of this chapter for the full code of this example
 				}
 			}).on('select2:select', function ({params}) {
@@ -501,8 +503,9 @@
 								}
 							})
 						};
-					}
+					},
 					// Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+					cache:true
 				}
 			}).on('select2:select', function ({params}) {
 				$('#id_dosen_bimbingan_mhs,#id_dosen_bimbingan_mhs_edit').val(params.data.id)

@@ -1,9 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Class Bimbingan
+ */
 class Bimbingan extends CI_Controller
 {
 
+	/**
+	 * Bimbingan constructor.
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -18,6 +24,9 @@ class Bimbingan extends CI_Controller
 		//Do your magic here
 	}
 
+	/**
+	 * @return void|null
+	 */
 	public function index()
 	{
 		//level
@@ -123,6 +132,10 @@ class Bimbingan extends CI_Controller
 	}
 
 	// Dosen
+
+	/**
+	 * @return mixed
+	 */
 	function index_daftar_bimbingan()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -135,6 +148,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_mahasiswa', $data);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	function index_view_bimbingan_offline()
 	{
 		$nip_nik = $this->session->userdata('nip_nik');
@@ -144,6 +160,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_view_offline');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	function index_bimbingan_online()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -156,6 +175,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_online', $data);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	function index_bimbingan_offline()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -168,6 +190,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_offline', $data);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	function index_belum_bimbingan()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -180,6 +205,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_belum', $data);
 	}
 
+	/**
+	 *
+	 */
 	function acc_bimbingan_mhs()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -192,6 +220,9 @@ class Bimbingan extends CI_Controller
 
 	}
 
+	/**
+	 *
+	 */
 	function dec_bimbingan_mhs()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -204,6 +235,9 @@ class Bimbingan extends CI_Controller
 
 	}
 
+	/**
+	 * @return mixed
+	 */
 	function index_approve_judul()
 	{
 		$pembimbing = $this->pembimbing_model;
@@ -215,6 +249,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_pengajuan_judul',$data);
 	}
 
+	/**
+	 * @param $action
+	 */
 	function change_status_judul($action){
 		$pembimbing = $this->pembimbing_model;
 		if($pembimbing->change_status_judul($action)){
@@ -226,6 +263,9 @@ class Bimbingan extends CI_Controller
 		redirect(site_url('bimbingan?m=approvejudul'));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	function index_approve_sidang()
 	{
 		$pembimbing = $this->pembimbing_model;
@@ -239,6 +279,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_pengajuan_sidang',$data);
 	}
 
+	/**
+	 * @param $action
+	 */
 	function change_status_seminar($action){
 		$pembimbing = $this->pembimbing_model;
 		if($pembimbing->change_status_seminar($action)){
@@ -251,12 +294,19 @@ class Bimbingan extends CI_Controller
 	}
 
 	// Mahasiswa
+
+	/**
+	 *
+	 */
 	function is_pembimbing_exist()
 	{
 		$pembimbing = $this->pembimbing_model;
 		echo json_encode($pembimbing->is_has());
 	}
 
+	/**
+	 * @return |null
+	 */
 	function index_konsultasi()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -271,6 +321,9 @@ class Bimbingan extends CI_Controller
 		return $this->load->view('user/bimbingan_konsultasi', $data);
 	}
 
+	/**
+	 *
+	 */
 	function insert_konsultasi()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -279,6 +332,9 @@ class Bimbingan extends CI_Controller
 		}
 	}
 
+	/**
+	 *
+	 */
 	function update_konsultasi()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -287,6 +343,9 @@ class Bimbingan extends CI_Controller
 		}
 	}
 
+	/**
+	 *
+	 */
 	function delete_konsultasi()
 	{
 		$konsultasi = $this->konsultasi_model;
@@ -295,6 +354,9 @@ class Bimbingan extends CI_Controller
 		}
 	}
 
+	/**
+	 *
+	 */
 	function pengajuan_judul()
 	{
 		$pembimbing = $this->pembimbing_model;

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php $nim = $this->session->userdata('id');
-$mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama')?>
+$mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 <html>
 <!-- Head PHP -->
 <?php $this->load->view('user/_partials/header.php'); ?>
@@ -30,12 +30,12 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama')?>
 					<!-- Card body -->
 					<div class="card-body">
 						<!-- List group -->
-						<?php $allow = isset($allow)?$allow:false; ?>
+						<?php $allow = isset($allow) ? $allow : false; ?>
 						<?php if (!$allow): ?>
 							<div class="h2">Anda belum bisa upload kelengkapan berkas</div>
 						<?php else: ?>
-						<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
-						<input type="file" class="my-pond">
+							<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
+							<input type="file" class="my-pond">
 						<?php endif; ?>
 					</div>
 				</div>
@@ -67,20 +67,20 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama')?>
 		FilePond.registerPlugin(FilePondPluginFileValidateSize);
 		FilePond.registerPlugin(FilePondPluginFileValidateType);
 		FilePond.setOptions({
-			maxFileSize: '10MB',
-			acceptedFileTypes: [],
+			maxFileSize: '1MB',
+			acceptedFileTypes: ['application/pdf'],
 			fileRenameFunction: (file) => {
 				console.log(file);
-				return `<?php echo $nim.' - '.$mhs->nama ?>${file.extension}`;
+				return `<?php echo $nim . ' - ' . $mhs->nama ?>${file.extension}`;
 			}
 		})
 		let pond = $('.my-pond').filepond({
 			server: "<?php echo site_url('kelengkapan?m=upload') ?>"
 		})
-		<?php if(isset($file)): ?>
-		setTimeout(function(){
-			$('.my-pond').filepond('addFile','<?php echo base_url('file_upload/berkas/').$file->nama_file ?>')
-		},1250)
+		<?php if(isset($file->nama_file) && $file->nama_file != ''): ?>
+		setTimeout(function () {
+			$('.my-pond').filepond('addFile', '<?php echo base_url('file_upload/berkas/') . $file->nama_file ?>')
+		}, 1250)
 		<?php endif ?>
 	})
 </script>

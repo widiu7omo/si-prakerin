@@ -8,7 +8,7 @@ class Sidang extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model(array('perusahaan_model', 'pengajuan_model', 'seminar_model', 'penilaian_model'));
-		$this->load->helper(array('notification', 'master'));
+		$this->load->helper(array('notification', 'master','upload'));
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
 		$id = $this->session->userdata('id');
 		$mahasiswa = masterdata('tb_mahasiswa', array('nim' => $id), array('alamat_mhs', 'email_mhs', 'jenis_kelamin_mhs'), false);
@@ -73,12 +73,59 @@ class Sidang extends CI_Controller
 					}
 					return $this->index_penilaian_seminar();
 					break;
+				case 'pendaftaran':
+					return $this->index_pendaftaran_seminar();
+					break;
+				case 'upload_pendaftaran':
+					return $this->upload_pendaftaran();
+					break;
 				default:
 					null;
 			}
 		}
 		$data['intro'] = array(array('step_intro' => 1, 'message_intro' => 'Selamat datang di bimbingan, klik tanggal anda ingin mengajukan konsultasi'));
 		return $this->load->view('user/sidang', $data);
+	}
+
+	public function index_pendaftaran_seminar()
+	{
+		$data = array();
+		$seminar = $this->seminar_model;
+		$data_seminar = $seminar->get_self_mahasiswa_seminar();
+		$data_pendaftaran = $seminar->get_status_pendaftaran();
+		$data['pendaftaran'] = $data_pendaftaran;
+		$data['allow'] = false;
+		$data['ontime'] = false;
+		if (count($data_seminar) > 0) {
+			if ($data_seminar[0]->status_seminar == 'setuju') {
+				$data['allow'] = true;
+				$data['data_seminar'] = $data_seminar;
+			}
+			//check diff date
+			$now = new DateTime('now');
+			$schedule_date = $data_seminar[0]->tanggal_seminar;
+			$schedule_expolode = explode('T',$schedule_date);
+			$schedule_only_date = $schedule_expolode[0];
+			$scheduled = new DateTime($schedule_only_date);
+			$interval = $scheduled->diff($now);
+			if($interval->d >= 1){
+				$data['ontime'] = true;
+			}
+
+		}
+		$this->load->view('user/sidang_pendaftaran', $data);
+	}
+
+	public function upload_pendaftaran()
+	{
+		$response = do_upload_pendaftaran_seminar();
+		$seminar = $this->seminar_model;
+		if(isset($response['upload_data'])){
+			if($seminar->save_pendaftaran($response['upload_data'])){
+				$response['status'] = 'success';
+			}
+		}
+		echo json_encode($response);
 	}
 
 	public function insert_penilaian()
