@@ -18,6 +18,8 @@ class User extends CI_Controller
 		$level = $this->session->userdata('level');
 		switch ($level) {
 			case 'mahasiswa':
+				//cek bimbingan
+
 				$data['menus'] = array(
 					array('name' => 'SIG Perusahaan',
 						'href' => 'https://simpkl.politala.ac.id/sig/home',

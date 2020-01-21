@@ -11,16 +11,22 @@ class Penilaian_model extends CI_Model
 	public function insert_penilaian_perusahaan()
 	{
 		$post = $this->input->post();
-		$data = array("nilai_pkl" => $post['tnp'],
-			"detail_nilai_pkl" => $post['dnp'],
-			"id_dosen_bimbingan_mhs" => $post['idbm']);
-		return $this->db->insert('tb_perusahaan_penilaian', $data);
+		$this->db->where('id_dosen_bimbingan_mhs', $post['idbm']);
+		if ($this->db->delete('tb_perusahaan_penilaian')) {
+			$data = array("nilai_pkl" => $post['tnp'],
+				"detail_nilai_pkl" => $post['dnp'],
+				"id_dosen_bimbingan_mhs" => $post['idbm']);
+			return $this->db->insert('tb_perusahaan_penilaian', $data);
+		} else {
+			return false;
+		}
 	}
 
 	public function update_penilaian_perusahaan()
 	{
 		$post = $this->input->post();
-		if($post['id']){
+
+		if ($post['id']) {
 			$data = array("nilai_pkl" => $post['tnp'],
 				"detail_nilai_pkl" => $post['dnp'],
 				"id_dosen_bimbingan_mhs" => $post['idbm']);
@@ -35,12 +41,25 @@ class Penilaian_model extends CI_Model
 
 	}
 
-	public function get_penilaian_perusahaan($id = null,$detail = false)
+	public function get_penilaian_perusahaan($id = null, $detail = false, $filter = false)
 	{
-		if($id){
+		if ($id) {
 			$this->db->where($id);
 		}
-		if($detail){
+		if ($filter) {
+			return $this->db->query('SELECT
+				tm.nim,
+				tm.nama_mahasiswa,
+				tp.nama_pegawai nama_pembimbing,
+				0 nilai_pkl,
+				"[]" detail_nilai_pkl
+			FROM
+				 tb_dosen_bimbingan_mhs tdbm
+				INNER JOIN tb_pegawai tp ON tdbm.nip_nik = tp.nip_nik
+				INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
+				WHERE tdbm.id_dosen_bimbingan_mhs NOT IN (SELECT id_dosen_bimbingan_mhs FROM tb_perusahaan_penilaian)')->result();
+		}
+		if ($detail) {
 			return $this->db->query('SELECT
 				tm.nim,
 				tm.nama_mahasiswa,

@@ -26,7 +26,16 @@
 				<div class="col-md-12 col-lg-12 col-sm-12">
 					<div class="card">
 						<div class="card-header">
-							<div class="h3">Nilai Prakerin Perusahaan</div>
+							<div class="d-flex justify-content-between">
+								<div class="h3">Nilai Prakerin Perusahaan</div>
+								<?php if (isset($_GET['filter'])): ?>
+									<a href="<?php echo site_url('perusahaan?m=penilaian') ?>"
+									   class="btn btn-sm btn-primary">Sudah mengisi penilaian</a>
+								<?php else: ?>
+									<a href="<?php echo site_url('perusahaan?m=penilaian&filter=belum') ?>"
+									   class="btn btn-sm btn-primary">Belum mengisi penilaian</a>
+								<?php endif; ?>
+							</div>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive py-0">
@@ -63,6 +72,9 @@
 	<!-- Scripts PHP-->
 	<?php $this->load->view('admin/_partials/modal.php'); ?>
 	<?php $this->load->view('admin/_partials/js.php'); ?>
+	<?php $uri = site_url('perusahaan?m=penilaian');
+	$uri = isset($_GET['filter']) ? $uri . "&filter=belum" : $uri;
+	?>
 	<script>
 		let t = $('#datatable-jadwal').dataTable({
 			dom: 'Bfrtip',
@@ -73,7 +85,7 @@
 				}
 			},
 			ajax: {
-				url: "<?php echo site_url("perusahaan?m=penilaian") ?>",
+				url: "<?php echo $uri?>",
 				type: "POST",
 				data: {
 					"ajax": "true"
@@ -84,7 +96,7 @@
 			],
 			"order": [[0, 'asc']],
 			columns: [
-				{"data":"nim"},
+				{"data": "nim"},
 				{"data": "nama_mahasiswa"},
 				{"data": "nama_pembimbing"},
 				{"data": "nilai_pkl"},
@@ -93,9 +105,9 @@
 					"render": function (data) {
 						let encodedData = JSON.parse(data);
 						let lists = encodedData.map(function (item) {
-							return '<li><span>'+item.name+'</span> : <span>'+item.res+'</span></li>'
+							return '<li><span>' + item.name + '</span> : <span>' + item.res + '</span></li>'
 						});
-						return '<ul>'+lists.join(" ")+'</ul>';
+						return '<ul>' + lists.join(" ") + '</ul>';
 					}
 				},
 			]

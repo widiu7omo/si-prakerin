@@ -88,8 +88,12 @@ class Perusahaan extends CI_Controller {
     }
     public function index_penilaian(){
     	$post = $this->input->post();
+    	$get = $this->input->get();
     	$penilaian = $this->penilaian_model;
     	$data_penilaian = $penilaian->get_penilaian_perusahaan(null,true);
+    	if(isset($get['filter'])){
+    		$data_penilaian = $penilaian->get_penilaian_perusahaan(null,true,true);
+		}
 		if (isset($post['ajax'])) {
 			echo json_encode((object)array('data' => $data_penilaian));
 			return;
