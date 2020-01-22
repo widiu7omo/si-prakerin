@@ -23,7 +23,8 @@
 				<?php foreach ($menus as $menu): ?>
 					<div class="row">
 						<div class="col-xl-12 col-lg-12">
-							<div class="card card-stats mb-4 mb-xl-2" data-step="<?php echo $menu['step_intro'] ?>" data-intro="<?php echo $menu['message_intro'] ?>">
+							<div class="card card-stats mb-4 mb-xl-2" data-step="<?php echo $menu['step_intro'] ?>"
+								 data-intro="<?php echo $menu['message_intro'] ?>">
 								<a href="<?php echo $menu['href'] ?>">
 									<div class="card-body">
 										<div class="row">
@@ -49,8 +50,22 @@
 				<?php endforeach; ?>
 			</div>
 			<div class="col-xl-8">
+				<div class="card">
+					<div class="card-header"><h3>Informasimu</h3></div>
+					<div class="card-body">
+						<?php if(!isset($informasi)): ?>
+
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-4"></div>
+			<div class="col-xl-8">
 				<!-- Checklist -->
-				<div class="card" data-step="4" data-intro="Tampilan ini merupakan daftar bimbingan terakhir anda. Bimbingan anda akan di konfirmasi terlebih dahulu oleh dosen pembimbing. Perlu anda ketahui bahwa setidaknya 4 kali bimbingan valid (terkonfirmasi) untuk bisa mengajukan sidang Prakerin">
+				<div class="card" data-step="4"
+					 data-intro="Tampilan ini merupakan daftar bimbingan terakhir anda. Bimbingan anda akan di konfirmasi terlebih dahulu oleh dosen pembimbing. Perlu anda ketahui bahwa setidaknya 4 kali bimbingan valid (terkonfirmasi) untuk bisa mengajukan sidang Prakerin">
 					<!-- Card header -->
 					<div class="card-header">
 						<!-- Title -->
@@ -108,10 +123,12 @@
 											</li>
 										<?php endforeach; ?>
 										<?php if (count($latest_bimbingan) == 0 and count($get_pembimbing) == 0) : ?>
-											<li class="list-group-item"><p class="h3">Anda belum mempunyai pembimbing</p>
+											<li class="list-group-item"><p class="h3">Anda belum mempunyai
+													pembimbing</p>
 											</li>
 										<?php elseif (count($latest_bimbingan) == 0 and count($get_pembimbing) != 0) : ?>
-											<li id="belum-konsultasi" class="list-group-item"><p class="h3">Belum mengajukan konsultasi</p>
+											<li id="belum-konsultasi" class="list-group-item"><p class="h3">Belum
+													mengajukan konsultasi</p>
 											</li>
 										<?php endif; ?>
 									</ul>
@@ -135,7 +152,8 @@
 															class="text-<?php echo $all_bimbingan->status !== null ? ($all_bimbingan->status == 'accept' ? 'success' : 'red') : 'warning' ?>"><b><?php echo $all_bimbingan->status !== null ? ($all_bimbingan->status == 'accept' ? 'Konsultasi Dikonfirmasi' : 'Konsultasi Ditolak') : 'Belum dikonsultasikan' ?></b></small>
 													</div>
 													<div>
-														<h4 class="font-weight-400">Mahasiswa: <b><?php echo $all_bimbingan->nama_mahasiswa ?></b></h4>
+														<h4 class="font-weight-400">Mahasiswa:
+															<b><?php echo $all_bimbingan->nama_mahasiswa ?></b></h4>
 													</div>
 													<div>
 														<div
@@ -151,7 +169,8 @@
 											</li>
 										<?php endforeach; ?>
 										<?php if (count($all_latest_bimbingan) == 0) : ?>
-											<li id="belum-konsultasi" class="list-group-item"><p class="h3">Belum mengajukan konsultasi</p>
+											<li id="belum-konsultasi" class="list-group-item"><p class="h3">Belum
+													mengajukan konsultasi</p>
 											</li>
 										<?php endif; ?>
 									</ul>
@@ -171,28 +190,30 @@
 <?php $this->load->view('user/_partials/modal.php'); ?>
 <?php $this->load->view('user/_partials/js.php'); ?>
 <script>
-    $(document).ready(function () {
-        if (!localStorage.getItem('wizard')) {
-            introJs().start().oncomplete(function () {
-                localStorage.setItem('wizard', 'yes')
-            }).onexit(function () {
-                localStorage.setItem('wizard', 'yes')
-            })
-        }
-        <?php if ($level === 'mahasiswa'): ?>
-        let checkBimbingan = $.ajax({
-			url:'<?php echo site_url("ajax/check_bimbingan")?>',
-			method:"GET",
-			dataType:'json',
-			async:false
-		}).done(function(res){return res});
-        let resJson = checkBimbingan.responseJSON;
-        if(resJson.data.mode === 'offline'){
-            $('#belum-konsultasi').remove();
+	$(document).ready(function () {
+		if (!localStorage.getItem('wizard')) {
+			introJs().start().oncomplete(function () {
+				localStorage.setItem('wizard', 'yes')
+			}).onexit(function () {
+				localStorage.setItem('wizard', 'yes')
+			})
+		}
+		<?php if ($level === 'mahasiswa'): ?>
+		let checkBimbingan = $.ajax({
+			url: '<?php echo site_url("ajax/check_bimbingan")?>',
+			method: "GET",
+			dataType: 'json',
+			async: false
+		}).done(function (res) {
+			return res
+		});
+		let resJson = checkBimbingan.responseJSON;
+		if (resJson.data.mode === 'offline') {
+			$('#belum-konsultasi').remove();
 			$('#div-mode-bimbingan').append('Anda sedang melakukan bimbingan offline')
 		}
 		<?php endif ?>
-    })
+	})
 </script>
 <!-- Demo JS - remove this in your project -->
 <!-- <script src="../aset/js/demo.min.js"></script> -->

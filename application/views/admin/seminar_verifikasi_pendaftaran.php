@@ -91,7 +91,7 @@
 														 data-target="#collapse-<?php echo $status->id_jadwal ?>"
 														 aria-expanded="true"
 														 aria-controls="collapse<?php echo $status->id_jadwal ?>">
-														<h5 class="mb-0 <?php echo $status->status != 'NULL' ? ($status->status == 'accept' ? 'text-success' : '') : ($status->status == 'decline' ? 'text-warning' : "") ?>"><?php echo $status->nama_mahasiswa ?>
+														<h5 class="mb-0 <?php echo ($status->status != 'NULL') ? ($status->status == 'accept' ? 'text-success' : ($status->status == 'reupload' ? 'text-danger' : '')) : '' ?>"><?php echo $status->nama_mahasiswa ?>
 															(<?php echo $status->nim ?>)</h5>
 													</div>
 													<div id="collapse-<?php echo $status->id_jadwal ?>"
@@ -101,10 +101,10 @@
 														<div class="card-body">
 															<div class="d-flex justify-content-end mb-3">
 																<a href="<?php echo site_url('seminar?m=pendaftaran&q=dec&id=' . $status->id_verif) ?>"
-																   class="btn btn-sm btn-danger <?php echo $status->status != 'NULL' ? ($status->status == 'accept' ? 'disabled' : '') : "" ?>">Upload
+																   class="btn btn-sm btn-danger <?php echo $status->status != 'NULL' ? (($status->status == 'accept') || ($status->status == 'reupload') ? 'disabled' : '') : "" ?>">Upload
 																	Ulang</a>
 																<a href="<?php echo site_url('seminar?m=pendaftaran&q=acc&id=' . $status->id_verif) ?>"
-																   class="btn btn-sm btn-primary mr-1 <?php echo $status->status != 'NULL' ? ($status->status == 'accept' ? 'disabled' : '') : "" ?>">Terima</a>
+																   class="btn btn-sm btn-primary mr-1 <?php echo $status->status != 'NULL' ? (($status->status == 'accept') || ($status->status == 'reupload') ? 'disabled' : '') : "" ?>">Terima</a>
 															</div>
 															<iframe class="col-md-12 px-0" style="border-radius: 6px"
 																	height="500px"
