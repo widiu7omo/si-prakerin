@@ -145,7 +145,7 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		FilePond.registerPlugin(FilePondPluginFileValidateSize);
 		FilePond.registerPlugin(FilePondPluginFileValidateType);
 		FilePond.setOptions({
-			maxFileSize: '2048MB',
+			maxFileSize: '2048MB',d
 			acceptedFileTypes: ['application/pdf'],
 			fileRenameFunction: (file) => {
 				console.log(file);
