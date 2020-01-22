@@ -43,6 +43,7 @@ class Penilaian_model extends CI_Model
 
 	public function get_penilaian_perusahaan($id = null, $detail = false, $filter = false)
 	{
+		$this->db->reset_query();
 		if ($id) {
 			$this->db->where($id);
 		}

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <!-- Head PHP -->
 <?php $this->load->view('user/_partials/header.php'); ?>
 <body class="g-sidenav-hidden">
@@ -53,8 +52,14 @@
 				<div class="card">
 					<div class="card-header"><h3>Informasimu</h3></div>
 					<div class="card-body">
-						<?php if(!isset($informasi)): ?>
-
+						<?php if(isset($informasi)): ?>
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong>Informasi</strong>
+								<h5><?php echo $informasi->pesan ?> <a href="<?php echo $informasi->uri ?>"><b>Klik disini untuk mengisi</b></a></h5>
+							</div>
 						<?php endif; ?>
 					</div>
 				</div>
