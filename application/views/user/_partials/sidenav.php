@@ -69,6 +69,7 @@ if($level == 'mahasiswa'){
 					<h6 class="navbar-heading p-0 text-muted">Bantuan</h6>
 					<!-- Navigation -->
 					<ul class="navbar-nav mb-md-3">
+						<?php if ($level == 'mahasiswa'): ?>
 						<li class="nav-item">
 							<a class="nav-link" href="<?php echo site_url('blog/home') ?>" target="_blank">
 								<i class="ni ni-support-16"></i>
@@ -81,6 +82,7 @@ if($level == 'mahasiswa'){
 								<span class="nav-link-text">Download Berkas</span>
 							</a>
 						</li>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>

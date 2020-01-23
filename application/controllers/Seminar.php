@@ -219,12 +219,14 @@ class Seminar extends MY_Controller
 	{
 		$post = $this->input->post();
 		$penilaian = $this->penilaian_model;
+		$data = array();
 		$data_penilaian = $penilaian->get_penilaian_seminar();
+		$data['list_penilaian'] = $data_penilaian;
 		if (isset($post['ajax'])) {
 			echo json_encode((object)array('data' => $data_penilaian));
 			return;
 		}
-		$this->load->view('admin/seminar_list_penilaian');
+		$this->load->view('admin/seminar_list_penilaian',$data);
 	}
 
 	public function get_list_jadwal()

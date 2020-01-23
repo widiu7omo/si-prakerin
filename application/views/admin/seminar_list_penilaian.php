@@ -26,7 +26,7 @@
 				<div class="col-md-12 col-lg-12 col-sm-12">
 					<div class="card">
 						<div class="card-header">
-							<div class="h3">Jadwal seminar mahasiswa</div>
+							<div class="h3">Penilaian Mahasiswa</div>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive py-0">
@@ -110,13 +110,13 @@
 					}
 				},
 				{
-					"data": "nilai_seminar_past",
+					"data": "nilai_seminar",
 					"render": function (data, type, row) {
 						return data !== null ? data : "Tidak ada penilaian"
 					}
 				},
 				{
-					"data": "nilai_seminar",
+					"data": "nilai_seminar_past",
 					"render": function (data, type, row) {
 						return data !== null ? data : "Tidak ada penilaian"
 					}
@@ -125,6 +125,11 @@
 		}).on('init.dt', function () {
 			$('.dt-buttons .btn').removeClass('btn-secondary').addClass('btn-sm btn-default');
 		});
+		setInterval( function () {
+			console.log(t)
+			t.api().ajax.reload(null, false );
+		}, 5000 );
 	</script>
 </body>
 </html>
+

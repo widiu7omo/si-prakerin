@@ -43,11 +43,11 @@ class Sidang extends CI_Controller
 					array('name' => 'Jadwal Seminar',
 						'href' => site_url('sidang?m=jadwal'),
 						'icon' => 'fas fa-id-badge',
-						'desc' => 'Informasi terkait jadwal seminar peserta prakerin'),
-					array('name' => 'Penilaian',
+						'desc' => 'Informasi terkait jadwal seminar peserta Praktik Kerja Industri'),
+					array('name' => 'Penilaian Seminar',
 						'href' => site_url('sidang?m=penilaian'),
 						'icon' => 'fas fa-id-badge',
-						'desc' => 'Penilaian mahasiswa seminar')
+						'desc' => 'Penilaian peserta seminar Praktik Kerja Industri')
 				);
 				break;
 			default:

@@ -18,25 +18,25 @@
 		case $nilai >= 80:
 			$mutu = 'A';
 			break;
-		case $nilai >= 75 && $nilai <= 79 :
+		case $nilai >= 75 && $nilai < 80 :
 			$mutu = 'B+';
 			break;
-		case $nilai >= 70 && $nilai <= 74:
+		case $nilai >= 70 && $nilai < 75:
 			$mutu = 'B';
 			break;
-		case $nilai >= 64 && $nilai <= 69:
+		case $nilai >= 65 && $nilai < 70:
 			$mutu = 'C+';
 			break;
-		case $nilai >= 60 && $nilai <= 64:
+		case $nilai >= 60 && $nilai < 65:
 			$mutu = 'C';
 			break;
-		case $nilai >= 50 && $nilai <= 59:
+		case $nilai >= 50 && $nilai < 60:
 			$mutu = 'D+';
 			break;
-		case $nilai >= 40 && $nilai <= 49:
+		case $nilai >= 40 && $nilai < 50:
 			$mutu = 'D';
 			break;
-		case $nilai <= 40:
+		case $nilai < 40:
 			$mutu = 'E';
 			break;
 	}
@@ -308,14 +308,23 @@
 																		<div class="col-md-12 ml-3">
 																			<h2>Hasil akhir </h2>
 																			<div
-																				class=" d-flex justify-content-around">
-																				<h4>- Mahasiswa mendapatkan Nilai
-																					Mutu <b
+																				class="row">
+																				<div
+																					class="col-xs-12 col-md-6 col-sm-6">
+																					<h4>- Hasil Nilai
+																						Mutu
+																					</h4>
+																					<b
 																						class="h1 text-primary"><?php echo get_nilai_mutu($total_nilai_semua) ?></b>
-																				</h4>
-																				<h4>- Mahasiswa dinyatakan <b
+																				</div>
+																				<div
+																					class="col-xs-12 col-md-6 col-sm-6">
+																					<h4>- Mahasiswa dinyatakan
+																					</h4>
+																					<b
 																						class="h1 text-primary"><?php echo get_nilai_mutu($total_nilai_semua, true) ?></b>
-																				</h4>
+																				</div>
+
 																			</div>
 																		</div>
 																	</div>
