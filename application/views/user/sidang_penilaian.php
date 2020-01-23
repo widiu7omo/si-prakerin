@@ -736,7 +736,8 @@
 		let p2 = $('#p2-tot').text();
 		let p1 = $('#p1-tot').text();
 		if (p5 !== 'P5' && p4 !== 'P4' && p3 !== 'P3' && p2 !== 'P2' && p1 !== 'P1') {
-			$('#pn-tot').text(parseFloat(p1) + parseFloat(p2) + parseFloat(p3) + parseFloat(p4) + parseFloat(p5));
+			let result = parseFloat(p1) + parseFloat(p2) + parseFloat(p3) + parseFloat(p4) + parseFloat(p5);
+			$('#pn-tot').text(result.toFixed(2));
 		}
 	}
 
