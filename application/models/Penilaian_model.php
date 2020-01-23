@@ -76,6 +76,21 @@ class Penilaian_model extends CI_Model
 		return $this->db->select('id,nilai_pkl,detail_nilai_pkl,id_dosen_bimbingan_mhs idbm')->from('tb_perusahaan_penilaian')->get()->result();
 	}
 
+	public function get_penilaian_seminar_sementara()
+	{
+		$post = $this->input->post();
+		$id_jadwal = $post['ij'];
+		return $this->db->query("SELECT
+						tp.nama_pegawai,
+						tsp.status_dosen,
+       					tsp.nilai_seminar
+					FROM
+						tb_seminar_penilaian tsp
+						INNER JOIN tb_seminar_jadwal tsj ON tsp.id_seminar_jadwal = tsj.id
+						INNER JOIN tb_pegawai tp ON tsp.id_dosen = tp.nip_nik
+						WHERE tsp.id_seminar_jadwal = '$id_jadwal' AND tsp.status_dosen <> 'p3'")->result();
+	}
+
 	public function get_penilaian_seminar($id = null)
 	{
 		$where = "";

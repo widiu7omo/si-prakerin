@@ -1,6 +1,54 @@
 <?php $section = isset($_GET['section']) ? $_GET['section'] : 'today'; ?>
 <?php $level = $this->session->userdata('level') ?>
 <?php $temp_date = "" ?>
+<?php function get_another_penilaian($id_jadwal, $status)
+{
+	$join = array('tb_history_seminar_penilaian thsp', 'thsp.id_seminar_penilaian = tsp.id', 'LEFT OUTER');
+	$data = datajoin('tb_seminar_penilaian tsp', "id_seminar_jadwal = '$id_jadwal' AND status_dosen = '$status'", 'tsp.nilai_seminar n1,tsp.detail_nilai_seminar dn1,thsp.nilai_seminar n2,thsp.detail_nilai_seminar dn2', $join);
+	return $data;
+} ?>
+<?php function get_penilaian_perusahaan($id_bimbingan)
+{
+	return masterdata('tb_perusahaan_penilaian', "id_dosen_bimbingan_mhs = '$id_bimbingan'", 'nilai_pkl');
+} ?>
+<?php function get_nilai_mutu($nilai, $get_status = false)
+{
+	$mutu = '';
+	switch ($nilai) {
+		case $nilai >= 80:
+			$mutu = 'A';
+			break;
+		case $nilai >= 75 && $nilai <= 79 :
+			$mutu = 'B+';
+			break;
+		case $nilai >= 70 && $nilai <= 74:
+			$mutu = 'B';
+			break;
+		case $nilai >= 64 && $nilai <= 69:
+			$mutu = 'C+';
+			break;
+		case $nilai >= 60 && $nilai <= 64:
+			$mutu = 'C';
+			break;
+		case $nilai >= 50 && $nilai <= 59:
+			$mutu = 'D+';
+			break;
+		case $nilai >= 40 && $nilai <= 49:
+			$mutu = 'D';
+			break;
+		case $nilai <= 40:
+			$mutu = 'E';
+			break;
+	}
+	if ($get_status) {
+		if ($mutu != 'D+' && $mutu != 'D' && $mutu != 'E') {
+			return 'LULUS DENGAN REVISI';
+		} else {
+			return 'TIDAK LULUS';
+		}
+	}
+	return $mutu;
+} ?>
 <!DOCTYPE html>
 <html>
 <!-- Head PHP -->
@@ -29,6 +77,11 @@
 								<a href="<?php echo site_url('sidang?m=penilaian&section=today') ?>"
 								   class="nav-link <?php echo !isset($section) ? 'active' : null ?> <?php echo $section == 'today' ? 'active' : null ?>">Uji
 									Hari ini</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?php echo site_url('sidang?m=penilaian&section=hasil') ?>"
+								   class="nav-link <?php echo !isset($section) ? 'active' : null ?> <?php echo $section == 'hasil' ? 'active' : null ?>">Hasil
+									Uji</a>
 							</li>
 							<li class="nav-item">
 								<a href="<?php echo site_url('sidang?m=penilaian&section=history') ?>"
@@ -76,7 +129,10 @@
 														</div>
 														<?php $temp_date = get_time_range($r_uji->start, $r_uji->end, 'datestart'); ?>
 													<?php endif; ?>
-													<a class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4">
+													<a class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+													   data-toggle="collapse"
+													   data-target="#collapse-<?php echo $r_uji->id ?>"
+													   aria-expanded="false" aria-controls="collapseOne">
 														<div
 															class="d-flex row justify-content-between align-items-center">
 															<div class="col col-xs-12">
@@ -119,6 +175,161 @@
 								</div>
 							</div>
 						<?php endif; ?>
+							<?php if ($section === 'hasil'): ?>
+							<div class="row">
+								<div class="col">
+									<div class="card">
+										<div class="card-header">
+											<!-- Title -->
+											<div class="row">
+												<div class="col-md-12 col-sm-12">
+													<h5 class="h3 mb-0">Berikut daftar mahasiswa yang telah anda uji
+														(Sebagai Pembimbing)</h5>
+													<small>* Pilih untuk melihat detail</small><br>
+												</div>
+											</div>
+										</div>
+										<div class="card-body p-0">
+											<div class="list-group list-group-flush">
+												<?php if (isset($riwayat_uji) and count($riwayat_uji) === 0): ?>
+													<div><p class="text-center h2">Belum ada hasil uji (Pembimbing)</p>
+													</div>
+												<?php endif; ?>
+												<div class="accordion" id="accordionExample">
+													<?php foreach (isset($riwayat_uji) ? $riwayat_uji : array() as $key => $r_uji): ?>
+														<?php if ($r_uji->sebagai === 'p3'): ?>
+															<?php $date = get_time_range($r_uji->start, $r_uji->end, 'datestart'); ?>
+															<?php if ($date != $temp_date): ?>
+																<div
+																	class="h4 bg-secondary p-3 m-0 font-weight-bold text-right d-flex justify-content-between">
+																	<div>Tanggal</div>
+																	<div><?php echo convert_date($date, 'long') ?></div>
+																</div>
+																<?php $temp_date = get_time_range($r_uji->start, $r_uji->end, 'datestart'); ?>
+															<?php endif; ?>
+
+															<a class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+															   data-toggle="collapse"
+															   data-target="#collapse-<?php echo $r_uji->id ?>"
+															   aria-expanded="false" aria-controls="collapseOne">
+																<div
+																	class="d-flex row justify-content-between align-items-center">
+																	<div class="col col-xs-12">
+																		<small>Mahasiswa:</small>
+																		<h5 class="mb-0 h4"><?php echo $r_uji->nama_mahasiswa ?></h5>
+																	</div>
+																	<div class="col col-xs-12">
+																		<small>Ruangan:</small>
+																		<h5 class="mb-0"><?php echo $r_uji->nama_tempat ?></h5>
+																	</div>
+																	<div class="col col-xs-12">
+																		<small>Waktu:</small>
+																		<h5 class="mb-0">
+																			Pukul <?php echo get_time_range($r_uji->start, $r_uji->end, 'time') ?></h5>
+																	</div>
+																	<div class="col col-xs-12">
+																		<button type="submit" id="btn-penilaian"
+																				data-ij="<?php echo $r_uji->ij ?>"
+																				data-in="<?php echo $r_uji->id ?>"
+																				class="m-1 btn btn-sm btn-primary">
+																			Detail Penilaian
+																		</button>
+																	</div>
+																</div>
+															</a>
+															<div id="collapse-<?php echo $r_uji->id ?>" class="collapse"
+																 aria-labelledby="headingOne"
+																 data-parent="#accordionExample">
+																<h4 class="ml-3 mt-2 text-primary">Penilaian seminar
+																	(Sementara)</h4>
+																<div class="card-body">
+																	<?php
+																	$nilai_p1 = get_another_penilaian($r_uji->ij, 'p1');
+																	$nilai_p2 = get_another_penilaian($r_uji->ij, 'p2');
+																	$nilai_p3 = get_another_penilaian($r_uji->ij, 'p3');
+																	$nilai_perusahaan = get_penilaian_perusahaan($r_uji->id_bimbingan); ?>
+																	<div class="row">
+																		<div class="col-xs-12 col-sm-12 col-md-6">
+																			<ul class="list-group">
+																				<li class="list-group-item d-flex justify-content-between">
+																					<h4 class="font-weight-normal">
+																						Penilaian dari Penguji
+																						1</h4>
+																					<?php $n1 = count($nilai_p1) > 0 ? $nilai_p1[0]->n1 : 0 ?>
+																					<b> 10% X <?php echo $n1 ?>
+																						= <?php echo ($n1 * 10) / 100; ?></b>
+																				</li>
+																				<li class="list-group-item d-flex justify-content-between">
+																					<h4 class="font-weight-normal">
+																						Penilaian dari Penguji
+																						2</h4>
+																					<?php $n2 = count($nilai_p2) > 0 ? $nilai_p2[0]->n1 : 0 ?>
+																					<b> 10% X <?php echo $n2 ?>
+																						= <?php echo ($n2 * 10) / 100 ?></b>
+																				</li>
+																				<li class="list-group-item d-flex justify-content-between">
+																					<h4 class="font-weight-normal">
+																						Penilaian dari
+																						Pembimbing</h4>
+																					<?php $n3 = count($nilai_p3) > 0 ? $nilai_p3[0]->n1 : 0 ?>
+																					<b> 30% X <?php echo $n3 ?>
+																						= <?php echo ($n3 * 30) / 100 ?></b>
+																				</li>
+																			</ul>
+																		</div>
+																		<div class="col-xs-12 col-sm-12 col-md-6">
+																			<ul class="list-group list-group-flush">
+																				<li class="list-group-item d-flex justify-content-between">
+																					<h4 class="font-weight-normal font-weight-bold">
+																						Penilaian Seminar
+																						(P1+P2+P3)</h4>
+																					<?php $total_nilai_seminar = (($n1 * 10) / 100) + (($n2 * 10) / 100) + (($n3 * 30) / 100) ?>
+																					<b><?php echo $total_nilai_seminar ?></b>
+																				</li>
+																				<li class="list-group-item d-flex justify-content-between">
+																					<h4 class="font-weight-normal font-weight-bold">
+																						Total
+																						Penilaian Perusahaan
+																						(50%)</h4>
+																					<?php $n4 = isset($nilai_perusahaan->nilai_pkl) ? $nilai_perusahaan->nilai_pkl : 0 ?>
+																					<b><?php echo ($n4 * 50) / 100 ?></b>
+																				</li>
+																				<li class="list-group-item d-flex justify-content-between">
+																					<h4 class="font-weight-normal font-weight-bold">
+																						Total Nilai Keseluruhan</h4>
+																					<?php $total_nilai_semua = (($n4 * 50) / 100) + $total_nilai_seminar ?>
+																					<b><?php echo $total_nilai_semua ?></b>
+																				</li>
+																			</ul>
+																		</div>
+																	</div>
+																	<hr class="m-0 mb-3">
+																	<div class="row">
+																		<div class="col-md-12 ml-3">
+																			<h2>Hasil akhir </h2>
+																			<div
+																				class=" d-flex justify-content-around">
+																				<h4>- Mahasiswa mendapatkan Nilai
+																					Mutu <b
+																						class="h1 text-primary"><?php echo get_nilai_mutu($total_nilai_semua) ?></b>
+																				</h4>
+																				<h4>- Mahasiswa dinyatakan <b
+																						class="h1 text-primary"><?php echo get_nilai_mutu($total_nilai_semua, true) ?></b>
+																				</h4>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														<?php endif; ?>
+													<?php endforeach; ?>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						<?php endif; ?>
 							<?php if ($section === 'today'): ?>
 							<div class="h3">Berikut seminar yang anda uji hari ini</div>
 							<div class="row">
@@ -144,8 +355,20 @@
 														<span
 															class="h6 surtitle">&nbsp; Anda sebagai <?php echo $item->sebagai === 'p1' ? 'Penguji 1' : ($item->sebagai === 'p2' ? "Penguji 2" : "Pembimbing") ?></span>
 													</div>
+													<?php
+													$time_start = get_time_range($item->start, $item->end, 'start');
+													$date_time_schedule = strtotime(date('Y-m-d') . ' ' . $time_start);
+													$now = strtotime(date('Y-m-d H:i'))
+													?>
 													<div class="col-auto">
-														<span class="badge badge-lg badge-success">Active</span>
+														<?php if ($now > $date_time_schedule): ?>
+															<?php if ($item->sebagai === 'p3'): ?>
+																<div class="btn btn-sm btn-primary"
+																	 id="nilai-penguji-sementara"
+																	 data-ij="<?php echo $item->ij ?>">Nilai Penguji
+																</div>
+															<?php endif ?>
+														<?php endif; ?>
 													</div>
 												</div>
 												<div class="row mx-0 d-flex justify-content-between align-items-center">
@@ -156,9 +379,11 @@
 														<div class="h1"><?php echo $item->nama_mahasiswa ?></div>
 													</div>
 													<div>
-														<button id="btn-penilaian" class="btn btn-primary"
-																data-ij="<?php echo $item->ij ?>">Penilaian
-														</button>
+														<?php if ($now > $date_time_schedule): ?>
+															<button id="btn-penilaian" class="btn btn-primary"
+																	data-ij="<?php echo $item->ij ?>">Penilaian
+															</button>
+														<?php endif; ?>
 													</div>
 												</div>
 												<div class="row">
@@ -456,6 +681,7 @@
 		<?php $this->load->view('user/_partials/footer.php'); ?>
 
 	</div>
+	<?php $this->load->view('user/sidang_modal_penilaian_sementara.php') ?>
 	<?php if (isset($_GET['section']) and $_GET['section'] === 'history'): ?>
 		<?php $this->load->view('user/sidang_modal_penilaian_revisi.php') ?>
 	<?php else: ?>
@@ -510,7 +736,7 @@
 		let p2 = $('#p2-tot').text();
 		let p1 = $('#p1-tot').text();
 		if (p5 !== 'P5' && p4 !== 'P4' && p3 !== 'P3' && p2 !== 'P2' && p1 !== 'P1') {
-			$('#pn-tot').text(parseInt(p1) + parseInt(p2) + parseInt(p3) + parseInt(p4) + parseInt(p5));
+			$('#pn-tot').text(parseFloat(p1) + parseFloat(p2) + parseFloat(p3) + parseFloat(p4) + parseFloat(p5));
 		}
 	}
 
@@ -533,7 +759,7 @@
 		{name: "1. Penyajian Presentasi", percentage: "10%", value: 10},
 		{name: "2. Pemahaman Materi", percentage: "15%", value: 15},
 		{name: "3. Hasil yang dicapai", percentage: "40%", value: 40},
-		{name: "4. Objektifitas menganggapi pertanyaan", percentage: "20%", value:20},
+		{name: "4. Objektifitas menganggapi pertanyaan", percentage: "20%", value: 20},
 		{name: "5. Penulisan laporan", percentage: "15%", value: 15}
 	];
 
@@ -626,10 +852,76 @@
 			})
 		}
 		<?php endif; ?>
+		function get_penilaian_perusahaan(id_jdw) {
+			console.log(id_jdw)
+			$.ajax({
+				url: '<?php echo site_url("sidang?m=penilaian&q=fetch_company_val") ?>',
+				method: "POST",
+				dataType: 'json',
+				data: {
+					id_jadwal: id_jdw
+				},
+				success: function (res) {
+					if (res.length > 0) {
+						let innerHtml = "";
+						innerHtml += "<h4>Penilaian Keseluruhan : <b>" + res[0].nilai_pkl + "</b></h4>";
+						let detail = res[0].detail_nilai_pkl;
+						let detailHtml = detail.map(function (item) {
+							return "<li><h5>" + item.name + " : " + item.value + "</h5></li>";
+						}).join("");
+						innerHtml += "<ul>" + detailHtml + "</ul>";
+						// console.log(innerHtml)
+						$('#place-penilaian-perusahaan').html(innerHtml);
+					} else {
+						$('#place-penilaian-perusahaan').html('<h3 class="text-center">Mahasiswa belum mengisi penilaian dari perusahaan</h3>');
+					}
+				},
+				error: function (er) {
+					console.log(er)
+				}
+			})
+		}
+
+		$(document).on('click', '#nilai-penguji-sementara', function () {
+			let ij = $(this).data('ij');
+			$.ajax({
+				url: "<?php echo site_url('sidang?m=penilaian&q=get_temp_nilai')?>",
+				method: "POST",
+				data: {
+					ij: ij
+				},
+				dataType: 'json',
+				success: function (data) {
+					if (data.length > 0) {
+						let ulHTML = "<ul class='list-group'>";
+						let innerHTML = data.map(function (item) {
+							let name = "";
+							let p = item.status_dosen === 'p1' ? '1' : '2';
+							name = "<li class='list-group-item'>" +
+								"<h4 class='d-flex justify-content-between'>" +
+								"<span>Penilaian Penguji " + p + "</span><span class='h3'> = " + item.nilai_seminar + "</span></h4>" +
+								"<h6>" + "(" + item.nama_pegawai + ")" + "</h6>" +
+								"</li>";
+							return name;
+						}).join('');
+						let finalHTML = ulHTML + innerHTML + '</ul>';
+						$('#body_penilaian_sementara').html(finalHTML);
+					} else {
+						$('#body_penilaian_sementara').html('<h2 class="text-center">Belum ada penilaian dari penguji</h2>');
+					}
+					console.log(data)
+				},
+				error: function (err) {
+					console.log(err)
+				}
+			})
+			$('#modal-seminar-penilaian-sementara').modal('show');
+		})
 		$(document).on('click', '#btn-penilaian', function () {
 			id_jdw = $(this).data('ij');
 			req = $(this).data('req') ? $(this).data('req') : "ajax";
 			id_n = section === 'history' ? $(this).data('in') : "";
+			get_penilaian_perusahaan(id_jdw);
 			$.ajax({
 				url: '<?php echo site_url("sidang?m=penilaian&section=") ?>' + section,
 				method: "POST",

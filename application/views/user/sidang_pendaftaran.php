@@ -65,28 +65,30 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 					<?php $ontime = isset($ontime) ? $ontime : false; ?>
 					<?php if ($is_file == null or $reupload == true): ?>
 						<?php if (!$allow): ?>
-						<div class="h2">Anda belum bisa upload kelengkapan berkas pendaftaran seminar karena belum
-							dijadwalkan di aplikasi
-						</div>
-					<?php elseif (!$ontime): ?>
-						<div class="h2">Anda terlambat mengupload berkas pendaftaran, silahkan hubungi koordinator
-							untuk
-							di jadwalkan ulang
-						</div>
-					<?php else: ?>
-						<div class="h5">* Catatan</div>
-						<div class="h6 font-weight-normal">- Pendafaran seminar akan hilang ketika waktu sidang
-							kurang
-							dari 2 hari
-						</div>
-						<div class="h6 font-weight-normal">- Harap mengecek kembali file pdf sebelum di
-							<i>upload</i>
-						</div>
-						<div class="h6 font-weight-normal">- Segera lakukan pendaftaran jika jadwal sudah di
-							informasikan oleh koordinator Prakerin
-						</div>
-					<input type="file" class="my-pond">
-					<?php endif; ?>
+							<div class="h2">Anda belum bisa upload kelengkapan berkas pendaftaran seminar karena belum
+								dijadwalkan di aplikasi
+							</div>
+						<?php elseif (!$ontime): ?>
+							<div class="h2">Anda terlambat mengupload berkas pendaftaran, silahkan hubungi koordinator
+								untuk
+								di jadwalkan ulang
+							</div>
+						<?php else: ?>
+							<div class="h5">* Catatan</div>
+							<div class="h6 font-weight-normal">- Pendafaran seminar akan hilang ketika waktu sidang
+								kurang
+								dari 2 hari
+							</div>
+							<div class="h6 font-weight-normal">- Harap mengecek kembali file pdf sebelum di
+								<i>upload</i>
+							</div>
+							<div class="h6 font-weight-normal">- Segera lakukan pendaftaran jika jadwal sudah di
+								informasikan oleh koordinator Prakerin
+							</div>
+							<div class="h6 font-weight-normal">- Pastikan ukuran pdf tidak lebih dari 2MB (2048kb)
+							</div>
+							<input type="file" class="my-pond">
+						<?php endif; ?>
 					<?php else: ?>
 						<div class="alert alert-success alert-dismissible fade show" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -145,7 +147,7 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		FilePond.registerPlugin(FilePondPluginFileValidateSize);
 		FilePond.registerPlugin(FilePondPluginFileValidateType);
 		FilePond.setOptions({
-			maxFileSize: '2048MB',d
+			maxFileSize: '2048MB',
 			acceptedFileTypes: ['application/pdf'],
 			fileRenameFunction: (file) => {
 				console.log(file);
@@ -155,7 +157,7 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		let pond = $('.my-pond').filepond({
 			server: "<?php echo site_url('sidang?m=upload_pendaftaran') ?>"
 		});
-		$('.my-pond').on('FilePond:processfile',function(e){
+		$('.my-pond').on('FilePond:processfile', function (e) {
 			console.log('success');
 			window.location.reload();
 		})

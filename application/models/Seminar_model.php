@@ -320,7 +320,8 @@ class Seminar_model extends CI_Model
        		tps.nama_program_studi,
        		tm.nim,
 			tsj.mulai start,
-			tsj.berakhir end
+			tsj.berakhir end,
+       		tsj.id_dosen_bimbingan_mhs id_bimbingan
 		FROM
 			tb_seminar_jadwal tsj
 		INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
@@ -403,8 +404,6 @@ class Seminar_model extends CI_Model
     		tdbm.judul_laporan_mhs laporan,
 			tst.nama nama_tempat,
 			tm.nama_mahasiswa,
-       		tsp.nilai_seminar,
-       		tsp.detail_nilai_seminar,
        		tps.nama_program_studi,
        		tm.nim,
 			tsj.mulai start,
@@ -412,7 +411,6 @@ class Seminar_model extends CI_Model
 		FROM
 			tb_seminar_jadwal tsj
 		INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
-		LEFT OUTER JOIN tb_seminar_penilaian tsp ON tsp.id_seminar_jadwal = tsj.id
 		INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
 		INNER JOIN tb_pegawai tp3 ON tp3.nip_nik = tdbm.nip_nik
 		INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim

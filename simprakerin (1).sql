@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2020 at 02:14 AM
+-- Generation Time: Jan 22, 2020 at 07:24 AM
 -- Server version: 5.5.60-MariaDB
 -- PHP Version: 5.4.16
 
@@ -490,7 +490,7 @@ INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akadem
 (302, 'TA002', 1012, 'A1317035', '150801145', 'Sistem Informasi Marketing dan Sales Pada PT. Indonesia Comnets Plus (ICON+) Kantor Perwakilan Kalim', 'setuju', 'setuju'),
 (303, 'TA002', 1011, 'A1317076', '150801145', 'APLIKASI IBOX (INTEGRATED BUSINESS OPERATION EXCELLENCE) BERBASIS WEB PADA PT INDONESIA COMNETS PLUS', 'setuju', 'setuju'),
 (304, 'TA002', 1009, 'A1317009', '150801145', 'INTEGRATED BUSINESS OPERATION EXCELLENCE (IBOX) BERBASIS WEB PADA PT INDONESIA COMNETS PLUS KANTOR P', 'setuju', 'setuju'),
-(305, 'TA002', 1042, 'A1317045', '120102070', 'Sistem Absensi Karyawan berbasis Web dengan Qrcode CV. Fast Media Komputindo Banjarbaru', 'setuju', 'setuju'),
+(305, 'TA002', 1042, 'A1317045', '120102070', 'Sistem Informasi Absensi Karyawan dengan Qrcode dan Geolocation Berbasis Web pada CV. Fast Media Kom', 'setuju', 'setuju'),
 (306, 'TA002', 1040, 'A1317066', '120102070', 'Sistem Informasi E-kinerja Karyawan Berbasis Web pada CV. Fast Media Komputindo', 'setuju', 'setuju'),
 (307, 'TA002', 1041, 'A1317025', '120102070', 'Aplikasi Manajemen Proyek (APRO) Berbasis Web Pada CV. Fast Media Komputindo', 'setuju', 'setuju'),
 (308, 'TA002', 1045, 'A1317067', '09081015', 'Konfigurasi Jalur Komunikasi Arus Dan Tegangan Supplay DC Menggunakan Protokol Modbus Pada SCADA PT ', 'setuju', 'setuju'),
@@ -507,11 +507,11 @@ INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akadem
 (320, 'TA002', 1010, 'A1317057', '150801145', 'APLIKASI IBOX (INTEGRATED BUSINESS OPERATION EXCELLENCE) BERBASIS WEB PADA PT. INDONESIA COMNETS PLU', 'setuju', 'setuju'),
 (321, 'TA002', 1017, 'A1317011', '090801016', 'Aplikasi e-Announcement Berbasis Web Pada PT. Geoinfo Teknologi Banjarmasin', 'setuju', 'setuju'),
 (322, 'TA002', 1049, 'A1317022', '160201151', 'Aplikasi RAPI (Review Activity and Project Issue)  pada PT.  Pamapersada Nusantara Distrik ARIA berb', 'setuju', 'setuju'),
-(324, 'TA002', 59, 'A1317065', '140825117', NULL, NULL, NULL),
-(326, 'TA002', 1052, 'A1317020', '120102079', 'APLIKASI FOOD COURT BERBASIS WEB PADA PT. PUTRA PERKASA ABADI SITE BIB (GIRIMULYA) ', NULL, NULL),
-(327, 'TA002', 1051, 'A1317071', '120102079', 'Sistem Informasi Pendataan Karyawan Penghuni Mess pada PT. Putra Perkasa Abadi site BIB (Giri Mulya)', NULL, NULL),
-(330, 'TA002', 1006, 'A1317100', '140825117', NULL, NULL, NULL),
-(331, 'TA002', 1050, 'A1317093', '199007112015041001', NULL, NULL, NULL);
+(324, 'TA002', 59, 'A1317065', '140825117', 'Aplikasi pelaksanaan pemeriksaan harian (p2h) unit A2B dan truck production online pada PT. Kalimant', 'setuju', 'setuju'),
+(326, 'TA002', 1052, 'A1317020', '120102079', 'APLIKASI FOOD COURT BERBASIS WEB PADA PT. PUTRA PERKASA ABADI SITE BIB (GIRIMULYA) ', 'setuju', 'setuju'),
+(327, 'TA002', 1051, 'A1317071', '120102079', 'Sistem Informasi Pendataan Karyawan Penghuni Mess pada PT. Putra Perkasa Abadi site BIB (Giri Mulya)', 'setuju', 'setuju'),
+(330, 'TA002', 1006, 'A1317100', '140825117', 'Aplikasi Peminjaman Tools berbasis web pada PT. United Tractors Site Rantau', 'setuju', 'setuju'),
+(331, 'TA002', 1050, 'A1317093', '199007112015041001', 'Aplikasi Bank Sampah PT Arutmin Indonesia Tambang Kintap Berbasis Web', 'setuju', 'setuju');
 
 -- --------------------------------------------------------
 
@@ -8492,7 +8492,7 @@ CREATE TABLE IF NOT EXISTS `tb_konsultasi_bimbingan_offline` (
   `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
   `lembar_konsultasi` text,
   `tanggal` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_konsultasi_bimbingan_offline`
@@ -8568,7 +8568,6 @@ INSERT INTO `tb_konsultasi_bimbingan_offline` (`id`, `id_dosen_bimbingan_mhs`, `
 (87, 296, 'a02fd8fec8bc940a20847820a6753a8b.pdf', NULL),
 (88, 293, '26db783b09352bac5f76b0d68a9b37c5.pdf', NULL),
 (89, 302, '581eb21e208d38506af6a084e327678c.pdf', NULL),
-(90, 301, '60655bc18c011c21470aa7792b197134.pdf', NULL),
 (91, 300, '7b87f9aaa4a013a523f46ff48daf54cf.pdf', NULL),
 (92, 310, 'aebf0dfbc3d0b25e2276efcecd748924.pdf', NULL),
 (93, 299, 'aecdba113e6589fc33509290be3e46b7.pdf', NULL),
@@ -8580,7 +8579,11 @@ INSERT INTO `tb_konsultasi_bimbingan_offline` (`id`, `id_dosen_bimbingan_mhs`, `
 (99, 317, '857b65df0cb647fb3205574aa6cdea53.pdf', NULL),
 (101, 322, '4c9b47a4cef22788e6def62e9d535dd4.pdf', NULL),
 (102, 326, '16ac4ed4280fca6a8d514de54a5e5a8a.pdf', NULL),
-(103, 327, '410c5227a403111d29d9f7d5d1086d71.pdf', NULL);
+(103, 327, '410c5227a403111d29d9f7d5d1086d71.pdf', NULL),
+(104, 331, '46127d94d97de25f79dcff132d78c6a5.pdf', NULL),
+(105, 324, '7273707060147f65c3d9b93846628b78.pdf', NULL),
+(106, 301, '56170055dfdad8d72683f666d0561dfa.pdf', NULL),
+(107, 330, '1264fa286b8307e6e42632bbb8395105.pdf', NULL);
 
 -- --------------------------------------------------------
 
@@ -9391,7 +9394,7 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (427, 'admin', 'A1317005', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:00', 'surat siap', 'magang?m=pengajuan'),
 (428, 'admin', 'A1317099', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:04', 'surat siap', 'magang?m=pengajuan'),
 (429, 'admin', 'A1317098', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:04', 'surat siap', 'magang?m=pengajuan'),
-(430, 'admin', 'A1317100', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
+(430, 'admin', 'A1317100', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
 (431, 'admin', 'A1317055', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
 (432, 'admin', 'A1317074', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
 (433, 'admin', 'A1317009', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
@@ -9400,9 +9403,9 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (436, 'admin', 'A1317035', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
 (437, 'A1317108', 'admin', 'Muhammad Iqbal  (A1317108) mengajukan permohonan magang', 1, '2020-01-17 06:29:51', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
 (438, 'A1317107', 'admin', 'Muhammad Aditya Effendi (A1317107) mengajukan permohonan magang', 1, '2020-01-17 06:31:54', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
-(439, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
+(439, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
 (440, 'admin', 'A1317107', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
-(441, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
+(441, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
 (442, 'admin', 'A1317107', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
 (443, 'admin', 'A1317066', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
 (444, 'admin', 'A1317025', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
@@ -9785,7 +9788,7 @@ CREATE TABLE IF NOT EXISTS `tb_perusahaan_penilaian` (
   `nilai_pkl` varchar(25) DEFAULT NULL,
   `detail_nilai_pkl` text,
   `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_perusahaan_penilaian`
@@ -9828,8 +9831,6 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (40, '86.95', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 306),
 (41, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 296),
 (42, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 295),
-(43, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 295),
-(44, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 295),
 (45, '80.70', '[{"name":"1. Disiplin","value":"78","res":"11.7"},{"name":"2. Komunikasi","value":"82","res":"8.2"},{"name":"3. Kerja Tim","value":"84","res":"12.6"},{"name":"4. Kerja Mandiri","value":"79","res":"7.9"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 300),
 (46, '88.70', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"87","res":"13.05"},{"name":"4. Kerja Mandiri","value":"88","res":"8.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 304),
 (47, '79.60', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"76","res":"7.6"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 289),
@@ -9837,7 +9838,6 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (49, '79.65', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"77","res":"15.4"}]', 321),
 (50, '95.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"97","res":"9.7"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 315),
 (51, '89.25', '[{"name":"1. Disiplin","value":"88","res":"13.2"},{"name":"2. Komunikasi","value":"88","res":"8.8"},{"name":"3. Kerja Tim","value":"91","res":"13.65"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"88","res":"8.8"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 302),
-(52, '79.60', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"76","res":"7.6"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 289),
 (53, '74.45', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"71","res":"7.1"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"72","res":"7.2"},{"name":"6. Sikap dan Etika","value":"73","res":"14.6"},{"name":"7. Pengetahuan","value":"74","res":"14.8"}]', 273),
 (54, '92.00', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 313),
 (55, '83.50', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 290),
@@ -9852,30 +9852,25 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (64, '86.00', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 280),
 (65, '88.75', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 270),
 (66, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(67, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(68, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(69, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(70, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
 (71, '87.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 240),
 (72, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 281),
 (73, '82.70', '[{"name":"1. Disiplin","value":"81","res":"12.15"},{"name":"2. Komunikasi","value":"84","res":"8.4"},{"name":"3. Kerja Tim","value":"81","res":"12.15"},{"name":"4. Kerja Mandiri","value":"82","res":"8.2"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 262),
 (74, '88.00', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 238),
 (75, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
-(76, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
-(77, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
-(78, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
-(79, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
-(80, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
-(81, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
-(82, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 242),
-(83, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 242),
 (84, '79.10', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"68","res":"13.6"}]', 322),
 (89, '91.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"93","res":"13.95"},{"name":"4. Kerja Mandiri","value":"93","res":"9.3"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 265),
 (90, '85.15', '[{"name":"1. Disiplin","value":"81","res":"12.15"},{"name":"2. Komunikasi","value":"88","res":"8.8"},{"name":"3. Kerja Tim","value":"84","res":"12.6"},{"name":"4. Kerja Mandiri","value":"89","res":"8.9"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 266),
 (91, '99.45', '[{"name":"1. Disiplin","value":"100","res":"15"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"99","res":"14.85"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"99","res":"9.9"},{"name":"6. Sikap dan Etika","value":"100","res":"20"},{"name":"7. Pengetahuan","value":"99","res":"19.8"}]', 275),
 (92, '99.45', '[{"name":"1. Disiplin","value":"100","res":"15"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"99","res":"14.85"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"99","res":"9.9"},{"name":"6. Sikap dan Etika","value":"100","res":"20"},{"name":"7. Pengetahuan","value":"99","res":"19.8"}]', 274),
 (93, '86.60', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 326),
-(94, '87.30', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 327);
+(94, '87.30', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 327),
+(95, '91.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"93","res":"9.3"},{"name":"3. Kerja Tim","value":"93","res":"13.95"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 264),
+(96, '89.35', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"89","res":"13.35"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 261),
+(97, '88.00', '[{"name":"1. Disiplin","value":"92","res":"13.8"},{"name":"2. Komunikasi","value":"82","res":"8.2"},{"name":"3. Kerja Tim","value":"86","res":"12.9"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"88","res":"17.6"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 259),
+(98, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 242),
+(101, '86.45', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"83","res":"12.45"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"86","res":"8.6"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"87","res":"17.4"}]', 331),
+(102, '97.65', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"100","res":"15"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"100","res":"20"}]', 330),
+(103, '83.55', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 258);
 
 -- --------------------------------------------------------
 
@@ -10089,7 +10084,7 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_jadwal` (
   `berakhir` varchar(255) DEFAULT NULL,
   `mulai` varchar(255) DEFAULT NULL,
   `id_penguji_2` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_seminar_jadwal`
@@ -10098,8 +10093,8 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_jadwal` (
 INSERT INTO `tb_seminar_jadwal` (`id`, `id_dosen_bimbingan_mhs`, `id_penguji_1`, `id_seminar_ruangan`, `berakhir`, `mulai`, `id_penguji_2`) VALUES
 (31, 260, 286, 8, '2020-01-23T10:00', '2020-01-23T08:30', 282),
 (32, 261, 286, 8, '2020-01-23T11:45', '2020-01-23T10:00', 282),
-(33, 297, 286, 8, '2020-01-23T14:30', '2020-01-23T13:30', 282),
-(34, 298, 286, 8, '2020-01-23T14:30:00', '2020-01-23T13:30:00', 282),
+(33, 297, 286, 8, '2020-01-23T14:30:00', '2020-01-23T13:00', 282),
+(34, 298, 286, 8, '2020-01-23T14:30:00', '2020-01-23T13:00', 282),
 (35, 256, 285, 12, '2020-01-23T10:00', '2020-01-23T08:30', 268),
 (36, 314, 285, 12, '2020-01-23T11:45', '2020-01-23T10:15', 268),
 (37, 262, 285, 12, '2020-01-23T14:30', '2020-01-23T13:00', 273),
@@ -10148,7 +10143,7 @@ INSERT INTO `tb_seminar_jadwal` (`id`, `id_dosen_bimbingan_mhs`, `id_penguji_1`,
 (81, 315, 295, 10, '2020-01-29T11:45', '2020-01-29T10:15', 267),
 (82, 307, 295, 10, '2020-01-29T14:30', '2020-01-29T13:00', 267),
 (83, 246, 295, 10, '2020-01-29T16:00', '2020-01-29T14:30', 267),
-(84, 240, 289, 10, '2020-01-29T10:00', '2020-01-29T08:30', 269),
+(84, 240, 289, 12, '2020-01-29T10:00:00', '2020-01-29T08:30:00', 269),
 (85, 241, 289, 12, '2020-01-29T11:45', '2020-01-29T10:15', 269),
 (86, 277, 284, 12, '2020-01-29T14:30', '2020-01-29T13:00', 273),
 (87, 305, 290, 12, '2020-01-29T16:00', '2020-01-29T14:30', 271),
@@ -10174,7 +10169,12 @@ INSERT INTO `tb_seminar_jadwal` (`id`, `id_dosen_bimbingan_mhs`, `id_penguji_1`,
 (107, 286, 283, 8, '2020-01-30T11:45', '2020-01-30T10:15', 274),
 (108, 272, 283, 8, '2020-01-30T14:30', '2020-01-30T13:00', 274),
 (109, 271, 283, 8, '2020-01-30T16:00', '2020-01-30T14:30', 274),
-(111, 322, 289, 8, '2020-01-24T10:00', '2020-01-24T08:30', 281);
+(111, 322, 289, 8, '2020-01-24T10:00', '2020-01-24T08:30', 281),
+(112, 327, 290, 8, '2020-01-29T11:45', '2020-01-29T10:15', 278),
+(113, 326, 293, 8, '2020-01-29T10:00', '2020-01-29T08:30', 278),
+(114, 331, 286, 12, '2020-01-27T14:30', '2020-01-27T13:00', 276),
+(115, 324, 290, 11, '2020-01-28T10:00', '2020-01-28T08:30', 281),
+(116, 330, 290, 11, '2020-01-28T11:45', '2020-01-28T10:15', 277);
 
 -- --------------------------------------------------------
 
@@ -10186,16 +10186,28 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_pendaftaran` (
   `id` int(11) NOT NULL,
   `id_jadwal_seminar` int(11) DEFAULT NULL,
   `file` text,
-  `size` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `size` varchar(10) DEFAULT NULL,
+  `status` enum('accept','reupload','','') DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_seminar_pendaftaran`
 --
 
-INSERT INTO `tb_seminar_pendaftaran` (`id`, `id_jadwal_seminar`, `file`, `size`) VALUES
-(2, 77, 'A1317002_-_Ade_Ardha_Reswari1.pdf', '348.91'),
-(3, 35, 'A1317083_-_Riska_Hartati.pdf', '1214.11');
+INSERT INTO `tb_seminar_pendaftaran` (`id`, `id_jadwal_seminar`, `file`, `size`, `status`) VALUES
+(7, 43, 'A1317003_-_Adela_Valiandra1.pdf', '1664.68', 'accept'),
+(8, 35, 'A1317083_-_Riska_Hartati1.pdf', '1214.11', 'accept'),
+(12, 38, 'A1317061_-_Nigmah2.pdf', '1997.86', 'accept'),
+(13, 33, 'A1317098_-_Wahzuni_Sri_Rahayu2.pdf', '1482.18', 'accept'),
+(15, 31, 'A1317031_-_Istiqomah.pdf', '944.14', 'accept'),
+(16, 34, 'A1317099_-_Winda_Dwi_Sulistia2.pdf', '1772.65', 'accept'),
+(19, 32, 'A1317046_-_Melda_Hikma2.pdf', '649.27', 'accept'),
+(22, 85, 'A1317051_-_Mila_Camelia2.pdf', '657.88', 'reupload'),
+(23, 36, 'A1317001_-_Achmad_Syah_Maulana.pdf', '1388.63', 'accept'),
+(26, 37, 'A1317037_-_Lidya_Novita2.pdf', '1511.38', 'accept'),
+(28, 44, 'A1317073_-_Reka_Nur_Andinni1.pdf', '1095.57', 'reupload'),
+(29, 54, 'A1317047_-_Melda_Rosalina.pdf', '1171.31', NULL),
+(30, 39, 'A1317058_-_Nadya_Alfisyah.pdf', '895.83', NULL);
 
 -- --------------------------------------------------------
 
@@ -10884,7 +10896,7 @@ ALTER TABLE `tb_konsultasi_bimbingan`
 -- AUTO_INCREMENT for table `tb_konsultasi_bimbingan_offline`
 --
 ALTER TABLE `tb_konsultasi_bimbingan_offline`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT for table `tb_level`
 --
@@ -10914,7 +10926,7 @@ ALTER TABLE `tb_perusahaan`
 -- AUTO_INCREMENT for table `tb_perusahaan_penilaian`
 --
 ALTER TABLE `tb_perusahaan_penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
 --
 -- AUTO_INCREMENT for table `tb_perusahaan_review`
 --
@@ -10929,12 +10941,12 @@ ALTER TABLE `tb_perusahaan_sementara`
 -- AUTO_INCREMENT for table `tb_seminar_jadwal`
 --
 ALTER TABLE `tb_seminar_jadwal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=112;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=117;
 --
 -- AUTO_INCREMENT for table `tb_seminar_pendaftaran`
 --
 ALTER TABLE `tb_seminar_pendaftaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `tb_seminar_penguji`
 --

@@ -110,13 +110,13 @@
 					}
 				},
 				{
-					"data": "nilai_seminar",
+					"data": "nilai_seminar_past",
 					"render": function (data, type, row) {
 						return data !== null ? data : "Tidak ada penilaian"
 					}
 				},
 				{
-					"data": "nilai_seminar_past",
+					"data": "nilai_seminar",
 					"render": function (data, type, row) {
 						return data !== null ? data : "Tidak ada penilaian"
 					}
