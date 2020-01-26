@@ -91,6 +91,40 @@ class Penilaian_model extends CI_Model
 						WHERE tsp.id_seminar_jadwal = '$id_jadwal' AND tsp.status_dosen <> 'p3'")->result();
 	}
 
+	public function get_belum_penilaian_seminar()
+	{
+		return $this->db->query("
+			SELECT
+				tsj.id ij,
+				tp3.nama_pegawai p3,
+				tp1.nama_pegawai p1,
+				tp2.nama_pegawai p2,
+				tdbm.judul_laporan_mhs laporan,
+				tst.nama nama_tempat,
+				tm.nama_mahasiswa,
+				tps.nama_program_studi,
+				tm.nim,
+				tsj.mulai START,
+				tsj.berakhir END
+			FROM
+				tb_seminar_jadwal tsj
+				LEFT OUTER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
+				INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+				INNER JOIN tb_pegawai tp3 ON tp3.nip_nik = tdbm.nip_nik
+				INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
+				INNER JOIN tb_program_studi tps ON tm.id_program_studi = tps.id_program_studi
+				INNER JOIN tb_seminar_penguji penguji_1 ON penguji_1.id = tsj.id_penguji_1
+				INNER JOIN tb_seminar_penguji penguji_2 ON penguji_2.id = tsj.id_penguji_2
+				INNER JOIN tb_dosen td1 ON td1.id = penguji_1.id_dosen
+				INNER JOIN tb_dosen td2 ON td2.id = penguji_2.id_dosen
+				INNER JOIN tb_pegawai tp1 ON tp1.nip_nik = td1.nip_nik
+				INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik
+			WHERE DATE(tsj.mulai) <= DATE(NOW())
+			AND tsj.id NOT IN (select id_seminar_jadwal from tb_seminar_penilaian)
+			ORDER BY tsj.mulai
+			")->result();
+	}
+
 	public function get_penilaian_seminar($id = null)
 	{
 		$where = "";

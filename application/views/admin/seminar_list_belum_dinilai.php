@@ -1,4 +1,5 @@
 <?php $section = isset($_GET['section']) ? $_GET['section'] : null ?>
+<?php $belum_dinilai = isset($belum_dinilai) ? $belum_dinilai : array(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -26,9 +27,11 @@
 				<div class="col-md-12 col-lg-12 col-sm-12">
 					<div class="card">
 						<div class="card-header">
-							<div class="h3">Penilaian Mahasiswa</div>
+							<div class="h3">Mahasiswa Belum dinilai per tanggal
+								< <?php echo convert_date(date('Y-m-d')) ?></div>
 							<div class="text-right">
-								<a href="<?php echo site_url('seminar?m=data_penilaian&q=filter_belum_menilai') ?>" class="btn btn-sm btn-primary">Belum dinilai per hari ini</a>
+								<a href="<?php echo site_url('seminar?m=data_penilaian') ?>"
+								   class="btn btn-sm btn-primary">Sudah dinilai</a>
 							</div>
 						</div>
 						<div class="card-body">
@@ -36,23 +39,40 @@
 								<table class="table table-flush" id="datatable-jadwal">
 									<thead class="thead-light">
 									<tr>
+										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
-										<th>Nama Dosen</th>
-										<th>Sebagai</th>
-										<th>Nilai Seminar</th>
-										<th>Nilai Revisi</th>
+										<th>Ruangan</th>
+										<th>Waktu Seminar</th>
+										<th>Nama Pembimbing</th>
+										<th>Nama Penguji 1</th>
+										<th>Nama Penguji 2</th>
 									</tr>
 									</thead>
 									<tfoot>
 									<tr>
+										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
-										<th>Nama Dosen</th>
-										<th>Sebagai</th>
-										<th>Nilai Seminar</th>
-										<th>Nilai Revisi</th>
+										<th>Ruangan</th>
+										<th>Waktu Seminar</th>
+										<th>Nama Pembimbing</th>
+										<th>Nama Penguji 1</th>
+										<th>Nama Penguji 2</th>
 									</tr>
 									</tfoot>
-									<tbody></tbody>
+									<tbody>
+									<?php foreach ($belum_dinilai as $item): ?>
+										<tr>
+											<td><?php echo $item->nim ?></td>
+											<td><?php echo $item->nama_mahasiswa ?></td>
+											<td><?php echo $item->nama_tempat ?></td>
+											<td><?php echo convert_date(get_time_range($item->START, $item->END, 'datestart'), 'long') ?>
+												Pukul <?php echo substr(get_time_range($item->START, $item->END, 'start'), 0, 5) ?></td>
+											<td><?php echo $item->p3 ?></td>
+											<td><?php echo $item->p1 ?></td>
+											<td><?php echo $item->p2 ?></td>
+										</tr>
+									<?php endforeach; ?>
+									</tbody>
 								</table>
 							</div>
 						</div>
@@ -67,6 +87,10 @@
 	<?php $this->load->view('admin/_partials/modal.php'); ?>
 	<?php $this->load->view('admin/_partials/js.php'); ?>
 	<script>
+		function format(value) {
+			return '<div>Hidden Value: ' + value + '</div>';
+		}
+
 		let t = $('#datatable-jadwal').dataTable({
 			dom: 'Bfrtip',
 			language: {
@@ -75,63 +99,21 @@
 					next: "<i class='fas fa-angle-right'>"
 				}
 			},
-			ajax: {
-				url: "<?php echo site_url("seminar?m=data_penilaian") ?>",
-				type: "POST",
-				data: {
-					"ajax": "true"
-				}
-			},
-			buttons: [
-				'excel', 'pdf', 'print'
-			],
-			"order": [[0, 'asc']],
-			columns: [
-				{"data": "nama_mahasiswa"},
+			buttons: [],
+			"order": [[3, 'asc'],[2,'asc']],
+			columnsDefs: [
 				{
-					"data": null,
-					"render": function (data, type, row) {
-						if (row.status_dosen === 'p1') {
-							return row.p1;
-						} else if (row.status_dosen === 'p2') {
-							return row.p2;
-						} else {
-							return row.p3
-						}
-					}
+					"targets": [2],
+					"visible": false,
 				},
 				{
-					"data": null,
-					"render": function (data, type, row) {
-						if (row.status_dosen === 'p1') {
-							return 'Penguji 1';
-						} else if (row.status_dosen === 'p2') {
-							return 'Penguji 2';
-						} else {
-							return 'Pembimbing'
-						}
-					}
-				},
-				{
-					"data": "nilai_seminar",
-					"render": function (data, type, row) {
-						return data !== null ? data : "Tidak ada penilaian"
-					}
-				},
-				{
-					"data": "nilai_seminar_past",
-					"render": function (data, type, row) {
-						return data !== null ? data : "Tidak ada penilaian"
-					}
+					"targets": [3],
+					"visible": false
 				}
 			]
 		}).on('init.dt', function () {
 			$('.dt-buttons .btn').removeClass('btn-secondary').addClass('btn-sm btn-default');
 		});
-		setInterval( function () {
-			console.log(t)
-			t.api().ajax.reload(null, false );
-		}, 5000 );
 	</script>
 </body>
 </html>

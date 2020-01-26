@@ -79,7 +79,7 @@ if (!function_exists('explode_date')) {
 	}
 }
 
-if (!function_exists('get_jadwal')) {
+if (!function_exists('get_time_range')) {
 	function get_time_range($start, $end, $return)
 	{
 		$arrStart = explode('T', $start);

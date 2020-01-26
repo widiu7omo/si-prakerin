@@ -1,1065 +1,694 @@
--- -------------------------------------------------------------
--- TablePlus 2.3(222)
+-- phpMyAdmin SQL Dump
+-- version 4.4.15.10
+-- https://www.phpmyadmin.net
 --
--- https://tableplus.com/
---
--- Database: simprakerin
--- Generation Time: 2019-09-18 21:13:34.4500
--- -------------------------------------------------------------
+-- Host: 127.0.0.1
+-- Generation Time: Jan 26, 2020 at 05:36 PM
+-- Server version: 5.5.60-MariaDB
+-- PHP Version: 5.4.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Database: `simprakerin`
+--
 
-DROP TABLE IF EXISTS `tabel_berita`;
-CREATE TABLE `tabel_berita` (
-  `id_berita` int(11) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_berita`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_berita` (
+  `id_berita` int(11) NOT NULL,
   `nama_berita` varchar(100) NOT NULL,
   `slug_berita` varchar(100) NOT NULL,
   `konten_berita` mediumtext NOT NULL,
   `tanggal_berita` date NOT NULL,
   `gambar_berita` mediumtext NOT NULL,
   `id_berita_view` int(11) NOT NULL,
-  `status_berita` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_berita`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status_berita` varchar(30) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `tabel_file`;
-CREATE TABLE `tabel_file` (
-  `id_file` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Dumping data for table `tabel_berita`
+--
+
+INSERT INTO `tabel_berita` (`id_berita`, `nama_berita`, `slug_berita`, `konten_berita`, `tanggal_berita`, `gambar_berita`, `id_berita_view`, `status_berita`) VALUES
+(1, 'Peluncuran Sistem Informasi Praktek Kerja Industri', 'peluncuran-sistem-informasi-praktek-kerja-industri', '<p><strong>PRAKERIN Politeknik Negeri Tanah Laut -</strong>&nbsp;Segera meluncurkan sebuah sistem informasi yang&nbsp; Praktek Kerja Industri diantaranya yaitu:</p>\r\n\r\n<ol style="list-style-type:decimal; margin-left:20px; margin-right:20">\r\n	<li>Sistem Informasi Managemen Praktek Kerja Industri (SIM-Prakerin)</li>\r\n	<li>Sistem Informasi Geografis Tempat Praktek Kerja Industri (SIG-Prakerin)</li>\r\n	<li>Sistem Informasi Monitoring Praktek Kerja Industri (SIMONEP)</li>\r\n</ol>\r\n', '2019-07-30', '1564474361Peluncuran_Sistem_Informasi_Praktek_Kerja_Industri.jpg', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_file`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_file` (
+  `id_file` int(11) NOT NULL,
   `nama_file` varchar(100) NOT NULL,
   `tanggal_file` date NOT NULL,
   `data_file` varchar(100) NOT NULL,
-  `status_file` enum('Tampil','Tidak Tampil') NOT NULL,
-  PRIMARY KEY (`id_file`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `status_file` enum('Tampil','Tidak Tampil') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `tabel_foto`;
-CREATE TABLE `tabel_foto` (
-  `id_foto` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Dumping data for table `tabel_file`
+--
+
+INSERT INTO `tabel_file` (`id_file`, `nama_file`, `tanggal_file`, `data_file`, `status_file`) VALUES
+(3, 'Persentasi Buku PKl versi 3', '2019-09-08', '1567951981Persentasi_Buku_PKl_versi_3.pptx', 'Tampil'),
+(4, '1. KUMPULAN LAMPIRAN-LAMPIRAN BERKAS PKL', '2019-09-09', '15679944611__KUMPULAN_LAMPIRAN-LAMPIRAN_BERKAS_PKL.docx', 'Tampil'),
+(5, '2. BIODATA PEMBIMBING DI KAMPUS', '2019-09-09', '15679944952__BIODATA_PEMBIMBING_DI_KAMPUS.docx', 'Tampil'),
+(6, '3. FORM DATA PERUSAHAAN', '2019-09-09', '15679945343__FORM_DATA_PERUSAHAAN.docx', 'Tampil'),
+(7, '4. PENILAIAN PRAKTEK KERJA LAPANGAN (pembimbing lapangan)', '2019-09-09', '15679945564__PENILAIAN_PRAKTEK_KERJA_LAPANGAN_(pembimbing_lapangan).docx', 'Tampil'),
+(8, '5. PRESENSI KEHADIRAN PRAKTEK KERJA LAPANGAN', '2019-09-09', '15679945775__PRESENSI_KEHADIRAN_PRAKTEK_KERJA_LAPANGAN.docx', 'Tampil'),
+(9, '6. LEMBAR PERSETUJUAN TELAH MENYELESAIKAN REVISI', '2019-09-09', '15679946166__LEMBAR_PERSETUJUAN_TELAH_MENYELESAIKAN_REVISI.docx', 'Tampil'),
+(10, '7. Contoh _SERTIFIKAT PKL', '2019-09-09', '15679946367__Contoh__SERTIFIKAT_PKL.docx', 'Tampil'),
+(11, '9. Template PKL Politala 2019 Rev.5', '2019-09-09', '15679953549__Template_PKL_Politala_2019_Rev_5.docx', 'Tampil'),
+(12, 'Buku PKL', '2019-09-13', '1568305153Buku_PKL.pdf', 'Tampil');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_foto`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_foto` (
+  `id_foto` int(11) NOT NULL,
   `nama_foto` varchar(100) NOT NULL,
   `deskripsi_foto` mediumtext NOT NULL,
   `tanggal_foto` date NOT NULL,
   `data_foto` varchar(100) NOT NULL,
-  `kategori_foto` enum('galeri','slideshows') NOT NULL,
-  PRIMARY KEY (`id_foto`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `kategori_foto` enum('galeri','slideshows') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `tabel_gambar`;
-CREATE TABLE `tabel_gambar` (
-  `id_gambar` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Dumping data for table `tabel_foto`
+--
+
+INSERT INTO `tabel_foto` (`id_foto`, `nama_foto`, `deskripsi_foto`, `tanggal_foto`, `data_foto`, `kategori_foto`) VALUES
+(2, '', '', '2019-07-30', '1564474375.jpg', 'slideshows'),
+(4, 'Monitoring PKL ke PLTD Pagatan Tanah Bumbu', '-', '2019-07-30', '1564472243_Mentoring_ke_Perusahaan.jpg', 'galeri'),
+(5, 'Monitoring PKL ke Perusahaan Kelapa Sawit Kotabaru', '-', '2019-07-30', '1564472259_Mentoring_ke_Perusahaan.jpg', 'galeri'),
+(6, 'Monitoring PKL ke PT. Batu Bulan Mill Tanah Bumbu', '-', '2019-07-30', '1564472270_Mentoring_ke_Perusahaan.jpg', 'galeri'),
+(7, 'Monitoring PKL ke PT. Balengkong Sebuku', '-', '2019-07-30', '1564473101_Monitoring_PKL_ke_PT__Balengkong_Sebuku.jpg', 'galeri'),
+(8, 'Monitoring PKL ke PT. JBG Jorong', '-', '2019-07-30', '1564473150_Monitoring_PKL_ke_PT__JBG_Jorong.jpg', 'galeri'),
+(9, 'Monitoring PKL ke PT. PLTA Riam Kanan', '-', '2019-07-30', '1564473239_Monitoring_PKL_ke_PT__PLTA_Riam_Kanan.jpg', 'galeri'),
+(10, 'Monitoring PKL ke PT. Phinemo Kreasi Media Semarang Jawa Tengah', '-', '2019-07-30', '1564473298_Monitoring_PKL_ke_PT__Phinemo_Kreasi_Media_Semarang_Jawa_Tengah.jpg', 'galeri'),
+(11, 'Monitoring PKL ke PT. Amanah Anugerah Adi Mulia Banjarmasin', '-', '2019-07-30', '1564473587_Monitoring_PKL_ke_PT__Amanah_Anugerah_Adi_Mulia_Banjarmasin.jpeg', 'galeri'),
+(12, 'Monitoring PKL ke PT. Diginet Media Yogyakarta', '-', '2019-07-30', '1564474992_Monitoring_PKL_ke_PT__Diginet_Media_Yogyakarta.jpg', 'galeri'),
+(13, 'Monitoring PKL ke Perusahaan Software House Malang', '-', '2019-07-30', '1564475106_Monitoring_PKL_ke_Perusahaan_Software_House_Malang.jpg', 'galeri'),
+(14, 'Monitoring PKL ke PLN AP2B Banjarbaru', '-', '2019-07-30', '1564475171_Monitoring_PKL_ke_PLN_AP2B_Banjarbaru.jpg', 'galeri'),
+(15, 'Monitoring PKL ke PT. Smart Tarjun Kotabaru', '-', '2019-07-30', '1564475264_Monitoring_PKL_ke_PT__Smart_Tarjun_Kotabaru.jpg', 'galeri'),
+(16, 'Monitoring PKL ke PT. Angkasa Pura I', '-', '2019-07-30', '1564475336_Monitoring_PKL_ke_PT__Angkasa_Pura_I.jpg', 'galeri');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_gambar`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_gambar` (
+  `id_gambar` int(11) NOT NULL,
   `nama_gambar` varchar(200) NOT NULL,
   `tanggal_gambar` date NOT NULL,
   `type_gambar` varchar(20) NOT NULL,
-  `data_gambar` varchar(200) NOT NULL,
-  PRIMARY KEY (`id_gambar`)
+  `data_gambar` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `tabel_halaman`;
-CREATE TABLE `tabel_halaman` (
-  `id_halaman` int(11) NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_halaman`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_halaman` (
+  `id_halaman` int(11) NOT NULL,
   `tanggal_halaman` date NOT NULL,
   `nama_halaman` varchar(100) NOT NULL,
   `slug_halaman` varchar(100) NOT NULL,
   `id_kategori` int(11) NOT NULL,
-  `konten_halaman` mediumtext NOT NULL,
-  PRIMARY KEY (`id_halaman`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `konten_halaman` mediumtext NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `tabel_kategori`;
-CREATE TABLE `tabel_kategori` (
-  `id_kategori` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Dumping data for table `tabel_halaman`
+--
+
+INSERT INTO `tabel_halaman` (`id_halaman`, `tanggal_halaman`, `nama_halaman`, `slug_halaman`, `id_kategori`, `konten_halaman`) VALUES
+(1, '2019-07-18', 'Syarat Mahasiswa Bisa Melaksanakan Prakerin', 'syarat-mahasiswa-bisa-melaksanakan-prakerin', 4, '<p>Peserta program Prakerin&nbsp;adalah mahasiswa aktif yang terdaftar pada Politenik Negeri Tanah Laut pada masa program ini berlangsung, dengan ketentuan mahasiswa harus memenuhi persyaratan dengan menyerahkan berkas sebagai berikut:</p>\r\n\r\n<ol style="list-style-type:decimal; margin-left:20px;">\r\n	<li>Terdaftar sebagai mahasiswa dalam tahun akademik semester berjalan.</li>\r\n	<li>Indek Prestasi Kumulatif minimal 2,5 (dua koma lima)</li>\r\n	<li>Nilai D maksimal 5 (Lima) SKS tanpa ada nilai E dari semester 1-3.</li>\r\n	<li>Mengajukan proposal Prakerin&nbsp;yang telah disetujui Dosen pembimbing dan Ketua Jurusan masing-masing ke panitia Prakerin&nbsp;di jurusan masing-masing.</li>\r\n</ol>\r\n'),
+(2, '2019-07-18', 'Tata Tertib Pelaksanaan Prakerin', 'tata-tertib-pelaksanaan-prakerin', 4, '<p><strong>Kriteria perusahaan</strong></p>\r\n\r\n<ol style="list-style-type:decimal; margin-left:20px">\r\n	<li>Perusahaan/Instansi/Lembaga yang berbadan Hukum.</li>\r\n	<li>Bersedia menugaskan 1 orang pembimbing dari perusahaan selama pelaksanaan Prakerin.</li>\r\n	<li>Menyediakan waktu selama 4 bulan untuk pelaksanaan Prakerin.</li>\r\n	<li>Pada kasus perusahaan yang tidak dapat memberikan waktu Prakerin&nbsp;selama 4 bulan, maka mahasiswa yang bersangkutan diwajibkan mencari tempat Prakerin&nbsp;di instansi atau perusahaan lain untuk memenuhi waktu Prakerin&nbsp;yang telah ditentukan.</li>\r\n</ol>\r\n\r\n<p><strong>Tata Tertib di Kampus</strong></p>\r\n\r\n<ol style="list-style-type:decimal; margin-left:20px">\r\n	<li>Menyelesaikan semua administrasi sebelum berangkat Prakerin&nbsp;</li>\r\n	<li>Menyelesaikan semua administrasi untuk pelaksanaan seminar Prakerin&nbsp;di kampus</li>\r\n	<li>Melaksanakan pendaftaran seminar Prakerin&nbsp;maksimal 1 minggu setelah tanggal akhir jadwal pelaksanaan Prakerin</li>\r\n	<li>Apabila nilai akhir di bawah C, maka mahasiswa ybs dinyatakan tidak lulus dan harus mengulang di periode berikutnya.</li>\r\n	<li>Apabila tidak mematuhi tata tertib dan aturan yang berlaku, maka mahasiswa ybs dinyatakan tidak lulus dan harus mengulang di periode berikutnya</li>\r\n</ol>\r\n\r\n<p><strong>Tata Tertib di Tempat Prakerin</strong></p>\r\n\r\n<ol style="list-style-type:decimal; margin-left:20px">\r\n	<li>Mematuhi peraturan dan tata tertib yang berlaku di tempat Praktek Kerja Industri.</li>\r\n	<li>Memberitahukan kepada pimpinan atau pembimbing apabila berhalangan hadir.</li>\r\n	<li>Mengkomunikasikan dengan pembimbing lapangan apabila menemui kesulitan atau masalah tertentu yang dihadapi.</li>\r\n	<li>Mampu menjaga kerahasiaan perusahaan.</li>\r\n	<li>Memberikan surat pernyataan bahwa mahasiswa yang bersangkutan diterima Prakerin&nbsp;(Format masing-masing Instansi/Perusahaan)</li>\r\n</ol>\r\n'),
+(3, '2019-07-23', 'Tugas Unit Layanan Praktek Kerja Industri', 'tugas-unit-layanan-praktek-kerja-industri', 3, '<p>Berikut ini adalah tugas unit layanan praktek kerja industri dalampelaksanaan proses pelaksanaan Prakerin&nbsp;mahasiswa:&nbsp;</p>\r\n\r\n<ol style="list-style-type:decimal; margin-left:20px; margin-right:20">\r\n	<li>Memberikan daftar nama-namaperusahaan.</li>\r\n	<li>Membuatkan surat keputusan (SK) penetapan dosen pembimbing Prakerin.</li>\r\n	<li>Membuat daftar mahasiswa, lokasi/tujuan Prakerin, tanggal mulai aktif pelaksanaan Prakerin&nbsp;dan tanggal akhir pelaksanaan Prakerin.</li>\r\n	<li>Membuatkan surat pengantar dan surat tugasuntuk mahasiswa Prakerin.</li>\r\n	<li>Menyiapkan dan membuatkan surat menyurat yang berkaitan dengan pelaksanaan Prakerin.</li>\r\n	<li>Mensosialisasikan standar operasional prosedur (SOP) kegiatan Prakerin.</li>\r\n</ol>\r\n'),
+(4, '2019-07-30', 'Pelaksanaan Prakerin 2019-2020', 'pelaksanaan-prakerin-2019-2020', 5, '<p>Waktu pelaksanaan Praktek Kerja Industri&nbsp;pada Politeknik Negeri Tanah Laut mulai dari <strong>16 September 2019 - 16 Januari 2020</strong></p>\r\n'),
+(5, '2019-07-31', 'Struktur Organisasi Prakerin', 'struktur-organisasi-prakerin', 3, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tabel_kategori`
+--
+
+CREATE TABLE IF NOT EXISTS `tabel_kategori` (
+  `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(100) NOT NULL,
-  `slug_kategori` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `slug_kategori` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `tahun_akademik`;
-CREATE TABLE `tahun_akademik` (
+--
+-- Dumping data for table `tabel_kategori`
+--
+
+INSERT INTO `tabel_kategori` (`id_kategori`, `nama_kategori`, `slug_kategori`) VALUES
+(3, 'Profile', 'profile'),
+(4, 'Tata Tertib', 'tata-tertib'),
+(5, 'Waktu Pelaksanaan', 'waktu-pelaksanaan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tahun_akademik`
+--
+
+CREATE TABLE IF NOT EXISTS `tahun_akademik` (
   `id_tahun_akademik` varchar(50) NOT NULL,
-  `tahun_akademik` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_tahun_akademik`)
+  `tahun_akademik` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `tb_akun`;
-CREATE TABLE `tb_akun` (
-  `username` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Dumping data for table `tahun_akademik`
+--
 
-DROP TABLE IF EXISTS `tb_berkas_dosen`;
-CREATE TABLE `tb_berkas_dosen` (
-  `id_berkas_dosen` varchar(50) NOT NULL,
-  `id_dosen` int(11) DEFAULT NULL,
-  `nama_berkas_dosen` varchar(255) DEFAULT NULL,
-  `extensi_berkas_dosen` varchar(10) DEFAULT NULL,
-  `jenis_berkas_dosen` varchar(30) DEFAULT NULL,
-  `tanggal_upload_dosen` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_berkas_dosen`),
-  KEY `fk_mempunyai_berkas_dosen` (`id_dosen`),
-  CONSTRAINT `tb_berkas_dosen_ibfk_1` FOREIGN KEY (`id_dosen`) REFERENCES `tb_dosen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_berkas_mhs`;
-CREATE TABLE `tb_berkas_mhs` (
-  `id_berkas_mhs` int(11) NOT NULL,
-  `nim` varchar(10) DEFAULT NULL,
-  `nama_berkas_mhs` varchar(255) DEFAULT NULL,
-  `extensi_berkas_mhs` varchar(10) DEFAULT NULL,
-  `jenis_berkas_mhs` varchar(30) DEFAULT NULL,
-  `tanggal_upload_mhs` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_berkas_mhs`),
-  KEY `fk_mempunyai_berkas_mhs` (`nim`),
-  CONSTRAINT `fk_mempunyai_berkas_mhs` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_berkas_perusahaan`;
-CREATE TABLE `tb_berkas_perusahaan` (
-  `id_berkas_perusahaan` int(30) NOT NULL AUTO_INCREMENT,
-  `id_perusahaan` int(11) DEFAULT NULL,
-  `nama_berkas_perusahaan` varchar(255) DEFAULT NULL,
-  `extensi_berkas_perusahaan` varchar(10) DEFAULT NULL,
-  `jenis_berkas_perusahaan` varchar(30) DEFAULT NULL,
-  `tanggal_upload_perusahaan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_berkas_perusahaan`),
-  KEY `fk_memiliki_berkas_perusahaan` (`id_perusahaan`),
-  CONSTRAINT `fk_memiliki_berkas_perusahaan` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_data_kuisioner`;
-CREATE TABLE `tb_data_kuisioner` (
-  `id_data_kuisioner` int(11) NOT NULL AUTO_INCREMENT,
-  `id_jenis_kuisioner` varchar(20) DEFAULT NULL,
-  `soal_kuisioner` mediumtext,
-  `jawaban_kuisioner` mediumtext,
-  PRIMARY KEY (`id_data_kuisioner`),
-  KEY `fk_memiliki_jenis_kuisioner_ke_soal` (`id_jenis_kuisioner`),
-  CONSTRAINT `fk_memiliki_jenis_kuisioner_ke_soal` FOREIGN KEY (`id_jenis_kuisioner`) REFERENCES `tb_jenis_kuisioner` (`id_jenis_kuisioner`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_dosen`;
-CREATE TABLE `tb_dosen` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nip_nik` varchar(20) DEFAULT NULL,
-  `id_program_studi` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tb_dosen_nip_nik_idx` (`nip_nik`) USING BTREE,
-  CONSTRAINT `fk_dosen_pegawai` FOREIGN KEY (`nip_nik`) REFERENCES `tb_pegawai` (`nip_nik`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_dosen_bimbingan_mhs`;
-CREATE TABLE `tb_dosen_bimbingan_mhs` (
-  `id_dosen_bimbingan_mhs` int(11) NOT NULL AUTO_INCREMENT,
-  `id_tahun_akademik` varchar(50) DEFAULT NULL,
-  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
-  `nim` varchar(10) DEFAULT NULL,
-  `nip_nik` varchar(20) DEFAULT NULL,
-  `judul_laporan_mhs` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_dosen_bimbingan_mhs`),
-  UNIQUE KEY `fk_memiliki_pilih_perusahaan_dosen_pembimbing` (`id_mhs_pilih_perusahaan`) USING BTREE,
-  KEY `fk_memiliki_dosen_bimbingan_mhs` (`id_tahun_akademik`),
-  KEY `fk_memiliki_mhs_dosen_pembimbing_mhs` (`nim`),
-  CONSTRAINT `tb_dosen_bimbingan_mhs_ibfk_1` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `tahun_akademik` (`id_tahun_akademik`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tb_dosen_bimbingan_mhs_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tb_dosen_bimbingan_mhs_ibfk_3` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_golongan`;
-CREATE TABLE `tb_golongan` (
-  `id_golongan` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_golongan` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_golongan`),
-  UNIQUE KEY `id` (`id_golongan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_history_pemilihan`;
-CREATE TABLE `tb_history_pemilihan` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `id_perusahaan` int(11) DEFAULT NULL,
-  `nim` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_jabatan`;
-CREATE TABLE `tb_jabatan` (
-  `id_jabatan` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_jabatan` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_jabatan`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_jadwal_seminar`;
-CREATE TABLE `tb_jadwal_seminar` (
-  `id_jadwal_seminar` varchar(20) NOT NULL,
-  `id_ruang_seminar` varchar(20) DEFAULT NULL,
-  `tanggal_seminar` date DEFAULT NULL,
-  `penguji_seminar_1` varchar(200) DEFAULT NULL,
-  `penguji_seminar_2` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id_jadwal_seminar`),
-  KEY `fk_memiliki_jadwal_seminar` (`id_ruang_seminar`),
-  CONSTRAINT `fk_memiliki_jadwal_seminar` FOREIGN KEY (`id_ruang_seminar`) REFERENCES `tb_ruang_seminar` (`id_ruang_seminar`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_jawaban_kuisioner`;
-CREATE TABLE `tb_jawaban_kuisioner` (
-  `id_jawaban_kuisioner` int(11) NOT NULL AUTO_INCREMENT,
-  `id_data_kuisioner` int(11) NOT NULL,
-  `nip_nik` int(11) DEFAULT NULL,
-  `id_perusahaan` int(11) DEFAULT NULL,
-  `jawaban` mediumtext,
-  PRIMARY KEY (`id_jawaban_kuisioner`),
-  KEY `id_soal_kuisioner` (`id_data_kuisioner`),
-  KEY `id_perusahaan` (`id_perusahaan`),
-  KEY `nip` (`nip_nik`),
-  KEY `id_data_kuisioner` (`id_data_kuisioner`),
-  KEY `nip_nik` (`nip_nik`),
-  KEY `id_perusahaan_2` (`id_perusahaan`),
-  CONSTRAINT `tb_jawaban_kuisioner_ibfk_1` FOREIGN KEY (`id_data_kuisioner`) REFERENCES `tb_data_kuisioner` (`id_data_kuisioner`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_jenis_kuisioner`;
-CREATE TABLE `tb_jenis_kuisioner` (
-  `id_jenis_kuisioner` varchar(20) NOT NULL,
-  `id_status_pkl` varchar(30) DEFAULT NULL,
-  `jenis_kuisioner` varchar(100) DEFAULT NULL,
-  `key_api_kuisioner` mediumtext,
-  `url_kuisioner` mediumtext,
-  PRIMARY KEY (`id_jenis_kuisioner`),
-  KEY `fk_memiliki_ststus_pkl_jenis_kuisioner` (`id_status_pkl`),
-  CONSTRAINT `fk_memiliki_ststus_pkl_jenis_kuisioner` FOREIGN KEY (`id_status_pkl`) REFERENCES `tb_status_pkl` (`id_status_pkl`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_jenis_nilai`;
-CREATE TABLE `tb_jenis_nilai` (
-  `id_jenis_nilai` varchar(20) NOT NULL,
-  `jenis_nilai` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_jenis_nilai`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_jenis_surat`;
-CREATE TABLE `tb_jenis_surat` (
-  `id_jenis_surat` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_jenis_surat` varchar(100) DEFAULT NULL,
-  `suffix_no_surat` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_jenis_surat`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_kabupaten_kota`;
-CREATE TABLE `tb_kabupaten_kota` (
-  `id_kab_kota` varchar(30) NOT NULL,
-  `id_provinsi` varchar(30) DEFAULT NULL,
-  `nama_kab_kota` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_kab_kota`),
-  KEY `fk_memiliki_kabupaten_kota` (`id_provinsi`),
-  CONSTRAINT `fk_memiliki_kabupaten_kota` FOREIGN KEY (`id_provinsi`) REFERENCES `tb_provinsi` (`id_provinsi`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_kecamatan`;
-CREATE TABLE `tb_kecamatan` (
-  `id_kecamatan` varchar(30) NOT NULL,
-  `id_kab_kota` varchar(30) DEFAULT NULL,
-  `nama_kecamatan` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_kecamatan`),
-  KEY `fk_memiliki_kecamatan` (`id_kab_kota`),
-  CONSTRAINT `fk_memiliki_kecamatan` FOREIGN KEY (`id_kab_kota`) REFERENCES `tb_kabupaten_kota` (`id_kab_kota`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_kelengkapan`;
-CREATE TABLE `tb_kelengkapan` (
-  `id_kelengkapan` varchar(20) NOT NULL,
-  `id_berkas_mhs` int(11) DEFAULT NULL,
-  `draft` mediumtext,
-  `urlsourcecode` mediumtext,
-  `poster` mediumtext,
-  `lembar_pengesahan` mediumtext,
-  PRIMARY KEY (`id_kelengkapan`),
-  KEY `fk_memiliki_berkas_mhs` (`id_berkas_mhs`),
-  CONSTRAINT `fk_memiliki_berkas_mhs` FOREIGN KEY (`id_berkas_mhs`) REFERENCES `tb_berkas_mhs` (`id_berkas_mhs`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_kerjasama_perusahaan`;
-CREATE TABLE `tb_kerjasama_perusahaan` (
-  `id_kerjasama_perusahaan` varchar(50) NOT NULL,
-  `nama_kerjasama` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_kerjasama_perusahaan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_konsultasi_bimbingan`;
-CREATE TABLE `tb_konsultasi_bimbingan` (
-  `id_konsultasi_bimbingan` int(11) NOT NULL AUTO_INCREMENT,
-  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
-  `start` date DEFAULT NULL,
-  `tag` mediumtext,
-  `title` mediumtext,
-  `masalah` mediumtext,
-  `solusi` mediumtext,
-  `end` date DEFAULT NULL,
-  `status` enum('accept','reject') DEFAULT NULL,
-  PRIMARY KEY (`id_konsultasi_bimbingan`),
-  KEY `fk_memiliki_konsultasi_bimbingan_dosen_mhs` (`id_dosen_bimbingan_mhs`),
-  CONSTRAINT `fk_memiliki_konsultasi_bimbingan_dosen_mhs` FOREIGN KEY (`id_dosen_bimbingan_mhs`) REFERENCES `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_konsultasi_bimbingan_offline`;
-CREATE TABLE `tb_konsultasi_bimbingan_offline` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
-  `lembar_konsultasi` text,
-  `tanggal` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `tb_kop_surat`;
-CREATE TABLE `tb_kop_surat` (
-  `id_kop_surat` varchar(30) NOT NULL,
-  `nama_kop_surat` varchar(100) DEFAULT NULL,
-  `extensi_kop_surat` varchar(10) DEFAULT NULL,
-  `tanggal_upload_kop_surat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_kop_surat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_level`;
-CREATE TABLE `tb_level` (
-  `id_level` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) DEFAULT NULL,
-  `id_master_level` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_level`),
-  KEY `fk_mempunyai_master_level` (`id_master_level`),
-  KEY `mempunyai_akun_level` (`username`),
-  CONSTRAINT `fk_mempunyai_master_level` FOREIGN KEY (`id_master_level`) REFERENCES `tb_master_level` (`id_master_level`),
-  CONSTRAINT `mempunyai_akun_level` FOREIGN KEY (`username`) REFERENCES `tb_akun` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2983 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_mahasiswa`;
-CREATE TABLE `tb_mahasiswa` (
-  `nim` varchar(10) NOT NULL,
-  `id_tahun_akademik` varchar(50) DEFAULT NULL,
-  `id_program_studi` varchar(50) DEFAULT NULL,
-  `username` varchar(100) DEFAULT NULL,
-  `nama_mahasiswa` varchar(100) DEFAULT NULL,
-  `alamat_mhs` mediumtext,
-  `jenis_kelamin_mhs` varchar(15) DEFAULT NULL,
-  `email_mhs` varchar(255) DEFAULT NULL,
-  `tempat_lahir_mhs` varchar(100) DEFAULT NULL,
-  `tanggal_lahir_mhs` date DEFAULT NULL,
-  `no_hp_mahasiswa` varchar(50) DEFAULT NULL,
-  `nama_orangtua_mhs` varchar(100) DEFAULT NULL,
-  `no_hp_orangtua_mhs` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`nim`),
-  KEY `fk_memiliki_mhs_ps` (`id_program_studi`),
-  KEY `fk_mempunyai_mhs` (`id_tahun_akademik`),
-  KEY `mempunyai_akun_mhs` (`username`),
-  CONSTRAINT `fk_memiliki_mhs_ps` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`),
-  CONSTRAINT `fk_mempunyai_mhs` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `tahun_akademik` (`id_tahun_akademik`),
-  CONSTRAINT `mempunyai_akun_mhs` FOREIGN KEY (`username`) REFERENCES `tb_akun` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_master_level`;
-CREATE TABLE `tb_master_level` (
-  `id_master_level` varchar(20) NOT NULL,
-  `nama_master_level` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_master_level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_mhs_pilih_perusahaan`;
-CREATE TABLE `tb_mhs_pilih_perusahaan` (
-  `id_mhs_pilih_perusahaan` int(11) NOT NULL AUTO_INCREMENT,
-  `id_perusahaan` int(11) DEFAULT NULL,
-  `nim` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id_mhs_pilih_perusahaan`),
-  KEY `fk_memilih_mhs_perusahaan` (`nim`),
-  KEY `fk_memiliki_perusahaan_mhs` (`id_perusahaan`),
-  CONSTRAINT `fk_memiliki_perusahaan_mhs` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_monev`;
-CREATE TABLE `tb_monev` (
-  `id_monev` int(11) NOT NULL AUTO_INCREMENT,
-  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
-  `nip_nik` varchar(20) DEFAULT NULL,
-  `id_perusahaan` int(11) DEFAULT NULL,
-  `no_surat` varchar(50) NOT NULL,
-  `tgl_berangkat` date NOT NULL,
-  `tgl_pulang` date NOT NULL,
-  `status` varchar(25) NOT NULL,
-  `id_ttd_pimpinan` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_monev`),
-  KEY `fk_memiliki_dosen_bimbingan_mhs_monev` (`id_dosen_bimbingan_mhs`),
-  KEY `fk_memiliki_dosen_monev` (`nip_nik`),
-  KEY `id_ttd_pimpinan` (`id_ttd_pimpinan`),
-  KEY `id_perusahaan` (`id_perusahaan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_negara`;
-CREATE TABLE `tb_negara` (
-  `id_negara` varchar(30) NOT NULL,
-  `nama_negara` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_negara`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_nilai_komponen`;
-CREATE TABLE `tb_nilai_komponen` (
-  `id_nilai_komponen` varchar(20) NOT NULL,
-  `komponen_nilai` varchar(100) DEFAULT NULL,
-  `bobot` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_nilai_komponen`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_nilai_seminar`;
-CREATE TABLE `tb_nilai_seminar` (
-  `id_nilai_seminar` varchar(20) NOT NULL,
-  `nilai_seminar` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_nilai_seminar`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_notification`;
-CREATE TABLE `tb_notification` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `pengirim` varchar(100) DEFAULT NULL,
-  `penerima` varchar(100) DEFAULT NULL,
-  `pesan` text,
-  `status` tinyint(1) DEFAULT '0',
-  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `hal` char(25) DEFAULT NULL,
-  `uri` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=996 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_pegawai`;
-CREATE TABLE `tb_pegawai` (
-  `nip_nik` varchar(20) NOT NULL DEFAULT '',
-  `username` varchar(100) DEFAULT NULL,
-  `status` varchar(30) DEFAULT NULL,
-  `id_pangkat_golongan` int(11) DEFAULT NULL,
-  `nama_pegawai` varchar(100) DEFAULT NULL,
-  `alamat_pegawai` mediumtext,
-  `jk_pegawai` varchar(20) DEFAULT NULL,
-  `email_pegawai` varchar(100) DEFAULT NULL,
-  `tempat_lahir_pegawai` varchar(100) DEFAULT NULL,
-  `tanggal_lahir_pegawai` date DEFAULT NULL,
-  `no_hp_pegawai` varchar(50) DEFAULT NULL,
-  `id_jabatan` int(11) DEFAULT NULL,
-  `id_golongan` int(11) DEFAULT NULL,
-  PRIMARY KEY (`nip_nik`),
-  KEY `fk_memiliki_pangkat_golongan` (`id_pangkat_golongan`),
-  KEY `fk_memiliki_status_pegawai` (`status`),
-  KEY `mempunyai_akun_pegawai` (`username`),
-  KEY `fk_pegawai_jabatan` (`id_jabatan`),
-  KEY `fk_pegawai_golongan` (`id_golongan`),
-  CONSTRAINT `fk_pegawai_golongan` FOREIGN KEY (`id_golongan`) REFERENCES `tb_golongan` (`id_golongan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_pegawai_jabatan` FOREIGN KEY (`id_jabatan`) REFERENCES `tb_jabatan` (`id_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `mempunyai_akun_pegawai` FOREIGN KEY (`username`) REFERENCES `tb_akun` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_pembimbing_lapangan`;
-CREATE TABLE `tb_pembimbing_lapangan` (
-  `id_pembimbing_lapangan` varchar(20) NOT NULL,
-  `id_status_pkl` varchar(30) DEFAULT NULL,
-  `id_perusahaan` int(11) DEFAULT NULL,
-  `nama_pembimbing` varchar(100) DEFAULT NULL,
-  `jabatan_pembimbing` varchar(50) DEFAULT NULL,
-  `alamat_pembimbing` mediumtext,
-  `telepon_pembimbing` varchar(15) DEFAULT NULL,
-  `hp_pembimbing` varchar(15) DEFAULT NULL,
-  `nama_hrd` varchar(100) DEFAULT NULL,
-  `no_hrd` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_pembimbing_lapangan`),
-  KEY `fk_memiliki_pembimbing` (`id_perusahaan`),
-  KEY `fk_memiliki_pembimbing_lapangan_status` (`id_status_pkl`),
-  CONSTRAINT `fk_memiliki_pembimbing` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`),
-  CONSTRAINT `fk_memiliki_pembimbing_lapangan_status` FOREIGN KEY (`id_status_pkl`) REFERENCES `tb_status_pkl` (`id_status_pkl`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_perusahaan`;
-CREATE TABLE `tb_perusahaan` (
-  `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT,
-  `id_negara` varchar(30) DEFAULT NULL,
-  `id_provinsi` varchar(30) DEFAULT NULL,
-  `id_kerjasama_perusahaan` varchar(50) DEFAULT NULL,
-  `id_kecamatan` varchar(30) DEFAULT NULL,
-  `id_kab_kota` varchar(30) DEFAULT NULL,
-  `id_program_studi` varchar(50) DEFAULT NULL,
-  `status_perusahaan` varchar(30) DEFAULT 'uncheck',
-  `nama_perusahaan` varchar(100) DEFAULT NULL,
-  `alamat_perusahaan` mediumtext,
-  `telepon_perusahaan` varchar(20) DEFAULT NULL,
-  `long_perusahaan` varchar(10) DEFAULT NULL,
-  `lat_perusahaan` varchar(10) DEFAULT NULL,
-  `kuota_pkl` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_perusahaan`),
-  KEY `fk_memiliki_kab_kota` (`id_kab_kota`),
-  KEY `fk_memiliki_kecamatan_kota` (`id_kecamatan`),
-  KEY `fk_memiliki_kerjasama_perusahaan` (`id_kerjasama_perusahaan`),
-  KEY `fk_memiliki_negara` (`id_negara`),
-  KEY `fk_memiliki_provinsi_negara` (`id_provinsi`),
-  KEY `fk_memiliki_ps_perusahaan` (`id_program_studi`),
-  CONSTRAINT `fk_memiliki_kab_kota` FOREIGN KEY (`id_kab_kota`) REFERENCES `tb_kabupaten_kota` (`id_kab_kota`),
-  CONSTRAINT `fk_memiliki_kecamatan_kota` FOREIGN KEY (`id_kecamatan`) REFERENCES `tb_kecamatan` (`id_kecamatan`),
-  CONSTRAINT `fk_memiliki_kerjasama_perusahaan` FOREIGN KEY (`id_kerjasama_perusahaan`) REFERENCES `tb_kerjasama_perusahaan` (`id_kerjasama_perusahaan`),
-  CONSTRAINT `fk_memiliki_negara` FOREIGN KEY (`id_negara`) REFERENCES `tb_negara` (`id_negara`),
-  CONSTRAINT `fk_memiliki_provinsi_negara` FOREIGN KEY (`id_provinsi`) REFERENCES `tb_provinsi` (`id_provinsi`),
-  CONSTRAINT `fk_memiliki_ps_perusahaan` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_perusahaan_review`;
-CREATE TABLE `tb_perusahaan_review` (
-  `id_perusahaan_review` int(11) NOT NULL AUTO_INCREMENT,
-  `id_perusahaan` int(11) NOT NULL,
-  `nim` varchar(10) NOT NULL,
-  `id_data_kuisioner` int(11) NOT NULL,
-  `rating_perusahaan` varchar(10) NOT NULL,
-  `komentar` mediumtext NOT NULL,
-  `tanggal_review_perusahaan` date NOT NULL,
-  PRIMARY KEY (`id_perusahaan_review`),
-  KEY `id_perusahaan` (`id_perusahaan`),
-  KEY `nim` (`nim`),
-  KEY `id_data_kuisioner` (`id_data_kuisioner`),
-  CONSTRAINT `tb_perusahaan_review_ibfk_1` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tb_perusahaan_review_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `tb_perusahaan_review_ibfk_3` FOREIGN KEY (`id_data_kuisioner`) REFERENCES `tb_data_kuisioner` (`id_data_kuisioner`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_perusahaan_sementara`;
-CREATE TABLE `tb_perusahaan_sementara` (
-  `id_perusahaan_sementara` int(11) NOT NULL AUTO_INCREMENT,
-  `nim` varchar(10) DEFAULT NULL,
-  `id_perusahaan` int(11) DEFAULT NULL,
-  `status` char(25) DEFAULT 'proses',
-  `tanggal_pengajuan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `bukti_diterima` mediumtext,
-  PRIMARY KEY (`id_perusahaan_sementara`),
-  KEY `fk_memiliki_perusahaan_sementara` (`nim`),
-  KEY `memiliki_perusahaan` (`id_perusahaan`),
-  CONSTRAINT `memiliki_perusahaan` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_program_studi`;
-CREATE TABLE `tb_program_studi` (
-  `id_program_studi` varchar(50) NOT NULL,
-  `nama_program_studi` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_program_studi`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_provinsi`;
-CREATE TABLE `tb_provinsi` (
-  `id_provinsi` varchar(30) NOT NULL,
-  `id_negara` varchar(30) DEFAULT NULL,
-  `nama_provinsi` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_provinsi`),
-  KEY `fk_memiliki_provinsi` (`id_negara`),
-  CONSTRAINT `fk_memiliki_provinsi` FOREIGN KEY (`id_negara`) REFERENCES `tb_negara` (`id_negara`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_ruang_seminar`;
-CREATE TABLE `tb_ruang_seminar` (
-  `id_ruang_seminar` varchar(20) NOT NULL,
-  `nama_ruang_seminar` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_ruang_seminar`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_status_pkl`;
-CREATE TABLE `tb_status_pkl` (
-  `id_status_pkl` varchar(30) NOT NULL,
-  `nama_status_pkl` varchar(100) DEFAULT NULL,
-  `keterangan_status_pkl` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_status_pkl`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_kuisioner_mhs`;
-CREATE TABLE `tb_transaksi_kuisioner_mhs` (
-  `id_transaksi_kuisioner_mhs` varchar(20) NOT NULL,
-  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
-  `id_jenis_kuisioner` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_kuisioner_mhs`),
-  KEY `fk_memiliki_pilih_mhs_transaksi_kuisioner_mhs` (`id_mhs_pilih_perusahaan`),
-  KEY `fk_memiliki_transaksi_kuisioner_mhs` (`id_jenis_kuisioner`),
-  CONSTRAINT `fk_memiliki_pilih_mhs_transaksi_kuisioner_mhs` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`),
-  CONSTRAINT `fk_memiliki_transaksi_kuisioner_mhs` FOREIGN KEY (`id_jenis_kuisioner`) REFERENCES `tb_jenis_kuisioner` (`id_jenis_kuisioner`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_kuisioner_pem_lap`;
-CREATE TABLE `tb_transaksi_kuisioner_pem_lap` (
-  `id_transaksi_kuisioner_pem_lap` varchar(20) NOT NULL,
-  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
-  `id_jenis_kuisioner` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_kuisioner_pem_lap`),
-  KEY `fk_memiliki_jenis_transaksi_kuisioner_pem_lap` (`id_jenis_kuisioner`),
-  KEY `fk_memiliki_mhs_pilih_transaksi_kuisioner_pem_lap` (`id_mhs_pilih_perusahaan`),
-  CONSTRAINT `fk_memiliki_jenis_transaksi_kuisioner_pem_lap` FOREIGN KEY (`id_jenis_kuisioner`) REFERENCES `tb_jenis_kuisioner` (`id_jenis_kuisioner`),
-  CONSTRAINT `fk_memiliki_mhs_pilih_transaksi_kuisioner_pem_lap` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_monev`;
-CREATE TABLE `tb_transaksi_monev` (
-  `id_transaksi_monev` varchar(30) NOT NULL,
-  `id_monev` int(11) DEFAULT NULL,
-  `id_jenis_kuisioner` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_monev`),
-  KEY `fk_memiliki_hasil_monev` (`id_monev`),
-  KEY `fk_memiliki_jenis_transaksi_kuisioner` (`id_jenis_kuisioner`),
-  CONSTRAINT `fk_memiliki_jenis_transaksi_kuisioner` FOREIGN KEY (`id_jenis_kuisioner`) REFERENCES `tb_jenis_kuisioner` (`id_jenis_kuisioner`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_nilai`;
-CREATE TABLE `tb_transaksi_nilai` (
-  `id_transaksi_nilai` varchar(20) NOT NULL,
-  `id_nilai_komponen` varchar(20) DEFAULT NULL,
-  `id_jenis_nilai` varchar(20) DEFAULT NULL,
-  `id_nilai_seminar` varchar(20) DEFAULT NULL,
-  `niilai_akhir` float DEFAULT NULL,
-  `nilai` float DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_nilai`),
-  KEY `fk_memiliki_jenis_nilai` (`id_jenis_nilai`),
-  KEY `fk_memiliki_komponen_nilai` (`id_nilai_komponen`),
-  KEY `fk_memiliki_nilai_seminar` (`id_nilai_seminar`),
-  CONSTRAINT `fk_memiliki_jenis_nilai` FOREIGN KEY (`id_jenis_nilai`) REFERENCES `tb_jenis_nilai` (`id_jenis_nilai`),
-  CONSTRAINT `fk_memiliki_komponen_nilai` FOREIGN KEY (`id_nilai_komponen`) REFERENCES `tb_nilai_komponen` (`id_nilai_komponen`),
-  CONSTRAINT `fk_memiliki_nilai_seminar` FOREIGN KEY (`id_nilai_seminar`) REFERENCES `tb_nilai_seminar` (`id_nilai_seminar`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_surat`;
-CREATE TABLE `tb_transaksi_surat` (
-  `id_transaksi_surat` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `id_program_studi` varchar(50) DEFAULT NULL,
-  `id_jenis_surat` int(11) DEFAULT NULL,
-  `nim` varchar(10) DEFAULT NULL,
-  `id_ttd_pimpinan` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_surat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_surat_dosen`;
-CREATE TABLE `tb_transaksi_surat_dosen` (
-  `id_transaksi_surat_dosen` varchar(20) NOT NULL,
-  `id_program_studi` varchar(50) DEFAULT NULL,
-  `nip_nik` varchar(20) DEFAULT NULL,
-  `id_jenis_surat` int(11) DEFAULT NULL,
-  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
-  `id_ttd_pimpinan` varchar(30) DEFAULT NULL,
-  `id_kop_surat` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_surat_dosen`),
-  KEY `fk_memiliki_jenis_surat_dsn` (`id_jenis_surat`),
-  KEY `fk_memiliki_kop_surat_dosen` (`id_kop_surat`),
-  KEY `fk_memiliki_pilihan_perusahaan_dsn` (`id_mhs_pilih_perusahaan`),
-  KEY `fk_memiliki_transaksi_surat` (`nip_nik`),
-  KEY `fk_memiliki_transaksi_surat_dosen` (`id_program_studi`),
-  KEY `fk_memiliki_ttd_pemimpin` (`id_ttd_pimpinan`),
-  CONSTRAINT `fk_memiliki_jenis_surat_dsn` FOREIGN KEY (`id_jenis_surat`) REFERENCES `tb_jenis_surat` (`id_jenis_surat`),
-  CONSTRAINT `fk_memiliki_kop_surat_dosen` FOREIGN KEY (`id_kop_surat`) REFERENCES `tb_kop_surat` (`id_kop_surat`),
-  CONSTRAINT `fk_memiliki_pilihan_perusahaan_dsn` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`),
-  CONSTRAINT `fk_memiliki_transaksi_surat` FOREIGN KEY (`nip_nik`) REFERENCES `tb_pegawai` (`nip_nik`),
-  CONSTRAINT `fk_memiliki_transaksi_surat_dosen` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_surat_kelulusan`;
-CREATE TABLE `tb_transaksi_surat_kelulusan` (
-  `id_transaksi_surat_kelulusan` varchar(20) NOT NULL,
-  `id_jenis_surat` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_surat_kelulusan`),
-  KEY `fk_memiliki_jenis_surat_lls` (`id_jenis_surat`),
-  CONSTRAINT `fk_memiliki_jenis_surat_lls` FOREIGN KEY (`id_jenis_surat`) REFERENCES `tb_jenis_surat` (`id_jenis_surat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_transaksi_surat_mhs`;
-CREATE TABLE `tb_transaksi_surat_mhs` (
-  `id_transaksi_surat_mhs` varchar(20) NOT NULL,
-  `id_ttd_pimpinan` varchar(30) DEFAULT NULL,
-  `id_program_studi` varchar(50) DEFAULT NULL,
-  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
-  `id_jenis_surat` int(11) DEFAULT NULL,
-  `id_kop_surat` varchar(30) DEFAULT NULL,
-  `nim` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id_transaksi_surat_mhs`),
-  KEY `fk_memiliki_jenis_surat_mhs` (`id_jenis_surat`),
-  KEY `fk_memiliki_kop_surat_mhs` (`id_kop_surat`),
-  KEY `fk_memiliki_pilihan_perusahaan2` (`id_mhs_pilih_perusahaan`),
-  KEY `fk_memiliki_program_studi_mhs` (`id_program_studi`),
-  KEY `fk_memiliki_transaksi_surat_mhs` (`nim`),
-  KEY `fk_memiliki_ttd_pimpinan_mhs` (`id_ttd_pimpinan`),
-  CONSTRAINT `fk_memiliki_jenis_surat_mhs` FOREIGN KEY (`id_jenis_surat`) REFERENCES `tb_jenis_surat` (`id_jenis_surat`),
-  CONSTRAINT `fk_memiliki_kop_surat_mhs` FOREIGN KEY (`id_kop_surat`) REFERENCES `tb_kop_surat` (`id_kop_surat`),
-  CONSTRAINT `fk_memiliki_pilihan_perusahaan2` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`),
-  CONSTRAINT `fk_memiliki_program_studi_mhs` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`),
-  CONSTRAINT `fk_memiliki_transaksi_surat_mhs` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_ttd_pimpinan`;
-CREATE TABLE `tb_ttd_pimpinan` (
-  `id_ttd_pimpinan` int(11) NOT NULL AUTO_INCREMENT,
-  `nip_nik_ttd_pimpinan` varchar(50) DEFAULT NULL,
-  `nama_ttd_pimpinan` varchar(100) DEFAULT NULL,
-  `jabatan_ttd_pimpinan` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_ttd_pimpinan`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_validasi_nilai`;
-CREATE TABLE `tb_validasi_nilai` (
-  `id_validasi_nilai` varchar(20) NOT NULL,
-  `id_transaksi_nilai` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_validasi_nilai`),
-  KEY `fk_memiliki_validasi_nilai` (`id_transaksi_nilai`),
-  CONSTRAINT `fk_memiliki_validasi_nilai` FOREIGN KEY (`id_transaksi_nilai`) REFERENCES `tb_transaksi_nilai` (`id_transaksi_nilai`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_waktu`;
-CREATE TABLE `tb_waktu` (
-  `id_waktu` int(11) NOT NULL AUTO_INCREMENT,
-  `id_tahun_akademik` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id_waktu`),
-  KEY `tb_waktu_tahun_akademik_id_tahun_akademik_fk` (`id_tahun_akademik`),
-  CONSTRAINT `tb_waktu_tahun_akademik_id_tahun_akademik_fk` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `tahun_akademik` (`id_tahun_akademik`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS `tb_waktu_seminar`;
-CREATE TABLE `tb_waktu_seminar` (
-  `id_waktu_seminar` varchar(20) NOT NULL,
-  `id_ruang_seminar` varchar(20) DEFAULT NULL,
-  `waktu_seminar` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id_waktu_seminar`),
-  KEY `fk_memiliki_ruang_waktu_seminar` (`id_ruang_seminar`),
-  CONSTRAINT `fk_memiliki_ruang_waktu_seminar` FOREIGN KEY (`id_ruang_seminar`) REFERENCES `tb_ruang_seminar` (`id_ruang_seminar`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO `tabel_file` (`id_file`, `nama_file`, `tanggal_file`, `data_file`, `status_file`) VALUES ('2', 'Buku Panduan Prakerin 2018 Versi 2.0 (Revisi)', '2019-07-18', '1563455684.pdf', X'54616d70696c');
-
-INSERT INTO `tabel_foto` (`id_foto`, `nama_foto`, `deskripsi_foto`, `tanggal_foto`, `data_foto`, `kategori_foto`) VALUES ('2', '', '', '2019-07-23', '1563858764.jpg', X'736c69646573686f7773');
-
-INSERT INTO `tabel_halaman` (`id_halaman`, `tanggal_halaman`, `nama_halaman`, `slug_halaman`, `id_kategori`, `konten_halaman`) VALUES ('1', '2019-07-18', 'Syarat Mahasiswa Bisa Melaksanakan Prakerin', 'syarat-mahasiswa-bisa-melaksanakan-prakerin', '4', '<p>Peserta program Prakerin&nbsp;adalah mahasiswa aktif yang terdaftar pada Politenik Negeri Tanah Laut pada masa program ini berlangsung, dengan ketentuan mahasiswa harus memenuhi persyaratan dengan menyerahkan berkas sebagai berikut:</p>\r\n\r\n<ol style=\"list-style-type:decimal; margin-left:20px;\">\r\n	<li>Terdaftar sebagai mahasiswa dalam tahun akademik semester berjalan.</li>\r\n	<li>Indek Prestasi Kumulatif minimal 2,5 (dua koma lima)</li>\r\n	<li>Nilai D maksimal 5 (Lima) SKS tanpa ada nilai E dari semester 1-3.</li>\r\n	<li>Mengajukan proposal Prakerin&nbsp;yang telah disetujui Dosen pembimbing dan Ketua Jurusan masing-masing ke panitia Prakerin&nbsp;di jurusan masing-masing.</li>\r\n</ol>\r\n'),
-('2', '2019-07-18', 'Tata Tertib Pelaksanaan Prakerin', 'tata-tertib-pelaksanaan-prakerin', '4', '<p><strong>Kriteria perusahaan</strong></p>\r\n\r\n<ol style=\"list-style-type:decimal; margin-left:20px\">\r\n	<li>Perusahaan/Instansi/Lembaga yang berbadan Hukum.</li>\r\n	<li>Bersedia menugaskan 1 orang pembimbing dari perusahaan selama pelaksanaan Prakerin.</li>\r\n	<li>Menyediakan waktu selama 4 bulan untuk pelaksanaan Prakerin.</li>\r\n	<li>Pada kasus perusahaan yang tidak dapat memberikan waktu Prakerin&nbsp;selama 4 bulan, maka mahasiswa yang bersangkutan diwajibkan mencari tempat Prakerin&nbsp;di instansi atau perusahaan lain untuk memenuhi waktu Prakerin&nbsp;yang telah ditentukan.</li>\r\n</ol>\r\n\r\n<p><strong>Tata Tertib di Kampus</strong></p>\r\n\r\n<ol style=\"list-style-type:decimal; margin-left:20px\">\r\n	<li>Menyelesaikan semua administrasi sebelum berangkat Prakerin&nbsp;</li>\r\n	<li>Menyelesaikan semua administrasi untuk pelaksanaan seminar Prakerin&nbsp;di kampus</li>\r\n	<li>Melaksanakan pendaftaran seminar Prakerin&nbsp;maksimal 1 minggu setelah tanggal akhir jadwal pelaksanaan Prakerin</li>\r\n	<li>Apabila nilai akhir di bawah C, maka mahasiswa ybs dinyatakan tidak lulus dan harus mengulang di periode berikutnya.</li>\r\n	<li>Apabila tidak mematuhi tata tertib dan aturan yang berlaku, maka mahasiswa ybs dinyatakan tidak lulus dan harus mengulang di periode berikutnya</li>\r\n</ol>\r\n\r\n<p><strong>Tata Tertib di Tempat Prakerin</strong></p>\r\n\r\n<ol style=\"list-style-type:decimal; margin-left:20px\">\r\n	<li>Mematuhi peraturan dan tata tertib yang berlaku di tempat Praktek Kerja Industri.</li>\r\n	<li>Memberitahukan kepada pimpinan atau pembimbing apabila berhalangan hadir.</li>\r\n	<li>Mengkomunikasikan dengan pembimbing lapangan apabila menemui kesulitan atau masalah tertentu yang dihadapi.</li>\r\n	<li>Mampu menjaga kerahasiaan perusahaan.</li>\r\n	<li>Memberikan surat pernyataan bahwa mahasiswa yang bersangkutan diterima Prakerin&nbsp;(Format masing-masing Instansi/Perusahaan)</li>\r\n</ol>\r\n'),
-('3', '2019-07-23', 'Tugas Unit Layanan Praktek Kerja Industri', 'tugas-unit-layanan-praktek-kerja-industri', '3', '<p>Berikut ini adalah tugas unit layanan praktek kerja industri dalampelaksanaan proses pelaksanaan Prakerin&nbsp;mahasiswa:&nbsp;</p>\r\n\r\n<ol style=\"list-style-type:decimal; margin-left:20px; margin-right:20\">\r\n	<li>Memberikan daftar nama-namaperusahaan.</li>\r\n	<li>Membuatkan surat keputusan (SK) penetapan dosen pembimbing Prakerin.</li>\r\n	<li>Membuat daftar mahasiswa, lokasi/tujuan Prakerin, tanggal mulai aktif pelaksanaan Prakerin&nbsp;dan tanggal akhir pelaksanaan Prakerin.</li>\r\n	<li>Membuatkan surat pengantar dan surat tugasuntuk mahasiswa Prakerin.</li>\r\n	<li>Menyiapkan dan membuatkan surat menyurat yang berkaitan dengan pelaksanaan Prakerin.</li>\r\n	<li>Mensosialisasikan standar operasional prosedur (SOP) kegiatan Prakerin.</li>\r\n</ol>\r\n');
-
-INSERT INTO `tabel_kategori` (`id_kategori`, `nama_kategori`, `slug_kategori`) VALUES ('3', 'Profile', 'profile'),
-('4', 'Tata Tertib', 'tata-tertib'),
-('5', 'Waktu Pelaksanaan', 'waktu-pelaksanaan'),
-('6', 'Laporan Prakerin', 'laporan-prakerin');
-
-INSERT INTO `tahun_akademik` (`id_tahun_akademik`, `tahun_akademik`) VALUES ('TA001', '2018/2019'),
+INSERT INTO `tahun_akademik` (`id_tahun_akademik`, `tahun_akademik`) VALUES
+('TA001', '2018/2019'),
 ('TA002', '2019/2020'),
 ('TA003', '2020/2021'),
 ('TA004', '2021/2022'),
 ('TA005', '2022/2023');
 
-INSERT INTO `tb_akun` (`username`, `password`, `created_at`, `updated_at`) VALUES ('12', '$2y$10$.KJEr3kVLtJbtjkgskOHW.k1cHm.94bmrCUPauWncuRGbX4D9bKU.', '2019-07-01 13:44:07', NULL),
-('13', 'c51ce410c124a10e0db5e4b97fc2af39', '2019-07-01 15:22:33', NULL),
-('14', 'aab3238922bcc25a6f606eb525ffdc56', '2019-07-01 15:31:39', NULL),
-('A1317001', '$2y$10$7nR4j8Gm6Zfi2mSFpdZM/umLK5wZ1dH/r6GmfLndoM8HfWmHsa2A2', '2019-07-12 18:42:47', NULL),
-('A1317002', '$2y$10$rszADhBoAD1gGhARlEFRde8LlsumwpNG7lLtp7FQVBLRfiCZtdzrW', '2019-07-12 18:42:47', NULL),
-('A1317003', '$2y$10$NJR7Bm/Iwr5Era6KrhktDe95mAg7yyl/okDt9.f19oS99bmhMX0lu', '2019-07-12 18:42:47', NULL),
-('A1317004', '$2y$10$RmwKjXxLWPUlPOLUGQ.JP.WD30Ek/wi8Gsk.WIcdL/mdiElZwFLvK', '2019-07-12 18:42:47', NULL),
-('A1317005', '$2y$10$HmIO4bf1EzHZyFscwRGmkuJqy1mZDLm1zc6YVEaKeQIsZX.wxg6te', '2019-07-12 18:42:47', NULL),
-('A1317006', '$2y$10$MMbxnQBpYjhiXWl3.ki8QOSaahMY5pK7IidD3hA7jhjhWq4XuUR/S', '2019-07-12 18:42:47', NULL),
-('A1317008', '$2y$10$fA/.4rvXZh2fThVW5f5Tpe0Jo6kp49F8RpzoPZnG4T1vyIWRKfwJq', '2019-07-12 18:42:47', NULL),
-('A1317009', '$2y$10$DCT7x81R49oAow76UyOQeOo3Cp.9cTg7bSIQyqd534eFj6fqfV5Dq', '2019-07-12 18:42:47', NULL),
-('A1317010', '$2y$10$tGFl2cEZ3R4C0ioDa/JPiuCFX33qxNx6K1MB5i3XTM176GeZV9.R2', '2019-07-12 18:42:47', NULL),
-('A1317011', '$2y$10$34Y5maJ5bdukkyuwag1FbO2a5RIrBVhK.KOYe09ncx6rh.tU3InM2', '2019-07-12 18:42:47', NULL),
-('A1317012', '$2y$10$G9c5np78HHaNRX34HGLPu.WIknTVpNlItAnvfQaVJ5RTysIi4yg/G', '2019-07-12 18:42:47', NULL),
-('A1317013', '$2y$10$waHyGdM7JXdyZGATS21sD.Bv.QDUinMkEdLWbGV1qpKr0i4ymM1qu', '2019-07-12 18:42:47', NULL),
-('A1317014', '$2y$10$0NV0ZOYRzq7OGs60/9EFv.tPq20.uNS88BUx.NNWqf4kFcO/NrXJC', '2019-07-12 18:42:47', NULL),
-('A1317016', '$2y$10$IwccSDUEC2jHwSMWQm8I3eFsQuMHanObg5m3aXTWJPdY6eeqwjFum', '2019-07-12 18:42:47', NULL),
-('A1317017', '$2y$10$WF0gKpt2MRIlTUyTQDqIxO0lSG4Z2L.O5HFJ9rtQo0UHWYsxzVJeq', '2019-07-12 18:42:47', NULL),
-('A1317018', '$2y$10$nyzuc/k8BBKfXFyqI4is/.7dPY.Eko1Z8H4sicTyT8uLGAJnPceeG', '2019-07-12 18:42:47', NULL),
-('A1317019', '$2y$10$MwObzXU9NLGXpgPDZ53QmO9bgpt.oVIWEcCRfuFzLkqHzUbqXm5Se', '2019-07-12 18:42:47', NULL),
-('A1317020', '$2y$10$2zuE/yVEupZwRFhg9vPGyu8.CbMoFP93ixUbDmvFJYx9K9/AzeXtm', '2019-07-12 18:42:47', NULL),
-('A1317021', '$2y$10$VJcPGareSHBYnU1yvgDSAu/pIHns/s/XLSgV0S/YDHGCg8rewOXXW', '2019-07-12 18:42:47', NULL),
-('A1317022', '$2y$10$sHiK5bytZXBsrzJ8TBauiOc4a/XobAhEi.x8J9CA7D/owsyxFUm4m', '2019-07-12 18:42:47', NULL),
-('A1317023', '$2y$10$kVkNBV8GaCZadUiBrYHeJ.o3aTB3kQm2OjUvnqSbbYSGfq3ZCnzAu', '2019-07-12 18:42:47', NULL),
-('A1317025', '$2y$10$DTmLHQ.YWpqJisU7yWBCKeLMELEoWBVqqJ.5OLiJOpxp7/GFRfgr.', '2019-07-12 18:42:47', NULL),
-('A1317026', '$2y$10$ovGddljIberXHWHEZHoWKuVrGae5TAoW8Oxz4GNoFrNhZjS89HmA2', '2019-07-12 18:42:47', NULL),
-('A1317027', '$2y$10$LvOZ8NsKyMmoQXmkgJi/G.gkDYtgc/CRsEc626H3AV66V7iW/Wx1C', '2019-07-12 18:42:47', NULL),
-('A1317030', '$2y$10$DBXviuoc82zBUE2UFctFguOR27RnAsU97Z7ztUilGLjs39Tmmyp8O', '2019-07-12 18:42:47', NULL),
-('A1317031', '$2y$10$d1KfGi3S9TxQgz3.AfNpse9bIZLogmL8u1q65fesQQzr2dX5gxx0m', '2019-07-12 18:42:47', NULL),
-('A1317033', '$2y$10$ff.kgysuLtOR4Y8APGYq1e4NGoabGdyrD6mKzazQKY4cUKsvSzkfW', '2019-07-12 18:42:47', NULL),
-('A1317034', '$2y$10$z3Bbj5PgRxjikiwtMu/IBuBI49jDgMxEFJAAk6aOBTyTzYMZ54HLu', '2019-07-12 18:42:47', NULL),
-('A1317035', '$2y$10$BVvGh0bHZeL8dl1PCO81Oeul/Lnxv4cxRBJiZ9yRIJaYmauVb8xqS', '2019-07-12 18:42:47', NULL),
-('A1317036', '$2y$10$zsBVAJT419NC.5XKk/fJye5fPC7MuEvIKG9fKWTdQ1o1wRZ9jzZM.', '2019-07-12 18:42:47', NULL),
-('A1317037', '$2y$10$GftzXATb4YbtV1lZi.OnSeegP4nrfmAgzzy/7lW0gL2zHyd7i75X6', '2019-07-12 18:42:47', NULL),
-('A1317040', '$2y$10$nadUmAWYuOpRrTJnnHeKbO1.dHBDZT7/BrlZ9bSngaKF6yX8gF.iO', '2019-07-12 18:42:47', NULL),
-('A1317041', '$2y$10$UwPBzrZO2j66rEaLtZttO.U3PzbeDw4Ub/OFcbXFPkhBBaPPskAY.', '2019-07-12 18:42:47', NULL),
-('A1317042', '$2y$10$Qvdi8iQb7cOziU9xOCBOUO3H1ln4XnD/fEXbGsbTmona3Rwf9lmx.', '2019-07-12 18:42:47', NULL),
-('A1317044', '$2y$10$dGCrs6NiZT8M1oI6fVhFH.k9fQJvH1OVcpXZHPsJ/lRQsiA93bnyq', '2019-07-12 18:42:47', NULL),
-('A1317045', '$2y$10$PbFV6UHcJEPIF3tFdmDQIOkWUvRA09YsFmhrMhDk4femz4a5V2TIu', '2019-07-12 18:42:47', NULL),
-('A1317046', '$2y$10$YcO24ZC18cMPZrY2TDNf8Oi./pj4XbyGRWIl6TBdUQluTmEHApnRa', '2019-07-12 18:42:47', NULL),
-('A1317047', '$2y$10$aGfN23Wkq3OtEvZXC6cMZu.EOt8TqnHfOI5YXmVNIXyVAEWoI4xAW', '2019-07-12 18:42:47', NULL),
-('A1317048', '$2y$10$y1PQ.94EeVJhepDpKfKeoOXcIWOGkO1YUGZg3BSYDTuN0uQG1tjo6', '2019-07-12 18:42:47', NULL),
-('A1317050', '$2y$10$Q03GIoLFhfBZV.rtqaDIw.VJltBhXwb8l18k/Bs4zrz0zHZfr/WTe', '2019-07-12 18:42:47', NULL),
-('A1317051', '$2y$10$bk7ERiv4yK6LctEM.hP0b.y4tH7vThKiSe.FJYAvYtVo4th6Tnuvi', '2019-07-12 18:42:47', NULL),
-('A1317052', '$2y$10$54/7fpsg4tzQv4LtER/BneDeFaZD8A/EsKlQuzA74zYB3glF8PnFO', '2019-07-12 18:42:47', NULL),
-('A1317054', '$2y$10$GRnvceoDyCk7TKOr/wH0j.k9jO54vJTJu5AqUaA5QambBrwi3O8wq', '2019-07-12 18:42:47', NULL),
-('A1317055', '$2y$10$6ggWepg6bt/alYBSel2rxOTaOrYLqu9AuD4if.lH.ulujv6YGefna', '2019-07-12 18:42:47', NULL),
-('A1317056', '$2y$10$bUpjhKxhB3.IpPT/uc4wgeGMKpy51loOtF3tGdtNki2iJsUruL9dS', '2019-07-12 18:42:47', NULL),
-('A1317057', '$2y$10$rMBYXnwwD.x45pDJp2D.9OgocdMWPrgZvo6S2LL/Wr75d43omfZbO', '2019-07-12 18:42:47', NULL),
-('A1317058', '$2y$10$HcDnqJLspdDv5giNa.dUVeqjB8hl8mdXiRGoHAo5o5jsFH1gkXiBS', '2019-07-12 18:42:47', NULL),
-('A1317060', '$2y$10$uNBLShfTXyi84a0C0RUB4O941ZT7w9eJNuDLuj/z3CP1C8j74dkee', '2019-07-12 18:42:47', NULL),
-('A1317061', '$2y$10$aeoYiZXwDUubIyJs5p7SiON9syxcZ0cEpLpXh1tzd8dYz6RBy49QW', '2019-07-12 18:42:47', NULL),
-('A1317064', '$2y$10$1DMDJyWuhpTTHiJUO0/.LOnCDNkCGRiRpm1B72XL7w4N.5pFiAYHm', '2019-07-12 18:42:47', NULL),
-('A1317065', '$2y$10$2gD0R38zsq9vaxKdk/HJ4.f9SqnQUQNjWXM3qidqVHDX1c6sjM63u', '2019-07-12 18:42:47', NULL),
-('A1317066', '$2y$10$.iuEOQFf2KaftthJUMpk8eCfDB/TYh/hOCDSsEhtdDpgI6X9qsgRe', '2019-07-12 18:42:47', NULL),
-('A1317067', '$2y$10$df4pHfUbWGDTMVHKCW.NsuqxA0Xt4u0Lj7sTRqeAaXLXxW9YCKWUW', '2019-07-12 18:42:47', NULL),
-('A1317068', '$2y$10$qgbIsbHLK0sU.R6LkBo4zOXSAoJn8VzVDnW6R8NVZBo0IBbnAnIv2', '2019-07-12 18:42:47', NULL),
-('A1317071', '$2y$10$ypjLiGbxZb3KlPXJa8Jmx.LQgQluZ1ER1CDjvWR5KYVGNiuJSnAJG', '2019-07-12 18:42:47', NULL),
-('A1317073', '$2y$10$GRVwJXyRdroApMqyhxLtiuX1cyY2NV2Qi/8yBGqr7kQ27AXtOU44C', '2019-07-12 18:42:47', NULL),
-('A1317074', '$2y$10$GYtGd94YEU/elvtA3ONbxe7CzB5O7Z3qCquZb3e2//k4mUpS8ed7W', '2019-07-12 18:42:47', NULL),
-('A1317075', '$2y$10$AuydkO8UxJfp36/uzUOKaOlldsSXQRUM8f6Z2oKQXdCBJQqeqvz4S', '2019-07-12 18:42:47', NULL),
-('A1317076', '$2y$10$7lp.4ZNuQCHLS98XBuhuBOtR.ObynoCxttFrXWWqiWu5Jz1nwAd.W', '2019-07-12 18:42:47', NULL),
-('A1317077', '$2y$10$prwUs6g0pIWRdAiaS5fGxe/SZqmN7n1agi31gBc6CLzDigNAD8I8u', '2019-07-12 18:42:47', NULL),
-('A1317078', '$2y$10$zUQSwaf.5J13Jq7NVjMsiOnAbYsGEQWI7pf0oe5b5kdn0le.2u8aW', '2019-07-12 18:42:47', NULL),
-('A1317079', '$2y$10$JspiqXAnbmvGG1XVXYQK8uMRqgilC4/CHWqPhVq3fvSAwfpR58fXO', '2019-07-12 18:42:47', NULL),
-('A1317080', '$2y$10$v1Wobw/6TUzJ.xQBftJY3.FkOccTaUr73NPNmRN2kfEd1kDcW.46m', '2019-07-12 18:42:47', NULL),
-('A1317081', '$2y$10$z1B2CiPFQS9wSE9r9XYNv.K66pHyhOi29.s43DP3Asz4su5L8Cr2W', '2019-07-12 18:42:47', NULL),
-('A1317082', '$2y$10$HP7e6Pvr1KWzgz/dWDm05OBUjJ5nYV2Y.elN158Uu0iSp5T0p47D.', '2019-07-12 18:42:47', NULL),
-('A1317083', '$2y$10$jDeJjXrls8LUE7Zw5LKEpOBJGKv/sV.1wpJxZClNlGexCw3/4vfLy', '2019-07-12 18:42:47', NULL),
-('A1317086', '$2y$10$9M1Y7X/q3YufqrSaWVEwcucXLUHAoFylIRBt3yvmF2V7GQ12/up2q', '2019-07-12 18:42:47', NULL),
-('A1317087', '$2y$10$ZtjZHxPEysi5ttf/5X.K.e8dqV.VJXgAyfs61YVuZvPo7NqGgFfOG', '2019-07-12 18:42:47', NULL),
-('A1317088', '$2y$10$OydVac0UfJab/lNpXbDDBeDhpHLFY19wDQ15WOgzuEjcTiP0vTZQW', '2019-07-12 18:42:47', NULL),
-('A1317090', '$2y$10$.Zm3umPrtlLm9kEBDGGuUOL0f60irbAUbEVw3DblhmJIMKXrubZi.', '2019-07-12 18:42:47', NULL),
-('A1317092', '$2y$10$U8n7Xp9B7CNGte6uO2bIcebh5hwhKQAW9gb3YBUgj81vpKBFpqAsS', '2019-07-12 18:42:47', NULL),
-('A1317093', '$2y$10$.kP9S43QoLqWa2ytMe2L4Oc9aWGpbFRWhdmPEOqxSruJuGghachNe', '2019-07-12 18:42:47', NULL),
-('A1317094', '$2y$10$rXGaPZPTde/H3VhBTjX1GuYjo4C7OzCj4aRQyxpYVb8XFJKNMxxj6', '2019-07-12 18:42:47', NULL),
-('A1317096', '$2y$10$N6Iy5UQszEhKNfGzOexige04ANhOx0udncHNvGMK0EiUhMz90wi7K', '2019-07-12 18:42:47', NULL),
-('A1317097', '$2y$10$U3CVQJI4K4CElYsrOsaXJOsAI8B8PsCzxhaq97DOhVMCWoEVrVuHC', '2019-07-12 18:42:47', NULL),
-('A1317098', '$2y$10$z8arpXJYmwXlsyxb4d9qt.9qgOw8xwg8me0VrXBxC4kv8Bv4jfKoq', '2019-07-12 18:42:47', NULL),
-('A1317099', '$2y$10$4LZrj7he/z9HloW1oyEQb.73ubEFsGg/wanGL46orgZajp4BX96SW', '2019-07-12 18:42:47', NULL),
-('A1317100', '$2y$10$TZ0zg3KUUzfEwM4aiVaSVeMcDRcnD.Get/oFbaeh4KGyWjz6550A.', '2019-07-12 18:42:47', NULL),
-('A1317101', '$2y$10$prqPWbj5UtyjJnqTFz1quutgVvIqwQIX6nzyv5IUjOYbyry4V39uC', '2019-07-12 18:42:47', NULL),
-('A1317103', '$2y$10$Odm0VulhzH3FMJmAhfqD3eJ7YM8/ppWcdJbix4HlXoEtFNyDNagUO', '2019-07-12 18:42:47', NULL),
-('A1317104', '$2y$10$rnf.8GLX7t4BggYiYDNKdusg/MEbKHzVGFrTxC2YU8NksEMST6mVe', '2019-07-12 18:42:47', NULL),
-('A1317106', '$2y$10$/8koFE9S8SV7omp9uju7YuhE20ClGSLATYvpk02Rhjmv.JE1XP/mW', '2019-07-12 18:42:47', NULL),
-('A1317107', '$2y$10$zkRuo3yKL46Ju3S2zLrRWOu5OjsVUo3SBbE9cV60gnmHD3IWg4Sn2', '2019-07-12 18:42:47', NULL),
-('A1317108', '$2y$10$R0o.TfgR8Zd5ULba7UkdteMvL27yMjFTYaSJnPiiacA1uDVJIDhXK', '2019-07-12 18:42:47', NULL),
-('A1317109', '$2y$10$sMM55V5Dte.FZXk4E/1Zp.x8y2SHCpsftvrKyQsv8kXyPhZdAuZg6', '2019-07-12 18:42:47', NULL),
-('A1317111', '$2y$10$6qr9hZE/OMFbaepOxxMJgu3yA.Ki777qafUxTH17wCGvcRpJdh45W', '2019-07-12 18:42:47', NULL),
-('A1317200', '$2y$10$XT.BXxF4pZO07E5XgJjH6Opj4uDnUTOq3f.J6i6TlWFeMtxGyanQ6', '2019-07-25 21:38:16', NULL),
-('A131901', '$2y$10$9jHYVuufRx6uYNFRI1pPyuBAOC0P2U4gFkURxGurEUoLCP4P.xVn.', '2019-07-25 21:37:02', NULL),
-('adhel_syaief@politala.ac.id', '7499e297c411b10091ed7206db3011d2', '2019-07-29 08:19:38', NULL),
-('adzani@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('agustiannoor@politala.ac.id', '9cf43feb3f23edf49ea3eb4c407f7853', '2019-07-29 08:19:37', NULL),
-('angkasa@politala.ac.id', '65abcdaa9d838672864004bcc85bdd3b', '2019-07-29 08:19:38', NULL),
-('arif@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('B1316002', '$2y$10$mwwLcCi7YWW2Z0pIZdx./eGiI6MTBeW3dv6qs5o3OLXkRXtN6TXPC', '2019-07-12 18:46:00', NULL),
-('B1317001', '$2y$10$otII5/C1GndWV6wyEZ439.f6/O3blzgnbSkCkvp8g5ZSaJPMSluLG', '2019-07-12 18:46:00', NULL),
-('B1317002', '$2y$10$dIABPGX0/3Vk.oj1FUztieoJkYwliiHhcYKs2dc53MxibiqlTmDCe', '2019-07-12 18:46:00', NULL),
-('B1317003', '$2y$10$fUDswTDK1K6Dq30JFh0p4uJOUG6KQ2F/EmGXDHtkhrFzPK1qdmXuu', '2019-07-12 18:46:00', NULL),
-('B1317004', '$2y$10$NcnWU2fC9t14BvA2jtCYyukUhqvJwMrfkuiyrYHTEeCb4Ut5KTg0C', '2019-07-12 18:46:00', NULL),
-('B1317005', '$2y$10$YN8EKf4JYn9aKK2sEHvh4eAeEHi6pj2e0.pEOEDmaVESf1V8DF2me', '2019-07-12 18:46:00', NULL),
-('B1317006', '$2y$10$tZmLClrIsP8fZPhOMeotyOg.ZNLUj0jA3tlmKYAHYlUI01mm7d/h6', '2019-07-12 18:46:00', NULL),
-('B1317007', '$2y$10$.CcNdziP5UpZYBQndOFfJ.zxT/XktdX8ZOwTQ2yKsnZBHrtUUg6om', '2019-07-12 18:46:00', NULL),
-('B1317008', '$2y$10$MtntUI8LAtinhZY/4AIicO/w/NfifzSL56ZwS/HYyeXUSIqul2t8y', '2019-07-12 18:46:00', NULL),
-('B1317009', '$2y$10$LXAImqSPplIzhQMsXUld1uRE8wg7mLPSIDJwatrWYGnfMrcsV42be', '2019-07-12 18:46:00', NULL),
-('B1317010', '$2y$10$kO7APAnnKbKPC8TiaKqewu6O9JEpPBlOitT.Kvs79vKuZhyJu/oOq', '2019-07-12 18:46:00', NULL),
-('B1317011', '$2y$10$YCor2ZbY3G8Nw979Uoh9Q.QkjYMmk0ji2iQ3/Mv/dhQINNVrL1hcy', '2019-07-12 18:46:00', NULL),
-('B1317014', '$2y$10$lY.0pXU0pU.b508C5SJoKeK.FzpWMXtvAaTLVXgSQ7Jti0I.leJAi', '2019-07-12 18:46:00', NULL),
-('B1317016', '$2y$10$ePu.1FS2f1PAP5buQGxQnu7mLabw8KQw7EjtOP1qz4VD4nCuBn8tK', '2019-07-12 18:46:00', NULL),
-('B1317017', '$2y$10$CZtVylTZbmh2nyKEhLnBIugxgjcXMF9Ehcjnh97O552eB5yHUPDaG', '2019-07-12 18:46:00', NULL),
-('B1317018', '$2y$10$YInDqjW5w9CvNBb9Mvv6..CqxjDQETMnJkPlTvpw1ZhaqrR5rFY5m', '2019-07-12 18:46:00', NULL),
-('B1317019', '$2y$10$MP9CxMLOWn.7QVJeDZso7OLQHFtNmqEpg6QSxdO0cOL2M/rMM0VDS', '2019-07-12 18:46:00', NULL),
-('B1317020', '$2y$10$fW2rZZy/vkDGoSQMHsmCgexlsdgx38SzltR.CUoHuzBkc7ORU8pOO', '2019-07-12 18:46:00', NULL),
-('B1317021', '$2y$10$KrYB/BRLurhB7b2NJjULHO6d4yD65CDaPxZERpiiFW9v48/tPMqDq', '2019-07-12 18:46:00', NULL),
-('B1317022', '$2y$10$JvfpoxPrZpE1PaNvgIsS3.mEG91vMGjSA5MU3Gk6EZD06xJuht08q', '2019-07-12 18:46:00', NULL),
-('B1317023', '$2y$10$0CuD4qoY7aE4FGeiAFDbquzDeTk/Dhik2IF9KRcNziynL79wNbPSq', '2019-07-12 18:46:00', NULL),
-('B1317024', '$2y$10$Up3/FHebJh1f3xUCHX2Zg.mgBuhPi.XLTCZ3T8jLFvNsFvGrZcFWW', '2019-07-12 18:46:00', NULL),
-('B1317025', '$2y$10$yqLFKtnwy4IE9l/QXnDjQu/.7V/9bJ2r2/tr.siKKDW/O5FsIwJ6W', '2019-07-12 18:46:00', NULL),
-('B1317026', '$2y$10$gxEg1xbti65c3Tq7582JZ.muNN9XyNFxH2O17F.DyPPc6Buw4VADK', '2019-07-12 18:46:00', NULL),
-('B1317027', '$2y$10$pxpYe0uRvAxrsnzvcCwrIuX6lj3F0OvdZd/77idI.HzdQ1WjP4kwy', '2019-07-12 18:46:00', NULL),
-('B1317028', '$2y$10$gZI9.rVweJRrBm3UAty1Zus0nl1wedvGOxUgkANVKCAZ0NVVNoX82', '2019-07-12 18:46:00', NULL),
-('B1317029', '$2y$10$RyXH/m3iXfk0x4CBhRiLoeEF.p2vAAGITgBfcaS8dHV6PAeF06wP2', '2019-07-12 18:46:00', NULL),
-('B1317030', '$2y$10$IIo0oGLZ7M8f8KW4dQqYXu.CXn2rtXHj2wbwnaYZJjk9i5HVDroby', '2019-07-12 18:46:00', NULL),
-('B1317033', '$2y$10$1TPbrZ8LNdWFagLLeb6AN.wQmT0de/B0NldAnRiXQTxMuULrEBAMW', '2019-07-12 18:46:00', NULL),
-('B1317034', '$2y$10$E61GMozyG4MU.6wIf6DPGOCvRCWgD1AJe6t/TZI0RMklOVP7KQP9m', '2019-07-12 18:46:00', NULL),
-('B1317035', '$2y$10$odM4ykkuc77gGluuQSjSHeLXa4cn8Ez34DfcfjiBdnnDh02dzZLo.', '2019-07-12 18:46:00', NULL),
-('B1317036', '$2y$10$u87L9TBGNQrJKvHPqtQY3u3tRt1JXyEdSAxTapSW.TqZ/GBfOySXG', '2019-07-12 18:46:00', NULL),
-('B1317037', '$2y$10$s/u6kbWylXc6K8BYyGpCX./3HDkkM86xnvynMRLbwQeu7Rq1uxjOa', '2019-07-12 18:46:00', NULL),
-('B1317038', '$2y$10$Oq8vwYV2zXR.BcIFxNbxOe2degojCbY8nfwWrOxRWdphhThrRX.QO', '2019-07-12 18:46:00', NULL),
-('B1317039', '$2y$10$7riIZVobARxy40x3CxR1l./GcEApDaDS0c.8h4JzHfiE5vd8DVlfy', '2019-07-12 18:46:00', NULL),
-('B1317040', '$2y$10$XSwrxLwTrlOqOT7b43qSdua/IesgKede.FFCDJiDFVpgdz94uytQW', '2019-07-12 18:46:00', NULL),
-('B1317041', '$2y$10$bVpFuWPX3vpsjFc4bhMAdOgML2TMCrL/hLua8UH9MnSh0KPWakLs.', '2019-07-12 18:46:00', NULL),
-('B1317044', '$2y$10$RgUmqQ5ZK8acqEd9kIKRBuwL2W8Ihm0.N7evrZQyHOjQ76j5ln.d.', '2019-07-12 18:46:00', NULL),
-('B1317045', '$2y$10$GN6qKB77ydm7XKgM/wUnOOMgwo3F7i06RisPnfj.3/PBrFulrKJHq', '2019-07-12 18:46:00', NULL),
-('B1317046', '$2y$10$C8uZI/SWxe2EbRtGUn1OgOYDXsQreoE/G6MRWgGWoq0iKGQXelVcK', '2019-07-12 18:46:00', NULL),
-('B1317047', '$2y$10$i6n0z58dli2s8lpxJEnaEuUZg5SF/1JeOPhNlLLeirzKGM2NufBnK', '2019-07-12 18:46:00', NULL),
-('B1317048', '$2y$10$RHp3K78T/TQ./OB6.m5skegvm1jd.rvaCwZMZWEfaWpklmOPQxhsa', '2019-07-12 18:46:00', NULL),
-('B1317049', '$2y$10$hzWMBb4LzwtjjLCF2M9slOUu5CE1jOYTsD.9s2tMa.P8OVhyH2yGy', '2019-07-12 18:46:00', NULL),
-('B1317050', '$2y$10$FfOq1NS.CcZPZjnaWVQf0uLD5EhjC9VdWrBk1nWDGJ0czwuSvIl4a', '2019-07-12 18:46:00', NULL),
-('B1317051', '$2y$10$GvsWQh8pKaf4D3hE7uryWO16geJdxsO7D5Xl1LHDH6lE4ow2BoKbq', '2019-07-12 18:46:00', NULL),
-('B1317052', '$2y$10$.yGnbnLkcWP6.DqOpFOV8Op48gH45JE2U1HYeaeimLmzjZM8tBV5.', '2019-07-12 18:46:00', NULL),
-('B1317053', '$2y$10$0zOGk2zM8V2TSusDZB5.yepFSMlXjkcn4bY/5yxU1qxvKz7xsJGgy', '2019-07-12 18:46:00', NULL),
-('B1317054', '$2y$10$7NRn6UWGzILf5MKUN1cGFOiKVbAdsF73SyBsF4qGCwUun04hlHQvq', '2019-07-12 18:46:00', NULL),
-('B1317056', '$2y$10$rkZkrC18zr9.KN.Skd26t..9IfGPNGkLZDjFLDLbylp7sHj.I/v7u', '2019-07-12 18:46:00', NULL),
-('B1317057', '$2y$10$KvANDipi/U9jA/4KlaMDrOarSaGpu4WYr1xJDyxMSHKhvJWfkzeeO', '2019-07-12 18:46:00', NULL),
-('B1317058', '$2y$10$lrzyVfU.Gyfc6cJRPTzfF.9mmaRcffVXGzMZ9/XPN23EQUxKghnXq', '2019-07-12 18:46:00', NULL),
-('B1317059', '$2y$10$Ic4PLDYPfz/TtVHteHj/qeWePXpXzLW/Tq.Z73GlBupS782SvWDVC', '2019-07-12 18:46:00', NULL),
-('B1317060', '$2y$10$VTls7xCDMXmvAsurXfurjudlQe01uAuFSQdG07X28BncnSsBW06M6', '2019-07-12 18:46:00', NULL),
-('B1317061', '$2y$10$rkp8Q3izIm446QRHFnZFAOjI2XL03Mg2RWCsbM2uOMf83T0zZzfiO', '2019-07-12 18:46:00', NULL),
-('B1317062', '$2y$10$PFGmcT49DlsTquyaRW3Ze..IN3GsRCGoYKQK2Cxao7qSunosDss9a', '2019-07-12 18:46:00', NULL),
-('B1317063', '$2y$10$ckSLhQIsoM/KpWzv9hFLcO0AY3MOp8O0v2mn7t2R9HxyUKB8RiT1G', '2019-07-12 18:46:00', NULL),
-('B1317065', '$2y$10$om.Ewdo0AYRoBZbx5dL6KeYkcgIWXklVgZgIbQNcRrWxnHM754t52', '2019-07-12 18:46:00', NULL),
-('B1317066', '$2y$10$Qa5IxeA.EePt5krWE4sxy.1Qjmo5QJmbpWcL/9ZkfdxicEmL/we.a', '2019-07-12 18:46:00', NULL),
-('B1317068', '$2y$10$G8nh4sQbkiw016FEFZvv6efo.OdInDqux7AgYP/YAG6K3nZe364gy', '2019-07-12 18:46:00', NULL),
-('B1317069', '$2y$10$JWpRsyYtfJtfXNnCUbRJHuqaUZH0xMq18JR5cuZq7xjd6mtQtgk.K', '2019-07-12 18:46:00', NULL),
-('B1317072', '$2y$10$LyKBgcCKFxH1CFLSYI5gouNTiLjS2xcEE8r4nghyNX31BOnMuPKuu', '2019-07-12 18:46:00', NULL),
-('B1317073', '$2y$10$Jn78RkaFi6iX4xxBQ2s50.0uoGK13xp5wewGWPXOHPThkd/RXIvaW', '2019-07-12 18:46:00', NULL),
-('B1317075', '$2y$10$MM83jMG8R2zcoV2sjmcHpOutRQ0Z59bNysMh7MnG1BVxENd1K1SDu', '2019-07-12 18:46:00', NULL),
-('C1317001', '$2y$10$2RJUjvsjb1I2RiEUNWLJ5OeK0HTF1gOvBqUTXOGkrTxKcJJBs5qki', '2019-07-12 18:44:54', NULL),
-('C1317004', '$2y$10$sBMYD5ZRhsaL00ZxtHhXMeM.HxeSmgagUm0KfzsEsU3VzHlWy1frG', '2019-07-12 18:44:54', NULL),
-('C1317005', '$2y$10$1F1KvgAZAqpJIrJxfu2C6eCzGHoTFbd.cYrBMXUaFR2IxAj3UXWoq', '2019-07-12 18:44:54', NULL),
-('C1317006', '$2y$10$F.uXgvttzziaS5GFHlb6IuWSjwBza4u5qlm3FJnz7p/cDmhFZnXOW', '2019-07-12 18:44:54', NULL),
-('C1317007', '$2y$10$ygD6Z.J6K/vo/KshkMPTK.qdNPZk9bwOwL37T7BwFUJ0x70b0E952', '2019-07-12 18:44:54', NULL),
-('C1317008', '$2y$10$Jy5f3oisejYcOzm8A0wzSO6nTjufon19oRnXIM7JLFEw/i4cwgmgq', '2019-07-12 18:44:54', NULL),
-('C1317009', '$2y$10$.wuMfwbfqpD9Uj5azdNrq.XgzTCIWQXiwpVQ3PwvPrr76D.QrtKjO', '2019-07-12 18:44:54', NULL),
-('C1317010', '$2y$10$nRVKERfK4xJHYCI4k67QleSCzsfx5YByI27ijY7pPVbNmlpBQNh/a', '2019-07-12 18:44:54', NULL),
-('C1317011', '$2y$10$qnViv6dPGJqOXwbnc1WLDu0ft9WNsk.pvFPY7G3ddA2/zaeoftD1m', '2019-07-12 18:44:54', NULL),
-('C1317012', '$2y$10$iZQmCjsHNRfsxEbHiXeVeeLxkB2hR9EWb9zlJdDDp48Nu3t/oHZ/C', '2019-07-12 18:44:54', NULL),
-('C1317013', '$2y$10$tpOpzTGrJrzXxBGG7yIAneaNITkTK/FK0cC8oYwcl2ulrBcOEMtEC', '2019-07-12 18:44:54', NULL),
-('C1317014', '$2y$10$eccfrvvfaltFwMpPXnKrduXt1z0d71goN2HF8QzAcXV4H0UiLJVQe', '2019-07-12 18:44:54', NULL),
-('C1317016', '$2y$10$UrSvI5Eis8ohdhcFpmpRCOvhHcTW4diJQMukiTD9umCN6oh/0KoRC', '2019-07-12 18:44:54', NULL),
-('C1317018', '$2y$10$0KbfPxlvK8.wzE8bufYsxuUvFYk0H1Ji4C8L7gsMim57liWxN4uM2', '2019-07-12 18:44:54', NULL),
-('C1317019', '$2y$10$ElugEPAwBcLlhQB4EPmIXe65II.TJ3a9Gxo/x2t9MqFDWLczI7THm', '2019-07-12 18:44:54', NULL),
-('C1317020', '$2y$10$QbDBPGxjc75AiTsQ/Cb.8up91baJ9X0McuxlQELsU3o8mOYkzk8La', '2019-07-12 18:44:54', NULL),
-('C1317021', '$2y$10$bvl4WwHMuTguSS66gALGvOmv6wTbWuTzDTayN3rtapXVD70D88HeS', '2019-07-12 18:44:54', NULL),
-('C1317022', '$2y$10$gK9/DWx2oZ/PyZKtzzHwjubqmRugwDnM8M6q3CGrUcN6vupzMyLS6', '2019-07-12 18:44:54', NULL),
-('C1317023', '$2y$10$2glX80hxk8ADLwnUQKlod.4mNeFWb3oHhkvjTGheJHi1ir07hhbZW', '2019-07-12 18:44:54', NULL),
-('C1317025', '$2y$10$ZrSJouD4lUR9yE92Q2.Qn.AZvJQH0cmHqv7uhAegwM0srVSZsjdx2', '2019-07-12 18:44:54', NULL),
-('C1317028', '$2y$10$smAQCnuCemuwQh7KRcriXeMZCYmiUerTjbEtW6Jlx4S4m8UAdPKYG', '2019-07-12 18:44:54', NULL),
-('C1317030', '$2y$10$eNgYIgR9Vx7I5Ev6aE5Pe.UutVPKouudZvMGf3MVoYx/e8b9UK.uK', '2019-07-12 18:44:54', NULL),
-('C1317031', '$2y$10$FUbLObqJAKwKeK.bCHIDlO4kd4ER2AS00hkd0YdfK4p8Q33xYTg0C', '2019-07-12 18:44:54', NULL),
-('C1317032', '$2y$10$C3gk1nfrlWj4mVmc7PkZzesv/zTLVMVZxCX5xt0Mz5MhyI5SfG4YK', '2019-07-12 18:44:54', NULL),
-('C1317033', '$2y$10$dsm14CWShRfpoel.uypz7Oe3oO5ONmxCl9hosd53zYKtAS0Eajomm', '2019-07-12 18:44:54', NULL),
-('C1317034', '$2y$10$k0oATai6e9v0PGGk7u1/eOJ5g27j20yGRiTyj3i4QSNmrElSp8SBy', '2019-07-12 18:44:54', NULL),
-('C1317035', '$2y$10$P1u0mV6tjFLd2YlHFaJkY.GSPKZPj5N1rk3rfUD8SA07Qzhm.BJ2a', '2019-07-12 18:44:54', NULL),
-('C1317036', '$2y$10$BDdnnMSLx6jfHEtYY/4vgOLX0TESbGGwG.OMTdN4yl7nNOEiOPkWy', '2019-07-12 18:44:54', NULL),
-('C1317037', '$2y$10$eiKdU8vyNSGguGu3CxorkeSRnPJzjpd54ht/dBIfiSjjwRpHer.V.', '2019-07-12 18:44:54', NULL),
-('C1317038', '$2y$10$xULokLdR9IuuxbuJAoX6R.2hL7PiA2.D1PktVYYKhYtTjsk6.uLT6', '2019-07-12 18:44:54', NULL),
-('C1317039', '$2y$10$8tCk4duAnsuA/bHs1zq59.bK/rosJxE4px2SY/5X7MrzhualATQdi', '2019-07-12 18:44:54', NULL),
-('C1317040', '$2y$10$rihV93GwUBqnCFElTrYW0.lZ8275.UDUo.LzYFxxnX/eoMNoLmHue', '2019-07-12 18:44:54', NULL),
-('C1317046', '$2y$10$vjyxP3vYZtV9XF.j7JtWuuYWB8fj9SWBibrkapSk71eIoQ1rwp6Iq', '2019-07-12 18:44:54', NULL),
-('C1317047', '$2y$10$eVxdCjh.0ouYZYacTVfoRO8/Ig3ts2GWCmC3LHWHSfYcH6PIfW1Iy', '2019-07-12 18:44:54', NULL),
-('C1317048', '$2y$10$EOrWru706iHqwpsNZ4jScubz3bOLMfnlQlV7.zKNCa4CkgAO6q4AO', '2019-07-12 18:44:54', NULL),
-('C1317049', '$2y$10$Hpr.HP50.IAyJwizsKMZ6uj991V2YMdw2.fmgLiCLMOYZp1ki19hC', '2019-07-12 18:44:54', NULL),
-('C1317050', '$2y$10$JhZIxLMsN6nDsfXkJfPPMOtP74JqYNwAZxxl9mz6nV1gTciRcTnIi', '2019-07-12 18:44:54', NULL),
-('C1317051', '$2y$10$tSVFZ6ACthMde5DfnJ2EjuwoM1Dh49O2WedEkV4wDFvIRUqpa3Gme', '2019-07-12 18:44:54', NULL),
-('dosen@politala.ac.id', 'ce28eed1511f631af6b2a7bb0a85d636', '2019-08-12 18:49:24', NULL),
-('emalestari@politala.ac.id', '9c468e729ef3b158201b1217eeb1f1c6', '2019-07-29 08:19:38', NULL),
-('fathurrahmani@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('fatimah@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('hafizd@politala.ac.id', '343fd51a3cadffd16fafa0b6b5f3b30b', '2019-07-29 08:19:37', NULL),
-('hendrik.tomo@politala.ac.id', '258b0b133466092ff4405e75aa212198', '2019-07-29 08:19:37', NULL),
-('herfia.rhomadhona@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('herpendi@politala.ac.id', '29ddfab781743403533ca86777083016', '2019-07-29 08:19:37', NULL),
-('ika.kusuma.n@politala.ac.id', 'f652b3d67b407ddd9527b49593ecd616', '2019-07-29 08:19:38', NULL),
-('imron@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('jakapermadi.88@politala.ac.id', 'eeddfce33f1cae7437cacb6aa3ed5180', '2019-07-29 08:19:37', NULL),
-('jaka_dj@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('jefriadi@politala.ac.id', 'aa746269343f2b66a56fa0705c4c9c6d', '2019-07-29 08:19:38', NULL),
-('kurnia.2a@politala.ac.id', '835afaa2dae3b4a26045b8153b6650ce', '2019-07-29 08:19:37', NULL),
-('kuswoyoanton@politala.ac.id', 'd70758563d6e8c104a20c7c98d3a4192', '2019-07-29 08:19:38', NULL),
-('mariatul@politala.ac.id', 'a0491fe48eef3b72d15a05e69b4e93c9', '2019-07-29 08:19:38', NULL),
-('marlia@politala.ac.id', 'b49a2da6055b4c32902942c80708c062', '2019-07-29 08:19:38', NULL),
-('meldayanoor@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('mindradarmawan@politala.ac.id', '0149d1fb991126227beb2d83d04f3b6c', '2019-07-29 08:19:38', NULL),
-('mufrida@politala.ac.id', 'cb88cbc22d48cb72861bd85b3fc4865a', '2019-07-29 08:19:38', NULL),
-('muhammadnoor@politala.ac.id', 'caacbb06ae82a7a8a1ae114cf58af205', '2019-07-29 08:19:37', NULL),
-('ninahairiyah@politala.ac.id', '9af7ddec5ede8d9d4fff7b253b2499bc', '2019-07-29 08:19:38', NULL),
-('nuryati@politala.ac.id', 'e91bd884adde9b8c04357b8e2a412286', '2019-07-29 08:19:38', NULL),
-('pemonitoring@politala.ac.id', 'c51ce410c124a10e0db5e4b97fc2af39', '2019-07-01 14:01:12', NULL),
-('ra.amalia.rizki@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL),
-('radna@politala.ac.id', 'ab24e24ea962aa0e02e076294ed71998', '2019-07-29 08:19:37', NULL),
-('redhy@politala.ac.id', '827ccb0eea8a706c4c34a16891f84e7b', '2019-07-29 08:19:38', NULL),
-('reza@politala.ac.id', '403a6f197124456fa304e8a75e514aa4', '2019-07-29 08:19:37', NULL),
-('rsayyidati@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:37', NULL),
-('rusumintosyahyuniar@politala.ac.id', '5dd2f3dda7890376cfb20c7e9f4af872', '2019-07-29 08:19:38', NULL),
-('sandri@politala.ac.id', '358dd7dfbb9518bf775f1b3a30013bf5', '2019-07-29 08:19:38', NULL),
-('simpkl@politala.ac.id', 'c20ad4d76fe97759aa27a0c99bff6710', '0000-00-00 00:00:00', NULL),
-('sukma@politala.ac.id', '4bd8058a99522e09c4cf23370512e29c', '2019-07-29 08:19:38', NULL),
-('veri@politala.ac.id', '9735f98f3cbd11ec1f1e5b57d106e462', '2019-07-29 08:19:37', NULL),
-('wanyuliyanti@politala.ac.id', '55b7db95219ae4a23b1a098a0af22fbe', '2019-07-29 08:19:37', NULL),
-('winda@politala.ac.id', '037245f05147c237529f12b08868ef88', '2019-07-29 08:19:37', NULL),
-('wiwik.kusrini@politala.ac.id', '3d1cb141faa0ad04dcde64c9a1798f8c', '2019-07-29 08:19:38', NULL),
-('yuliananingsih@politala.ac.id', '5ee6c077974421156c7f44b93e2c8fd8', '2019-07-29 08:19:38', NULL),
-('yunitaprastya@politala.ac.id', 'b4d1801df7a2ce3e89d559b4aab45e38', '2019-07-29 08:19:38', NULL);
+-- --------------------------------------------------------
 
-INSERT INTO `tb_data_kuisioner` (`id_data_kuisioner`, `id_jenis_kuisioner`, `soal_kuisioner`, `jawaban_kuisioner`) VALUES ('1', '10', 'Perusahaan Menjajikan Untuk Berkerja DIsana Setelah PKL', NULL),
-('2', '10', 'Perusahaan Memiliki Konsep Dalam Mendidik Mahasiswa PKL', NULL),
-('3', '11', 'Bagaimana keadaan mahasiswa kami di sini (kerja, inisiatif dan etika, dll) ?', NULL),
-('4', '11', 'Melihat dari mhs PKL kami, kira-kira masukan (evaluasi/saran) apa yang perlu kami lakukan dalam pelaksanaan PKL dan maupun proses pembelajaran ?', NULL),
-('5', '11', 'Materi- materi apa saja yang kira-kira perlu ditekankan kepada mahasiswa kami terutama dalam menghadapi kegiatan PKL dan dunia kerja? (khusus perusahaan /instansi yang bersangkutan) ?', NULL),
-('6', '11', 'Apakah kedepan, perusahaan bapak bersedia menerima kembali mahasiswa kami untuk PKL disini?', NULL),
-('7', '11', 'Informasi lain yang dianggap perlu silahkan ditambahkan', NULL);
+--
+-- Table structure for table `tb_akun`
+--
 
-INSERT INTO `tb_dosen` (`id`, `nip_nik`, `id_program_studi`) VALUES ('19', '140102102', 'PST003'),
-('22', '180301181', 'PST002'),
-('27', '09081015', 'PST001'),
-('29', '160201153', 'PST001'),
-('30', '110103046', 'PST004'),
-('31', '130204092', 'PST003'),
-('32', '140102098', 'PST001'),
-('33', '120102079', 'PST001'),
-('34', '090801016', 'PST001'),
-('35', '160201151', 'PST001'),
-('36', '160801168', 'PST001'),
-('37', '150203104', 'PST001'),
-('38', '140825117', 'PST001'),
-('39', '140814113', 'PST001'),
-('40', '199007112015041001', 'PST001'),
-('41', '090801031', 'PST001'),
-('42', '150801145', 'PST001'),
-('43', '120102070', 'PST001'),
-('44', '110103048', 'PST001'),
-('46', '12345', ''),
-('47', '110502054', 'PST002'),
-('48', '14020983', 'PST001');
+CREATE TABLE IF NOT EXISTS `tb_akun` (
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=622 DEFAULT CHARSET=utf8;
 
-INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akademik`, `id_mhs_pilih_perusahaan`, `nim`, `nip_nik`, `judul_laporan_mhs`) VALUES ('25', 'TA002', '4', 'A1317106', '160201153', NULL),
-('26', 'TA002', '3', 'A1317037', '09081015', NULL),
-('29', 'TA002', '9', 'A1317030', '09081015', NULL),
-('32', 'TA002', '14', 'A1317097', '140102098', NULL),
-('33', 'TA002', '15', 'A1317098', '140102098', NULL),
-('34', 'TA002', '13', 'A1317077', '120102079', NULL),
-('35', 'TA002', '5', 'A1317090', '120102079', NULL),
-('36', 'TA002', '17', 'A1317071', '120102079', NULL),
-('37', 'TA002', '16', 'A1317099', '14020983', NULL),
-('39', 'TA002', '10', 'A1317031', '14020983', NULL),
-('40', 'TA002', '1', 'A1317066', '14020983', NULL),
-('81', 'TA002', '6', 'A1317010', '160201153', NULL),
-('173', 'TA002', '8', 'A1317006', '160201153', NULL),
-('192', 'TA002', '11', 'A1317002', '14020983', NULL);
+--
+-- Dumping data for table `tb_akun`
+--
 
-INSERT INTO `tb_history_pemilihan` (`id`, `id_perusahaan`, `nim`) VALUES ('1', '77', 'A1317023');
+INSERT INTO `tb_akun` (`username`, `password`, `created_at`, `updated_at`, `id`) VALUES
+('A1316021', '$2y$10$QTJshqAG1CAWJZqDtrMkyeLBcoRKEHpTE3NXRvVisJn7.iqezKio.', '2020-01-17 00:35:37', NULL, 619),
+('A1317001', '$2y$10$UGamcj0OSgIuB056F6aDI.QEU0EgtoKFVf79rsFC5s/vmwRwprGCS', '2020-01-16 08:48:08', NULL, 611),
+('A1317002', '$2y$10$0mHjJkRt652ydDOtwo2Fx.8gaU..oGx8l1Eafk9jQ5yXME6e6JoDS', '2020-01-16 08:48:08', NULL, 595),
+('A1317003', '$2y$10$8otDmKJlNpRovIXYobK7Texv/D2dBmPA7A9UGB7IV6Rh48itIVL9.', '2020-01-16 08:48:08', NULL, 567),
+('A1317004', '$2y$10$fWCrV3sCzHCwey9fsJU7reoGr4YeogVnOlZHUjKgRvAyKdm74MTZm', '2020-01-16 08:48:08', NULL, 614),
+('A1317005', '$2y$10$PopURmmdlXCXjd2BIa5OKO/bMBqf/0KUdypIBtcZUmyPREVz3ulNK', '2020-01-16 08:48:08', NULL, 571),
+('A1317006', '$2y$10$3Klmfjbxo.sAlfYDv1pWkOybFCIy8j0cipB.YdnIw.PqBDzWIJ7YS', '2020-01-16 08:48:08', NULL, 562),
+('A1317008', '$2y$10$HAS907I61uqkglemaULD6..RqJ9TWwimov5gELH38KHAvoIwqq8zS', '2020-01-16 08:48:08', NULL, 587),
+('A1317009', '$2y$10$vAzEq9nJh5SflhiEHIk6N.jBVKAvudMVcjdALDlSki8XieclSttJC', '2020-01-16 08:48:08', NULL, 581),
+('A1317010', '$2y$10$R6KhRGaOFFe.Hcn66dWdmefbmFXEwYGERRN6KzB4qQ0YMGhrUG7U2', '2020-01-16 08:48:08', NULL, 545),
+('A1317011', '$2y$10$/uh9ToOmNP3VzYTpC8C0a.Sfm9/Z4HRVy2pC/XVltojjl7bwn4rM6', '2020-01-16 08:48:08', NULL, 561),
+('A1317012', '$2y$10$jBrWB3roKRtYaGMiuVW3le/Zc4Y6cAkIL0NHt4sa8u56/YgTwVfsG', '2020-01-16 08:48:08', NULL, 608),
+('A1317013', '$2y$10$30G/bzR2yUmuIrJohv7zSesTli4ZSTMHlmyTE0/NZtcNY4JnoE.Re', '2020-01-16 08:48:08', NULL, 554),
+('A1317014', '$2y$10$QGHhXzx.ix201Zm6PqhSEeu9qWu2VcahF4FfSG7dO5bkxNkjyBr0O', '2020-01-16 08:48:08', NULL, 563),
+('A1317016', '$2y$10$syKCwApmep9GE2/M5hBume0klyNbSmQsswPCufSjvy5LiNt1Yx8M6', '2020-01-16 08:48:08', NULL, 549),
+('A1317017', '$2y$10$jKPQRHY2a50Mi.0ey88/hOpZX0K8ySgGuUf.j5dDeJgS49JXgLXgO', '2020-01-16 08:48:08', NULL, 533),
+('A1317018', '$2y$10$7kFtfaoc/jd3UU1b/qgFsuMyXLaeNQNcI1z9ufm7rBS9WjRokSY6O', '2020-01-16 08:48:08', NULL, 616),
+('A1317019', '$2y$10$vkycpSSJ64YKechMihs6U.Lr6sNS0QbPcZlxYn6M4K3DqahHVs8r2', '2020-01-16 08:48:08', NULL, 559),
+('A1317020', '$2y$10$dVGnPiE6JQ0VLemYNwiCv.Slc7VFve9j/xni6tclZIV8AtNdvLHhC', '2020-01-16 08:48:08', NULL, 603),
+('A1317021', '$2y$10$pNTvO0OHoV7acIfznEj2l.LUCG32Yn3VjpquCD0OfTKpV.548XY.2', '2020-01-16 08:48:08', NULL, 560),
+('A1317022', '$2y$10$cGSYaaQ5oPNlbyOMGb3YjOzmGC6RzcvszcDpsrmH/wGd4KeWQvFni', '2020-01-16 08:48:08', NULL, 570),
+('A1317023', '$2y$10$UvXH4hfoxeZ2JdaAfGuHZe8JWW/hd97IF20n1KtXKOOA5.K1Hs0BW', '2020-01-16 08:48:08', NULL, 564),
+('A1317025', '$2y$10$ZXO1JlNzY8ibAdWCvmvfbeYH6QnNtmqNYKJueSmtnla9My0B6jZ42', '2020-01-16 08:48:08', NULL, 586),
+('A1317026', '$2y$10$6phcqPEv45QtNyxIeSE6.eBZtIK3dzGFp6GUxI7SVdATeIGI/iFaG', '2020-01-16 08:48:08', NULL, 547),
+('A1317027', '$2y$10$GWCxtzLJsO2LiqIVIcwhjOz80cPv1w.uFeJ1JVnGC4/Hd0ZMtIvHS', '2020-01-16 08:48:08', NULL, 543),
+('A1317030', '$2y$10$CxjPYfJxvVFI7Zlw15aOSuW4aSGEvhSomPvnRtO.gbBnvE3RsaHim', '2020-01-16 08:48:08', NULL, 575),
+('A1317031', '$2y$10$nR9icaqYmBF0cunWovOjK.sCNvz7MkceicH8/5erADGNJvCDoUoZC', '2020-01-16 08:48:08', NULL, 568),
+('A1317033', '$2y$10$yKbDaQSpkp7KU91/aH2ri.GF3ktyoqHnchk2hu5vdkZvn4tcQ76Y6', '2020-01-16 08:48:08', NULL, 605),
+('A1317034', '$2y$10$KNWtG3jtg8tKqMjqRWvA0.Pmkzmq7QEy09R0mgtaMWlqOPBlf.aDu', '2020-01-16 08:48:08', NULL, 582),
+('A1317035', '$2y$10$CM3EdZ.Yh4z7xvyREDTlWu.GoD5Brfc9aCooInxFgY9jZD5hSMY7e', '2020-01-16 08:48:08', NULL, 578),
+('A1317036', '$2y$10$6E7Z2RXb4wL5CsCmEKShiuVv9uJxyO9xBJSbKMutIu02XxqAqxR5S', '2020-01-16 08:48:08', NULL, 589),
+('A1317037', '$2y$10$Nwgp/J6EqXdb0RT85/1UoOUKXWjEcmloLuyvYLBWqgOOIt53Xmx5W', '2020-01-16 08:48:08', NULL, 573),
+('A1317040', '$2y$10$XSteJ0ZSfvX.XY7hOMULrOWeVyK/Jh2F1DSK13cqQhaYd6MMvdIrG', '2020-01-16 08:48:08', NULL, 597),
+('A1317041', '$2y$10$kBa1f87gS54DIyuqcS0s3u/yKllOa0d1UQmkzNY4bkiuLz6uo8QSi', '2020-01-16 08:48:08', NULL, 536),
+('A1317042', '$2y$10$RHm/cBdH6jt968TXKtBqdO87XQ/B1P69rDA3hE.DaFTr6NCm/iBnK', '2020-01-16 08:48:08', NULL, 594),
+('A1317044', '$2y$10$5GQhLNK4rIE3VGsRNPwlO.uOoVRAeHbgdDIs8Vwh1AzHq7.vFf6uq', '2020-01-16 08:48:08', NULL, 609),
+('A1317045', '$2y$10$P9xMgkc.sljEPColELE10OkejYi5fBmjXIeKfvz3JZDyuAyrEiERO', '2020-01-16 08:48:08', NULL, 584),
+('A1317046', '$2y$10$oWsMDY4geRpiAnOirRF2YOyt.6yylBG.k0NmKcpqM5bKSSkzB0hXa', '2020-01-16 08:48:08', NULL, 569),
+('A1317047', '$2y$10$82O43/jO3/aSHiWGaDIBUuctNFvyQ8qbA8UC3VF186oXqvCRbQTuS', '2020-01-16 08:48:08', NULL, 574),
+('A1317048', '$2y$10$MQVVxEKWQ8fAYUA8tIt1V.N3SxmStZP1n2Ybr4XXL79/T8mvTdtCe', '2020-01-16 08:48:08', NULL, 600),
+('A1317050', '$2y$10$ChWBX0D4cMxHdVv9CIVq9O1lgcRQnFdL65cMVcfVCNs0kLiphPkeu', '2020-01-16 08:48:08', NULL, 541),
+('A1317051', '$2y$10$csb5Ippo9kR0GRH4W9Y2I.IX./nufb5bcRD5mnWfgUUTI0rBKAhau', '2020-01-16 08:48:08', NULL, 591),
+('A1317052', '$2y$10$ggTmJD5G4UUCZxkFxcBdqOX34p1fKywgLauF7IJgHJ/XACKeuWL/m', '2020-01-16 08:48:08', NULL, 593),
+('A1317054', '$2y$10$kQGSZ6coo/.o.m2lV9V8j.ULUb729tK1byJeDPo//mZrrAWc2otWG', '2020-01-16 08:48:08', NULL, 607),
+('A1317055', '$2y$10$JsI9BNKTklqXUercFZI/B.hgxd6paV2DjVntqBw6diob34Mu6d4ja', '2020-01-16 08:48:08', NULL, 534),
+('A1317056', '$2y$10$jFviTS4Hjb3nYRHz7eh7oeLmY8s9zbAwVCtWi3vszWorpuvvyCwAK', '2020-01-16 08:48:08', NULL, 606),
+('A1317057', '$2y$10$BQisUyv2u.UNGwOjJfAJ/.fNNzOTlVMeKr/jLnQBjWy/X7xBWf4j2', '2020-01-16 08:48:08', NULL, 580),
+('A1317058', '$2y$10$4Y9TyoIuc.S7.8EeA8F8.uyM2tr8zaw01WcOvvEuG89wag5HWV5LO', '2020-01-16 08:48:08', NULL, 531),
+('A1317060', '$2y$10$9cCm8LLwG.SoR.B8NE57Een.VSy.xzrCHinVfFOkU3HTEw.XfbUMi', '2020-01-16 08:48:08', NULL, 556),
+('A1317061', '$2y$10$yYRnJX2Xd/Bx1BXSiAXqqeW7mWeTU0bBb/BHPzYouxVUezDUuZ3Ce', '2020-01-16 08:48:08', NULL, 601),
+('A1317064', '$2y$10$ZD.rne95SPRsoiMU46jheuEUFFVABwaE0uqAsZqXTK3wrfx84NmZW', '2020-01-16 08:48:08', NULL, 540),
+('A1317065', '$2y$10$VO97UwkCbEgi2XhsLb0n7.GFNDUbgibyg0hwxKMj5INMBeYwfur36', '2020-01-16 08:48:08', NULL, 537),
+('A1317066', '$2y$10$tiSjjQPGQsDSuPQpSwvU5OlYA4g0svd8DBayA4J9HhGaQLgLvf18G', '2020-01-16 08:48:08', NULL, 585),
+('A1317067', '$2y$10$ZibP8.b8NGdtgWIvvy5UAe9dpYbQldbU1vd4EFKDP7kdwS04Nc1FW', '2020-01-16 08:48:08', NULL, 592),
+('A1317068', '$2y$10$sll4/YOODgIHbGeGimVMbuWIVgKzsXFIXGoB1gR29EOD261NTMxhO', '2020-01-16 08:48:08', NULL, 542),
+('A1317071', '$2y$10$4r/OOFMyyl/ng3h1Qv1MJuOoEMSGfKsundw/BfojFRYqiokQFfnP6', '2020-01-16 08:48:08', NULL, 604),
+('A1317073', '$2y$10$qrp81DUyLewKFkbyIZDzauloqkvOmtleCiJ4PJwjX2j.3Tnr81k2C', '2020-01-16 08:48:08', NULL, 576),
+('A1317074', '$2y$10$IVeHmks16w4lNNmUvuxb4OgAVosP4aG1WaTmYi4t0us29J8TrrG72', '2020-01-16 08:48:08', NULL, 577),
+('A1317075', '$2y$10$Xk0WnPAXpIOQ67iu1wPbIeXcj1v02490VOVXhDocIfLLfvB73ynSu', '2020-01-16 08:48:08', NULL, 615),
+('A1317076', '$2y$10$ZF26FRO.MGLRQsULKeke4Opd.cIMJanCy2as9qh13ACtMzRUnCNrO', '2020-01-16 08:48:08', NULL, 579),
+('A1317077', '$2y$10$nO7jtcYFSkhb6tcPXfBKIuhzZI7ubihP5GGeeVMRlPXlTd75NlWni', '2020-01-16 08:48:08', NULL, 612),
+('A1317078', '$2y$10$th09DKMG9bDCQAeaUoYQyO2uGKUuqR1Q2ur0BTiXZZwHYPmtKoh46', '2020-01-16 08:48:08', NULL, 596),
+('A1317079', '$2y$10$LMTwu42vstnMCXOKD/DUEuWf.DUB01zO.KmwkmAfTPMN6q6cPnbnO', '2020-01-16 08:48:08', NULL, 598),
+('A1317080', '$2y$10$rm5ZZW5uT2pxJsfaEhOitOilh4u5s0EgPkBPxBEVk64SDq.b2/8qa', '2020-01-16 08:48:08', NULL, 613),
+('A1317081', '$2y$10$dWRLHzYk9LkyrMwlkHYgueZwNedz7G4L4Wn/Q9krjXK1VpXRvFCLG', '2020-01-16 08:48:08', NULL, 532),
+('A1317082', '$2y$10$STnxHTrNUs6jbVIKvvTo6uzgWtuqAaLL1PelvN3P6Iq6VyfqYeD6W', '2020-01-16 08:48:08', NULL, 590),
+('A1317083', '$2y$10$8m7IwV3YDpswaPilrdq6eek8OnknIE43OCfou.8sQflEP7BnWLXBe', '2020-01-16 08:48:08', NULL, 553),
+('A1317086', '$2y$10$/iVfL5jAR3v3rOuqVFD7I.r.TTT2oRWvNdri/CLSwc5CGGQZnrd9i', '2020-01-16 08:48:08', NULL, 602),
+('A1317087', '$2y$10$mNs/VSavildVYNnYAWy5qOloPdgHCS5NAkS9xcNUoyVW5ugBprXmq', '2020-01-16 08:48:08', NULL, 588),
+('A1317088', '$2y$10$AvqqZzooN2gzXeVRkd16aeJPGkZEUAQhIVGpT/EqpFxgI64TcJjpu', '2020-01-16 08:48:08', NULL, 583),
+('A1317090', '$2y$10$j8t9PrRUqbNIM8E5XHK1rub11FgxJe.hkG4zYwziuGjWJKY243.LG', '2020-01-16 08:48:08', NULL, 546),
+('A1317092', '$2y$10$DW.94uHWZuNIsiapdnmFLePhxNM8Y9jPl2qw8EkQalpVP.xFnN0Le', '2020-01-16 08:48:08', NULL, 599),
+('A1317093', '$2y$10$HsZA9TIE9csQ3D0rOJe9sufVIaqHBOI9Ewu3XMCygA8FQVhnyboku', '2020-01-16 08:48:08', NULL, 610),
+('A1317094', '$2y$10$zNzqT56U18CCERWWZssTieQ0p5xUir43jPZ.cddHMKT1vP/sCDNUC', '2020-01-16 08:48:08', NULL, 539),
+('A1317096', '$2y$10$E1CNgdpvX0x1BsLmDrn8c.uRgsoDterby5PaVI/02h7BBzdKupFMG', '2020-01-16 08:48:08', NULL, 551),
+('A1317097', '$2y$10$84hjf88dQioAzbfbeVy4KeCvmPk3XJP4QeIiKQfvolGsyFrIfzf/K', '2020-01-16 08:48:08', NULL, 555),
+('A1317098', '$2y$10$lQk3AfuOjkMbK6pyHqLvwuI/zy/UM5CHvKx7C/EFkaBwxOTxSugly', '2020-01-16 08:48:08', NULL, 565),
+('A1317099', '$2y$10$zX1Mn1ZTiLCCoMa5ibRt3uWgoZ4kODpDImwoP9XyMcv9HT9p0LXaW', '2020-01-16 08:48:08', NULL, 566),
+('A1317100', '$2y$10$2Ntf9RGNS0Hythhl3LekH.R0T8SL40qRiuLS4kUuEH/V8T.dzwCUO', '2020-01-16 08:48:08', NULL, 535),
+('A1317101', '$2y$10$1xgIT9LsbZFfDqzpFeAGI.AgtrdMomMwgkSqf5EQWgIMNF9sFBBaC', '2020-01-16 08:48:08', NULL, 552),
+('A1317103', '$2y$10$Wj.El8oAYtcjGr2ySAthcuy2oJdlRhRDcfUpmQ.Iur9pibVmQdgNe', '2020-01-16 08:48:08', NULL, 572),
+('A1317104', '$2y$10$mvjntzhQRBgxGdq7n2sPR.q4k3fbJgw1nouYXxNkjltr1pLCH8kv2', '2020-01-16 08:48:08', NULL, 548),
+('A1317106', '$2y$10$dqAcEWcuuIuJVfFDdi3ZbeuZYmB5sTbuERsoPLn5arYa3AFJo8cJm', '2020-01-16 08:48:08', NULL, 544),
+('A1317107', '$2y$10$fbzvwx4JvdBVKFBeZNOZiON/OtToBBfZqOG.sQM02VkhCMl28hFNq', '2020-01-16 08:48:08', NULL, 557),
+('A1317108', '$2y$10$HtQWGBZYdpF/f8iCgDSTIOdNfLP1fnFxpZWt2e56D43l9ffvC3yiy', '2020-01-16 08:48:08', NULL, 558),
+('A1317109', '$2y$10$rdkXmkn8E7BECLOyCe/kUOK6bwwPCV9E2PYcJmfC7a.E/0dbwFwwG', '2020-01-16 08:48:08', NULL, 550),
+('A1317111', '$2y$10$JvhIwZAAUH4.bCO/XLILHeby/jaCjCqnLMWVY1Jt5SonT56.OhI/i', '2020-01-16 08:48:08', NULL, 538),
+('adhel_syaief@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 422),
+('adzani@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 436),
+('agustiannoor@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 431),
+('angkasa@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 407),
+('arif@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 405),
+('blogprakerin@politala.ac.id', '$2y$10$.KJEr3kVLtJbtjkgskOHW.k1cHm.94bmrCUPauWncuRGbX4D9bKU.', '2020-01-22 07:31:48', NULL, 621),
+('dosendua@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 530),
+('dosen_satu@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 529),
+('emalestari@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 430),
+('fathurrahmani@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 420),
+('fatimah@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 439),
+('hafizd@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 427),
+('hendrik.tomo@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 415),
+('herfia.rhomadhona@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 402),
+('herpendi@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 429),
+('ika.kusuma.n@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 408),
+('imron@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 426),
+('jakapermadi.88@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 432),
+('jaka_dj@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 440),
+('jefriadi@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 433),
+('kurnia.2a@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 412),
+('kuswoyoanton@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 418),
+('mariatul@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 434),
+('marlia@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 401),
+('meldayanoor@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 438),
+('mindradarmawan@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 435),
+('mufrida@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 437),
+('muhammadnoor@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 425),
+('ninahairiyah@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 411),
+('nuryati@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 419),
+('ra.amalia.rizki@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 404),
+('radna@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 406),
+('redhy@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 413),
+('reza@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 421),
+('rsayyidati@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 424),
+('rusumintosyahyuniar@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 417),
+('sandri@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 410),
+('simpkl@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 442),
+('sukma@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 416),
+('titikwijayati@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-17 02:51:13', NULL, 620),
+('veri@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 441),
+('wanyuliyanti@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 403),
+('winda@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 428),
+('wiwik.kusrini@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 414),
+('yuliananingsih@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 423),
+('yunitaprastya@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 409);
 
-INSERT INTO `tb_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES ('1', '-'),
-('2', 'Direktur'),
-('3', 'Wakil Direktur Bidang Akademik'),
-('4', 'Wakil Direktur Bidang Umum Dan Keuangan'),
-('5', 'Wakil Direktur Bidang Kemahasiswaan, Kerjasama Dan Sistem Informasi'),
-('6', 'Ketua Jurusan Teknik Informatika'),
-('7', 'Sekretaris Jurusan Teknik Informatika'),
-('8', 'Ketua Jurusan Mesin Otomotif'),
-('9', 'Sekretaris Jurusan Mesin Otomotif'),
-('10', 'Ketua Jurusan Teknologi Industri Pertanian'),
-('11', 'Sekretaris Jurusan Teknologi Industri Pertanian'),
-('12', 'Kepala Pusat Penelitian & Pengabdian Masyarakat'),
-('13', 'Sekretaris P3M Bidang Pengabdian Masyarakat'),
-('15', 'Kepala P4MP Bidang Penelitian'),
-('17', 'Kepala UPT Perpustakaan'),
-('18', 'Kepala UPT Bahasa'),
-('19', 'Kepala UPT Kewirausahaan'),
-('20', 'Kepala UPT Teknologi Informasi Dan Komunikasi');
+-- --------------------------------------------------------
 
-INSERT INTO `tb_jenis_kuisioner` (`id_jenis_kuisioner`, `id_status_pkl`, `jenis_kuisioner`, `key_api_kuisioner`, `url_kuisioner`) VALUES ('10', NULL, 'review_perusahaan', NULL, NULL),
-('11', NULL, 'pemonitoring', NULL, NULL);
+--
+-- Table structure for table `tb_data_kuisioner`
+--
 
-INSERT INTO `tb_jenis_surat` (`id_jenis_surat`, `nama_jenis_surat`, `suffix_no_surat`) VALUES ('1', 'Permohonan Magang', '/PL40/PK.01.06/'),
-('2', 'Tugas Monev', '');
+CREATE TABLE IF NOT EXISTS `tb_data_kuisioner` (
+  `id_data_kuisioner` int(11) NOT NULL,
+  `id_jenis_kuisioner` varchar(20) DEFAULT NULL,
+  `soal_kuisioner` mediumtext,
+  `jawaban_kuisioner` mediumtext
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
-INSERT INTO `tb_kabupaten_kota` (`id_kab_kota`, `id_provinsi`, `nama_kab_kota`) VALUES ('1101', '11', 'KABUPATEN SIMEULUE'),
+--
+-- Dumping data for table `tb_data_kuisioner`
+--
+
+INSERT INTO `tb_data_kuisioner` (`id_data_kuisioner`, `id_jenis_kuisioner`, `soal_kuisioner`, `jawaban_kuisioner`) VALUES
+(1, '10', 'Perusahaan Menjajikan Untuk Berkerja DIsana Setelah PKL', NULL),
+(2, '10', 'Perusahaan Memiliki Konsep Dalam Mendidik Mahasiswa PKL', NULL),
+(3, '11', 'Bagaimana keadaan mahasiswa kami di sini (kerja, inisiatif dan etika, dll) ?', NULL),
+(4, '11', 'Melihat dari mhs PKL kami, kira-kira masukan (evaluasi/saran) apa yang perlu kami lakukan dalam pelaksanaan PKL dan maupun proses pembelajaran ?', NULL),
+(5, '11', 'Materi- materi apa saja yang kira-kira perlu ditekankan kepada mahasiswa kami terutama dalam menghadapi kegiatan PKL dan dunia kerja? (khusus perusahaan /instansi yang bersangkutan) ?', NULL),
+(6, '11', 'Apakah kedepan, perusahaan bapak bersedia menerima kembali mahasiswa kami untuk PKL disini?', NULL),
+(7, '11', 'Informasi lain yang dianggap perlu silahkan ditambahkan', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_dosen`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_dosen` (
+  `id` int(11) NOT NULL,
+  `nip_nik` varchar(20) DEFAULT NULL,
+  `id_program_studi` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_dosen`
+--
+
+INSERT INTO `tb_dosen` (`id`, `nip_nik`, `id_program_studi`) VALUES
+(67, '160201153', 'PST001'),
+(68, '09081015', 'PST001'),
+(69, '140102098', 'PST001'),
+(70, '120102079', 'PST001'),
+(71, '090801016', 'PST001'),
+(72, '160201151', 'PST001'),
+(74, '160801168', 'PST001'),
+(76, '150203104', 'PST001'),
+(78, '140825117', 'PST001'),
+(81, '140814113', 'PST001'),
+(82, '199007112015041001', 'PST001'),
+(83, '090801031', 'PST001'),
+(84, '150801145', 'PST001'),
+(85, '120102070', 'PST001'),
+(86, '110103048', 'PST001'),
+(87, '197006071995122003', 'PST001');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_dosen_bimbingan_mhs`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_dosen_bimbingan_mhs` (
+  `id_dosen_bimbingan_mhs` int(11) NOT NULL,
+  `id_tahun_akademik` varchar(50) DEFAULT NULL,
+  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
+  `nim` varchar(10) DEFAULT NULL,
+  `nip_nik` varchar(20) DEFAULT NULL,
+  `judul_laporan_mhs` varchar(100) DEFAULT NULL,
+  `status_judul` enum('ulang','setuju') DEFAULT NULL,
+  `status_seminar` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=332 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_dosen_bimbingan_mhs`
+--
+
+INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akademik`, `id_mhs_pilih_perusahaan`, `nim`, `nip_nik`, `judul_laporan_mhs`, `status_judul`, `status_seminar`) VALUES
+(237, 'TA002', 53, 'A1317104', '160201153', 'SIMA (Sistem Informasi Management Audit) Inventory Pada  PT. Trio Motor Berbasis Web', 'setuju', 'setuju'),
+(238, 'TA002', 38, 'A1317096', '160201153', 'Sistem Informasi Manajemen Stok Barang Berbasis Web PT. Nogopatmolo (Cabang Dari PT. Gagah Putera Sa', 'setuju', 'setuju'),
+(239, 'TA002', 39, 'A1317101', '160201153', 'Sistem Informasi Data Cuti Berbasis Web pada PT.Gagah Putera Satria', 'setuju', 'setuju'),
+(240, 'TA002', 45, 'A1317082', '09081015', 'Aplikasi Kontrol Deadline Pembuatan Berita Di Radar Banjarmasin Berbasis WEB', 'setuju', 'setuju'),
+(241, 'TA002', 44, 'A1317051', '09081015', 'Aplikasi Pengarsipan Berita pada Koran Harian Radar Banjarmasin Berbasis Web', 'setuju', 'setuju'),
+(242, 'TA002', 55, 'A1317002', '09081015', 'Sistem Manajemenn check in/out camp nirwana pandansari pada PT. Darma Henwa,Tbk- ACP', 'setuju', 'setuju'),
+(244, 'TA002', 27, 'A1317040', '160801168', 'Aplikasi Pengajuan Cuti Online Karyawan PT Jhonlin Group Batulicin', 'setuju', 'setuju'),
+(245, 'TA002', 29, 'A1317079', '160801168', 'E-Arsip PT.Jhonlin Group', 'setuju', 'setuju'),
+(246, 'TA002', 28, 'A1317092', '160801168', 'Sistem Pengajuan User Id Registration', 'setuju', 'setuju'),
+(247, 'TA002', 24, 'A1317048', '160801168', 'Pengembangan Sistem Informasi Rawa BaTIK (Ruang Aktivitas Warga Belajar Aplikasi dan TIK) Fitur Open', 'setuju', 'setuju'),
+(248, 'TA002', 25, 'A1317061', '160801168', 'Pengembangan Sistem Informasi Rawa BaTIK (Ruang Aktivitas Warga Belajar Aplikasi dan TIK) Fasilita P', 'setuju', 'setuju'),
+(249, 'TA002', 26, 'A1317086', '160801168', 'Pengembangan Sistem Informasi Rawa Batik (Ruang Aktiviitas Warga Belajar Aplikasi dan TIK) Fitur Pen', 'setuju', 'setuju'),
+(250, 'TA002', 37, 'A1317058', '090801031', 'Aplikasi Pengarsipan Dokumen pada LPSE Kabupaten Tanah Laut', 'setuju', 'setuju'),
+(251, 'TA002', 23, 'A1317081', '090801031', 'Aplikasi Pembongkaran Tusbung (KARBUNG) PT. PLN (PERSERO) Unit Layanan Pelanggan (ULP) Pelaihari Ber', 'setuju', 'setuju'),
+(252, 'TA002', 35, 'A1317017', '090801031', 'Aplikasi amandemen laporan survey eksport pada PT. SUCOFINDO (persero) cabang banjarmasin berbasis w', 'setuju', 'setuju'),
+(254, 'TA002', 42, 'A1317097', '110103048', 'Sistem Informasi Keluar Masuk Barang dari Gudang WH TA SO 1 PT Telkom Akses Nagasari berbasis Web', 'setuju', 'setuju'),
+(255, 'TA002', 46, 'A1317021', '090801016', 'Aplikasi e - Announcement  Berbasis Web pada PT. Geoinfo Teknologi Banjarmasin', 'setuju', 'setuju'),
+(256, 'TA002', 36, 'A1317083', '110103048', 'Sistem Informasi Layanan dalam Kredit Mobil Berbasis Web PT. Sumber Berlian Motors', 'setuju', 'setuju'),
+(258, 'TA002', 43, 'A1317060', '110103048', 'Sistem Informasi Peminjaman Mobil Pada PT.Telkom Akses Nagasari Banjarmasin Berbasis Web', 'setuju', 'setuju'),
+(259, 'TA002', 57, 'A1317003', '160201151', 'Aplikasi Portopolio Kinerja Tenaga Kontrak Berbasis Web Mobile', 'setuju', 'setuju'),
+(260, 'TA002', 56, 'A1317031', '160201151', 'Sistem Informasi Penyelenggaraan E-Government Berbasis Web', 'setuju', 'setuju'),
+(261, 'TA002', 58, 'A1317046', '160201151', 'Aplikasi Arsip Surat Masuk Surat Keluar Berbasis Web Pada Dinas Komunikasi dan Informatika Kabupaten', 'setuju', 'setuju'),
+(262, 'TA002', 66, 'A1317037', '150203104', 'Aplikasi Guest Book Dinas Komunikasi dan Informatika Provinsi Kalimantan Selatan', 'setuju', 'setuju'),
+(263, 'TA002', 67, 'A1317047', '150203104', 'Aplikasi e-DUPAK Dinas Komunikasi dan Informatika Provinsi Kalimantan Selatan Berbasis Web', 'setuju', 'setuju'),
+(264, 'TA002', 41, 'A1317030', '150203104', 'Sistem Informasi Pedoman Pembuatan Surat Di Dinas Komunikasi dan Informatika  Kota Banjarbaru', 'setuju', 'setuju'),
+(265, 'TA002', 40, 'A1317073', '150203104', 'Buku Tamu Berbasis Web Pada Dinas Komunikasi dan Informatika Kota Banjarbaru', 'setuju', 'setuju'),
+(266, 'TA002', 50, 'A1317034', '150801145', 'Aplikasi Pelayanan Bagasi Di PT. Angkasa Pura I (Persero) Bandar Udara Internasional Syamsudin Noor', 'setuju', 'setuju'),
+(267, 'TA002', 49, 'A1317088', '150801145', 'Aplikasi Ujian TIM (Tanda Izin Mengemudi) Online di PT. Angkasa Pura I (Persero)', 'setuju', 'setuju'),
+(268, 'TA002', 32, 'A1317008', '120102070', 'Sistem Informasi DLPD PT.PLN (persero) UIW KSKT UP3 Banjarmasin ULP Banjarbaru', 'setuju', 'setuju'),
+(269, 'TA002', 34, 'A1317087', '120102070', 'sistem informasi ganti meter PT.PLN (Persero) UIW KSKT UP3 Banjarmasin ULP Banjarbaru', 'setuju', 'setuju'),
+(270, 'TA002', 33, 'A1317036', '120102070', 'Sistem informasi penyimpanan berkas printah kerja PT.PLN (Persero) UIW KSKT Up3 Banjarmasin ULP Banj', 'setuju', 'setuju'),
+(271, 'TA002', 48, 'A1317090', '140814113', 'Sistem Informasi Penelitian dan Pengabdian Kepada Masyarakat Berbasis Web', 'setuju', 'setuju'),
+(272, 'TA002', 47, 'A1317010', '140814113', 'Sistem Informasi Kajian Opini Publik Pada BPSDMP Kominfo Banjarmasin Berbasis Web ', 'setuju', 'setuju'),
+(273, 'TA002', 1, 'A1317041', '140825117', 'Aplikasi Pelaksanaan Pemeriksaan Harian (P2H) Unit A2B dan Truck Production Online pada PT. Kalimant', 'setuju', 'setuju'),
+(274, 'TA002', 63, 'A1317064', '140102098', 'Sistem Informasi Akademik United Tractors School Berbasis Web pada PT. United Tractors Tbk Cabang Ba', 'setuju', 'setuju'),
+(275, 'TA002', 62, 'A1317050', '140102098', 'Sistem Informasi  Monthly Instructor Utility And Development Record Berbasis Web Di PT United Tracto', 'setuju', 'setuju'),
+(277, 'TA002', 31, 'A1317027', '140102098', 'Sistem Informasi Survey Icare Sales Dan SA (Service Advisor) Toyota Auto2000 Banjarmasin Berbasis We', 'setuju', 'setuju'),
+(278, 'TA002', 30, 'A1317068', '140102098', 'SISTEM INFORMASI MANAGEMENT COMPLAINT CUSTOMER BERBASIS WEB DI AUTO2000 BANJARMASIN', 'setuju', 'setuju'),
+(279, 'TA002', 61, 'A1317111', '140102098', 'Sistem Informasi Utilisasi Mobil Dan Service PT Cipta Krida Bahari Banjarmasin Berbasis Web', 'setuju', 'setuju'),
+(280, 'TA002', 60, 'A1317094', '140102098', 'Aplikasi Manual Tracking Outbond Pada PT. Cipta Krida Bahari Berbasis Web', 'setuju', 'setuju'),
+(281, 'TA002', 54, 'A1317078', '09081015', 'Sistem Manajemen Check In/Out Camp Nirwana Pandansari Pada PT. Darma Henwa,Tbk-ACP', 'setuju', 'setuju'),
+(282, 'TA002', 999, 'A1317042', '09081015', 'Aplikasi Pelaporan Surat Perintah Perjalanan Dinas (SPPD) Pada PT PLN (Persero) UP2B Kalimantan', 'setuju', 'setuju'),
+(283, 'TA002', 998, 'A1317052', '09081015', 'Alat Monitoring Arus dan Tegangan Supplay DC Gardu Induk PT PLN (Persero) UP2B Kalimantan Berbasis A', 'setuju', 'setuju'),
+(284, 'TA002', 1007, 'A1317055', '140825117', 'Sistem Informasi Data Karyawan Berbasis Web Php', 'setuju', 'setuju'),
+(286, 'TA002', 1032, 'A1317106', '140814113', 'Sistem Informasi Perpustakaan pada Badan Penelitian Sumber Daya Manusia Komunikasi dan Informatika( ', 'setuju', 'setuju'),
+(287, 'TA002', 1022, 'A1317026', '160201153', 'SIMA (Sistem Informasi Management Audit) Inventory pada PT. Trio Motor berbasis Mobile ', 'setuju', 'setuju'),
+(288, 'TA002', 1037, 'A1317016', '160201153', 'Sistem Informasi Point of Sales dan Inventory Pada Amanah Borneo Park Berbasis Web', 'setuju', 'setuju'),
+(289, 'TA002', 1036, 'A1317109', '160201153', 'APLIKASI SAFETY ACCOUNTABILITY PROGRAM (SAP) PADA PT. AMANAH ANUGERAH ADI MULIA SITE KINTAP', 'setuju', 'setuju'),
+(290, 'TA002', 1024, 'A1317013', '110103048', 'Aplikasi Perhitungan Upah Premi Mekanik PT. Sumber Berlian Motors Berbasis Web', 'setuju', 'setuju'),
+(291, 'TA002', 1001, 'A1317107', '110103048', 'Sistem Informasi Masuk Ruangan (SIMARU)', 'setuju', 'setuju'),
+(292, 'TA002', 1000, 'A1317108', '110103048', 'Sistem Informasi Masuk Ruangan (SIMARU)', 'setuju', 'setuju'),
+(293, 'TA002', 1018, 'A1317019', '090801016', 'Aplikasi e-Announcement Berbasis Web Pada PT. Geoinfo Teknologi Banjarmasin', 'setuju', 'setuju'),
+(294, 'TA002', 1013, 'A1317006', '090801016', 'SISTEM MONITORING APAR PLTA/D GUNUNG BAMEGA DENGAN QR CODE ONLINE BERBASIS WEB (SI MONTAIN)', 'setuju', 'setuju'),
+(295, 'TA002', 1014, 'A1317014', '090801016', 'Sistem Informasi ULPLTA/D Gunung Bamega berbasis Web', 'setuju', 'setuju'),
+(296, 'TA002', 1015, 'A1317023', '090801016', 'Sistem Informasi Perpustakaan UL PLTA/D Gunung Bamega bebasis web', 'setuju', 'setuju'),
+(297, 'TA002', 1005, 'A1317098', '160201151', 'Aplikasi Logbook IT PT. Mitra Megah Profitamas (Mitra Suzuki) Berbasis Mobile ', 'setuju', 'setuju'),
+(298, 'TA002', 1004, 'A1317099', '160201151', 'Aplikasi Logbook IT PT. Mitra Megah Profitamas (Mitra Suzuki) Berbasis Mobile', 'setuju', 'setuju'),
+(299, 'TA002', 1003, 'A1317005', '150203104', 'SISTEM INFORMASI INVENTARIS GUDANG BERBASIS WEB PADA PT. PLN (PERSERO) UNIT INDUK WILAYAH KALIMANTAN', 'setuju', 'setuju'),
+(300, 'TA002', 1002, 'A1317103', '150203104', 'Sistem Informasi Inventaris Gudang Berbasis Web Pada PT. PLN (Persero) Unit Induk Wilayah Kalimantan', 'setuju', 'setuju'),
+(301, 'TA002', 1008, 'A1317074', '150801145', 'Sistem Informasi Geografis Customer PT. Indonesia Comnets Plus Kantor Perwakilan Kalimantan Selatan', 'setuju', 'setuju'),
+(302, 'TA002', 1012, 'A1317035', '150801145', 'Sistem Informasi Marketing dan Sales Pada PT. Indonesia Comnets Plus (ICON+) Kantor Perwakilan Kalim', 'setuju', 'setuju'),
+(303, 'TA002', 1011, 'A1317076', '150801145', 'APLIKASI IBOX (INTEGRATED BUSINESS OPERATION EXCELLENCE) BERBASIS WEB PADA PT INDONESIA COMNETS PLUS', 'setuju', 'setuju'),
+(304, 'TA002', 1009, 'A1317009', '150801145', 'INTEGRATED BUSINESS OPERATION EXCELLENCE (IBOX) BERBASIS WEB PADA PT INDONESIA COMNETS PLUS KANTOR P', 'setuju', 'setuju'),
+(305, 'TA002', 1042, 'A1317045', '120102070', 'Sistem Informasi Absensi Karyawan dengan Qrcode dan Geolocation Berbasis Web pada CV. Fast Media Kom', 'setuju', 'setuju'),
+(306, 'TA002', 1040, 'A1317066', '120102070', 'Sistem Informasi E-kinerja Karyawan Berbasis Web pada CV. Fast Media Komputindo', 'setuju', 'setuju'),
+(307, 'TA002', 1041, 'A1317025', '120102070', 'Aplikasi Manajemen Proyek (APRO) Berbasis Web Pada CV. Fast Media Komputindo', 'setuju', 'setuju'),
+(308, 'TA002', 1045, 'A1317067', '09081015', 'Konfigurasi Jalur Komunikasi Arus Dan Tegangan Supplay DC Menggunakan Protokol Modbus Pada SCADA PT ', 'setuju', 'setuju'),
+(309, 'TA002', 1027, 'A1317033', '120102079', 'SISTEM INFORMASI HUMAN RESOURCE GENERAL AFFAIR (HRGA) CUTI PADA PT.BORNEO INDOBARA ', 'setuju', 'setuju'),
+(310, 'TA002', 1048, 'A1317054', '120102079', 'Sistem Informasi Human Resources And General Affair (HRGA) Karyawan Dan Pelatihan Pada PT. Borneo In', 'setuju', 'setuju'),
+(311, 'TA002', 1028, 'A1317056', '120102079', 'Sistem Informasi Human Resources and General Affair (HRGA) Pada PT. Borneo Indobara', 'setuju', 'setuju'),
+(312, 'TA002', 1020, 'A1317012', '120102079', 'Aplikasi Digimart Pada PT United Tractors, Tbk Site Satui', 'setuju', 'setuju'),
+(313, 'TA002', 1019, 'A1317044', '120102079', 'Pengembangan  Aplikasi Digifood Pada PT United Tractors Tbk Site Satui Berbasis Web Mobile', 'setuju', 'setuju'),
+(314, 'TA002', 1033, 'A1317001', '199007112015041001', 'Aplikasi MFB(Manajement Fly ash Bottom ash) pada PT PLN (Persero) Berbasis Web', 'setuju', 'setuju'),
+(315, 'TA002', 1035, 'A1317077', '199007112015041001', 'Aplikasi D.E.R.I System (Direct Engineering Reliability Identification System) pada PT PLN (Persero)', 'setuju', 'setuju'),
+(316, 'TA002', 1034, 'A1317080', '199007112015041001', 'Aplikasi Perhitungan OPEX (Operational Expenses) Berbasis Web Pada PT PLN (persero) Unit Pelaksana P', 'setuju', 'setuju'),
+(317, 'TA002', 1038, 'A1317075', '199007112015041001', 'PENGEMBANGAN BACK END APLIKASI PHINEMO MARKETPLACE PADA PT. PHINEMO KREASI MEDIA SEMARANG', 'setuju', 'setuju'),
+(318, 'TA002', 1039, 'A1317004', '199007112015041001', 'PENGEMBANGAN FRONT END APLIKASI PHINEMO MARKETPLACE PADA PT. PHINEMO KREASI MEDIA SEMARANG', 'setuju', 'setuju'),
+(320, 'TA002', 1010, 'A1317057', '150801145', 'APLIKASI IBOX (INTEGRATED BUSINESS OPERATION EXCELLENCE) BERBASIS WEB PADA PT. INDONESIA COMNETS PLU', 'setuju', 'setuju'),
+(321, 'TA002', 1017, 'A1317011', '090801016', 'Aplikasi e-Announcement Berbasis Web Pada PT. Geoinfo Teknologi Banjarmasin', 'setuju', 'setuju'),
+(322, 'TA002', 1049, 'A1317022', '160201151', 'Aplikasi RAPI (Review Activity and Project Issue)  pada PT.  Pamapersada Nusantara Distrik ARIA berb', 'setuju', 'setuju'),
+(324, 'TA002', 59, 'A1317065', '140825117', 'Aplikasi pelaksanaan pemeriksaan harian (p2h) unit A2B dan truck production online pada PT. Kalimant', 'setuju', 'setuju'),
+(326, 'TA002', 1052, 'A1317020', '120102079', 'APLIKASI FOOD COURT BERBASIS WEB PADA PT. PUTRA PERKASA ABADI SITE BIB (GIRIMULYA) ', 'setuju', 'setuju'),
+(327, 'TA002', 1051, 'A1317071', '120102079', 'Sistem Informasi Pendataan Karyawan Penghuni Mess pada PT. Putra Perkasa Abadi site BIB (Giri Mulya)', 'setuju', 'setuju'),
+(330, 'TA002', 1006, 'A1317100', '140825117', 'Aplikasi Peminjaman Tools berbasis web pada PT. United Tractors Site Rantau', 'setuju', 'setuju'),
+(331, 'TA002', 1050, 'A1317093', '199007112015041001', 'Aplikasi Bank Sampah PT Arutmin Indonesia Tambang Kintap Berbasis Web', 'setuju', 'setuju');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_ga_component`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_ga_component` (
+  `id` int(11) NOT NULL,
+  `ruangan` varchar(255) DEFAULT NULL,
+  `waktu` varchar(255) DEFAULT NULL,
+  `penguji1` varchar(255) DEFAULT NULL,
+  `penguji2` varchar(255) DEFAULT NULL,
+  `tanggal` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_golongan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_golongan` (
+  `id_golongan` int(11) NOT NULL,
+  `nama_golongan` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_history_judul`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_history_judul` (
+  `id` int(11) NOT NULL,
+  `judul` text,
+  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_history_judul`
+--
+
+INSERT INTO `tb_history_judul` (`id`, `judul`, `id_dosen_bimbingan_mhs`) VALUES
+(3, 'sistem informasi hrga bib', 309);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_history_pemilihan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_history_pemilihan` (
+  `id` int(11) unsigned NOT NULL,
+  `id_perusahaan` int(11) DEFAULT NULL,
+  `nim` varchar(10) DEFAULT NULL,
+  `nomor_surat` mediumtext
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_history_pemilihan`
+--
+
+INSERT INTO `tb_history_pemilihan` (`id`, `id_perusahaan`, `nim`, `nomor_surat`) VALUES
+(7, 69, 'A1317047', NULL),
+(8, 109, 'A1317042', NULL),
+(9, 109, 'A1317052', NULL),
+(10, 69, 'A1317037', NULL),
+(11, 89, 'A1317003', NULL),
+(12, 89, 'A1317046', NULL),
+(13, 109, 'A1317052', NULL),
+(14, 109, 'A1317042', NULL),
+(15, 77, 'A1317014', NULL),
+(16, 77, 'A1317023', NULL),
+(17, 77, 'A1317006', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_history_seminar_penilaian`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_history_seminar_penilaian` (
+  `id` int(11) NOT NULL,
+  `id_seminar_penilaian` int(11) DEFAULT NULL,
+  `nilai_seminar` varchar(25) DEFAULT NULL,
+  `detail_nilai_seminar` text,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_jabatan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_jabatan` (
+  `id_jabatan` int(11) NOT NULL,
+  `nama_jabatan` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_jabatan`
+--
+
+INSERT INTO `tb_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
+(1, '-'),
+(2, 'Direktur'),
+(3, 'Wakil Direktur Bidang Akademik'),
+(4, 'Wakil Direktur Bidang Umum Dan Keuangan'),
+(5, 'Wakil Direktur Bidang Kemahasiswaan, Kerjasama Dan Sistem Informasi'),
+(6, 'Ketua Jurusan Teknik Informatika'),
+(7, 'Sekretaris Jurusan Teknik Informatika'),
+(8, 'Ketua Jurusan Mesin Otomotif'),
+(9, 'Sekretaris Jurusan Mesin Otomotif'),
+(10, 'Ketua Jurusan Teknologi Industri Pertanian'),
+(11, 'Sekretaris Jurusan Teknologi Industri Pertanian'),
+(12, 'Kepala Pusat Penelitian & Pengabdian Masyarakat'),
+(13, 'Sekretaris P3M Bidang Pengabdian Masyarakat'),
+(15, 'Kepala P4MP Bidang Penelitian'),
+(17, 'Kepala UPT Perpustakaan'),
+(18, 'Kepala UPT Bahasa'),
+(19, 'Kepala UPT Kewirausahaan'),
+(20, 'Kepala UPT Teknologi Informasi Dan Komunikasi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_jawaban_kuisioner`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_jawaban_kuisioner` (
+  `id_jawaban_kuisioner` int(11) NOT NULL,
+  `id_data_kuisioner` int(11) NOT NULL,
+  `nip_nik` int(11) DEFAULT NULL,
+  `id_perusahaan` int(11) DEFAULT NULL,
+  `jawaban` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_jenis_surat`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_jenis_surat` (
+  `id_jenis_surat` int(11) NOT NULL,
+  `nama_jenis_surat` varchar(100) DEFAULT NULL,
+  `suffix_no_surat` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_jenis_surat`
+--
+
+INSERT INTO `tb_jenis_surat` (`id_jenis_surat`, `nama_jenis_surat`, `suffix_no_surat`) VALUES
+(1, 'Permohonan Magang', '/PL40/PK.01.06/'),
+(2, 'Tugas Monev', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_kabupaten_kota`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_kabupaten_kota` (
+  `id_kab_kota` varchar(30) NOT NULL,
+  `id_provinsi` varchar(30) DEFAULT NULL,
+  `nama_kab_kota` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_kabupaten_kota`
+--
+
+INSERT INTO `tb_kabupaten_kota` (`id_kab_kota`, `id_provinsi`, `nama_kab_kota`) VALUES
+('1101', '11', 'KABUPATEN SIMEULUE'),
 ('1102', '11', 'KABUPATEN ACEH SINGKIL'),
 ('1103', '11', 'KABUPATEN ACEH SELATAN'),
 ('1104', '11', 'KABUPATEN ACEH TENGGARA'),
@@ -1574,7 +1203,24 @@ INSERT INTO `tb_kabupaten_kota` (`id_kab_kota`, `id_provinsi`, `nama_kab_kota`) 
 ('9436', '94', 'KABUPATEN DEIYAI'),
 ('9471', '94', 'KOTA JAYAPURA');
 
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('1101010', '1101', 'TEUPAH SELATAN'),
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_kecamatan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_kecamatan` (
+  `id_kecamatan` varchar(30) NOT NULL,
+  `id_kab_kota` varchar(30) DEFAULT NULL,
+  `nama_kecamatan` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_kecamatan`
+--
+
+INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES
+('1101010', '1101', 'TEUPAH SELATAN'),
 ('1101020', '1101', 'SIMEULUE TIMUR'),
 ('1101021', '1101', 'TEUPAH BARAT'),
 ('1101022', '1101', 'TEUPAH TENGAH'),
@@ -2133,7 +1779,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('1214070', '1214', 'LOLOMATUA'),
 ('1214071', '1214', 'ULUNOYO'),
 ('1214072', '1214', 'HURUNA'),
-('1214080', '1214', 'LOLOWA\'U'),
+('1214080', '1214', 'LOLOWA''U'),
 ('1214081', '1214', 'HILIMEGAI'),
 ('1214082', '1214', 'OOU'),
 ('1214083', '1214', 'ONOHAZUMBA'),
@@ -2573,9 +2219,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('1406020', '1406', 'XIII KOTO KAMPAR'),
 ('1406021', '1406', 'KOTO KAMPAR HULU'),
 ('1406030', '1406', 'KUOK'),
-('1406031', '1406', 'SALO');
-
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('1406040', '1406', 'TAPUNG'),
+('1406031', '1406', 'SALO'),
+('1406040', '1406', 'TAPUNG'),
 ('1406041', '1406', 'TAPUNG HULU'),
 ('1406042', '1406', 'TAPUNG HILIR'),
 ('1406050', '1406', 'BANGKINANG KOTA'),
@@ -3030,7 +2675,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('1673030', '1673', 'PAGAR ALAM SELATAN'),
 ('1673040', '1673', 'PAGAR ALAM UTARA'),
 ('1674011', '1674', 'LUBUK LINGGAU BARAT I'),
-('1674012', '1674', 'LUBUK LINGGAU BARAT II'),
+('1674012', '1674', 'LUBUK LINGGAU BARAT II');
+INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES
 ('1674021', '1674', 'LUBUK LINGGAU SELATAN I'),
 ('1674022', '1674', 'LUBUK LINGGAU SELATAN II'),
 ('1674031', '1674', 'LUBUK LINGGAU TIMUR I'),
@@ -3574,9 +3220,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('3201140', '3201', 'BABAKAN MADANG'),
 ('3201150', '3201', 'SUKAMAKMUR'),
 ('3201160', '3201', 'CARIU'),
-('3201161', '3201', 'TANJUNGSARI');
-
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('3201170', '3201', 'JONGGOL'),
+('3201161', '3201', 'TANJUNGSARI'),
+('3201170', '3201', 'JONGGOL'),
 ('3201180', '3201', 'CILEUNGSI'),
 ('3201181', '3201', 'KELAPA NUNGGAL'),
 ('3201190', '3201', 'GUNUNG PUTRI'),
@@ -4568,16 +4213,16 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('3321030', '3321', 'GUNTUR'),
 ('3321040', '3321', 'SAYUNG'),
 ('3321050', '3321', 'KARANG TENGAH'),
-('3321060', '3321', 'BONANG'),
+('3321060', '3321', 'BONANG');
+INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES
 ('3321070', '3321', 'DEMAK'),
 ('3321080', '3321', 'WONOSALAM'),
 ('3321090', '3321', 'DEMPET'),
 ('3321091', '3321', 'KEBONAGUNG'),
 ('3321100', '3321', 'GAJAH'),
 ('3321110', '3321', 'KARANGANYAR'),
-('3321120', '3321', 'MIJEN');
-
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('3321130', '3321', 'WEDUNG'),
+('3321120', '3321', 'MIJEN'),
+('3321130', '3321', 'WEDUNG'),
 ('3322010', '3322', 'GETASAN'),
 ('3322020', '3322', 'TENGARAN'),
 ('3322030', '3322', 'SUSUKAN'),
@@ -5576,9 +5221,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('3603081', '3603', 'CISAUK'),
 ('3603120', '3603', 'PASARKEMIS'),
 ('3603121', '3603', 'SINDANG JAYA'),
-('3603130', '3603', 'BALARAJA');
-
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('3603131', '3603', 'JAYANTI'),
+('3603130', '3603', 'BALARAJA'),
+('3603131', '3603', 'JAYANTI'),
 ('3603132', '3603', 'SUKAMULYA'),
 ('3603140', '3603', 'KRESEK'),
 ('3603141', '3603', 'GUNUNG KALER'),
@@ -5779,7 +5423,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('5204132', '5204', 'MARONGE'),
 ('5204140', '5204', 'EMPANG'),
 ('5204141', '5204', 'TARANO'),
-('5205010', '5205', 'HU\'U'),
+('5205010', '5205', 'HU''U'),
 ('5205011', '5205', 'PAJO'),
 ('5205020', '5205', 'DOMPU'),
 ('5205030', '5205', 'WOJA'),
@@ -5904,7 +5548,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('5304081', '5304', 'FAUTMOLO'),
 ('5304082', '5304', 'FATUKOPA'),
 ('5304090', '5304', 'KIE'),
-('5304091', '5304', 'KOT\'OLIN'),
+('5304091', '5304', 'KOT''OLIN'),
 ('5304100', '5304', 'AMANATUN SELATAN'),
 ('5304101', '5304', 'BOKING'),
 ('5304102', '5304', 'NUNKOLO'),
@@ -6166,7 +5810,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('6102042', '6102', 'SUNGAI BETUNG'),
 ('6102050', '6102', 'LEDO'),
 ('6102051', '6102', 'SUTI SEMARANG'),
-('6102052', '6102', 'LUMAR'),
+('6102052', '6102', 'LUMAR');
+INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES
 ('6102060', '6102', 'SANGGAU LEDO'),
 ('6102061', '6102', 'TUJUHBELAS'),
 ('6102070', '6102', 'SELUAS'),
@@ -6293,7 +5938,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('6112010', '6112', 'BATU AMPAR'),
 ('6112020', '6112', 'TERENTANG'),
 ('6112030', '6112', 'KUBU'),
-('6112040', '6112', 'TELOK PA\'KEDAI'),
+('6112040', '6112', 'TELOK PA''KEDAI'),
 ('6112050', '6112', 'SUNGAI KAKAP'),
 ('6112060', '6112', 'RASAU JAYA'),
 ('6112070', '6112', 'SUNGAI RAYA'),
@@ -6577,9 +6222,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('6310040', '6310', 'KUSAN HULU'),
 ('6310041', '6310', 'KURANJI'),
 ('6310050', '6310', 'BATU LICIN'),
-('6310051', '6310', 'KARANG BINTANG');
-
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('6310052', '6310', 'SIMPANG EMPAT'),
+('6310051', '6310', 'KARANG BINTANG'),
+('6310052', '6310', 'SIMPANG EMPAT'),
 ('6310053', '6310', 'MANTEWE'),
 ('6311010', '6311', 'LAMPIHONG'),
 ('6311020', '6311', 'BATU MANDI'),
@@ -6822,7 +6466,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('7104041', '7104', 'BEO UTARA'),
 ('7104042', '7104', 'BEO SELATAN'),
 ('7104050', '7104', 'RAINIS'),
-('7104051', '7104', 'TAMPA NA\'MMA'),
+('7104051', '7104', 'TAMPA NA''MMA'),
 ('7104052', '7104', 'PULUTAN'),
 ('7104060', '7104', 'ESSANG'),
 ('7104061', '7104', 'ESSANG SELATAN'),
@@ -7128,7 +6772,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('7303020', '7303', 'BANTAENG'),
 ('7303021', '7303', 'EREMERASA'),
 ('7303030', '7303', 'TOMPOBULU'),
-('7303031', '7303', 'PA\'JUKUKANG'),
+('7303031', '7303', 'PA''JUKUKANG'),
 ('7303032', '7303', 'GANTARANGKEKE'),
 ('7304010', '7304', 'BANGKALA'),
 ('7304011', '7304', 'BANGKALA BARAT'),
@@ -7201,7 +6845,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('7309051', '7309', 'TONDONG TALLASA'),
 ('7309060', '7309', 'BUNGORO'),
 ('7309070', '7309', 'LABAKKANG'),
-('7309080', '7309', 'MA\'RANG'),
+('7309080', '7309', 'MA''RANG'),
 ('7309091', '7309', 'SEGERI'),
 ('7309092', '7309', 'MANDALLE'),
 ('7310010', '7310', 'TANETE RIAJA'),
@@ -7371,7 +7015,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('7326100', '7326', 'TIKALA'),
 ('7326110', '7326', 'SESEAN'),
 ('7326120', '7326', 'BALUSU'),
-('7326130', '7326', 'SA\'DAN'),
+('7326130', '7326', 'SA''DAN'),
 ('7326140', '7326', 'BENGKELEKILA'),
 ('7326150', '7326', 'SESEAN SULOARA'),
 ('7326160', '7326', 'KAPALA PITU'),
@@ -7578,9 +7222,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('7411090', '7411', 'MOWEWE'),
 ('7411100', '7411', 'TINONDO'),
 ('7411110', '7411', 'ULUIWOI'),
-('7411120', '7411', 'UEESI');
-
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('7412010', '7412', 'WAWONII TENGGARA'),
+('7411120', '7411', 'UEESI'),
+('7412010', '7412', 'WAWONII TENGGARA'),
 ('7412020', '7412', 'WAWONII TIMUR'),
 ('7412030', '7412', 'WAWONII TIMUR LAUT'),
 ('7412040', '7412', 'WAWONII UTARA'),
@@ -7678,7 +7321,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('7504020', '7504', 'KABILA'),
 ('7504021', '7504', 'BOTU PINGGE'),
 ('7504022', '7504', 'TILONGKABILA'),
-('7504030', '7504', 'SUWAWA'),
+('7504030', '7504', 'SUWAWA');
+INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES
 ('7504031', '7504', 'SUWAWA SELATAN'),
 ('7504032', '7504', 'SUWAWA TIMUR'),
 ('7504033', '7504', 'SUWAWA TENGAH'),
@@ -8579,9 +8223,8 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('9418026', '9418', 'LIANOGOMA'),
 ('9418027', '9418', 'BIUK'),
 ('9418030', '9418', 'BOKONDINI'),
-('9418031', '9418', 'BOKONERI');
-
-INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VALUES ('9418032', '9418', 'BEWANI'),
+('9418031', '9418', 'BOKONERI'),
+('9418032', '9418', 'BEWANI'),
 ('9418040', '9418', 'KEMBU'),
 ('9418041', '9418', 'WINA'),
 ('9418042', '9418', 'UMAGI'),
@@ -8758,7 +8401,7 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('9433033', '9433', 'OMUKIA'),
 ('9433040', '9433', 'SINAK'),
 ('9433041', '9433', 'SINAK BARAT'),
-('9433042', '9433', 'MAGE?BUME'),
+('9433042', '9433', 'MAGEÁBUME'),
 ('9433043', '9433', 'YUGUMUAK'),
 ('9433050', '9433', 'POGOMA'),
 ('9433051', '9433', 'KEMBRU'),
@@ -8797,445 +8440,455 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 ('9471030', '9471', 'JAYAPURA SELATAN'),
 ('9471040', '9471', 'JAYAPURA UTARA');
 
-INSERT INTO `tb_konsultasi_bimbingan` (`id_konsultasi_bimbingan`, `id_dosen_bimbingan_mhs`, `start`, `tag`, `title`, `masalah`, `solusi`, `end`, `status`) VALUES ('43', '192', '2019-08-18', 'bg-red', 'Call with Dave', 'I have troble with my friend', 'Just to be good', '2019-08-18', X'616363657074'),
-('44', '192', '2019-08-13', 'bg-success', 'Sulit cari kasus', 'Saya kesulitan mencari kasus di perusahaan, karena pembimbing lapangan sering keluar kota', 'Hubungi pembimbing lapangan, atau tanyakan pada karyawan lain tentang kesulitan apa yang masih dirasakan pada saat bekerja', '2019-08-13', X'616363657074'),
-('45', '192', '2019-08-31', 'bg-danger', 'Susah Minta Tanda Tangan', 'Susah minta tanda tangan pembimbing lapangan, karena pembimbing sering keluar kota', '', '2019-08-31', NULL),
-('46', '192', '2019-09-14', 'bg-info', 'Hey', 'Sekarang aku Lagi Males', '', '2019-09-14', X'72656a656374'),
-('47', '192', '2019-09-14', 'bg-info', 'fdakj', 'fdafjlk', '', '2019-09-14', X'72656a656374');
+-- --------------------------------------------------------
 
-INSERT INTO `tb_level` (`id_level`, `username`, `id_master_level`) VALUES ('1', '12', 'IML001'),
-('2', 'simpkl@politala.ac.id', 'IML008'),
-('13', '13', 'IML001'),
-('2420', 'simpkl@politala.ac.id', 'IML001'),
-('2463', 'simpkl@politala.ac.id', 'IML002'),
-('2464', 'simpkl@politala.ac.id', 'IML003'),
-('2465', 'simpkl@politala.ac.id', 'IML004'),
-('2466', 'simpkl@politala.ac.id', 'IML005'),
-('2467', 'simpkl@politala.ac.id', 'IML006'),
-('2468', 'simpkl@politala.ac.id', 'IML007'),
-('2711', 'A1317040', 'IML006'),
-('2712', 'A1317093', 'IML006'),
-('2713', 'A1317079', 'IML006'),
-('2714', 'A1317016', 'IML006'),
-('2715', 'A1317109', 'IML006'),
-('2716', 'A1317041', 'IML006'),
-('2717', 'A1317065', 'IML006'),
-('2718', 'A1317017', 'IML006'),
-('2719', 'A1317022', 'IML006'),
-('2720', 'A1317001', 'IML006'),
-('2721', 'A1317077', 'IML006'),
-('2722', 'A1317080', 'IML006'),
-('2723', 'A1317035', 'IML006'),
-('2724', 'A1317074', 'IML006'),
-('2725', 'A1317076', 'IML006'),
-('2726', 'A1317009', 'IML006'),
-('2727', 'A1317055', 'IML006'),
-('2728', 'A1317057', 'IML006'),
-('2729', 'A1317027', 'IML006'),
-('2730', 'A1317068', 'IML006'),
-('2731', 'A1317042', 'IML006'),
-('2732', 'A1317052', 'IML006'),
-('2733', 'A1317067', 'IML006'),
-('2734', 'A1317096', 'IML006'),
-('2735', 'A1317101', 'IML006'),
-('2736', 'A1317034', 'IML006'),
-('2737', 'A1317088', 'IML006'),
-('2738', 'A1317033', 'IML006'),
-('2739', 'A1317054', 'IML006'),
-('2740', 'A1317056', 'IML006'),
-('2741', 'A1317048', 'IML006'),
-('2742', 'A1317061', 'IML006'),
-('2743', 'A1317086', 'IML006'),
-('2744', 'A1317002', 'IML006'),
-('2745', 'A1317078', 'IML006'),
-('2746', 'A1317004', 'IML006'),
-('2747', 'A1317018', 'IML006'),
-('2748', 'A1317075', 'IML006'),
-('2749', 'A1317030', 'IML006'),
-('2750', 'A1317073', 'IML006'),
-('2751', 'A1317058', 'IML006'),
-('2752', 'A1317081', 'IML006'),
-('2753', 'A1317037', 'IML006'),
-('2754', 'A1317047', 'IML006'),
-('2755', 'A1317008', 'IML006'),
-('2756', 'A1317036', 'IML006'),
-('2757', 'A1317087', 'IML006'),
-('2758', 'A1317020', 'IML006'),
-('2759', 'A1317071', 'IML006'),
-('2760', 'A1317045', 'IML006'),
-('2761', 'A1317066', 'IML006'),
-('2762', 'A1317111', 'IML006'),
-('2763', 'A1317094', 'IML006'),
-('2764', 'A1317026', 'IML006'),
-('2765', 'A1317104', 'IML006'),
-('2766', 'A1317012', 'IML006'),
-('2767', 'A1317044', 'IML006'),
-('2768', 'A1317010', 'IML006'),
-('2769', 'A1317106', 'IML006'),
-('2770', 'A1317090', 'IML006'),
-('2771', 'A1317092', 'IML006'),
-('2772', 'A1317006', 'IML006'),
-('2773', 'A1317014', 'IML006'),
-('2774', 'A1317023', 'IML006'),
-('2775', 'A1317013', 'IML006'),
-('2776', 'A1317083', 'IML006'),
-('2777', 'A1317051', 'IML006'),
-('2778', 'A1317082', 'IML006'),
-('2779', 'A1317060', 'IML006'),
-('2780', 'A1317097', 'IML006'),
-('2781', 'A1317050', 'IML006'),
-('2782', 'A1317064', 'IML006'),
-('2783', 'A1317025', 'IML006'),
-('2784', 'A1317103', 'IML006'),
-('2785', 'A1317005', 'IML006'),
-('2786', 'A1317003', 'IML006'),
-('2787', 'A1317031', 'IML006'),
-('2788', 'A1317046', 'IML006'),
-('2789', 'A1317098', 'IML006'),
-('2790', 'A1317099', 'IML006'),
-('2791', 'A1317100', 'IML006'),
-('2792', 'A1317107', 'IML006'),
-('2793', 'A1317108', 'IML006'),
-('2794', 'A1317019', 'IML006'),
-('2795', 'A1317021', 'IML006'),
-('2796', 'A1317011', 'IML006'),
-('2797', 'C1317040', 'IML006'),
-('2798', 'C1317050', 'IML006'),
-('2799', 'C1317004', 'IML006'),
-('2800', 'C1317023', 'IML006'),
-('2801', 'C1317031', 'IML006'),
-('2802', 'C1317047', 'IML006'),
-('2803', 'C1317048', 'IML006'),
-('2804', 'C1317033', 'IML006'),
-('2805', 'C1317012', 'IML006'),
-('2806', 'C1317049', 'IML006'),
-('2807', 'C1317001', 'IML006'),
-('2808', 'C1317009', 'IML006'),
-('2809', 'C1317020', 'IML006'),
-('2810', 'C1317032', 'IML006'),
-('2811', 'C1317030', 'IML006'),
-('2812', 'C1317051', 'IML006'),
-('2813', 'C1317028', 'IML006'),
-('2814', 'C1317036', 'IML006'),
-('2815', 'C1317046', 'IML006'),
-('2816', 'C1317014', 'IML006'),
-('2817', 'C1317025', 'IML006'),
-('2818', 'C1317039', 'IML006'),
-('2819', 'C1317011', 'IML006'),
-('2820', 'C1317018', 'IML006'),
-('2821', 'C1317038', 'IML006'),
-('2822', 'C1317034', 'IML006'),
-('2823', 'C1317035', 'IML006'),
-('2824', 'C1317006', 'IML006'),
-('2825', 'C1317007', 'IML006'),
-('2826', 'C1317013', 'IML006'),
-('2827', 'C1317005', 'IML006'),
-('2828', 'C1317019', 'IML006'),
-('2829', 'C1317022', 'IML006'),
-('2830', 'C1317008', 'IML006'),
-('2831', 'C1317016', 'IML006'),
-('2832', 'C1317021', 'IML006'),
-('2833', 'C1317010', 'IML006'),
-('2834', 'C1317037', 'IML006'),
-('2835', 'B1317010', 'IML006'),
-('2836', 'B1317038', 'IML006'),
-('2837', 'B1316002', 'IML006'),
-('2838', 'B1317022', 'IML006'),
-('2839', 'B1317023', 'IML006'),
-('2840', 'B1317002', 'IML006'),
-('2841', 'B1317003', 'IML006'),
-('2842', 'B1317073', 'IML006'),
-('2843', 'B1317034', 'IML006'),
-('2844', 'B1317036', 'IML006'),
-('2845', 'B1317026', 'IML006'),
-('2846', 'B1317004', 'IML006'),
-('2847', 'B1317021', 'IML006'),
-('2848', 'B1317057', 'IML006'),
-('2849', 'B1317061', 'IML006'),
-('2850', 'B1317045', 'IML006'),
-('2851', 'B1317044', 'IML006'),
-('2852', 'B1317024', 'IML006'),
-('2853', 'B1317029', 'IML006'),
-('2854', 'B1317051', 'IML006'),
-('2855', 'B1317056', 'IML006'),
-('2856', 'B1317075', 'IML006'),
-('2857', 'B1317052', 'IML006'),
-('2858', 'B1317063', 'IML006'),
-('2859', 'B1317025', 'IML006'),
-('2860', 'B1317017', 'IML006'),
-('2861', 'B1317062', 'IML006'),
-('2862', 'B1317027', 'IML006'),
-('2863', 'B1317001', 'IML006'),
-('2864', 'B1317054', 'IML006'),
-('2865', 'B1317072', 'IML006'),
-('2866', 'B1317018', 'IML006'),
-('2867', 'B1317020', 'IML006'),
-('2868', 'B1317039', 'IML006'),
-('2869', 'B1317047', 'IML006'),
-('2870', 'B1317059', 'IML006'),
-('2871', 'B1317068', 'IML006'),
-('2872', 'B1317033', 'IML006'),
-('2873', 'B1317011', 'IML006'),
-('2874', 'B1317028', 'IML006'),
-('2875', 'B1317048', 'IML006'),
-('2876', 'B1317008', 'IML006'),
-('2877', 'B1317007', 'IML006'),
-('2878', 'B1317009', 'IML006'),
-('2879', 'B1317006', 'IML006'),
-('2880', 'B1317041', 'IML006'),
-('2881', 'B1317005', 'IML006'),
-('2882', 'B1317037', 'IML006'),
-('2883', 'B1317019', 'IML006'),
-('2884', 'B1317046', 'IML006'),
-('2885', 'B1317050', 'IML006'),
-('2886', 'B1317049', 'IML006'),
-('2887', 'B1317066', 'IML006'),
-('2888', 'B1317053', 'IML006'),
-('2889', 'B1317069', 'IML006'),
-('2890', 'B1317058', 'IML006'),
-('2891', 'B1317040', 'IML006'),
-('2892', 'B1317014', 'IML006'),
-('2893', 'B1317060', 'IML006'),
-('2894', 'B1317016', 'IML006'),
-('2895', 'B1317035', 'IML006'),
-('2896', 'B1317065', 'IML006'),
-('2897', 'B1317030', 'IML006'),
-('2939', 'A131901', 'IML006'),
-('2940', 'A1317200', 'IML006'),
-('2941', 'hendrik.tomo@politala.ac.id', 'IML005'),
-('2942', 'jakapermadi.88@politala.ac.id', 'IML005'),
-('2943', 'herpendi@politala.ac.id', 'IML005'),
-('2944', 'kurnia.2a@politala.ac.id', 'IML005'),
-('2945', 'reza@politala.ac.id', 'IML005'),
-('2946', 'winda@politala.ac.id', 'IML005'),
-('2947', 'veri@politala.ac.id', 'IML005'),
-('2948', 'hafizd@politala.ac.id', 'IML005'),
-('2949', 'wanyuliyanti@politala.ac.id', 'IML005'),
-('2950', 'agustiannoor@politala.ac.id', 'IML005'),
-('2951', 'rsayyidati@politala.ac.id', 'IML005'),
-('2952', 'muhammadnoor@politala.ac.id', 'IML005'),
-('2953', 'radna@politala.ac.id', 'IML005'),
-('2954', 'redhy@politala.ac.id', 'IML005'),
-('2955', 'ra.amalia.rizki@politala.ac.id', 'IML005'),
-('2956', 'sandri@politala.ac.id', 'IML005'),
-('2957', 'jaka_dj@politala.ac.id', 'IML005'),
-('2958', 'fatimah@politala.ac.id', 'IML005'),
-('2959', 'ninahairiyah@politala.ac.id', 'IML005'),
-('2960', 'nuryati@politala.ac.id', 'IML005'),
-('2961', 'marlia@politala.ac.id', 'IML005'),
-('2962', 'ika.kusuma.n@politala.ac.id', 'IML005'),
-('2963', 'mufrida@politala.ac.id', 'IML005'),
-('2964', 'sukma@politala.ac.id', 'IML005'),
-('2965', 'rusumintosyahyuniar@politala.ac.id', 'IML005'),
-('2966', 'kuswoyoanton@politala.ac.id', 'IML005'),
-('2967', 'imron@politala.ac.id', 'IML005'),
-('2968', 'adhel_syaief@politala.ac.id', 'IML005'),
-('2969', 'angkasa@politala.ac.id', 'IML005'),
-('2970', 'yuliananingsih@politala.ac.id', 'IML005'),
-('2971', 'jefriadi@politala.ac.id', 'IML005'),
-('2972', 'emalestari@politala.ac.id', 'IML005'),
-('2973', 'yunitaprastya@politala.ac.id', 'IML005'),
-('2974', 'herfia.rhomadhona@politala.ac.id', 'IML005'),
-('2975', 'fathurrahmani@politala.ac.id', 'IML005'),
-('2976', 'arif@politala.ac.id', 'IML005'),
-('2977', 'wiwik.kusrini@politala.ac.id', 'IML005'),
-('2978', 'meldayanoor@politala.ac.id', 'IML005'),
-('2979', 'mariatul@politala.ac.id', 'IML005'),
-('2980', 'mindradarmawan@politala.ac.id', 'IML005'),
-('2981', 'adzani@politala.ac.id', 'IML005'),
-('2982', 'dosen@politala.ac.id', 'IML005');
+--
+-- Table structure for table `tb_kelengkapan_berkas`
+--
 
-INSERT INTO `tb_mahasiswa` (`nim`, `id_tahun_akademik`, `id_program_studi`, `username`, `nama_mahasiswa`, `alamat_mhs`, `jenis_kelamin_mhs`, `email_mhs`, `tempat_lahir_mhs`, `tanggal_lahir_mhs`, `no_hp_mahasiswa`, `nama_orangtua_mhs`, `no_hp_orangtua_mhs`) VALUES ('A1317001', 'TA002', 'PST001', 'A1317001', 'Achmad Syah Maulana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317002', 'TA002', 'PST001', 'A1317002', 'Ade Ardha Reswari', 'ds.Benua Tengah RT.08 RW.03', 'Perempuan', 'adeardha81@gmail.com', 'Palangkaraya', '1994-06-28', '082155327086', 'Riyanto', '082357621644'),
-('A1317003', 'TA002', 'PST001', 'A1317003', 'Adela Valiandra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317004', 'TA002', 'PST001', 'A1317004', 'Agi Munawa', 'Pelaihari', 'Laki-laki', 'agi@gmail.com', 'Pelaihari', '2000-02-22', '+6237484987', 'Orang Tua Agi', '+62374888775'),
-('A1317005', 'TA002', 'PST001', 'A1317005', 'Ahmad Asegaf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317006', 'TA002', 'PST001', 'A1317006', 'Ahmad Laily Misfi', 'Desa Ujung Kec.Bati-bati Kab.Tanah laut', 'Laki-laki', 'ahmadlaily021@gmail.com', 'Pelaihari', '0000-00-00', '+62 858-2048-6303', 'Iwan Arie Sandy', '+62 857-0545-3119'),
-('A1317008', 'TA002', 'PST001', 'A1317008', 'Aiga Putri Oktovianda', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317009', 'TA002', 'PST001', 'A1317009', 'Andre Ade Irawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317010', 'TA002', 'PST001', 'A1317010', 'Anita', 'Jl. Desa Pemuda KNPI RT 019 RW 001', 'Perempuan', 'anitati1d@gmail.com', 'Tanah Laut', '0000-00-00', '082253686857', 'Agus Waluyo', '081351160358'),
-('A1317011', 'TA002', 'PST001', 'A1317011', 'Anita Nurlaila', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317012', 'TA002', 'PST001', 'A1317012', 'Annisa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317013', 'TA002', 'PST001', 'A1317013', 'Ari Setia Budi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317014', 'TA002', 'PST001', 'A1317014', 'Ari Wahyudi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317016', 'TA002', 'PST001', 'A1317016', 'Bibit Wahyudi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317017', 'TA002', 'PST001', 'A1317017', 'Cahya Aprilia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317018', 'TA002', 'PST001', 'A1317018', 'Danu Rizky Maulana', 'Jl. Teluk Baru Rt. 08 B RW 003 Kelurahan Karang Jawa Kec. Pelaihari', 'Laki-laki', 'danu.rm99@gmail.com', 'Tanah Laut', '0000-00-00', '082254904247', 'Safrudin', '085248049305'),
-('A1317019', 'TA002', 'PST001', 'A1317019', 'Dicky Sulis Stiawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317020', 'TA002', 'PST001', 'A1317020', 'Dita Ayu Lestari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317021', 'TA002', 'PST001', 'A1317021', 'Erna Sulistyowati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317022', 'TA002', 'PST001', 'A1317022', 'Estri Nunik Hidayati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317023', 'TA002', 'PST001', 'A1317023', 'Fajar', 'Jl. Karang Jawa RT 03 RW 02', 'Laki-laki', 'fajarujangg@gmail.com', 'Kapuas', '0000-00-00', '085750725730', 'Asmawar', '085750725730'),
-('A1317025', 'TA002', 'PST001', 'A1317025', 'Gusti Ahmad Hafi', 'Jl. Mufakat II RT 02/RW 01, Desa Ujung, Kec. Bati-Bati, Kab. Tanah Laut', 'Laki-laki', 'gustihafi99@gmail.com', 'Tanah Laut', '0000-00-00', '+6285958067848', 'Gusti Badran', '+6282255363444'),
-('A1317026', 'TA002', 'PST001', 'A1317026', 'Helmi Tri Budi Yulianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317027', 'TA002', 'PST001', 'A1317027', 'Hesti Ratih Ningtias', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317030', 'TA002', 'PST001', 'A1317030', 'Inka Nurjanah', 'Jl. Taruna Jaya Rt/Rw 14/04 Kelurahan Karang Taruna', 'Perempuan', 'inkanurjanah98@gmail.com', 'Pelaihari', '0000-00-00', '+6281250515136', 'Sabardi Kasianto', '+6285248584497'),
-('A1317031', 'TA002', 'PST001', 'A1317031', 'Istiqomah', 'Desa Ketapang rt 04 rw 01, Kecamatan Bajuin, Kabupaten Tanah Laut, Kalimantan Selatan', 'Perempuan', 'iistiqomahh95@gmail.com', 'Desa Ketapang', '0000-00-00', '0857-5008-4291 / 0857-5025-7141', 'Dahlina', '0823-5035-1561'),
-('A1317033', 'TA002', 'PST001', 'A1317033', 'Khoirul Imam Safi?i', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317034', 'TA002', 'PST001', 'A1317034', 'Kiki Maulida', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317035', 'TA002', 'PST001', 'A1317035', 'Koko Hermawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317036', 'TA002', 'PST001', 'A1317036', 'Lia Merliana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317037', 'TA002', 'PST001', 'A1317037', 'Lidya Novita', 'Komplek Perumahan PTPN 13 RT010/RW004 Desa Pemuda Kecamatan Pelaihari Kabupaten Tanah Laut', 'Perempuan', 'lidya.novita0711@gmail.com', 'Salam', '0000-00-00', '081258753836', 'Nasib', '085349335271'),
-('A1317040', 'TA002', 'PST001', 'A1317040', 'Mahriani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317041', 'TA002', 'PST001', 'A1317041', 'Mariana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317042', 'TA002', 'PST001', 'A1317042', 'Mariatul Kiftiah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317044', 'TA002', 'PST001', 'A1317044', 'Maya Gian Sister', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317045', 'TA002', 'PST001', 'A1317045', 'Megawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317046', 'TA002', 'PST001', 'A1317046', 'Melda Hikma', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317047', 'TA002', 'PST001', 'A1317047', 'Melda Rosalina', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317048', 'TA002', 'PST001', 'A1317048', 'Meliana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317050', 'TA002', 'PST001', 'A1317050', 'Meyhastanti Cahyaning Fijar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317051', 'TA002', 'PST001', 'A1317051', 'Mila Camelia', 'Jl.A.Yani KM 101, Desa Jorong Kecamatan Jorong Kabupaten Tanah Laut', 'Perempuan', 'cameliam388@gmail.com', 'Tampang', '0000-00-00', '+6287764500306', 'Mahli', '+6285249794524'),
-('A1317052', 'TA002', 'PST001', 'A1317052', 'Mita Maulinda', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317054', 'TA002', 'PST001', 'A1317054', 'Muhammad Khairi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317055', 'TA002', 'PST001', 'A1317055', 'Muhammad Rizky Ansyari', 'Jln Muallimin Desa kayu bawang rt 05 rw 03 kec.Barabai Kab. Hulu Sungai Tengah Prov Kalsel.', 'Laki-laki', 'riskyansyari9@gmail.com', 'Barabai', '0000-00-00', '082357062569', 'Nurul Lisna Hartati', '085349358097'),
-('A1317056', 'TA002', 'PST001', 'A1317056', 'Muhammad Teddy Taufani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317057', 'TA002', 'PST001', 'A1317057', 'Muhammad Thayib Ramadan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317058', 'TA002', 'PST001', 'A1317058', 'Nadya Alfisyah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317060', 'TA002', 'PST001', 'A1317060', 'Nanda Sejati Ningtyas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317061', 'TA002', 'PST001', 'A1317061', 'Nigmah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317064', 'TA002', 'PST001', 'A1317064', 'Noor Latipah', 'jl. Teluk Baru, RT.8a RW.003, Kec. Karang Taruna, Kab. Tanah Laut', 'Laki-laki', 'noorlatipah06@gmail.com', 'Tanah Laut', '0000-00-00', '+6281253905229', 'MATLI', '+6285349307021'),
-('A1317065', 'TA002', 'PST001', 'A1317065', 'Nor Janah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317066', 'TA002', 'PST001', 'A1317066', 'Norhatiah', 'Jl. Jayau rt.09/rw.02 Desa.Ambungan Kec. Pelaihari , Tanah Laut', 'Perempuan', 'norhatiah2102@gmail.com', 'Batu Mandi', '0000-00-00', '082151466477', 'ABD Mugeni', '082153035114'),
-('A1317067', 'TA002', 'PST001', 'A1317067', 'Norida Alisa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317068', 'TA002', 'PST001', 'A1317068', 'Novia Sari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317071', 'TA002', 'PST001', 'A1317071', 'Rahma Dwi Cahyani', 'Jl.KH.Mansyur Rt.14/Rw.05 Gang. Kenanga, Kel. Angsau, Kec. Pelaihari', 'Perempuan', 'rahma.dwi.cahyani.99@gmail.com', 'Pelaihari', '0000-00-00', '085820673424', 'Purwandio', '081348614116'),
-('A1317073', 'TA002', 'PST001', 'A1317073', 'Reka Nur Andinni', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317074', 'TA002', 'PST001', 'A1317074', 'Renaldi Haris Aksara', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317075', 'TA002', 'PST001', 'A1317075', 'Rendy Saputera', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317076', 'TA002', 'PST001', 'A1317076', 'Rendy Saputra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317077', 'TA002', 'PST001', 'A1317077', 'Restu Adji Saputra', 'Komplek Bajuin raya, JL.kihung, No.7B, Desa Atu-Atu, Kabupaten Tanah Laut, Provinsi Kalimantan Selatan, Negara Indonesia.', 'Laki-laki', 'restuadjisaputra22@gmail.com', 'Banjarmasin', '0000-00-00', '082253038974', 'Sukaji & Sulasmi', '081348549611'),
-('A1317078', 'TA002', 'PST001', 'A1317078', 'Retno Fratiwi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317079', 'TA002', 'PST001', 'A1317079', 'Reyfindy', 'Desa Asam Jaya Tran 400 rt07/rw 04 KEC.Jorong \r\nKabupaten Tanah Laut', 'Perempuan', 'reyfindy13@gmail.com', 'Tanah Laut', '0000-00-00', '082158018076', 'Suroso', '085248156149'),
-('A1317080', 'TA002', 'PST001', 'A1317080', 'Riki Hidayat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317081', 'TA002', 'PST001', 'A1317081', 'Rindiyani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317082', 'TA002', 'PST001', 'A1317082', 'Rini Yuliani', 'Kurau', 'Perempuan', 'ryulianii62@gmail.com', 'Tanah Laut', '0000-00-00', '+6282251568965', 'Suranto Purnomo', '+6285249240205'),
-('A1317083', 'TA002', 'PST001', 'A1317083', 'Riska Hartati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317086', 'TA002', 'PST001', 'A1317086', 'Sapniah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317087', 'TA002', 'PST001', 'A1317087', 'Sari Maryani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317088', 'TA002', 'PST001', 'A1317088', 'Selvya Meirida Andani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317090', 'TA002', 'PST001', 'A1317090', 'Sinta Esti Rahayu', 'Sungai Riam', 'Laki-laki', 'estisinta14@gmail.com', 'Pelaihari', '0000-00-00', '087841126649', 'Darsih', '085251412856'),
-('A1317092', 'TA002', 'PST001', 'A1317092', 'Siti Purnama', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317093', 'TA002', 'PST001', 'A1317093', 'Suci Febriani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317094', 'TA002', 'PST001', 'A1317094', 'Susanti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317096', 'TA002', 'PST001', 'A1317096', 'Tri Lutfiatul Rahayu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317097', 'TA002', 'PST001', 'A1317097', 'Tsamara Dara Rizkita', 'Jl kelayan a gg sadar no 60', 'Perempuan', 'tsamaradara4@gmail.com', 'Banjarmasin', '0000-00-00', '081953576568', 'Fitrian Noor', '085952720959'),
-('A1317098', 'TA002', 'PST001', 'A1317098', 'Wahzuni Sri Rahayu', 'Jl.Purnawirawan Gg.Damai No.48 Kecamatan Pelaihari Kabupaten Tanah Laut Kelurahan Angsau', 'Perempuan', 'wahzuni.srirahayu24@gmail.com', 'Tuban', '0000-00-00', '085750257441', 'Suparji', '082253367841'),
-('A1317099', 'TA002', 'PST001', 'A1317099', 'Winda Dwi Sulistia', 'Jl. Trans Plasma Desa Ujung Batu RT.011 RW.004 Kec. Pelaihari Kab. Tanah Laut', 'Perempuan', 'windadsulistia@gmail.com', 'Tanah Laut', '1990-07-04', '+6285350287269', 'Syahril', '+6285248093952'),
-('A1317100', 'TA002', 'PST001', 'A1317100', 'Yeremia Handoyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317101', 'TA002', 'PST001', 'A1317101', 'Yeyen Nurul Imama', 'Jl. Swadaya Tirtajaya 2 RT.11 RW.02 Kec. Bajuin Kab. Tanah Laut', 'Perempuan', 'yeyennurulimama12@gmil.com', 'Tirtajaya', '0000-00-00', '082220360902', 'Turkan Adi Subandi', '082255166730'),
-('A1317103', 'TA002', 'PST001', 'A1317103', 'Yougie Affandi', 'Jl. Perintis no.32 Kec. Satui Kab. Tanah Bumbu', 'Laki-laki', 'yougieaffandi27@gmail.com', 'Sungai Danau', '0000-00-00', '+6285246068378', 'Susanto', '+6285386520577'),
-('A1317104', 'TA002', 'PST001', 'A1317104', 'Yunita Anggraini', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317106', 'TA002', 'PST001', 'A1317106', 'Fransisca Jeni Tari Krismany', 'Desa Sungai Riam,Jl. Raya Batakan Rt.12. Rw.5', 'Laki-laki', 'fransiscajtk@gmail.com', 'Banjarmasin', '0000-00-00', '082252533571', 'Anastasya Muji Lestari ', '082251949284'),
-('A1317107', 'TA002', 'PST001', 'A1317107', 'Muhammad Aditya Effendi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317108', 'TA002', 'PST001', 'A1317108', 'Muhammad Iqbal ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317109', 'TA002', 'PST001', 'A1317109', 'Muhammad Muslih Amirudin', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317111', 'TA002', 'PST001', 'A1317111', 'Siti Naziha', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A1317200', 'TA002', 'PST001', 'A1317200', 'Contoh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('A131901', 'TA002', 'PST001', 'A131901', 'Contoh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1316002', 'TA002', 'PST002', 'B1316002', 'Abdal Alwali', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317001', 'TA002', 'PST002', 'B1317001', 'Abdul Majid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317002', 'TA002', 'PST002', 'B1317002', 'Abdul Mutholib', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317003', 'TA002', 'PST002', 'B1317003', 'Ahmad Abdul Ghani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317004', 'TA002', 'PST002', 'B1317004', 'Ahmad Mardianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317005', 'TA002', 'PST002', 'B1317005', 'Aisah Humairoh', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317006', 'TA002', 'PST002', 'B1317006', 'Akhmad Fauzi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317007', 'TA002', 'PST002', 'B1317007', 'Alda Erlyca', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317008', 'TA002', 'PST002', 'B1317008', 'Ani Pujawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317009', 'TA002', 'PST002', 'B1317009', 'Ayu Puji Lestari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317010', 'TA002', 'PST002', 'B1317010', 'Balqis Septyan Nurhaya', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317011', 'TA002', 'PST002', 'B1317011', 'Bilda Ariyani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317014', 'TA002', 'PST002', 'B1317014', 'Dewi Sukma', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317016', 'TA002', 'PST002', 'B1317016', 'Eka Amalia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317017', 'TA002', 'PST002', 'B1317017', 'Elly Fitriyanti Sapoetri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317018', 'TA002', 'PST002', 'B1317018', 'Eva Sari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317019', 'TA002', 'PST002', 'B1317019', 'Evi Liani Dahlianto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317020', 'TA002', 'PST002', 'B1317020', 'Hairunsyah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317021', 'TA002', 'PST002', 'B1317021', 'Halimah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317022', 'TA002', 'PST002', 'B1317022', 'Iis Sakhatun', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317023', 'TA002', 'PST002', 'B1317023', 'Intan Nurhaliza Irmanto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317024', 'TA002', 'PST002', 'B1317024', 'Isnawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317025', 'TA002', 'PST002', 'B1317025', 'Istifarah Indrasasi Awal', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317026', 'TA002', 'PST002', 'B1317026', 'Jahriah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317027', 'TA002', 'PST002', 'B1317027', 'Joo Vani Lutviyadi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317028', 'TA002', 'PST002', 'B1317028', 'Khoirotun Nisa\'in', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317029', 'TA002', 'PST002', 'B1317029', 'Laila Latifah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317030', 'TA002', 'PST002', 'B1317030', 'Leliana Octaviani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317033', 'TA002', 'PST002', 'B1317033', 'Mar\'atus Sholikhah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317034', 'TA002', 'PST002', 'B1317034', 'Maulida Safitri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317035', 'TA002', 'PST002', 'B1317035', 'Maydah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317036', 'TA002', 'PST002', 'B1317036', 'Mega Novita Sari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317037', 'TA002', 'PST002', 'B1317037', 'Mella Wulandary', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317038', 'TA002', 'PST002', 'B1317038', 'Mira Ade Setiawati', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317039', 'TA002', 'PST002', 'B1317039', 'Mislina', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317040', 'TA002', 'PST002', 'B1317040', 'Muhammad Afan Saputra', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317041', 'TA002', 'PST002', 'B1317041', 'Muhammad Afuan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317044', 'TA002', 'PST002', 'B1317044', 'Muhammad Rafi\'i', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317045', 'TA002', 'PST002', 'B1317045', 'Muhammad Riyadi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317046', 'TA002', 'PST002', 'B1317046', 'Noor Hafizah Rizky Safitri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317047', 'TA002', 'PST002', 'B1317047', 'Nor Dita', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317048', 'TA002', 'PST002', 'B1317048', 'Norhayatul Jannah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317049', 'TA002', 'PST002', 'B1317049', 'Noviyanti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317050', 'TA002', 'PST002', 'B1317050', 'Nurhalisa', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317051', 'TA002', 'PST002', 'B1317051', 'Putri Rindiyani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317052', 'TA002', 'PST002', 'B1317052', 'Ratih', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317053', 'TA002', 'PST002', 'B1317053', 'Ratna Amelia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317054', 'TA002', 'PST002', 'B1317054', 'Ratna Eka Wulandari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317056', 'TA002', 'PST002', 'B1317056', 'Rida Aulia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317057', 'TA002', 'PST002', 'B1317057', 'Rika Safitri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317058', 'TA002', 'PST002', 'B1317058', 'Rizky', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317059', 'TA002', 'PST002', 'B1317059', 'Rohimah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317060', 'TA002', 'PST002', 'B1317060', 'Ruliati Puspita Asih', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317061', 'TA002', 'PST002', 'B1317061', 'Setia Rahman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317062', 'TA002', 'PST002', 'B1317062', 'Sholeh Evendi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317063', 'TA002', 'PST002', 'B1317063', 'Siti Hainun', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317065', 'TA002', 'PST002', 'B1317065', 'Siti Nurul Laili', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317066', 'TA002', 'PST002', 'B1317066', 'Siti Soniya', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317068', 'TA002', 'PST002', 'B1317068', 'Sumarni', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317069', 'TA002', 'PST002', 'B1317069', 'Supian', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317072', 'TA002', 'PST002', 'B1317072', 'Dwi Atika Yulianti', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317073', 'TA002', 'PST002', 'B1317073', 'Hartomi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('B1317075', 'TA002', 'PST002', 'B1317075', 'Summa Nur Hidayah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317001', 'TA002', 'PST003', 'C1317001', 'Ade Fitra Hidayatullah', 'Pelaihari', 'Laki-laki', 'ade@gmai.com', 'Pelaihari', '0000-00-00', '082240121017', 'Muhaimin', '085340121017'),
-('C1317004', 'TA002', 'PST003', 'C1317004', 'Ali Fitriyani', 'Pelaihari', 'Laki-laki', 'fitriana@gmail.com', 'Pelaihar', '0000-00-00', '+6282335478000', 'Halo', '082335478000'),
-('C1317005', 'TA002', 'PST003', 'C1317005', 'Andri Gunawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317006', 'TA002', 'PST003', 'C1317006', 'Arlis Setiawan Wiji Pratama Ady', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317007', 'TA002', 'PST003', 'C1317007', 'Bayu Nur Aji', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317008', 'TA002', 'PST003', 'C1317008', 'Edwin Joko Setiawan', 'Pelaihari', 'Laki-laki', 'joko@gmail.com', 'Pelaihari', '0000-00-00', '08213146543', 'Sumidi', '08245636672'),
-('C1317009', 'TA002', 'PST003', 'C1317009', 'Ega Yudistira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317010', 'TA002', 'PST003', 'C1317010', 'Fahruz Zaini', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317011', 'TA002', 'PST003', 'C1317011', 'Fariz Muhammad Toha', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317012', 'TA002', 'PST003', 'C1317012', 'Fildza Taufik Qurrahman', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317013', 'TA002', 'PST003', 'C1317013', 'Hamdi Anor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317014', 'TA002', 'PST003', 'C1317014', 'Hasan Basri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317016', 'TA002', 'PST003', 'C1317016', 'Isbedy Stiawan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317018', 'TA002', 'PST003', 'C1317018', 'M. Khairul Azmi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317019', 'TA002', 'PST003', 'C1317019', 'M. Mahdianor', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317020', 'TA002', 'PST003', 'C1317020', 'M. Riza Maulana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317021', 'TA002', 'PST003', 'C1317021', 'Maisuri', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317022', 'TA002', 'PST003', 'C1317022', 'Miftah Farij', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317023', 'TA002', 'PST003', 'C1317023', 'Muhammad Agus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317025', 'TA002', 'PST003', 'C1317025', 'Muhammad Anang Nursidik', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317028', 'TA002', 'PST003', 'C1317028', 'Muhammad Nabhani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317030', 'TA002', 'PST003', 'C1317030', 'Muhammad Taufany', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317031', 'TA002', 'PST003', 'C1317031', 'Nurul Yulia Sari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317032', 'TA002', 'PST003', 'C1317032', 'Obbie Leo Stevan Menteng', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317033', 'TA002', 'PST003', 'C1317033', 'Eko Bagus Saputro', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317034', 'TA002', 'PST003', 'C1317034', 'Rafi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317035', 'TA002', 'PST003', 'C1317035', 'Rafli Rahmad Dianur', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317036', 'TA002', 'PST003', 'C1317036', 'Ramadani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317037', 'TA002', 'PST003', 'C1317037', 'Rhohmad Zaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317038', 'TA002', 'PST003', 'C1317038', 'Ricky Topan Prasetyo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317039', 'TA002', 'PST003', 'C1317039', 'Rifa Triansyah', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317040', 'TA002', 'PST003', 'C1317040', 'Rizky Bachtiar', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317046', 'TA002', 'PST003', 'C1317046', 'Zaky Dwi Gunardi', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317047', 'TA002', 'PST003', 'C1317047', 'Zulkifli', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317048', 'TA002', 'PST003', 'C1317048', 'Oky Andira', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317049', 'TA002', 'PST003', 'C1317049', 'M. Noor Khafid Muzaky', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317050', 'TA002', 'PST003', 'C1317050', 'Turki Zidami', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('C1317051', 'TA002', 'PST003', 'C1317051', 'Muhammad Alpi Nisfianda', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+CREATE TABLE IF NOT EXISTS `tb_kelengkapan_berkas` (
+  `id` int(11) NOT NULL,
+  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
+  `nama_file` text
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
-INSERT INTO `tb_master_level` (`id_master_level`, `nama_master_level`) VALUES ('IML001', 'admin'),
+--
+-- Dumping data for table `tb_kelengkapan_berkas`
+--
+
+INSERT INTO `tb_kelengkapan_berkas` (`id`, `id_dosen_bimbingan_mhs`, `nama_file`) VALUES
+(1, 317, ''),
+(2, 318, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_kerjasama_perusahaan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_kerjasama_perusahaan` (
+  `id_kerjasama_perusahaan` varchar(50) NOT NULL,
+  `nama_kerjasama` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_konsultasi_bimbingan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_konsultasi_bimbingan` (
+  `id_konsultasi_bimbingan` int(11) NOT NULL,
+  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
+  `start` date DEFAULT NULL,
+  `tag` mediumtext,
+  `title` mediumtext,
+  `masalah` mediumtext,
+  `solusi` mediumtext,
+  `end` date DEFAULT NULL,
+  `status` enum('accept','reject') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_konsultasi_bimbingan_offline`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_konsultasi_bimbingan_offline` (
+  `id` int(11) NOT NULL,
+  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
+  `lembar_konsultasi` text,
+  `tanggal` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_konsultasi_bimbingan_offline`
+--
+
+INSERT INTO `tb_konsultasi_bimbingan_offline` (`id`, `id_dosen_bimbingan_mhs`, `lembar_konsultasi`, `tanggal`) VALUES
+(14, 278, '4b30713b76ff171d49f0bbacbe2aa58c.pdf', NULL),
+(15, 255, '4b0c0998e6bf9017165d09cfa19a7fad.pdf', NULL),
+(16, 281, '142ccfad60a12074343d053abe297317.pdf', NULL),
+(17, 250, 'd186dc5ab074a0e8fe14b4551d2e1248.pdf', NULL),
+(18, 251, '2f395126768d3a135caed40f3afdf9e7.pdf', NULL),
+(19, 249, 'c284655aae4983d70275a2276db2b4c2.pdf', NULL),
+(20, 260, '091d1836eaee413f9086e561cef25e97.pdf', NULL),
+(21, 272, '6c8c1ffd2862e9d07867ccd1b8e49ffc.pdf', NULL),
+(22, 279, 'c492637cfeec9765854a838855c7ecb8.pdf', NULL),
+(23, 275, '92d0ce31bad1fb03f298b1dc9d0a5dc9.pdf', NULL),
+(24, 266, '2c35ec02d08a6f1b7ec2f9b86e3bf2c0.pdf', NULL),
+(25, 270, '9400e96355c15362c2af756ac6193dc2.pdf', NULL),
+(26, 277, '067e47474e9ad7ad4959a170e6cb9634.pdf', NULL),
+(27, 237, '29a9ec155e1a8b4b80ff103777e1024f.pdf', NULL),
+(28, 261, 'dd1c5d1e3623ea2c13d5315f5a3ca46e.pdf', NULL),
+(29, 258, '73575bf3f94c008e95ac26f560a8971f.pdf', NULL),
+(30, 246, '046d8659a7229bd8eb4eb8720009f82c.pdf', NULL),
+(32, 240, '349d61aa0069c7a8c0743adb99db1e60.pdf', NULL),
+(33, 256, 'd4e55c600fafd84f20c4a586fd1c5f23.pdf', NULL),
+(35, 248, 'f18de5e349733ebfd7a011b0c1bc52d2.pdf', NULL),
+(36, 280, '95143f6626a3d37127d662fcf74c897c.pdf', NULL),
+(37, 244, '1892dee2cd12845f5c55a1b913b4559b.pdf', NULL),
+(38, 238, 'c112f77857a012dd9fb6e27562b1059e.pdf', NULL),
+(39, 271, '9b0f485027c4833ab6ce3ddb50383163.pdf', NULL),
+(40, 267, 'b28e5373fae97199ed61de190856d34e.pdf', NULL),
+(41, 247, '4446f7913c2b1db713aacc8fc061542a.pdf', NULL),
+(42, 268, '31c9aed9376ef1a6bb0874665592f049.pdf', NULL),
+(43, 245, 'd0e7a67c9e29644b4db582a4f0d4e76f.pdf', NULL),
+(44, 274, '384ae0fe00672a2b166ce109abf7a63e.pdf', NULL),
+(45, 241, 'd360df4d1aa31785c1289799f05175e1.pdf', NULL),
+(47, 263, '08f98e62c75ba18720542e6228ce0722.pdf', NULL),
+(48, 264, '8401cc2dc6a048d87d00ae431980a060.pdf', NULL),
+(49, 254, '046847eee87c8942424e44a03728628b.pdf', NULL),
+(50, 265, 'beed99b6afe9a076e5a7a43f997996a3.pdf', NULL),
+(51, 269, '1062d6bc90d4441caca6e42f61f170e5.pdf', NULL),
+(52, 259, '7cec0038f0629866d96f06cb7d608460.pdf', NULL),
+(54, 239, '5c5cce2f0eed780b470cf086e855af32.pdf', NULL),
+(55, 283, '6002fd2e2a9e39080b2367e8327d7912.pdf', NULL),
+(56, 282, 'c3bf93621029054fa7651087c0419f37.pdf', NULL),
+(58, 252, 'c9c085ad29cfdd739023fb97a199ba56.pdf', NULL),
+(59, 262, 'da6fdb7519ddccbd140317b4810f2ea7.pdf', NULL),
+(60, 242, '900376ec898ae1324f66f50ef31dd5bf.pdf', NULL),
+(61, 308, 'd99e2ec0c1e89cf77d1974158709944f.pdf', NULL),
+(62, 288, '3c16dece7c485eb722f621dd6754ef03.pdf', NULL),
+(63, 284, '260cf64034468c4d4ad01f5a3d505ca1.pdf', NULL),
+(64, 287, 'ba91e8f3e9816d895e29f5c4adb99ac8.pdf', NULL),
+(66, 289, '09319ce1d4de73b991b59a6c8404efa2.pdf', NULL),
+(68, 313, '6d1f668f6efa0607143dc350530be793.pdf', NULL),
+(69, 306, '345f4c8348467ac73df104af14467e43.pdf', NULL),
+(70, 298, '7eae72c85b1e0b1adcc1f3b775486b33.pdf', NULL),
+(71, 273, '345c76fb5b4d580eee4981b1e5181807.pdf', NULL),
+(72, 311, '409e3661cb41a47b0a0df156f299e37e.pdf', NULL),
+(73, 309, '4eac513cfa72087b4d91faf51d1f95f9.pdf', NULL),
+(74, 320, '7db949186f3939956b1f19e474df9ff4.pdf', NULL),
+(75, 315, '9a91dbe4e01631452516369f36b47ff3.pdf', NULL),
+(76, 303, '9ead65927896208fe3a1e7b6e1c2e0ee.pdf', NULL),
+(77, 295, '45e25070fcaae51b24e4def218a32b32.pdf', NULL),
+(78, 297, '1004814fa12789395937ecb17a777862.pdf', NULL),
+(79, 316, 'f40e304381160b876b4c07ff2aad57ef.pdf', NULL),
+(80, 321, '7ee1c998fd28d77cc9417266098d7812.pdf', NULL),
+(81, 305, '864fdfc349f8392092006aa7491ca2a7.pdf', NULL),
+(82, 312, '307ff3906998dc702d493863fd33cd5b.pdf', NULL),
+(83, 290, '3b2a390d63894b897b7edc1f7bff83e9.pdf', NULL),
+(84, 314, '93e163a1016076615e15225087402749.pdf', NULL),
+(85, 286, '2641349c95dc27f17901598516539974.pdf', NULL),
+(86, 294, '2a08b0848746fce7fc1761534254dfcc.pdf', NULL),
+(87, 296, 'a02fd8fec8bc940a20847820a6753a8b.pdf', NULL),
+(88, 293, '26db783b09352bac5f76b0d68a9b37c5.pdf', NULL),
+(89, 302, '581eb21e208d38506af6a084e327678c.pdf', NULL),
+(91, 300, '7b87f9aaa4a013a523f46ff48daf54cf.pdf', NULL),
+(92, 310, 'aebf0dfbc3d0b25e2276efcecd748924.pdf', NULL),
+(93, 299, 'aecdba113e6589fc33509290be3e46b7.pdf', NULL),
+(94, 307, 'f35a40e4f711409e1bea4e53ef2e4b09.pdf', NULL),
+(95, 304, '2d00d63a30f767c5ec37bb3ec30b7989.pdf', NULL),
+(96, 291, '88d018b831b6634c5a70d5f479da8a68.pdf', NULL),
+(97, 292, '867955bcf14eb901254823785261118a.pdf', NULL),
+(98, 318, 'c3950a4953ac2f3d554c4a5fc4c4dd72.pdf', NULL),
+(99, 317, '857b65df0cb647fb3205574aa6cdea53.pdf', NULL),
+(101, 322, '4c9b47a4cef22788e6def62e9d535dd4.pdf', NULL),
+(102, 326, '16ac4ed4280fca6a8d514de54a5e5a8a.pdf', NULL),
+(103, 327, '410c5227a403111d29d9f7d5d1086d71.pdf', NULL),
+(104, 331, '46127d94d97de25f79dcff132d78c6a5.pdf', NULL),
+(105, 324, '7273707060147f65c3d9b93846628b78.pdf', NULL),
+(106, 301, '56170055dfdad8d72683f666d0561dfa.pdf', NULL),
+(107, 330, '1264fa286b8307e6e42632bbb8395105.pdf', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_kop_surat`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_kop_surat` (
+  `id_kop_surat` varchar(30) NOT NULL,
+  `nama_kop_surat` varchar(100) DEFAULT NULL,
+  `extensi_kop_surat` varchar(10) DEFAULT NULL,
+  `tanggal_upload_kop_surat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_level`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_level` (
+  `id_level` int(11) NOT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `id_master_level` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3889 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_level`
+--
+
+INSERT INTO `tb_level` (`id_level`, `username`, `id_master_level`) VALUES
+(3668, 'marlia@politala.ac.id', 'IML005'),
+(3669, 'herfia.rhomadhona@politala.ac.id', 'IML005'),
+(3670, 'wanyuliyanti@politala.ac.id', 'IML005'),
+(3671, 'ra.amalia.rizki@politala.ac.id', 'IML005'),
+(3672, 'arif@politala.ac.id', 'IML005'),
+(3673, 'radna@politala.ac.id', 'IML005'),
+(3674, 'angkasa@politala.ac.id', 'IML005'),
+(3675, 'ika.kusuma.n@politala.ac.id', 'IML005'),
+(3676, 'yunitaprastya@politala.ac.id', 'IML005'),
+(3677, 'sandri@politala.ac.id', 'IML005'),
+(3678, 'ninahairiyah@politala.ac.id', 'IML005'),
+(3679, 'kurnia.2a@politala.ac.id', 'IML005'),
+(3680, 'redhy@politala.ac.id', 'IML005'),
+(3681, 'wiwik.kusrini@politala.ac.id', 'IML005'),
+(3682, 'hendrik.tomo@politala.ac.id', 'IML005'),
+(3683, 'sukma@politala.ac.id', 'IML005'),
+(3684, 'rusumintosyahyuniar@politala.ac.id', 'IML005'),
+(3685, 'kuswoyoanton@politala.ac.id', 'IML005'),
+(3686, 'nuryati@politala.ac.id', 'IML005'),
+(3687, 'fathurrahmani@politala.ac.id', 'IML005'),
+(3688, 'reza@politala.ac.id', 'IML005'),
+(3689, 'adhel_syaief@politala.ac.id', 'IML005'),
+(3690, 'yuliananingsih@politala.ac.id', 'IML005'),
+(3691, 'rsayyidati@politala.ac.id', 'IML005'),
+(3692, 'muhammadnoor@politala.ac.id', 'IML005'),
+(3693, 'imron@politala.ac.id', 'IML005'),
+(3694, 'hafizd@politala.ac.id', 'IML005'),
+(3695, 'winda@politala.ac.id', 'IML005'),
+(3696, 'herpendi@politala.ac.id', 'IML005'),
+(3697, 'emalestari@politala.ac.id', 'IML005'),
+(3698, 'agustiannoor@politala.ac.id', 'IML005'),
+(3699, 'jakapermadi.88@politala.ac.id', 'IML005'),
+(3700, 'jefriadi@politala.ac.id', 'IML005'),
+(3701, 'mariatul@politala.ac.id', 'IML005'),
+(3702, 'mindradarmawan@politala.ac.id', 'IML005'),
+(3703, 'adzani@politala.ac.id', 'IML005'),
+(3704, 'mufrida@politala.ac.id', 'IML005'),
+(3705, 'meldayanoor@politala.ac.id', 'IML005'),
+(3706, 'fatimah@politala.ac.id', 'IML005'),
+(3707, 'jaka_dj@politala.ac.id', 'IML005'),
+(3708, 'veri@politala.ac.id', 'IML005'),
+(3709, 'simpkl@politala.ac.id', 'IML001'),
+(3796, 'dosen_satu@politala.ac.id', 'IML005'),
+(3797, 'dosendua@politala.ac.id', 'IML005'),
+(3798, 'A1317058', 'IML006'),
+(3799, 'A1317081', 'IML006'),
+(3800, 'A1317017', 'IML006'),
+(3801, 'A1317055', 'IML006'),
+(3802, 'A1317100', 'IML006'),
+(3803, 'A1317041', 'IML006'),
+(3804, 'A1317065', 'IML006'),
+(3805, 'A1317111', 'IML006'),
+(3806, 'A1317094', 'IML006'),
+(3807, 'A1317064', 'IML006'),
+(3808, 'A1317050', 'IML006'),
+(3809, 'A1317068', 'IML006'),
+(3810, 'A1317027', 'IML006'),
+(3811, 'A1317106', 'IML006'),
+(3812, 'A1317010', 'IML006'),
+(3813, 'A1317090', 'IML006'),
+(3814, 'A1317026', 'IML006'),
+(3815, 'A1317104', 'IML006'),
+(3816, 'A1317016', 'IML006'),
+(3817, 'A1317109', 'IML006'),
+(3818, 'A1317096', 'IML006'),
+(3819, 'A1317101', 'IML006'),
+(3820, 'A1317083', 'IML006'),
+(3821, 'A1317013', 'IML006'),
+(3822, 'A1317097', 'IML006'),
+(3823, 'A1317060', 'IML006'),
+(3824, 'A1317107', 'IML006'),
+(3825, 'A1317108', 'IML006'),
+(3826, 'A1317019', 'IML006'),
+(3827, 'A1317021', 'IML006'),
+(3828, 'A1317011', 'IML006'),
+(3829, 'A1317006', 'IML006'),
+(3830, 'A1317014', 'IML006'),
+(3831, 'A1317023', 'IML006'),
+(3832, 'A1317098', 'IML006'),
+(3833, 'A1317099', 'IML006'),
+(3834, 'A1317003', 'IML006'),
+(3835, 'A1317031', 'IML006'),
+(3836, 'A1317046', 'IML006'),
+(3837, 'A1317022', 'IML006'),
+(3838, 'A1317005', 'IML006'),
+(3839, 'A1317103', 'IML006'),
+(3840, 'A1317037', 'IML006'),
+(3841, 'A1317047', 'IML006'),
+(3842, 'A1317030', 'IML006'),
+(3843, 'A1317073', 'IML006'),
+(3844, 'A1317074', 'IML006'),
+(3845, 'A1317035', 'IML006'),
+(3846, 'A1317076', 'IML006'),
+(3847, 'A1317057', 'IML006'),
+(3848, 'A1317009', 'IML006'),
+(3849, 'A1317034', 'IML006'),
+(3850, 'A1317088', 'IML006'),
+(3851, 'A1317045', 'IML006'),
+(3852, 'A1317066', 'IML006'),
+(3853, 'A1317025', 'IML006'),
+(3854, 'A1317008', 'IML006'),
+(3855, 'A1317087', 'IML006'),
+(3856, 'A1317036', 'IML006'),
+(3857, 'A1317082', 'IML006'),
+(3858, 'A1317051', 'IML006'),
+(3859, 'A1317067', 'IML006'),
+(3860, 'A1317052', 'IML006'),
+(3861, 'A1317042', 'IML006'),
+(3862, 'A1317002', 'IML006'),
+(3863, 'A1317078', 'IML006'),
+(3864, 'A1317040', 'IML006'),
+(3865, 'A1317079', 'IML006'),
+(3866, 'A1317092', 'IML006'),
+(3867, 'A1317048', 'IML006'),
+(3868, 'A1317061', 'IML006'),
+(3869, 'A1317086', 'IML006'),
+(3870, 'A1317020', 'IML006'),
+(3871, 'A1317071', 'IML006'),
+(3872, 'A1317033', 'IML006'),
+(3873, 'A1317056', 'IML006'),
+(3874, 'A1317054', 'IML006'),
+(3875, 'A1317012', 'IML006'),
+(3876, 'A1317044', 'IML006'),
+(3877, 'A1317093', 'IML006'),
+(3878, 'A1317001', 'IML006'),
+(3879, 'A1317077', 'IML006'),
+(3880, 'A1317080', 'IML006'),
+(3881, 'A1317004', 'IML006'),
+(3882, 'A1317075', 'IML006'),
+(3883, 'A1317018', 'IML006'),
+(3885, 'A1316021', 'IML006'),
+(3886, 'herpendi@politala.ac.id', 'IML001'),
+(3887, 'titikwijayati@politala.ac.id', 'IML005'),
+(3888, 'blogprakerin@politala.ac.id', 'IML001');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_mahasiswa`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_mahasiswa` (
+  `nim` varchar(10) NOT NULL,
+  `id_tahun_akademik` varchar(50) DEFAULT NULL,
+  `id_program_studi` varchar(50) DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `nama_mahasiswa` varchar(100) DEFAULT NULL,
+  `alamat_mhs` mediumtext,
+  `jenis_kelamin_mhs` varchar(15) DEFAULT NULL,
+  `email_mhs` varchar(255) DEFAULT NULL,
+  `tempat_lahir_mhs` varchar(100) DEFAULT NULL,
+  `tanggal_lahir_mhs` date DEFAULT NULL,
+  `no_hp_mahasiswa` varchar(50) DEFAULT NULL,
+  `nama_orangtua_mhs` varchar(100) DEFAULT NULL,
+  `no_hp_orangtua_mhs` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_mahasiswa`
+--
+
+INSERT INTO `tb_mahasiswa` (`nim`, `id_tahun_akademik`, `id_program_studi`, `username`, `nama_mahasiswa`, `alamat_mhs`, `jenis_kelamin_mhs`, `email_mhs`, `tempat_lahir_mhs`, `tanggal_lahir_mhs`, `no_hp_mahasiswa`, `nama_orangtua_mhs`, `no_hp_orangtua_mhs`) VALUES
+('A1317001', 'TA002', 'PST001', 'A1317001', 'Achmad Syah Maulana', 'JL. Niaga Gg. Baru', 'Laki-laki', 'achmad.syah.maulana69@gmail.com', 'Tanah Laut', '1999-06-21', '085224276886', 'Rusmiah', '085245673960'),
+('A1317002', 'TA002', 'PST001', 'A1317002', 'Ade Ardha Reswari', 'Ds. Benua Tengah Rt.08 Rw.03 Kec.Takisung Kab.Tanah Laut', 'Perempuan', 'adeardha81@gmail.com', 'palangkaraya', '2000-06-02', '082155327086', 'Riyanto', '082357621644'),
+('A1317003', 'TA002', 'PST001', 'A1317003', 'Adela Valiandra', 'Desa Maluka Baulin RT/RW 01 Kec.Kurau Kab.Tanah Laut', 'Perempuan', 'adelavaliandra30@gmail.com', 'karawang', '1999-03-30', '+628250798707', 'Dony Valiandra', '085298177271'),
+('A1317004', 'TA002', 'PST001', 'A1317004', 'Agi Munawa', 'Jl. Sukadamai Rt. 03, desa Takisung', 'Laki-laki', 'agimunawa11@gmail.com', 'Takisung', '1999-02-20', '+681935344898', 'Dewi Arianti', '+6282252218147'),
+('A1317005', 'TA002', 'PST001', 'A1317005', 'Ahmad Asegaf', 'Desa Ketapang kec.Bajuin kab.tanah laut', 'Laki-laki', 'aefsegaf1001@gmail.com', 'Palangkaraya', '2000-01-08', '082157906280', 'Sayyid Abdul Khadir Assegaf', '08125157211'),
+('A1317006', 'TA002', 'PST001', 'A1317006', 'Ahmad Laily Misfi', 'Bati-Bati desa ujung Kecamatan bati-bati', 'Laki-laki', 'ahmadlaily021@gmail.com', 'Pelaihari', '1998-12-03', '+6285820486303', 'Iwan Arie Sandy', '+6285705453119'),
+('A1317008', 'TA002', 'PST001', 'A1317008', 'Aiga Putri Oktovianda', 'Jl. Anggrek Rt.11 Rw.01 Desa Gunung Makmur Kecamatan Takisung Kabupaten Tanah Laut', 'Perempuan', 'aiga.putri2016@gmail.com', 'Banjarmasin', '1999-10-05', '+6285348283890', 'Sugianto dan Herlindawati', '+6285346541234'),
+('A1317009', 'TA002', 'PST001', 'A1317009', 'Andri Ade Irawan', 'jl. Karya Bersama, Ds. Tajau Pecah Rt.13 Rw.04 Kec. Batu Ampar Kab. Tanah Laut, Kalimantan Selatan.', 'Laki-laki', 'andriadeirawan04@gmail.com', 'Tanah Laut', '1999-04-30', '085753963059', 'Partinem', '082357285247'),
+('A1317010', 'TA002', 'PST001', 'A1317010', 'Anita', 'J. Kamaratih Ds. Panggung RT 19 RW 001, Kab. Tanah Laut', 'Perempuan', 'anitati1d@gmail.com', 'Tanah Laut', '1999-11-08', '082253686857', 'Agus Waluyo', '081351160358'),
+('A1317011', 'TA002', 'PST001', 'A1317011', 'Anita Nurlaila', 'Jl. Bhakti   rt 2 rw 1  Kel. Karang Taruna kec. Pelaihari Kab. Tanah Laut', 'Perempuan', 'anitanurlaila11@gmail.com', 'Pelaihari', '1999-11-03', '082251562707', 'Jasmani', '085651459731'),
+('A1317012', 'TA002', 'PST001', 'A1317012', 'Annisa', 'Desa Jombang RT 12 No 82 Kecamatan Satui Kabupaten Tanah Laut', 'Perempuan', 'an.nisa.051099@gmail.com', 'Tumingki', '1999-10-05', '+6285246639266', 'Nortajudin', '+6285349440768'),
+('A1317013', 'TA002', 'PST001', 'A1317013', 'Ari Setia Budi', 'Ds. Benua Tengah, Kc. Takisung, Kab. Tanah Laut', 'Laki-laki', 'arisetiabudi19@gmail.com', 'Ds. Benua Tengah', '1999-02-04', '082253305320', 'Yuli Wahyuni', '082255649037'),
+('A1317014', 'TA002', 'PST001', 'A1317014', 'Ari Wahyudi', 'RT 03 RW 02 Desa Sungai Asam, Kec. Karang Intan, Kab. Banjar, Kalimantan Selatan.', 'Laki-laki', 'ariwahyudi1945@gmail.com', 'Sungai Asam', '1999-01-09', '0816402809 (WA)', 'Salmiah', '082253499031'),
+('A1317016', 'TA002', 'PST001', 'A1317016', 'Bibit Wahyudi', 'Jl. Transmigrasi, Desa Kayu Abang, Kecamatan Tambang Ulang, Kabupaten Tanah Laut.', 'Laki-laki', 'Bibitwahyudi1922@gmail.com', 'Tanah Laut', '1998-12-19', '+62857548573', 'Wartiyah', '+6281251178237'),
+('A1317017', 'TA002', 'PST001', 'A1317017', 'Cahya Aprilia', 'Jl. Kepuh Rt 11 Rw 02 Desa Panggung ', 'Perempuan', 'cahyaaprillia47@gmail.com', 'Pelaihari', '1999-04-26', '085246081229', 'Suharno', '085310371377'),
+('A1317018', 'TA002', 'PST001', 'A1317018', 'Danu Rizky Maulana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('A1317019', 'TA002', 'PST001', 'A1317019', 'Dicky Sulis Stiawan', 'Jl. Pamanaran Rt 25 Rw 03 Kel.Angsau Kec.Pelaihari Kab.Tanah Laut', 'Laki-laki', 'dickyss144@gmail.com', 'Tanah Laut', '1999-07-03', '082251140197', 'SURYADI', '085252978857'),
+('A1317020', 'TA002', 'PST001', 'A1317020', 'Dita Ayu Lestari', 'Desa Kebun Raya, Kec.Kintap, Kab.Tanah Laut', 'Perempuan', 'ditaayulestari02@gmail.com', 'Bantul', '1999-02-13', '+6282256850133', 'Bambang Priyono', '+6285248244505'),
+('A1317021', 'TA002', 'PST001', 'A1317021', 'Erna Sulistyowati', 'jl.  Bung Karno Rt 10/02, Tirtajaya Kec.Bajuin', 'Perempuan', 'ernasulistyowatii05@gmail.com', 'Tanah Laut', '1999-05-27', '085821059335', 'Suwito', '082150064744'),
+('A1317022', 'TA002', 'PST001', 'A1317022', 'Estri Nunik Hidayati', 'Jl. A. Yani Desa Asam Jaya kec. Jorong', 'Perempuan', 'estrinunikhidayati@gmail.com', 'Tanah Laut', '1999-06-14', '+6285820673385', 'Daryoni', '+6281348515298'),
+('A1317023', 'TA002', 'PST001', 'A1317023', 'Fajar', 'Jl.bhakti  rt 03, rw 02 ', 'Laki-laki', 'fajarujangg@gmai.com', 'kapuas', '1998-02-07', '+62857505730', 'asmawar', '+6285750725730'),
+('A1317025', 'TA002', 'PST001', 'A1317025', 'Gusti Ahmad Hafi', 'Jl. Mufakat, Desa Ujung, Kec. Bati-Bati, Kab. Tanah Laut, Kalimantan Selatan', 'Laki-laki', 'gustihafi99@gmail.com', 'Tanah Laut', '1999-08-14', '+6285958067848', 'Gusti Badran', '+62895415593100'),
+('A1317026', 'TA002', 'PST001', 'A1317026', 'Helmi Tri Budi Yulianto', 'Desa Tirta Jaya Rt 04 Rw 01 Kec. Bajuin Kab. Tanah Laut', 'Laki-laki', 'helmity.ty@gmail.com', 'Pelaihari', '1999-07-21', '+6282251884786', 'Lilik Susanti', '+6282255622677'),
+('A1317027', 'TA002', 'PST001', 'A1317027', 'Hesti Ratih Ningtias', 'Desa Telaga Langsat, Kec Takisung, Rt 04 Rw 01', 'Perempuan', 'hestiratih08@gmail.com', 'Tanah Laut', '1999-08-11', '+6282233651828', 'Hari Suseno', '+6285251700816'),
+('A1317030', 'TA002', 'PST001', 'A1317030', 'Inka Nurjanah', 'Jl. Taruna Jaya Rt/Rw 14/04 Kelurahan Karang Taruna Kecamatan Pelaihari Kabupaten Tanah Laut', 'Perempuan', 'inkanurjanah98@gmail.com', 'Pelaihari', '1998-10-15', '+6281250515136', 'Sabardi Kasianto', '+6285248584497'),
+('A1317031', 'TA002', 'PST001', 'A1317031', 'Istiqomah', 'desa ketapang rt 04 rw 01, kecamatan bajuin, kabupaten tanah laut, kalimantan selatan', 'Perempuan', 'iistiqomahh95@gmail.com', 'Ketapang', '1999-08-01', '085750084291', 'Dahlina', '082350351561'),
+('A1317033', 'TA002', 'PST001', 'A1317033', 'Khoirul Imam Safi’i', 'jln ahmad yani. angsau pelaihari tanah laut', 'Laki-laki', 'khoirulimam3009@gmail.com', 'jepara', '1997-09-30', '+6285975249088', 'suparti (alm)', '081359580103'),
+('A1317034', 'TA002', 'PST001', 'A1317034', 'Kiki Maulida', 'Jl. Atu-atu, Kec Pelaihari', 'Perempuan', 'kikimaulida.99@gmail.com', 'Tanah Laut', '1999-07-05', '082158337585', 'Ahmad Rafi''i', '085248600821'),
+('A1317035', 'TA002', 'PST001', 'A1317035', 'Koko Hermawan', 'JL. Padat Karya RT.2 RW.2 Desa Kampung Baru Kec. Pelaihari Kab. Tanah Laut', 'Laki-laki', 'kokohermawantkj@gmail.com', 'Banjarmasin', '1999-12-07', '+6285753621688', 'Nanok Rahman Harianto', '+6282251861411'),
+('A1317036', 'TA002', 'PST001', 'A1317036', 'Lia Merliana', 'Ds.sumber mulia rt 11', 'Perempuan', 'liamerliana12@gmail.com', 'Pelaihari', '0000-00-00', '083143540022', 'Subarno', '081259521392'),
+('A1317037', 'TA002', 'PST001', 'A1317037', 'Lidya Novita', 'Komplek Perumahan PTPN 13 ', 'Perempuan', 'lidya.novita0711@gmail.com', 'Salam', '1999-11-07', '081258753836', 'Nasib', '085349335271'),
+('A1317040', 'TA002', 'PST001', 'A1317040', 'Mahriani', 'Kuala Tambangan Rt.14 Rw.06, kec. Takisung kab. Tanah Laut', 'Perempuan', 'mahriani1499@gmail.com', 'Kuala Tambangan', '1999-04-01', '+6281645421745', 'Abd Rahman', '+6285391299631'),
+('A1317041', 'TA002', 'PST001', 'A1317041', 'Mariana', 'Desa Galam RT.03 RW.01\r\nKecamatan Bajuin Kabupaten Tanah Laut', 'Perempuan', 'mariana.39714@gmail.com', 'Bangkalaan Melayu', '1997-09-03', '+6282253603552', 'Sulpandi', '+6282250723706'),
+('A1317042', 'TA002', 'PST001', 'A1317042', 'Mariatul Kiftiah', 'Jl. A. Yani Sarang Halang', 'Perempuan', 'mariatulkitiah92@gmail.com', 'Tanah Laut', '1999-08-22', '082253042369', 'Jamsaniansyah ', '085251837379'),
+('A1317044', 'TA002', 'PST001', 'A1317044', 'Maya Gian Sister', 'EX UPT Tanjung Dewa, RT 08 RW 03, Desa Batu Tungku, Kecamatan Panyipatan, Kabupaten Tanah Laut', 'Perempuan', 'mayagiansister@gmail.com', 'Tanah Laut', '2000-05-01', '+6285349642424', 'Drs. Nono', '+6285251184480'),
+('A1317045', 'TA002', 'PST001', 'A1317045', 'Megawati', 'jl. Matah komplek sinar alam Takisung permai gg blungka no. 8', 'Perempuan', 'megawati3110@gmail.com', 'pelaihari', '2020-01-31', '085389299743', 'Nor Ainah', '081349390937'),
+('A1317046', 'TA002', 'PST001', 'A1317046', 'Melda Hikma', 'Jalan Suka Damai Takisung ', 'Perempuan', 'melda.hikma07@gmail.com', 'Takisung', '1997-07-24', '+6287701450617', 'Baidillah', '+6285251617816'),
+('A1317047', 'TA002', 'PST001', 'A1317047', 'Melda Rosalina', 'Jl. Ayani Pulau Sari No.31 Kec. Tambang Ulang Kab. Tanah Laut', 'Perempuan', 'meldarosalina.29599@gmail.com', 'Pelaihari', '1999-05-29', '+6281253022223', 'Kamarudin', '+628125181223'),
+('A1317048', 'TA002', 'PST001', 'A1317048', 'Meliana', 'Desa Ambawang Rt.08 Kec. Batu Ampar', 'Perempuan', 'meli.ana0520@gmail.com', 'Tanah Laut', '1998-05-20', '+6282162274148', 'Kuatno', '+6285251930468'),
+('A1317050', 'TA002', 'PST001', 'A1317050', 'Meyhastanti Cahyaning Fijar', 'Jl.A.Yani rt 18 rw 4 Desa Panggung Kec.Pelaihari', 'Perempuan', 'Meyhastanti2017@gmail.com', 'Tanah Laut', '1999-05-30', '081351100160', 'Suwarto', '081251138602'),
+('A1317051', 'TA002', 'PST001', 'A1317051', 'Mila Camelia', 'Jl.A.Yani KM 101, Desa Jorong Kecamatan Jorong Kabupaten Tanah Laut, Kalimantan Selatan', 'Perempuan', 'cameliam388@gmail.com', 'Tampang', '1999-07-10', '+6287764500306', 'Mahli', '+6285249794524'),
+('A1317052', 'TA002', 'PST001', 'A1317052', 'Mita Maulinda', 'jl. matah 2', 'Perempuan', 'mitamaulinda25@gmail.com', 'Pantai Linuh', '1999-06-25', '085251586178', 'Asmani', '085251586178'),
+('A1317054', 'TA002', 'PST001', 'A1317054', 'Muhammad Khairi', 'jalan 45  rt.4 rw.2 sarang halang, pelaihari, kabupaten tanah laut, kalimantan selatan', 'Laki-laki', 'muhammad.khairi.2199@gmail.com', 'Tanah laut', '1999-08-21', '+6281347931514', 'sahrani', '+6281349640289'),
+('A1317055', 'TA002', 'PST001', 'A1317055', 'Muhammad Rizky Ansyari', 'Jalan Muallimin Desa Kayu Bawang rt 05 rw 03 Kecamatan Barabai Kabupaten hulu sungai tengah provinsi kalimantan selatan', 'Laki-laki', 'riskyansyari9@gmail.com', 'Barabai', '1998-11-13', '082357062569', 'Nurul Lisna Hartati', '085349358097'),
+('A1317056', 'TA002', 'PST001', 'A1317056', 'Muhammad Teddy Taufani', 'Jl. Matah 1, Gang. Swadaya, RT. 06, RW. 02, Kel. Karang Taruna, Kec. Pelaihari, Kab. Tanah Laut, Kalimantan Selatan, 70812', 'Laki-laki', 'teddyready7@gmail.com', 'Rantau', '1999-02-12', '+6285246488560', 'Dahliani', '+6285231223184'),
+('A1317057', 'TA002', 'PST001', 'A1317057', 'Muhammad Thayib Ramadan', 'Jl. Ahmad Yani RT.04 RW.02 Desa Gunung Raja Kecamatan Tambang Ulang', 'Laki-laki', 'muhammad.thayib.ramadan@gmail.com', 'Tanah Laut', '1999-12-27', '+6281522797490', 'Laila Darmawati', '+6281322797490'),
+('A1317058', 'TA002', 'PST001', 'A1317058', 'Nadya Alfisyah', 'Komplek Taman Asri Jl. Anggrek Blok A No.1', 'Perempuan', 'nadyalfi08@gmail.com', 'Tanah Laut', '1999-08-23', '+6282256621026', 'M. Yazid Helmi', '+6282153330072'),
+('A1317060', 'TA002', 'PST001', 'A1317060', 'Nanda Sejati Ningtyas', 'Jl.Swadaya Tirta Jaya Rt.08 Rw.03', 'Perempuan', 'nandasejatiningtyas@gmail.com', 'Tanah Laut', '0000-00-00', '+6282251045245', 'Soeratno', '+625248584494'),
+('A1317061', 'TA002', 'PST001', 'A1317061', 'Nigmah', 'Jl. Mekar Sari Ds. Bingkulu Rt.06 Rw.03 Kec. Tambang Ulang Kab. Tanah Laut', 'Perempuan', 'nigmah.77@gmail.com', 'Bingkulu', '1998-05-25', '+6282240570796', 'Saini', '085251912733'),
+('A1317064', 'TA002', 'PST001', 'A1317064', 'Noor Latipah', 'jl. Teluk baru RT/RW. 8a/003, Kec. Karang Taruna, Kel. Pelaihari, Kab. Tanah Laut, Prov. Kalimantan Selatan', 'Perempuan', 'noorlatipah06@gmail.com', 'Tanah Laut', '1999-06-20', '+6288247894164', 'MATLI', '+6285349307021'),
+('A1317065', 'TA002', 'PST001', 'A1317065', 'Nor Janah', 'Jl kunyit dalam, desa kunyit kecamatan bajuin kab tanah laut Kalimantan Selatan', 'Perempuan', 'norjanah10599@gmail.com', 'Kapuas', '1999-05-10', '085714285227', 'Hamdi', '085393110379'),
+('A1317066', 'TA002', 'PST001', 'A1317066', 'Norhatiah', 'Jl. Jayau Rt.09/rw.02 Desa.ambungan Kec. Pelaihari', 'Perempuan', 'norhatiah2102@gmail.com', 'Batu Mandi', '1999-02-21', '+6285750629941', 'ABD Mugeni', '+6285249382538'),
+('A1317067', 'TA002', 'PST001', 'A1317067', 'Norida Alisa', 'Jl. Al-Fatah Gg.Berkah', 'Perempuan', 'noridaalisa03@gmail.com', 'Pelaihari', '1999-03-02', '+6283159090827', 'M.Zali', '+6285350538105'),
+('A1317068', 'TA002', 'PST001', 'A1317068', 'Novia Sari', 'Jl. Datu Insad Rt/02 Rw/02, Desan Sambangan, kec. Bati-Bati, Kab.Tanah Laut', 'Perempuan', 'Noviasr964@gmail.com', 'Tanah Laut', '1998-11-01', '081649189984', 'Asrah', '085348038539'),
+('A1317071', 'TA002', 'PST001', 'A1317071', 'Rahma Dwi Cahyani', 'jl. kh.mansyur rt.14/rw.05 gang kenanga, kel. Angsau, kab. tanah laut, kec. pelaihari, prov. kalsel', 'Perempuan', 'rahm.dwi.cahyani.99@gmail.com', 'Pelaihari', '1999-11-24', '081349570865', 'purwandio', '081348614116'),
+('A1317073', 'TA002', 'PST001', 'A1317073', 'Reka Nur Andinni', 'Jl.Niaga Pelaiahari rt 13 rw 4', 'Perempuan', 'rekanurandinni23@gmail.com', 'Pelaihari', '1999-12-23', '+6285248554702', 'Didin Jayadi ', '085251231030'),
+('A1317074', 'TA002', 'PST001', 'A1317074', 'Renaldi Haris Aksara', 'Jl. Lingkar Atu-Atu RT.08 RW.02 , Kec. Pelaihari, Kab. Tanah Laut, Kalimantan Selatan, Indonesia', 'Laki-laki', 'harisaksararenaldi30@gmail.com', 'Marabahan', '1999-05-30', '+62 857-5318-7299', 'Misdah', '+62 852-4803-6671'),
+('A1317075', 'TA002', 'PST001', 'A1317075', 'Rendy Saputera', 'Jl Noorsehat RT.4 RW.2 Pelaihari', 'Laki-laki', 'rendyspt20@gmail.com', 'Pelaihari', '1999-08-10', '+6282239790110', 'Indar Jaya Putra', '+6285248493940'),
+('A1317076', 'TA002', 'PST001', 'A1317076', 'Rendy Saputra', 'Jl Ambawang RT 15 RW 03 Kelurahan Sarang Halang Kecamatan Pelaihari Kabupaten Tanah Laut Provinsi Kalimantan Selatan', 'Laki-laki', 'rendy.kampus88@gmail.com', 'Batu Apit', '1997-08-28', '+6282177354854', 'Sandi', '+6285387126259'),
+('A1317077', 'TA002', 'PST001', 'A1317077', 'Restu Adji Saputra', 'pelaihari, komplek bajuin raya, no 7b, desa atu-atu.', 'Laki-laki', 'restuadjisaputra22@gmail.com', 'Banjarmasin', '2000-02-18', '087815268818', 'Sulasmi', '081348549611'),
+('A1317078', 'TA002', 'PST001', 'A1317078', 'Retno Fratiwi', 'Jl. A Yani RT 18/03 Ds. Panggung Kec. Pelaihari', 'Perempuan', 'retnofratiwi10@gmail.com', 'Tanah Laut', '1999-11-10', '+6285388708110', 'Suyono', '+6281251961044'),
+('A1317079', 'TA002', 'PST001', 'A1317079', 'Reyfindy', 'Desa Asam Jaya Tran 400, Kec.Jorong Kab.Tanah Laut', 'Perempuan', 'reyfindy13@gmail.com', 'Tanah Laut', '1999-05-13', '082158018076', 'Suroso', '085248156149'),
+('A1317080', 'TA002', 'PST001', 'A1317080', 'Riki Hidayat', 'Jl. Swadaya RT.03, RW.02, Padang Luas Kec. Kurau. Kab. Tanah Laut, Provinsi Kalimantan Selatan ', 'Laki-laki', 'rikyhidayat70@gmail.com', 'Pelaihari', '1999-03-15', '085349855279', 'Salih', '08235314589'),
+('A1317081', 'TA002', 'PST001', 'A1317081', 'Rindiyani', 'Jln. Bhakti Karang Jawa', 'Perempuan', 'rindiyanii.2212@gmail.com', 'Tanah Laut', '1999-10-22', '081349567464', 'Abdul Basir', '085248622811'),
+('A1317082', 'TA002', 'PST001', 'A1317082', 'Rini Yuliani', 'Jln. Swadaya, RT.06, RW.003, Desa Padang Luas, Kec. Kuarau', 'Perempuan', 'ryulianii62@gmail.com', 'Tanah Laut', '2000-07-14', '+6282251568965', 'Suranto Purnomo', '+6285249240205'),
+('A1317083', 'TA002', 'PST001', 'A1317083', 'Riska Hartati', 'JL. Datuk Timang RT.09 RW.03 Desa.Jorong Kec.Jorong kab.Tanah Laut', 'Perempuan', 'riskahartati10@gmail.com', 'Jorong', '1999-07-04', '+6282250153926', 'Ahmad Badar', '+6285248214333'),
+('A1317086', 'TA002', 'PST001', 'A1317086', 'Sapniah', 'Desa Tambak Karya Rt. 05 rw. 03', 'Perempuan', 'sapniah07@gmail.com', 'Tambak Karya', '1997-07-15', '082352207767', 'Anwar', '08538279129'),
+('A1317087', 'TA002', 'PST001', 'A1317087', 'Sari Maryani', 'Jl. Perintis 1 Rt. 17 Pelaihari', 'Perempuan', 'sarimaryanii@gmail.com', 'Tanah Laut', '1998-09-03', '082253563241', 'Chairil anwar', '085246060438'),
+('A1317088', 'TA002', 'PST001', 'A1317088', 'Selvya Meirida Andani', 'Jl. Sri Rejeki Rt 16/3 Desa Panggung, Pelaihari, Tanah Laut', 'Perempuan', 'selvyameirida1@gmail.com', 'Tanah Laut', '1999-05-01', '082154112548', 'Sumadi ', '085250895240'),
+('A1317090', 'TA002', 'PST001', 'A1317090', 'Sinta Esti Rahayu', 'Sungai Riam 1', 'Perempuan', 'estisinta14@gmail.com', 'Pelaihari', '1999-11-10', '085249638846', 'Darsih', '085251412856'),
+('A1317092', 'TA002', 'PST001', 'A1317092', 'Siti Purnama', 'Desa Tambak Sarinah Rt 05 Kec Kurau', 'Perempuan', 'sitipurnama195@gmail.com', 'Tambak Sarinah', '1999-08-05', '+6285250014904', 'Marjuki', '+6285248887921'),
+('A1317093', 'TA002', 'PST001', 'A1317093', 'Suci Febriani', 'Desa Ambawang, Kec. Batu Ampar', 'Perempuan', 'sucifebriani243@gmail.com', 'Ambawang', '1999-02-01', '+6282254769223', 'Mulyadi', '+6282255556265'),
+('A1317094', 'TA002', 'PST001', 'A1317094', 'Susanti', 'Jl. Rahayu RT.08 Desa Bawah Layung Kec. Kurau Kab. tanah Laut', 'Perempuan', 'susantisan730@gmail.com', 'Bawah Layung', '1999-10-17', '+6283135715181', 'Darmawan dan Siti rahmah', '+6282158763603'),
+('A1317096', 'TA002', 'PST001', 'A1317096', 'Tri Lutfiatul Rahayu', 'Jl. A. Yani RT. 07/ RW. 02 Desa Panggung, Kec. Pelaihari, Kab. Tanah Laut', 'Perempuan', 'trilutfiatulr13@gmail.com', 'Tanah Laut', '1999-08-13', '+6282112799521', 'Supeni Edi', '+6282151718882'),
+('A1317097', 'TA002', 'PST001', 'A1317097', 'Tsamara Dara Rizkita', 'Jl kelayan a gg sadar no 60', 'Perempuan', 'tsamaradara4@gmail.com', 'Banjarmasin', '1999-01-04', '+628195357658', 'Fitrian Noor', ''),
+('A1317098', 'TA002', 'PST001', 'A1317098', 'Wahzuni Sri Rahayu', 'Jl.Purnawirawan Gg.Damai No.48 Kelurahan Angsau Kecamatan Pelaihari Kabupaten Tanah Laut', 'Perempuan', 'wahzuni.srirahayu24@gmail.com', 'Tuban', '1998-12-24', '085750257441', 'Sulasih', '082255553522'),
+('A1317099', 'TA002', 'PST001', 'A1317099', 'Winda Dwi Sulistia', 'jl. Trans Plasma Desa Ujung Batu RT. 011 Rw. 004 ', 'Perempuan', 'windadsulistia@gmail.com', 'Tanah Laut', '1999-07-14', '+6285350287269', 'Syahril', '+6285248093952'),
+('A1317100', 'TA002', 'PST001', 'A1317100', 'Yeremia Handoyo', 'jl.parit mas rt.20 rw.06 kel.Angsau kec.pelaihari', 'Laki-laki', 'yeremia.handoyo28@gmail.com', 'Tanah Laut', '1999-01-08', '085754794847', 'Dwi Handoyo Timotius', '081334926777'),
+('A1317101', 'TA002', 'PST001', 'A1317101', 'Yeyen Nurul Imama', 'Jl.swadaya Tirtajaya 2 RT.11 RW.02 kecamatan Bajuin', 'Perempuan', 'yeyennurulimama12@gmail.com', 'Tirtajaya', '1998-07-16', '+6282251295620', 'Turkan Adi Subandi', '082251295620'),
+('A1317103', 'TA002', 'PST001', 'A1317103', 'Yougie Affandi', 'Jl. Perintis Gg. Sidodadi Rt.6 No.32 Ds. Makmur mulia Kec. Satui Kab. Tanah Bumbu', 'Laki-laki', 'yougieaffandi27@gmail.com', 'Satui', '1999-10-27', '085246068378', 'Susanto', '085386520577'),
+('A1317104', 'TA002', 'PST001', 'A1317104', 'Yunita Anggraini', 'Jl. Cengkeh RT. 06 RW. 03, Kelurahan Pabahanan', 'Perempuan', 'yunitaanggraini246@gmail.com', 'Banjarmasin', '1999-06-24', '081645471447', 'Sunardi', '085248045352'),
+('A1317106', 'TA002', 'PST001', 'A1317106', 'Fransisca Jeni Tari Krismany', 'Desa Sungai Riam Jl. Raya Batakan RT.12 RW 5 Kec. Pelaihari Kab. Tanah Laut', 'Perempuan', 'fransiscajtk@gmail.com', 'Banjarmasin', '1999-01-24', '+6282251949284', 'Daniel Sucipto', '+6282252533571'),
+('A1317107', 'TA002', 'PST001', 'A1317107', 'Muhammad Aditya Effendi', 'Jl.Majakeling 15/05 No.21', 'Laki-laki', 'adityaeffendi025@gmail.com', 'Guntung Payung', '1999-09-25', '+628971892590', 'Rusman Effendi', '+6282251915658'),
+('A1317108', 'TA002', 'PST001', 'A1317108', 'Muhammad Iqbal ', 'Jl. Beramban RT 21 RW 07', 'Laki-laki', 'iqbal710.mi@gmail.com', 'Tapin', '1998-10-07', '+6287816574554', 'Eksaniah', '+6285349229111'),
+('A1317109', 'TA002', 'PST001', 'A1317109', 'Muhammad Muslih Amirudin', 'Desa Pantai Linuh RT 03 Dusun 01 Kecamatan Batu Ampar', 'Laki-laki', 'muhammad.muslih.amirudin@gmail.com', 'Pantai Linuh', '1999-03-19', '+6285348484017', 'Samuji', '+6282149747693'),
+('A1317111', 'TA002', 'PST001', 'A1317111', 'Siti Naziha', 'JL. Karnila Rt 02 Rw 02 Desa Ketapang\r\nKecamatan Bajuin, Kabupaten Tanah Laut ', 'Perempuan', 'sitinaziha28@gmail.com', 'Banyuwangi', '1999-04-24', '+6282350008626', 'Syamsul Hadi', '+6282358799914');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_master_level`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_master_level` (
+  `id_master_level` varchar(20) NOT NULL,
+  `nama_master_level` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_master_level`
+--
+
+INSERT INTO `tb_master_level` (`id_master_level`, `nama_master_level`) VALUES
+('IML001', 'admin'),
 ('IML002', 'prakerin'),
 ('IML003', 'koordinator prodi'),
 ('IML004', 'akademik'),
@@ -9244,498 +8897,1162 @@ INSERT INTO `tb_master_level` (`id_master_level`, `nama_master_level`) VALUES ('
 ('IML007', 'pembimbing lapangan'),
 ('IML008', 'pemonitoring');
 
-INSERT INTO `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`, `id_perusahaan`, `nim`) VALUES ('1', '71', 'A1317066'),
-('2', '71', 'A1317025'),
-('3', '69', 'A1317037'),
-('4', '75', 'A1317106'),
-('5', '75', 'A1317090'),
-('6', '75', 'A1317010'),
-('8', '67', 'A1317006'),
-('9', '67', 'A1317030'),
-('10', '89', 'A1317031'),
-('11', '53', 'A1317002'),
-('12', '90', 'A1317101'),
-('13', '56', 'A1317077'),
-('14', '80', 'A1317097'),
-('15', '84', 'A1317098'),
-('16', '84', 'A1317099'),
-('17', '70', 'A1317071');
+-- --------------------------------------------------------
 
-INSERT INTO `tb_negara` (`id_negara`, `nama_negara`) VALUES ('1', 'INDONESIA');
+--
+-- Table structure for table `tb_mhs_pilih_perusahaan`
+--
 
-INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, `waktu`, `hal`, `uri`) VALUES ('512', 'admin', '111', 'Akun telah dibuat, silahkan melengkapi profil', '0', '2019-05-11 01:38:19', X'70726f66696c', 'user/profile'),
-('513', 'C1316002', 'admin', 'Adhhani (C1316002) mengajukan permohonan magang', '1', '2019-06-28 00:58:26', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('515', 'C1316002', 'admin', 'Adhhani (C1316002) telah mengirim bukti penerimaan magang', '1', '2019-06-28 00:58:26', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('519', 'C1316007', 'admin', 'Mahasiswa Ahmad Rizal (C1316007) telah mengajukan perusahaan baru', '1', '2019-06-28 00:58:26', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('520', 'C1316007', 'admin', 'Ahmad Rizal (C1316007) mengajukan permohonan magang', '1', '2019-06-28 00:58:26', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('522', 'C1316007', 'admin', 'Ahmad Rizal (C1316007) telah mengirim bukti penerimaan magang', '1', '2019-06-28 00:58:26', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('523', 'C1316017', 'admin', 'Deny Aditya Pradana (C1316017) mengajukan permohonan magang', '1', '2019-06-28 00:58:26', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('526', 'C1316017', 'admin', 'Deny Aditya Pradana (C1316017) telah mengirim bukti penerimaan magang', '1', '2019-06-28 00:58:26', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('663', 'D1317001', 'admin', 'ALFIAN DWI PAMBUDI (D1317001) mengajukan permohonan magang', '1', '2019-07-01 15:41:20', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('665', 'D1317001', 'admin', 'ALFIAN DWI PAMBUDI (D1317001) telah mengirim bukti penerimaan magang', '1', '2019-07-01 15:41:20', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('689', 'D1317001', 'admin', 'ALFIAN DWI PAMBUDI (D1317001) mengajukan permohonan magang', '1', '2019-07-12 18:46:44', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('691', 'D1317001', 'admin', 'ALFIAN DWI PAMBUDI (D1317001) telah mengirim bukti penerimaan magang', '1', '2019-07-12 18:46:44', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('730', 'admin', 'A1317040', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('731', 'admin', 'A1317093', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('732', 'admin', 'A1317079', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:59', X'70726f66696c', 'user/profile'),
-('733', 'admin', 'A1317016', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('734', 'admin', 'A1317109', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('735', 'admin', 'A1317041', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('736', 'admin', 'A1317065', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('737', 'admin', 'A1317017', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('738', 'admin', 'A1317022', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('739', 'admin', 'A1317001', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('740', 'admin', 'A1317077', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:58:23', X'70726f66696c', 'user/profile'),
-('741', 'admin', 'A1317080', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('742', 'admin', 'A1317035', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('743', 'admin', 'A1317074', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('744', 'admin', 'A1317076', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('745', 'admin', 'A1317009', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('746', 'admin', 'A1317055', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:59:26', X'70726f66696c', 'user/profile'),
-('747', 'admin', 'A1317057', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('748', 'admin', 'A1317027', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('749', 'admin', 'A1317068', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('750', 'admin', 'A1317042', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('751', 'admin', 'A1317052', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('752', 'admin', 'A1317067', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('753', 'admin', 'A1317096', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('754', 'admin', 'A1317101', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:56:28', X'70726f66696c', 'user/profile'),
-('755', 'admin', 'A1317034', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('756', 'admin', 'A1317088', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('757', 'admin', 'A1317033', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('758', 'admin', 'A1317054', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('759', 'admin', 'A1317056', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('760', 'admin', 'A1317048', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('761', 'admin', 'A1317061', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('762', 'admin', 'A1317086', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('763', 'admin', 'A1317002', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:52:18', X'70726f66696c', 'user/profile'),
-('764', 'admin', 'A1317078', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('765', 'admin', 'A1317004', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-08-26 21:31:54', X'70726f66696c', 'user/profile'),
-('766', 'admin', 'A1317018', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:52:55', X'70726f66696c', 'user/profile'),
-('767', 'admin', 'A1317075', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('768', 'admin', 'A1317030', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:23', X'70726f66696c', 'user/profile'),
-('769', 'admin', 'A1317073', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('770', 'admin', 'A1317058', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('771', 'admin', 'A1317081', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('772', 'admin', 'A1317037', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:55', X'70726f66696c', 'user/profile'),
-('773', 'admin', 'A1317047', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('774', 'admin', 'A1317008', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('775', 'admin', 'A1317036', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('776', 'admin', 'A1317087', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('777', 'admin', 'A1317020', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('778', 'admin', 'A1317071', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:59:05', X'70726f66696c', 'user/profile'),
-('779', 'admin', 'A1317045', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('780', 'admin', 'A1317066', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:35', X'70726f66696c', 'user/profile'),
-('781', 'admin', 'A1317111', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('782', 'admin', 'A1317094', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('783', 'admin', 'A1317026', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('784', 'admin', 'A1317104', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('785', 'admin', 'A1317012', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('786', 'admin', 'A1317044', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('787', 'admin', 'A1317010', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:57:33', X'70726f66696c', 'user/profile'),
-('788', 'admin', 'A1317106', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:54:30', X'70726f66696c', 'user/profile'),
-('789', 'admin', 'A1317090', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:31', X'70726f66696c', 'user/profile'),
-('790', 'admin', 'A1317092', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('791', 'admin', 'A1317006', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:56:12', X'70726f66696c', 'user/profile'),
-('792', 'admin', 'A1317014', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('793', 'admin', 'A1317023', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 22:02:59', X'70726f66696c', 'user/profile'),
-('794', 'admin', 'A1317013', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('795', 'admin', 'A1317083', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('796', 'admin', 'A1317051', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:16', X'70726f66696c', 'user/profile'),
-('797', 'admin', 'A1317082', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:57:32', X'70726f66696c', 'user/profile'),
-('798', 'admin', 'A1317060', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('799', 'admin', 'A1317097', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:22', X'70726f66696c', 'user/profile'),
-('800', 'admin', 'A1317050', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('801', 'admin', 'A1317064', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:57:33', X'70726f66696c', 'user/profile'),
-('802', 'admin', 'A1317025', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:54:01', X'70726f66696c', 'user/profile'),
-('803', 'admin', 'A1317103', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:55:30', X'70726f66696c', 'user/profile'),
-('804', 'admin', 'A1317005', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('805', 'admin', 'A1317003', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('806', 'admin', 'A1317031', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:57:28', X'70726f66696c', 'user/profile'),
-('807', 'admin', 'A1317046', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('808', 'admin', 'A1317098', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:57:20', X'70726f66696c', 'user/profile'),
-('809', 'admin', 'A1317099', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 21:56:55', X'70726f66696c', 'user/profile'),
-('810', 'admin', 'A1317100', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('811', 'admin', 'A1317107', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('812', 'admin', 'A1317108', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('813', 'admin', 'A1317019', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('814', 'admin', 'A1317021', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('815', 'admin', 'A1317011', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:42:47', X'70726f66696c', 'user/profile'),
-('816', 'admin', 'C1317040', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('817', 'admin', 'C1317050', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('818', 'admin', 'C1317004', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 22:15:21', X'70726f66696c', 'user/profile'),
-('819', 'admin', 'C1317023', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('820', 'admin', 'C1317031', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('821', 'admin', 'C1317047', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('822', 'admin', 'C1317048', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('823', 'admin', 'C1317033', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('824', 'admin', 'C1317012', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('825', 'admin', 'C1317049', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('826', 'admin', 'C1317001', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-23 19:58:16', X'70726f66696c', 'user/profile'),
-('827', 'admin', 'C1317009', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('828', 'admin', 'C1317020', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('829', 'admin', 'C1317032', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('830', 'admin', 'C1317030', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('831', 'admin', 'C1317051', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('832', 'admin', 'C1317028', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('833', 'admin', 'C1317036', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('834', 'admin', 'C1317046', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('835', 'admin', 'C1317014', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('836', 'admin', 'C1317025', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('837', 'admin', 'C1317039', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('838', 'admin', 'C1317011', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('839', 'admin', 'C1317018', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('840', 'admin', 'C1317038', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('841', 'admin', 'C1317034', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('842', 'admin', 'C1317035', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('843', 'admin', 'C1317006', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('844', 'admin', 'C1317007', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('845', 'admin', 'C1317013', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('846', 'admin', 'C1317005', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('847', 'admin', 'C1317019', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('848', 'admin', 'C1317022', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('849', 'admin', 'C1317008', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '1', '2019-07-26 18:01:16', X'70726f66696c', 'user/profile'),
-('850', 'admin', 'C1317016', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('851', 'admin', 'C1317021', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('852', 'admin', 'C1317010', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('853', 'admin', 'C1317037', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:44:54', X'70726f66696c', 'user/profile'),
-('854', 'admin', 'B1317010', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('855', 'admin', 'B1317038', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('856', 'admin', 'B1316002', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('857', 'admin', 'B1317022', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('858', 'admin', 'B1317023', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('859', 'admin', 'B1317002', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('860', 'admin', 'B1317003', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('861', 'admin', 'B1317073', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('862', 'admin', 'B1317034', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('863', 'admin', 'B1317036', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('864', 'admin', 'B1317026', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('865', 'admin', 'B1317004', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('866', 'admin', 'B1317021', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('867', 'admin', 'B1317057', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('868', 'admin', 'B1317061', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('869', 'admin', 'B1317045', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('870', 'admin', 'B1317044', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('871', 'admin', 'B1317024', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('872', 'admin', 'B1317029', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('873', 'admin', 'B1317051', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('874', 'admin', 'B1317056', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('875', 'admin', 'B1317075', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('876', 'admin', 'B1317052', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('877', 'admin', 'B1317063', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('878', 'admin', 'B1317025', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('879', 'admin', 'B1317017', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('880', 'admin', 'B1317062', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('881', 'admin', 'B1317027', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('882', 'admin', 'B1317001', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('883', 'admin', 'B1317054', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('884', 'admin', 'B1317072', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('885', 'admin', 'B1317018', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('886', 'admin', 'B1317020', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('887', 'admin', 'B1317039', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('888', 'admin', 'B1317047', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('889', 'admin', 'B1317059', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('890', 'admin', 'B1317068', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('891', 'admin', 'B1317033', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('892', 'admin', 'B1317011', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('893', 'admin', 'B1317028', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('894', 'admin', 'B1317048', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('895', 'admin', 'B1317008', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('896', 'admin', 'B1317007', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('897', 'admin', 'B1317009', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('898', 'admin', 'B1317006', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('899', 'admin', 'B1317041', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('900', 'admin', 'B1317005', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('901', 'admin', 'B1317037', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('902', 'admin', 'B1317019', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('903', 'admin', 'B1317046', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('904', 'admin', 'B1317050', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('905', 'admin', 'B1317049', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('906', 'admin', 'B1317066', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('907', 'admin', 'B1317053', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('908', 'admin', 'B1317069', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('909', 'admin', 'B1317058', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('910', 'admin', 'B1317040', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('911', 'admin', 'B1317014', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('912', 'admin', 'B1317060', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('913', 'admin', 'B1317016', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('914', 'admin', 'B1317035', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('915', 'admin', 'B1317065', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('916', 'admin', 'B1317030', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', '0', '2019-07-12 18:46:00', X'70726f66696c', 'user/profile'),
-('917', 'C1317001', 'admin', 'Ade Fitra Hidayatullah (C1317001) mengajukan permohonan magang', '0', '2019-07-23 21:57:44', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('918', 'A1317066', 'admin', 'Norhatiah (A1317066) mengajukan permohonan magang', '0', '2019-07-23 21:57:54', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('919', 'A1317037', 'admin', 'Lidya Novita (A1317037) mengajukan permohonan magang', '0', '2019-07-23 21:58:04', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('920', 'A1317018', 'admin', 'Mahasiswa Danu Rizky Maulana (A1317018) telah mengajukan perusahaan baru', '0', '2019-07-23 21:58:36', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('921', 'A1317006', 'admin', 'Ahmad Laily Misfi (A1317006) mengajukan permohonan magang', '0', '2019-07-23 21:58:40', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('922', 'A1317030', 'admin', 'Inka Nurjanah (A1317030) mengajukan permohonan magang', '0', '2019-07-23 21:58:42', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('923', 'A1317082', 'admin', 'Rini Yuliani (A1317082) mengajukan permohonan magang', '0', '2019-07-23 21:58:51', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('924', 'A1317025', 'admin', 'Gusti Ahmad Hafi (A1317025) mengajukan permohonan magang', '0', '2019-07-23 21:59:04', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('925', 'A1317097', 'admin', 'Tsamara Dara Rizkita (A1317097) mengajukan permohonan magang', '0', '2019-07-23 21:59:36', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('926', 'A1317098', 'admin', 'Wahzuni Sri Rahayu (A1317098) mengajukan permohonan magang', '0', '2019-07-23 22:00:20', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('927', 'A1317099', 'admin', 'Winda Dwi Sulistia (A1317099) mengajukan permohonan magang', '0', '2019-07-23 22:00:22', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('928', 'A1317051', 'admin', 'Mila Camelia (A1317051) mengajukan permohonan magang', '0', '2019-07-23 22:01:48', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('929', 'A1317077', 'admin', 'Restu Adji Saputra (A1317077) mengajukan permohonan magang', '0', '2019-07-23 22:02:34', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('930', 'C1317001', 'admin', 'Mahasiswa Ade Fitra Hidayatullah (C1317001) telah mengajukan perusahaan baru', '0', '2019-07-23 22:02:37', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('931', 'A1317064', 'admin', 'Noor Latipah (A1317064) mengajukan permohonan magang', '0', '2019-07-23 22:02:41', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('932', 'A1317023', 'admin', 'Fajar (A1317023) mengajukan permohonan magang', '0', '2019-07-23 22:05:19', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('933', 'A1317031', 'admin', 'Mahasiswa Istiqomah (A1317031) telah mengajukan perusahaan baru', '0', '2019-07-23 22:06:15', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('934', 'A1317101', 'admin', 'Mahasiswa Yeyen Nurul Imama (A1317101) telah mengajukan perusahaan baru', '0', '2019-07-23 22:06:50', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('935', 'A1317055', 'admin', 'Mahasiswa Muhammad Rizky Ansyari (A1317055) telah mengajukan perusahaan baru', '0', '2019-07-23 22:07:16', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('936', 'admin', 'A1317037', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:07:50', X'73757261742073696170', 'magang?m=pengajuan'),
-('937', 'A1317071', 'admin', 'Mahasiswa Rahma Dwi Cahyani (A1317071) telah mengajukan perusahaan baru', '0', '2019-07-23 22:13:28', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('938', 'A1317098', 'admin', 'Mahasiswa Wahzuni Sri Rahayu (A1317098) telah mengajukan perusahaan baru', '0', '2019-07-23 22:14:07', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('939', 'A1317071', 'admin', 'Rahma Dwi Cahyani (A1317071) mengajukan permohonan magang', '0', '2019-07-23 22:14:24', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('940', 'C1317004', 'admin', 'Ali Fitriyani (C1317004) mengajukan permohonan magang', '0', '2019-07-23 22:15:34', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('941', 'admin', 'A1317006', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:19:33', X'73757261742073696170', 'magang?m=pengajuan'),
-('942', 'admin', 'A1317030', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:19:33', X'73757261742073696170', 'magang?m=pengajuan'),
-('943', 'admin', 'C1317001', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:20:54', X'73757261742073696170', 'magang?m=pengajuan'),
-('944', 'admin', 'C1317004', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:20:54', X'73757261742073696170', 'magang?m=pengajuan'),
-('945', 'A1317106', 'admin', 'Fransisca Jeni Tari Krismany (A1317106) mengajukan permohonan magang', '0', '2019-07-23 22:22:38', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('946', 'A1317090', 'admin', 'Sinta Esti Rahayu (A1317090) mengajukan permohonan magang', '0', '2019-07-23 22:22:52', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('947', 'admin', 'A1317077', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:22:53', X'73757261742073696170', 'magang?m=pengajuan'),
-('948', 'admin', 'A1317106', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:23:38', X'73757261742073696170', 'magang?m=pengajuan'),
-('949', 'admin', 'A1317090', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:23:38', X'73757261742073696170', 'magang?m=pengajuan'),
-('950', 'admin', 'A1317023', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:23:54', X'73757261742073696170', 'magang?m=pengajuan'),
-('951', 'admin', 'A1317071', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:24:12', X'73757261742073696170', 'magang?m=pengajuan'),
-('952', 'admin', 'A1317066', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:24:36', X'73757261742073696170', 'magang?m=pengajuan'),
-('953', 'admin', 'A1317025', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:24:36', X'73757261742073696170', 'magang?m=pengajuan'),
-('954', 'C1317001', 'admin', 'Ade Fitra Hidayatullah (C1317001) telah mengirim bukti penerimaan magang', '0', '2019-07-23 22:26:41', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('955', 'admin', 'A1317097', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:29:38', X'73757261742073696170', 'magang?m=pengajuan'),
-('956', 'admin', 'A1317064', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:30:06', X'73757261742073696170', 'magang?m=pengajuan'),
-('957', 'admin', 'A1317098', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:30:15', X'73757261742073696170', 'magang?m=pengajuan'),
-('958', 'admin', 'A1317099', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:30:15', X'73757261742073696170', 'magang?m=pengajuan'),
-('959', 'A1317077', 'admin', 'Restu Adji Saputra (A1317077) telah mengirim bukti penerimaan magang', '0', '2019-07-23 22:31:19', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('960', 'A1317030', 'admin', 'Inka Nurjanah (A1317030) telah mengirim bukti penerimaan magang', '0', '2019-07-23 22:32:27', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('961', 'A1317101', 'admin', 'Yeyen Nurul Imama (A1317101) mengajukan permohonan magang', '0', '2019-07-23 22:33:54', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('962', 'A1317002', 'admin', 'Ade Ardha Reswari (A1317002) mengajukan permohonan magang', '0', '2019-07-23 22:34:14', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('963', 'A1317018', 'admin', 'Mahasiswa Danu Rizky Maulana (A1317018) telah mengajukan perusahaan baru', '0', '2019-07-23 22:35:44', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('964', 'A1317018', 'admin', 'Mahasiswa Danu Rizky Maulana (A1317018) telah mengajukan perusahaan baru', '0', '2019-07-23 22:35:50', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('965', 'A1317010', 'admin', 'Anita (A1317010) mengajukan permohonan magang', '0', '2019-07-23 22:38:05', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('966', 'A1317018', 'admin', 'Danu Rizky Maulana (A1317018) mengajukan permohonan magang', '0', '2019-07-23 22:40:44', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('967', 'A1317031', 'admin', 'Istiqomah (A1317031) mengajukan permohonan magang', '0', '2019-07-23 22:41:01', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('968', 'admin', 'A1317082', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:44:10', X'73757261742073696170', 'magang?m=pengajuan'),
-('969', 'admin', 'A1317051', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:44:10', X'73757261742073696170', 'magang?m=pengajuan'),
-('970', 'admin', 'A1317031', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:48:41', X'73757261742073696170', 'magang?m=pengajuan'),
-('971', 'admin', 'A1317018', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-23 22:48:45', X'73757261742073696170', 'magang?m=pengajuan'),
-('972', 'A1317031', 'admin', 'Istiqomah (A1317031) telah mengirim bukti penerimaan magang', '0', '2019-07-24 00:32:16', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('973', 'C1317001', 'admin', 'Ade Fitra Hidayatullah (C1317001) mengajukan permohonan magang', '0', '2019-07-25 21:18:11', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('974', 'A1317025', 'admin', 'Gusti Ahmad Hafi (A1317025) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:19:23', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('975', 'admin', 'A1317101', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-25 21:21:38', X'73757261742073696170', 'magang?m=pengajuan'),
-('976', 'admin', 'A1317002', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-25 21:25:36', X'73757261742073696170', 'magang?m=pengajuan'),
-('977', 'admin', 'C1317001', 'Surat sudah ditandatangani, siap untuk dikirimkan', '0', '2019-07-25 21:27:25', X'73757261742073696170', 'magang?m=pengajuan'),
-('978', 'A1317055', 'admin', 'Mahasiswa Muhammad Rizky Ansyari (A1317055) telah mengajukan perusahaan baru', '0', '2019-07-25 21:28:06', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('979', 'A1317097', 'admin', 'Tsamara Dara Rizkita (A1317097) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:28:47', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('980', 'A1317025', 'admin', 'Mahasiswa Gusti Ahmad Hafi (A1317025) telah mengajukan perusahaan baru', '0', '2019-07-25 21:29:32', X'70656e67616a75616e206d6167616e67', 'perusahaan?m=manajemen'),
-('981', 'A1317037', 'admin', 'Lidya Novita (A1317037) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:31:39', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('982', 'A1317101', 'admin', 'Yeyen Nurul Imama (A1317101) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:31:45', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('983', 'A1317106', 'admin', 'Fransisca Jeni Tari Krismany (A1317106) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:33:14', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('984', 'C1317001', 'admin', 'Ade Fitra Hidayatullah (C1317001) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:36:17', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('985', 'C1317001', 'admin', 'Ade Fitra Hidayatullah (C1317001) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:37:31', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('986', 'A1317002', 'admin', 'Ade Ardha Reswari (A1317002) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:39:02', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('987', 'A1317055', 'admin', 'Muhammad Rizky Ansyari (A1317055) mengajukan permohonan magang', '0', '2019-07-25 21:50:35', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('988', 'A1317098', 'admin', 'Wahzuni Sri Rahayu (A1317098) telah mengirim bukti penerimaan magang', '0', '2019-07-25 21:53:52', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('989', 'A1317071', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', '0', '2019-07-25 22:04:13', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('990', 'admin', 'A1317106', 'Surat tugas sudah dicetak, silahkan hubungi prakerin untuk informasi selanjutnya', '0', '2019-07-26 18:14:38', X'73757261742074756761732073696170', NULL),
-('991', 'admin', 'A1317090', 'Surat tugas sudah dicetak, silahkan hubungi prakerin untuk informasi selanjutnya', '0', '2019-07-26 18:14:38', X'73757261742074756761732073696170', NULL),
-('992', 'admin', 'A1317010', 'Surat tugas sudah dicetak, silahkan hubungi prakerin untuk informasi selanjutnya', '0', '2019-07-26 18:14:38', X'73757261742074756761732073696170', NULL),
-('993', 'C1317008', 'admin', 'Edwin Joko Setiawan (C1317008) mengajukan permohonan magang', '0', '2019-07-29 04:59:28', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan'),
-('994', 'A1317071', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', '0', '2019-07-29 10:58:09', X'62756b7469206469746572696d61', 'mahasiswa?m=pengajuan'),
-('995', 'A1317004', 'admin', 'Agi Munawa (A1317004) mengajukan permohonan magang', '0', '2019-08-26 21:32:29', X'70656e67616a75616e206d6167616e67', 'mahasiswa?m=pengajuan');
+CREATE TABLE IF NOT EXISTS `tb_mhs_pilih_perusahaan` (
+  `id_mhs_pilih_perusahaan` int(11) NOT NULL,
+  `id_perusahaan` int(11) DEFAULT NULL,
+  `nim` varchar(10) DEFAULT NULL,
+  `nomor_surat_tugas` mediumtext
+) ENGINE=InnoDB AUTO_INCREMENT=1053 DEFAULT CHARSET=utf8;
 
-INSERT INTO `tb_pegawai` (`nip_nik`, `username`, `status`, `id_pangkat_golongan`, `nama_pegawai`, `alamat_pegawai`, `jk_pegawai`, `email_pegawai`, `tempat_lahir_pegawai`, `tanggal_lahir_pegawai`, `no_hp_pegawai`, `id_jabatan`, `id_golongan`) VALUES ('090801007', 'marlia@politala.ac.id', 'dosen', NULL, 'Marlia Adriana, M.T.', 'Jl.Almanar No. 23 A Rt.22 Rw.06 Kelurahan Angsau Pelaihari Kab.Tanah Laut', 'Perempuan', 'marlia@politala.ac.id', 'Bati-bati', '1982-03-23', NULL, NULL, NULL),
-('090801016', 'herfia.rhomadhona@politala.ac.id', 'dosen', NULL, 'Herfia Rhomadhona, S.Kom., M.Cs', 'Jl. Datu Daim Gang Jambu No. 112 RT. 28 RW.02 ', 'Perempuan', 'herfia.rhomadhona@politala.ac.id', 'Tanah Laut', '1989-04-21', NULL, NULL, NULL),
-('090801031', 'wanyuliyanti@politala.ac.id', 'dosen', NULL, 'Wan Yuliyanti, M.Pd.', 'Jl. Samudra No. 14 Matah Kec. Pelaihari Kab. Tanah Laut - Kalimantan Selatan', 'Perempuan', 'wanyuliyanti@politala.ac.id', 'Singkawang', '1969-07-03', NULL, NULL, NULL),
-('090801044', 'ra.amalia.rizki@politala.ac.id', 'dosen', NULL, 'Raden Rizki Amalia, S.T., M.Si.', 'Jalan Teluk Baru No.33 Karang Taruna Rt/Rw:08/03 Pelaihari Kalsel', 'Perempuan', 'ra.amalia.rizki@politala.ac.id', 'Pamekasan', '1981-02-12', NULL, NULL, NULL),
-('09081015', 'arif@politala.ac.id', 'dosen', NULL, 'Arif Supriyanto, S.Kom., M.Cs', 'Jl. A. Yani Gang Ikhlas RT.01 RW.01 Kec. Pelaihari Kab, Tanah Laut ', 'Laki - Laki', 'arif@politala.ac.id', 'Pelaihari', '1989-09-27', NULL, NULL, NULL),
-('100921045', 'radna@politala.ac.id', 'dosen', NULL, 'Radna Nurmalina, S.E., M.Si.', 'Pelaihari', 'Perempuan', 'radna@politala.ac.id', 'Banjarmasin', '2017-02-10', NULL, NULL, NULL),
-('110103046', 'angkasa@politala.ac.id', 'dosen', NULL, 'Anggun Angkasa Bela Persada, M.T.', 'Jln. A.Nawawi Komplek Permata Jingga III, Blok B.49, Kel Karang Taruna, Pelaihari, Tanah Laut, KALSEL', 'Laki - Laki', 'angkasa@politala.ac.id', 'Jember', '1985-04-29', NULL, NULL, NULL),
-('110103047', 'ika.kusuma.n@politala.ac.id', 'dosen', NULL, 'Ika Kusuma Nugraheni, S.Si., M.Sc.', 'Jl. Kamaratih, Rt. 06A, Komp. GW1 No. 6, Panggung, Pelaihari, Tanah Laut, Kalimantan Selatan', 'Perempuan', 'ika.kusuma.n@politala.ac.id', 'Tebing Siring (Tanah Laut)', '1988-04-20', NULL, NULL, NULL),
-('110103048', 'yunitaprastya@politala.ac.id', 'dosen', NULL, 'Yunita Prastyaningsih, M.Kom', 'Jl.norsehat No.02 Pelaihari', 'Perempuan', 'yunitaprastya@politala.ac.id', 'Mojokerto', '1987-06-12', NULL, NULL, NULL),
-('110502054', 'sandri@politala.ac.id', 'dosen', NULL, 'Dwi Sandri, S.Si., M.P.', 'Jl. Mekar Sari Komp. Pondok Indah Pelaihari Blok C 20. Desa Pemuda (KNPI), Kec. Pelaihari Kab. Tanah Laut, Kalimantan Selatan', 'Laki - Laki', 'sandri@politala.ac.id', 'Sangasanga', '1983-01-31', NULL, NULL, NULL),
-('110502055', 'ninahairiyah@politala.ac.id', 'dosen', NULL, 'Nina Hairiyah, S.TP., M.Si.', 'Jl.Taruna Praja Raya Komplek Balitan 12 Blok C No. 5 Banjarbaru Kal-Sel 70712', 'Perempuan', 'ninahairiyah@politala.ac.id', 'Banjarbaru', '1988-05-04', NULL, NULL, NULL),
-('110905058', 'kurnia.2a@politala.ac.id', 'dosen', NULL, 'Kurnia Dwi Artika, ST,. MT', 'Jl. Teluk Baru RT.8/3 \r\nKel. Karang Taruna, Pelaihari', 'Laki - Laki', 'kurnia.2a@politala.ac.id', 'Jember', '1985-06-27', NULL, NULL, NULL),
-('120102069', 'redhy@politala.ac.id', 'dosen', NULL, 'Muhammad Redhy Rizani, M.T.', 'Pelaihari', 'Laki - Laki', 'redhy@politala.ac.id', 'Banjarmasin', '2017-02-10', NULL, NULL, NULL),
-('120102070', 'wiwik.kusrini@politala.ac.id', 'dosen', NULL, 'Wiwik Kusrini', 'Jl. Lingkar Komp. Perum. Sinar Atu - Atu Pelaihari, Tanah Laut Kalimatan Selatan', 'Perempuan', 'wiwik.kusrini@politala.ac.id', 'Purworejo', '1984-02-02', NULL, NULL, NULL),
-('120102079', 'hendrik.tomo@politala.ac.id', 'dosen', NULL, 'Hendrik Setyo Utomo, S.T., MMSI.', 'Jl. A. Yani. Km. 148, RT 07 RW 03, Desa Muara Kintap, Kec. Kintap Kab. Tanah Laut, Kalimatan Selatan', 'Laki - Laki', 'hendrik.tomo@politala.ac.id', 'Tanah Laut', '1986-07-01', NULL, NULL, NULL),
-('120905081', 'sukma@politala.ac.id', 'dosen', NULL, 'Sukma Firdaus, S.Si., M.T.', 'Jalan Raya Takisung, Sakura Residence No 13. Rt 09 Rw 04. Kelurahan Karang Taruna. Kecamatan Pelaihari. Kabupaten Tanah Laut. Kalimantan Selatan 70812', 'Laki - Laki', 'sukma@politala.ac.id', 'Rantau', '0000-00-00', NULL, NULL, NULL),
-('120905084', 'rusumintosyahyuniar@politala.ac.id', 'dosen', NULL, 'Rusuminto Syahyuniar, M.T.', '-', 'Laki - Laki', 'rusumintosyahyuniar@politala.ac.id', '-', '0000-00-00', NULL, NULL, NULL),
-('12345', 'simpkl@politala.ac.id', 'admin', NULL, 'Admin Simpkl', 'Tanah Laut', '-', NULL, NULL, NULL, NULL, NULL, NULL),
-('123456', '14', 'pegawai', NULL, 'Pemonitoring Perusahaan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('130204092', 'kuswoyoanton@politala.ac.id', 'dosen', NULL, 'Anton Kuswoyo, S.Si., M.T.', 'Jl. Ki Hajar Dewantara, RT 8 RW 3, Kelurahan Angsau, Kec. Pelaihari, Kab. Tanah Laut, Kalimantan Selatan', 'Laki - Laki', 'kuswoyoanton@politala.ac.id', 'Kapuas', '1988-07-17', NULL, NULL, NULL),
-('130204093', 'nuryati@politala.ac.id', 'dosen', NULL, 'Nuryati, S.T., M.Eng.', 'Komplek Pondok Indah Pelaihari 3, No. 14C', 'Perempuan', 'nuryati@politala.ac.id', 'Temanggung', '1977-06-19', NULL, NULL, NULL),
-('140102098', 'fathurrahmani@politala.ac.id', 'dosen', NULL, 'Fathurrahmani, M.Kom ', 'Jalan A. Yani Km 14.5 Komplek Sejahtera Mandiri Asri Ray IV No.35', 'Laki - Laki', 'fathurrahmani@politala.ac.id', 'Duli', '0000-00-00', NULL, NULL, NULL),
-('140102101', 'reza@politala.ac.id', 'dosen', NULL, 'Reza Taufiqi Ivana, S.T.', 'Jl. BIGJEN H. HASAN BASRI, GG. TANGGA NO. 10', 'Laki - Laki', 'reza@politala.ac.id', 'Malang', '1990-04-23', NULL, NULL, NULL),
-('140102102', 'adhel_syaief@politala.ac.id', 'dosen', NULL, 'Adhiela Noer Syaief, M.T', 'Jl. A Yani No 07, Angsau, Pelaihari-Tanah Laut', 'Laki - Laki', 'adhel_syaief@politala.ac.id', 'Pelaihari', '1987-03-19', NULL, NULL, NULL),
-('140102103', 'yuliananingsih@politala.ac.id', 'dosen', NULL, 'Yuliana Ningsih, S.S., M.Hum.', 'Jl', 'Perempuan', 'yuliananingsih@politala.ac.id', '-', '0000-00-00', NULL, NULL, NULL),
-('14020983', 'dosen@politala.ac.id', 'dosen', NULL, 'Dr. Dosen, S.Kom, M.Kom', 'Jl. Pegangsaan Timur No.56 Jakarta', 'Laki-Laki', 'dosen@politala.ac.id', 'Gunung Kembar', '1990-01-01', NULL, NULL, NULL),
-('140814113', 'rsayyidati@politala.ac.id', 'dosen', NULL, 'Rabini Sayyidati, M.Pd.', 'Jl. Tembus Perumnas. Komp. Herlina No. 9 Blok. C RT. 43 RW. 003, Banjarmasin Utara, Kota Banjarmasin, 70123', 'Perempuan', 'rsayyidati@politala.ac.id', 'Banjarmasin', '1992-05-05', NULL, NULL, NULL),
-('140825117', 'muhammadnoor@politala.ac.id', 'dosen', NULL, 'Muhammad Noor, M.H.I.', 'Jl. Pahantasan, Perum Pondok Syafira No. F11 Pelaihari', 'Laki - Laki', 'muhammadnoor@politala.ac.id', 'Martapura', '1985-11-01', NULL, NULL, NULL),
-('150105124', 'imron@politala.ac.id', 'dosen', NULL, 'Imron Musthofa, S.T.', 'Jl. Kol. Soepirman. Komp. Anugerah Hamparan Asri RT 11 RW 2 Atu-Atu', 'Laki - Laki', 'imron@politala.ac.id', 'Kuala Kapuas', '0000-00-00', NULL, NULL, NULL),
-('150203104', 'hafizd@politala.ac.id', 'dosen', NULL, 'Khairul Anwar Hafizd, M.Kom.', 'Jl. Kamaratih RT 6 No. 10 Desa Panggung Kecamatan Pelaihari', 'Laki - Laki', 'hafizd@politala.ac.id', 'Gambut', '1989-06-01', NULL, NULL, NULL),
-('150801145', 'winda@politala.ac.id', 'dosen', NULL, 'Winda Aprianti, M.Si.', 'Komplek Citra Megah Raya No 7B, Banjarbaru', 'Perempuan', 'winda@politala.ac.id', 'Martapura', '1990-04-17', NULL, NULL, NULL),
-('160201151', 'herpendi@politala.ac.id', 'dosen', NULL, 'Herpendi, M.Kom', 'Pelaihari', 'Laki - Laki', 'herpendi@politala.ac.id', 'Gunung Makmur', '1990-11-20', NULL, NULL, NULL),
-('160201152', 'emalestari@politala.ac.id', 'dosen', NULL, 'Ema Lestari, M.Pd', 'Komplek Graha Citra Permai 1 Blok G9 Guntung Manggis Banjarbaru', 'Perempuan', 'emalestari@politala.ac.id', 'Rantau Keminting', '1992-08-23', NULL, NULL, NULL),
-('160201153', 'agustiannoor@politala.ac.id', 'dosen', NULL, 'Agustian Noor, M.Kom', 'Bjm', 'Laki - Laki', 'agustiannoor@politala.ac.id', 'Banjarmasin', '2017-02-08', NULL, NULL, NULL),
-('160801168', 'jakapermadi.88@politala.ac.id', 'dosen', NULL, 'Jaka Permadi, S.Si., M.Cs', 'Desa Atu-Atu', 'Laki - Laki', 'jakapermadi.88@politala.ac.id', 'Tebing Siring', '1988-07-03', NULL, NULL, NULL),
-('160818170', 'jefriadi@politala.ac.id', 'dosen', NULL, 'Jefriadi, S.T., M.Eng', 'Jl. Rambai Tengah No.88 Guntung Paikat, Banjarbaru', 'Laki - Laki', 'jefriadi@politala.ac.id', 'Duri', '1988-08-27', NULL, NULL, NULL),
-('170103174', 'mariatul@politala.ac.id', 'dosen', NULL, 'Mariatul Kiptiah, S.Sos., M.Si', 'JL. A. YANI, RT.14/RW.3, BENUA RAYA', 'Perempuan', 'mariatul@politala.ac.id', 'Bati-Bati', '1983-11-30', NULL, NULL, NULL),
-('180301180', 'mindradarmawan@politala.ac.id', 'dosen', NULL, 'Muhammad Indra Darmawan, STP., M.Sc', 'Jl. Sapta Marga Blok E Beruntung Resort I RT.10 Rw.01 Guntung Payung, Kota Banjarbaru,Kalimantan Selatan', 'Laki - Laki', 'mindradarmawan@politala.ac.id', 'Kandangan', '0000-00-00', NULL, NULL, NULL),
-('180301181', 'adzani@politala.ac.id', 'dosen', NULL, 'Adzani Ghani Ilmannafian, S.Si., M.Si', 'Puri Cipageran Indah 1 Blok A-171 RT 02 RW 26 Cimahi 40511', 'Perempuan', 'adzani@politala.ac.id', 'Bandung', '0000-00-00', NULL, NULL, NULL),
-('196806171997022004', 'mufrida@politala.ac.id', 'dosen', NULL, 'Dr. Mufrida Zein, M.Pd.', 'Jl', 'Perempuan', 'mufrida@politala.ac.id', 'Martapura', '1968-06-17', NULL, NULL, NULL),
-('197909142015041003', 'meldayanoor@politala.ac.id', 'dosen', NULL, 'Meldayanoor, S.Hut., M.S', 'Jalan Basuki Rahmat Rt.26 Kelurahan Angsau Kecamatan Pelaihari', 'Laki - Laki', 'meldayanoor@politala.ac.id', 'Pelaihari', '1979-09-14', NULL, NULL, NULL),
-('198307112015042002', 'fatimah@politala.ac.id', 'dosen', NULL, 'Fatimah, S.Si., M.P.', 'Jl. Mekar Sari, Desa Pemuda, Pelaihari, Kalsel, 70815 ', 'Perempuan', 'fatimah@politala.ac.id', 'Hulu Sungai Tengah', '1983-07-11', NULL, NULL, NULL),
-('198404282011011003', 'jaka_dj@politala.ac.id', 'dosen', NULL, 'Jaka Darma Jaya, M.P., M.Sc.', 'Jl. Peramuan Komplek Citra Bangun Persada No. H1, Rt. 3 Rw. 1 Kelurahan Landasan Ulin Timur, Kecamatan Landasan Ulin, Kota Banjarbaru, Kalimantan Selatan', 'Laki - Laki', 'jaka_dj@politala.ac.id', 'Pagat', '1984-04-28', NULL, NULL, NULL),
-('199007112015041001', 'veri@politala.ac.id', 'dosen', NULL, 'Veri Julianto, S.Si., M.Si.', 'Jl. Kamratih', 'Laki - Laki', 'veri@politala.ac.id', 'Gunung Makmur', '1990-07-11', NULL, NULL, NULL),
-('A1316075', '13', 'admin', NULL, 'Koordinator PKL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+--
+-- Dumping data for table `tb_mhs_pilih_perusahaan`
+--
 
-INSERT INTO `tb_perusahaan` (`id_perusahaan`, `id_negara`, `id_provinsi`, `id_kerjasama_perusahaan`, `id_kecamatan`, `id_kab_kota`, `id_program_studi`, `status_perusahaan`, `nama_perusahaan`, `alamat_perusahaan`, `telepon_perusahaan`, `long_perusahaan`, `lat_perusahaan`, `kuota_pkl`) VALUES ('1', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Kanwil DJP Provinsi Kalimantan Selatan dan Tengah', NULL, NULL, NULL, NULL, '3'),
-('2', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Badan Pusat Statistik Provinsi Kalimantan Selatan', NULL, NULL, NULL, NULL, '3'),
-('3', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT. TASPEN (PERSERO) Kantor Cabang Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('4', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Kantor Wilayah Direktorat Jenderal Pembendaharaan Provinsi Kalimantan Selatan', NULL, NULL, NULL, NULL, '3'),
-('5', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Badan Pengelolaan Keuangan dan Aset Daerah Kota Banjarbaru', NULL, NULL, NULL, NULL, '3'),
-('6', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT.PLN (Persero) Unit Induk Provinsi Kalimantan Selatan dan Tengah', NULL, NULL, NULL, NULL, '3'),
-('7', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT. Martplus Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('8', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'KPP Pratama Banjarbaru', NULL, NULL, NULL, NULL, '3'),
-('9', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'KPP Pratama Banjarbaru', NULL, NULL, NULL, NULL, '3'),
-('10', NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT.Ahsan Farma Medika Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('11', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'PT. Semen Gresik, Tbk', NULL, NULL, NULL, NULL, '3'),
-('12', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Pama Persada Nusantara (Balangan)', NULL, NULL, NULL, NULL, '3'),
-('13', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Putra Sarana Transborneo', NULL, NULL, NULL, NULL, '3'),
-('14', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Nusantara Indah Daihatsu', NULL, NULL, NULL, NULL, '3'),
-('15', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Cakrawala Putra Bersama', NULL, NULL, NULL, NULL, '3'),
-('16', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Kalimantan Concrete Engineering', NULL, NULL, NULL, NULL, '3'),
-('17', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'CV. Boston', NULL, NULL, NULL, NULL, '3'),
-('18', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Toyota Wira Megah Profitamas', NULL, NULL, NULL, NULL, '3'),
-('19', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Jorong Barutama Greston', NULL, NULL, NULL, NULL, '3'),
-('20', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Sinar Nirwana Sari', NULL, NULL, NULL, NULL, '3'),
-('21', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Kabina Sukses Makmur', NULL, NULL, NULL, NULL, '3'),
-('22', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Wahyu Putra Ramadhan', NULL, NULL, NULL, NULL, '3'),
-('23', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Cahaya Marhan Naya', NULL, NULL, NULL, NULL, '3'),
-('24', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Arutmin Indonesia Kintap-Mine', NULL, NULL, NULL, NULL, '3'),
-('25', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Pama Persada Nusantara', NULL, NULL, NULL, NULL, '3'),
-('26', NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Bukit Makmur Mandiri Utama Site SDJ Angsana', NULL, NULL, NULL, NULL, '3'),
-('27', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Benih Citra Asia', NULL, NULL, NULL, NULL, '3'),
-('28', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT.Perkebunan Nusantara  XIII (Persero)  Danau Salak', NULL, NULL, NULL, NULL, '3'),
-('29', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT.Perkebunan Nusantara  XIII (Persero)  Pelaihari', NULL, NULL, NULL, NULL, '3'),
-('30', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Candi Artha', NULL, NULL, NULL, NULL, '3'),
-('31', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. SINAR NUSANTARA INDUSTRIES', NULL, NULL, NULL, NULL, '3'),
-('32', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. CITRA PUTRA KEBUN ASRI', NULL, NULL, NULL, NULL, '3'),
-('33', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Sime Darby Oils Pulau Laut Refinery', NULL, NULL, NULL, NULL, '3'),
-('34', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. INDOFOOD CBP', NULL, NULL, NULL, NULL, '3'),
-('35', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. GMK SATUI', NULL, NULL, NULL, NULL, '3'),
-('36', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. KINTAP JAYA WATTINDO', NULL, NULL, NULL, NULL, '3'),
-('37', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. GMK JORONG', NULL, NULL, NULL, NULL, '3'),
-('38', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. BUANA KARYA BAKTI', NULL, NULL, NULL, NULL, '3'),
-('39', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Astra Agro Lestari', NULL, NULL, NULL, NULL, '3'),
-('40', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. WILSON LAUTAN KARET', NULL, NULL, NULL, NULL, '3'),
-('41', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. ADI SURYA CITRA LESTARI', NULL, NULL, NULL, NULL, '3'),
-('42', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Palmina Utama', NULL, NULL, NULL, NULL, '3'),
-('43', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. CHEIL JEDANG', NULL, NULL, NULL, NULL, '3'),
-('44', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Suntory Garuda Beverage ', NULL, NULL, NULL, NULL, '3'),
-('45', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. KHARISMA INTI USAHA', NULL, NULL, NULL, NULL, '3'),
-('46', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. BANUA LIMA SEJURUS', NULL, NULL, NULL, NULL, '3'),
-('47', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Jafpa Comfeed Indonesia Tbk. Unit Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('48', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. SMART (KINTAP)', NULL, NULL, NULL, NULL, '3'),
-('49', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. KAHURIPAN INTI SAWIT', NULL, NULL, NULL, NULL, '3'),
-('50', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. DITAMAS NUGRAHA', NULL, NULL, NULL, NULL, '3'),
-('51', NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. BRIDGESTONE', NULL, NULL, NULL, NULL, '3'),
-('52', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Arutmin Site Kintap', NULL, NULL, NULL, NULL, '3'),
-('53', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Darma Henwa Tbk', NULL, NULL, NULL, NULL, '3'),
-('54', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. KPP Coal Mining Rantau', NULL, NULL, NULL, NULL, '3'),
-('55', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Pama Persada Nusantara Distrik Aria', NULL, NULL, NULL, NULL, '3'),
-('56', '1', '63', NULL, '6301080', '6301', 'PST001', 'whitelist', 'PT. PLN (Persero) Pembangkitan Dan Penyaluran Kalimantan    Unit Pelaksana Kegiatan Asam-Asam', 'ASAM-ASAM', '+62', '114.767202', '-3.7537759', '3'),
-('57', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. PLN (Persero) Pelaksanaan Pelayanan Pelanggan Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('58', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Sumber Alfaria Trijaya Tbk', NULL, NULL, NULL, NULL, '3'),
-('59', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Toyota Auto2000 Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('60', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'AirNav Cabang Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('61', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Amanah Anugerah Adi Mulia', NULL, NULL, NULL, NULL, '3'),
-('62', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Angkasa Pura I (PERSERO)', NULL, NULL, NULL, NULL, '3'),
-('63', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Borneo Indobara', NULL, NULL, NULL, NULL, '3'),
-('64', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Buana Karya Bhakti', NULL, NULL, NULL, NULL, '3'),
-('65', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Bukit Makmur Mandiri Utama', NULL, NULL, NULL, NULL, '3'),
-('66', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Gamatechno', NULL, NULL, NULL, NULL, '3'),
-('67', '1', '63', NULL, '6372031', '6372', 'PST001', 'whitelist', 'Dinas Komunikasi Dan Informatika Banjarbaru', 'Loktabat Utara, Kec. Banjarbaru Utara, Kota Banjar Baru, Kalimantan Selatan 70714', '789786', '114.767410', '-3.7538581', '3'),
-('68', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Dinas Komunikasi Dan Informatika Kabupaten Tanah Laut', NULL, NULL, NULL, NULL, '3'),
-('69', '1', '63', NULL, '6372020', '6372', 'PST001', 'whitelist', ' Dinas Komunikasi Dan Informatika Provinsi Kalimantan Selatan', 'Jl. Aneka Tambang', '(0511) 6749844', '114.767356', '-3.7538586', '3'),
-('70', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Putra Perkasa Abadi', NULL, NULL, NULL, NULL, '3'),
-('71', '1', '63', NULL, '6372032', '6372', 'PST001', 'whitelist', 'PT. Saka Jaya Teknologi', 'Jl.Palam Komplek Wngga Palem Indah 1 G35, Guntung Manggis, Landasan Ulin, Guntungmanggis, Kec. Landasan Ulin, Kota Banjar Baru, Kalimantan Selatan 70731', '0812121314', '114.767384', '-3.7538446', '3'),
-('72', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Trakindo Utama', NULL, NULL, NULL, NULL, '3'),
-('73', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Trio Motor', NULL, NULL, NULL, NULL, '3'),
-('74', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. United Tractors Tbk, Site Satui', NULL, NULL, NULL, NULL, '3'),
-('75', '1', '63', NULL, '6371030', '6371', 'PST001', 'whitelist', 'BPSDMP KOMINFO BANJARMASIN', 'Jl. Yos Sudarso No.29, Telaga Biru, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan', '085113353849', '114.767450', '-3.7538736', '3'),
-('76', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. CIOMAS ADISATWA', NULL, NULL, NULL, NULL, '3'),
-('77', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. PLN(Persero) Unit Induk Pembangkitan dan Penyaluran Kalimantan UPDK Barito ULPLTA Ir. P.M.Noor', NULL, NULL, NULL, NULL, '3'),
-('78', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Nusantara Group Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('79', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Radar Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('80', '1', '63', NULL, '6371030', '6371', 'PST001', 'whitelist', 'PT. Telkom Akses Banjarmasin', 'Jl bla', '0878664', '114.767454', '-3.7538695', '3'),
-('81', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. United Tractors Tbk - Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('82', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Adaro Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('83', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Pertamina Banjarmasin', NULL, NULL, NULL, NULL, '3'),
-('84', '1', '63', NULL, '6371020', '6371', 'PST001', 'whitelist', 'SUZUKI Banjarbaru Mitra Megah Profitamas', 'Jl. A. Yani KM 5.5 No. 1, RT.022/RW.002, Pemurus Luar, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70249', '(0511) 3253355', '114.767377', '-3.7538365', '3'),
-('85', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Telkom Banjarmasin Centrum', NULL, NULL, NULL, NULL, '3'),
-('86', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Geoinfo Teknologi', NULL, NULL, NULL, NULL, '3'),
-('87', NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'Phinemo Kreasi Media', 'Rukan Pemuda Mas Blok B-5, Sekayu, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50132', '(024) 33149439', '-6.982479', '110.412272', '0'),
-('88', '1', '63', NULL, '6371010', '6371', 'PST003', 'whitelist', 'PT. Indo Jaya ', 'JLn. Pelaihari', '6233677', '114.5889', '-3.3236', '3'),
-('89', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Dinas Komunikasi Dan Informatika Kabupaten Kapuas', 'JL. Pemuda km 5.5 Kel. Selat Utara Kuala 	Kapuas', '0852-5196-1352', '', '', '3'),
-('90', '1', '63', NULL, '6371030', '6371', 'PST001', 'whitelist', 'PT. Gagah Putera Satria', 'Wisma Dayasakti, Jl. Kapten Piera Tendean No. 158, seberang Mesjid, Banjarmasin Tengah', '0511 3252766', '114.767221', '-3.7538229', '2'),
-('91', NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'United Tractors  Tbk. Site Rantau', 'Kecamatan Binuang, Tatakan, Tapin Selatan Kabupaten Tapin, Kalimantan Selatan 71183', '081347037070', '-3.1192528', '115.077870', '0'),
-('92', NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT. Putra Perkasa Abadi', 'Mangkalapi, Kusan Hulu, Angsana, Kab. Tanah Bumbu', '08115132600', '', '', '0'),
-('93', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT Mitra Megah Profitamas', 'J;.A.Yani KM 5.5 No.1 RT.022/RW.002, Pemurus Luar, Kec.Banjarmasin Timur,  Kota Banjarmasin Kalimantan Selatan 70249', '05113253355', '114.622010', '-3.3434488', '2'),
-('94', NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Phinemo Kreasi Media', 'Rukan Pemuda Mas Blok B-5, Sekayu, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50132', '(024) 33149439', '', '', '3'),
-('96', NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'United Tractors Tbk. Site Rantau', 'Kecamatan Binuang, Tatakan, Tapin Selatan Kabupaten Tapin, Kalimantan Selatan 71183', '081347037070', '-3.1192528', '115.077870', '0'),
-('97', NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT. PLN (Persero) Unit Induk Wilayah Kalimantan Selatan & Kalimantan Tengah', 'Jl. Panglima Batur No.1, Loktabat Utara, Kec. Banjarbaru Utara, Kota Banjar Baru, Kalimantan Selatan', '0511772520', '-3.4384413', '114.825759', '0');
+INSERT INTO `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`, `id_perusahaan`, `nim`, `nomor_surat_tugas`) VALUES
+(1, 54, 'A1317041', NULL),
+(23, 107, 'A1317081', NULL),
+(24, 103, 'A1317048', NULL),
+(25, 103, 'A1317061', NULL),
+(26, 103, 'A1317086', NULL),
+(27, 102, 'A1317040', NULL),
+(28, 102, 'A1317092', NULL),
+(29, 102, 'A1317079', NULL),
+(30, 59, 'A1317068', NULL),
+(31, 59, 'A1317027', NULL),
+(32, 110, 'A1317008', NULL),
+(33, 110, 'A1317036', NULL),
+(34, 110, 'A1317087', NULL),
+(35, 106, 'A1317017', NULL),
+(36, 104, 'A1317083', NULL),
+(37, 108, 'A1317058', NULL),
+(38, 90, 'A1317096', NULL),
+(39, 90, 'A1317101', NULL),
+(40, 67, 'A1317073', NULL),
+(41, 67, 'A1317030', NULL),
+(42, 80, 'A1317097', NULL),
+(43, 80, 'A1317060', NULL),
+(44, 79, 'A1317051', NULL),
+(45, 79, 'A1317082', NULL),
+(46, 86, 'A1317021', NULL),
+(47, 75, 'A1317010', NULL),
+(48, 75, 'A1317090', NULL),
+(49, 62, 'A1317088', NULL),
+(50, 62, 'A1317034', NULL),
+(53, 73, 'A1317104', NULL),
+(54, 53, 'A1317078', NULL),
+(55, 53, 'A1317002', NULL),
+(56, 89, 'A1317031', NULL),
+(57, 89, 'A1317003', NULL),
+(58, 89, 'A1317046', NULL),
+(59, 54, 'A1317065', NULL),
+(60, 111, 'A1317094', NULL),
+(61, 111, 'A1317111', NULL),
+(62, 81, 'A1317050', NULL),
+(63, 81, 'A1317064', NULL),
+(66, 69, 'A1317037', NULL),
+(67, 69, 'A1317047', NULL),
+(68, 83, 'A1316021', NULL),
+(998, 109, 'A1317052', NULL),
+(999, 109, 'A1317042', NULL),
+(1000, 85, 'A1317108', NULL),
+(1001, 85, 'A1317107', NULL),
+(1002, 100, 'A1317103', NULL),
+(1003, 100, 'A1317005', NULL),
+(1004, 93, 'A1317099', NULL),
+(1005, 93, 'A1317098', NULL),
+(1006, 116, 'A1317100', NULL),
+(1007, 116, 'A1317055', NULL),
+(1008, 114, 'A1317074', NULL),
+(1009, 114, 'A1317009', NULL),
+(1010, 114, 'A1317057', NULL),
+(1011, 114, 'A1317076', NULL),
+(1012, 114, 'A1317035', NULL),
+(1013, 77, 'A1317006', NULL),
+(1014, 77, 'A1317014', NULL),
+(1015, 77, 'A1317023', NULL),
+(1016, 86, 'A1317021', NULL),
+(1017, 86, 'A1317011', NULL),
+(1018, 86, 'A1317019', NULL),
+(1019, 74, 'A1317044', NULL),
+(1020, 74, 'A1317012', NULL),
+(1021, 73, 'A1317104', NULL),
+(1022, 73, 'A1317026', NULL),
+(1023, 104, 'A1317083', NULL),
+(1024, 104, 'A1317013', NULL),
+(1025, 54, 'A1317065', NULL),
+(1026, 54, 'A1317041', NULL),
+(1027, 63, 'A1317033', NULL),
+(1028, 63, 'A1317056', NULL),
+(1029, 63, 'A1317054', NULL),
+(1030, 75, 'A1317010', NULL),
+(1031, 75, 'A1317090', NULL),
+(1032, 75, 'A1317106', NULL),
+(1033, 56, 'A1317001', NULL),
+(1034, 56, 'A1317080', NULL),
+(1035, 56, 'A1317077', NULL),
+(1036, 61, 'A1317109', NULL),
+(1037, 61, 'A1317016', NULL),
+(1038, 94, 'A1317075', NULL),
+(1039, 94, 'A1317004', NULL),
+(1040, 113, 'A1317066', NULL),
+(1041, 113, 'A1317025', NULL),
+(1042, 113, 'A1317045', NULL),
+(1043, 109, 'A1317052', NULL),
+(1044, 109, 'A1317042', NULL),
+(1045, 109, 'A1317067', NULL),
+(1048, 63, 'A1317054', NULL),
+(1049, 55, 'A1317022', NULL),
+(1050, 52, 'A1317093', NULL),
+(1051, 70, 'A1317071', NULL),
+(1052, 70, 'A1317020', NULL);
 
-INSERT INTO `tb_perusahaan_review` (`id_perusahaan_review`, `id_perusahaan`, `nim`, `id_data_kuisioner`, `rating_perusahaan`, `komentar`, `tanggal_review_perusahaan`) VALUES ('1', '88', 'C1317001', '1', '5', 'Prusahaan ini bagus  Prusahaan ini bagus ', '2019-07-25'),
-('2', '88', 'C1317001', '2', '5', 'Prusahaan ini bagus  Prusahaan ini bagus ', '2019-07-25'),
-('3', '69', 'A1317037', '1', '2', 'Dinas atau perusahaannya bagus dan mereka bisa membekali mahasiswa yang magang dengan perlahan', '2019-07-25'),
-('4', '69', 'A1317037', '2', '5', 'Dinas atau perusahaannya bagus dan mereka bisa membekali mahasiswa yang magang dengan perlahan', '2019-07-25'),
-('5', '67', 'A1317030', '1', '4', 'perusahaan ini sangat-sangat bagus sekali ', '2019-07-25'),
-('6', '67', 'A1317030', '2', '4', 'perusahaan ini sangat-sangat bagus sekali ', '2019-07-25'),
-('7', '56', 'A1317077', '1', '5', 'Perusahaannya ini bagus, Perusahaannya ini bagus, Perusahaannya ini bagus, Perusahaannya ini bagus', '2019-07-25'),
-('8', '56', 'A1317077', '2', '5', 'Perusahaannya ini bagus, Perusahaannya ini bagus, Perusahaannya ini bagus, Perusahaannya ini bagus', '2019-07-25'),
-('9', '84', 'A1317098', '1', '1', 'mencoba membuat komentar tentang perusahaan di PT.Mitra Megah Profitamas ', '2019-07-25'),
-('10', '84', 'A1317098', '2', '3', 'mencoba membuat komentar tentang perusahaan di PT.Mitra Megah Profitamas ', '2019-07-25'),
-('11', '71', 'A1317066', '1', '4', 'perusahaan membuat kita lebih mengerti lebih jauh tentang koding juga aplikasi ', '2019-07-25'),
-('12', '71', 'A1317066', '2', '4', 'perusahaan membuat kita lebih mengerti lebih jauh tentang koding juga aplikasi ', '2019-07-25'),
-('13', '84', 'A1317099', '1', '4', 'bagus deh....................................', '2019-07-25'),
-('14', '84', 'A1317099', '2', '5', 'bagus deh....................................', '2019-07-25'),
-('15', '80', 'A1317097', '1', '5', 'Uguguguguugufiiigiifiifjjfjrjjfjfjfjjgjg', '2019-07-25'),
-('16', '80', 'A1317097', '2', '5', 'Uguguguguugufiiigiifiifjjfjrjjfjfjfjjgjg', '2019-07-25');
+-- --------------------------------------------------------
 
-INSERT INTO `tb_perusahaan_sementara` (`id_perusahaan_sementara`, `nim`, `id_perusahaan`, `status`, `tanggal_pengajuan`, `bukti_diterima`) VALUES ('1', 'C1317001', '11', X'746f6c616b', '2019-07-23 22:49:11', '/var/flexshare/shares/simpkl/file_upload/bukti/Buku_Panduan_PKL_2018_versi_2_0_(revisi)_compressed.pdf'),
-('2', 'A1317066', '71', X'746572696d61', '2019-07-25 21:31:35', '/var/flexshare/shares/simpkl/file_upload/bukti/131402121.pdf'),
-('3', 'A1317037', '69', X'746572696d61', '2019-07-25 21:34:40', '/var/flexshare/shares/simpkl/file_upload/bukti/Mentoring.pdf'),
-('4', 'A1317006', '67', X'746572696d61', '2019-07-25 21:52:27', '/var/flexshare/shares/simpkl/file_upload/bukti/surat.pdf'),
-('5', 'A1317030', '67', X'746572696d61', '2019-07-25 21:52:27', '/var/flexshare/shares/simpkl/file_upload/bukti/surat.pdf'),
-('6', 'A1317082', '79', X'6b6972696d', '2019-07-23 22:44:10', NULL),
-('7', 'A1317025', '71', X'746572696d61', '2019-07-25 21:31:35', '/var/flexshare/shares/simpkl/file_upload/bukti/131402121.pdf'),
-('8', 'A1317097', '80', X'746572696d61', '2019-07-25 21:55:16', '/var/flexshare/shares/simpkl/file_upload/bukti/Annis(A1317012)praktikum_6.pdf'),
-('9', 'A1317098', '84', X'746572696d61', '2019-07-25 21:56:21', '/var/flexshare/shares/simpkl/file_upload/bukti/IPTABLES.pdf'),
-('10', 'A1317099', '84', X'746572696d61', '2019-07-25 21:56:21', '/var/flexshare/shares/simpkl/file_upload/bukti/IPTABLES.pdf'),
-('11', 'A1317051', '79', X'6b6972696d', '2019-07-23 22:44:10', NULL),
-('12', 'A1317077', '56', X'746572696d61', '2019-07-25 21:54:20', '/var/flexshare/shares/simpkl/file_upload/bukti/sk_2019_5_SDM_06_01_28.pdf'),
-('13', 'A1317064', '81', X'6b6972696d', '2019-07-23 22:30:06', NULL),
-('14', 'A1317023', '77', X'746f6c616b', '2019-07-29 06:22:08', NULL),
-('15', 'A1317071', '70', X'746572696d61', '2019-07-29 10:59:48', '/Users/random/Desktop/Playground/simpkl/file_upload/bukti/document.pdf'),
-('16', 'C1317004', '11', X'746f6c616b', '2019-07-23 22:49:11', '/var/flexshare/shares/simpkl/file_upload/bukti/Buku_Panduan_PKL_2018_versi_2_0_(revisi)_compressed.pdf'),
-('17', 'A1317106', '75', X'746572696d61', '2019-07-25 21:37:33', '/var/flexshare/shares/simpkl/file_upload/bukti/PENERIMAAN_KERJA_PRAKTEK_ATAU_MAGANG.pdf'),
-('18', 'A1317090', '75', X'746572696d61', '2019-07-25 21:37:33', '/var/flexshare/shares/simpkl/file_upload/bukti/PENERIMAAN_KERJA_PRAKTEK_ATAU_MAGANG.pdf'),
-('19', 'A1317101', '90', X'746572696d61', '2019-07-25 21:54:07', '/var/flexshare/shares/simpkl/file_upload/bukti/magang_poltek0048.pdf'),
-('20', 'A1317002', '53', X'746572696d61', '2019-07-25 21:53:30', '/var/flexshare/shares/simpkl/file_upload/bukti/Camera.pdf'),
-('21', 'A1317010', '75', X'746572696d61', '2019-07-25 21:37:33', '/var/flexshare/shares/simpkl/file_upload/bukti/PENERIMAAN_KERJA_PRAKTEK_ATAU_MAGANG.pdf'),
-('22', 'A1317018', '94', X'6b6972696d', '2019-07-23 22:48:45', NULL),
-('23', 'A1317031', '89', X'746572696d61', '2019-07-25 21:53:20', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_balasan.pdf'),
-('24', 'C1317001', '88', X'70726f736573', '2019-07-29 05:04:39', NULL),
-('25', 'A1317055', '74', X'70726f736573', '2019-07-25 21:50:35', NULL),
-('26', 'C1317008', '11', X'70726f736573', '2019-07-29 04:59:28', NULL),
-('28', 'A1317004', '52', X'70726f736573', '2019-08-26 21:32:29', NULL);
+--
+-- Table structure for table `tb_monev`
+--
 
-INSERT INTO `tb_program_studi` (`id_program_studi`, `nama_program_studi`) VALUES ('PST001', 'Teknik Informatika'),
-('PST002', 'Teknologi Industri Pertanian'),
-('PST003', 'Mesin Otomotif'),
-('PST004', 'Akuntansi');
+CREATE TABLE IF NOT EXISTS `tb_monev` (
+  `id_monev` int(11) NOT NULL,
+  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
+  `nip_nik` varchar(20) DEFAULT NULL,
+  `id_perusahaan` int(11) DEFAULT NULL,
+  `no_surat` varchar(50) NOT NULL,
+  `tgl_berangkat` date NOT NULL,
+  `tgl_pulang` date NOT NULL,
+  `status` varchar(25) NOT NULL,
+  `id_ttd_pimpinan` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `tb_provinsi` (`id_provinsi`, `id_negara`, `nama_provinsi`) VALUES ('11', '1', 'ACEH'),
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_negara`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_negara` (
+  `id_negara` varchar(30) NOT NULL,
+  `nama_negara` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_negara`
+--
+
+INSERT INTO `tb_negara` (`id_negara`, `nama_negara`) VALUES
+('1', 'INDONESIA');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_nilai_akhir`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_nilai_akhir` (
+  `id_nilai_akhir` varchar(20) NOT NULL,
+  `nilai_akhir` varchar(100) DEFAULT NULL,
+  `id_perusahaan_penilaian` int(11) DEFAULT NULL,
+  `id_seminar_penilaian` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_notification`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_notification` (
+  `id` int(11) unsigned NOT NULL,
+  `pengirim` varchar(100) DEFAULT NULL,
+  `penerima` varchar(100) DEFAULT NULL,
+  `pesan` text,
+  `status` tinyint(1) DEFAULT '0',
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hal` char(25) DEFAULT NULL,
+  `uri` text
+) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_notification`
+--
+
+INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, `waktu`, `hal`, `uri`) VALUES
+(111, 'admin', 'A1317058', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(112, 'admin', 'A1317081', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(113, 'admin', 'A1317017', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(114, 'admin', 'A1317055', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(115, 'admin', 'A1317100', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(116, 'admin', 'A1317041', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(117, 'admin', 'A1317065', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(118, 'admin', 'A1317111', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(119, 'admin', 'A1317094', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(120, 'admin', 'A1317064', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(121, 'admin', 'A1317050', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(122, 'admin', 'A1317068', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(123, 'admin', 'A1317027', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(124, 'admin', 'A1317106', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(125, 'admin', 'A1317010', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(126, 'admin', 'A1317090', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(127, 'admin', 'A1317026', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(128, 'admin', 'A1317104', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(129, 'admin', 'A1317016', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(130, 'admin', 'A1317109', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(131, 'admin', 'A1317096', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(132, 'admin', 'A1317101', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(133, 'admin', 'A1317083', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(134, 'admin', 'A1317013', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(135, 'admin', 'A1317097', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(136, 'admin', 'A1317060', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(137, 'admin', 'A1317107', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(138, 'admin', 'A1317108', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(139, 'admin', 'A1317019', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(140, 'admin', 'A1317021', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(141, 'admin', 'A1317011', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(142, 'admin', 'A1317006', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(143, 'admin', 'A1317014', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(144, 'admin', 'A1317023', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(145, 'admin', 'A1317098', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(146, 'admin', 'A1317099', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(147, 'admin', 'A1317003', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(148, 'admin', 'A1317031', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(149, 'admin', 'A1317046', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(150, 'admin', 'A1317022', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(151, 'admin', 'A1317005', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(152, 'admin', 'A1317103', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(153, 'admin', 'A1317037', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(154, 'admin', 'A1317047', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(155, 'admin', 'A1317030', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(156, 'admin', 'A1317073', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(157, 'admin', 'A1317074', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(158, 'admin', 'A1317035', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(159, 'admin', 'A1317076', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(160, 'admin', 'A1317057', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(161, 'admin', 'A1317009', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(162, 'admin', 'A1317034', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(163, 'admin', 'A1317088', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(164, 'admin', 'A1317045', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(165, 'admin', 'A1317066', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(166, 'admin', 'A1317025', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(167, 'admin', 'A1317008', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(168, 'admin', 'A1317087', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(169, 'admin', 'A1317036', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(170, 'admin', 'A1317082', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(171, 'admin', 'A1317051', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(172, 'admin', 'A1317067', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(173, 'admin', 'A1317052', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(174, 'admin', 'A1317042', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(175, 'admin', 'A1317002', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(176, 'admin', 'A1317078', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(177, 'admin', 'A1317040', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(178, 'admin', 'A1317079', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(179, 'admin', 'A1317092', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(180, 'admin', 'A1317048', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(181, 'admin', 'A1317061', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(182, 'admin', 'A1317086', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(183, 'admin', 'A1317020', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(184, 'admin', 'A1317071', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(185, 'admin', 'A1317033', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(186, 'admin', 'A1317056', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(187, 'admin', 'A1317054', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(188, 'admin', 'A1317012', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(189, 'admin', 'A1317044', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(190, 'admin', 'A1317093', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(191, 'admin', 'A1317001', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(192, 'admin', 'A1317077', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(193, 'admin', 'A1317080', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(194, 'admin', 'A1317004', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(195, 'admin', 'A1317075', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(196, 'admin', 'A1317018', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 0, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(197, 'A1317078', 'admin', 'Retno Fratiwi (A1317078) mengajukan permohonan magang', 1, '2020-01-17 02:07:07', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(198, 'A1317065', 'admin', 'Nor Janah (A1317065) mengajukan permohonan magang', 1, '2020-01-17 02:07:13', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(199, 'A1317096', 'admin', 'Tri Lutfiatul Rahayu (A1317096) mengajukan permohonan magang', 1, '2020-01-17 02:07:27', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(200, 'A1317031', 'admin', 'Istiqomah (A1317031) mengajukan permohonan magang', 1, '2020-01-17 02:07:33', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(201, 'A1317010', 'admin', 'Anita (A1317010) mengajukan permohonan magang', 1, '2020-01-17 02:07:53', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(202, 'A1317003', 'admin', 'Adela Valiandra (A1317003) mengajukan permohonan magang', 1, '2020-01-17 02:07:55', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(203, 'A1317097', 'admin', 'Tsamara Dara Rizkita (A1317097) mengajukan permohonan magang', 1, '2020-01-17 02:07:57', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(204, 'A1317046', 'admin', 'Melda Hikma (A1317046) mengajukan permohonan magang', 1, '2020-01-17 02:07:58', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(205, 'A1317002', 'admin', 'Ade Ardha Reswari (A1317002) mengajukan permohonan magang', 1, '2020-01-17 02:07:58', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(206, 'A1317073', 'admin', 'Reka Nur Andinni (A1317073) mengajukan permohonan magang', 1, '2020-01-17 02:08:17', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(207, 'A1317037', 'admin', 'Lidya Novita (A1317037) mengajukan permohonan magang', 1, '2020-01-17 02:08:30', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(208, 'A1317104', 'admin', 'Yunita Anggraini (A1317104) mengajukan permohonan magang', 1, '2020-01-17 02:08:52', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(209, 'A1317088', 'admin', 'Selvya Meirida Andani (A1317088) mengajukan permohonan magang', 1, '2020-01-17 02:09:00', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(210, 'A1317034', 'admin', 'Kiki Maulida (A1317034) mengajukan permohonan magang', 1, '2020-01-17 02:09:02', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(211, 'A1317051', 'admin', 'Mila Camelia (A1317051) mengajukan permohonan magang', 1, '2020-01-17 02:09:06', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(212, 'A1317090', 'admin', 'Sinta Esti Rahayu (A1317090) mengajukan permohonan magang', 1, '2020-01-17 02:09:10', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(213, 'A1317047', 'admin', 'Melda Rosalina (A1317047) mengajukan permohonan magang', 1, '2020-01-17 02:09:16', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(214, 'A1317021', 'admin', 'Erna Sulistyowati (A1317021) mengajukan permohonan magang', 1, '2020-01-17 02:09:20', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(215, 'A1317050', 'admin', 'Meyhastanti Cahyaning Fijar (A1317050) mengajukan permohonan magang', 1, '2020-01-17 02:09:56', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(216, 'A1317082', 'admin', 'Rini Yuliani (A1317082) mengajukan permohonan magang', 1, '2020-01-17 02:10:04', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(217, 'A1317060', 'admin', 'Nanda Sejati Ningtyas (A1317060) mengajukan permohonan magang', 1, '2020-01-17 02:10:32', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(218, 'A1317048', 'admin', 'Mahasiswa Meliana (A1317048) telah mengajukan perusahaan baru', 1, '2020-01-17 02:10:37', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(219, 'A1317083', 'admin', 'Mahasiswa Riska Hartati (A1317083) telah mengajukan perusahaan baru', 1, '2020-01-17 02:10:46', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(220, 'A1317092', 'admin', 'Mahasiswa Siti Purnama (A1317092) telah mengajukan perusahaan baru', 1, '2020-01-17 02:11:04', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(221, 'A1317017', 'admin', 'Mahasiswa Cahya Aprilia (A1317017) telah mengajukan perusahaan baru', 1, '2020-01-17 02:11:23', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(222, 'A1317081', 'admin', 'Mahasiswa Rindiyani (A1317081) telah mengajukan perusahaan baru', 1, '2020-01-17 02:11:26', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(223, 'A1317030', 'admin', 'Inka Nurjanah (A1317030) mengajukan permohonan magang', 1, '2020-01-17 02:11:31', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(224, 'A1317048', 'admin', 'Meliana (A1317048) mengajukan permohonan magang', 1, '2020-01-17 02:12:26', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(225, 'A1317061', 'admin', 'Nigmah (A1317061) mengajukan permohonan magang', 1, '2020-01-17 02:12:28', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(226, 'A1317058', 'admin', 'Mahasiswa Nadya Alfisyah (A1317058) telah mengajukan perusahaan baru', 1, '2020-01-17 02:12:40', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(227, 'A1317040', 'admin', 'Mahriani (A1317040) mengajukan permohonan magang', 1, '2020-01-17 02:12:56', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(228, 'A1317052', 'admin', 'Mahasiswa Mita Maulinda (A1317052) telah mengajukan perusahaan baru', 1, '2020-01-17 02:13:00', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(229, 'A1317092', 'admin', 'Siti Purnama (A1317092) mengajukan permohonan magang', 1, '2020-01-17 02:13:22', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(230, 'A1317008', 'admin', 'Mahasiswa Aiga Putri Oktovianda (A1317008) telah mengajukan perusahaan baru', 1, '2020-01-17 02:13:40', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(231, 'A1317101', 'admin', 'Yeyen Nurul Imama (A1317101) mengajukan permohonan magang', 1, '2020-01-17 02:14:27', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(232, 'A1317058', 'admin', 'Nadya Alfisyah (A1317058) mengajukan permohonan magang', 1, '2020-01-17 02:15:53', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(233, 'A1317083', 'admin', 'Riska Hartati (A1317083) mengajukan permohonan magang', 1, '2020-01-17 02:15:56', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(234, 'A1317017', 'admin', 'Cahya Aprilia (A1317017) mengajukan permohonan magang', 1, '2020-01-17 02:16:01', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(235, 'A1317008', 'admin', 'Aiga Putri Oktovianda (A1317008) mengajukan permohonan magang', 1, '2020-01-17 02:16:33', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(236, 'A1317079', 'admin', 'Reyfindy (A1317079) mengajukan permohonan magang', 1, '2020-01-17 02:16:52', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(237, 'A1317068', 'admin', 'Novia Sari (A1317068) mengajukan permohonan magang', 1, '2020-01-17 02:16:59', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(238, 'A1317052', 'admin', 'Mita Maulinda (A1317052) mengajukan permohonan magang', 1, '2020-01-17 02:17:05', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(239, 'A1317036', 'admin', 'Lia Merliana (A1317036) mengajukan permohonan magang', 1, '2020-01-17 02:17:09', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(240, 'A1317042', 'admin', 'Mariatul Kiftiah (A1317042) mengajukan permohonan magang', 1, '2020-01-17 02:17:13', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(241, 'A1317087', 'admin', 'Sari Maryani (A1317087) mengajukan permohonan magang', 1, '2020-01-17 02:17:30', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(242, 'A1317094', 'admin', 'Mahasiswa Susanti (A1317094) telah mengajukan perusahaan baru', 1, '2020-01-17 02:17:30', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(243, 'A1317027', 'admin', 'Hesti Ratih Ningtias (A1317027) mengajukan permohonan magang', 1, '2020-01-17 02:17:33', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(244, 'A1317086', 'admin', 'Sapniah (A1317086) mengajukan permohonan magang', 1, '2020-01-17 02:17:35', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(245, 'admin', 'A1317008', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:17:47', 'surat siap', 'magang?m=pengajuan'),
+(246, 'admin', 'A1317036', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:17:47', 'surat siap', 'magang?m=pengajuan'),
+(247, 'admin', 'A1317087', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:17:47', 'surat siap', 'magang?m=pengajuan'),
+(248, 'admin', 'A1317048', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:18:51', 'surat siap', 'magang?m=pengajuan'),
+(249, 'admin', 'A1317061', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:18:51', 'surat siap', 'magang?m=pengajuan'),
+(250, 'admin', 'A1317086', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:18:51', 'surat siap', 'magang?m=pengajuan'),
+(251, 'admin', 'A1317068', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:19:20', 'surat siap', 'magang?m=pengajuan'),
+(252, 'admin', 'A1317027', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:19:20', 'surat siap', 'magang?m=pengajuan'),
+(253, 'A1317094', 'admin', 'Mahasiswa Susanti (A1317094) telah mengajukan perusahaan baru', 1, '2020-01-17 02:19:36', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(254, 'admin', 'A1317052', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:19:52', 'surat siap', 'magang?m=pengajuan'),
+(255, 'admin', 'A1317042', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:19:52', 'surat siap', 'magang?m=pengajuan'),
+(256, 'admin', 'A1317040', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:19:58', 'surat siap', 'magang?m=pengajuan'),
+(257, 'admin', 'A1317092', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:19:58', 'surat siap', 'magang?m=pengajuan'),
+(258, 'admin', 'A1317079', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:19:58', 'surat siap', 'magang?m=pengajuan'),
+(259, 'admin', 'A1317017', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:20:21', 'surat siap', 'magang?m=pengajuan'),
+(260, 'admin', 'A1317083', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:20:50', 'surat siap', 'magang?m=pengajuan'),
+(261, 'A1317081', 'admin', 'Rindiyani (A1317081) mengajukan permohonan magang', 1, '2020-01-17 02:21:01', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(262, 'admin', 'A1317058', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:21:15', 'surat siap', 'magang?m=pengajuan'),
+(263, 'A1317094', 'admin', 'Susanti (A1317094) mengajukan permohonan magang', 1, '2020-01-17 02:21:26', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(264, 'admin', 'A1317096', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:21:45', 'surat siap', 'magang?m=pengajuan'),
+(265, 'admin', 'A1317101', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:21:45', 'surat siap', 'magang?m=pengajuan'),
+(266, 'admin', 'A1317081', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:22:30', 'surat siap', 'magang?m=pengajuan'),
+(267, 'admin', 'A1317094', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:22:34', 'surat siap', 'magang?m=pengajuan'),
+(268, 'admin', 'A1317073', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:00', 'surat siap', 'magang?m=pengajuan'),
+(269, 'admin', 'A1317030', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:00', 'surat siap', 'magang?m=pengajuan'),
+(270, 'A1317111', 'admin', 'Siti Naziha (A1317111) mengajukan permohonan magang', 1, '2020-01-17 02:23:01', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(271, 'admin', 'A1317097', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:08', 'surat siap', 'magang?m=pengajuan'),
+(272, 'admin', 'A1317060', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:08', 'surat siap', 'magang?m=pengajuan'),
+(273, 'admin', 'A1317051', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:22', 'surat siap', 'magang?m=pengajuan'),
+(274, 'admin', 'A1317082', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:22', 'surat siap', 'magang?m=pengajuan'),
+(275, 'A1317079', 'admin', 'Mahriani (A1317040) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:23:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(276, 'A1317079', 'admin', 'Siti Purnama (A1317092) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:23:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(277, 'A1317079', 'admin', 'Reyfindy (A1317079) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:23:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(278, 'A1317061', 'admin', 'Meliana (A1317048) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:23:42', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(279, 'A1317061', 'admin', 'Nigmah (A1317061) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:23:42', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(280, 'A1317061', 'admin', 'Sapniah (A1317086) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:23:42', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(281, 'admin', 'A1317050', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:24:10', 'surat siap', 'magang?m=pengajuan'),
+(282, 'admin', 'A1317021', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:24:56', 'surat siap', 'magang?m=pengajuan'),
+(283, 'admin', 'A1317037', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:25:24', 'surat siap', 'magang?m=pengajuan'),
+(284, 'admin', 'A1317047', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:25:24', 'surat siap', 'magang?m=pengajuan'),
+(285, 'A1316021', 'admin', 'Mahasiswa Dummy (A1316021) mengajukan permohonan magang', 1, '2020-01-17 02:25:39', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(286, 'admin', 'A1317010', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:26:09', 'surat siap', 'magang?m=pengajuan'),
+(287, 'admin', 'A1317090', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:26:09', 'surat siap', 'magang?m=pengajuan'),
+(288, 'admin', 'A1316021', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:26:12', 'surat siap', 'magang?m=pengajuan'),
+(289, 'A1317058', 'admin', 'Nadya Alfisyah (A1317058) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:26:35', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(290, 'admin', 'A1317088', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:26:37', 'surat siap', 'magang?m=pengajuan'),
+(291, 'admin', 'A1317034', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:26:37', 'surat siap', 'magang?m=pengajuan'),
+(292, 'A1317017', 'admin', 'Cahya Aprilia (A1317017) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:27:17', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(293, 'admin', 'A1317104', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:41', 'surat siap', 'magang?m=pengajuan'),
+(294, 'admin', 'A1317078', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:27:46', 'surat siap', 'magang?m=pengajuan'),
+(295, 'admin', 'A1317002', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:46', 'surat siap', 'magang?m=pengajuan'),
+(296, 'A1317101', 'admin', 'Tri Lutfiatul Rahayu (A1317096) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:27:51', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(297, 'A1317101', 'admin', 'Yeyen Nurul Imama (A1317101) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:27:51', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(298, 'A1317037', 'admin', 'Lidya Novita (A1317037) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:27:52', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(299, 'A1317037', 'admin', 'Melda Rosalina (A1317047) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 02:27:52', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(300, 'admin', 'A1317031', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:52', 'surat siap', 'magang?m=pengajuan'),
+(301, 'admin', 'A1317003', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:52', 'surat siap', 'magang?m=pengajuan'),
+(302, 'admin', 'A1317046', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:52', 'surat siap', 'magang?m=pengajuan'),
+(303, 'A1317081', 'admin', 'Rindiyani (A1317081) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:27:55', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(304, 'admin', 'A1317031', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:55', 'surat siap', 'magang?m=pengajuan'),
+(305, 'admin', 'A1317003', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:55', 'surat siap', 'magang?m=pengajuan'),
+(306, 'admin', 'A1317046', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:27:55', 'surat siap', 'magang?m=pengajuan'),
+(307, 'A1317052', 'admin', 'Mita Maulinda (A1317052) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:27:58', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(308, 'A1317052', 'admin', 'Mariatul Kiftiah (A1317042) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 02:27:58', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(309, 'admin', 'A1317065', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:28:00', 'surat siap', 'magang?m=pengajuan'),
+(310, 'A1317096', 'admin', 'Tri Lutfiatul Rahayu (A1317096) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:28:01', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(311, 'A1317096', 'admin', 'Yeyen Nurul Imama (A1317101) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:28:01', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(312, 'A1317042', 'admin', 'Mita Maulinda (A1317052) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 02:28:10', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(313, 'A1317042', 'admin', 'Mariatul Kiftiah (A1317042) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:28:10', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(314, 'A1317047', 'admin', 'Lidya Novita (A1317037) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 02:28:19', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(315, 'A1317047', 'admin', 'Melda Rosalina (A1317047) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:28:19', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(316, 'A1317031', 'admin', 'Istiqomah (A1317031) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:29:32', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(317, 'A1317031', 'admin', 'Adela Valiandra (A1317003) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 02:29:32', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(318, 'A1317031', 'admin', 'Melda Hikma (A1317046) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 02:29:32', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(319, 'A1317092', 'admin', 'Mahriani (A1317040) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(320, 'A1317092', 'admin', 'Siti Purnama (A1317092) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(321, 'A1317092', 'admin', 'Reyfindy (A1317079) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(322, 'A1317010', 'admin', 'Anita (A1317010) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(323, 'A1317010', 'admin', 'Sinta Esti Rahayu (A1317090) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(324, 'A1317104', 'admin', 'Yunita Anggraini (A1317104) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(325, 'A1317078', 'admin', 'Retno Fratiwi (A1317078) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(326, 'A1317078', 'admin', 'Ade Ardha Reswari (A1317002) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:30:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(327, 'A1317065', 'admin', 'Nor Janah (A1317065) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:05', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(328, 'A1317046', 'admin', 'Istiqomah (A1317031) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:06', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(329, 'A1317046', 'admin', 'Adela Valiandra (A1317003) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:06', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(330, 'A1317046', 'admin', 'Melda Hikma (A1317046) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:06', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(331, 'A1317034', 'admin', 'Selvya Meirida Andani (A1317088) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:18', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(332, 'A1317034', 'admin', 'Kiki Maulida (A1317034) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:18', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(333, 'A1317027', 'admin', 'Novia Sari (A1317068) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:22', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(334, 'A1317027', 'admin', 'Hesti Ratih Ningtias (A1317027) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:22', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(335, 'A1317036', 'admin', 'Aiga Putri Oktovianda (A1317008) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(336, 'A1317036', 'admin', 'Lia Merliana (A1317036) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(337, 'A1317036', 'admin', 'Sari Maryani (A1317087) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:31:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(338, 'A1317064', 'admin', 'Noor Latipah (A1317064) mengajukan permohonan magang', 1, '2020-01-17 02:31:53', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(339, 'A1317030', 'admin', 'Reka Nur Andinni (A1317073) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:25', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(340, 'A1317030', 'admin', 'Inka Nurjanah (A1317030) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:25', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(341, 'A1317051', 'admin', 'Mila Camelia (A1317051) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:27', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(342, 'A1317051', 'admin', 'Rini Yuliani (A1317082) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:27', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(343, 'A1317008', 'admin', 'Aiga Putri Oktovianda (A1317008) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:29', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(344, 'A1317008', 'admin', 'Lia Merliana (A1317036) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:29', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(345, 'A1317008', 'admin', 'Sari Maryani (A1317087) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:29', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(346, 'A1317073', 'admin', 'Reka Nur Andinni (A1317073) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(347, 'A1317073', 'admin', 'Inka Nurjanah (A1317030) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(348, 'A1317087', 'admin', 'Aiga Putri Oktovianda (A1317008) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:50', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(349, 'A1317087', 'admin', 'Lia Merliana (A1317036) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:50', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(350, 'A1317087', 'admin', 'Sari Maryani (A1317087) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:50', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(351, 'A1317083', 'admin', 'Riska Hartati (A1317083) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:55', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(352, 'A1317027', 'admin', 'Novia Sari (A1317068) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(353, 'A1317027', 'admin', 'Hesti Ratih Ningtias (A1317027) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:32:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(354, 'A1317082', 'admin', 'Mila Camelia (A1317051) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:33:35', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(355, 'A1317082', 'admin', 'Rini Yuliani (A1317082) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:33:35', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(356, 'A1317050', 'admin', 'Meyhastanti Cahyaning Fijar (A1317050) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:33:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(357, 'A1317050', 'admin', 'Meyhastanti Cahyaning Fijar (A1317050) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:33:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(358, 'A1317021', 'admin', 'Erna Sulistyowati (A1317021) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:33:52', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(359, 'admin', 'A1317050', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:34:18', 'surat siap', 'magang?m=pengajuan'),
+(360, 'admin', 'A1317064', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:34:18', 'surat siap', 'magang?m=pengajuan'),
+(361, 'admin', 'A1317094', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:34:51', 'surat siap', 'magang?m=pengajuan'),
+(362, 'admin', 'A1317111', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:34:51', 'surat siap', 'magang?m=pengajuan'),
+(363, 'A1317060', 'admin', 'Tsamara Dara Rizkita (A1317097) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:35:35', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(364, 'A1317060', 'admin', 'Nanda Sejati Ningtyas (A1317060) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:35:35', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(365, 'A1317068', 'admin', 'Novia Sari (A1317068) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:36:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(366, 'A1317068', 'admin', 'Hesti Ratih Ningtias (A1317027) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:36:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(367, 'A1317003', 'admin', 'Istiqomah (A1317031) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:37:01', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(368, 'A1317003', 'admin', 'Adela Valiandra (A1317003) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:37:01', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(369, 'A1317003', 'admin', 'Melda Hikma (A1317046) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:37:01', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(370, 'A1317094', 'admin', 'Susanti (A1317094) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:37:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(371, 'A1317094', 'admin', 'Siti Naziha (A1317111) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:37:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(372, 'A1317050', 'admin', 'Meyhastanti Cahyaning Fijar (A1317050) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:39:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(373, 'A1317050', 'admin', 'Noor Latipah (A1317064) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:39:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(374, 'A1317111', 'admin', 'Susanti (A1317094) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:39:49', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(375, 'A1317111', 'admin', 'Siti Naziha (A1317111) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:39:49', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(376, 'A1317064', 'admin', 'Meyhastanti Cahyaning Fijar (A1317050) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:40:13', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(377, 'A1317064', 'admin', 'Noor Latipah (A1317064) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:40:13', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(378, 'A1317067', 'admin', 'Norida Alisa (A1317067) mengajukan permohonan magang', 1, '2020-01-17 02:41:51', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(379, 'A1316021', 'admin', 'Mahasiswa Dummy (A1316021) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:42:37', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(380, 'A1317041', 'admin', 'Mariana (A1317041) mengajukan permohonan magang', 1, '2020-01-17 02:43:28', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(381, 'A1317022', 'admin', 'Estri Nunik Hidayati (A1317022) mengajukan permohonan magang', 1, '2020-01-17 03:45:56', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(382, 'A1317001', 'admin', 'Achmad Syah Maulana (A1317001) mengajukan permohonan magang', 1, '2020-01-17 06:13:24', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(383, 'A1317033', 'admin', 'Khoirul Imam Safi’i (A1317033) mengajukan permohonan magang', 1, '2020-01-17 06:13:41', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(384, 'A1317075', 'admin', 'Rendy Saputera (A1317075) mengajukan permohonan magang', 1, '2020-01-17 06:13:46', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(385, 'A1317006', 'admin', 'Ahmad Laily Misfi (A1317006) mengajukan permohonan magang', 1, '2020-01-17 06:14:15', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(386, 'A1317109', 'admin', 'Muhammad Muslih Amirudin (A1317109) mengajukan permohonan magang', 1, '2020-01-17 06:14:22', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(387, 'A1317106', 'admin', 'Fransisca Jeni Tari Krismany (A1317106) mengajukan permohonan magang', 1, '2020-01-17 06:14:29', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(388, 'A1317016', 'admin', 'Bibit Wahyudi (A1317016) mengajukan permohonan magang', 1, '2020-01-17 06:14:30', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(389, 'A1317014', 'admin', 'Ari Wahyudi (A1317014) mengajukan permohonan magang', 1, '2020-01-17 06:14:33', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(390, 'A1317011', 'admin', 'Anita Nurlaila (A1317011) mengajukan permohonan magang', 1, '2020-01-17 06:14:37', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(391, 'A1317004', 'admin', 'Agi Munawa (A1317004) mengajukan permohonan magang', 1, '2020-01-17 06:14:46', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(392, 'A1317080', 'admin', 'Riki Hidayat (A1317080) mengajukan permohonan magang', 1, '2020-01-17 06:14:46', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(393, 'A1317056', 'admin', 'Muhammad Teddy Taufani (A1317056) mengajukan permohonan magang', 1, '2020-01-17 06:14:48', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(394, 'A1317077', 'admin', 'Restu Adji Saputra (A1317077) mengajukan permohonan magang', 1, '2020-01-17 06:15:12', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(395, 'A1317054', 'admin', 'Muhammad Khairi (A1317054) mengajukan permohonan magang', 1, '2020-01-17 06:15:28', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(396, 'A1317044', 'admin', 'Maya Gian Sister (A1317044) mengajukan permohonan magang', 1, '2020-01-17 06:15:46', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(397, 'A1317013', 'admin', 'Ari Setia Budi (A1317013) mengajukan permohonan magang', 1, '2020-01-17 06:15:48', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(398, 'A1317012', 'admin', 'Annisa (A1317012) mengajukan permohonan magang', 1, '2020-01-17 06:15:51', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(399, 'A1317025', 'admin', 'Mahasiswa Gusti Ahmad Hafi (A1317025) telah mengajukan perusahaan baru', 1, '2020-01-17 06:15:55', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(400, 'A1317019', 'admin', 'Dicky Sulis Stiawan (A1317019) mengajukan permohonan magang', 1, '2020-01-17 06:15:56', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(401, 'A1317023', 'admin', 'Fajar (A1317023) mengajukan permohonan magang', 1, '2020-01-17 06:16:54', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(402, 'A1317076', 'admin', 'Mahasiswa Rendy Saputra (A1317076) telah mengajukan perusahaan baru', 1, '2020-01-17 06:17:03', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(403, 'A1317066', 'admin', 'Norhatiah (A1317066) mengajukan permohonan magang', 1, '2020-01-17 06:17:15', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(404, 'A1317025', 'admin', 'Gusti Ahmad Hafi (A1317025) mengajukan permohonan magang', 1, '2020-01-17 06:17:19', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(405, 'A1317099', 'admin', 'Mahasiswa Winda Dwi Sulistia (A1317099) telah mengajukan perusahaan baru', 1, '2020-01-17 06:17:37', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(406, 'A1317074', 'admin', 'Renaldi Haris Aksara (A1317074) mengajukan permohonan magang', 1, '2020-01-17 06:17:54', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(407, 'A1317100', 'admin', 'Mahasiswa Yeremia Handoyo (A1317100) telah mengajukan perusahaan baru', 1, '2020-01-17 06:18:20', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(408, 'A1317045', 'admin', 'Megawati (A1317045) mengajukan permohonan magang', 1, '2020-01-17 06:18:27', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(409, 'A1317107', 'admin', 'Muhammad Aditya Effendi (A1317107) mengajukan permohonan magang', 1, '2020-01-17 06:19:37', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(410, 'A1317026', 'admin', 'Helmi Tri Budi Yulianto (A1317026) mengajukan permohonan magang', 1, '2020-01-17 06:19:40', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(411, 'A1317009', 'admin', 'Andri Ade Irawan (A1317009) mengajukan permohonan magang', 1, '2020-01-17 06:19:40', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(412, 'A1317100', 'admin', 'Yeremia Handoyo (A1317100) mengajukan permohonan magang', 1, '2020-01-17 06:20:23', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(413, 'A1317057', 'admin', 'Muhammad Thayib Ramadan (A1317057) mengajukan permohonan magang', 1, '2020-01-17 06:20:39', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(414, 'A1317076', 'admin', 'Rendy Saputra (A1317076) mengajukan permohonan magang', 1, '2020-01-17 06:20:57', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(415, 'A1317035', 'admin', 'Koko Hermawan (A1317035) mengajukan permohonan magang', 1, '2020-01-17 06:21:06', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(416, 'A1317099', 'admin', 'Winda Dwi Sulistia (A1317099) mengajukan permohonan magang', 1, '2020-01-17 06:21:25', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(417, 'A1317098', 'admin', 'Wahzuni Sri Rahayu (A1317098) mengajukan permohonan magang', 1, '2020-01-17 06:22:05', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(418, 'admin', 'A1317104', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:22:12', 'surat siap', 'magang?m=pengajuan'),
+(419, 'admin', 'A1317026', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:22:12', 'surat siap', 'magang?m=pengajuan'),
+(420, 'A1317005', 'admin', 'Mahasiswa Ahmad Asegaf (A1317005) telah mengajukan perusahaan baru', 1, '2020-01-17 06:22:25', 'pengajuan magang', 'perusahaan?m=manajemen'),
+(421, 'A1317103', 'admin', 'Yougie Affandi (A1317103) mengajukan permohonan magang', 1, '2020-01-17 06:23:55', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(422, 'A1317055', 'admin', 'Muhammad Rizky Ansyari (A1317055) mengajukan permohonan magang', 1, '2020-01-17 06:24:54', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(423, 'admin', 'A1317103', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:25:16', 'surat siap', 'magang?m=pengajuan'),
+(424, 'A1317098', 'admin', 'Wahzuni Sri Rahayu (A1317098) mengajukan permohonan magang', 1, '2020-01-17 06:25:20', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(425, 'A1317005', 'admin', 'Ahmad Asegaf (A1317005) mengajukan permohonan magang', 1, '2020-01-17 06:25:32', 'pengajuan magang', 'mahasiswa?m=pengajuan');
+INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, `waktu`, `hal`, `uri`) VALUES
+(426, 'admin', 'A1317103', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:00', 'surat siap', 'magang?m=pengajuan'),
+(427, 'admin', 'A1317005', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:00', 'surat siap', 'magang?m=pengajuan'),
+(428, 'admin', 'A1317099', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:04', 'surat siap', 'magang?m=pengajuan'),
+(429, 'admin', 'A1317098', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:04', 'surat siap', 'magang?m=pengajuan'),
+(430, 'admin', 'A1317100', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
+(431, 'admin', 'A1317055', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
+(432, 'admin', 'A1317074', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
+(433, 'admin', 'A1317009', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
+(434, 'admin', 'A1317057', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
+(435, 'admin', 'A1317076', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
+(436, 'admin', 'A1317035', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
+(437, 'A1317108', 'admin', 'Muhammad Iqbal  (A1317108) mengajukan permohonan magang', 1, '2020-01-17 06:29:51', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(438, 'A1317107', 'admin', 'Muhammad Aditya Effendi (A1317107) mengajukan permohonan magang', 1, '2020-01-17 06:31:54', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(439, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
+(440, 'admin', 'A1317107', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
+(441, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
+(442, 'admin', 'A1317107', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
+(443, 'admin', 'A1317066', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
+(444, 'admin', 'A1317025', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
+(445, 'admin', 'A1317045', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
+(446, 'admin', 'A1317006', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:53', 'surat siap', 'magang?m=pengajuan'),
+(447, 'admin', 'A1317014', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:53', 'surat siap', 'magang?m=pengajuan'),
+(448, 'admin', 'A1317023', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:53', 'surat siap', 'magang?m=pengajuan'),
+(449, 'admin', 'A1317021', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:56', 'surat siap', 'magang?m=pengajuan'),
+(450, 'admin', 'A1317011', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:56', 'surat siap', 'magang?m=pengajuan'),
+(451, 'admin', 'A1317019', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:56', 'surat siap', 'magang?m=pengajuan'),
+(452, 'admin', 'A1317021', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:59', 'surat siap', 'magang?m=pengajuan'),
+(453, 'admin', 'A1317011', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:59', 'surat siap', 'magang?m=pengajuan'),
+(454, 'admin', 'A1317019', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:59', 'surat siap', 'magang?m=pengajuan'),
+(455, 'admin', 'A1317044', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:01', 'surat siap', 'magang?m=pengajuan'),
+(456, 'admin', 'A1317012', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:01', 'surat siap', 'magang?m=pengajuan'),
+(457, 'admin', 'A1317044', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:04', 'surat siap', 'magang?m=pengajuan'),
+(458, 'admin', 'A1317012', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:04', 'surat siap', 'magang?m=pengajuan'),
+(459, 'admin', 'A1317033', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:09', 'surat siap', 'magang?m=pengajuan'),
+(460, 'admin', 'A1317056', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:09', 'surat siap', 'magang?m=pengajuan'),
+(461, 'admin', 'A1317054', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:09', 'surat siap', 'magang?m=pengajuan'),
+(462, 'admin', 'A1317033', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:12', 'surat siap', 'magang?m=pengajuan'),
+(463, 'admin', 'A1317056', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:12', 'surat siap', 'magang?m=pengajuan'),
+(464, 'admin', 'A1317054', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:12', 'surat siap', 'magang?m=pengajuan'),
+(465, 'admin', 'A1317022', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:16', 'surat siap', 'magang?m=pengajuan'),
+(466, 'admin', 'A1317001', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:30', 'surat siap', 'magang?m=pengajuan'),
+(467, 'admin', 'A1317080', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:30', 'surat siap', 'magang?m=pengajuan'),
+(468, 'admin', 'A1317077', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:30', 'surat siap', 'magang?m=pengajuan'),
+(469, 'admin', 'A1317083', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:39', 'surat siap', 'magang?m=pengajuan'),
+(470, 'admin', 'A1317013', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:39', 'surat siap', 'magang?m=pengajuan'),
+(471, 'admin', 'A1317083', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:45', 'surat siap', 'magang?m=pengajuan'),
+(472, 'admin', 'A1317013', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:45', 'surat siap', 'magang?m=pengajuan'),
+(473, 'admin', 'A1317075', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:46', 'surat siap', 'magang?m=pengajuan'),
+(474, 'admin', 'A1317004', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:46', 'surat siap', 'magang?m=pengajuan'),
+(475, 'admin', 'A1317075', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:54', 'surat siap', 'magang?m=pengajuan'),
+(476, 'admin', 'A1317004', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:54', 'surat siap', 'magang?m=pengajuan'),
+(477, 'admin', 'A1317109', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:54', 'surat siap', 'magang?m=pengajuan'),
+(478, 'admin', 'A1317016', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:54', 'surat siap', 'magang?m=pengajuan'),
+(479, 'admin', 'A1317010', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:36:13', 'surat siap', 'magang?m=pengajuan'),
+(480, 'admin', 'A1317090', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:36:13', 'surat siap', 'magang?m=pengajuan'),
+(481, 'admin', 'A1317106', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:36:13', 'surat siap', 'magang?m=pengajuan'),
+(482, 'admin', 'A1317065', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:36:38', 'surat siap', 'magang?m=pengajuan'),
+(483, 'admin', 'A1317041', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:36:38', 'surat siap', 'magang?m=pengajuan'),
+(484, 'admin', 'A1317052', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:37:04', 'surat siap', 'magang?m=pengajuan'),
+(485, 'admin', 'A1317042', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:37:04', 'surat siap', 'magang?m=pengajuan'),
+(486, 'admin', 'A1317067', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:37:04', 'surat siap', 'magang?m=pengajuan'),
+(487, 'A1317067', 'admin', 'Mita Maulinda (A1317052) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 06:38:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(488, 'A1317067', 'admin', 'Mariatul Kiftiah (A1317042) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 06:38:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(489, 'A1317067', 'admin', 'Norida Alisa (A1317067) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:38:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(490, 'admin', 'A1317097', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:38:53', 'surat siap', 'magang?m=pengajuan'),
+(491, 'admin', 'A1317060', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:38:53', 'surat siap', 'magang?m=pengajuan'),
+(492, 'A1317100', 'admin', 'Yeremia Handoyo (A1317100) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:40:20', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(493, 'A1317100', 'admin', 'Muhammad Rizky Ansyari (A1317055) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:40:20', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(494, 'A1317045', 'admin', 'Norhatiah (A1317066) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:40:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(495, 'A1317045', 'admin', 'Gusti Ahmad Hafi (A1317025) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:40:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(496, 'A1317045', 'admin', 'Megawati (A1317045) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:40:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(497, 'A1317006', 'admin', 'Ahmad Laily Misfi (A1317006) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:40:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(498, 'A1317006', 'admin', 'Ari Wahyudi (A1317014) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 06:40:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(499, 'A1317006', 'admin', 'Fajar (A1317023) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 06:40:45', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(500, 'A1317080', 'admin', 'Achmad Syah Maulana (A1317001) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:41:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(501, 'A1317080', 'admin', 'Riki Hidayat (A1317080) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:41:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(502, 'A1317080', 'admin', 'Restu Adji Saputra (A1317077) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:41:26', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(503, 'A1317016', 'admin', 'Muhammad Muslih Amirudin (A1317109) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:41:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(504, 'A1317016', 'admin', 'Bibit Wahyudi (A1317016) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:41:36', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(505, 'A1317103', 'admin', 'Yougie Affandi (A1317103) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:41:59', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(506, 'A1317103', 'admin', 'Ahmad Asegaf (A1317005) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:41:59', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(507, 'A1317099', 'admin', 'Winda Dwi Sulistia (A1317099) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:03', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(508, 'A1317099', 'admin', 'Wahzuni Sri Rahayu (A1317098) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:03', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(509, 'A1317075', 'admin', 'Rendy Saputera (A1317075) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:33', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(510, 'A1317075', 'admin', 'Agi Munawa (A1317004) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:33', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(511, 'A1317014', 'admin', 'Ahmad Laily Misfi (A1317006) telah ditolak oleh perusahaan yang bersangkutan', 1, '2020-01-17 06:42:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(512, 'A1317014', 'admin', 'Ari Wahyudi (A1317014) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(513, 'A1317014', 'admin', 'Fajar (A1317023) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(514, 'A1317056', 'admin', 'Khoirul Imam Safi’i (A1317033) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:46', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(515, 'A1317056', 'admin', 'Muhammad Teddy Taufani (A1317056) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:46', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(516, 'A1317056', 'admin', 'Muhammad Khairi (A1317054) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:46', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(517, 'A1317056', 'admin', 'Khoirul Imam Safi’i (A1317033) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:46', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(518, 'A1317056', 'admin', 'Muhammad Teddy Taufani (A1317056) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:46', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(519, 'A1317056', 'admin', 'Muhammad Khairi (A1317054) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:46', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(520, 'A1317076', 'admin', 'Renaldi Haris Aksara (A1317074) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(521, 'A1317076', 'admin', 'Andri Ade Irawan (A1317009) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(522, 'A1317076', 'admin', 'Muhammad Thayib Ramadan (A1317057) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(523, 'A1317076', 'admin', 'Rendy Saputra (A1317076) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(524, 'A1317076', 'admin', 'Koko Hermawan (A1317035) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:48', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(525, 'A1317107', 'admin', 'Muhammad Iqbal  (A1317108) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:55', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(526, 'A1317107', 'admin', 'Muhammad Aditya Effendi (A1317107) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:42:55', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(527, 'A1317012', 'admin', 'Maya Gian Sister (A1317044) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:08', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(528, 'A1317012', 'admin', 'Annisa (A1317012) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:08', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(529, 'A1317019', 'admin', 'Erna Sulistyowati (A1317021) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(530, 'A1317019', 'admin', 'Anita Nurlaila (A1317011) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(531, 'A1317019', 'admin', 'Dicky Sulis Stiawan (A1317019) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(532, 'A1317011', 'admin', 'Erna Sulistyowati (A1317021) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(533, 'A1317011', 'admin', 'Anita Nurlaila (A1317011) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(534, 'A1317011', 'admin', 'Dicky Sulis Stiawan (A1317019) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(535, 'A1317011', 'admin', 'Erna Sulistyowati (A1317021) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(536, 'A1317011', 'admin', 'Anita Nurlaila (A1317011) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(537, 'A1317011', 'admin', 'Dicky Sulis Stiawan (A1317019) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:45:44', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(538, 'A1317013', 'admin', 'Riska Hartati (A1317083) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:47:00', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(539, 'A1317013', 'admin', 'Ari Setia Budi (A1317013) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:47:00', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(540, 'A1317006', 'admin', 'Ahmad Laily Misfi (A1317006) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:47:15', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(541, 'A1317006', 'admin', 'Ari Wahyudi (A1317014) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:47:15', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(542, 'A1317006', 'admin', 'Fajar (A1317023) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:47:15', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(543, 'A1317041', 'admin', 'Nor Janah (A1317065) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:47:54', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(544, 'A1317041', 'admin', 'Mariana (A1317041) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:47:54', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(545, 'A1317044', 'admin', 'Maya Gian Sister (A1317044) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:48:04', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(546, 'A1317044', 'admin', 'Annisa (A1317012) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:48:04', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(547, 'A1317106', 'admin', 'Anita (A1317010) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:48:13', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(548, 'A1317106', 'admin', 'Sinta Esti Rahayu (A1317090) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:48:13', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(549, 'A1317106', 'admin', 'Fransisca Jeni Tari Krismany (A1317106) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:48:13', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(550, 'A1317026', 'admin', 'Yunita Anggraini (A1317104) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:48:17', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(551, 'A1317026', 'admin', 'Helmi Tri Budi Yulianto (A1317026) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:48:17', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(552, 'A1317045', 'admin', 'Norhatiah (A1317066) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:49:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(553, 'A1317045', 'admin', 'Gusti Ahmad Hafi (A1317025) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:49:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(554, 'A1317045', 'admin', 'Megawati (A1317045) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:49:39', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(555, 'admin', 'A1317022', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:49:45', 'surat siap', 'magang?m=pengajuan'),
+(556, 'A1317054', 'admin', 'Khoirul Imam Safi’i (A1317033) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:53', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(557, 'A1317054', 'admin', 'Muhammad Teddy Taufani (A1317056) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:53', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(558, 'A1317054', 'admin', 'Muhammad Khairi (A1317054) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:53', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(559, 'A1317056', 'admin', 'Khoirul Imam Safi’i (A1317033) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(560, 'A1317056', 'admin', 'Muhammad Teddy Taufani (A1317056) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(561, 'A1317056', 'admin', 'Muhammad Khairi (A1317054) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(562, 'A1317022', 'admin', 'Estri Nunik Hidayati (A1317022) telah mengirim bukti penerimaan magang', 1, '2020-01-17 07:00:56', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(563, 'A1317093', 'admin', 'Suci Febriani (A1317093) mengajukan permohonan magang', 1, '2020-01-19 06:23:04', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(564, 'admin', 'A1317093', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-19 07:38:36', 'surat siap', 'magang?m=pengajuan'),
+(565, 'A1317093', 'admin', 'Suci Febriani (A1317093) telah mengirim bukti penerimaan magang', 1, '2020-01-19 07:46:27', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(566, 'A1317071', 'admin', 'Rahma Dwi Cahyani (A1317071) mengajukan permohonan magang', 1, '2020-01-20 03:12:27', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(567, 'A1317020', 'admin', 'Dita Ayu Lestari (A1317020) mengajukan permohonan magang', 1, '2020-01-20 03:41:41', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(568, 'admin', 'A1317071', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-20 03:46:46', 'surat siap', 'magang?m=pengajuan'),
+(569, 'admin', 'A1317020', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-20 03:46:46', 'surat siap', 'magang?m=pengajuan'),
+(570, 'A1317020', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', 1, '2020-01-20 03:59:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(571, 'A1317020', 'admin', 'Dita Ayu Lestari (A1317020) telah mengirim bukti penerimaan magang', 1, '2020-01-20 03:59:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(572, 'A1317071', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:02', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(573, 'A1317071', 'admin', 'Dita Ayu Lestari (A1317020) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:02', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(574, 'A1317020', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:17', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(575, 'A1317020', 'admin', 'Dita Ayu Lestari (A1317020) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:17', 'bukti diterima', 'mahasiswa?m=pengajuan');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pegawai`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_pegawai` (
+  `nip_nik` varchar(20) NOT NULL DEFAULT '',
+  `username` varchar(100) DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
+  `nama_pegawai` varchar(100) DEFAULT NULL,
+  `alamat_pegawai` mediumtext,
+  `jk_pegawai` varchar(20) DEFAULT NULL,
+  `email_pegawai` varchar(100) DEFAULT NULL,
+  `tempat_lahir_pegawai` varchar(100) DEFAULT NULL,
+  `tanggal_lahir_pegawai` date DEFAULT NULL,
+  `no_hp_pegawai` varchar(50) DEFAULT NULL,
+  `id_jabatan` int(11) DEFAULT NULL,
+  `id_golongan` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_pegawai`
+--
+
+INSERT INTO `tb_pegawai` (`nip_nik`, `username`, `status`, `nama_pegawai`, `alamat_pegawai`, `jk_pegawai`, `email_pegawai`, `tempat_lahir_pegawai`, `tanggal_lahir_pegawai`, `no_hp_pegawai`, `id_jabatan`, `id_golongan`) VALUES
+('090801007', 'marlia@politala.ac.id', NULL, 'Marlia Adriana, M.T.', 'Jl.Almanar No. 23 A Rt.22 Rw.06 Kelurahan Angsau Pelaihari Kab.Tanah Laut', 'Perempuan', 'marlia@politala.ac.id', 'Bati-bati', '1982-03-23', '-', NULL, NULL),
+('090801016', 'herfia.rhomadhona@politala.ac.id', NULL, 'Herfia Rhomadhona, S.Kom., M.Cs', 'Jl. Datu Daim Gang Jambu No. 112 RT. 28 RW.02 ', 'Perempuan', 'herfia.rhomadhona@politala.ac.id', 'Tanah Laut', '1989-04-21', '-', NULL, NULL),
+('090801031', 'wanyuliyanti@politala.ac.id', NULL, 'Wan Yuliyanti, M.Pd.', 'Jl. Samudra No. 14 Matah Kec. Pelaihari Kab. Tanah Laut - Kalimantan Selatan', 'Perempuan', 'wanyuliyanti@politala.ac.id', 'Singkawang', '1969-07-03', '-', NULL, NULL),
+('090801044', 'ra.amalia.rizki@politala.ac.id', NULL, 'Raden Rizki Amalia, S.T., M.Si.', 'Jalan Teluk Baru No.33 Karang Taruna Rt/Rw:08/03 Pelaihari Kalsel', 'Perempuan', 'ra.amalia.rizki@politala.ac.id', 'Pamekasan', '1981-02-12', '-', NULL, NULL),
+('09081015', 'arif@politala.ac.id', NULL, 'Arif Supriyanto, S.Kom., M.Cs', 'Jl. A. Yani Gang Ikhlas RT.01 RW.01 Kec. Pelaihari Kab, Tanah Laut ', 'Laki - Laki', 'arif@politala.ac.id', 'Pelaihari', '1989-09-27', '-', NULL, NULL),
+('100921045', 'radna@politala.ac.id', NULL, 'Radna Nurmalina, S.E., M.Si.', 'Pelaihari', 'Perempuan', 'radna@politala.ac.id', 'Banjarmasin', '2017-02-10', '-', NULL, NULL),
+('110103046', 'angkasa@politala.ac.id', NULL, 'Anggun Angkasa Bela Persada, M.T.', 'Jln. A.Nawawi Komplek Permata Jingga III, Blok B.49, Kel Karang Taruna, Pelaihari, Tanah Laut, KALSEL', 'Laki - Laki', 'angkasa@politala.ac.id', 'Jember', '1985-04-29', '-', NULL, NULL),
+('110103047', 'ika.kusuma.n@politala.ac.id', NULL, 'Ika Kusuma Nugraheni, S.Si., M.Sc.', 'Jl. Kamaratih, Rt. 06A, Komp. GW1 No. 6, Panggung, Pelaihari, Tanah Laut, Kalimantan Selatan', 'Perempuan', 'ika.kusuma.n@politala.ac.id', 'Tebing Siring (Tanah Laut)', '1988-04-20', '-', NULL, NULL),
+('110103048', 'yunitaprastya@politala.ac.id', NULL, 'Yunita Prastyaningsih, M.Kom', 'Jl.norsehat No.02 Pelaihari', 'Perempuan', 'yunitaprastya@politala.ac.id', 'Mojokerto', '1987-06-12', '-', NULL, NULL),
+('110502054', 'sandri@politala.ac.id', NULL, 'Dwi Sandri, S.Si., M.P.', 'Jl. Mekar Sari Komp. Pondok Indah Pelaihari Blok C 20. Desa Pemuda (KNPI), Kec. Pelaihari Kab. Tanah Laut, Kalimantan Selatan', 'Laki - Laki', 'sandri@politala.ac.id', 'Sangasanga', '1983-01-31', '-', NULL, NULL),
+('110502055', 'ninahairiyah@politala.ac.id', NULL, 'Nina Hairiyah, S.TP., M.Si.', 'Jl.Taruna Praja Raya Komplek Balitan 12 Blok C No. 5 Banjarbaru Kal-Sel 70712', 'Perempuan', 'ninahairiyah@politala.ac.id', 'Banjarbaru', '1988-05-04', '-', NULL, NULL),
+('110905058', 'kurnia.2a@politala.ac.id', NULL, 'Kurnia Dwi Artika, ST,. MT', 'Jl. Teluk Baru RT.8/3 \r\nKel. Karang Taruna, Pelaihari', 'Laki - Laki', 'kurnia.2a@politala.ac.id', 'Jember', '1985-06-27', '-', NULL, NULL),
+('120102069', 'redhy@politala.ac.id', NULL, 'Muhammad Redhy Rizani, M.T.', 'Pelaihari', 'Laki - Laki', 'redhy@politala.ac.id', 'Banjarmasin', '2017-02-10', '-', NULL, NULL),
+('120102070', 'wiwik.kusrini@politala.ac.id', NULL, 'Wiwik Kusrini, S.Kom, M.Cs', 'Jl. Lingkar Komp. Perum. Sinar Atu - Atu Pelaihari, Tanah Laut Kalimatan Selatan', 'Perempuan', 'wiwik.kusrini@politala.ac.id', 'Purworejo', '1984-02-02', '-', NULL, NULL),
+('120102079', 'hendrik.tomo@politala.ac.id', NULL, 'Hendrik Setyo Utomo, S.T., MMSI.', 'Jl. A. Yani. Km. 148, RT 07 RW 03, Desa Muara Kintap, Kec. Kintap Kab. Tanah Laut, Kalimatan Selatan', 'Laki - Laki', 'hendrik.tomo@politala.ac.id', 'Tanah Laut', '1986-07-01', '-', NULL, NULL),
+('120905081', 'sukma@politala.ac.id', NULL, 'Sukma Firdaus, S.Si., M.T.', 'Jalan Raya Takisung, Sakura Residence No 13. Rt 09 Rw 04. Kelurahan Karang Taruna. Kecamatan Pelaihari. Kabupaten Tanah Laut. Kalimantan Selatan 70812', 'Laki - Laki', 'sukma@politala.ac.id', 'Rantau', '0000-00-00', '-', NULL, NULL),
+('120905084', 'rusumintosyahyuniar@politala.ac.id', NULL, 'Rusuminto Syahyuniar, M.T.', '-', 'Laki - Laki', 'rusumintosyahyuniar@politala.ac.id', '-', '0000-00-00', '-', NULL, NULL),
+('130204092', 'kuswoyoanton@politala.ac.id', NULL, 'Anton Kuswoyo, S.Si., M.T.', 'Jl. Ki Hajar Dewantara, RT 8 RW 3, Kelurahan Angsau, Kec. Pelaihari, Kab. Tanah Laut, Kalimantan Selatan', 'Laki - Laki', 'kuswoyoanton@politala.ac.id', 'Kapuas', '1988-07-17', '-', NULL, NULL),
+('130204093', 'nuryati@politala.ac.id', NULL, 'Nuryati, S.T., M.Eng.', 'Komplek Pondok Indah Pelaihari 3, No. 14C', 'Perempuan', 'nuryati@politala.ac.id', 'Temanggung', '1977-06-19', '-', NULL, NULL),
+('140102098', 'fathurrahmani@politala.ac.id', NULL, 'Fathurrahmani, M.Kom ', 'Jalan A. Yani Km 14.5 Komplek Sejahtera Mandiri Asri Ray IV No.35', 'Laki - Laki', 'fathurrahmani@politala.ac.id', 'Duli', '0000-00-00', '-', NULL, NULL),
+('140102101', 'reza@politala.ac.id', NULL, 'Reza Taufiqi Ivana, S.T.', 'Jl. BIGJEN H. HASAN BASRI, GG. TANGGA NO. 10', 'Laki - Laki', 'reza@politala.ac.id', 'Malang', '1990-04-23', '-', NULL, NULL),
+('140102102', 'adhel_syaief@politala.ac.id', NULL, 'Adhiela Noer Syaief, M.T', 'Jl. A Yani No 07, Angsau, Pelaihari-Tanah Laut', 'Laki - Laki', 'adhel_syaief@politala.ac.id', 'Pelaihari', '1987-03-19', '-', NULL, NULL),
+('140102103', 'yuliananingsih@politala.ac.id', NULL, 'Yuliana Ningsih, S.S., M.Hum.', 'Jl', 'Perempuan', 'yuliananingsih@politala.ac.id', '-', '0000-00-00', '-', NULL, NULL),
+('140814113', 'rsayyidati@politala.ac.id', NULL, 'Rabini Sayyidati, M.Pd.', 'Jl. Tembus Perumnas. Komp. Herlina No. 9 Blok. C RT. 43 RW. 003, Banjarmasin Utara, Kota Banjarmasin, 70123', 'Perempuan', 'rsayyidati@politala.ac.id', 'Banjarmasin', '1992-05-05', '-', NULL, NULL),
+('140825117', 'muhammadnoor@politala.ac.id', NULL, 'Muhammad Noor, M.H.I.', 'Jl. Pahantasan, Perum Pondok Syafira No. F11 Pelaihari', 'Laki - Laki', 'muhammadnoor@politala.ac.id', 'Martapura', '1985-11-01', '-', NULL, NULL),
+('150105124', 'imron@politala.ac.id', NULL, 'Imron Musthofa, S.T.', 'Jl. Kol. Soepirman. Komp. Anugerah Hamparan Asri RT 11 RW 2 Atu-Atu', 'Laki - Laki', 'imron@politala.ac.id', 'Kuala Kapuas', '0000-00-00', '-', NULL, NULL),
+('150203104', 'hafizd@politala.ac.id', NULL, 'Khairul Anwar Hafizd, M.Kom.', 'Jl. Kamaratih RT 6 No. 10 Desa Panggung Kecamatan Pelaihari', 'Laki - Laki', 'hafizd@politala.ac.id', 'Gambut', '1989-06-01', '-', NULL, NULL),
+('150801145', 'winda@politala.ac.id', NULL, 'Winda Aprianti, M.Si.', 'Komplek Citra Megah Raya No 7B, Banjarbaru', 'Perempuan', 'winda@politala.ac.id', 'Martapura', '1990-04-17', '-', NULL, NULL),
+('160201151', 'herpendi@politala.ac.id', NULL, 'Herpendi, M.Kom', 'Pelaihari', 'Laki - Laki', 'herpendi@politala.ac.id', 'Gunung Makmur', '1990-11-20', '-', NULL, NULL),
+('160201152', 'emalestari@politala.ac.id', NULL, 'Ema Lestari, M.Pd', 'Komplek Graha Citra Permai 1 Blok G9 Guntung Manggis Banjarbaru', 'Perempuan', 'emalestari@politala.ac.id', 'Rantau Keminting', '1992-08-23', '-', NULL, NULL),
+('160201153', 'agustiannoor@politala.ac.id', NULL, 'Agustian Noor, M.Kom', 'Bjm', 'Laki - Laki', 'agustiannoor@politala.ac.id', 'Banjarmasin', '2017-02-08', '-', NULL, NULL),
+('160801168', 'jakapermadi.88@politala.ac.id', NULL, 'Jaka Permadi, S.Si., M.Cs', 'Desa Atu-Atu', 'Laki - Laki', 'jakapermadi.88@politala.ac.id', 'Tebing Siring', '1988-07-03', '-', NULL, NULL),
+('160818170', 'jefriadi@politala.ac.id', NULL, 'Jefriadi, S.T., M.Eng', 'Jl. Rambai Tengah No.88 Guntung Paikat, Banjarbaru', 'Laki - Laki', 'jefriadi@politala.ac.id', 'Duri', '1988-08-27', '-', NULL, NULL),
+('170103174', 'mariatul@politala.ac.id', NULL, 'Mariatul Kiptiah, S.Sos., M.Si', 'JL. A. YANI, RT.14/RW.3, BENUA RAYA', 'Perempuan', 'mariatul@politala.ac.id', 'Bati-Bati', '1983-11-30', '-', NULL, NULL),
+('180301180', 'mindradarmawan@politala.ac.id', NULL, 'Muhammad Indra Darmawan, STP., M.Sc', 'Jl. Sapta Marga Blok E Beruntung Resort I RT.10 Rw.01 Guntung Payung, Kota Banjarbaru,Kalimantan Selatan', 'Laki - Laki', 'mindradarmawan@politala.ac.id', 'Kandangan', '0000-00-00', '-', NULL, NULL),
+('180301181', 'adzani@politala.ac.id', NULL, 'Adzani Ghani Ilmannafian, S.Si., M.Si', 'Puri Cipageran Indah 1 Blok A-171 RT 02 RW 26 Cimahi 40511', 'Perempuan', 'adzani@politala.ac.id', 'Bandung', '0000-00-00', '-', NULL, NULL),
+('196806171997022004', 'mufrida@politala.ac.id', NULL, 'Dr. Mufrida Zein, M.Pd.', 'Jl', 'Perempuan', 'mufrida@politala.ac.id', 'Martapura', '1968-06-17', '-', NULL, NULL),
+('197006071995122003', 'titikwijayati@politala.ac.id', NULL, 'Titik Wijayati, M.Pd', NULL, NULL, 'titikwijayanti@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
+('197909142015041003', 'meldayanoor@politala.ac.id', NULL, 'Meldayanoor, S.Hut., M.S', 'Jalan Basuki Rahmat Rt.26 Kelurahan Angsau Kecamatan Pelaihari', 'Laki - Laki', 'meldayanoor@politala.ac.id', 'Pelaihari', '1979-09-14', '-', NULL, NULL),
+('198307112015042002', 'fatimah@politala.ac.id', NULL, 'Fatimah, S.Si., M.P.', 'Jl. Mekar Sari, Desa Pemuda, Pelaihari, Kalsel, 70815 ', 'Perempuan', 'fatimah@politala.ac.id', 'Hulu Sungai Tengah', '1983-07-11', '-', NULL, NULL),
+('198404282011011003', 'jaka_dj@politala.ac.id', NULL, 'Jaka Darma Jaya, M.P., M.Sc.', 'Jl. Peramuan Komplek Citra Bangun Persada No. H1, Rt. 3 Rw. 1 Kelurahan Landasan Ulin Timur, Kecamatan Landasan Ulin, Kota Banjarbaru, Kalimantan Selatan', 'Laki - Laki', 'jaka_dj@politala.ac.id', 'Pagat', '1984-04-28', '-', NULL, NULL),
+('199007112015041001', 'veri@politala.ac.id', NULL, 'Veri Julianto, S.Si., M.Si.', 'Jl. Kamratih', 'Laki - Laki', 'veri@politala.ac.id', 'Gunung Makmur', '1990-07-11', '-', NULL, NULL),
+('199007112015041002', 'simpkl@politala.ac.id', NULL, 'Admin SIMPKL', 'Pelaihari', NULL, 'simpkl@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
+('199007112015041003', 'dosen_satu@politala.ac.id', NULL, 'Dr. Dosen Satu', NULL, NULL, 'dosen_satu@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
+('199007112015041004', 'dosendua@politala.ac.id', NULL, 'Dosen Dua S.Pd', NULL, NULL, 'dosendua@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
+('blogprakerin@polital', 'blogprakerin@politala.ac.id', NULL, 'Blog Prakerin', NULL, NULL, 'blogprakerin@politala.ac.id', NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pembimbing_lapangan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_pembimbing_lapangan` (
+  `id_pembimbing_lapangan` varchar(20) NOT NULL,
+  `id_status_pkl` varchar(30) DEFAULT NULL,
+  `id_perusahaan` int(11) DEFAULT NULL,
+  `nama_pembimbing` varchar(100) DEFAULT NULL,
+  `jabatan_pembimbing` varchar(50) DEFAULT NULL,
+  `alamat_pembimbing` mediumtext,
+  `telepon_pembimbing` varchar(15) DEFAULT NULL,
+  `hp_pembimbing` varchar(15) DEFAULT NULL,
+  `nama_hrd` varchar(100) DEFAULT NULL,
+  `no_hrd` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_perusahaan`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_perusahaan` (
+  `id_perusahaan` int(11) NOT NULL,
+  `id_negara` varchar(30) DEFAULT NULL,
+  `id_provinsi` varchar(30) DEFAULT NULL,
+  `id_kerjasama_perusahaan` varchar(50) DEFAULT NULL,
+  `id_kecamatan` varchar(30) DEFAULT NULL,
+  `id_kab_kota` varchar(30) DEFAULT NULL,
+  `id_program_studi` varchar(50) DEFAULT NULL,
+  `status_perusahaan` varchar(30) DEFAULT 'uncheck',
+  `nama_perusahaan` varchar(100) DEFAULT NULL,
+  `alamat_perusahaan` mediumtext,
+  `telepon_perusahaan` varchar(20) DEFAULT NULL,
+  `long_perusahaan` varchar(10) DEFAULT NULL,
+  `lat_perusahaan` varchar(10) DEFAULT NULL,
+  `kuota_pkl` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_perusahaan`
+--
+
+INSERT INTO `tb_perusahaan` (`id_perusahaan`, `id_negara`, `id_provinsi`, `id_kerjasama_perusahaan`, `id_kecamatan`, `id_kab_kota`, `id_program_studi`, `status_perusahaan`, `nama_perusahaan`, `alamat_perusahaan`, `telepon_perusahaan`, `long_perusahaan`, `lat_perusahaan`, `kuota_pkl`) VALUES
+(1, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Kanwil DJP Provinsi Kalimantan Selatan dan Tengah', NULL, NULL, NULL, NULL, 3),
+(2, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Badan Pusat Statistik Provinsi Kalimantan Selatan', NULL, NULL, NULL, NULL, 3),
+(3, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT. TASPEN (PERSERO) Kantor Cabang Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(4, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Kantor Wilayah Direktorat Jenderal Pembendaharaan Provinsi Kalimantan Selatan', NULL, NULL, NULL, NULL, 3),
+(5, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'Badan Pengelolaan Keuangan dan Aset Daerah Kota Banjarbaru', NULL, NULL, NULL, NULL, 3),
+(6, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT.PLN (Persero) Unit Induk Provinsi Kalimantan Selatan dan Tengah', NULL, NULL, NULL, NULL, 3),
+(7, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT. Martplus Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(8, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'KPP Pratama Banjarbaru', NULL, NULL, NULL, NULL, 3),
+(9, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'KPP Pratama Banjarbaru', NULL, NULL, NULL, NULL, 3),
+(10, NULL, NULL, NULL, NULL, NULL, 'PST004', 'whitelist', 'PT.Ahsan Farma Medika Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(11, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'PT. Semen Gresik, Tbk', NULL, NULL, NULL, NULL, 3),
+(12, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Pama Persada Nusantara (Balangan)', NULL, NULL, NULL, NULL, 3),
+(13, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Putra Sarana Transborneo', NULL, NULL, NULL, NULL, 3),
+(14, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Nusantara Indah Daihatsu', NULL, NULL, NULL, NULL, 3),
+(15, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Cakrawala Putra Bersama', NULL, NULL, NULL, NULL, 3),
+(16, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Kalimantan Concrete Engineering', NULL, NULL, NULL, NULL, 3),
+(17, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'CV. Boston', NULL, NULL, NULL, NULL, 3),
+(18, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Toyota Wira Megah Profitamas', NULL, NULL, NULL, NULL, 3),
+(19, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Jorong Barutama Greston', NULL, NULL, NULL, NULL, 3),
+(20, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Sinar Nirwana Sari', NULL, NULL, NULL, NULL, 3),
+(21, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Kabina Sukses Makmur', NULL, NULL, NULL, NULL, 3),
+(22, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Wahyu Putra Ramadhan', NULL, NULL, NULL, NULL, 3),
+(23, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Cahaya Marhan Naya', NULL, NULL, NULL, NULL, 3),
+(24, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Arutmin Indonesia Kintap-Mine', NULL, NULL, NULL, NULL, 3),
+(25, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Pama Persada Nusantara', NULL, NULL, NULL, NULL, 3),
+(26, NULL, NULL, NULL, NULL, NULL, 'PST003', 'whitelist', 'Bukit Makmur Mandiri Utama Site SDJ Angsana', NULL, NULL, NULL, NULL, 3),
+(27, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Benih Citra Asia', NULL, NULL, NULL, NULL, 3),
+(28, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT.Perkebunan Nusantara  XIII (Persero)  Danau Salak', NULL, NULL, NULL, NULL, 3),
+(29, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT.Perkebunan Nusantara  XIII (Persero)  Pelaihari', NULL, NULL, NULL, NULL, 3),
+(30, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Candi Artha', NULL, NULL, NULL, NULL, 3),
+(31, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. SINAR NUSANTARA INDUSTRIES', NULL, NULL, NULL, NULL, 3),
+(32, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. CITRA PUTRA KEBUN ASRI', NULL, NULL, NULL, NULL, 3),
+(33, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Sime Darby Oils Pulau Laut Refinery', NULL, NULL, NULL, NULL, 3),
+(34, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. INDOFOOD CBP', NULL, NULL, NULL, NULL, 3),
+(35, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. GMK SATUI', NULL, NULL, NULL, NULL, 3),
+(36, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. KINTAP JAYA WATTINDO', NULL, NULL, NULL, NULL, 3),
+(37, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. GMK JORONG', NULL, NULL, NULL, NULL, 3),
+(38, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. BUANA KARYA BAKTI', NULL, NULL, NULL, NULL, 3),
+(39, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Astra Agro Lestari', NULL, NULL, NULL, NULL, 3),
+(40, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. WILSON LAUTAN KARET', NULL, NULL, NULL, NULL, 3),
+(41, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. ADI SURYA CITRA LESTARI', NULL, NULL, NULL, NULL, 3),
+(42, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Palmina Utama', NULL, NULL, NULL, NULL, 3),
+(43, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. CHEIL JEDANG', NULL, NULL, NULL, NULL, 3),
+(44, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Suntory Garuda Beverage ', NULL, NULL, NULL, NULL, 3),
+(45, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. KHARISMA INTI USAHA', NULL, NULL, NULL, NULL, 3),
+(46, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. BANUA LIMA SEJURUS', NULL, NULL, NULL, NULL, 3),
+(47, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. Jafpa Comfeed Indonesia Tbk. Unit Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(48, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. SMART (KINTAP)', NULL, NULL, NULL, NULL, 3),
+(49, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. KAHURIPAN INTI SAWIT', NULL, NULL, NULL, NULL, 3),
+(50, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. DITAMAS NUGRAHA', NULL, NULL, NULL, NULL, 3),
+(51, NULL, NULL, NULL, NULL, NULL, 'PST002', 'whitelist', 'PT. BRIDGESTONE', NULL, NULL, NULL, NULL, 3),
+(52, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Arutmin Site Kintap', NULL, NULL, NULL, NULL, 3),
+(53, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Darma Henwa Tbk', NULL, NULL, NULL, NULL, 3),
+(54, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. KPP Coal Mining Rantau', NULL, NULL, NULL, NULL, 3),
+(55, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Pama Persada Nusantara Distrik Aria', NULL, NULL, NULL, NULL, 3),
+(56, '1', '63', NULL, '6301080', '6301', 'PST001', 'whitelist', 'PT. PLN (Persero) Pembangkitan Dan Penyaluran Kalimantan    Unit Pelaksana Kegiatan Asam-Asam', 'ASAM-ASAM', '+62', '115.429804', '-3.7754903', 3),
+(57, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. PLN (Persero) Pelaksanaan Pelayanan Pelanggan Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(58, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Sumber Alfaria Trijaya Tbk', NULL, NULL, NULL, NULL, 3),
+(59, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Toyota Auto2000 Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(60, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'AirNav Cabang Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(61, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Amanah Anugerah Adi Mulia', NULL, NULL, NULL, NULL, 3),
+(62, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Angkasa Pura I (PERSERO)', NULL, NULL, NULL, NULL, 3),
+(63, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Borneo Indobara', NULL, NULL, NULL, NULL, 3),
+(64, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Buana Karya Bhakti', NULL, NULL, NULL, NULL, 3),
+(65, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Bukit Makmur Mandiri Utama', NULL, NULL, NULL, NULL, 3),
+(66, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Gamatechno', NULL, NULL, NULL, NULL, 3),
+(67, '1', '63', NULL, '6372031', '6372', 'PST001', 'whitelist', 'Dinas Komunikasi Dan Informatika Banjarbaru', 'Loktabat Utara, Kec. Banjarbaru Utara, Kota Banjar Baru, Kalimantan Selatan 70714', '789786', '114.767410', '-3.7538581', 3),
+(68, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Dinas Komunikasi Dan Informatika Kabupaten Tanah Laut', NULL, NULL, NULL, NULL, 3),
+(69, '1', '63', NULL, '6372020', '6372', 'PST001', 'whitelist', ' Dinas Komunikasi Dan Informatika Provinsi Kalimantan Selatan', 'Jl. Aneka Tambang', '(0511) 6749844', '114.767356', '-3.7538586', 3),
+(70, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Putra Perkasa Abadi', NULL, NULL, NULL, NULL, 3),
+(71, '1', '63', NULL, '6372032', '6372', 'PST001', 'whitelist', 'PT. Saka Jaya Teknologi', 'Jl.Palam Komplek Wngga Palem Indah 1 G35, Guntung Manggis, Landasan Ulin, Guntungmanggis, Kec. Landasan Ulin, Kota Banjar Baru, Kalimantan Selatan 70731', '0812121314', '114.767384', '-3.7538446', 3),
+(72, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Trakindo Utama', NULL, NULL, NULL, NULL, 3),
+(73, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Trio Motor', NULL, NULL, NULL, NULL, 3),
+(74, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. United Tractors Tbk, Site Satui', NULL, NULL, NULL, NULL, 3),
+(75, '1', '63', NULL, '6371030', '6371', 'PST001', 'whitelist', 'BPSDMP KOMINFO BANJARMASIN', 'Jl. Yos Sudarso No.29, Telaga Biru, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan', '085113353849', '114.767450', '-3.7538736', 3),
+(76, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. CIOMAS ADISATWA', NULL, NULL, NULL, NULL, 3),
+(77, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. PLN(Persero) Unit Induk Pembangkitan dan Penyaluran Kalimantan UPDK Barito ULPLTA Ir. P.M.Noor', NULL, NULL, NULL, NULL, 3),
+(78, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Nusantara Group Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(79, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Radar Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(80, '1', '63', NULL, '6371030', '6371', 'PST001', 'whitelist', 'PT. Telkom Akses Banjarmasin', 'Jl bla', '0878664', '114.767454', '-3.7538695', 3),
+(81, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. United Tractors Tbk - Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(82, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Adaro Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(83, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Pertamina Banjarmasin', NULL, NULL, NULL, NULL, 3),
+(84, '1', '63', NULL, '6371020', '6371', 'PST001', 'whitelist', 'SUZUKI Banjarbaru Mitra Megah Profitamas', 'Jl. A. Yani KM 5.5 No. 1, RT.022/RW.002, Pemurus Luar, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70249', '(0511) 3253355', '114.767377', '-3.7538365', 3),
+(85, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Telkom Banjarmasin Centrum', NULL, NULL, NULL, NULL, 3),
+(86, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Geoinfo Teknologi', NULL, NULL, NULL, NULL, 3),
+(87, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'Phinemo Kreasi Media', 'Rukan Pemuda Mas Blok B-5, Sekayu, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50132', '(024) 33149439', '-6.982479', '110.412272', 0),
+(88, '1', '63', NULL, '6371010', '6371', 'PST003', 'whitelist', 'PT. Indo Jaya ', 'JLn. Pelaihari', '6233677', '114.767003', '-3.7536425', 3),
+(89, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Dinas Komunikasi Dan Informatika Kabupaten Kapuas', 'JL. Pemuda km 5.5 Kel. Selat Utara Kuala 	Kapuas', '0852-5196-1352', '', '', 3),
+(90, '1', '63', NULL, '6371030', '6371', 'PST001', 'whitelist', 'PT. Gagah Putera Satria', 'Wisma Dayasakti, Jl. Kapten Piera Tendean No. 158, seberang Mesjid, Banjarmasin Tengah', '0511 3252766', '114.767221', '-3.7538229', 2),
+(91, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'United Tractors  Tbk. Site Rantau', 'Kecamatan Binuang, Tatakan, Tapin Selatan Kabupaten Tapin, Kalimantan Selatan 71183', '081347037070', '-3.1192528', '115.077870', 0),
+(92, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT. Putra Perkasa Abadi', 'Mangkalapi, Kusan Hulu, Angsana, Kab. Tanah Bumbu', '08115132600', '', '', 0),
+(93, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT Mitra Megah Profitamas', 'J;.A.Yani KM 5.5 No.1 RT.022/RW.002, Pemurus Luar, Kec.Banjarmasin Timur,  Kota Banjarmasin Kalimantan Selatan 70249', '05113253355', '114.622010', '-3.3434488', 2),
+(94, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Phinemo Kreasi Media', 'Rukan Pemuda Mas Blok B-5, Sekayu, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50132', '(024) 33149439', '', '', 3),
+(96, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'United Tractors Tbk. Site Rantau', 'Kecamatan Binuang, Tatakan, Tapin Selatan Kabupaten Tapin, Kalimantan Selatan 71183', '081347037070', '-3.1192528', '115.077870', 0),
+(97, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT. PLN (Persero) Unit Induk Wilayah Kalimantan Selatan & Kalimantan Tengah', 'Jl. Panglima Batur No.1, Loktabat Utara, Kec. Banjarbaru Utara, Kota Banjar Baru, Kalimantan Selatan', '0511772520', '-3.4384413', '114.825759', 0),
+(98, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'United Tractors  Tbk. Site Rantau', 'Kecamatan Binuang, Tatakan, Tapin Selatan. Kabupaten Tapin, Kalimantan Selatan 71183', '081347037070', '-3.1192528', '115.077870', 0),
+(99, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', '', '', '', '', '', 0),
+(100, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. PLN (persero) Unit Induk Wilayah Kalimantan Selatan & Kalimantan Tengah', 'Jl. Panglima Batur no. 1, Loktabat Utara, Kec. Banjarbaru Utara, Kota Banjarbaru, Kalimantan Selatan', '0511772520', '-3.4384413', '114.825709', 2),
+(101, NULL, NULL, NULL, NULL, NULL, 'PST003', 'uncheck', 'PT. Mitra Megah Profitamas', 'Jl.  Jend.  A.  Yani KM 5,5 No. 1', '0511 325 3355', '', '', 0),
+(102, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. JHONLIN GROUP', 'Gn.Antasari, Simpang Empat, Kabupaten Tanah Bumbu, Kalimantan Selatan 72211', '+6281367365549', '', '', 3),
+(103, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Dinas Komunikasi dan Informatika Kabupaten Tanah Bumbu', 'Pd. Butun, Batulicin, Kabupaten Tanah Bumbu, Kalimantan Selatan 72171', '081349656283', '-3.4759517', '', 3),
+(104, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT.Sumber Berlian Motors', 'JL.A.Yani Km.10,3 No.1 RT.5 Kertak hanyar-70654, Kab.Banjar Kalimantan Selatan', '0511-4281699', '-3.3776814', '114.648299', 2),
+(105, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT Jhonlin Group', 'Jl. Raya Kodeco Km.1 Kel. Gunung Antasari, Kec. Simpang Empat, Tanah Bumbu Kalimantan Selatan 72271', '0804-178-7878', '-3.409439', '116.010132', 0),
+(106, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT.  SUCOFINDO (Persero) Cabang Banjarmasin ', 'Jl. A. Yani km 18.200 kel. Landasan ulin barat kec. Liang anggang kode pos 70722 provisi kalimantan selatan, indonesia', '05113271080', '-3.437694', '114.692710', 1),
+(107, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. PLN (PERSERO) Unit Layanan Pelanggan (ULP) Pelaihari', 'Jl. Datu Daim No.1 Pelaihari Kabupaten Tanah Laut Provinsi Kalimantan Selatan', '(0512) 21063', '-3.8049021', '114.768540', 1),
+(108, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'Sekretariat Daerah Kabupaten Tanah Laut', 'Jl. A. Syairani Komp. Perkantoran Gagas Pelaihari KP. 70814', '051221003', '-3.7998636', '114.782965', 1),
+(109, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT PLN (Persero) UP2B Kalimantan', 'Jl. kemuning, kec.banjarbaru selatan, kota banjarbaru, kalimantan selatan', '08112634200', '-3.463607', '114.849947', 3),
+(110, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT.PLN (Persero) UIW KSKT UP3 Banjarmasin ULP Banjarbaru', 'Jl.Panglima Batur Barat No.01 Kabupaten Banjarbaru Provinsi Kalimantan Selatan', '123', '114.827168', '-3.4388268', 3),
+(111, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. Cipta Krida Bahari', 'Jl. Jenderal Ahmad Yani KM. 13,7 Gambut, Pemurus Luar, Kec. Banjarmasin Timur', '0511-4221616', '-3.4018837', '114.666822', 2),
+(112, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT. Cipta Krida Bahari', 'JL. Jenderal Ahmad Yani, Km. 13.7, Gambut, Pemurus Luar, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70654', '0511-4221616', '114.666822', '-3.4018837', 0),
+(113, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'CV. Fast Media Komputindo', 'Jl. A. Yani, KM. 34, Komplek Citra Megah Raya II, No. 18, Loktabat Utara, Kec. Landasan Ulin, Kota Banjarbaru, Kalimantan Selatan 70714', '08115031909', '114.822869', '-3.442074', 3),
+(114, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. INDONESIA COMNET PLUS (ICON+)', 'Kantor Perwakilan Kalselteng, Jl. RO Ulin No.Ruko, Guntung Payung, Kec. Landasan Ulin, Kota Banjar Baru, Kalimantan Selatan 70714', '(0511) 5914070', '-3.446436', '114.817312', 5),
+(115, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT. Mitra Megah Profitamas', 'Jl. A. Yani KM 5.5 No. 1, RT.022/RW.002, Pemurus Luar, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70249', '+6281390003624', '114.622015', '-3.3435164', 0),
+(116, NULL, NULL, NULL, NULL, NULL, 'PST001', 'whitelist', 'PT. United Tractors Sire Rantau.Tbk', 'Jl. A. Yani KM.89, Pulau Pinang, Binuang, Kabupaten Tapin, Kalimantan Selatan 71183', '081347037070', '-3.4623569', '114.627442', 2),
+(117, NULL, NULL, NULL, NULL, NULL, 'PST001', 'uncheck', 'PT.PLN (Persero) Unit Induk Wilayah Kalimantan Selatan dan Kalimantan Tengah ', 'Jl. Panglima Batur No.1, Loktabat Utara, Kec. Banjarbaru Utara, Kota Banjar Baru, Kalimantan Selatan 70711', '082250254150', '-3.438301,', '114.825739', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_perusahaan_penilaian`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_perusahaan_penilaian` (
+  `id` int(11) NOT NULL,
+  `nilai_pkl` varchar(25) DEFAULT NULL,
+  `detail_nilai_pkl` text,
+  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_perusahaan_penilaian`
+--
+
+INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `id_dosen_bimbingan_mhs`) VALUES
+(4, '88.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 252),
+(5, '84.25', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 237),
+(7, '83.50', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 256),
+(8, '93.25', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 279),
+(9, '90.75', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 268),
+(10, '95.70', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"97","res":"14.55"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"97","res":"9.7"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 282),
+(11, '77.00', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"75","res":"7.5"},{"name":"6. Sikap dan Etika","value":"70","res":"14"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 255),
+(12, '95.70', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"97","res":"14.55"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"97","res":"9.7"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 283),
+(13, '82.25', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 248),
+(14, '79.25', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 247),
+(15, '85.65', '[{"name":"1. Disiplin","value":"91","res":"13.65"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 244),
+(16, '90.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 251),
+(17, '82.15', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 267),
+(18, '83.55', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 254),
+(19, '82.70', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"81","res":"8.1"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 263),
+(20, '84.90', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"82","res":"8.2"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"88","res":"17.6"},{"name":"7. Pengetahuan","value":"83","res":"16.6"}]', 317),
+(21, '86.35', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 246),
+(22, '83.75', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"75","res":"15"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 287),
+(23, '90.75', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 269),
+(24, '81.75', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 309),
+(25, '89.15', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"89","res":"8.9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 301),
+(27, '79.50', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 288),
+(28, '96.75', '[{"name":"1. Disiplin","value":"97","res":"14.55"},{"name":"2. Komunikasi","value":"95","res":"9.5"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"97","res":"19.4"}]', 284),
+(29, '89.25', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"87","res":"8.7"},{"name":"5. Penampilan","value":"88","res":"8.8"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 303),
+(30, '90.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 297),
+(31, '85.65', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"82","res":"16.4"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 305),
+(32, '90.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 298),
+(33, '95.70', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"97","res":"14.55"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"97","res":"9.7"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 308),
+(35, '95.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"97","res":"9.7"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 314),
+(36, '88.90', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"87","res":"13.05"},{"name":"4. Kerja Mandiri","value":"88","res":"8.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 320),
+(37, '85.10', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"89","res":"8.9"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 318),
+(38, '88.15', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 286),
+(39, '81.75', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 311),
+(40, '86.95', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 306),
+(41, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 296),
+(42, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 295),
+(45, '80.70', '[{"name":"1. Disiplin","value":"78","res":"11.7"},{"name":"2. Komunikasi","value":"82","res":"8.2"},{"name":"3. Kerja Tim","value":"84","res":"12.6"},{"name":"4. Kerja Mandiri","value":"79","res":"7.9"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 300),
+(46, '88.70', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"87","res":"13.05"},{"name":"4. Kerja Mandiri","value":"88","res":"8.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 304),
+(47, '79.60', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"76","res":"7.6"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 289),
+(48, '86.35', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"82","res":"8.2"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"87","res":"17.4"}]', 307),
+(49, '79.65', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"77","res":"15.4"}]', 321),
+(50, '95.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"97","res":"9.7"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 315),
+(51, '89.25', '[{"name":"1. Disiplin","value":"88","res":"13.2"},{"name":"2. Komunikasi","value":"88","res":"8.8"},{"name":"3. Kerja Tim","value":"91","res":"13.65"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"88","res":"8.8"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 302),
+(53, '74.45', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"71","res":"7.1"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"72","res":"7.2"},{"name":"6. Sikap dan Etika","value":"73","res":"14.6"},{"name":"7. Pengetahuan","value":"74","res":"14.8"}]', 273),
+(54, '92.00', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 313),
+(55, '83.50', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 290),
+(56, '81.60', '[{"name":"1. Disiplin","value":"78","res":"11.7"},{"name":"2. Komunikasi","value":"83","res":"8.3"},{"name":"3. Kerja Tim","value":"84","res":"12.6"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"82","res":"8.2"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"79","res":"15.8"}]', 299),
+(57, '76.90', '[{"name":"1. Disiplin","value":"70","res":"10.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"70","res":"10.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"75","res":"7.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"77","res":"15.4"}]', 293),
+(58, '81.75', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 310),
+(59, '95.55', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"97","res":"9.7"},{"name":"3. Kerja Tim","value":"96","res":"14.4"},{"name":"4. Kerja Mandiri","value":"97","res":"9.7"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 316),
+(60, '90.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 312),
+(61, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 294),
+(62, '88.00', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 239),
+(63, '83.25', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"78","res":"11.7"},{"name":"4. Kerja Mandiri","value":"89","res":"8.9"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 250),
+(64, '86.00', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 280),
+(65, '88.75', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 270),
+(66, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
+(71, '87.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 240),
+(72, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 281),
+(73, '82.70', '[{"name":"1. Disiplin","value":"81","res":"12.15"},{"name":"2. Komunikasi","value":"84","res":"8.4"},{"name":"3. Kerja Tim","value":"81","res":"12.15"},{"name":"4. Kerja Mandiri","value":"82","res":"8.2"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 262),
+(74, '88.00', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 238),
+(75, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
+(84, '79.10', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"68","res":"13.6"}]', 322),
+(89, '91.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"93","res":"13.95"},{"name":"4. Kerja Mandiri","value":"93","res":"9.3"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 265),
+(90, '85.15', '[{"name":"1. Disiplin","value":"81","res":"12.15"},{"name":"2. Komunikasi","value":"88","res":"8.8"},{"name":"3. Kerja Tim","value":"84","res":"12.6"},{"name":"4. Kerja Mandiri","value":"89","res":"8.9"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 266),
+(91, '99.45', '[{"name":"1. Disiplin","value":"100","res":"15"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"99","res":"14.85"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"99","res":"9.9"},{"name":"6. Sikap dan Etika","value":"100","res":"20"},{"name":"7. Pengetahuan","value":"99","res":"19.8"}]', 275),
+(92, '99.45', '[{"name":"1. Disiplin","value":"100","res":"15"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"99","res":"14.85"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"99","res":"9.9"},{"name":"6. Sikap dan Etika","value":"100","res":"20"},{"name":"7. Pengetahuan","value":"99","res":"19.8"}]', 274),
+(93, '86.60', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 326),
+(94, '87.30', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 327),
+(95, '91.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"93","res":"9.3"},{"name":"3. Kerja Tim","value":"93","res":"13.95"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 264),
+(96, '89.35', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"89","res":"13.35"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 261),
+(97, '88.00', '[{"name":"1. Disiplin","value":"92","res":"13.8"},{"name":"2. Komunikasi","value":"82","res":"8.2"},{"name":"3. Kerja Tim","value":"86","res":"12.9"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"88","res":"17.6"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 259),
+(98, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 242),
+(101, '86.45', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"83","res":"12.45"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"86","res":"8.6"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"87","res":"17.4"}]', 331),
+(102, '97.65', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"100","res":"15"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"100","res":"20"}]', 330),
+(103, '83.55', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 258),
+(107, '89.35', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"89","res":"13.35"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 260),
+(110, '78.75', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 249),
+(112, '87.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 241),
+(113, '91.25', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"95","res":"9.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 272),
+(114, '73.15', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"71","res":"7.1"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"70","res":"7"},{"name":"5. Penampilan","value":"72","res":"7.2"},{"name":"6. Sikap dan Etika","value":"73","res":"14.6"},{"name":"7. Pengetahuan","value":"70","res":"14"}]', 324),
+(117, '88.15', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 271),
+(118, '87.50', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 277);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_perusahaan_review`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_perusahaan_review` (
+  `id_perusahaan_review` int(11) NOT NULL,
+  `id_perusahaan` int(11) NOT NULL,
+  `nim` varchar(10) NOT NULL,
+  `id_data_kuisioner` int(11) NOT NULL,
+  `rating_perusahaan` varchar(10) NOT NULL,
+  `komentar` mediumtext NOT NULL,
+  `tanggal_review_perusahaan` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_perusahaan_sementara`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_perusahaan_sementara` (
+  `id_perusahaan_sementara` int(11) NOT NULL,
+  `nim` varchar(10) DEFAULT NULL,
+  `id_perusahaan` int(11) DEFAULT NULL,
+  `status` char(25) DEFAULT 'proses',
+  `tanggal_pengajuan` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `bukti_diterima` mediumtext,
+  `tanggal_konfirmasi` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `nomor_surat` mediumtext
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_perusahaan_sementara`
+--
+
+INSERT INTO `tb_perusahaan_sementara` (`id_perusahaan_sementara`, `nim`, `id_perusahaan`, `status`, `tanggal_pengajuan`, `bukti_diterima`, `tanggal_konfirmasi`, `nomor_surat`) VALUES
+(42, 'A1317078', 53, 'terima', '2020-01-17 02:07:07', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Diterima_Magang_(Retno_F).pdf', '2020-01-17 02:37:00', 'B/10/PL40/PK.01.06/2020'),
+(43, 'A1317065', 54, 'terima', '2020-01-17 02:07:13', '/var/flexshare/shares/simpkl/file_upload/bukti/balasan_PKL1.pdf', '2020-01-17 06:49:03', 'B/10/PL40/PK.01.06/2020'),
+(44, 'A1317096', 90, 'terima', '2020-01-17 02:07:27', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_tanggapan_PKL00501.pdf', '2020-01-17 02:35:33', 'B/10/PL40/PK.01.06/2020'),
+(45, 'A1317031', 89, 'terima', '2020-01-17 02:07:33', '/var/flexshare/shares/simpkl/file_upload/bukti/punya_dela_1.pdf', '2020-01-17 02:37:09', 'B/10/PL40/PK.01.06/2020'),
+(46, 'A1317010', 75, 'terima', '2020-01-17 02:07:53', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Tanda_Terima_PKL1.pdf', '2020-01-17 06:49:11', 'B/10/PL40/PK.01.06/2020'),
+(47, 'A1317003', 89, 'terima', '2020-01-17 02:07:55', '/var/flexshare/shares/simpkl/file_upload/bukti/punya_dela_1.pdf', '2020-01-17 02:37:09', 'B/10/PL40/PK.01.06/2020'),
+(48, 'A1317097', 80, 'terima', '2020-01-17 02:07:57', '/var/flexshare/shares/simpkl/file_upload/bukti/5_6125152074570137829.pdf', '2020-01-17 02:35:49', 'B/10/PL40/PK.01.06/2020'),
+(49, 'A1317046', 89, 'terima', '2020-01-17 02:07:58', '/var/flexshare/shares/simpkl/file_upload/bukti/punya_dela_1.pdf', '2020-01-17 02:37:09', 'B/10/PL40/PK.01.06/2020'),
+(50, 'A1317002', 53, 'terima', '2020-01-17 02:07:58', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Diterima_Magang_(Retno_F).pdf', '2020-01-17 02:37:00', 'B/10/PL40/PK.01.06/2020'),
+(51, 'A1317073', 67, 'terima', '2020-01-17 02:08:17', '/var/flexshare/shares/simpkl/file_upload/bukti/surat2.pdf', '2020-01-17 02:35:41', 'B/10/PL40/PK.01.06/2020'),
+(52, 'A1317037', 69, 'terima', '2020-01-17 02:08:30', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_lidya.pdf', '2020-01-17 02:41:50', 'B/10/PL40/PK.01.06/2020'),
+(53, 'A1317104', 73, 'terima', '2020-01-17 02:08:52', '/var/flexshare/shares/simpkl/file_upload/bukti/Konfirmasi_magang.pdf', '2020-01-17 06:48:43', 'B/10/PL40/PK.01.06/2020'),
+(54, 'A1317088', 62, 'terima', '2020-01-17 02:09:00', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_diterima_pkl.pdf', '2020-01-17 02:36:30', 'B/10/PL40/PK.01.06/2020'),
+(55, 'A1317034', 62, 'terima', '2020-01-17 02:09:02', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_diterima_pkl.pdf', '2020-01-17 02:36:30', 'B/10/PL40/PK.01.06/2020'),
+(56, 'A1317051', 79, 'terima', '2020-01-17 02:09:06', '/var/flexshare/shares/simpkl/file_upload/bukti/Jan_17,_Doc_11.pdf', '2020-01-17 02:35:57', 'B/10/PL40/PK.01.06/2020'),
+(57, 'A1317090', 75, 'terima', '2020-01-17 02:09:10', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Tanda_Terima_PKL1.pdf', '2020-01-17 06:49:11', 'B/10/PL40/PK.01.06/2020'),
+(58, 'A1317047', 69, 'terima', '2020-01-17 02:09:16', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_lidya.pdf', '2020-01-17 02:41:50', 'B/10/PL40/PK.01.06/2020'),
+(59, 'A1317021', 86, 'terima', '2020-01-17 02:09:20', '/var/flexshare/shares/simpkl/file_upload/bukti/New_Doc_2020-01-17_10_29_12_12.pdf', '2020-01-17 06:48:07', 'B/10/PL40/PK.01.06/2020'),
+(60, 'A1317050', 81, 'terima', '2020-01-17 02:09:56', '/var/flexshare/shares/simpkl/file_upload/bukti/penerimaan_pkl_ipeh.pdf', '2020-01-17 02:40:31', 'B/10/PL40/PK.01.06/2020'),
+(61, 'A1317082', 79, 'terima', '2020-01-17 02:10:04', '/var/flexshare/shares/simpkl/file_upload/bukti/Jan_17,_Doc_11.pdf', '2020-01-17 02:35:57', 'B/10/PL40/PK.01.06/2020'),
+(62, 'A1317060', 80, 'terima', '2020-01-17 02:10:32', '/var/flexshare/shares/simpkl/file_upload/bukti/5_6125152074570137829.pdf', '2020-01-17 02:35:49', 'B/10/PL40/PK.01.06/2020'),
+(63, 'A1317030', 67, 'terima', '2020-01-17 02:11:31', '/var/flexshare/shares/simpkl/file_upload/bukti/surat2.pdf', '2020-01-17 02:35:41', 'B/10/PL40/PK.01.06/2020'),
+(64, 'A1317048', 103, 'terima', '2020-01-17 02:12:26', '/var/flexshare/shares/simpkl/file_upload/bukti/diterima_pkl.pdf', '2020-01-17 02:32:40', 'B/2/PL40/PK.01.06/2020'),
+(65, 'A1317061', 103, 'terima', '2020-01-17 02:12:28', '/var/flexshare/shares/simpkl/file_upload/bukti/diterima_pkl.pdf', '2020-01-17 02:32:40', 'B/2/PL40/PK.01.06/2020'),
+(66, 'A1317040', 102, 'terima', '2020-01-17 02:12:56', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Magang_Jhonlin_Group_-_Politeknik_Negeri_Tanah_Laut1.pdf', '2020-01-17 02:33:02', 'B/6/PL40/PK.01.06/2020'),
+(67, 'A1317092', 102, 'terima', '2020-01-17 02:13:22', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Magang_Jhonlin_Group_-_Politeknik_Negeri_Tanah_Laut1.pdf', '2020-01-17 02:33:02', 'B/6/PL40/PK.01.06/2020'),
+(68, 'A1317101', 90, 'terima', '2020-01-17 02:14:27', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_tanggapan_PKL00501.pdf', '2020-01-17 02:35:33', 'B/10/PL40/PK.01.06/2020'),
+(69, 'A1317058', 108, 'terima', '2020-01-17 02:15:53', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Pernyataan_Diterima_PKL.pdf', '2020-01-17 02:35:23', 'B/9/PL40/PK.01.06/2020'),
+(70, 'A1317083', 104, 'terima', '2020-01-17 02:15:56', '/var/flexshare/shares/simpkl/file_upload/bukti/Jan_17,_Doc_2.pdf', '2020-01-17 06:48:57', 'B/10/PL40/PK.01.06/2020'),
+(71, 'A1317017', 106, 'terima', '2020-01-17 02:16:01', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_balasan_pkl.pdf', '2020-01-17 02:33:35', 'B/7/PL40/PK.01.06/2020'),
+(72, 'A1317008', 110, 'terima', '2020-01-17 02:16:33', '/var/flexshare/shares/simpkl/file_upload/bukti/Dok_baru_2020-01-17_08_18_56_42.pdf', '2020-01-17 02:33:28', 'B/1/PL40/PK.01.06/2020'),
+(73, 'A1317079', 102, 'terima', '2020-01-17 02:16:52', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Magang_Jhonlin_Group_-_Politeknik_Negeri_Tanah_Laut1.pdf', '2020-01-17 02:33:02', 'B/6/PL40/PK.01.06/2020'),
+(74, 'A1317068', 59, 'terima', '2020-01-17 02:16:59', '/var/flexshare/shares/simpkl/file_upload/bukti/bukti_di_terima_magang.pdf', '2020-01-17 02:36:43', 'B/3/PL40/PK.01.06/2020'),
+(75, 'A1317052', 109, 'terima', '2020-01-17 02:17:05', '/var/flexshare/shares/simpkl/file_upload/bukti/Dok_baru_2020-01-16_09_01_36_2.pdf', '2020-01-17 06:50:01', 'B/10/PL40/PK.01.06/2020'),
+(76, 'A1317036', 110, 'terima', '2020-01-17 02:17:09', '/var/flexshare/shares/simpkl/file_upload/bukti/Dok_baru_2020-01-17_08_18_56_42.pdf', '2020-01-17 02:33:28', 'B/1/PL40/PK.01.06/2020'),
+(77, 'A1317042', 109, 'terima', '2020-01-17 02:17:13', '/var/flexshare/shares/simpkl/file_upload/bukti/Dok_baru_2020-01-16_09_01_36_2.pdf', '2020-01-17 06:50:01', 'B/10/PL40/PK.01.06/2020'),
+(78, 'A1317087', 110, 'terima', '2020-01-17 02:17:30', '/var/flexshare/shares/simpkl/file_upload/bukti/Dok_baru_2020-01-17_08_18_56_42.pdf', '2020-01-17 02:33:28', NULL),
+(79, 'A1317027', 59, 'terima', '2020-01-17 02:17:33', '/var/flexshare/shares/simpkl/file_upload/bukti/bukti_di_terima_magang.pdf', '2020-01-17 02:36:43', 'B/3/PL40/PK.01.06/2020'),
+(80, 'A1317086', 103, 'terima', '2020-01-17 02:17:35', '/var/flexshare/shares/simpkl/file_upload/bukti/diterima_pkl.pdf', '2020-01-17 02:32:40', 'B/2/PL40/PK.01.06/2020'),
+(81, 'A1317081', 107, 'terima', '2020-01-17 02:21:01', '/var/flexshare/shares/simpkl/file_upload/bukti/SURAT_DITERIMA_PKL.pdf', '2020-01-17 02:32:02', 'B/10/PL40/PK.01.06/2020'),
+(82, 'A1317094', 111, 'terima', '2020-01-17 02:21:26', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Penerimaan_Perusahaan.pdf', '2020-01-17 02:40:39', 'B/10/PL40/PK.01.06/2020'),
+(83, 'A1317111', 111, 'terima', '2020-01-17 02:23:01', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Penerimaan_Perusahaan.pdf', '2020-01-17 02:40:39', 'B/10/PL40/PK.01.06/2020'),
+(85, 'A1317064', 81, 'terima', '2020-01-17 02:31:53', '/var/flexshare/shares/simpkl/file_upload/bukti/penerimaan_pkl_ipeh.pdf', '2020-01-17 02:40:31', 'B/10/PL40/PK.01.06/2020'),
+(86, 'A1317067', 109, 'terima', '2020-01-17 02:41:51', '/var/flexshare/shares/simpkl/file_upload/bukti/Dok_baru_2020-01-16_09_01_36_2.pdf', '2020-01-17 06:50:01', 'B/10/PL40/PK.01.06/2020'),
+(87, 'A1317041', 54, 'terima', '2020-01-17 02:43:28', '/var/flexshare/shares/simpkl/file_upload/bukti/balasan_PKL1.pdf', '2020-01-17 06:49:03', 'B/10/PL40/PK.01.06/2020'),
+(88, 'A1317022', 55, 'terima', '2020-01-17 03:45:56', '/var/flexshare/shares/simpkl/file_upload/bukti/Penerimaan_Mahasiswa_Magang.pdf', '2020-01-18 02:09:44', 'B/10/PL40/PK.01.06/2020'),
+(89, 'A1317001', 56, 'terima', '2020-01-17 06:13:24', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_pernyataan_diterima_pkl.pdf', '2020-01-17 06:49:14', 'B/10/PL40/PK.01.06/2020'),
+(90, 'A1317033', 63, 'terima', '2020-01-17 06:13:41', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_Magang_Khoirul,_Khairi_Teddy1.pdf', '2020-01-17 06:51:00', 'B/10/PL40/PK.01.06/2020'),
+(91, 'A1317075', 94, 'terima', '2020-01-17 06:13:46', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_pkl_Rendy.pdf', '2020-01-17 06:49:19', 'B/10/PL40/PK.01.06/2020'),
+(92, 'A1317006', 77, 'terima', '2020-01-17 06:14:15', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Diterima_PKL1.pdf', '2020-01-17 06:48:01', 'B/10/PL40/PK.01.06/2020'),
+(93, 'A1317109', 61, 'terima', '2020-01-17 06:14:22', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Pernyataan_Diterima_PKL1.pdf', '2020-01-17 06:49:19', 'B/10/PL40/PK.01.06/2020'),
+(94, 'A1317106', 75, 'terima', '2020-01-17 06:14:29', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Tanda_Terima_PKL1.pdf', '2020-01-17 06:49:11', 'B/10/PL40/PK.01.06/2020'),
+(95, 'A1317016', 61, 'terima', '2020-01-17 06:14:30', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Pernyataan_Diterima_PKL1.pdf', '2020-01-17 06:49:19', 'B/10/PL40/PK.01.06/2020'),
+(96, 'A1317014', 77, 'terima', '2020-01-17 06:14:33', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Diterima_PKL1.pdf', '2020-01-17 06:48:01', 'B/10/PL40/PK.01.06/2020'),
+(97, 'A1317011', 86, 'terima', '2020-01-17 06:14:37', '/var/flexshare/shares/simpkl/file_upload/bukti/New_Doc_2020-01-17_10_29_12_12.pdf', '2020-01-17 06:48:07', 'B/10/PL40/PK.01.06/2020'),
+(98, 'A1317004', 94, 'terima', '2020-01-17 06:14:46', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_pkl_Rendy.pdf', '2020-01-17 06:49:19', 'B/10/PL40/PK.01.06/2020'),
+(99, 'A1317080', 56, 'terima', '2020-01-17 06:14:46', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_pernyataan_diterima_pkl.pdf', '2020-01-17 06:49:14', 'B/10/PL40/PK.01.06/2020'),
+(100, 'A1317056', 63, 'terima', '2020-01-17 06:14:48', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_Magang_Khoirul,_Khairi_Teddy1.pdf', '2020-01-17 06:51:00', 'B/10/PL40/PK.01.06/2020'),
+(101, 'A1317077', 56, 'terima', '2020-01-17 06:15:12', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_pernyataan_diterima_pkl.pdf', '2020-01-17 06:49:14', 'B/10/PL40/PK.01.06/2020'),
+(102, 'A1317054', 63, 'terima', '2020-01-17 06:15:28', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_Magang_Khoirul,_Khairi_Teddy1.pdf', '2020-01-17 06:51:00', 'B/10/PL40/PK.01.06/2020'),
+(103, 'A1317044', 74, 'terima', '2020-01-17 06:15:46', '/var/flexshare/shares/simpkl/file_upload/bukti/diterima_pkl1.pdf', '2020-01-17 06:48:13', 'B/10/PL40/PK.01.06/2020'),
+(104, 'A1317013', 104, 'terima', '2020-01-17 06:15:48', '/var/flexshare/shares/simpkl/file_upload/bukti/Jan_17,_Doc_2.pdf', '2020-01-17 06:48:57', 'B/10/PL40/PK.01.06/2020'),
+(105, 'A1317012', 74, 'terima', '2020-01-17 06:15:51', '/var/flexshare/shares/simpkl/file_upload/bukti/diterima_pkl1.pdf', '2020-01-17 06:48:13', 'B/10/PL40/PK.01.06/2020'),
+(106, 'A1317019', 86, 'terima', '2020-01-17 06:15:56', '/var/flexshare/shares/simpkl/file_upload/bukti/New_Doc_2020-01-17_10_29_12_12.pdf', '2020-01-17 06:48:07', 'B/10/PL40/PK.01.06/2020'),
+(107, 'A1317023', 77, 'terima', '2020-01-17 06:16:54', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Diterima_PKL1.pdf', '2020-01-17 06:48:01', 'B/10/PL40/PK.01.06/2020'),
+(108, 'A1317066', 113, 'terima', '2020-01-17 06:17:15', '/var/flexshare/shares/simpkl/file_upload/bukti/lembar_jawaban_pkl(1)1.pdf', '2020-01-17 06:49:51', 'B/10/PL40/PK.01.06/2020'),
+(109, 'A1317025', 113, 'terima', '2020-01-17 06:17:19', '/var/flexshare/shares/simpkl/file_upload/bukti/lembar_jawaban_pkl(1)1.pdf', '2020-01-17 06:49:51', 'B/10/PL40/PK.01.06/2020'),
+(110, 'A1317074', 114, 'terima', '2020-01-17 06:17:54', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Permohonan_PKL_PT__Icon_Plus_-_Politeknik_Negeri_Tanah_Laut.pdf', '2020-01-17 06:47:53', 'B/10/PL40/PK.01.06/2020'),
+(111, 'A1317045', 113, 'terima', '2020-01-17 06:18:27', '/var/flexshare/shares/simpkl/file_upload/bukti/lembar_jawaban_pkl(1)1.pdf', '2020-01-17 06:49:51', 'B/10/PL40/PK.01.06/2020'),
+(113, 'A1317026', 73, 'terima', '2020-01-17 06:19:40', '/var/flexshare/shares/simpkl/file_upload/bukti/Konfirmasi_magang.pdf', '2020-01-17 06:48:43', 'B/10/PL40/PK.01.06/2020'),
+(114, 'A1317009', 114, 'terima', '2020-01-17 06:19:40', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Permohonan_PKL_PT__Icon_Plus_-_Politeknik_Negeri_Tanah_Laut.pdf', '2020-01-17 06:47:53', 'B/10/PL40/PK.01.06/2020'),
+(115, 'A1317100', 116, 'terima', '2020-01-17 06:20:23', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_diterima_PKL.pdf', '2020-01-17 06:47:32', 'B/10/PL40/PK.01.06/2020'),
+(116, 'A1317057', 114, 'terima', '2020-01-17 06:20:39', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Permohonan_PKL_PT__Icon_Plus_-_Politeknik_Negeri_Tanah_Laut.pdf', '2020-01-17 06:47:53', 'B/10/PL40/PK.01.06/2020'),
+(117, 'A1317076', 114, 'terima', '2020-01-17 06:20:57', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Permohonan_PKL_PT__Icon_Plus_-_Politeknik_Negeri_Tanah_Laut.pdf', '2020-01-17 06:47:53', 'B/10/PL40/PK.01.06/2020'),
+(118, 'A1317035', 114, 'terima', '2020-01-17 06:21:05', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Balasan_Permohonan_PKL_PT__Icon_Plus_-_Politeknik_Negeri_Tanah_Laut.pdf', '2020-01-17 06:47:53', 'B/10/PL40/PK.01.06/2020'),
+(119, 'A1317099', 93, 'terima', '2020-01-17 06:21:25', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_magang_wahzun(1).pdf', '2020-01-17 06:47:27', 'B/10/PL40/PK.01.06/2020'),
+(121, 'A1317103', 100, 'terima', '2020-01-17 06:23:55', '/var/flexshare/shares/simpkl/file_upload/bukti/Pernyataan_Diterima_(PLN).pdf', '2020-01-17 06:47:22', 'B/10/PL40/PK.01.06/2020'),
+(122, 'A1317055', 116, 'terima', '2020-01-17 06:24:54', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_diterima_PKL.pdf', '2020-01-17 06:47:32', 'B/10/PL40/PK.01.06/2020'),
+(123, 'A1317098', 93, 'terima', '2020-01-17 06:25:20', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_magang_wahzun(1).pdf', '2020-01-17 06:47:27', 'B/10/PL40/PK.01.06/2020'),
+(124, 'A1317005', 100, 'terima', '2020-01-17 06:25:32', '/var/flexshare/shares/simpkl/file_upload/bukti/Pernyataan_Diterima_(PLN).pdf', '2020-01-17 06:47:22', 'B/10/PL40/PK.01.06/2020'),
+(125, 'A1317108', 85, 'terima', '2020-01-17 06:29:51', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_permohonan_Pkl_Politeknik_PLI.pdf', '2020-01-17 06:47:16', 'B/10/PL40/PK.01.06/2020'),
+(126, 'A1317107', 85, 'terima', '2020-01-17 06:31:54', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_permohonan_Pkl_Politeknik_PLI.pdf', '2020-01-17 06:47:16', 'B/10/PL40/PK.01.06/2020'),
+(127, 'A1317093', 52, 'terima', '2020-01-19 06:23:04', '/var/flexshare/shares/simpkl/file_upload/bukti/140_Suart_Balasan_Mahasiswa_Magang_POLITALA.pdf', '2020-01-20 02:08:34', 'B/10/PL40/PK.01.06/2020'),
+(128, 'A1317071', 70, 'terima', '2020-01-20 03:12:27', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_pernyataan_diterima_PKL_PT_PPA1.pdf', '2020-01-20 04:43:17', 'B/10/PL40/PK.01.06/2020'),
+(129, 'A1317020', 70, 'terima', '2020-01-20 03:41:41', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_pernyataan_diterima_PKL_PT_PPA1.pdf', '2020-01-20 04:43:17', 'B/10/PL40/PK.01.06/2020');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_program_studi`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_program_studi` (
+  `id_program_studi` varchar(50) NOT NULL,
+  `nama_program_studi` varchar(100) DEFAULT NULL,
+  `alias` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_program_studi`
+--
+
+INSERT INTO `tb_program_studi` (`id_program_studi`, `nama_program_studi`, `alias`) VALUES
+('PST001', 'Teknik Informatika', NULL),
+('PST002', 'Teknologi Industri Pertanian', NULL),
+('PST003', 'Mesin Otomotif', NULL),
+('PST004', 'Akuntansi', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_provinsi`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_provinsi` (
+  `id_provinsi` varchar(30) NOT NULL,
+  `id_negara` varchar(30) DEFAULT NULL,
+  `nama_provinsi` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_provinsi`
+--
+
+INSERT INTO `tb_provinsi` (`id_provinsi`, `id_negara`, `nama_provinsi`) VALUES
+('11', '1', 'ACEH'),
 ('12', '1', 'SUMATERA UTARA'),
 ('13', '1', 'SUMATERA BARAT'),
 ('14', '1', 'RIAU'),
@@ -9770,21 +10087,1195 @@ INSERT INTO `tb_provinsi` (`id_provinsi`, `id_negara`, `nama_provinsi`) VALUES (
 ('91', '1', 'PAPUA BARAT'),
 ('94', '1', 'PAPUA');
 
-INSERT INTO `tb_status_pkl` (`id_status_pkl`, `nama_status_pkl`, `keterangan_status_pkl`) VALUES ('1', 'koordinator', 'koordinator PKL'),
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_jadwal`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_jadwal` (
+  `id` int(11) NOT NULL,
+  `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
+  `id_penguji_1` int(11) DEFAULT NULL,
+  `id_seminar_ruangan` int(11) DEFAULT NULL,
+  `berakhir` varchar(255) DEFAULT NULL,
+  `mulai` varchar(255) DEFAULT NULL,
+  `id_penguji_2` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_seminar_jadwal`
+--
+
+INSERT INTO `tb_seminar_jadwal` (`id`, `id_dosen_bimbingan_mhs`, `id_penguji_1`, `id_seminar_ruangan`, `berakhir`, `mulai`, `id_penguji_2`) VALUES
+(31, 260, 286, 10, '2020-01-23T10:00:00', '2020-01-23T08:30:00', 282),
+(32, 261, 286, 10, '2020-01-23T11:45:00', '2020-01-23T10:15:00', 282),
+(33, 297, 286, 10, '2020-01-23T14:30:00', '2020-01-23T13:00:00', 282),
+(34, 298, 286, 10, '2020-01-23T14:30:00', '2020-01-23T13:00:00', 282),
+(35, 256, 285, 12, '2020-01-23T10:00', '2020-01-23T08:30', 268),
+(36, 314, 285, 12, '2020-01-23T11:45', '2020-01-23T10:15', 268),
+(37, 262, 285, 12, '2020-01-23T14:30', '2020-01-23T13:00', 273),
+(38, 248, 285, 12, '2020-01-23T16:00', '2020-01-23T14:30', 271),
+(39, 250, 293, 10, '2020-01-24T10:00', '2020-01-24T08:30', 267),
+(40, 251, 284, 10, '2020-01-24T11:45', '2020-01-24T10:15', 275),
+(41, 252, 284, 10, '2020-01-24T14:45', '2020-01-24T13:30', 275),
+(42, 258, 284, 10, '2020-01-24T16:15', '2020-01-24T14:45', 275),
+(43, 259, 289, 14, '2020-01-24T10:00:00', '2020-01-24T08:30:00', 281),
+(44, 265, 289, 14, '2020-01-24T14:45:00', '2020-01-24T13:30:00', 281),
+(45, 303, 288, 10, '2020-01-27T10:00', '2020-01-27T08:30', 268),
+(46, 320, 288, 10, '2020-01-27T10:00', '2020-01-27T08:30', 268),
+(47, 304, 288, 10, '2020-01-27T10:00', '2020-01-27T08:30', 268),
+(48, 301, 285, 10, '2020-01-27T11:45', '2020-01-27T10:15', 268),
+(49, 302, 285, 10, '2020-01-27T11:45', '2020-01-27T10:15', 268),
+(50, 266, 289, 10, '2020-01-27T14:30', '2020-01-27T13:00', 271),
+(51, 267, 289, 10, '2020-01-27T16:00', '2020-01-27T14:30', 271),
+(52, 254, 290, 14, '2020-01-27T10:00:00', '2020-01-27T08:30:00', 282),
+(53, 316, 286, 14, '2020-01-27T11:45:00', '2020-01-27T10:15:00', 282),
+(54, 263, 297, 11, '2020-01-27T11:45', '2020-01-27T10:15', 278),
+(57, 293, 283, 8, '2020-01-27T10:00', '2020-01-27T08:30', 276),
+(58, 255, 283, 8, '2020-01-27T10:00', '2020-01-27T08:30', 276),
+(59, 321, 283, 8, '2020-01-27T10:00', '2020-01-27T08:30', 276),
+(61, 287, 288, 8, '2020-01-27T16:00', '2020-01-27T14:30', 276),
+(62, 237, 288, 8, '2020-01-27T16:00', '2020-01-27T14:30', 276),
+(63, 279, 296, 10, '2020-01-28T10:00', '2020-01-28T08:30', 279),
+(64, 280, 296, 10, '2020-01-28T11:45', '2020-01-28T10:15', 279),
+(65, 274, 296, 10, '2020-01-28T14:30', '2020-01-28T13:00', 279),
+(66, 275, 296, 10, '2020-01-28T16:00', '2020-01-28T14:30', 279),
+(67, 317, 288, 14, '2020-01-28T10:00:00', '2020-01-28T08:30:00', 273),
+(68, 318, 288, 14, '2020-01-28T10:00:00', '2020-01-28T08:30:00', 273),
+(69, 239, 287, 14, '2020-01-28T14:30:00', '2020-01-28T13:00:00', 273),
+(70, 289, 287, 14, '2020-01-28T16:00:00', '2020-01-28T14:30:00', 278),
+(71, 273, 290, 11, '2020-01-28T10:00', '2020-01-28T08:30', 281),
+(73, 290, 290, 11, '2020-01-28T14:30', '2020-01-28T13:00', 277),
+(74, 264, 297, 11, '2020-01-28T16:00', '2020-01-28T14:30', 277),
+(75, 288, 287, 8, '2020-01-28T10:00', '2020-01-28T08:30', 270),
+(76, 306, 287, 8, '2020-01-28T11:45', '2020-01-28T10:15', 270),
+(77, 242, 288, 8, '2020-01-28T14:30', '2020-01-28T13:00', 270),
+(78, 281, 288, 8, '2020-01-28T14:30', '2020-01-28T13:00', 270),
+(79, 244, 284, 8, '2020-01-28T16:00', '2020-01-28T14:30', 270),
+(80, 269, 295, 10, '2020-01-29T10:00', '2020-01-29T08:30', 267),
+(81, 315, 295, 10, '2020-01-29T11:45', '2020-01-29T10:15', 267),
+(82, 307, 295, 10, '2020-01-29T14:30', '2020-01-29T13:00', 267),
+(83, 246, 295, 10, '2020-01-29T16:00', '2020-01-29T14:30', 267),
+(84, 240, 289, 14, '2020-01-29T10:00:00', '2020-01-29T08:30:00', 269),
+(85, 241, 289, 14, '2020-01-29T11:45:00', '2020-01-29T10:15:00', 269),
+(86, 277, 284, 14, '2020-01-29T14:30:00', '2020-01-29T13:00:00', 273),
+(87, 305, 290, 14, '2020-01-29T16:00:00', '2020-01-29T14:30:00', 271),
+(88, 294, 297, 11, '2020-01-29T10:00', '2020-01-29T08:30', 280),
+(89, 295, 297, 11, '2020-01-29T11:45', '2020-01-29T10:15', 280),
+(90, 296, 290, 11, '2020-01-29T14:30', '2020-01-29T13:00', 280),
+(91, 284, 297, 11, '2020-01-29T16:00', '2020-01-29T14:30', 280),
+(92, 312, 293, 8, '2020-01-29T14:30', '2020-01-29T13:00', 275),
+(93, 313, 293, 8, '2020-01-29T16:00', '2020-01-29T14:30', 275),
+(94, 282, 295, 10, '2020-01-30T10:00', '2020-01-30T08:30', 272),
+(95, 268, 286, 10, '2020-01-30T11:45', '2020-01-30T10:15', 277),
+(96, 309, 287, 10, '2020-01-30T14:30', '2020-01-30T13:00', 275),
+(97, 311, 287, 10, '2020-01-30T16:00', '2020-01-30T14:30', 279),
+(98, 245, 287, 12, '2020-01-30T10:00', '2020-01-30T08:30', 269),
+(99, 270, 295, 9, '2020-01-30T11:45', '2020-01-30T10:15', 269),
+(100, 308, 296, 14, '2020-01-30T14:30:00', '2020-01-30T13:00:00', 272),
+(101, 283, 296, 14, '2020-01-30T16:00:00', '2020-01-30T14:30:00', 272),
+(102, 291, 293, 11, '2020-01-30T10:00', '2020-01-30T08:30', 280),
+(103, 292, 293, 11, '2020-01-30T10:00', '2020-01-30T08:30', 280),
+(104, 247, 293, 13, '2020-01-30T14:30', '2020-01-30T13:00', 279),
+(105, 249, 293, 11, '2020-01-30T16:00', '2020-01-30T14:30', 269),
+(106, 310, 283, 8, '2020-01-30T10:00', '2020-01-30T08:30', 274),
+(107, 286, 283, 8, '2020-01-30T11:45', '2020-01-30T10:15', 274),
+(108, 272, 283, 8, '2020-01-30T14:30', '2020-01-30T13:00', 274),
+(109, 271, 283, 8, '2020-01-30T16:00', '2020-01-30T14:30', 274),
+(112, 327, 290, 8, '2020-01-29T11:45', '2020-01-29T10:15', 278),
+(113, 326, 293, 8, '2020-01-29T10:00', '2020-01-29T08:30', 278),
+(114, 331, 286, 14, '2020-01-27T14:30:00', '2020-01-27T13:00:00', 276),
+(115, 324, 290, 11, '2020-01-28T10:00', '2020-01-28T08:30', 281),
+(116, 330, 290, 11, '2020-01-28T11:45', '2020-01-28T10:15', 277);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_pendaftaran`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_pendaftaran` (
+  `id` int(11) NOT NULL,
+  `id_jadwal_seminar` int(11) DEFAULT NULL,
+  `file` text,
+  `size` varchar(10) DEFAULT NULL,
+  `status` enum('accept','reupload','','') DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_seminar_pendaftaran`
+--
+
+INSERT INTO `tb_seminar_pendaftaran` (`id`, `id_jadwal_seminar`, `file`, `size`, `status`) VALUES
+(7, 43, 'A1317003_-_Adela_Valiandra1.pdf', '1664.68', 'accept'),
+(8, 35, 'A1317083_-_Riska_Hartati1.pdf', '1214.11', 'accept'),
+(12, 38, 'A1317061_-_Nigmah2.pdf', '1997.86', 'accept'),
+(13, 33, 'A1317098_-_Wahzuni_Sri_Rahayu2.pdf', '1482.18', 'accept'),
+(15, 31, 'A1317031_-_Istiqomah.pdf', '944.14', 'accept'),
+(16, 34, 'A1317099_-_Winda_Dwi_Sulistia2.pdf', '1772.65', 'accept'),
+(19, 32, 'A1317046_-_Melda_Hikma2.pdf', '649.27', 'accept'),
+(22, 85, 'A1317051_-_Mila_Camelia2.pdf', '657.88', 'reupload'),
+(23, 36, 'A1317001_-_Achmad_Syah_Maulana.pdf', '1388.63', 'accept'),
+(26, 37, 'A1317037_-_Lidya_Novita2.pdf', '1511.38', 'accept'),
+(29, 54, 'A1317047_-_Melda_Rosalina.pdf', '1171.31', 'accept'),
+(30, 39, 'A1317058_-_Nadya_Alfisyah.pdf', '895.83', 'accept'),
+(31, 44, 'A1317073_-_Reka_Nur_Andinni2.pdf', '1209.38', 'accept'),
+(33, 40, 'A1317081_-_Rindiyani1.pdf', '926.17', 'accept'),
+(36, 42, 'A1317060_-_Nanda_Sejati_Ningtyas1.pdf', '1259.78', 'accept'),
+(38, 46, 'A1317057_-_Muhammad_Thayib_Ramadan.pdf', '678.9', 'accept'),
+(39, 41, 'A1317017_-_Cahya_Aprilia1.pdf', '1860.76', 'accept'),
+(40, 51, 'A1317088_-_Selvya_Meirida_Andani.pdf', '480.46', 'accept'),
+(41, 50, 'A1317034_-_Kiki_Maulida.pdf', '1506.88', 'accept'),
+(42, 47, 'A1317009_-_Andri_Ade_Irawan.pdf', '1316.56', 'accept'),
+(43, 58, 'A1317021_-_Erna_Sulistyowati.pdf', '847.67', 'accept'),
+(46, 78, 'A1317078_-_Retno_Fratiwi.pdf', '930.68', 'accept'),
+(47, 59, 'A1317011_-_Anita_Nurlaila1.pdf', '1378.95', 'accept'),
+(48, 49, 'A1317035_-_Koko_Hermawan1.pdf', '890.74', 'accept'),
+(49, 61, 'A1317026_-_Helmi_Tri_Budi_Yulianto.pdf', '1035.97', 'accept'),
+(50, 113, 'A1317020_-_Dita_Ayu_Lestari.pdf', '457.63', 'accept'),
+(51, 77, 'A1317002_-_Ade_Ardha_Reswari2.pdf', '451.47', 'accept'),
+(52, 112, 'A1317071_-_Rahma_Dwi_Cahyani.pdf', '366.27', 'accept'),
+(53, 79, 'A1317040_-_Mahriani.pdf', '1297.72', 'accept'),
+(54, 52, 'A1317097_-_Tsamara_Dara_Rizkita.pdf', '1509.45', 'accept'),
+(55, 57, 'A1317019_-_Dicky_Sulis_Stiawan.pdf', '1729.01', 'accept'),
+(56, 98, 'A1317079_-_Reyfindy.pdf', '636.9', 'accept'),
+(57, 114, 'A1317093_-_Suci_Febriani.pdf', '1360.54', 'accept'),
+(58, 104, 'A1317048_-_Meliana.pdf', '1514.48', 'accept'),
+(59, 53, 'A1317080_-_Riki_Hidayat.pdf', '1361', 'accept'),
+(60, 45, 'A1317076_-_Rendy_Saputra.pdf', '626.8', 'accept'),
+(61, 62, 'A1317104_-_Yunita_Anggraini.pdf', '1371.17', 'accept'),
+(62, 116, 'A1317100_-_Yeremia_Handoyo.pdf', '927.87', 'accept'),
+(63, 67, 'A1317075_-_Rendy_Saputera.pdf', '943.92', 'accept'),
+(64, 68, 'A1317004_-_Agi_Munawa.pdf', '961.78', 'accept'),
+(65, 73, 'A1317013_-_Ari_Setia_Budi.pdf', '859.21', 'accept'),
+(66, 76, 'A1317066_-_Norhatiah.pdf', '825.93', 'accept'),
+(67, 48, 'A1317074_-_Renaldi_Haris_Aksara.pdf', '1349.31', 'accept'),
+(68, 70, 'A1317109_-_Muhammad_Muslih_Amirudin.pdf', '1977.2', 'accept'),
+(69, 93, 'A1317044_-_Maya_Gian_Sister.pdf', '596.94', 'accept'),
+(70, 115, 'A1317065_-_Nor_Janah.pdf', '1719.09', 'accept'),
+(71, 71, 'A1317041_-_Mariana.pdf', '2039.91', 'accept'),
+(72, 63, 'A1317111_-_Siti_Naziha.pdf', '1236.05', 'accept'),
+(73, 92, 'A1317012_-_Annisa.pdf', '570.17', 'accept'),
+(74, 64, 'A1317094_-_Susanti.pdf', '702.64', 'accept'),
+(75, 66, 'A1317050_-_Meyhastanti_Cahyaning_Fijar.pdf', '915.25', 'accept'),
+(76, 65, 'A1317064_-_Noor_Latipah.pdf', '676.75', 'accept');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_penguji`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_penguji` (
+  `id` int(11) NOT NULL,
+  `id_dosen` int(11) DEFAULT NULL,
+  `status` text
+) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_seminar_penguji`
+--
+
+INSERT INTO `tb_seminar_penguji` (`id`, `id_dosen`, `status`) VALUES
+(267, 67, 'p2'),
+(268, 68, 'p2'),
+(269, 69, 'p2'),
+(270, 70, 'p2'),
+(271, 71, 'p2'),
+(272, 72, 'p2'),
+(273, 74, 'p2'),
+(274, 76, 'p2'),
+(275, 78, 'p2'),
+(276, 81, 'p2'),
+(277, 82, 'p2'),
+(278, 83, 'p2'),
+(279, 84, 'p2'),
+(280, 85, 'p2'),
+(281, 86, 'p2'),
+(282, 87, 'p2'),
+(283, 67, 'p1'),
+(284, 68, 'p1'),
+(285, 69, 'p1'),
+(286, 70, 'p1'),
+(287, 71, 'p1'),
+(288, 72, 'p1'),
+(289, 74, 'p1'),
+(290, 76, 'p1'),
+(291, 78, 'p1'),
+(292, 81, 'p1'),
+(293, 82, 'p1'),
+(294, 83, 'p1'),
+(295, 84, 'p1'),
+(296, 85, 'p1'),
+(297, 86, 'p1'),
+(298, 87, 'p1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_penilaian`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_penilaian` (
+  `id` int(11) NOT NULL,
+  `nilai_seminar` varchar(25) DEFAULT NULL,
+  `detail_nilai_seminar` text,
+  `id_seminar_jadwal` int(11) DEFAULT NULL,
+  `id_dosen` varchar(20) DEFAULT NULL,
+  `status_dosen` varchar(25) DEFAULT NULL,
+  `status_revisi` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_seminar_penilaian`
+--
+
+INSERT INTO `tb_seminar_penilaian` (`id`, `nilai_seminar`, `detail_nilai_seminar`, `id_seminar_jadwal`, `id_dosen`, `status_dosen`, `status_revisi`) VALUES
+(13, '74.7', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"76","res":"19"},{"name":"3. Keaktifan bimbingan","value":"78","res":"11.7"},{"name":"4. Kemampuan penulisan laporan","value":"73","res":"14.6"},{"name":"5. Sikap / Etika","value":"72","res":"14.4"}]', 31, '160201151', 'p3', 0),
+(14, '60.9', '[{"name":"1. Penyajian Presentasi","value":"69","res":"6.9"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 31, '120102079', 'p1', 0),
+(15, '74.75', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 31, '197006071995122003', 'p2', 0),
+(16, '72', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 35, '140102098', 'p1', 0),
+(17, '69', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"67","res":"10.05"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 35, '09081015', 'p2', 0),
+(18, '83.70', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"87","res":"21.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', 35, '110103048', 'p3', 0),
+(19, '60', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 32, '120102079', 'p1', 0),
+(20, '75.95', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', 36, '140102098', 'p1', 0),
+(21, '72.90', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"73","res":"10.95"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 36, '09081015', 'p2', 0),
+(22, '78.65', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"79","res":"11.85"},{"name":"4. Kemampuan penulisan laporan","value":"78","res":"15.6"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', 36, '199007112015041001', 'p3', 0),
+(23, '72.30', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"76","res":"11.4"},{"name":"4. Kemampuan penulisan laporan","value":"72","res":"14.4"},{"name":"5. Sikap / Etika","value":"75","res":"15"}]', 32, '160201151', 'p3', 0),
+(24, '67.60', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 32, '197006071995122003', 'p2', 0),
+(25, '76.25', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 37, '160801168', 'p2', 0),
+(26, '73.30', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"69","res":"10.35"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 37, '140102098', 'p1', 0),
+(27, '80.10', '[{"name":"1. Penguasaan teori","value":"74","res":"14.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"83","res":"20.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"74","res":"14.8"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 37, '150203104', 'p3', 0),
+(28, '60.00', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 34, '120102079', 'p1', 0),
+(29, '60.00', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 33, '120102079', 'p1', 0),
+(30, '63.25', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 34, '197006071995122003', 'p2', 0),
+(31, '64.00', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 33, '197006071995122003', 'p2', 0),
+(32, '65.10', '[{"name":"1. Penguasaan teori","value":"63","res":"12.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"60","res":"15"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"70","res":"14"}]', 34, '160201151', 'p3', 0),
+(33, '65.30', '[{"name":"1. Penguasaan teori","value":"64","res":"12.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"60","res":"15"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"70","res":"14"}]', 33, '160201151', 'p3', 0),
+(34, '82.50', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 38, '160801168', 'p3', 0),
+(35, '78.05', '[{"name":"1. Penyajian Presentasi","value":"82","res":"8.2"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 38, '090801016', 'p2', 0),
+(36, '77.10', '[{"name":"1. Penyajian Presentasi","value":"79","res":"7.9"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 38, '140102098', 'p1', 0),
+(37, '70.05', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 39, '160201153', 'p2', 0),
+(38, '86.40', '[{"name":"1. Penguasaan teori","value":"83","res":"16.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"86","res":"21.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"84","res":"16.8"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 39, '090801031', 'p3', 0),
+(39, '77.95', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', 39, '199007112015041001', 'p1', 0),
+(40, '70.75', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 43, '160801168', 'p1', 0),
+(41, '70.95', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 43, '110103048', 'p2', 1),
+(42, '70.50', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"72","res":"10.8"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"71","res":"14.2"}]', 43, '160201151', 'p3', 0),
+(43, '89.10', '[{"name":"1. Penguasaan teori","value":"89","res":"17.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"88","res":"22"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"89","res":"17.8"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 40, '090801031', 'p3', 0),
+(44, '72.80', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 40, '09081015', 'p1', 0),
+(45, '81.50', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"85","res":"17"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 40, '140825117', 'p2', 0),
+(46, '70.00', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"67","res":"26.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', 41, '09081015', 'p1', 0),
+(47, '85.70', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"87","res":"17.4"},{"name":"5. Penulisan laporan","value":"87","res":"13.05"}]', 41, '140825117', 'p2', 0),
+(48, '87.35', '[{"name":"1. Penguasaan teori","value":"87","res":"17.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"89","res":"22.25"},{"name":"3. Keaktifan bimbingan","value":"82","res":"12.3"},{"name":"4. Kemampuan penulisan laporan","value":"90","res":"18"},{"name":"5. Sikap / Etika","value":"87","res":"17.4"}]', 41, '090801031', 'p3', 0),
+(49, '74.75', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 44, '160801168', 'p1', 0),
+(50, '71.75', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 42, '140825117', 'p2', 0),
+(51, '72.60', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 44, '110103048', 'p2', 0),
+(52, '82.20', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"82","res":"20.5"},{"name":"3. Keaktifan bimbingan","value":"86","res":"12.9"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"86","res":"17.2"}]', 44, '150203104', 'p3', 0),
+(53, '70.10', '[{"name":"1. Penguasaan teori","value":"65","res":"13"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"60","res":"12"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', 42, '110103048', 'p3', 0),
+(54, '70.00', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 42, '09081015', 'p1', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_tanggal`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_tanggal` (
+  `id` int(11) NOT NULL,
+  `hari` varchar(11) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_tempat`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_tempat` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_seminar_tempat`
+--
+
+INSERT INTO `tb_seminar_tempat` (`id`, `nama`) VALUES
+(8, 'Bootstrap'),
+(9, 'Mysql'),
+(10, 'Lab A'),
+(11, 'Lab B'),
+(12, 'Java'),
+(13, 'CI'),
+(14, 'PHP');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_waktu`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_waktu` (
+  `id` int(11) NOT NULL,
+  `jam` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_status_pkl`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_status_pkl` (
+  `id_status_pkl` varchar(30) NOT NULL,
+  `nama_status_pkl` varchar(100) DEFAULT NULL,
+  `keterangan_status_pkl` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_status_pkl`
+--
+
+INSERT INTO `tb_status_pkl` (`id_status_pkl`, `nama_status_pkl`, `keterangan_status_pkl`) VALUES
+('1', 'koordinator', 'koordinator PKL'),
 ('2', 'pemonitoring', 'pemonitoring PKL');
 
-INSERT INTO `tb_ttd_pimpinan` (`id_ttd_pimpinan`, `nip_nik_ttd_pimpinan`, `nama_ttd_pimpinan`, `jabatan_ttd_pimpinan`) VALUES ('1', 'NIP. 196806171997022004', 'Mufrida Zein, S.Ag., M.Pd', 'Direktur');
+-- --------------------------------------------------------
 
-INSERT INTO `tb_waktu` (`id_waktu`, `id_tahun_akademik`) VALUES ('13', 'TA002');
+--
+-- Table structure for table `tb_transaksi_surat_dosen`
+--
 
+CREATE TABLE IF NOT EXISTS `tb_transaksi_surat_dosen` (
+  `id_transaksi_surat_dosen` varchar(20) NOT NULL,
+  `id_program_studi` varchar(50) DEFAULT NULL,
+  `nip_nik` varchar(20) DEFAULT NULL,
+  `id_jenis_surat` int(11) DEFAULT NULL,
+  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
+  `id_ttd_pimpinan` varchar(30) DEFAULT NULL,
+  `id_kop_surat` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `tb_ttd_pimpinan`
+--
 
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+CREATE TABLE IF NOT EXISTS `tb_ttd_pimpinan` (
+  `id_ttd_pimpinan` int(11) NOT NULL,
+  `nip_nik_ttd_pimpinan` varchar(50) DEFAULT NULL,
+  `nama_ttd_pimpinan` varchar(100) DEFAULT NULL,
+  `jabatan_ttd_pimpinan` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_ttd_pimpinan`
+--
+
+INSERT INTO `tb_ttd_pimpinan` (`id_ttd_pimpinan`, `nip_nik_ttd_pimpinan`, `nama_ttd_pimpinan`, `jabatan_ttd_pimpinan`) VALUES
+(1, 'NIP. 196806171997022004', 'Mufrida Zein, S.Ag., M.Pd', 'Direktur');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_waktu`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_waktu` (
+  `id_waktu` int(11) NOT NULL,
+  `id_tahun_akademik` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_waktu`
+--
+
+INSERT INTO `tb_waktu` (`id_waktu`, `id_tahun_akademik`) VALUES
+(13, 'TA002');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tabel_berita`
+--
+ALTER TABLE `tabel_berita`
+  ADD PRIMARY KEY (`id_berita`);
+
+--
+-- Indexes for table `tabel_file`
+--
+ALTER TABLE `tabel_file`
+  ADD PRIMARY KEY (`id_file`);
+
+--
+-- Indexes for table `tabel_foto`
+--
+ALTER TABLE `tabel_foto`
+  ADD PRIMARY KEY (`id_foto`);
+
+--
+-- Indexes for table `tabel_gambar`
+--
+ALTER TABLE `tabel_gambar`
+  ADD PRIMARY KEY (`id_gambar`);
+
+--
+-- Indexes for table `tabel_halaman`
+--
+ALTER TABLE `tabel_halaman`
+  ADD PRIMARY KEY (`id_halaman`);
+
+--
+-- Indexes for table `tabel_kategori`
+--
+ALTER TABLE `tabel_kategori`
+  ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `tahun_akademik`
+--
+ALTER TABLE `tahun_akademik`
+  ADD PRIMARY KEY (`id_tahun_akademik`);
+
+--
+-- Indexes for table `tb_akun`
+--
+ALTER TABLE `tb_akun`
+  ADD PRIMARY KEY (`username`),
+  ADD UNIQUE KEY `id` (`id`) USING BTREE;
+
+--
+-- Indexes for table `tb_data_kuisioner`
+--
+ALTER TABLE `tb_data_kuisioner`
+  ADD PRIMARY KEY (`id_data_kuisioner`),
+  ADD KEY `fk_memiliki_jenis_kuisioner_ke_soal` (`id_jenis_kuisioner`);
+
+--
+-- Indexes for table `tb_dosen`
+--
+ALTER TABLE `tb_dosen`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `tb_dosen_nip_nik_idx` (`nip_nik`) USING BTREE,
+  ADD KEY `id_program_studi` (`id_program_studi`);
+
+--
+-- Indexes for table `tb_dosen_bimbingan_mhs`
+--
+ALTER TABLE `tb_dosen_bimbingan_mhs`
+  ADD PRIMARY KEY (`id_dosen_bimbingan_mhs`),
+  ADD KEY `fk_memiliki_dosen_bimbingan_mhs` (`id_tahun_akademik`),
+  ADD KEY `fk_memiliki_mhs_dosen_pembimbing_mhs` (`nim`),
+  ADD KEY `nip_nik` (`nip_nik`),
+  ADD KEY `id_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`);
+
+--
+-- Indexes for table `tb_ga_component`
+--
+ALTER TABLE `tb_ga_component`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `id` (`id`) USING BTREE;
+
+--
+-- Indexes for table `tb_golongan`
+--
+ALTER TABLE `tb_golongan`
+  ADD PRIMARY KEY (`id_golongan`) USING BTREE,
+  ADD UNIQUE KEY `id` (`id_golongan`) USING BTREE;
+
+--
+-- Indexes for table `tb_history_judul`
+--
+ALTER TABLE `tb_history_judul`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`);
+
+--
+-- Indexes for table `tb_history_pemilihan`
+--
+ALTER TABLE `tb_history_pemilihan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_perusahaan` (`id_perusahaan`),
+  ADD KEY `nim` (`nim`);
+
+--
+-- Indexes for table `tb_history_seminar_penilaian`
+--
+ALTER TABLE `tb_history_seminar_penilaian`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_seminar_penilaian` (`id_seminar_penilaian`);
+
+--
+-- Indexes for table `tb_jabatan`
+--
+ALTER TABLE `tb_jabatan`
+  ADD PRIMARY KEY (`id_jabatan`);
+
+--
+-- Indexes for table `tb_jawaban_kuisioner`
+--
+ALTER TABLE `tb_jawaban_kuisioner`
+  ADD PRIMARY KEY (`id_jawaban_kuisioner`),
+  ADD KEY `id_soal_kuisioner` (`id_data_kuisioner`),
+  ADD KEY `id_perusahaan` (`id_perusahaan`),
+  ADD KEY `nip` (`nip_nik`),
+  ADD KEY `id_data_kuisioner` (`id_data_kuisioner`),
+  ADD KEY `nip_nik` (`nip_nik`),
+  ADD KEY `id_perusahaan_2` (`id_perusahaan`);
+
+--
+-- Indexes for table `tb_jenis_surat`
+--
+ALTER TABLE `tb_jenis_surat`
+  ADD PRIMARY KEY (`id_jenis_surat`);
+
+--
+-- Indexes for table `tb_kabupaten_kota`
+--
+ALTER TABLE `tb_kabupaten_kota`
+  ADD PRIMARY KEY (`id_kab_kota`),
+  ADD KEY `fk_memiliki_kabupaten_kota` (`id_provinsi`);
+
+--
+-- Indexes for table `tb_kecamatan`
+--
+ALTER TABLE `tb_kecamatan`
+  ADD PRIMARY KEY (`id_kecamatan`),
+  ADD KEY `fk_memiliki_kecamatan` (`id_kab_kota`);
+
+--
+-- Indexes for table `tb_kelengkapan_berkas`
+--
+ALTER TABLE `tb_kelengkapan_berkas`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`);
+
+--
+-- Indexes for table `tb_kerjasama_perusahaan`
+--
+ALTER TABLE `tb_kerjasama_perusahaan`
+  ADD PRIMARY KEY (`id_kerjasama_perusahaan`);
+
+--
+-- Indexes for table `tb_konsultasi_bimbingan`
+--
+ALTER TABLE `tb_konsultasi_bimbingan`
+  ADD PRIMARY KEY (`id_konsultasi_bimbingan`),
+  ADD KEY `fk_memiliki_konsultasi_bimbingan_dosen_mhs` (`id_dosen_bimbingan_mhs`);
+
+--
+-- Indexes for table `tb_konsultasi_bimbingan_offline`
+--
+ALTER TABLE `tb_konsultasi_bimbingan_offline`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`);
+
+--
+-- Indexes for table `tb_kop_surat`
+--
+ALTER TABLE `tb_kop_surat`
+  ADD PRIMARY KEY (`id_kop_surat`);
+
+--
+-- Indexes for table `tb_level`
+--
+ALTER TABLE `tb_level`
+  ADD PRIMARY KEY (`id_level`),
+  ADD KEY `fk_mempunyai_master_level` (`id_master_level`),
+  ADD KEY `mempunyai_akun_level` (`username`);
+
+--
+-- Indexes for table `tb_mahasiswa`
+--
+ALTER TABLE `tb_mahasiswa`
+  ADD PRIMARY KEY (`nim`),
+  ADD KEY `fk_memiliki_mhs_ps` (`id_program_studi`),
+  ADD KEY `fk_mempunyai_mhs` (`id_tahun_akademik`),
+  ADD KEY `mempunyai_akun_mhs` (`username`);
+
+--
+-- Indexes for table `tb_master_level`
+--
+ALTER TABLE `tb_master_level`
+  ADD PRIMARY KEY (`id_master_level`);
+
+--
+-- Indexes for table `tb_mhs_pilih_perusahaan`
+--
+ALTER TABLE `tb_mhs_pilih_perusahaan`
+  ADD PRIMARY KEY (`id_mhs_pilih_perusahaan`),
+  ADD KEY `fk_memilih_mhs_perusahaan` (`nim`),
+  ADD KEY `fk_memiliki_perusahaan_mhs` (`id_perusahaan`);
+
+--
+-- Indexes for table `tb_monev`
+--
+ALTER TABLE `tb_monev`
+  ADD PRIMARY KEY (`id_monev`),
+  ADD KEY `fk_memiliki_dosen_bimbingan_mhs_monev` (`id_dosen_bimbingan_mhs`),
+  ADD KEY `fk_memiliki_dosen_monev` (`nip_nik`),
+  ADD KEY `id_ttd_pimpinan` (`id_ttd_pimpinan`),
+  ADD KEY `id_perusahaan` (`id_perusahaan`);
+
+--
+-- Indexes for table `tb_negara`
+--
+ALTER TABLE `tb_negara`
+  ADD PRIMARY KEY (`id_negara`);
+
+--
+-- Indexes for table `tb_nilai_akhir`
+--
+ALTER TABLE `tb_nilai_akhir`
+  ADD PRIMARY KEY (`id_nilai_akhir`) USING BTREE,
+  ADD KEY `id_seminar_penilaian` (`id_seminar_penilaian`),
+  ADD KEY `id_perusahaan_penilaian` (`id_perusahaan_penilaian`);
+
+--
+-- Indexes for table `tb_notification`
+--
+ALTER TABLE `tb_notification`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_pegawai`
+--
+ALTER TABLE `tb_pegawai`
+  ADD PRIMARY KEY (`nip_nik`),
+  ADD KEY `fk_memiliki_status_pegawai` (`status`),
+  ADD KEY `mempunyai_akun_pegawai` (`username`),
+  ADD KEY `fk_pegawai_jabatan` (`id_jabatan`) USING BTREE,
+  ADD KEY `fk_pegawai_golongan` (`id_golongan`) USING BTREE;
+
+--
+-- Indexes for table `tb_pembimbing_lapangan`
+--
+ALTER TABLE `tb_pembimbing_lapangan`
+  ADD PRIMARY KEY (`id_pembimbing_lapangan`),
+  ADD KEY `fk_memiliki_pembimbing` (`id_perusahaan`),
+  ADD KEY `fk_memiliki_pembimbing_lapangan_status` (`id_status_pkl`);
+
+--
+-- Indexes for table `tb_perusahaan`
+--
+ALTER TABLE `tb_perusahaan`
+  ADD PRIMARY KEY (`id_perusahaan`),
+  ADD KEY `fk_memiliki_kab_kota` (`id_kab_kota`),
+  ADD KEY `fk_memiliki_kecamatan_kota` (`id_kecamatan`),
+  ADD KEY `fk_memiliki_kerjasama_perusahaan` (`id_kerjasama_perusahaan`),
+  ADD KEY `fk_memiliki_negara` (`id_negara`),
+  ADD KEY `fk_memiliki_provinsi_negara` (`id_provinsi`),
+  ADD KEY `fk_memiliki_ps_perusahaan` (`id_program_studi`);
+
+--
+-- Indexes for table `tb_perusahaan_penilaian`
+--
+ALTER TABLE `tb_perusahaan_penilaian`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`);
+
+--
+-- Indexes for table `tb_perusahaan_review`
+--
+ALTER TABLE `tb_perusahaan_review`
+  ADD PRIMARY KEY (`id_perusahaan_review`),
+  ADD KEY `id_perusahaan` (`id_perusahaan`),
+  ADD KEY `nim` (`nim`),
+  ADD KEY `id_data_kuisioner` (`id_data_kuisioner`);
+
+--
+-- Indexes for table `tb_perusahaan_sementara`
+--
+ALTER TABLE `tb_perusahaan_sementara`
+  ADD PRIMARY KEY (`id_perusahaan_sementara`),
+  ADD KEY `fk_memiliki_perusahaan_sementara` (`nim`),
+  ADD KEY `memiliki_perusahaan` (`id_perusahaan`);
+
+--
+-- Indexes for table `tb_program_studi`
+--
+ALTER TABLE `tb_program_studi`
+  ADD PRIMARY KEY (`id_program_studi`);
+
+--
+-- Indexes for table `tb_provinsi`
+--
+ALTER TABLE `tb_provinsi`
+  ADD PRIMARY KEY (`id_provinsi`),
+  ADD KEY `fk_memiliki_provinsi` (`id_negara`);
+
+--
+-- Indexes for table `tb_seminar_jadwal`
+--
+ALTER TABLE `tb_seminar_jadwal`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`),
+  ADD KEY `id_seminar_ruangan` (`id_seminar_ruangan`),
+  ADD KEY `id_penguji_1` (`id_penguji_1`),
+  ADD KEY `id_penguji_2` (`id_penguji_2`);
+
+--
+-- Indexes for table `tb_seminar_pendaftaran`
+--
+ALTER TABLE `tb_seminar_pendaftaran`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_jadwal_seminar` (`id_jadwal_seminar`);
+
+--
+-- Indexes for table `tb_seminar_penguji`
+--
+ALTER TABLE `tb_seminar_penguji`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_dosen` (`id_dosen`);
+
+--
+-- Indexes for table `tb_seminar_penilaian`
+--
+ALTER TABLE `tb_seminar_penilaian`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD KEY `id_seminar_jadwal` (`id_seminar_jadwal`);
+
+--
+-- Indexes for table `tb_seminar_tanggal`
+--
+ALTER TABLE `tb_seminar_tanggal`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `tb_seminar_tempat`
+--
+ALTER TABLE `tb_seminar_tempat`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `tb_seminar_waktu`
+--
+ALTER TABLE `tb_seminar_waktu`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `tb_status_pkl`
+--
+ALTER TABLE `tb_status_pkl`
+  ADD PRIMARY KEY (`id_status_pkl`);
+
+--
+-- Indexes for table `tb_transaksi_surat_dosen`
+--
+ALTER TABLE `tb_transaksi_surat_dosen`
+  ADD PRIMARY KEY (`id_transaksi_surat_dosen`),
+  ADD KEY `fk_memiliki_jenis_surat_dsn` (`id_jenis_surat`),
+  ADD KEY `fk_memiliki_kop_surat_dosen` (`id_kop_surat`),
+  ADD KEY `fk_memiliki_pilihan_perusahaan_dsn` (`id_mhs_pilih_perusahaan`),
+  ADD KEY `fk_memiliki_transaksi_surat` (`nip_nik`),
+  ADD KEY `fk_memiliki_transaksi_surat_dosen` (`id_program_studi`),
+  ADD KEY `fk_memiliki_ttd_pemimpin` (`id_ttd_pimpinan`);
+
+--
+-- Indexes for table `tb_ttd_pimpinan`
+--
+ALTER TABLE `tb_ttd_pimpinan`
+  ADD PRIMARY KEY (`id_ttd_pimpinan`);
+
+--
+-- Indexes for table `tb_waktu`
+--
+ALTER TABLE `tb_waktu`
+  ADD PRIMARY KEY (`id_waktu`),
+  ADD KEY `tb_waktu_tahun_akademik_id_tahun_akademik_fk` (`id_tahun_akademik`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tabel_berita`
+--
+ALTER TABLE `tabel_berita`
+  MODIFY `id_berita` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tabel_file`
+--
+ALTER TABLE `tabel_file`
+  MODIFY `id_file` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `tabel_foto`
+--
+ALTER TABLE `tabel_foto`
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `tabel_gambar`
+--
+ALTER TABLE `tabel_gambar`
+  MODIFY `id_gambar` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tabel_halaman`
+--
+ALTER TABLE `tabel_halaman`
+  MODIFY `id_halaman` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `tabel_kategori`
+--
+ALTER TABLE `tabel_kategori`
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `tb_akun`
+--
+ALTER TABLE `tb_akun`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=622;
+--
+-- AUTO_INCREMENT for table `tb_data_kuisioner`
+--
+ALTER TABLE `tb_data_kuisioner`
+  MODIFY `id_data_kuisioner` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tb_dosen`
+--
+ALTER TABLE `tb_dosen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
+--
+-- AUTO_INCREMENT for table `tb_dosen_bimbingan_mhs`
+--
+ALTER TABLE `tb_dosen_bimbingan_mhs`
+  MODIFY `id_dosen_bimbingan_mhs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=332;
+--
+-- AUTO_INCREMENT for table `tb_ga_component`
+--
+ALTER TABLE `tb_ga_component`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_golongan`
+--
+ALTER TABLE `tb_golongan`
+  MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_history_judul`
+--
+ALTER TABLE `tb_history_judul`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tb_history_pemilihan`
+--
+ALTER TABLE `tb_history_pemilihan`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `tb_history_seminar_penilaian`
+--
+ALTER TABLE `tb_history_seminar_penilaian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_jabatan`
+--
+ALTER TABLE `tb_jabatan`
+  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `tb_jawaban_kuisioner`
+--
+ALTER TABLE `tb_jawaban_kuisioner`
+  MODIFY `id_jawaban_kuisioner` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_jenis_surat`
+--
+ALTER TABLE `tb_jenis_surat`
+  MODIFY `id_jenis_surat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tb_kelengkapan_berkas`
+--
+ALTER TABLE `tb_kelengkapan_berkas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tb_konsultasi_bimbingan`
+--
+ALTER TABLE `tb_konsultasi_bimbingan`
+  MODIFY `id_konsultasi_bimbingan` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_konsultasi_bimbingan_offline`
+--
+ALTER TABLE `tb_konsultasi_bimbingan_offline`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=108;
+--
+-- AUTO_INCREMENT for table `tb_level`
+--
+ALTER TABLE `tb_level`
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3889;
+--
+-- AUTO_INCREMENT for table `tb_mhs_pilih_perusahaan`
+--
+ALTER TABLE `tb_mhs_pilih_perusahaan`
+  MODIFY `id_mhs_pilih_perusahaan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1053;
+--
+-- AUTO_INCREMENT for table `tb_monev`
+--
+ALTER TABLE `tb_monev`
+  MODIFY `id_monev` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_notification`
+--
+ALTER TABLE `tb_notification`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=576;
+--
+-- AUTO_INCREMENT for table `tb_perusahaan`
+--
+ALTER TABLE `tb_perusahaan`
+  MODIFY `id_perusahaan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=118;
+--
+-- AUTO_INCREMENT for table `tb_perusahaan_penilaian`
+--
+ALTER TABLE `tb_perusahaan_penilaian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=119;
+--
+-- AUTO_INCREMENT for table `tb_perusahaan_review`
+--
+ALTER TABLE `tb_perusahaan_review`
+  MODIFY `id_perusahaan_review` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_perusahaan_sementara`
+--
+ALTER TABLE `tb_perusahaan_sementara`
+  MODIFY `id_perusahaan_sementara` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=130;
+--
+-- AUTO_INCREMENT for table `tb_seminar_jadwal`
+--
+ALTER TABLE `tb_seminar_jadwal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=117;
+--
+-- AUTO_INCREMENT for table `tb_seminar_pendaftaran`
+--
+ALTER TABLE `tb_seminar_pendaftaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT for table `tb_seminar_penguji`
+--
+ALTER TABLE `tb_seminar_penguji`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=299;
+--
+-- AUTO_INCREMENT for table `tb_seminar_penilaian`
+--
+ALTER TABLE `tb_seminar_penilaian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=55;
+--
+-- AUTO_INCREMENT for table `tb_seminar_tanggal`
+--
+ALTER TABLE `tb_seminar_tanggal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_seminar_tempat`
+--
+ALTER TABLE `tb_seminar_tempat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `tb_seminar_waktu`
+--
+ALTER TABLE `tb_seminar_waktu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tb_ttd_pimpinan`
+--
+ALTER TABLE `tb_ttd_pimpinan`
+  MODIFY `id_ttd_pimpinan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tb_waktu`
+--
+ALTER TABLE `tb_waktu`
+  MODIFY `id_waktu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tb_dosen`
+--
+ALTER TABLE `tb_dosen`
+  ADD CONSTRAINT `fk_dosen_pegawai` FOREIGN KEY (`nip_nik`) REFERENCES `tb_pegawai` (`nip_nik`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_dosen_ibfk_1` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_dosen_bimbingan_mhs`
+--
+ALTER TABLE `tb_dosen_bimbingan_mhs`
+  ADD CONSTRAINT `tb_dosen_bimbingan_mhs_ibfk_1` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `tahun_akademik` (`id_tahun_akademik`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_dosen_bimbingan_mhs_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_dosen_bimbingan_mhs_ibfk_3` FOREIGN KEY (`nip_nik`) REFERENCES `tb_pegawai` (`nip_nik`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_dosen_bimbingan_mhs_ibfk_4` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_history_judul`
+--
+ALTER TABLE `tb_history_judul`
+  ADD CONSTRAINT `tb_history_judul_ibfk_1` FOREIGN KEY (`id_dosen_bimbingan_mhs`) REFERENCES `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_history_pemilihan`
+--
+ALTER TABLE `tb_history_pemilihan`
+  ADD CONSTRAINT `tb_history_pemilihan_ibfk_1` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_history_pemilihan_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_history_seminar_penilaian`
+--
+ALTER TABLE `tb_history_seminar_penilaian`
+  ADD CONSTRAINT `tb_history_seminar_penilaian_ibfk_1` FOREIGN KEY (`id_seminar_penilaian`) REFERENCES `tb_seminar_penilaian` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_kabupaten_kota`
+--
+ALTER TABLE `tb_kabupaten_kota`
+  ADD CONSTRAINT `fk_memiliki_kabupaten_kota` FOREIGN KEY (`id_provinsi`) REFERENCES `tb_provinsi` (`id_provinsi`);
+
+--
+-- Constraints for table `tb_kecamatan`
+--
+ALTER TABLE `tb_kecamatan`
+  ADD CONSTRAINT `fk_memiliki_kecamatan` FOREIGN KEY (`id_kab_kota`) REFERENCES `tb_kabupaten_kota` (`id_kab_kota`);
+
+--
+-- Constraints for table `tb_kelengkapan_berkas`
+--
+ALTER TABLE `tb_kelengkapan_berkas`
+  ADD CONSTRAINT `tb_kelengkapan_berkas_ibfk_1` FOREIGN KEY (`id_dosen_bimbingan_mhs`) REFERENCES `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_konsultasi_bimbingan`
+--
+ALTER TABLE `tb_konsultasi_bimbingan`
+  ADD CONSTRAINT `fk_memiliki_konsultasi_bimbingan_dosen_mhs` FOREIGN KEY (`id_dosen_bimbingan_mhs`) REFERENCES `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`);
+
+--
+-- Constraints for table `tb_konsultasi_bimbingan_offline`
+--
+ALTER TABLE `tb_konsultasi_bimbingan_offline`
+  ADD CONSTRAINT `tb_konsultasi_bimbingan_offline_ibfk_1` FOREIGN KEY (`id_dosen_bimbingan_mhs`) REFERENCES `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_level`
+--
+ALTER TABLE `tb_level`
+  ADD CONSTRAINT `fk_mempunyai_master_level` FOREIGN KEY (`id_master_level`) REFERENCES `tb_master_level` (`id_master_level`),
+  ADD CONSTRAINT `mempunyai_akun_level` FOREIGN KEY (`username`) REFERENCES `tb_akun` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_mahasiswa`
+--
+ALTER TABLE `tb_mahasiswa`
+  ADD CONSTRAINT `fk_memiliki_mhs_ps` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`),
+  ADD CONSTRAINT `fk_mempunyai_mhs` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `tahun_akademik` (`id_tahun_akademik`),
+  ADD CONSTRAINT `mempunyai_akun_mhs` FOREIGN KEY (`username`) REFERENCES `tb_akun` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_mhs_pilih_perusahaan`
+--
+ALTER TABLE `tb_mhs_pilih_perusahaan`
+  ADD CONSTRAINT `fk_memiliki_perusahaan_mhs` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_nilai_akhir`
+--
+ALTER TABLE `tb_nilai_akhir`
+  ADD CONSTRAINT `tb_nilai_akhir_ibfk_1` FOREIGN KEY (`id_seminar_penilaian`) REFERENCES `tb_seminar_penilaian` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_nilai_akhir_ibfk_2` FOREIGN KEY (`id_perusahaan_penilaian`) REFERENCES `tb_perusahaan_penilaian` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_pegawai`
+--
+ALTER TABLE `tb_pegawai`
+  ADD CONSTRAINT `fk_pegawai_golongan` FOREIGN KEY (`id_golongan`) REFERENCES `tb_golongan` (`id_golongan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_pegawai_jabatan` FOREIGN KEY (`id_jabatan`) REFERENCES `tb_jabatan` (`id_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `mempunyai_akun_pegawai` FOREIGN KEY (`username`) REFERENCES `tb_akun` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_pembimbing_lapangan`
+--
+ALTER TABLE `tb_pembimbing_lapangan`
+  ADD CONSTRAINT `fk_memiliki_pembimbing` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`),
+  ADD CONSTRAINT `fk_memiliki_pembimbing_lapangan_status` FOREIGN KEY (`id_status_pkl`) REFERENCES `tb_status_pkl` (`id_status_pkl`);
+
+--
+-- Constraints for table `tb_perusahaan`
+--
+ALTER TABLE `tb_perusahaan`
+  ADD CONSTRAINT `fk_memiliki_kab_kota` FOREIGN KEY (`id_kab_kota`) REFERENCES `tb_kabupaten_kota` (`id_kab_kota`),
+  ADD CONSTRAINT `fk_memiliki_kecamatan_kota` FOREIGN KEY (`id_kecamatan`) REFERENCES `tb_kecamatan` (`id_kecamatan`),
+  ADD CONSTRAINT `fk_memiliki_kerjasama_perusahaan` FOREIGN KEY (`id_kerjasama_perusahaan`) REFERENCES `tb_kerjasama_perusahaan` (`id_kerjasama_perusahaan`),
+  ADD CONSTRAINT `fk_memiliki_negara` FOREIGN KEY (`id_negara`) REFERENCES `tb_negara` (`id_negara`),
+  ADD CONSTRAINT `fk_memiliki_provinsi_negara` FOREIGN KEY (`id_provinsi`) REFERENCES `tb_provinsi` (`id_provinsi`),
+  ADD CONSTRAINT `fk_memiliki_ps_perusahaan` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`);
+
+--
+-- Constraints for table `tb_perusahaan_penilaian`
+--
+ALTER TABLE `tb_perusahaan_penilaian`
+  ADD CONSTRAINT `tb_perusahaan_penilaian_ibfk_1` FOREIGN KEY (`id_dosen_bimbingan_mhs`) REFERENCES `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_perusahaan_review`
+--
+ALTER TABLE `tb_perusahaan_review`
+  ADD CONSTRAINT `tb_perusahaan_review_ibfk_1` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_perusahaan_review_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_perusahaan_review_ibfk_3` FOREIGN KEY (`id_data_kuisioner`) REFERENCES `tb_data_kuisioner` (`id_data_kuisioner`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_perusahaan_sementara`
+--
+ALTER TABLE `tb_perusahaan_sementara`
+  ADD CONSTRAINT `memiliki_perusahaan` FOREIGN KEY (`id_perusahaan`) REFERENCES `tb_perusahaan` (`id_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_perusahaan_sementara_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `tb_mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_provinsi`
+--
+ALTER TABLE `tb_provinsi`
+  ADD CONSTRAINT `fk_memiliki_provinsi` FOREIGN KEY (`id_negara`) REFERENCES `tb_negara` (`id_negara`);
+
+--
+-- Constraints for table `tb_seminar_jadwal`
+--
+ALTER TABLE `tb_seminar_jadwal`
+  ADD CONSTRAINT `tb_seminar_jadwal_ibfk_1` FOREIGN KEY (`id_dosen_bimbingan_mhs`) REFERENCES `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_seminar_jadwal_ibfk_3` FOREIGN KEY (`id_seminar_ruangan`) REFERENCES `tb_seminar_tempat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_seminar_jadwal_ibfk_5` FOREIGN KEY (`id_penguji_1`) REFERENCES `tb_seminar_penguji` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_seminar_jadwal_ibfk_6` FOREIGN KEY (`id_penguji_2`) REFERENCES `tb_seminar_penguji` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_seminar_pendaftaran`
+--
+ALTER TABLE `tb_seminar_pendaftaran`
+  ADD CONSTRAINT `tb_seminar_pendaftaran_ibfk_1` FOREIGN KEY (`id_jadwal_seminar`) REFERENCES `tb_seminar_jadwal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_seminar_penguji`
+--
+ALTER TABLE `tb_seminar_penguji`
+  ADD CONSTRAINT `tb_seminar_penguji_ibfk_1` FOREIGN KEY (`id_dosen`) REFERENCES `tb_dosen` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_seminar_penilaian`
+--
+ALTER TABLE `tb_seminar_penilaian`
+  ADD CONSTRAINT `tb_seminar_penilaian_ibfk_3` FOREIGN KEY (`id_seminar_jadwal`) REFERENCES `tb_seminar_jadwal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_transaksi_surat_dosen`
+--
+ALTER TABLE `tb_transaksi_surat_dosen`
+  ADD CONSTRAINT `fk_memiliki_jenis_surat_dsn` FOREIGN KEY (`id_jenis_surat`) REFERENCES `tb_jenis_surat` (`id_jenis_surat`),
+  ADD CONSTRAINT `fk_memiliki_kop_surat_dosen` FOREIGN KEY (`id_kop_surat`) REFERENCES `tb_kop_surat` (`id_kop_surat`),
+  ADD CONSTRAINT `fk_memiliki_pilihan_perusahaan_dsn` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`),
+  ADD CONSTRAINT `fk_memiliki_transaksi_surat` FOREIGN KEY (`nip_nik`) REFERENCES `tb_pegawai` (`nip_nik`),
+  ADD CONSTRAINT `fk_memiliki_transaksi_surat_dosen` FOREIGN KEY (`id_program_studi`) REFERENCES `tb_program_studi` (`id_program_studi`);
+
+--
+-- Constraints for table `tb_waktu`
+--
+ALTER TABLE `tb_waktu`
+  ADD CONSTRAINT `tb_waktu_tahun_akademik_id_tahun_akademik_fk` FOREIGN KEY (`id_tahun_akademik`) REFERENCES `tahun_akademik` (`id_tahun_akademik`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

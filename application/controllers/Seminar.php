@@ -169,6 +169,9 @@ class Seminar extends MY_Controller
 					return $this->get_list_jadwal();
 					break;
 				case 'data_penilaian':
+					if (isset($get['q']) && $get['q'] == 'filter_belum_menilai') {
+						return $this->filter_belum_dinilai();
+					}
 					return $this->get_list_penilaian();
 					break;
 				default:
@@ -179,6 +182,13 @@ class Seminar extends MY_Controller
 		$this->load->view('admin/seminar', $data);
 	}
 
+	public function filter_belum_dinilai(){
+		$data = array();
+		$post = $this->input->post();
+		$penilaian = $this->penilaian_model;
+		$data['belum_dinilai'] = $penilaian->get_belum_penilaian_seminar();
+		$this->load->view('admin/seminar_list_belum_dinilai',$data);
+	}
 	public function acc_verifikasi_pendaftaran()
 	{
 		$get = $this->input->get();
