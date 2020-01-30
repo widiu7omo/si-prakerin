@@ -230,7 +230,7 @@ class Seminar extends MY_Controller
 		$post = $this->input->post();
 		$penilaian = $this->penilaian_model;
 		$data = array();
-		$data_penilaian = $penilaian->get_penilaian_seminar();
+		$data_penilaian = $penilaian->get_all_penilaian_seminar();
 		$data['list_penilaian'] = $data_penilaian;
 		if (isset($post['ajax'])) {
 			echo json_encode((object)array('data' => $data_penilaian));

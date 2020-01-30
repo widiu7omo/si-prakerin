@@ -43,9 +43,7 @@
 										<th>Nama Mahasiswa</th>
 										<th>Ruangan</th>
 										<th>Waktu Seminar</th>
-										<th>Nama Pembimbing</th>
-										<th>Nama Penguji 1</th>
-										<th>Nama Penguji 2</th>
+										<th>Status Penilaian</th>
 									</tr>
 									</thead>
 									<tfoot>
@@ -54,9 +52,7 @@
 										<th>Nama Mahasiswa</th>
 										<th>Ruangan</th>
 										<th>Waktu Seminar</th>
-										<th>Nama Pembimbing</th>
-										<th>Nama Penguji 1</th>
-										<th>Nama Penguji 2</th>
+										<th>Status Penilaian</th>
 									</tr>
 									</tfoot>
 									<tbody>
@@ -68,8 +64,6 @@
 											<td><?php echo convert_date(get_time_range($item->START, $item->END, 'datestart'), 'long') ?>
 												Pukul <?php echo substr(get_time_range($item->START, $item->END, 'start'), 0, 5) ?></td>
 											<td><?php echo $item->p3 ?></td>
-											<td><?php echo $item->p1 ?></td>
-											<td><?php echo $item->p2 ?></td>
 										</tr>
 									<?php endforeach; ?>
 									</tbody>
