@@ -31,12 +31,24 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 					<div class="card-body">
 						<!-- List group -->
 						<?php $allow = isset($allow) ? $allow : false; ?>
-						<?php if (!$allow): ?>
+						<?php if (!$allow && !isset($message)): ?>
 							<div class="h2">Anda belum bisa upload kelengkapan berkas</div>
 						<?php else: ?>
 							<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
 							<input type="file" class="my-pond">
 						<?php endif; ?>
+						<?php if (isset($message)): ?>
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong><?php echo $message ?></strong>
+							</div>
+						<?php endif; ?>
+						<script>
+							$(".alert").alert();
+						</script>
+						<?php ?>
 					</div>
 				</div>
 			</div>

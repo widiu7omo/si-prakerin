@@ -76,8 +76,8 @@ if (!function_exists('do_upload_berkas')) {
 	{
 		$ci =& get_instance();
 		$config['upload_path'] = './file_upload/berkas/';
-		$config['allowed_types'] = 'zip';
-		$config['max_size'] = 10240;
+		$config['allowed_types'] = 'pdf';
+		$config['max_size'] = 2560;
 		$config['encrypt_name'] = FALSE;
 		$ci->load->library('upload', $config);
 

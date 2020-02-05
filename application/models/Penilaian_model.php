@@ -128,6 +128,31 @@ class Penilaian_model extends CI_Model
 			")->result();
 	}
 
+	public function get_status_revisi()
+	{
+		$jadwal = $this->db->select('id,(SELECT nama_mahasiswa FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nama_mahasiswa,
+	tsj.mulai')->get('tb_seminar_jadwal tsj')->result();
+		foreach ($jadwal as $key=> $jd) {
+			$jd->detail = $this->db->query("SELECT
+				tsp.nilai_seminar nilai_1,
+				IF(thsp.nilai_seminar is null,'belum',thsp.nilai_seminar) nilai_2,
+				IF(thsp.nilai_seminar is null,'belum',thsp.tanggal_revisi) tanggal_revisi,
+				(SELECT nama_pegawai from tb_pegawai where nip_nik = tsp.id_dosen) dosen,
+				IF(status_dosen = 'p1','Penguji 1',IF(status_dosen = 'p2','Penguji 2','Pembimbing')) status,
+				(SELECT nama_mahasiswa FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tdbm.nim = tm.nim WHERE id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nama_mahasiswa,
+				(SELECT nama_program_studi FROM tb_program_studi tps INNER JOIN tb_mahasiswa tm ON tm.id_program_studi = tps.id_program_studi INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tdbm.nim = tm.nim WHERE id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) program_studi
+			FROM
+				tb_seminar_penilaian tsp
+				LEFT OUTER JOIN tb_history_seminar_penilaian thsp
+				ON tsp.id = thsp.id_seminar_penilaian
+				INNER JOIN tb_seminar_jadwal tsj
+				ON tsj.id = tsp.id_seminar_jadwal
+				WHERE tsj.id = '$jd->id'
+				")->result();
+		}
+		return $jadwal;
+	}
+
 	public function get_all_penilaian_seminar()
 	{
 		return $this->db->query("SELECT

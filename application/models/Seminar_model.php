@@ -485,7 +485,7 @@ class Seminar_model extends CI_Model
 		$id = $post['id'];
 		if ($id != "") {
 			$this->db->trans_start();
-			$this->db->query("insert into tb_history_seminar_penilaian(id_seminar_penilaian, nilai_seminar, detail_nilai_seminar) select id ,nilai_seminar,detail_nilai_seminar from tb_seminar_penilaian where id = '$id'");
+			$this->db->query("insert into tb_history_seminar_penilaian(id_seminar_penilaian, nilai_seminar,tanggal_revisi, detail_nilai_seminar) select id ,nilai_seminar,DATE(NOW()),detail_nilai_seminar from tb_seminar_penilaian where id = '$id'");
 			$this->db->update('tb_seminar_penilaian', $data, "id = '$id'");
 			$this->db->trans_complete();
 			return $this->db->trans_status();

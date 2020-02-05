@@ -45,6 +45,24 @@ class Seminar extends MY_Controller
 						'icon' => 'fas fa-file-excel',
 						'desc' => 'Data penilaian seminar terkini  ' . $tahunAkademik[0]->tahun_akademik
 					),
+					array(
+						'name' => 'Proses Revisi ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=revisi'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Daftar mahasiswa revisi ' . $tahunAkademik[0]->tahun_akademik
+					),
+					array(
+						'name' => 'Proses Pemberkasan ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=pemberkasan'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Daftar pemberkasan terkini  ' . $tahunAkademik[0]->tahun_akademik
+					),
+					array(
+						'name' => 'Rekap Prakerin ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=rekap_akhir'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Data penilaian seminar terkini  ' . $tahunAkademik[0]->tahun_akademik
+					),
 				);
 				break;
 			case 'koordinator prodi':
@@ -174,6 +192,15 @@ class Seminar extends MY_Controller
 					}
 					return $this->get_list_penilaian();
 					break;
+				case 'revisi':
+					return $this->index_proses_revisi();
+					break;
+				case 'pemberkasan':
+					return $this->index_proses_pemberkasan();
+					break;
+				case 'rekap_akhir':
+					return $this->index_rekap_akhir();
+					break;
 				default:
 					redirect(site_url('seminar'));
 			}
@@ -182,6 +209,25 @@ class Seminar extends MY_Controller
 		$this->load->view('admin/seminar', $data);
 	}
 
+	public function index_proses_revisi(){
+		$data = array();
+		$penilaian = $this->penilaian_model;
+		if(isset($_POST['ajax'])){
+			echo json_encode(array('data'=>$penilaian->get_status_revisi()));
+			return;
+		}
+		$this->load->view('admin/rekap_revisi',$data);
+	}
+
+	public function index_proses_pemberkasan(){
+		$data = array();
+		$this->load->view('admin/rekap_pemberkasan',$data);
+	}
+
+	public function index_rekap_akhir(){
+		$data = array();
+		$this->load->view('admin/rekap_akhir',$data);
+	}
 	public function filter_belum_dinilai(){
 		$data = array();
 		$post = $this->input->post();

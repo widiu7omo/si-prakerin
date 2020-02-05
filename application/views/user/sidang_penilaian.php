@@ -952,7 +952,7 @@
 							let data_nilai = JSON.parse(res[0].detail_nilai_seminar);
 							let total_nilai = 0;
 							data_nilai.forEach(function (val) {
-								total_nilai = total_nilai + parseInt(val.res)
+								total_nilai = total_nilai + parseFloat(val.res)
 							})
 							for (let i = 1; i <= 5; i++) {
 								$('#p' + i).val(data_nilai[i - 1].value);
@@ -998,6 +998,8 @@
 			})
 		}).on('click', '#btn-simpan-nilai', function () {
 			let nas = $('#pn-tot').text();
+			$(this).addClass('disabled');
+			$(this).text("Menyimpan...")
 			let dns = get_detail_nilai();
 			let q = $(this).data('method');
 			if (nas !== 'PT' && nas !== '0') {
