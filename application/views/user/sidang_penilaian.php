@@ -50,10 +50,14 @@
 	return $mutu;
 } ?>
 <?php
-function get_another_penilaian_revisi($id)
+function get_another_penilaian_revisi($id, $filter = true)
 {
+	$where = "";
+	if ($filter) {
+		$where = "AND status_dosen <> 'p3'";
+	}
 	$join = array('tb_history_seminar_penilaian thsp', 'thsp.id_seminar_penilaian = tsp.id', 'LEFT OUTER');
-	return datajoin('tb_seminar_penilaian tsp', "id_seminar_jadwal = '$id' AND status_dosen <> 'p3'", 'tsp.nilai_seminar nilai1,thsp.nilai_seminar nilai2,tsp.status_dosen', $join);
+	return datajoin('tb_seminar_penilaian tsp', "id_seminar_jadwal = '$id' $where", 'tsp.nilai_seminar nilai1,thsp.nilai_seminar nilai2,tsp.status_dosen', $join);
 
 }
 
@@ -138,7 +142,15 @@ function get_another_penilaian_revisi($id)
 														</div>
 														<?php $temp_date = get_time_range($r_uji->start, $r_uji->end, 'datestart'); ?>
 													<?php endif; ?>
-													<a class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+													<?php $is_complete = array();
+													$checking_revisi = get_another_penilaian_revisi($r_uji->ij, false);
+													foreach ($checking_revisi as $item) {
+														array_push($is_complete, $item->nilai1 != NULL ? 1 : 0);
+														array_push($is_complete, $item->nilai2 != NULL ? 1 : 0);
+													}
+													$color_success = !in_array(0, $is_complete) ? "bg-success" : "";
+													?>
+													<a class="list-group-item <?php echo $color_success ?> list-group-item-action flex-column align-items-start py-4 px-4"
 													   role="button"
 													   data-toggle="collapse"
 													   href="#collapse<?php echo $r_uji->id ?>"
@@ -187,20 +199,24 @@ function get_another_penilaian_revisi($id)
 													<?php if ($r_uji->sebagai == 'p3'): ?>
 														<div class="collapse" id="collapse<?php echo $r_uji->id ?>">
 															<div class="card card-body shadow-none m-0 pt-2 pb-2">
-																<div
-																	class="d-flex row justify-content-between align-items-center">
-																	<?php
-																	$revisi = get_another_penilaian_revisi($r_uji->ij) ?? array(); ?>
-																	<?php foreach ($revisi as $rev): ?>
+																<?php $revisi = get_another_penilaian_revisi($r_uji->ij, true) ?? array(); ?>
+																<?php foreach ($revisi as $rev): ?>
+																	<div
+																		class="d-flex row justify-content-between align-items-center">
 																		<div class="col col-xs-12">
-																			<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Penguji 1" : "Nilai Penguji 2" ?>
+																			<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Seminar Penguji 1" : "Nilai Seminar Penguji 2" ?>
 																				:</small>
 																			<span
-																				class="mb-0 h4"><?php echo $rev->nilai2 != "NULL" ? $rev->nilai1 : "Belum ada penilaian" ?></span>
+																				class="mb-0 h4"><?php echo $rev->nilai2 == NULL ? $rev->nilai1 : $rev->nilai2 ?></span>
 																		</div>
-
-																	<?php endforeach; ?>
-																</div>
+																		<div class="col col-xs-12">
+																			<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Revisi Penguji 1" : "Nilai Revisi Penguji 2" ?>
+																				:</small>
+																			<span
+																				class="mb-0 h4"><?php echo $rev->nilai2 != NULL ? $rev->nilai1 : "Belum ada penilaian" ?></span>
+																		</div>
+																	</div>
+																<?php endforeach; ?>
 															</div>
 														</div>
 													<?php endif; ?>

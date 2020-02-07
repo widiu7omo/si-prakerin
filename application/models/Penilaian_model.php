@@ -134,7 +134,7 @@ class Penilaian_model extends CI_Model
 		(SELECT nama_mahasiswa FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nama_mahasiswa,
 		(SELECT tm.nim FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nim,
 	tsj.mulai')->get('tb_seminar_jadwal tsj')->result();
-		foreach ($jadwal as $key=> $jd) {
+		foreach ($jadwal as $key => $jd) {
 			$jd->detail = $this->db->query("SELECT
 				tsp.nilai_seminar nilai_1,
 				IF(thsp.nilai_seminar is null,'belum',thsp.nilai_seminar) nilai_2,
@@ -163,23 +163,26 @@ class Penilaian_model extends CI_Model
 			tp1.nama_pegawai p1,
 			tp2.nama_pegawai p2, (
 			SELECT
-				nilai_seminar
+				IF(thsp.nilai_seminar is null,tsp.nilai_seminar,thsp.nilai_seminar)
 			FROM
-				tb_seminar_penilaian
+				tb_seminar_penilaian tsp
+			LEFT OUTER JOIN tb_history_seminar_penilaian thsp on tsp.id = thsp.id_seminar_penilaian
 			WHERE
 			id_seminar_jadwal = ij
 			AND id_dosen = tp3.nip_nik LIMIT 1) AS penilaian_pembimbing, (
 			SELECT
-				nilai_seminar
+				IF(thsp.nilai_seminar is null,tsp.nilai_seminar,thsp.nilai_seminar)
 			FROM
-				tb_seminar_penilaian
+				tb_seminar_penilaian tsp
+			LEFT OUTER JOIN tb_history_seminar_penilaian thsp on tsp.id = thsp.id_seminar_penilaian
 			WHERE
 			id_seminar_jadwal = ij
 			AND id_dosen = tp2.nip_nik LIMIT 1) AS penilaian_penguji2, (
 			SELECT
-				nilai_seminar
+				IF(thsp.nilai_seminar is null,tsp.nilai_seminar,thsp.nilai_seminar)
 			FROM
-				tb_seminar_penilaian
+				tb_seminar_penilaian tsp
+			LEFT OUTER JOIN tb_history_seminar_penilaian thsp on tsp.id = thsp.id_seminar_penilaian
 			WHERE
 				id_seminar_jadwal = ij
 				AND id_dosen = tp1.nip_nik LIMIT 1) AS penilaian_penguji1, 
