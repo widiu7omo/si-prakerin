@@ -199,6 +199,9 @@ class Seminar extends MY_Controller
 					if (isset($get['q']) && $get['q'] == 'preview') {
 						return $this->get_modal_preview();
 					}
+					if (isset($get['q']) && $get['q'] == 'u') {
+						return $this->update_pemberkasan();
+					}
 					return $this->index_proses_pemberkasan();
 					break;
 				case 'rekap_akhir':
@@ -235,10 +238,28 @@ class Seminar extends MY_Controller
 		$this->load->view('admin/rekap_pemberkasan', $data);
 	}
 
+	public function update_pemberkasan()
+	{
+		$post = $this->input->post();
+		$pemberkasan = $this->kelengkapan_model;
+		if (isset($post['update']) && $post['update'] == 'acc') {
+			$status = 'approve';
+			$file = $post['file'];
+		}
+		if (isset($post['update']) && $post['update'] == 'dec') {
+			$status = 'reupload';
+			$file = $post['file'];
+		}
+		$pemberkasan->update_kelengkapan($status, $file);
+		redirect(site_url('seminar?m=pemberkasan'));
+	}
+
 	public function get_modal_preview()
 	{
-		var_dump($_POST);
-		$base_uri =  base_url('/ViewerJS/#../file_upload/berkas/');
+		$site_update = site_url('seminar?m=pemberkasan&q=u');
+		$base_uri = base_url('/ViewerJS/#../file_upload/berkas/');
+		$data_pemberkasan = masterdata('tb_kelengkapan_berkas', "nama_file ='$_POST[file]'", 'status');
+		$disabled = ($data_pemberkasan->status == "approve" || $data_pemberkasan->status == "reupload") ? "disabled" : "";
 		if (isset($_POST['file'])) {
 			echo '<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -252,14 +273,17 @@ class Seminar extends MY_Controller
 							<div class="modal-body">
 								<iframe id="preview-berkas" class="col-md-12 px-0" style="border-radius: 6px"
 										height="500px"
-										src="'.$base_uri.$_POST["file"].'"
+										src="' . $base_uri . $_POST["file"] . '"
 										frameborder="0"></iframe>
 							</div>
 							<div class="modal-footer">
-								<button id="btn-ulang" type="button" class="btn btn-sm btn-warning text-white" data-dismiss="modal">
-									Upload ulang
-								</button>
-								<a id="btn-terima" class="btn btn-sm btn-success text-white">Terima</a>
+								<form action="' . $site_update . '" method="POST">
+									<input type="hidden" name="file" value="' . $_POST["file"] . '"/>
+									<button id="btn-ulang" type="submit" name="update" value="dec" class="btn btn-sm btn-warning text-white ' . $disabled . '">
+										Upload ulang
+									</button>
+									<button id="btn-terima" type="submit" name="update" value="acc" class="btn btn-sm btn-success text-white ' . $disabled . '">Terima</button>
+								</form>
 							</div>
 						</div>
 					</div>

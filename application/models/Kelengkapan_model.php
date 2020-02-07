@@ -17,7 +17,8 @@ class Kelengkapan_model extends CI_Model
 		   IF(nama_file is null,'belum',nama_file) file,
 		   IF(tanggal_pemberkasan is null,'belum',tanggal_pemberkasan) tanggal_upload,
 		   tsj.mulai tanggal_seminar,
-		   tsj.id id_jadwal
+		   tsj.id id_jadwal,
+		   tkb.status
 		   FROM tb_mahasiswa tm INNER JOIN  tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim
 		       INNER JOIN tb_seminar_jadwal tsj on tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs
 		       LEFT OUTER JOIN tb_kelengkapan_berkas tkb on tdbm.id_dosen_bimbingan_mhs = tkb.id_dosen_bimbingan_mhs")->result();
@@ -44,4 +45,12 @@ class Kelengkapan_model extends CI_Model
 			ORDER BY tanggal_revisi DESC
 		")->result();
 	}
+
+	public function update_kelengkapan($status, $file)
+	{
+		$this->db->where("nama_file = '$file'");
+		$this->db->set(array('status' => $status));
+		return $this->db->update('tb_kelengkapan_berkas');
+	}
+
 }

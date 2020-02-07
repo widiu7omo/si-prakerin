@@ -24,6 +24,14 @@
 			<div class="card">
 				<div class="card-header">
 					<h4 class="font-weight-600">Status Pemberkasan Mahasiswa</h4>
+					<div class="row">
+						<div class="col-md-12">
+							<button class="btn btn-sm btn-warning"></button>
+							<small>Upload ulang</small>
+							<button class="btn btn-sm btn-success"></button>
+							<small>Sudah di setujui</small>
+						</div>
+					</div>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -116,6 +124,16 @@
 				},
 				type: "POST"
 			},
+			rowCallback: function (row, data, index) {
+				// console.log(data.mahasiswa)
+				//take first array, cz every company have mahasiswa intern. another company with zero mahasiswa, already filter on server side
+				if (data.status === 'reupload') {
+					$(row).addClass('text-white bg-warning');
+				}
+				if (data.status === 'approve') {
+					$(row).addClass('text-white bg-success');
+				}
+			},
 			columns: [
 				{"data": "nim"},
 				{"data": "nama_mahasiswa"},
@@ -167,8 +185,8 @@
 		$.ajax({
 			url: "<?php echo site_url('seminar?m=pemberkasan&q=preview')?>",
 			method: 'POST',
-			data:{
-				file:file
+			data: {
+				file: file
 			},
 			success: function (res) {
 				$('#modal-preview').html(res);
