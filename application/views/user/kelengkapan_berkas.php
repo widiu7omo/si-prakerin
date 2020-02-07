@@ -33,6 +33,8 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 						<?php $allow = isset($allow) ? $allow : false; ?>
 						<?php if (!$allow && !isset($message)): ?>
 							<div class="h2">Anda belum bisa upload kelengkapan berkas</div>
+						<?php elseif (!$allow && isset($message)): ?>
+							<div class="h2">Berkas berhasil di upload</div>
 						<?php else: ?>
 							<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
 							<input type="file" class="my-pond">
@@ -89,11 +91,9 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		let pond = $('.my-pond').filepond({
 			server: "<?php echo site_url('kelengkapan?m=upload') ?>"
 		})
-		<?php if(isset($file->nama_file) && $file->nama_file != ''): ?>
-		setTimeout(function () {
-			$('.my-pond').filepond('addFile', '<?php echo base_url('file_upload/berkas/') . $file->nama_file ?>')
-		}, 1250)
-		<?php endif ?>
+		$('.my-pond').on('FilePond:processfile', function (e) {
+			window.location.reload();
+		})
 	})
 </script>
 <!-- Demo JS - remove this in your project -->

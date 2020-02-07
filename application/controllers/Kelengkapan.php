@@ -67,9 +67,9 @@ class Kelengkapan extends CI_Controller
 		$file_name = isset($res['upload_data']['file_name']) ? $res['upload_data']['file_name'] : null;
 		$dsn_bimbingan = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs id');
 		$is_exits = masterdata('tb_kelengkapan_berkas', "id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'", 'id');
-		$id = isset($is_exits->id) ? $is_exits->id : null;
+		$id = isset($is_exits->id) ? $is_exits->id : 0;
 		$now = date('Y-m-d');
-		if ($this->db->query("REPLACE INTO tb_kelengkapan_berkas VALUES('$id','$dsn_bimbingan->id','$file_name','$now')")) {
+		if ($this->db->query("REPLACE INTO tb_kelengkapan_berkas VALUES('$id','$dsn_bimbingan->id','$file_name','$now','pending')")) {
 			echo $this->db->insert_id();
 		} else {
 			show_error('failed upload', 500);

@@ -49,6 +49,7 @@
 									<thead class="thead-light">
 									<tr role="row">
 										<th>Detail</th>
+										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
 										<th>Status Revisi</th>
 										<th>Tanggal Seminar</th>
@@ -59,6 +60,7 @@
 									<tfoot>
 									<tr>
 										<th>Detail</th>
+										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
 										<th>Status Revisi</th>
 										<th>Tanggal Seminar</th>
@@ -159,6 +161,7 @@
 						"ajax": true
 					}
 				},
+				responsive:true,
 				buttons: [
 					'excel', 'pdf', 'print'
 				],
@@ -173,6 +176,7 @@
 						"data": null,
 						"defaultContent": ' Detail'
 					},
+					{"data": "nim"},
 					{"data": "nama_mahasiswa"},
 					{
 						"data": "nama_mahasiswa",
@@ -235,7 +239,7 @@
 									lamaRevisi = finalRevDate.workingDaysFrom(scheduleTime);
 								}
 								if (finalRevDate != null) {
-									if (parseInt(lamaRevisi) > 7) {
+									if (parseInt(lamaRevisi) > 8) {
 										Info = "Terlambat";
 									} else {
 										Info = "Tepat Waktu";

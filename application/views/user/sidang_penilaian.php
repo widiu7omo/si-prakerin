@@ -959,7 +959,7 @@
 								$('#p' + i + '-tot').text(data_nilai[i - 1].res);
 								$('#res-p' + i).text(data_nilai[i - 1].res);
 							}
-							$('#pn-tot').text(total_nilai);
+							$('#pn-tot').text(total_nilai.toFixed(2));
 						}
 						let label = $('#komponen-penilaian>label');
 						let percentage = $('span#percent-value');

@@ -8,7 +8,7 @@ class Seminar extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('upload', 'master', 'notification'));
-		$this->load->model(array('pembimbing_model', 'akun_model', 'penilaian_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
+		$this->load->model(array('pembimbing_model', 'akun_model', 'penilaian_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model', 'kelengkapan_model'));
 		$this->load->library('form_validation');
 		//middleware
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
@@ -196,6 +196,9 @@ class Seminar extends MY_Controller
 					return $this->index_proses_revisi();
 					break;
 				case 'pemberkasan':
+					if (isset($get['q']) && $get['q'] == 'preview') {
+						return $this->get_modal_preview();
+					}
 					return $this->index_proses_pemberkasan();
 					break;
 				case 'rekap_akhir':
@@ -209,32 +212,76 @@ class Seminar extends MY_Controller
 		$this->load->view('admin/seminar', $data);
 	}
 
-	public function index_proses_revisi(){
+	public function index_proses_revisi()
+	{
 		$data = array();
 		$penilaian = $this->penilaian_model;
-		if(isset($_POST['ajax'])){
-			echo json_encode(array('data'=>$penilaian->get_status_revisi()));
+		if (isset($_POST['ajax'])) {
+			echo json_encode(array('data' => $penilaian->get_status_revisi()));
 			return;
 		}
-		$this->load->view('admin/rekap_revisi',$data);
+		$this->load->view('admin/rekap_revisi', $data);
 	}
 
-	public function index_proses_pemberkasan(){
+	public function index_proses_pemberkasan()
+	{
 		$data = array();
-		$this->load->view('admin/rekap_pemberkasan',$data);
+		$pemberkasan = $this->kelengkapan_model;
+		if (isset($_POST['ajax'])) {
+			$pemberkasans = $pemberkasan->get_all_pemberkasan();
+			echo json_encode(array('data' => $pemberkasans));
+			return;
+		}
+		$this->load->view('admin/rekap_pemberkasan', $data);
 	}
 
-	public function index_rekap_akhir(){
-		$data = array();
-		$this->load->view('admin/rekap_akhir',$data);
+	public function get_modal_preview()
+	{
+		var_dump($_POST);
+		$base_uri =  base_url('/ViewerJS/#../file_upload/berkas/');
+		if (isset($_POST['file'])) {
+			echo '<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="deleteModalLabel">Kelengkapan Berkas Mahasiswa</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<iframe id="preview-berkas" class="col-md-12 px-0" style="border-radius: 6px"
+										height="500px"
+										src="'.$base_uri.$_POST["file"].'"
+										frameborder="0"></iframe>
+							</div>
+							<div class="modal-footer">
+								<button id="btn-ulang" type="button" class="btn btn-sm btn-warning text-white" data-dismiss="modal">
+									Upload ulang
+								</button>
+								<a id="btn-terima" class="btn btn-sm btn-success text-white">Terima</a>
+							</div>
+						</div>
+					</div>
+				</div>';
+		}
 	}
-	public function filter_belum_dinilai(){
+
+	public function index_rekap_akhir()
+	{
+		$data = array();
+		$this->load->view('admin/rekap_akhir', $data);
+	}
+
+	public function filter_belum_dinilai()
+	{
 		$data = array();
 		$post = $this->input->post();
 		$penilaian = $this->penilaian_model;
 		$data['belum_dinilai'] = $penilaian->get_belum_penilaian_seminar();
-		$this->load->view('admin/seminar_list_belum_dinilai',$data);
+		$this->load->view('admin/seminar_list_belum_dinilai', $data);
 	}
+
 	public function acc_verifikasi_pendaftaran()
 	{
 		$get = $this->input->get();
@@ -262,6 +309,7 @@ class Seminar extends MY_Controller
 		}
 		redirect(site_url('seminar?m=pendaftaran'));
 	}
+
 	public function index_verifikasi_pendaftaran()
 	{
 		$data = array();
@@ -282,7 +330,7 @@ class Seminar extends MY_Controller
 			echo json_encode((object)array('data' => $data_penilaian));
 			return;
 		}
-		$this->load->view('admin/seminar_list_penilaian',$data);
+		$this->load->view('admin/seminar_list_penilaian', $data);
 	}
 
 	public function get_list_jadwal()

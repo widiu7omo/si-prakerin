@@ -130,7 +130,9 @@ class Penilaian_model extends CI_Model
 
 	public function get_status_revisi()
 	{
-		$jadwal = $this->db->select('id,(SELECT nama_mahasiswa FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nama_mahasiswa,
+		$jadwal = $this->db->select('id,
+		(SELECT nama_mahasiswa FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nama_mahasiswa,
+		(SELECT tm.nim FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nim,
 	tsj.mulai')->get('tb_seminar_jadwal tsj')->result();
 		foreach ($jadwal as $key=> $jd) {
 			$jd->detail = $this->db->query("SELECT
