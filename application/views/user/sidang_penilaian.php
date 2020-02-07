@@ -49,6 +49,15 @@
 	}
 	return $mutu;
 } ?>
+<?php
+function get_another_penilaian_revisi($id)
+{
+	$join = array('tb_history_seminar_penilaian thsp', 'thsp.id_seminar_penilaian = tsp.id', 'LEFT OUTER');
+	return datajoin('tb_seminar_penilaian tsp', "id_seminar_jadwal = '$id' AND status_dosen <> 'p3'", 'tsp.nilai_seminar nilai1,thsp.nilai_seminar nilai2,tsp.status_dosen', $join);
+
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <!-- Head PHP -->
@@ -72,7 +81,7 @@
 			<div class="card">
 				<div class="card-header">
 					<?php if ($level === 'dosen'): ?>
-						<ul class="nav nav-pills nav-stacked">
+						<ul class="nav nav-pills nav-stacked ">
 							<li class="nav-item">
 								<a href="<?php echo site_url('sidang?m=penilaian&section=today') ?>"
 								   class="nav-link <?php echo !isset($section) ? 'active' : null ?> <?php echo $section == 'today' ? 'active' : null ?>">Uji
@@ -130,9 +139,16 @@
 														<?php $temp_date = get_time_range($r_uji->start, $r_uji->end, 'datestart'); ?>
 													<?php endif; ?>
 													<a class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+													   role="button"
 													   data-toggle="collapse"
-													   data-target="#collapse-<?php echo $r_uji->id ?>"
-													   aria-expanded="false" aria-controls="collapseOne">
+													   href="#collapse<?php echo $r_uji->id ?>"
+													   aria-expanded="false"
+													   aria-controls="collapse<?php echo $r_uji->id ?>">
+														<?php if ($r_uji->sebagai == 'p3'): ?>
+															<small class="text-warning">Bimbingan anda (klik untuk
+																melihat
+																detail nilai revisi penguji)</small>
+														<?php endif; ?>
 														<div
 															class="d-flex row justify-content-between align-items-center">
 															<div class="col col-xs-12">
@@ -168,6 +184,26 @@
 															</div>
 														</div>
 													</a>
+													<?php if ($r_uji->sebagai == 'p3'): ?>
+														<div class="collapse" id="collapse<?php echo $r_uji->id ?>">
+															<div class="card card-body shadow-none m-0 pt-2 pb-2">
+																<div
+																	class="d-flex row justify-content-between align-items-center">
+																	<?php
+																	$revisi = get_another_penilaian_revisi($r_uji->ij) ?? array(); ?>
+																	<?php foreach ($revisi as $rev): ?>
+																		<div class="col col-xs-12">
+																			<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Penguji 1" : "Nilai Penguji 2" ?>
+																				:</small>
+																			<span
+																				class="mb-0 h4"><?php echo $rev->nilai2 != "NULL" ? $rev->nilai1 : "Belum ada penilaian" ?></span>
+																		</div>
+
+																	<?php endforeach; ?>
+																</div>
+															</div>
+														</div>
+													<?php endif; ?>
 												<?php endforeach; ?>
 											</div>
 										</div>
