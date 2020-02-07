@@ -27,7 +27,7 @@ class Kelengkapan extends CI_Controller
 		$nim = $this->session->userdata('id');
 		$dsn_bimbingan = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs id');
 		if (isset($dsn_bimbingan->id)) {
-			$file = masterdata('tb_kelengkapan_berkas', "id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'", 'nama_file', true);
+			$file = masterdata('tb_kelengkapan_berkas', "id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'", 'nama_file,status', true);
 			$join = array(
 				array('tb_history_seminar_penilaian thsp', 'thsp.id_seminar_penilaian = tsp.id', 'LEFT OUTER'),
 				array('tb_seminar_jadwal tsj', 'tsj.id = tsp.id_seminar_jadwal', 'INNER')
@@ -52,7 +52,15 @@ class Kelengkapan extends CI_Controller
 				if (count($file) > 0) {
 					if ($file[0]->nama_file != "") {
 						$data['allow'] = false;
-						$data['message'] = "Mohon untuk menunggu koordinator memverifikasi";
+						$data['status'] = (object)array("message" => "<b>Menunggu</b> Mohon untuk menunggu koordinator memverifikasi","color" => "alert-dark");
+						if ($file[0]->status == 'reupload') {
+							$data['allow'] = true;
+							$data['status'] = (object)array("message" => "<b>Gagal</b> Berkas tidak disetujui, silahkan upload ulang","color" => "alert-danger");
+						}
+						if ($file[0]->status == 'approve') {
+							$data['allow'] = false;
+							$data['status'] = (object)array("message" => "<b>Sukses</b> Pemberkasan berhasil disetujui koordinator, ada berhak untuk melanjutkan Tugas Akhir (TA)","color" => "alert-success");
+						}
 					}
 				}
 			}

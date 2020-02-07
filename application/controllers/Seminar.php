@@ -283,10 +283,10 @@ class Seminar extends MY_Controller
 							<div class="modal-footer">
 								<form action="' . $site_update . '" method="POST">
 									<input type="hidden" name="file" value="' . $_POST["file"] . '"/>
-									<button id="btn-ulang" type="submit" name="update" value="dec" class="btn btn-sm btn-warning text-white ' . $disabled . '">
+									<button id="btn-ulang" type="submit" '.$disabled.' name="update" value="dec" class="btn btn-sm btn-warning text-white ' . $disabled . '">
 										Upload ulang
 									</button>
-									<button id="btn-terima" type="submit" name="update" value="acc" class="btn btn-sm btn-success text-white ' . $disabled . '">Terima</button>
+									<button id="btn-terima" type="submit" '.$disabled.' name="update" value="acc" class="btn btn-sm btn-success text-white ' . $disabled . '">Terima</button>
 								</form>
 							</div>
 						</div>
