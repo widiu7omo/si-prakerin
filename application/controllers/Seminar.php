@@ -106,6 +106,9 @@ class Seminar extends MY_Controller
 					if (isset($get['q']) && $get['q'] == 'dec') {
 						return $this->dec_verifikasi_pendaftaran();
 					}
+					if (isset($get['q']) && $get['q'] == 'preview') {
+						return $this->get_preview_modal_verif();
+					}
 					return $this->index_verifikasi_pendaftaran();
 					break;
 				case 'kelola':
@@ -254,6 +257,7 @@ class Seminar extends MY_Controller
 		redirect(site_url('seminar?m=pemberkasan'));
 	}
 
+	//modal preview pemberkasan
 	public function get_modal_preview()
 	{
 		$site_update = site_url('seminar?m=pemberkasan&q=u');
@@ -289,6 +293,41 @@ class Seminar extends MY_Controller
 					</div>
 				</div>';
 		}
+	}
+
+	// modal verifikasi pendaftaran
+	public function get_preview_modal_verif()
+	{
+		$post = $this->input->post();
+		$status = $post['status'] != 'NULL' ? (($post['status'] == 'accept') || ($post['status'] == 'reupload') ? 'disabled' : '') : "";
+		echo '
+		<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header pb-0">
+								<h5 class="modal-title" id="deleteModalLabel">Berkas Pendaftaran Mahasiswa</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="d-flex justify-content-end mb-3">
+									<a href="' . site_url('seminar?m=pendaftaran&q=dec&id=' . $post['verif']) . '"
+									   class="btn btn-sm btn-danger ' . $status . '">Upload
+										Ulang</a>
+									<a href="' . site_url('seminar?m=pendaftaran&q=acc&id=' . $post['verif']) . '"
+									   class="btn btn-sm btn-primary mr-1 ' . $status . '">Terima</a>
+								</div>
+								<iframe class="col-md-12 px-0"
+										style="border-radius: 6px"
+										height="500px"
+										src="' . base_url('/ViewerJS/#../file_upload/pendaftaran_seminar/' . $post['file']) . '"
+										frameborder="0">
+								</iframe>
+							</div>
+						</div>
+					</div>
+				</div>';
 	}
 
 	public function index_rekap_akhir()
