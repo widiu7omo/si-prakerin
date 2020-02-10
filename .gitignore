@@ -9,7 +9,12 @@ application/logs/*
 !application/*/.htaccess
 application/config/*
 uploads/*
-file_upload/*
+file_upload/berkas/*.pdf
+file_upload/bimbingan/*.pdf
+file_upload/bukti/*.pdf
+file_upload/file_perusahaan/*.pdf
+file_upload/file_si/*.pdf
+file_upload/pendaftaran_seminar/*.pdf
 foto_kuisioner/*
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
