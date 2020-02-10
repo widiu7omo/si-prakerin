@@ -2,3 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/repositories/si-prakerin
+    - /bin/cp -a * $DEPLOYPATH

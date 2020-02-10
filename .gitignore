@@ -7,7 +7,7 @@ application/logs/*
 !application/logs/index.html
 
 !application/*/.htaccess
-application/config/*
+application/config/config.php
 uploads/*
 foto_kuisioner/*
 user_guide_src/build/*
