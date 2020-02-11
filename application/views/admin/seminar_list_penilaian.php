@@ -91,7 +91,6 @@
 				"</td>" +
 				"</tr>";
 		}
-
 		$(document).ready(function () {
 
 			let table = $('#datatable-jadwal').DataTable({
@@ -140,8 +139,6 @@
 							return data.substr(0, 50) + "...";
 						}
 					},
-
-					// { "data": "mahasiswa.[0].tanggal_pengajuan", "visible": false}
 				],
 				"order": [[1, 'asc'], [3, 'asc']],
 				language: {
@@ -161,13 +158,11 @@
 				}
 			});
 			function ajaxRefresh() {
-				console.log('auto refresh');
 				table.ajax.reload(null, false);
 			}
 			let Interval = 0;
 			$('#switch-realtime').on('change', function () {
 				let switchAuto = $(this).prop('checked');
-				console.log(switchAuto);
 				if (switchAuto === false) {
 					clearInterval(Interval);
 				} else {

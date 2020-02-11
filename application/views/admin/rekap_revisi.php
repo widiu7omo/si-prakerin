@@ -88,7 +88,6 @@
 			} else {
 				return "";
 			}
-
 		}
 
 		function format(d) {
@@ -106,17 +105,10 @@
 				if (detail.length !== 3) {
 					addInfo = "<small class='text-warning'>Penilaian Seminar Belum Lengkap</small>";
 				}
-				return "<tr>" +
-					"<td>" +
-					addInfo +
-					"<h3>Detail Penilaian Revisi</h3>" +
-					detailHtml.join("") +
-					"</td>" +
-					"</tr>";
+				return "<tr>" + "<td>" + addInfo + "<h3>Detail Penilaian Revisi</h3>" + detailHtml.join("") + "</td>" + "</tr>";
 			} else {
 				"NULL Detail"
 			}
-
 		}
 
 		$(document).ready(function () {
@@ -161,7 +153,7 @@
 						"ajax": true
 					}
 				},
-				responsive:true,
+				responsive: true,
 				buttons: [
 					'excel', 'pdf', 'print'
 				],
@@ -220,7 +212,7 @@
 							if (row.detail.length !== 0) {
 								let scheduleTime = new Date(data);
 								let detailSorted = row.detail.sort(function (a, b) {
-									if(isFinite(new Date(b.tanggal_revisi) - new Date(a.tanggal_revisi))) {
+									if (isFinite(new Date(b.tanggal_revisi) - new Date(a.tanggal_revisi))) {
 										return new Date(b.tanggal_revisi) - new Date(a.tanggal_revisi);
 									} else {
 										return isFinite(new Date(a.tanggal_revisi)) ? -1 : 1;
@@ -229,15 +221,15 @@
 								let Info = "Masih Proses";
 								let lamaRevisi = null;
 								let finalRevDate = null;
-								console.log(detailSorted);
 								if (detailSorted[0].tanggal_revisi !== "belum") {
 									finalRevDate = new Date(detailSorted[0].tanggal_revisi);
 									lamaRevisi = finalRevDate.workingDaysFrom(scheduleTime);
-								}
-								else if(detailSorted[0].tanggal_revisi === "belum") {
+								} else if (detailSorted[0].tanggal_revisi === "belum") {
 									finalRevDate = new Date("<?php echo date("Y-m-d") ?>");
 									lamaRevisi = finalRevDate.workingDaysFrom(scheduleTime);
 								}
+								//kurangi hari karena di hitung tanggal besok setelah seminar
+								lamaRevisi = lamaRevisi - 1;
 								if (finalRevDate != null) {
 									if (parseInt(lamaRevisi) > 8) {
 										Info = "Terlambat";
