@@ -157,7 +157,8 @@ function get_another_penilaian_revisi($id, $filter = true)
 													   aria-expanded="false"
 													   aria-controls="collapse<?php echo $r_uji->id ?>">
 														<?php if ($r_uji->sebagai == 'p3'): ?>
-															<small class="text-warning">Bimbingan anda (klik untuk
+															<small class="text-warning">Mahasiswa Bimbingan anda (klik
+																untuk
 																melihat
 																detail nilai revisi penguji)</small>
 														<?php endif; ?>
@@ -199,24 +200,94 @@ function get_another_penilaian_revisi($id, $filter = true)
 													<?php if ($r_uji->sebagai == 'p3'): ?>
 														<div class="collapse" id="collapse<?php echo $r_uji->id ?>">
 															<div class="card card-body shadow-none m-0 pt-2 pb-2">
-																<?php $revisi = get_another_penilaian_revisi($r_uji->ij, true) ?? array(); ?>
-																<?php foreach ($revisi as $rev): ?>
-																	<div
-																		class="d-flex row justify-content-between align-items-center">
-																		<div class="col col-xs-12">
-																			<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Seminar Penguji 1" : "Nilai Seminar Penguji 2" ?>
-																				:</small>
-																			<span
-																				class="mb-0 h4"><?php echo $rev->nilai2 == NULL ? $rev->nilai1 : $rev->nilai2 ?></span>
-																		</div>
-																		<div class="col col-xs-12">
-																			<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Revisi Penguji 1" : "Nilai Revisi Penguji 2" ?>
-																				:</small>
-																			<span
-																				class="mb-0 h4"><?php echo $rev->nilai2 != NULL ? $rev->nilai1 : "Belum ada penilaian" ?></span>
+																<?php
+																$revisi = get_another_penilaian_revisi($r_uji->ij, false) ?? array(); ?>
+																<?php $perusahaan = get_penilaian_perusahaan($r_uji->id_bimbingan);
+																$total_seminar = 0;
+																$total_revisi = 0;
+																$n_perusahaan = isset($perusahaan->nilai_pkl) ? $perusahaan->nilai_pkl : 0;
+																$percentage_n_perusahaan = isset($perusahaan->nilai_pkl) ? round(($perusahaan->nilai_pkl * 50) / 100, 2) : 0
+																?>
+																<div class="row">
+																	<div class="col-md-6 col-xs-12">
+																		<div class="list-group">
+																			<?php foreach ($revisi as $rev): ?>
+																				<a href="#"
+																				   class="list-group-item list-group-item-action list-group-item-primary">
+																					<div class="col col-xs-12">
+																						<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Seminar Penguji 1" : ($rev->status_dosen == 'p2' ? "Nilai Seminar Penguji 2" : "Nilai Seminar Pembimbing") ?>
+																							:</small>
+																						<?php $n_rev = $rev->nilai2 == NULL ? $rev->nilai1 : $rev->nilai2;
+																						$val_rev = $rev->nilai2 == NULL ? $rev->nilai1 : $rev->nilai2;
+																						$percent = $rev->status_dosen == 'p3' ? 30 : 10;
+																						$total_all_s = round(($val_rev * $percent) / 100, 2);
+																						$total_seminar = $total_seminar + $total_all_s;
+																						?>
+																						<span
+																							class="mb-0 h4"><?php echo $n_rev ?> X <?php echo $percent ?>% = <?php echo $total_all_s ?> </span>
+																					</div>
+																				</a>
+																			<?php endforeach; ?>
+																			<a href="#"
+																			   class="list-group-item list-group-item-action list-group-item-primary">
+																				<div class="col col-xs-12">
+																					<small>Nilai Perusahaan :</small>
+																					<span
+																						class="mb-0 h4"><?php echo $n_perusahaan ?> X 50% = <?php echo $percentage_n_perusahaan ?></span>
+																				</div>
+																			</a>
+																			<a href="#"
+																			   class="list-group-item list-group-item-action list-group-item-primary">
+																				<div class="col col-xs-12">
+																					<small>Nilai Total Sebelum Revisi
+																						:</small>
+																					<?php $total_seminar = $total_seminar + $percentage_n_perusahaan; ?>
+																					<span
+																						class="mb-0 h4"><?php echo $total_seminar ?> dengan Mutu <?php echo get_nilai_mutu($total_seminar) ?></span>
+																				</div>
+																			</a>
 																		</div>
 																	</div>
-																<?php endforeach; ?>
+																	<div class="col-md-6 col-xs-12">
+																		<div class="list-group">
+																			<?php foreach ($revisi as $rev): ?>
+																				<a href="#"
+																				   class="list-group-item list-group-item-action list-group-item-primary">
+																					<div class="col col-xs-12">
+																						<small><?php echo $rev->status_dosen == 'p1' ? "Nilai Revisi Penguji 1" : ($rev->status_dosen == 'p2' ? "Nilai Revisi Penguji 2" : "Nilai Revisi Pembimbing") ?>
+																							:</small>
+																						<?php $n_rev = $rev->nilai2 != NULL ? $rev->nilai1 : "Belum ada penilaian";
+																						$val_rev = $rev->nilai2 != NULL ? $rev->nilai1 : 0;
+																						$percent = $rev->status_dosen == 'p3' ? 30 : 10;
+																						$total_all_r = round(($val_rev * $percent) / 100, 2);
+																						$total_revisi = $total_revisi + $total_all_r;
+																						?>
+																						<span
+																							class="mb-0 h4"><?php echo $n_rev ?> X <?php echo $percent ?>% = <?php echo $total_all_r ?> </span>
+																					</div>
+																				</a>
+																			<?php endforeach; ?>
+																			<a href="#"
+																			   class="list-group-item list-group-item-action list-group-item-primary">
+																				<div class="col col-xs-12">
+																					<small>Nilai Perusahaan :</small>
+																					<span
+																						class="mb-0 h4"><?php echo $n_perusahaan ?> X 50% = <?php echo $percentage_n_perusahaan ?></span>
+																				</div>
+																			</a>
+																			<a href="#"
+																			   class="list-group-item list-group-item-action list-group-item-primary">
+																				<div class="col col-xs-12">
+																					<small>Nilai Total Setelah Revisi
+																						:</small>
+																					<?php $total_revisi = $total_revisi + $percentage_n_perusahaan; ?>
+																					<span
+																						class="mb-0 h4"><?php echo $total_revisi ?> dengan Mutu <?php echo get_nilai_mutu($total_revisi) ?></span>
+																				</div>
+																			</a>
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 													<?php endif; ?>
