@@ -21,7 +21,7 @@ class Kelengkapan_model extends CI_Model
 		   tkb.status
 		   FROM tb_mahasiswa tm INNER JOIN  tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim
 		       INNER JOIN tb_seminar_jadwal tsj on tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs
-		       LEFT OUTER JOIN tb_kelengkapan_berkas tkb on tdbm.id_dosen_bimbingan_mhs = tkb.id_dosen_bimbingan_mhs")->result();
+		       LEFT OUTER JOIN tb_kelengkapan_berkas tkb on tdbm.id_dosen_bimbingan_mhs = tkb.id_dosen_bimbingan_mhs WHERE tkb.id is not null")->result();
 		foreach ($status_mahasiswa as $item) {
 			$status_rev = $this->get_status_revisi($item->id_jadwal) ?? array();
 			if (count($status_rev) > 0) {
