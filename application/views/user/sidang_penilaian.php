@@ -167,24 +167,24 @@ function get_another_penilaian_revisi($id, $filter = true)
 															class="d-flex row justify-content-between align-items-center">
 															<div class="col col-xs-12">
 																<small>Mahasiswa:</small>
-																<h5 class="mb-0 h4"><?php echo $r_uji->nama_mahasiswa ?></h5>
+																<h5 class="mb-0 h4 <?php echo $text_success ?> "><?php echo $r_uji->nama_mahasiswa ?></h5>
 															</div>
 															<div class="col col-xs-12">
 																<small>Ruangan:</small>
-																<h5 class="mb-0"><?php echo $r_uji->nama_tempat ?></h5>
+																<h5 class="mb-0 <?php echo $text_success ?> "><?php echo $r_uji->nama_tempat ?></h5>
 															</div>
 															<div class="col col-xs-12">
 																<small>Waktu:</small>
-																<h5 class="mb-0">
+																<h5 class="mb-0 <?php echo $text_success ?> ">
 																	Pukul <?php echo get_time_range($r_uji->start, $r_uji->end, 'time') ?></h5>
 															</div>
 															<div class="col col-xs-12">
 																<small>Nilai Seminar:</small>
-																<h5 class="mb-0"><?php echo $r_uji->nilai_seminar_past ? $r_uji->nilai_seminar_past : $r_uji->nilai_seminar ?></h5>
+																<h5 class="mb-0 <?php echo $text_success ?> "><?php echo $r_uji->nilai_seminar_past ? $r_uji->nilai_seminar_past : $r_uji->nilai_seminar ?></h5>
 															</div>
 															<div class="col col-xs-12">
 																<small>Nilai Revisi:</small>
-																<h5 class="mb-0"><?php echo $r_uji->status_revisi ? $r_uji->nilai_seminar : "Belum revisi" ?></h5>
+																<h5 class="mb-0 <?php echo $text_success ?> "><?php echo $r_uji->status_revisi ? $r_uji->nilai_seminar : "Belum revisi" ?></h5>
 															</div>
 															<div class="col col-xs-12">
 																<?php if (!$r_uji->status_revisi): ?>
