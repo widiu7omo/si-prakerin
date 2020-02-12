@@ -149,8 +149,9 @@ function get_another_penilaian_revisi($id, $filter = true)
 														array_push($is_complete, $item->nilai2 != NULL ? 1 : 0);
 													}
 													$color_success = !in_array(0, $is_complete) ? "bg-success" : "";
+													$text_success = !in_array(0, $is_complete) ? "text-white" : "";
 													?>
-													<a class="list-group-item <?php echo $color_success ?> list-group-item-action flex-column align-items-start py-4 px-4"
+													<a class="list-group-item <?php echo $color_success ?> <?php echo $text_success ?> list-group-item-action flex-column align-items-start py-4 px-4"
 													   role="button"
 													   data-toggle="collapse"
 													   href="#collapse<?php echo $r_uji->id ?>"
