@@ -127,6 +127,12 @@ function get_another_penilaian_revisi($id, $filter = true)
 											</div>
 										</div>
 										<div class="card-body p-0">
+											<div class="row">
+												<div class="col-md-12 m-3">
+													<button class="btn btn-sm btn-success"></button><span>Acc semua dosen (Penguji dan Pembimbing)</span><br>
+													<button class="btn btn-sm btn-secondary"></button><span>Belum Acc semua dosen (Penguji dan Pembimbing)</span>
+												</div>
+											</div>
 											<div class="list-group list-group-flush">
 												<?php if (isset($riwayat_uji) and count($riwayat_uji) === 0): ?>
 													<div><p class="text-center h2">Belum ada mahasiswa yang anda uji</p>
