@@ -95,7 +95,7 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 			server: "<?php echo site_url('kelengkapan?m=upload') ?>"
 		})
 		$('.my-pond').on('FilePond:processfile', function (e) {
-			// window.location.reload();
+			window.location.reload();
 		})
 	})
 </script>
