@@ -53,9 +53,6 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 						<div class="h6 font-weight-normal">- Apabila berkas yang kalian upload kurang lengkap,
 							koordinator akan mengintruksikan kalian untuk upload ulang
 						</div>
-						<script>
-							$(".alert").alert();
-						</script>
 						<?php ?>
 					</div>
 				</div>
@@ -87,7 +84,7 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		FilePond.registerPlugin(FilePondPluginFileValidateSize);
 		FilePond.registerPlugin(FilePondPluginFileValidateType);
 		FilePond.setOptions({
-			maxFileSize: '1MB',
+			maxFileSize: '2560KB',
 			acceptedFileTypes: ['application/pdf'],
 			fileRenameFunction: (file) => {
 				console.log(file);
@@ -98,7 +95,7 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 			server: "<?php echo site_url('kelengkapan?m=upload') ?>"
 		})
 		$('.my-pond').on('FilePond:processfile', function (e) {
-			window.location.reload();
+			// window.location.reload();
 		})
 	})
 </script>
