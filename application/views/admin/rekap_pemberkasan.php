@@ -93,13 +93,15 @@
 			success: function (res) {
 				let {data} = res;
 				let listHtml = '<div class="list-group">';
+				let count = 0;
 				let belumHTML = data.map(function (item) {
 					if (item.terakhir_revisi !== 'belum revisi' && item.file === 'belum') {
+						count++;
 						return '<a href="#" class="list-group-item list-group-item-action">' + item.nama_mahasiswa + '</a>';
 					}
 				});
 				listHtml += belumHTML.join("") + "</div>";
-				if (belumHTML.length === 0) {
+				if (count === 0) {
 					listHtml += "Tidak ada mahasiswa belum upload" + "</div>";
 				}
 				$('#previewModalBody').html(listHtml);
