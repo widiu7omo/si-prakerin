@@ -99,6 +99,9 @@
 					}
 				});
 				listHtml += belumHTML.join("") + "</div>";
+				if (belumHTML.length === 0) {
+					listHtml += "Tidak ada mahasiswa belum upload" + "</div>";
+				}
 				$('#previewModalBody').html(listHtml);
 				$('#previewModalLabel').text("Daftar mahasiswa yang belum upload (Sudah Revisi)");
 				$('#previewModal').modal('show');
