@@ -129,8 +129,12 @@ function get_another_penilaian_revisi($id, $filter = true)
 										<div class="card-body p-0">
 											<div class="row">
 												<div class="col-md-12 m-3">
-													<button class="btn btn-sm btn-success"></button><span>Acc semua dosen (Penguji dan Pembimbing)</span><br>
-													<button class="btn btn-sm btn-secondary"></button><span>Belum Acc semua dosen (Penguji dan Pembimbing)</span>
+													<button class="btn btn-sm btn-info"></button>
+													<span>Approved berkas akhir</span><br>
+													<button class="btn btn-sm btn-success"></button>
+													<span>Acc semua dosen (Penguji dan Pembimbing)</span><br>
+													<button class="btn btn-sm btn-secondary"></button>
+													<span>Belum Acc semua dosen (Penguji dan Pembimbing)</span>
 												</div>
 											</div>
 											<div class="list-group list-group-flush">
@@ -156,6 +160,10 @@ function get_another_penilaian_revisi($id, $filter = true)
 													}
 													$color_success = !in_array(0, $is_complete) ? "bg-success" : "";
 													$text_success = !in_array(0, $is_complete) ? "text-white" : "";
+													$status_berkas = masterdata('tb_kelengkapan_berkas', "id_dosen_bimbingan_mhs = '$r_uji->id_bimbingan'", 'status', false);
+													if (isset($status_berkas->status) && $status_berkas->status == 'approve') {
+														$color_success = 'bg-info';
+													}
 													?>
 													<a class="list-group-item <?php echo $color_success ?> <?php echo $text_success ?> list-group-item-action flex-column align-items-start py-4 px-4"
 													   role="button"

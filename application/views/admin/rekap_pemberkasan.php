@@ -24,12 +24,16 @@
 			<div class="card">
 				<div class="card-header">
 					<h4 class="font-weight-600">Status Pemberkasan Mahasiswa</h4>
-					<div class="row">
-						<div class="col-md-12">
+					<div class="row d-flex justify-content-between m-2">
+						<div>
 							<button class="btn btn-sm btn-warning"></button>
 							<small>Upload ulang</small>
 							<button class="btn btn-sm btn-success"></button>
 							<small>Sudah di setujui</small>
+						</div>
+						<div class="mt-xs-3">
+							<button class="btn btn-sm btn-primary" id="preview-mhs-belum">Mahasiswa belum upload
+							</button>
 						</div>
 					</div>
 				</div>
@@ -71,7 +75,7 @@
 </div>
 <!-- Scripts PHP-->
 <div id="modal-preview"></div>
-<?php //$this->load->view('admin/_partials/modal_preview.php'); ?>
+<?php $this->load->view('admin/_partials/modal_preview.php'); ?>
 <?php $this->load->view('admin/_partials/js.php'); ?>
 <?php
 //	require APPPATH."libraries/hotreloader.php";
@@ -81,6 +85,29 @@
 //	$reloader->init();
 ?>
 <script>
+	$('#preview-mhs-belum').on('click', function () {
+		$.ajax({
+			url: "<?php echo site_url('seminar?m=pemberkasan&q=belum') ?>",
+			dataType: 'json',
+			method: 'POST',
+			success: function (res) {
+				let {data} = res;
+				let listHtml = '<div class="list-group">';
+				let belumHTML = data.map(function (item) {
+					if (item.terakhir_revisi !== 'belum revisi' && item.file === 'belum') {
+						return '<a href="#" class="list-group-item list-group-item-action">' + item.nama_mahasiswa + '</a>';
+					}
+				});
+				listHtml += belumHTML.join("") + "</div>";
+				$('#previewModalBody').html(listHtml);
+				$('#previewModalLabel').text("Daftar mahasiswa yang belum upload (Sudah Revisi)");
+				$('#previewModal').modal('show');
+			},
+			error: function (err) {
+				console.log(err)
+			}
+		})
+	});
 	Date.prototype.workingDaysFrom = function (fromDate) {
 		// ensure that the argument is a valid and past date
 		if (!fromDate || isNaN(fromDate) || this < fromDate) {

@@ -205,6 +205,9 @@ class Seminar extends MY_Controller
 					if (isset($get['q']) && $get['q'] == 'u') {
 						return $this->update_pemberkasan();
 					}
+					if (isset($get['q']) && $get['q'] == 'belum') {
+						return $this->belum_pemberkasan();
+					}
 					return $this->index_proses_pemberkasan();
 					break;
 				case 'rekap_akhir':
@@ -227,6 +230,16 @@ class Seminar extends MY_Controller
 			return;
 		}
 		$this->load->view('admin/rekap_revisi', $data);
+	}
+
+	public function belum_pemberkasan()
+	{
+		$data = array();
+		$pemberkasan = $this->kelengkapan_model;
+		$data = $pemberkasan->get_belum_pemberkasan();
+		echo json_encode(array('data' => $data));
+		return;
+
 	}
 
 	public function index_proses_pemberkasan()
@@ -283,10 +296,10 @@ class Seminar extends MY_Controller
 							<div class="modal-footer">
 								<form action="' . $site_update . '" method="POST">
 									<input type="hidden" name="file" value="' . $_POST["file"] . '"/>
-									<button id="btn-ulang" type="submit" '.$disabled.' name="update" value="dec" class="btn btn-sm btn-warning text-white ' . $disabled . '">
+									<button id="btn-ulang" type="submit" ' . $disabled . ' name="update" value="dec" class="btn btn-sm btn-warning text-white ' . $disabled . '">
 										Upload ulang
 									</button>
-									<button id="btn-terima" type="submit" '.$disabled.' name="update" value="acc" class="btn btn-sm btn-success text-white ' . $disabled . '">Terima</button>
+									<button id="btn-terima" type="submit" ' . $disabled . ' name="update" value="acc" class="btn btn-sm btn-success text-white ' . $disabled . '">Terima</button>
 								</form>
 							</div>
 						</div>

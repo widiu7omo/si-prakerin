@@ -338,7 +338,7 @@ class Seminar_model extends CI_Model
 		INNER JOIN tb_pegawai tp1 ON tp1.nip_nik = td1.nip_nik
 		INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik
 			$where
-		ORDER BY start")->result();
+		ORDER BY start DESC")->result();
 	}
 
 	public function get_jadwal_past_left($id = null, $date, $time)
