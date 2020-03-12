@@ -346,6 +346,13 @@ class Seminar extends MY_Controller
 	public function index_rekap_akhir()
 	{
 		$data = array();
+		$penilaian = $this->penilaian_model;
+		if (isset($_POST['ajax'])) {
+			echo json_encode(array('data' => $penilaian->get_all_rekap()));
+			return;
+		}
+		$tahunAkademik = masterdata('tb_waktu',null,'(select tahun_akademik from tahun_akademik where id_tahun_akademik = tb_waktu.id_tahun_akademik) tahun_akademik',true);
+		$data['tahun'] = $tahunAkademik[0]->tahun_akademik;
 		$this->load->view('admin/rekap_akhir', $data);
 	}
 

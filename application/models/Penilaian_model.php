@@ -155,6 +155,76 @@ class Penilaian_model extends CI_Model
 		return $jadwal;
 	}
 
+
+	public function get_all_rekap()
+	{
+		$rekap = $this->db->select('
+		tsj.id,
+       (SELECT nama_mahasiswa
+        FROM tb_mahasiswa tm
+                 INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nama_mahasiswa,
+       (SELECT tm.nim
+        FROM tb_mahasiswa tm
+                 INNER JOIN tb_dosen_bimbingan_mhs tdbm on tm.nim = tdbm.nim
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nim,
+       (SELECT t.nama_pegawai
+        FROM tb_dosen_bimbingan_mhs tdbm
+                 INNER JOIN tb_pegawai t on tdbm.nip_nik = t.nip_nik
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) pembimbing,
+       (SELECT tdbm.judul_laporan_mhs
+        FROM tb_dosen_bimbingan_mhs tdbm
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) judul,
+       (SELECT tp.nama_perusahaan
+        FROM tb_perusahaan tp
+                 INNER JOIN tb_mhs_pilih_perusahaan tmpp ON tp.id_perusahaan = tmpp.id_perusahaan
+                 INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tmpp.id_mhs_pilih_perusahaan = tdbm.id_mhs_pilih_perusahaan
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) perusahaan,
+        (SELECT tpp.nilai_pkl
+        FROM tb_perusahaan_penilaian tpp
+                 INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tpp.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nilai_perusahaan,
+        (SELECT status FROM tb_kelengkapan_berkas tkb 
+        		 INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tkb.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) status_pemberkasan,
+        (SELECT tanggal_pemberkasan FROM tb_kelengkapan_berkas tkb 
+        		 INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tkb.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+        where tdbm.id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) tanggal_pemberkasan,
+       tsj.mulai,
+       tsj.berakhir,
+       tst.nama tempat,
+       p.nama_pegawai penguji_1,
+       p2.nama_pegawai penguji_2')->from('tb_seminar_jadwal tsj')
+			->join('tb_seminar_tempat tst', 'tsj.id_seminar_ruangan = tst.id', 'INNER')
+			->join('tb_seminar_penguji tsp', 'tsj.id_penguji_1 = tsp.id', 'INNER')
+			->join('tb_seminar_penguji tsp2', 'tsj.id_penguji_2 = tsp2.id', 'INNER')
+			->join('tb_dosen td', 'tsp.id_dosen = td.id', 'INNER')
+			->join('tb_dosen td2', 'tsp2.id_dosen = td2.id', 'INNER')
+			->join('tb_pegawai p', 'td.nip_nik = p.nip_nik', 'INNER')
+			->join('tb_pegawai p2', 'td2.nip_nik = p2.nip_nik', 'INNER')
+			->order_by('nim')
+			->get()->result();
+		foreach ($rekap as $key => $jd) {
+			$jd->detail = $this->db->query("SELECT
+				tsp.nilai_seminar nilai_1,
+				IF(thsp.nilai_seminar is null,'belum',thsp.nilai_seminar) nilai_2,
+				IF(thsp.nilai_seminar is null,'belum',thsp.tanggal_revisi) tanggal_revisi,
+				(SELECT nama_pegawai from tb_pegawai where nip_nik = tsp.id_dosen) dosen,
+				IF(status_dosen = 'p1','Penguji 1',IF(status_dosen = 'p2','Penguji 2','Pembimbing')) status,
+				(SELECT nama_mahasiswa FROM tb_mahasiswa tm INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tdbm.nim = tm.nim WHERE id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) nama_mahasiswa,
+				(SELECT nama_program_studi FROM tb_program_studi tps INNER JOIN tb_mahasiswa tm ON tm.id_program_studi = tps.id_program_studi INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tdbm.nim = tm.nim WHERE id_dosen_bimbingan_mhs = tsj.id_dosen_bimbingan_mhs) program_studi
+			FROM
+				tb_seminar_penilaian tsp
+				LEFT OUTER JOIN tb_history_seminar_penilaian thsp
+				ON tsp.id = thsp.id_seminar_penilaian
+				INNER JOIN tb_seminar_jadwal tsj
+				ON tsj.id = tsp.id_seminar_jadwal
+				WHERE tsj.id = '$jd->id'
+				")->result();
+		}
+		return $rekap;
+	}
+
 	public function get_all_penilaian_seminar()
 	{
 		return $this->db->query("SELECT
