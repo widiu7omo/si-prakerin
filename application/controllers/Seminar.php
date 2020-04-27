@@ -8,7 +8,7 @@ class Seminar extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('upload', 'master', 'notification'));
-		$this->load->model(array('pembimbing_model', 'akun_model', 'penilaian_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model'));
+		$this->load->model(array('pembimbing_model', 'akun_model', 'penilaian_model', 'seminar_model', 'pilihperusahaan_model', 'dosen_prodi_model', 'seminar_model', 'kelengkapan_model'));
 		$this->load->library('form_validation');
 		//middleware
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
@@ -42,6 +42,24 @@ class Seminar extends MY_Controller
 					array(
 						'name' => 'Data Penilaian Seminar ' . $tahunAkademik[0]->tahun_akademik,
 						'href' => site_url('seminar?m=data_penilaian'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Data penilaian seminar terkini  ' . $tahunAkademik[0]->tahun_akademik
+					),
+					array(
+						'name' => 'Proses Revisi ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=revisi'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Daftar mahasiswa revisi ' . $tahunAkademik[0]->tahun_akademik
+					),
+					array(
+						'name' => 'Proses Pemberkasan ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=pemberkasan'),
+						'icon' => 'fas fa-file-excel',
+						'desc' => 'Daftar pemberkasan terkini  ' . $tahunAkademik[0]->tahun_akademik
+					),
+					array(
+						'name' => 'Rekap Prakerin ' . $tahunAkademik[0]->tahun_akademik,
+						'href' => site_url('seminar?m=rekap_akhir'),
 						'icon' => 'fas fa-file-excel',
 						'desc' => 'Data penilaian seminar terkini  ' . $tahunAkademik[0]->tahun_akademik
 					),
@@ -82,6 +100,15 @@ class Seminar extends MY_Controller
 		if (isset($get['m'])) {
 			switch ($get['m']) {
 				case 'pendaftaran':
+					if (isset($get['q']) && $get['q'] == 'acc') {
+						return $this->acc_verifikasi_pendaftaran();
+					}
+					if (isset($get['q']) && $get['q'] == 'dec') {
+						return $this->dec_verifikasi_pendaftaran();
+					}
+					if (isset($get['q']) && $get['q'] == 'preview') {
+						return $this->get_preview_modal_verif();
+					}
 					return $this->index_verifikasi_pendaftaran();
 					break;
 				case 'kelola':
@@ -163,7 +190,28 @@ class Seminar extends MY_Controller
 					return $this->get_list_jadwal();
 					break;
 				case 'data_penilaian':
+					if (isset($get['q']) && $get['q'] == 'filter_belum_menilai') {
+						return $this->filter_belum_dinilai();
+					}
 					return $this->get_list_penilaian();
+					break;
+				case 'revisi':
+					return $this->index_proses_revisi();
+					break;
+				case 'pemberkasan':
+					if (isset($get['q']) && $get['q'] == 'preview') {
+						return $this->get_modal_preview();
+					}
+					if (isset($get['q']) && $get['q'] == 'u') {
+						return $this->update_pemberkasan();
+					}
+					if (isset($get['q']) && $get['q'] == 'belum') {
+						return $this->belum_pemberkasan();
+					}
+					return $this->index_proses_pemberkasan();
+					break;
+				case 'rekap_akhir':
+					return $this->index_rekap_akhir();
 					break;
 				default:
 					redirect(site_url('seminar'));
@@ -172,20 +220,200 @@ class Seminar extends MY_Controller
 
 		$this->load->view('admin/seminar', $data);
 	}
-	public function index_verifikasi_pendaftaran(){
+
+	public function index_proses_revisi()
+	{
 		$data = array();
-		$this->load->view('admin/seminar_verifikasi_pendaftaran',$data);
+		$penilaian = $this->penilaian_model;
+		if (isset($_POST['ajax'])) {
+			echo json_encode(array('data' => $penilaian->get_status_revisi()));
+			return;
+		}
+		$this->load->view('admin/rekap_revisi', $data);
 	}
+
+	public function belum_pemberkasan()
+	{
+		$data = array();
+		$pemberkasan = $this->kelengkapan_model;
+		$data = $pemberkasan->get_belum_pemberkasan();
+		echo json_encode(array('data' => $data));
+		return;
+
+	}
+
+	public function index_proses_pemberkasan()
+	{
+		$data = array();
+		$pemberkasan = $this->kelengkapan_model;
+		if (isset($_POST['ajax'])) {
+			$pemberkasans = $pemberkasan->get_all_pemberkasan();
+			echo json_encode(array('data' => $pemberkasans));
+			return;
+		}
+		$this->load->view('admin/rekap_pemberkasan', $data);
+	}
+
+	public function update_pemberkasan()
+	{
+		$post = $this->input->post();
+		$pemberkasan = $this->kelengkapan_model;
+		if (isset($post['update']) && $post['update'] == 'acc') {
+			$status = 'approve';
+			$file = $post['file'];
+		}
+		if (isset($post['update']) && $post['update'] == 'dec') {
+			$status = 'reupload';
+			$file = $post['file'];
+		}
+		$pemberkasan->update_kelengkapan($status, $file);
+		redirect(site_url('seminar?m=pemberkasan'));
+	}
+
+	//modal preview pemberkasan
+	public function get_modal_preview()
+	{
+		$site_update = site_url('seminar?m=pemberkasan&q=u');
+		$base_uri = base_url('/ViewerJS/#../file_upload/berkas/');
+		$data_pemberkasan = masterdata('tb_kelengkapan_berkas', "nama_file ='$_POST[file]'", 'status');
+		$disabled = ($data_pemberkasan->status == "approve" || $data_pemberkasan->status == "reupload") ? "disabled" : "";
+		if (isset($_POST['file'])) {
+			echo '<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="deleteModalLabel">Kelengkapan Berkas Mahasiswa</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<iframe id="preview-berkas" class="col-md-12 px-0" style="border-radius: 6px"
+										height="500px"
+										src="' . $base_uri . $_POST["file"] . '"
+										frameborder="0"></iframe>
+							</div>
+							<div class="modal-footer">
+								<form action="' . $site_update . '" method="POST">
+									<input type="hidden" name="file" value="' . $_POST["file"] . '"/>
+									<button id="btn-ulang" type="submit" ' . $disabled . ' name="update" value="dec" class="btn btn-sm btn-warning text-white ' . $disabled . '">
+										Upload ulang
+									</button>
+									<button id="btn-terima" type="submit" ' . $disabled . ' name="update" value="acc" class="btn btn-sm btn-success text-white ' . $disabled . '">Terima</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>';
+		}
+	}
+
+	// modal verifikasi pendaftaran
+	public function get_preview_modal_verif()
+	{
+		$post = $this->input->post();
+		$status = $post['status'] != 'NULL' ? (($post['status'] == 'accept') || ($post['status'] == 'reupload') ? 'disabled' : '') : "";
+		echo '
+		<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header pb-0">
+								<h5 class="modal-title" id="deleteModalLabel">Berkas Pendaftaran Mahasiswa</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="d-flex justify-content-end mb-3">
+									<a href="' . site_url('seminar?m=pendaftaran&q=dec&id=' . $post['verif']) . '"
+									   class="btn btn-sm btn-danger ' . $status . '">Upload
+										Ulang</a>
+									<a href="' . site_url('seminar?m=pendaftaran&q=acc&id=' . $post['verif']) . '"
+									   class="btn btn-sm btn-primary mr-1 ' . $status . '">Terima</a>
+								</div>
+								<iframe class="col-md-12 px-0"
+										style="border-radius: 6px"
+										height="500px"
+										src="' . base_url('/ViewerJS/#../file_upload/pendaftaran_seminar/' . $post['file']) . '"
+										frameborder="0">
+								</iframe>
+							</div>
+						</div>
+					</div>
+				</div>';
+	}
+
+	public function index_rekap_akhir()
+	{
+		$data = array();
+		$penilaian = $this->penilaian_model;
+		if (isset($_POST['ajax'])) {
+			echo json_encode(array('data' => $penilaian->get_all_rekap()));
+			return;
+		}
+		$tahunAkademik = masterdata('tb_waktu',null,'(select tahun_akademik from tahun_akademik where id_tahun_akademik = tb_waktu.id_tahun_akademik) tahun_akademik',true);
+		$data['tahun'] = $tahunAkademik[0]->tahun_akademik;
+		$this->load->view('admin/rekap_akhir', $data);
+	}
+
+	public function filter_belum_dinilai()
+	{
+		$data = array();
+		$post = $this->input->post();
+		$penilaian = $this->penilaian_model;
+		$data['belum_dinilai'] = $penilaian->get_belum_penilaian_seminar();
+		$this->load->view('admin/seminar_list_belum_dinilai', $data);
+	}
+
+	public function acc_verifikasi_pendaftaran()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$seminar = $this->seminar_model;
+			if ($seminar->acc_verifikasi_pendaftaran($get['id'])) {
+				$this->session->set_flashdata(array('status' => 'success', 'message' => 'Berhasil'));
+			} else {
+				$this->session->set_flashdata(array('status' => 'error', 'message' => 'Gagal'));
+			}
+		}
+		redirect('seminar?m=pendaftaran');
+	}
+
+	public function dec_verifikasi_pendaftaran()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$seminar = $this->seminar_model;
+			if ($seminar->dec_verifikasi_pendaftaran($get['id'])) {
+				$this->session->set_flashdata(array('status' => 'success', 'message' => 'Berhasil'));
+			} else {
+				$this->session->set_flashdata(array('status' => 'error', 'message' => 'Gagal'));
+			}
+		}
+		redirect(site_url('seminar?m=pendaftaran'));
+	}
+
+	public function index_verifikasi_pendaftaran()
+	{
+		$data = array();
+		$seminar = $this->seminar_model;
+		$tanggal_seminar = $seminar->get_all_seminar_date();
+		$data['tanggal_seminar'] = $tanggal_seminar;
+		$this->load->view('admin/seminar_verifikasi_pendaftaran', $data);
+	}
+
 	public function get_list_penilaian()
 	{
 		$post = $this->input->post();
 		$penilaian = $this->penilaian_model;
-		$data_penilaian = $penilaian->get_penilaian_seminar();
+		$data = array();
+		$data_penilaian = $penilaian->get_all_penilaian_seminar();
+		$data['list_penilaian'] = $data_penilaian;
 		if (isset($post['ajax'])) {
 			echo json_encode((object)array('data' => $data_penilaian));
 			return;
 		}
-		$this->load->view('admin/seminar_list_penilaian');
+		$this->load->view('admin/seminar_list_penilaian', $data);
 	}
 
 	public function get_list_jadwal()

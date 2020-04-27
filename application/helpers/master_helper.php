@@ -53,21 +53,33 @@ if (!function_exists('custom_query')) {
 		return $ci->db->query($query)->row();
 	}
 }
-if(!function_exists('convert_date')){
-	function convert_date($date,$format = 'long'){
-		$month_name = array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
-		if($format == 'long'){
-			$expleded =  explode('-',$date);
-			if(count($expleded)== 3){
-				return $expleded[2].' '.$month_name[$expleded[1]-1].' '.$expleded[0];
-			}
-			else{
+if (!function_exists('convert_date')) {
+	function convert_date($date, $format = 'long')
+	{
+		$month_name = array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+		if ($format == 'long') {
+			$expleded = explode('-', $date);
+			if (count($expleded) == 3) {
+				return $expleded[2] . ' ' . $month_name[$expleded[1] - 1] . ' ' . $expleded[0];
+			} else {
 				return $date;
 			}
 		}
 	}
 }
-if (!function_exists('get_jadwal')) {
+if (!function_exists('explode_date')) {
+	function explode_date($date)
+	{
+		$expleded = explode('T', $date);
+		if (count($expleded) == 2) {
+			return $expleded[0];
+		} else {
+			return $date;
+		}
+	}
+}
+
+if (!function_exists('get_time_range')) {
 	function get_time_range($start, $end, $return)
 	{
 		$arrStart = explode('T', $start);
@@ -77,7 +89,7 @@ if (!function_exists('get_jadwal')) {
 		$timeStart = $arrStart[1];
 		$timeEnd = $arrEnd[1];
 		if ($return == 'time') {
-			if($start === ""){
+			if ($start === "") {
 				return null;
 			}
 			$arrTimeStart = explode(':', $timeStart);
@@ -89,18 +101,18 @@ if (!function_exists('get_jadwal')) {
 			return implode(':', $arrTimeStart) . ' - ' . implode(':', $arrTimeEnd);
 		}
 		if ($return == 'start') {
-			if($start === ""){
+			if ($start === "") {
 				return null;
 			}
 			return $timeStart;
 		}
 		if ($return == 'end') {
-			if($start === ""){
+			if ($start === "") {
 				return null;
 			}
 			return $timeEnd;
 		}
-		if($return == 'datestart'){
+		if ($return == 'datestart') {
 			return $dateStart;
 		}
 		if ($return == 'date') {

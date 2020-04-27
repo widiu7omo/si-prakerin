@@ -189,7 +189,6 @@ $currentTahun = datajoin('tb_waktu', null, 'tb_waktu.*,ta.tahun_akademik', [
                 if (data.mahasiswa[0].status === 'terima') {
                     $(row).addClass('text-white bg-success');
                 }
-
             }
         });
 

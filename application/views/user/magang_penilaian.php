@@ -290,7 +290,7 @@ $perusahaan = isset($perusahaan_terpilih)?$perusahaan_terpilih:null;
 				idbm: $('input[name="idbm"]').val()
 			}
 			$.ajax({
-				url: "<?php echo site_url('magang?m=penilaian&q=') ?>" + mode,
+				url: "<?php echo site_url('magang?m=penilaian&q=') ?>" + 'i',
 				method: "POST",
 				dataType: "json",
 				data: data,

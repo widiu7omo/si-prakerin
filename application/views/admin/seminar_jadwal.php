@@ -553,6 +553,7 @@
 					selectable: true,
 					selectHelper: true,
 					editable: true,
+					eventLimit: true,
 					eventSources: [
 						{
 							url: "<?php echo site_url('seminar?m=jadwal') ?>",

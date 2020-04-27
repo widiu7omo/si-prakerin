@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2020 at 04:01 AM
+-- Generation Time: Feb 07, 2020 at 09:02 AM
 -- Server version: 5.5.60-MariaDB
 -- PHP Version: 5.4.16
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `tabel_foto` (
   `tanggal_foto` date NOT NULL,
   `data_foto` varchar(100) NOT NULL,
   `kategori_foto` enum('galeri','slideshows') NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tabel_foto`
@@ -107,8 +107,7 @@ INSERT INTO `tabel_foto` (`id_foto`, `nama_foto`, `deskripsi_foto`, `tanggal_fot
 (13, 'Monitoring PKL ke Perusahaan Software House Malang', '-', '2019-07-30', '1564475106_Monitoring_PKL_ke_Perusahaan_Software_House_Malang.jpg', 'galeri'),
 (14, 'Monitoring PKL ke PLN AP2B Banjarbaru', '-', '2019-07-30', '1564475171_Monitoring_PKL_ke_PLN_AP2B_Banjarbaru.jpg', 'galeri'),
 (15, 'Monitoring PKL ke PT. Smart Tarjun Kotabaru', '-', '2019-07-30', '1564475264_Monitoring_PKL_ke_PT__Smart_Tarjun_Kotabaru.jpg', 'galeri'),
-(16, 'Monitoring PKL ke PT. Angkasa Pura I', '-', '2019-07-30', '1564475336_Monitoring_PKL_ke_PT__Angkasa_Pura_I.jpg', 'galeri'),
-(17, '', '', '2019-11-26', '1574753834.jpg', 'slideshows');
+(16, 'Monitoring PKL ke PT. Angkasa Pura I', '-', '2019-07-30', '1564475336_Monitoring_PKL_ke_PT__Angkasa_Pura_I.jpg', 'galeri');
 
 -- --------------------------------------------------------
 
@@ -160,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `tabel_kategori` (
   `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(100) NOT NULL,
   `slug_kategori` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tabel_kategori`
@@ -205,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `tb_akun` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   `id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=621 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=622 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_akun`
@@ -304,6 +303,7 @@ INSERT INTO `tb_akun` (`username`, `password`, `created_at`, `updated_at`, `id`)
 ('agustiannoor@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 431),
 ('angkasa@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 407),
 ('arif@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 405),
+('blogprakerin@politala.ac.id', '$2y$10$.KJEr3kVLtJbtjkgskOHW.k1cHm.94bmrCUPauWncuRGbX4D9bKU.', '2020-01-22 07:31:48', NULL, 621),
 ('dosendua@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 530),
 ('dosen_satu@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 529),
 ('emalestari@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 430),
@@ -337,7 +337,7 @@ INSERT INTO `tb_akun` (`username`, `password`, `created_at`, `updated_at`, `id`)
 ('sandri@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 410),
 ('simpkl@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 442),
 ('sukma@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 416),
-('titikwijayanti@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-17 02:51:13', NULL, 620),
+('titikwijayati@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-17 02:51:13', NULL, 620),
 ('veri@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 441),
 ('wanyuliyanti@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 403),
 ('winda@politala.ac.id', 'ad326d44d54f71c7a355039de5baf583', '2020-01-16 15:49:31', NULL, 428),
@@ -420,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `tb_dosen_bimbingan_mhs` (
   `judul_laporan_mhs` varchar(100) DEFAULT NULL,
   `status_judul` enum('ulang','setuju') DEFAULT NULL,
   `status_seminar` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=325 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=332 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_dosen_bimbingan_mhs`
@@ -463,7 +463,6 @@ INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akadem
 (273, 'TA002', 1, 'A1317041', '140825117', 'Aplikasi Pelaksanaan Pemeriksaan Harian (P2H) Unit A2B dan Truck Production Online pada PT. Kalimant', 'setuju', 'setuju'),
 (274, 'TA002', 63, 'A1317064', '140102098', 'Sistem Informasi Akademik United Tractors School Berbasis Web pada PT. United Tractors Tbk Cabang Ba', 'setuju', 'setuju'),
 (275, 'TA002', 62, 'A1317050', '140102098', 'Sistem Informasi  Monthly Instructor Utility And Development Record Berbasis Web Di PT United Tracto', 'setuju', 'setuju'),
-(276, 'TA002', 68, 'A1316021', '160201151', 'Sistem informasi bla bla bka', 'setuju', 'setuju'),
 (277, 'TA002', 31, 'A1317027', '140102098', 'Sistem Informasi Survey Icare Sales Dan SA (Service Advisor) Toyota Auto2000 Banjarmasin Berbasis We', 'setuju', 'setuju'),
 (278, 'TA002', 30, 'A1317068', '140102098', 'SISTEM INFORMASI MANAGEMENT COMPLAINT CUSTOMER BERBASIS WEB DI AUTO2000 BANJARMASIN', 'setuju', 'setuju'),
 (279, 'TA002', 61, 'A1317111', '140102098', 'Sistem Informasi Utilisasi Mobil Dan Service PT Cipta Krida Bahari Banjarmasin Berbasis Web', 'setuju', 'setuju'),
@@ -472,7 +471,6 @@ INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akadem
 (282, 'TA002', 999, 'A1317042', '09081015', 'Aplikasi Pelaporan Surat Perintah Perjalanan Dinas (SPPD) Pada PT PLN (Persero) UP2B Kalimantan', 'setuju', 'setuju'),
 (283, 'TA002', 998, 'A1317052', '09081015', 'Alat Monitoring Arus dan Tegangan Supplay DC Gardu Induk PT PLN (Persero) UP2B Kalimantan Berbasis A', 'setuju', 'setuju'),
 (284, 'TA002', 1007, 'A1317055', '140825117', 'Sistem Informasi Data Karyawan Berbasis Web Php', 'setuju', 'setuju'),
-(285, 'TA002', 1006, 'A1317100', '140825117', 'Aplikasi Peminjaman Tools Berbasis Web Pada PT. United Tractors Site Rantau', 'setuju', 'setuju'),
 (286, 'TA002', 1032, 'A1317106', '140814113', 'Sistem Informasi Perpustakaan pada Badan Penelitian Sumber Daya Manusia Komunikasi dan Informatika( ', 'setuju', 'setuju'),
 (287, 'TA002', 1022, 'A1317026', '160201153', 'SIMA (Sistem Informasi Management Audit) Inventory pada PT. Trio Motor berbasis Mobile ', 'setuju', 'setuju'),
 (288, 'TA002', 1037, 'A1317016', '160201153', 'Sistem Informasi Point of Sales dan Inventory Pada Amanah Borneo Park Berbasis Web', 'setuju', 'setuju'),
@@ -492,7 +490,7 @@ INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akadem
 (302, 'TA002', 1012, 'A1317035', '150801145', 'Sistem Informasi Marketing dan Sales Pada PT. Indonesia Comnets Plus (ICON+) Kantor Perwakilan Kalim', 'setuju', 'setuju'),
 (303, 'TA002', 1011, 'A1317076', '150801145', 'APLIKASI IBOX (INTEGRATED BUSINESS OPERATION EXCELLENCE) BERBASIS WEB PADA PT INDONESIA COMNETS PLUS', 'setuju', 'setuju'),
 (304, 'TA002', 1009, 'A1317009', '150801145', 'INTEGRATED BUSINESS OPERATION EXCELLENCE (IBOX) BERBASIS WEB PADA PT INDONESIA COMNETS PLUS KANTOR P', 'setuju', 'setuju'),
-(305, 'TA002', 1042, 'A1317045', '120102070', 'Sistem Absensi Karyawan berbasis Web dengan Qrcode CV. Fast Media Komputindo Banjarbaru', 'setuju', 'setuju'),
+(305, 'TA002', 1042, 'A1317045', '120102070', 'Sistem Informasi Absensi Karyawan dengan Qrcode dan Geolocation Berbasis Web pada CV. Fast Media Kom', 'setuju', 'setuju'),
 (306, 'TA002', 1040, 'A1317066', '120102070', 'Sistem Informasi E-kinerja Karyawan Berbasis Web pada CV. Fast Media Komputindo', 'setuju', 'setuju'),
 (307, 'TA002', 1041, 'A1317025', '120102070', 'Aplikasi Manajemen Proyek (APRO) Berbasis Web Pada CV. Fast Media Komputindo', 'setuju', 'setuju'),
 (308, 'TA002', 1045, 'A1317067', '09081015', 'Konfigurasi Jalur Komunikasi Arus Dan Tegangan Supplay DC Menggunakan Protokol Modbus Pada SCADA PT ', 'setuju', 'setuju'),
@@ -506,11 +504,14 @@ INSERT INTO `tb_dosen_bimbingan_mhs` (`id_dosen_bimbingan_mhs`, `id_tahun_akadem
 (316, 'TA002', 1034, 'A1317080', '199007112015041001', 'Aplikasi Perhitungan OPEX (Operational Expenses) Berbasis Web Pada PT PLN (persero) Unit Pelaksana P', 'setuju', 'setuju'),
 (317, 'TA002', 1038, 'A1317075', '199007112015041001', 'PENGEMBANGAN BACK END APLIKASI PHINEMO MARKETPLACE PADA PT. PHINEMO KREASI MEDIA SEMARANG', 'setuju', 'setuju'),
 (318, 'TA002', 1039, 'A1317004', '199007112015041001', 'PENGEMBANGAN FRONT END APLIKASI PHINEMO MARKETPLACE PADA PT. PHINEMO KREASI MEDIA SEMARANG', 'setuju', 'setuju'),
-(319, 'TA002', 1029, 'A1317054', '160201151', 'Sistem Informasi Human Resources And General Affair (HRGA) Karyawan Dan Pelatihan Pada PT. Borneo In', 'setuju', 'setuju'),
 (320, 'TA002', 1010, 'A1317057', '150801145', 'APLIKASI IBOX (INTEGRATED BUSINESS OPERATION EXCELLENCE) BERBASIS WEB PADA PT. INDONESIA COMNETS PLU', 'setuju', 'setuju'),
 (321, 'TA002', 1017, 'A1317011', '090801016', 'Aplikasi e-Announcement Berbasis Web Pada PT. Geoinfo Teknologi Banjarmasin', 'setuju', 'setuju'),
-(322, 'TA002', 1049, 'A1317022', '160201151', NULL, NULL, NULL),
-(324, 'TA002', 59, 'A1317065', '140825117', NULL, NULL, NULL);
+(322, 'TA002', 1049, 'A1317022', '160201151', 'Aplikasi RAPI (Review Activity and Project Issue)  pada PT.  Pamapersada Nusantara Distrik ARIA berb', 'setuju', 'setuju'),
+(324, 'TA002', 59, 'A1317065', '140825117', 'Aplikasi pelaksanaan pemeriksaan harian (p2h) unit A2B dan truck production online pada PT. Kalimant', 'setuju', 'setuju'),
+(326, 'TA002', 1052, 'A1317020', '120102079', 'APLIKASI FOOD COURT BERBASIS WEB PADA PT. PUTRA PERKASA ABADI SITE BIB (GIRIMULYA) ', 'setuju', 'setuju'),
+(327, 'TA002', 1051, 'A1317071', '120102079', 'Sistem Informasi Pendataan Karyawan Penghuni Mess pada PT. Putra Perkasa Abadi site BIB (Giri Mulya)', 'setuju', 'setuju'),
+(330, 'TA002', 1006, 'A1317100', '140825117', 'Aplikasi Peminjaman Tools berbasis web pada PT. United Tractors Site Rantau', 'setuju', 'setuju'),
+(331, 'TA002', 1050, 'A1317093', '199007112015041001', 'Aplikasi Bank Sampah PT Arutmin Indonesia Tambang Kintap Berbasis Web', 'setuju', 'setuju');
 
 -- --------------------------------------------------------
 
@@ -525,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `tb_ga_component` (
   `penguji1` varchar(255) DEFAULT NULL,
   `penguji2` varchar(255) DEFAULT NULL,
   `tanggal` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -536,7 +537,7 @@ CREATE TABLE IF NOT EXISTS `tb_ga_component` (
 CREATE TABLE IF NOT EXISTS `tb_golongan` (
   `id_golongan` int(11) NOT NULL,
   `nama_golongan` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -548,7 +549,7 @@ CREATE TABLE IF NOT EXISTS `tb_history_judul` (
   `id` int(11) NOT NULL,
   `judul` text,
   `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_history_judul`
@@ -598,8 +599,139 @@ CREATE TABLE IF NOT EXISTS `tb_history_seminar_penilaian` (
   `id_seminar_penilaian` int(11) DEFAULT NULL,
   `nilai_seminar` varchar(25) DEFAULT NULL,
   `detail_nilai_seminar` text,
+  `tanggal_revisi` date DEFAULT NULL,
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_history_seminar_penilaian`
+--
+
+INSERT INTO `tb_history_seminar_penilaian` (`id`, `id_seminar_penilaian`, `nilai_seminar`, `detail_nilai_seminar`, `tanggal_revisi`, `update_time`) VALUES
+(1, 47, '85.70', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"87","res":"17.4"},{"name":"5. Penulisan laporan","value":"87","res":"13.05"}]', '2020-01-27', '2020-01-27 02:47:52'),
+(2, 45, '81.50', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"85","res":"17"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-01-27', '2020-01-27 02:48:26'),
+(6, 95, '82.20', '[{"name":"1. Penguasaan teori","value":"82","res":"16.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"84","res":"21"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"84","res":"16.8"}]', '2020-01-27', '2020-01-27 08:50:38'),
+(7, 96, '80.50', '[{"name":"1. Penguasaan teori","value":"81","res":"16.2"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"82","res":"12.3"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', '2020-01-27', '2020-01-27 08:52:11'),
+(8, 38, '86.40', '[{"name":"1. Penguasaan teori","value":"83","res":"16.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"86","res":"21.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"84","res":"16.8"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', '2020-01-27', '2020-01-27 10:14:48'),
+(9, 39, '77.95', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', '2020-01-31', '2020-01-31 03:21:17'),
+(10, 37, '70.05', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', '2020-02-03', '2020-02-03 05:56:05'),
+(11, 43, '89.10', '[{"name":"1. Penguasaan teori","value":"89","res":"17.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"88","res":"22"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"89","res":"17.8"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', '2020-02-03', '2020-02-03 06:26:25'),
+(12, 48, '87.35', '[{"name":"1. Penguasaan teori","value":"87","res":"17.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"89","res":"22.25"},{"name":"3. Keaktifan bimbingan","value":"82","res":"12.3"},{"name":"4. Kemampuan penulisan laporan","value":"90","res":"18"},{"name":"5. Sikap / Etika","value":"87","res":"17.4"}]', '2020-02-03', '2020-02-03 06:26:31'),
+(14, 167, '93.20', '[{"name":"1. Penyajian Presentasi","value":"99","res":"9.9"},{"name":"2. Pemahaman Materi","value":"99","res":"14.85"},{"name":"3. Hasil yang dicapai","value":"89","res":"35.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"99","res":"19.8"},{"name":"5. Penulisan laporan","value":"87","res":"13.05"}]', '2020-02-03', '2020-02-03 07:13:31'),
+(15, 104, '86.00', '[{"name":"1. Penguasaan teori","value":"87","res":"17.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"87","res":"21.75"},{"name":"3. Keaktifan bimbingan","value":"87","res":"13.05"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"89","res":"17.8"}]', '2020-02-03', '2020-02-03 07:14:22'),
+(17, 103, '84.75', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"83","res":"20.75"},{"name":"3. Keaktifan bimbingan","value":"88","res":"13.2"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"89","res":"17.8"}]', '2020-02-03', '2020-02-03 07:15:04'),
+(18, 117, '84.85', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"85","res":"21.25"},{"name":"3. Keaktifan bimbingan","value":"88","res":"13.2"},{"name":"4. Kemampuan penulisan laporan","value":"79","res":"15.8"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', '2020-02-03', '2020-02-03 07:15:22'),
+(19, 35, '78.05', '[{"name":"1. Penyajian Presentasi","value":"82","res":"8.2"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-03', '2020-02-03 07:16:37'),
+(20, 141, '87.30', '[{"name":"1. Penyajian Presentasi","value":"88","res":"8.8"},{"name":"2. Pemahaman Materi","value":"87","res":"13.05"},{"name":"3. Hasil yang dicapai","value":"87","res":"34.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"88","res":"17.6"},{"name":"5. Penulisan laporan","value":"87","res":"13.05"}]', '2020-02-03', '2020-02-03 09:11:11'),
+(21, 49, '74.75', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', '2020-02-04', '2020-02-04 00:54:15'),
+(22, 86, '82.25', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"85","res":"17"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', '2020-02-04', '2020-02-04 00:54:32'),
+(23, 25, '76.25', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-02-04', '2020-02-04 01:00:40'),
+(25, 83, '84.10', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', '2020-02-04', '2020-02-04 01:05:47'),
+(26, 151, '80.35', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"77","res":"19.25"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"78","res":"15.6"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', '2020-02-04', '2020-02-04 01:06:36'),
+(27, 158, '80.00', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', '2020-02-04', '2020-02-04 01:07:04'),
+(28, 51, '72.60', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-04', '2020-02-04 01:07:48'),
+(29, 31, '64.00', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-04', '2020-02-04 03:33:36'),
+(30, 30, '63.25', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-04', '2020-02-04 03:39:28'),
+(31, 44, '72.80', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-04', '2020-02-04 03:42:39'),
+(32, 21, '72.90', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"73","res":"10.95"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-04', '2020-02-04 03:43:01'),
+(33, 166, '83.20', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"88","res":"35.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-04', '2020-02-04 06:13:03'),
+(34, 75, '82.20', '[{"name":"1. Penyajian Presentasi","value":"83","res":"8.3"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"83","res":"33.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', '2020-02-04', '2020-02-04 09:08:02'),
+(35, 34, '82.50', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', '2020-02-04', '2020-02-04 09:44:38'),
+(36, 99, '61.75', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"55","res":"22"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-04', '2020-02-04 09:49:31'),
+(37, 93, '69.00', '[{"name":"1. Penyajian Presentasi","value":"77","res":"7.7"},{"name":"2. Pemahaman Materi","value":"71","res":"10.65"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-04', '2020-02-04 09:51:28'),
+(38, 114, '70.50', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-04', '2020-02-04 10:20:36'),
+(39, 13, '74.7', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"76","res":"19"},{"name":"3. Keaktifan bimbingan","value":"78","res":"11.7"},{"name":"4. Kemampuan penulisan laporan","value":"73","res":"14.6"},{"name":"5. Sikap / Etika","value":"72","res":"14.4"}]', '2020-02-05', '2020-02-04 23:38:38'),
+(40, 81, '80.00', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-05', '2020-02-05 00:45:37'),
+(41, 135, '68.10', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"68","res":"10.2"},{"name":"3. Hasil yang dicapai","value":"67","res":"26.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-05', '2020-02-05 01:45:16'),
+(42, 136, '67.80', '[{"name":"1. Penyajian Presentasi","value":"67","res":"6.7"},{"name":"2. Pemahaman Materi","value":"67","res":"10.05"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"69","res":"13.8"},{"name":"5. Penulisan laporan","value":"67","res":"10.05"}]', '2020-02-05', '2020-02-05 02:23:15'),
+(43, 22, '78.65', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"79","res":"11.85"},{"name":"4. Kemampuan penulisan laporan","value":"78","res":"15.6"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', '2020-02-05', '2020-02-05 02:27:05'),
+(44, 213, '72.70', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"71","res":"10.65"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-05', '2020-02-05 02:28:06'),
+(45, 50, '71.75', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', '2020-02-05', '2020-02-05 03:39:36'),
+(46, 97, '85.35', '[{"name":"1. Penyajian Presentasi","value":"82","res":"8.2"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"87","res":"34.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"88","res":"17.6"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-02-05', '2020-02-05 03:40:55'),
+(47, 16, '72', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-05', '2020-02-05 05:03:37'),
+(48, 36, '77.10', '[{"name":"1. Penyajian Presentasi","value":"79","res":"7.9"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', '2020-02-05', '2020-02-05 05:04:06'),
+(49, 20, '75.95', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', '2020-02-05', '2020-02-05 05:04:39'),
+(50, 26, '73.30', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"69","res":"10.35"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', '2020-02-05', '2020-02-05 05:04:58'),
+(51, 17, '69', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"67","res":"10.05"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-05', '2020-02-05 05:31:14'),
+(52, 46, '70.00', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"67","res":"26.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', '2020-02-05', '2020-02-05 05:31:30'),
+(53, 217, '73.05', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"73","res":"29.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"71","res":"10.65"}]', '2020-02-05', '2020-02-05 05:33:40'),
+(54, 65, '66.05', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"67","res":"10.05"}]', '2020-02-05', '2020-02-05 07:12:38'),
+(55, 61, '71.85', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-05', '2020-02-05 08:33:15'),
+(56, 98, '84.20', '[{"name":"1. Penyajian Presentasi","value":"86","res":"8.6"},{"name":"2. Pemahaman Materi","value":"83","res":"12.45"},{"name":"3. Hasil yang dicapai","value":"84","res":"33.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"84","res":"16.8"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', '2020-02-05', '2020-02-05 08:40:58'),
+(57, 112, '74.25', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', '2020-02-05', '2020-02-05 08:47:39'),
+(58, 64, '75.10', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"76","res":"11.4"}]', '2020-02-05', '2020-02-05 09:05:44'),
+(59, 60, '73.45', '[{"name":"1. Penyajian Presentasi","value":"71","res":"7.1"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-05', '2020-02-05 09:05:57'),
+(60, 63, '76.35', '[{"name":"1. Penyajian Presentasi","value":"76","res":"7.6"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"76","res":"15.2"},{"name":"5. Penulisan laporan","value":"74","res":"11.1"}]', '2020-02-05', '2020-02-05 09:06:00'),
+(61, 62, '72.00', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"73","res":"29.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"71","res":"14.2"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', '2020-02-05', '2020-02-05 09:06:06'),
+(62, 80, '62.15', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"62","res":"12.4"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', '2020-02-05', '2020-02-05 09:06:25'),
+(63, 79, '75.00', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', '2020-02-05', '2020-02-05 09:06:36'),
+(64, 91, '74.90', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-02-05', '2020-02-05 09:08:19'),
+(65, 15, '74.75', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-06', '2020-02-06 01:44:18'),
+(66, 24, '67.60', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-06', '2020-02-06 01:47:37'),
+(67, 56, '66.75', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-06', '2020-02-06 01:52:05'),
+(68, 100, '80.10', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"78","res":"11.7"},{"name":"3. Hasil yang dicapai","value":"82","res":"32.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-02-06', '2020-02-06 02:32:54'),
+(69, 101, '92.25', '[{"name":"1. Penyajian Presentasi","value":"90","res":"9"},{"name":"2. Pemahaman Materi","value":"90","res":"13.5"},{"name":"3. Hasil yang dicapai","value":"95","res":"38"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"95","res":"19"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', '2020-02-06', '2020-02-06 02:33:04'),
+(70, 102, '92.25', '[{"name":"1. Penyajian Presentasi","value":"90","res":"9"},{"name":"2. Pemahaman Materi","value":"90","res":"13.5"},{"name":"3. Hasil yang dicapai","value":"95","res":"38"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"95","res":"19"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', '2020-02-06', '2020-02-06 02:33:09'),
+(71, 72, '81.50', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"78","res":"11.7"}]', '2020-02-06', '2020-02-06 02:34:31'),
+(72, 71, '81.30', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"78","res":"11.7"}]', '2020-02-06', '2020-02-06 02:34:57'),
+(73, 73, '83.30', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"85","res":"17"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', '2020-02-06', '2020-02-06 02:35:08'),
+(74, 52, '82.20', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"82","res":"20.5"},{"name":"3. Keaktifan bimbingan","value":"86","res":"12.9"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"86","res":"17.2"}]', '2020-02-06', '2020-02-06 03:09:46'),
+(75, 58, '73.30', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"73","res":"10.95"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"71","res":"10.65"}]', '2020-02-06', '2020-02-06 03:10:54'),
+(76, 67, '82.60', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"78","res":"19.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', '2020-02-06', '2020-02-06 03:14:24'),
+(77, 87, '84.60', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"85","res":"21.25"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"85","res":"17"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', '2020-02-06', '2020-02-06 03:14:31'),
+(78, 66, '76.60', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"75","res":"11.25"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', '2020-02-06', '2020-02-06 03:15:02'),
+(79, 133, '75.85', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"73","res":"18.25"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', '2020-02-06', '2020-02-06 04:00:15'),
+(80, 134, '78.05', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"77","res":"19.25"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"78","res":"15.6"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', '2020-02-06', '2020-02-06 04:00:34'),
+(81, 164, '75.95', '[{"name":"1. Penguasaan teori","value":"74","res":"14.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', '2020-02-06', '2020-02-06 04:01:00'),
+(82, 165, '75.95', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"76","res":"15.2"}]', '2020-02-06', '2020-02-06 04:01:19'),
+(83, 192, '76.15', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', '2020-02-06', '2020-02-06 04:02:04'),
+(84, 215, '76.15', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', '2020-02-06', '2020-02-06 04:02:45'),
+(85, 216, '76.15', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', '2020-02-06', '2020-02-06 04:02:58'),
+(86, 77, '84.65', '[{"name":"1. Penguasaan teori","value":"84","res":"16.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"83","res":"20.75"},{"name":"3. Keaktifan bimbingan","value":"86","res":"12.9"},{"name":"4. Kemampuan penulisan laporan","value":"84","res":"16.8"},{"name":"5. Sikap / Etika","value":"87","res":"17.4"}]', '2020-02-06', '2020-02-06 05:37:54'),
+(87, 130, '81.40', '[{"name":"1. Penguasaan teori","value":"84","res":"16.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"83","res":"16.6"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', '2020-02-06', '2020-02-06 06:34:21'),
+(88, 76, '75.50', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-06', '2020-02-06 06:50:49'),
+(89, 163, '69.25', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-06', '2020-02-06 06:56:50'),
+(90, 70, '70.70', '[{"name":"1. Penyajian Presentasi","value":"69","res":"6.9"},{"name":"2. Pemahaman Materi","value":"68","res":"10.2"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', '2020-02-06', '2020-02-06 07:27:27'),
+(91, 68, '68.95', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"71","res":"10.65"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-06', '2020-02-06 07:27:35'),
+(92, 94, '70.50', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-06', '2020-02-06 07:27:45'),
+(93, 69, '68.90', '[{"name":"1. Penyajian Presentasi","value":"68","res":"6.8"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"67","res":"13.4"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', '2020-02-06', '2020-02-06 07:27:58'),
+(94, 144, '81.45', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"82","res":"32.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', '2020-02-06', '2020-02-06 07:28:06'),
+(95, 85, '80.15', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"74","res":"14.8"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', '2020-02-06', '2020-02-06 07:36:20'),
+(96, 84, '83.10', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', '2020-02-06', '2020-02-06 07:38:05'),
+(97, 180, '83.95', '[{"name":"1. Penyajian Presentasi","value":"83","res":"8.3"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"83","res":"16.6"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', '2020-02-06', '2020-02-06 08:09:56'),
+(98, 148, '83.35', '[{"name":"1. Penyajian Presentasi","value":"83","res":"8.3"},{"name":"2. Pemahaman Materi","value":"84","res":"12.6"},{"name":"3. Hasil yang dicapai","value":"84","res":"33.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"83","res":"12.45"}]', '2020-02-06', '2020-02-06 08:15:53'),
+(99, 153, '82.85', '[{"name":"1. Penyajian Presentasi","value":"82","res":"8.2"},{"name":"2. Pemahaman Materi","value":"83","res":"12.45"},{"name":"3. Hasil yang dicapai","value":"83","res":"33.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"84","res":"12.6"}]', '2020-02-06', '2020-02-06 08:35:28'),
+(100, 218, '72.10', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-06', '2020-02-06 08:51:31'),
+(101, 18, '83.70', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"87","res":"21.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', '2020-02-06', '2020-02-06 09:09:44'),
+(102, 161, '70.55', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-06', '2020-02-06 09:52:09'),
+(103, 109, '75.10', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"79","res":"11.85"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-06', '2020-02-06 10:25:31'),
+(104, 168, '80.00', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-02-07', '2020-02-07 00:16:13'),
+(105, 154, '76.10', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"76","res":"30.4"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', '2020-02-07', '2020-02-07 01:04:57'),
+(106, 122, '79.60', '[{"name":"1. Penguasaan teori","value":"82","res":"16.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"78","res":"19.5"},{"name":"3. Keaktifan bimbingan","value":"78","res":"11.7"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', '2020-02-07', '2020-02-07 01:32:39'),
+(107, 138, '72.65', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"71","res":"10.65"}]', '2020-02-07', '2020-02-07 01:32:52'),
+(108, 229, '74.75', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', '2020-02-07', '2020-02-07 01:33:17'),
+(109, 89, '66.50', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', '2020-02-07', '2020-02-07 01:33:42'),
+(110, 175, '56.45', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"63","res":"9.45"},{"name":"3. Hasil yang dicapai","value":"50","res":"20"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', '2020-02-07', '2020-02-07 01:34:02'),
+(111, 174, '81.30', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"82","res":"12.3"},{"name":"4. Kemampuan penulisan laporan","value":"83","res":"16.6"},{"name":"5. Sikap / Etika","value":"82","res":"16.4"}]', '2020-02-07', '2020-02-07 01:34:19'),
+(112, 106, '80.50', '[{"name":"1. Penyajian Presentasi","value":"81","res":"8.1"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"81","res":"32.4"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-02-07', '2020-02-07 01:38:25'),
+(113, 196, '80.10', '[{"name":"1. Penyajian Presentasi","value":"81","res":"8.1"},{"name":"2. Pemahaman Materi","value":"82","res":"12.3"},{"name":"3. Hasil yang dicapai","value":"83","res":"33.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-07', '2020-02-07 01:38:42'),
+(114, 195, '71.65', '[{"name":"1. Penyajian Presentasi","value":"68","res":"6.8"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', '2020-02-07', '2020-02-07 01:41:18'),
+(115, 147, '77.50', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', '2020-02-07', '2020-02-07 02:10:13'),
+(116, 169, '76.50', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', '2020-02-07', '2020-02-07 02:10:23'),
+(117, 190, '75.00', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"60","res":"12"},{"name":"5. Sikap / Etika","value":"75","res":"15"}]', '2020-02-07', '2020-02-07 02:10:34'),
+(118, 183, '80.05', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"79","res":"11.85"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', '2020-02-07', '2020-02-07 04:36:54'),
+(119, 110, '81.40', '[{"name":"1. Penguasaan teori","value":"79","res":"15.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"89","res":"17.8"},{"name":"5. Sikap / Etika","value":"79","res":"15.8"}]', '2020-02-07', '2020-02-07 04:37:23'),
+(120, 129, '68.55', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', '2020-02-07', '2020-02-07 06:06:16'),
+(121, 54, '70.00', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', '2020-02-07', '2020-02-07 06:07:02'),
+(122, 149, '75.80', '[{"name":"1. Penyajian Presentasi","value":"79","res":"7.9"},{"name":"2. Pemahaman Materi","value":"78","res":"11.7"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', '2020-02-07', '2020-02-07 06:38:47'),
+(123, 27, '80.10', '[{"name":"1. Penguasaan teori","value":"74","res":"14.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"83","res":"20.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"74","res":"14.8"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', '2020-02-07', '2020-02-07 07:55:58'),
+(124, 159, '80.60', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"78","res":"11.7"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"83","res":"16.6"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', '2020-02-07', '2020-02-07 07:56:13'),
+(125, 157, '75.85', '[{"name":"1. Penguasaan teori","value":"73","res":"14.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', '2020-02-07', '2020-02-07 08:31:29'),
+(126, 179, '81.75', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', '2020-02-07', '2020-02-07 08:31:39'),
+(127, 23, '72.30', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"76","res":"11.4"},{"name":"4. Kemampuan penulisan laporan","value":"72","res":"14.4"},{"name":"5. Sikap / Etika","value":"75","res":"15"}]', '2020-02-07', '2020-02-07 08:32:44'),
+(128, 33, '65.30', '[{"name":"1. Penguasaan teori","value":"64","res":"12.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"60","res":"15"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"70","res":"14"}]', '2020-02-07', '2020-02-07 08:33:28'),
+(129, 32, '65.10', '[{"name":"1. Penguasaan teori","value":"63","res":"12.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"60","res":"15"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"70","res":"14"}]', '2020-02-07', '2020-02-07 08:33:50'),
+(130, 197, '80.00', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"79","res":"11.85"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"81","res":"12.15"}]', '2020-02-07', '2020-02-07 08:53:31');
 
 -- --------------------------------------------------------
 
@@ -648,7 +780,7 @@ CREATE TABLE IF NOT EXISTS `tb_jawaban_kuisioner` (
   `nip_nik` int(11) DEFAULT NULL,
   `id_perusahaan` int(11) DEFAULT NULL,
   `jawaban` mediumtext
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -660,7 +792,7 @@ CREATE TABLE IF NOT EXISTS `tb_jenis_surat` (
   `id_jenis_surat` int(11) NOT NULL,
   `nama_jenis_surat` varchar(100) DEFAULT NULL,
   `suffix_no_surat` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_jenis_surat`
@@ -8448,8 +8580,17 @@ INSERT INTO `tb_kecamatan` (`id_kecamatan`, `id_kab_kota`, `nama_kecamatan`) VAL
 CREATE TABLE IF NOT EXISTS `tb_kelengkapan_berkas` (
   `id` int(11) NOT NULL,
   `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
-  `nama_file` text
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `nama_file` text,
+  `tanggal_pemberkasan` date DEFAULT NULL,
+  `status` enum('approve','pending','reupload','') NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_kelengkapan_berkas`
+--
+
+INSERT INTO `tb_kelengkapan_berkas` (`id`, `id_dosen_bimbingan_mhs`, `nama_file`, `tanggal_pemberkasan`, `status`) VALUES
+(1, 250, 'A1317058_-_Nadya_Alfisyah3.pdf', '2020-02-07', 'reupload');
 
 -- --------------------------------------------------------
 
@@ -8491,7 +8632,7 @@ CREATE TABLE IF NOT EXISTS `tb_konsultasi_bimbingan_offline` (
   `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL,
   `lembar_konsultasi` text,
   `tanggal` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_konsultasi_bimbingan_offline`
@@ -8534,7 +8675,6 @@ INSERT INTO `tb_konsultasi_bimbingan_offline` (`id`, `id_dosen_bimbingan_mhs`, `
 (50, 265, 'beed99b6afe9a076e5a7a43f997996a3.pdf', NULL),
 (51, 269, '1062d6bc90d4441caca6e42f61f170e5.pdf', NULL),
 (52, 259, '7cec0038f0629866d96f06cb7d608460.pdf', NULL),
-(53, 276, 'c7473448ff44a386f6a0184cc90a1810.pdf', NULL),
 (54, 239, '5c5cce2f0eed780b470cf086e855af32.pdf', NULL),
 (55, 283, '6002fd2e2a9e39080b2367e8327d7912.pdf', NULL),
 (56, 282, 'c3bf93621029054fa7651087c0419f37.pdf', NULL),
@@ -8545,7 +8685,6 @@ INSERT INTO `tb_konsultasi_bimbingan_offline` (`id`, `id_dosen_bimbingan_mhs`, `
 (62, 288, '3c16dece7c485eb722f621dd6754ef03.pdf', NULL),
 (63, 284, '260cf64034468c4d4ad01f5a3d505ca1.pdf', NULL),
 (64, 287, 'ba91e8f3e9816d895e29f5c4adb99ac8.pdf', NULL),
-(65, 285, '0d3ed30d4201fa29c4b858de5d586d38.pdf', NULL),
 (66, 289, '09319ce1d4de73b991b59a6c8404efa2.pdf', NULL),
 (68, 313, '6d1f668f6efa0607143dc350530be793.pdf', NULL),
 (69, 306, '345f4c8348467ac73df104af14467e43.pdf', NULL),
@@ -8569,7 +8708,6 @@ INSERT INTO `tb_konsultasi_bimbingan_offline` (`id`, `id_dosen_bimbingan_mhs`, `
 (87, 296, 'a02fd8fec8bc940a20847820a6753a8b.pdf', NULL),
 (88, 293, '26db783b09352bac5f76b0d68a9b37c5.pdf', NULL),
 (89, 302, '581eb21e208d38506af6a084e327678c.pdf', NULL),
-(90, 301, '60655bc18c011c21470aa7792b197134.pdf', NULL),
 (91, 300, '7b87f9aaa4a013a523f46ff48daf54cf.pdf', NULL),
 (92, 310, 'aebf0dfbc3d0b25e2276efcecd748924.pdf', NULL),
 (93, 299, 'aecdba113e6589fc33509290be3e46b7.pdf', NULL),
@@ -8578,7 +8716,14 @@ INSERT INTO `tb_konsultasi_bimbingan_offline` (`id`, `id_dosen_bimbingan_mhs`, `
 (96, 291, '88d018b831b6634c5a70d5f479da8a68.pdf', NULL),
 (97, 292, '867955bcf14eb901254823785261118a.pdf', NULL),
 (98, 318, 'c3950a4953ac2f3d554c4a5fc4c4dd72.pdf', NULL),
-(99, 317, '857b65df0cb647fb3205574aa6cdea53.pdf', NULL);
+(99, 317, '857b65df0cb647fb3205574aa6cdea53.pdf', NULL),
+(101, 322, '4c9b47a4cef22788e6def62e9d535dd4.pdf', NULL),
+(102, 326, '16ac4ed4280fca6a8d514de54a5e5a8a.pdf', NULL),
+(103, 327, '410c5227a403111d29d9f7d5d1086d71.pdf', NULL),
+(104, 331, '46127d94d97de25f79dcff132d78c6a5.pdf', NULL),
+(105, 324, '7273707060147f65c3d9b93846628b78.pdf', NULL),
+(106, 301, '56170055dfdad8d72683f666d0561dfa.pdf', NULL),
+(107, 330, '1264fa286b8307e6e42632bbb8395105.pdf', NULL);
 
 -- --------------------------------------------------------
 
@@ -8603,7 +8748,7 @@ CREATE TABLE IF NOT EXISTS `tb_level` (
   `id_level` int(11) NOT NULL,
   `username` varchar(100) DEFAULT NULL,
   `id_master_level` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3888 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3889 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_level`
@@ -8742,7 +8887,8 @@ INSERT INTO `tb_level` (`id_level`, `username`, `id_master_level`) VALUES
 (3883, 'A1317018', 'IML006'),
 (3885, 'A1316021', 'IML006'),
 (3886, 'herpendi@politala.ac.id', 'IML001'),
-(3887, 'titikwijayanti@politala.ac.id', 'IML005');
+(3887, 'titikwijayati@politala.ac.id', 'IML005'),
+(3888, 'blogprakerin@politala.ac.id', 'IML001');
 
 -- --------------------------------------------------------
 
@@ -8771,7 +8917,6 @@ CREATE TABLE IF NOT EXISTS `tb_mahasiswa` (
 --
 
 INSERT INTO `tb_mahasiswa` (`nim`, `id_tahun_akademik`, `id_program_studi`, `username`, `nama_mahasiswa`, `alamat_mhs`, `jenis_kelamin_mhs`, `email_mhs`, `tempat_lahir_mhs`, `tanggal_lahir_mhs`, `no_hp_mahasiswa`, `nama_orangtua_mhs`, `no_hp_orangtua_mhs`) VALUES
-('A1316021', 'TA002', 'PST001', 'A1316021', 'Mahasiswa Dummy', 'Pelaihari', 'Laki-laki', 'widiu7omo@gmail.com', 'Pelaihari', '2020-01-01', '+6282335463777', 'Huna', '+623346577382'),
 ('A1317001', 'TA002', 'PST001', 'A1317001', 'Achmad Syah Maulana', 'JL. Niaga Gg. Baru', 'Laki-laki', 'achmad.syah.maulana69@gmail.com', 'Tanah Laut', '1999-06-21', '085224276886', 'Rusmiah', '085245673960'),
 ('A1317002', 'TA002', 'PST001', 'A1317002', 'Ade Ardha Reswari', 'Ds. Benua Tengah Rt.08 Rw.03 Kec.Takisung Kab.Tanah Laut', 'Perempuan', 'adeardha81@gmail.com', 'palangkaraya', '2000-06-02', '082155327086', 'Riyanto', '082357621644'),
 ('A1317003', 'TA002', 'PST001', 'A1317003', 'Adela Valiandra', 'Desa Maluka Baulin RT/RW 01 Kec.Kurau Kab.Tanah Laut', 'Perempuan', 'adelavaliandra30@gmail.com', 'karawang', '1999-03-30', '+628250798707', 'Dony Valiandra', '085298177271'),
@@ -8789,7 +8934,7 @@ INSERT INTO `tb_mahasiswa` (`nim`, `id_tahun_akademik`, `id_program_studi`, `use
 ('A1317017', 'TA002', 'PST001', 'A1317017', 'Cahya Aprilia', 'Jl. Kepuh Rt 11 Rw 02 Desa Panggung ', 'Perempuan', 'cahyaaprillia47@gmail.com', 'Pelaihari', '1999-04-26', '085246081229', 'Suharno', '085310371377'),
 ('A1317018', 'TA002', 'PST001', 'A1317018', 'Danu Rizky Maulana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('A1317019', 'TA002', 'PST001', 'A1317019', 'Dicky Sulis Stiawan', 'Jl. Pamanaran Rt 25 Rw 03 Kel.Angsau Kec.Pelaihari Kab.Tanah Laut', 'Laki-laki', 'dickyss144@gmail.com', 'Tanah Laut', '1999-07-03', '082251140197', 'SURYADI', '085252978857'),
-('A1317020', 'TA002', 'PST001', 'A1317020', 'Dita Ayu Lestari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('A1317020', 'TA002', 'PST001', 'A1317020', 'Dita Ayu Lestari', 'Desa Kebun Raya, Kec.Kintap, Kab.Tanah Laut', 'Perempuan', 'ditaayulestari02@gmail.com', 'Bantul', '1999-02-13', '+6282256850133', 'Bambang Priyono', '+6285248244505'),
 ('A1317021', 'TA002', 'PST001', 'A1317021', 'Erna Sulistyowati', 'jl.  Bung Karno Rt 10/02, Tirtajaya Kec.Bajuin', 'Perempuan', 'ernasulistyowatii05@gmail.com', 'Tanah Laut', '1999-05-27', '085821059335', 'Suwito', '082150064744'),
 ('A1317022', 'TA002', 'PST001', 'A1317022', 'Estri Nunik Hidayati', 'Jl. A. Yani Desa Asam Jaya kec. Jorong', 'Perempuan', 'estrinunikhidayati@gmail.com', 'Tanah Laut', '1999-06-14', '+6285820673385', 'Daryoni', '+6281348515298'),
 ('A1317023', 'TA002', 'PST001', 'A1317023', 'Fajar', 'Jl.bhakti  rt 03, rw 02 ', 'Laki-laki', 'fajarujangg@gmai.com', 'kapuas', '1998-02-07', '+62857505730', 'asmawar', '+6285750725730'),
@@ -8826,7 +8971,7 @@ INSERT INTO `tb_mahasiswa` (`nim`, `id_tahun_akademik`, `id_program_studi`, `use
 ('A1317066', 'TA002', 'PST001', 'A1317066', 'Norhatiah', 'Jl. Jayau Rt.09/rw.02 Desa.ambungan Kec. Pelaihari', 'Perempuan', 'norhatiah2102@gmail.com', 'Batu Mandi', '1999-02-21', '+6285750629941', 'ABD Mugeni', '+6285249382538'),
 ('A1317067', 'TA002', 'PST001', 'A1317067', 'Norida Alisa', 'Jl. Al-Fatah Gg.Berkah', 'Perempuan', 'noridaalisa03@gmail.com', 'Pelaihari', '1999-03-02', '+6283159090827', 'M.Zali', '+6285350538105'),
 ('A1317068', 'TA002', 'PST001', 'A1317068', 'Novia Sari', 'Jl. Datu Insad Rt/02 Rw/02, Desan Sambangan, kec. Bati-Bati, Kab.Tanah Laut', 'Perempuan', 'Noviasr964@gmail.com', 'Tanah Laut', '1998-11-01', '081649189984', 'Asrah', '085348038539'),
-('A1317071', 'TA002', 'PST001', 'A1317071', 'Rahma Dwi Cahyani', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('A1317071', 'TA002', 'PST001', 'A1317071', 'Rahma Dwi Cahyani', 'jl. kh.mansyur rt.14/rw.05 gang kenanga, kel. Angsau, kab. tanah laut, kec. pelaihari, prov. kalsel', 'Perempuan', 'rahm.dwi.cahyani.99@gmail.com', 'Pelaihari', '1999-11-24', '081349570865', 'purwandio', '081348614116'),
 ('A1317073', 'TA002', 'PST001', 'A1317073', 'Reka Nur Andinni', 'Jl.Niaga Pelaiahari rt 13 rw 4', 'Perempuan', 'rekanurandinni23@gmail.com', 'Pelaihari', '1999-12-23', '+6285248554702', 'Didin Jayadi ', '085251231030'),
 ('A1317074', 'TA002', 'PST001', 'A1317074', 'Renaldi Haris Aksara', 'Jl. Lingkar Atu-Atu RT.08 RW.02 , Kec. Pelaihari, Kab. Tanah Laut, Kalimantan Selatan, Indonesia', 'Laki-laki', 'harisaksararenaldi30@gmail.com', 'Marabahan', '1999-05-30', '+62 857-5318-7299', 'Misdah', '+62 852-4803-6671'),
 ('A1317075', 'TA002', 'PST001', 'A1317075', 'Rendy Saputera', 'Jl Noorsehat RT.4 RW.2 Pelaihari', 'Laki-laki', 'rendyspt20@gmail.com', 'Pelaihari', '1999-08-10', '+6282239790110', 'Indar Jaya Putra', '+6285248493940'),
@@ -8844,9 +8989,9 @@ INSERT INTO `tb_mahasiswa` (`nim`, `id_tahun_akademik`, `id_program_studi`, `use
 ('A1317090', 'TA002', 'PST001', 'A1317090', 'Sinta Esti Rahayu', 'Sungai Riam 1', 'Perempuan', 'estisinta14@gmail.com', 'Pelaihari', '1999-11-10', '085249638846', 'Darsih', '085251412856'),
 ('A1317092', 'TA002', 'PST001', 'A1317092', 'Siti Purnama', 'Desa Tambak Sarinah Rt 05 Kec Kurau', 'Perempuan', 'sitipurnama195@gmail.com', 'Tambak Sarinah', '1999-08-05', '+6285250014904', 'Marjuki', '+6285248887921'),
 ('A1317093', 'TA002', 'PST001', 'A1317093', 'Suci Febriani', 'Desa Ambawang, Kec. Batu Ampar', 'Perempuan', 'sucifebriani243@gmail.com', 'Ambawang', '1999-02-01', '+6282254769223', 'Mulyadi', '+6282255556265'),
-('A1317094', 'TA002', 'PST001', 'A1317094', 'Susanti', 'Jl. Rahayu RT.08 Desa Bawah Layung Kec. Kurau Kab. tanah Laut', 'Perempuan', 'susantisan730@gmail.com', 'Bawah Layung', '1999-10-17', '+6285821508310', 'Darmawan dan Siti rahmah', '+6282158763603'),
+('A1317094', 'TA002', 'PST001', 'A1317094', 'Susanti', 'Jl. Rahayu RT.08 Desa Bawah Layung Kec. Kurau Kab. tanah Laut', 'Perempuan', 'susantisan730@gmail.com', 'Bawah Layung', '1999-10-17', '+6283135715181', 'Darmawan dan Siti rahmah', '+6282158763603'),
 ('A1317096', 'TA002', 'PST001', 'A1317096', 'Tri Lutfiatul Rahayu', 'Jl. A. Yani RT. 07/ RW. 02 Desa Panggung, Kec. Pelaihari, Kab. Tanah Laut', 'Perempuan', 'trilutfiatulr13@gmail.com', 'Tanah Laut', '1999-08-13', '+6282112799521', 'Supeni Edi', '+6282151718882'),
-('A1317097', 'TA002', 'PST001', 'A1317097', 'Tsamara Dara Rizkita', 'Jl kelayan a gg sadar no 60', 'Perempuan', 'tsamaradara4@gmail.com', 'Banjarmasin', '0000-00-00', '+628195357658', 'Fitrian Noor', ''),
+('A1317097', 'TA002', 'PST001', 'A1317097', 'Tsamara Dara Rizkita', 'Jl kelayan a gg sadar no 60', 'Perempuan', 'tsamaradara4@gmail.com', 'Banjarmasin', '1999-01-04', '+628195357658', 'Fitrian Noor', ''),
 ('A1317098', 'TA002', 'PST001', 'A1317098', 'Wahzuni Sri Rahayu', 'Jl.Purnawirawan Gg.Damai No.48 Kelurahan Angsau Kecamatan Pelaihari Kabupaten Tanah Laut', 'Perempuan', 'wahzuni.srirahayu24@gmail.com', 'Tuban', '1998-12-24', '085750257441', 'Sulasih', '082255553522'),
 ('A1317099', 'TA002', 'PST001', 'A1317099', 'Winda Dwi Sulistia', 'jl. Trans Plasma Desa Ujung Batu RT. 011 Rw. 004 ', 'Perempuan', 'windadsulistia@gmail.com', 'Tanah Laut', '1999-07-14', '+6285350287269', 'Syahril', '+6285248093952'),
 ('A1317100', 'TA002', 'PST001', 'A1317100', 'Yeremia Handoyo', 'jl.parit mas rt.20 rw.06 kel.Angsau kec.pelaihari', 'Laki-laki', 'yeremia.handoyo28@gmail.com', 'Tanah Laut', '1999-01-08', '085754794847', 'Dwi Handoyo Timotius', '081334926777'),
@@ -8895,7 +9040,7 @@ CREATE TABLE IF NOT EXISTS `tb_mhs_pilih_perusahaan` (
   `id_perusahaan` int(11) DEFAULT NULL,
   `nim` varchar(10) DEFAULT NULL,
   `nomor_surat_tugas` mediumtext
-) ENGINE=InnoDB AUTO_INCREMENT=1050 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1053 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_mhs_pilih_perusahaan`
@@ -8994,7 +9139,10 @@ INSERT INTO `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`, `id_perusahaan
 (1044, 109, 'A1317042', NULL),
 (1045, 109, 'A1317067', NULL),
 (1048, 63, 'A1317054', NULL),
-(1049, 55, 'A1317022', NULL);
+(1049, 55, 'A1317022', NULL),
+(1050, 52, 'A1317093', NULL),
+(1051, 70, 'A1317071', NULL),
+(1052, 70, 'A1317020', NULL);
 
 -- --------------------------------------------------------
 
@@ -9012,7 +9160,7 @@ CREATE TABLE IF NOT EXISTS `tb_monev` (
   `tgl_pulang` date NOT NULL,
   `status` varchar(25) NOT NULL,
   `id_ttd_pimpinan` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9043,7 +9191,7 @@ CREATE TABLE IF NOT EXISTS `tb_nilai_akhir` (
   `nilai_akhir` varchar(100) DEFAULT NULL,
   `id_perusahaan_penilaian` int(11) DEFAULT NULL,
   `id_seminar_penilaian` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -9060,7 +9208,7 @@ CREATE TABLE IF NOT EXISTS `tb_notification` (
   `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hal` char(25) DEFAULT NULL,
   `uri` text
-) ENGINE=InnoDB AUTO_INCREMENT=563 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=576 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_notification`
@@ -9139,8 +9287,8 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (180, 'admin', 'A1317048', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
 (181, 'admin', 'A1317061', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
 (182, 'admin', 'A1317086', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
-(183, 'admin', 'A1317020', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 0, '2020-01-16 08:48:08', 'profil', 'user/profile'),
-(184, 'admin', 'A1317071', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 0, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(183, 'admin', 'A1317020', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
+(184, 'admin', 'A1317071', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
 (185, 'admin', 'A1317033', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
 (186, 'admin', 'A1317056', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
 (187, 'admin', 'A1317054', 'Silahkan melengkapi profil terlebih dahulu untuk bisa mengajukan permohonan magang', 1, '2020-01-16 08:48:08', 'profil', 'user/profile'),
@@ -9202,7 +9350,7 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (243, 'A1317027', 'admin', 'Hesti Ratih Ningtias (A1317027) mengajukan permohonan magang', 1, '2020-01-17 02:17:33', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
 (244, 'A1317086', 'admin', 'Sapniah (A1317086) mengajukan permohonan magang', 1, '2020-01-17 02:17:35', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
 (245, 'admin', 'A1317008', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:17:47', 'surat siap', 'magang?m=pengajuan'),
-(246, 'admin', 'A1317036', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:17:47', 'surat siap', 'magang?m=pengajuan'),
+(246, 'admin', 'A1317036', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:17:47', 'surat siap', 'magang?m=pengajuan'),
 (247, 'admin', 'A1317087', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:17:47', 'surat siap', 'magang?m=pengajuan'),
 (248, 'admin', 'A1317048', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:18:51', 'surat siap', 'magang?m=pengajuan'),
 (249, 'admin', 'A1317061', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:18:51', 'surat siap', 'magang?m=pengajuan'),
@@ -9223,7 +9371,7 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (264, 'admin', 'A1317096', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:21:45', 'surat siap', 'magang?m=pengajuan'),
 (265, 'admin', 'A1317101', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:21:45', 'surat siap', 'magang?m=pengajuan'),
 (266, 'admin', 'A1317081', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:22:30', 'surat siap', 'magang?m=pengajuan'),
-(267, 'admin', 'A1317094', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:22:34', 'surat siap', 'magang?m=pengajuan'),
+(267, 'admin', 'A1317094', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:22:34', 'surat siap', 'magang?m=pengajuan'),
 (268, 'admin', 'A1317073', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:00', 'surat siap', 'magang?m=pengajuan'),
 (269, 'admin', 'A1317030', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:23:00', 'surat siap', 'magang?m=pengajuan'),
 (270, 'A1317111', 'admin', 'Siti Naziha (A1317111) mengajukan permohonan magang', 1, '2020-01-17 02:23:01', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
@@ -9240,7 +9388,7 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (281, 'admin', 'A1317050', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:24:10', 'surat siap', 'magang?m=pengajuan'),
 (282, 'admin', 'A1317021', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:24:56', 'surat siap', 'magang?m=pengajuan'),
 (283, 'admin', 'A1317037', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:25:24', 'surat siap', 'magang?m=pengajuan'),
-(284, 'admin', 'A1317047', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:25:24', 'surat siap', 'magang?m=pengajuan'),
+(284, 'admin', 'A1317047', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:25:24', 'surat siap', 'magang?m=pengajuan'),
 (285, 'A1316021', 'admin', 'Mahasiswa Dummy (A1316021) mengajukan permohonan magang', 1, '2020-01-17 02:25:39', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
 (286, 'admin', 'A1317010', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:26:09', 'surat siap', 'magang?m=pengajuan'),
 (287, 'admin', 'A1317090', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:26:09', 'surat siap', 'magang?m=pengajuan'),
@@ -9317,7 +9465,7 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (358, 'A1317021', 'admin', 'Erna Sulistyowati (A1317021) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:33:52', 'bukti diterima', 'mahasiswa?m=pengajuan'),
 (359, 'admin', 'A1317050', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:34:18', 'surat siap', 'magang?m=pengajuan'),
 (360, 'admin', 'A1317064', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:34:18', 'surat siap', 'magang?m=pengajuan'),
-(361, 'admin', 'A1317094', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:34:51', 'surat siap', 'magang?m=pengajuan'),
+(361, 'admin', 'A1317094', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 02:34:51', 'surat siap', 'magang?m=pengajuan'),
 (362, 'admin', 'A1317111', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 02:34:51', 'surat siap', 'magang?m=pengajuan'),
 (363, 'A1317060', 'admin', 'Tsamara Dara Rizkita (A1317097) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:35:35', 'bukti diterima', 'mahasiswa?m=pengajuan'),
 (364, 'A1317060', 'admin', 'Nanda Sejati Ningtyas (A1317060) telah mengirim bukti penerimaan magang', 1, '2020-01-17 02:35:35', 'bukti diterima', 'mahasiswa?m=pengajuan'),
@@ -9387,7 +9535,7 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (427, 'admin', 'A1317005', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:00', 'surat siap', 'magang?m=pengajuan'),
 (428, 'admin', 'A1317099', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:04', 'surat siap', 'magang?m=pengajuan'),
 (429, 'admin', 'A1317098', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:04', 'surat siap', 'magang?m=pengajuan'),
-(430, 'admin', 'A1317100', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
+(430, 'admin', 'A1317100', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
 (431, 'admin', 'A1317055', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:15', 'surat siap', 'magang?m=pengajuan'),
 (432, 'admin', 'A1317074', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
 (433, 'admin', 'A1317009', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
@@ -9396,14 +9544,14 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (436, 'admin', 'A1317035', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:26:20', 'surat siap', 'magang?m=pengajuan'),
 (437, 'A1317108', 'admin', 'Muhammad Iqbal  (A1317108) mengajukan permohonan magang', 1, '2020-01-17 06:29:51', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
 (438, 'A1317107', 'admin', 'Muhammad Aditya Effendi (A1317107) mengajukan permohonan magang', 1, '2020-01-17 06:31:54', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
-(439, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
+(439, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
 (440, 'admin', 'A1317107', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:35', 'surat siap', 'magang?m=pengajuan'),
-(441, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
+(441, 'admin', 'A1317108', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
 (442, 'admin', 'A1317107', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:40', 'surat siap', 'magang?m=pengajuan'),
 (443, 'admin', 'A1317066', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
 (444, 'admin', 'A1317025', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
 (445, 'admin', 'A1317045', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:45', 'surat siap', 'magang?m=pengajuan'),
-(446, 'admin', 'A1317006', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:53', 'surat siap', 'magang?m=pengajuan'),
+(446, 'admin', 'A1317006', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:53', 'surat siap', 'magang?m=pengajuan'),
 (447, 'admin', 'A1317014', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:34:53', 'surat siap', 'magang?m=pengajuan'),
 (448, 'admin', 'A1317023', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:53', 'surat siap', 'magang?m=pengajuan'),
 (449, 'admin', 'A1317021', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:56', 'surat siap', 'magang?m=pengajuan'),
@@ -9412,14 +9560,14 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (452, 'admin', 'A1317021', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:59', 'surat siap', 'magang?m=pengajuan'),
 (453, 'admin', 'A1317011', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:59', 'surat siap', 'magang?m=pengajuan'),
 (454, 'admin', 'A1317019', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:34:59', 'surat siap', 'magang?m=pengajuan'),
-(455, 'admin', 'A1317044', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:01', 'surat siap', 'magang?m=pengajuan'),
+(455, 'admin', 'A1317044', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:01', 'surat siap', 'magang?m=pengajuan'),
 (456, 'admin', 'A1317012', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:01', 'surat siap', 'magang?m=pengajuan'),
-(457, 'admin', 'A1317044', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:04', 'surat siap', 'magang?m=pengajuan'),
+(457, 'admin', 'A1317044', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:04', 'surat siap', 'magang?m=pengajuan'),
 (458, 'admin', 'A1317012', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:04', 'surat siap', 'magang?m=pengajuan'),
-(459, 'admin', 'A1317033', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:09', 'surat siap', 'magang?m=pengajuan'),
+(459, 'admin', 'A1317033', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:09', 'surat siap', 'magang?m=pengajuan'),
 (460, 'admin', 'A1317056', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:09', 'surat siap', 'magang?m=pengajuan'),
 (461, 'admin', 'A1317054', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:09', 'surat siap', 'magang?m=pengajuan'),
-(462, 'admin', 'A1317033', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:12', 'surat siap', 'magang?m=pengajuan'),
+(462, 'admin', 'A1317033', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:12', 'surat siap', 'magang?m=pengajuan'),
 (463, 'admin', 'A1317056', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:12', 'surat siap', 'magang?m=pengajuan'),
 (464, 'admin', 'A1317054', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-17 06:35:12', 'surat siap', 'magang?m=pengajuan'),
 (465, 'admin', 'A1317022', 'Surat sudah ditandatangani, siap untuk dikirimkan', 1, '2020-01-17 06:35:16', 'surat siap', 'magang?m=pengajuan'),
@@ -9519,7 +9667,20 @@ INSERT INTO `tb_notification` (`id`, `pengirim`, `penerima`, `pesan`, `status`, 
 (559, 'A1317056', 'admin', 'Khoirul Imam Safi’i (A1317033) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
 (560, 'A1317056', 'admin', 'Muhammad Teddy Taufani (A1317056) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
 (561, 'A1317056', 'admin', 'Muhammad Khairi (A1317054) telah mengirim bukti penerimaan magang', 1, '2020-01-17 06:50:57', 'bukti diterima', 'mahasiswa?m=pengajuan'),
-(562, 'A1317022', 'admin', 'Estri Nunik Hidayati (A1317022) telah mengirim bukti penerimaan magang', 1, '2020-01-17 07:00:56', 'bukti diterima', 'mahasiswa?m=pengajuan');
+(562, 'A1317022', 'admin', 'Estri Nunik Hidayati (A1317022) telah mengirim bukti penerimaan magang', 1, '2020-01-17 07:00:56', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(563, 'A1317093', 'admin', 'Suci Febriani (A1317093) mengajukan permohonan magang', 1, '2020-01-19 06:23:04', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(564, 'admin', 'A1317093', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-19 07:38:36', 'surat siap', 'magang?m=pengajuan'),
+(565, 'A1317093', 'admin', 'Suci Febriani (A1317093) telah mengirim bukti penerimaan magang', 1, '2020-01-19 07:46:27', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(566, 'A1317071', 'admin', 'Rahma Dwi Cahyani (A1317071) mengajukan permohonan magang', 1, '2020-01-20 03:12:27', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(567, 'A1317020', 'admin', 'Dita Ayu Lestari (A1317020) mengajukan permohonan magang', 1, '2020-01-20 03:41:41', 'pengajuan magang', 'mahasiswa?m=pengajuan'),
+(568, 'admin', 'A1317071', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-20 03:46:46', 'surat siap', 'magang?m=pengajuan'),
+(569, 'admin', 'A1317020', 'Surat sudah ditandatangani, siap untuk dikirimkan', 0, '2020-01-20 03:46:46', 'surat siap', 'magang?m=pengajuan'),
+(570, 'A1317020', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', 1, '2020-01-20 03:59:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(571, 'A1317020', 'admin', 'Dita Ayu Lestari (A1317020) telah mengirim bukti penerimaan magang', 1, '2020-01-20 03:59:21', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(572, 'A1317071', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:02', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(573, 'A1317071', 'admin', 'Dita Ayu Lestari (A1317020) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:02', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(574, 'A1317020', 'admin', 'Rahma Dwi Cahyani (A1317071) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:17', 'bukti diterima', 'mahasiswa?m=pengajuan'),
+(575, 'A1317020', 'admin', 'Dita Ayu Lestari (A1317020) telah mengirim bukti penerimaan magang', 1, '2020-01-20 04:06:17', 'bukti diterima', 'mahasiswa?m=pengajuan');
 
 -- --------------------------------------------------------
 
@@ -9560,7 +9721,7 @@ INSERT INTO `tb_pegawai` (`nip_nik`, `username`, `status`, `nama_pegawai`, `alam
 ('110502055', 'ninahairiyah@politala.ac.id', NULL, 'Nina Hairiyah, S.TP., M.Si.', 'Jl.Taruna Praja Raya Komplek Balitan 12 Blok C No. 5 Banjarbaru Kal-Sel 70712', 'Perempuan', 'ninahairiyah@politala.ac.id', 'Banjarbaru', '1988-05-04', '-', NULL, NULL),
 ('110905058', 'kurnia.2a@politala.ac.id', NULL, 'Kurnia Dwi Artika, ST,. MT', 'Jl. Teluk Baru RT.8/3 \r\nKel. Karang Taruna, Pelaihari', 'Laki - Laki', 'kurnia.2a@politala.ac.id', 'Jember', '1985-06-27', '-', NULL, NULL),
 ('120102069', 'redhy@politala.ac.id', NULL, 'Muhammad Redhy Rizani, M.T.', 'Pelaihari', 'Laki - Laki', 'redhy@politala.ac.id', 'Banjarmasin', '2017-02-10', '-', NULL, NULL),
-('120102070', 'wiwik.kusrini@politala.ac.id', NULL, 'Wiwik Kusrini', 'Jl. Lingkar Komp. Perum. Sinar Atu - Atu Pelaihari, Tanah Laut Kalimatan Selatan', 'Perempuan', 'wiwik.kusrini@politala.ac.id', 'Purworejo', '1984-02-02', '-', NULL, NULL),
+('120102070', 'wiwik.kusrini@politala.ac.id', NULL, 'Wiwik Kusrini, S.Kom, M.Cs', 'Jl. Lingkar Komp. Perum. Sinar Atu - Atu Pelaihari, Tanah Laut Kalimatan Selatan', 'Perempuan', 'wiwik.kusrini@politala.ac.id', 'Purworejo', '1984-02-02', '-', NULL, NULL),
 ('120102079', 'hendrik.tomo@politala.ac.id', NULL, 'Hendrik Setyo Utomo, S.T., MMSI.', 'Jl. A. Yani. Km. 148, RT 07 RW 03, Desa Muara Kintap, Kec. Kintap Kab. Tanah Laut, Kalimatan Selatan', 'Laki - Laki', 'hendrik.tomo@politala.ac.id', 'Tanah Laut', '1986-07-01', '-', NULL, NULL),
 ('120905081', 'sukma@politala.ac.id', NULL, 'Sukma Firdaus, S.Si., M.T.', 'Jalan Raya Takisung, Sakura Residence No 13. Rt 09 Rw 04. Kelurahan Karang Taruna. Kecamatan Pelaihari. Kabupaten Tanah Laut. Kalimantan Selatan 70812', 'Laki - Laki', 'sukma@politala.ac.id', 'Rantau', '0000-00-00', '-', NULL, NULL),
 ('120905084', 'rusumintosyahyuniar@politala.ac.id', NULL, 'Rusuminto Syahyuniar, M.T.', '-', 'Laki - Laki', 'rusumintosyahyuniar@politala.ac.id', '-', '0000-00-00', '-', NULL, NULL),
@@ -9584,14 +9745,15 @@ INSERT INTO `tb_pegawai` (`nip_nik`, `username`, `status`, `nama_pegawai`, `alam
 ('180301180', 'mindradarmawan@politala.ac.id', NULL, 'Muhammad Indra Darmawan, STP., M.Sc', 'Jl. Sapta Marga Blok E Beruntung Resort I RT.10 Rw.01 Guntung Payung, Kota Banjarbaru,Kalimantan Selatan', 'Laki - Laki', 'mindradarmawan@politala.ac.id', 'Kandangan', '0000-00-00', '-', NULL, NULL),
 ('180301181', 'adzani@politala.ac.id', NULL, 'Adzani Ghani Ilmannafian, S.Si., M.Si', 'Puri Cipageran Indah 1 Blok A-171 RT 02 RW 26 Cimahi 40511', 'Perempuan', 'adzani@politala.ac.id', 'Bandung', '0000-00-00', '-', NULL, NULL),
 ('196806171997022004', 'mufrida@politala.ac.id', NULL, 'Dr. Mufrida Zein, M.Pd.', 'Jl', 'Perempuan', 'mufrida@politala.ac.id', 'Martapura', '1968-06-17', '-', NULL, NULL),
-('197006071995122003', 'titikwijayanti@politala.ac.id', NULL, 'Titik Wijayanti, M.Pd', NULL, NULL, 'titikwijayanti@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
+('197006071995122003', 'titikwijayati@politala.ac.id', NULL, 'Titik Wijayati, M.Pd', NULL, NULL, 'titikwijayanti@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
 ('197909142015041003', 'meldayanoor@politala.ac.id', NULL, 'Meldayanoor, S.Hut., M.S', 'Jalan Basuki Rahmat Rt.26 Kelurahan Angsau Kecamatan Pelaihari', 'Laki - Laki', 'meldayanoor@politala.ac.id', 'Pelaihari', '1979-09-14', '-', NULL, NULL),
 ('198307112015042002', 'fatimah@politala.ac.id', NULL, 'Fatimah, S.Si., M.P.', 'Jl. Mekar Sari, Desa Pemuda, Pelaihari, Kalsel, 70815 ', 'Perempuan', 'fatimah@politala.ac.id', 'Hulu Sungai Tengah', '1983-07-11', '-', NULL, NULL),
 ('198404282011011003', 'jaka_dj@politala.ac.id', NULL, 'Jaka Darma Jaya, M.P., M.Sc.', 'Jl. Peramuan Komplek Citra Bangun Persada No. H1, Rt. 3 Rw. 1 Kelurahan Landasan Ulin Timur, Kecamatan Landasan Ulin, Kota Banjarbaru, Kalimantan Selatan', 'Laki - Laki', 'jaka_dj@politala.ac.id', 'Pagat', '1984-04-28', '-', NULL, NULL),
 ('199007112015041001', 'veri@politala.ac.id', NULL, 'Veri Julianto, S.Si., M.Si.', 'Jl. Kamratih', 'Laki - Laki', 'veri@politala.ac.id', 'Gunung Makmur', '1990-07-11', '-', NULL, NULL),
 ('199007112015041002', 'simpkl@politala.ac.id', NULL, 'Admin SIMPKL', 'Pelaihari', NULL, 'simpkl@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
 ('199007112015041003', 'dosen_satu@politala.ac.id', NULL, 'Dr. Dosen Satu', NULL, NULL, 'dosen_satu@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
-('199007112015041004', 'dosendua@politala.ac.id', NULL, 'Dosen Dua S.Pd', NULL, NULL, 'dosendua@politala.ac.id', NULL, NULL, NULL, NULL, NULL);
+('199007112015041004', 'dosendua@politala.ac.id', NULL, 'Dosen Dua S.Pd', NULL, NULL, 'dosendua@politala.ac.id', NULL, NULL, NULL, NULL, NULL),
+('blogprakerin@polital', 'blogprakerin@politala.ac.id', NULL, 'Blog Prakerin', NULL, NULL, 'blogprakerin@politala.ac.id', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -9768,7 +9930,7 @@ CREATE TABLE IF NOT EXISTS `tb_perusahaan_penilaian` (
   `nilai_pkl` varchar(25) DEFAULT NULL,
   `detail_nilai_pkl` text,
   `id_dosen_bimbingan_mhs` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_perusahaan_penilaian`
@@ -9796,7 +9958,6 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (23, '90.75', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 269),
 (24, '81.75', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 309),
 (25, '89.15', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"89","res":"8.9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 301),
-(26, '97.65', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"100","res":"15"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"100","res":"20"}]', 285),
 (27, '79.50', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 288),
 (28, '96.75', '[{"name":"1. Disiplin","value":"97","res":"14.55"},{"name":"2. Komunikasi","value":"95","res":"9.5"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"97","res":"19.4"}]', 284),
 (29, '89.25', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"87","res":"8.7"},{"name":"5. Penampilan","value":"88","res":"8.8"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 303),
@@ -9804,7 +9965,6 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (31, '85.65', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"82","res":"16.4"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 305),
 (32, '90.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 298),
 (33, '95.70', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"97","res":"14.55"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"97","res":"9.7"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 308),
-(34, '90.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 276),
 (35, '95.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"97","res":"9.7"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 314),
 (36, '88.90', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"87","res":"13.05"},{"name":"4. Kerja Mandiri","value":"88","res":"8.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 320),
 (37, '85.10', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"89","res":"8.9"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 318),
@@ -9813,8 +9973,6 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (40, '86.95', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 306),
 (41, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 296),
 (42, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 295),
-(43, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 295),
-(44, '97.25', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"98","res":"14.7"},{"name":"4. Kerja Mandiri","value":"98","res":"9.8"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"98","res":"19.6"},{"name":"7. Pengetahuan","value":"98","res":"19.6"}]', 295),
 (45, '80.70', '[{"name":"1. Disiplin","value":"78","res":"11.7"},{"name":"2. Komunikasi","value":"82","res":"8.2"},{"name":"3. Kerja Tim","value":"84","res":"12.6"},{"name":"4. Kerja Mandiri","value":"79","res":"7.9"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 300),
 (46, '88.70', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"89","res":"8.9"},{"name":"3. Kerja Tim","value":"87","res":"13.05"},{"name":"4. Kerja Mandiri","value":"88","res":"8.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 304),
 (47, '79.60', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"76","res":"7.6"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 289),
@@ -9822,7 +9980,6 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (49, '79.65', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"77","res":"15.4"}]', 321),
 (50, '95.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"98","res":"9.8"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"97","res":"9.7"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 315),
 (51, '89.25', '[{"name":"1. Disiplin","value":"88","res":"13.2"},{"name":"2. Komunikasi","value":"88","res":"8.8"},{"name":"3. Kerja Tim","value":"91","res":"13.65"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"88","res":"8.8"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 302),
-(52, '79.60', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"76","res":"7.6"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 289),
 (53, '74.45', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"71","res":"7.1"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"72","res":"7.2"},{"name":"6. Sikap dan Etika","value":"73","res":"14.6"},{"name":"7. Pengetahuan","value":"74","res":"14.8"}]', 273),
 (54, '92.00', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"95","res":"14.25"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 313),
 (55, '83.50', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 290),
@@ -9837,13 +9994,32 @@ INSERT INTO `tb_perusahaan_penilaian` (`id`, `nilai_pkl`, `detail_nilai_pkl`, `i
 (64, '86.00', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 280),
 (65, '88.75', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 270),
 (66, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(67, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(68, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(69, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
-(70, '78.50', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"75","res":"15"}]', 278),
 (71, '87.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 240),
 (72, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 281),
-(73, '82.70', '[{"name":"1. Disiplin","value":"81","res":"12.15"},{"name":"2. Komunikasi","value":"84","res":"8.4"},{"name":"3. Kerja Tim","value":"81","res":"12.15"},{"name":"4. Kerja Mandiri","value":"82","res":"8.2"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 262);
+(73, '82.70', '[{"name":"1. Disiplin","value":"81","res":"12.15"},{"name":"2. Komunikasi","value":"84","res":"8.4"},{"name":"3. Kerja Tim","value":"81","res":"12.15"},{"name":"4. Kerja Mandiri","value":"82","res":"8.2"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"85","res":"17"}]', 262),
+(74, '88.00', '[{"name":"1. Disiplin","value":"80","res":"12"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 238),
+(75, '83.95', '[{"name":"1. Disiplin","value":"89","res":"13.35"},{"name":"2. Komunikasi","value":"78","res":"7.8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"78","res":"7.8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 245),
+(84, '79.10', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"75","res":"11.25"},{"name":"4. Kerja Mandiri","value":"75","res":"7.5"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"68","res":"13.6"}]', 322),
+(89, '91.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"93","res":"13.95"},{"name":"4. Kerja Mandiri","value":"93","res":"9.3"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 265),
+(90, '85.15', '[{"name":"1. Disiplin","value":"81","res":"12.15"},{"name":"2. Komunikasi","value":"88","res":"8.8"},{"name":"3. Kerja Tim","value":"84","res":"12.6"},{"name":"4. Kerja Mandiri","value":"89","res":"8.9"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"84","res":"16.8"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 266),
+(91, '99.45', '[{"name":"1. Disiplin","value":"100","res":"15"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"99","res":"14.85"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"99","res":"9.9"},{"name":"6. Sikap dan Etika","value":"100","res":"20"},{"name":"7. Pengetahuan","value":"99","res":"19.8"}]', 275),
+(92, '99.45', '[{"name":"1. Disiplin","value":"100","res":"15"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"99","res":"14.85"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"99","res":"9.9"},{"name":"6. Sikap dan Etika","value":"100","res":"20"},{"name":"7. Pengetahuan","value":"99","res":"19.8"}]', 274),
+(93, '86.60', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 326),
+(94, '87.30', '[{"name":"1. Disiplin","value":"82","res":"12.3"},{"name":"2. Komunikasi","value":"85","res":"8.5"},{"name":"3. Kerja Tim","value":"88","res":"13.2"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"89","res":"17.8"}]', 327),
+(95, '91.50', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"93","res":"9.3"},{"name":"3. Kerja Tim","value":"93","res":"13.95"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 264),
+(96, '89.35', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"89","res":"13.35"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 261),
+(97, '88.00', '[{"name":"1. Disiplin","value":"92","res":"13.8"},{"name":"2. Komunikasi","value":"82","res":"8.2"},{"name":"3. Kerja Tim","value":"86","res":"12.9"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"88","res":"17.6"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 259),
+(98, '86.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"85","res":"8.5"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 242),
+(101, '86.45', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"83","res":"12.45"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"86","res":"8.6"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"87","res":"17.4"}]', 331),
+(102, '97.65', '[{"name":"1. Disiplin","value":"95","res":"14.25"},{"name":"2. Komunikasi","value":"100","res":"10"},{"name":"3. Kerja Tim","value":"100","res":"15"},{"name":"4. Kerja Mandiri","value":"99","res":"9.9"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"100","res":"20"}]', 330),
+(103, '83.55', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"85","res":"12.75"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"83","res":"8.3"},{"name":"6. Sikap dan Etika","value":"85","res":"17"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 258),
+(107, '89.35', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"89","res":"13.35"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"93","res":"9.3"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"86","res":"17.2"}]', 260),
+(110, '78.75', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"75","res":"7.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"80","res":"8"},{"name":"6. Sikap dan Etika","value":"80","res":"16"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 249),
+(112, '87.00', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"80","res":"8"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"80","res":"16"}]', 241),
+(113, '91.25', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"95","res":"9.5"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"95","res":"9.5"},{"name":"5. Penampilan","value":"95","res":"9.5"},{"name":"6. Sikap dan Etika","value":"95","res":"19"},{"name":"7. Pengetahuan","value":"95","res":"19"}]', 272),
+(114, '73.15', '[{"name":"1. Disiplin","value":"75","res":"11.25"},{"name":"2. Komunikasi","value":"71","res":"7.1"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"70","res":"7"},{"name":"5. Penampilan","value":"72","res":"7.2"},{"name":"6. Sikap dan Etika","value":"73","res":"14.6"},{"name":"7. Pengetahuan","value":"70","res":"14"}]', 324),
+(117, '88.15', '[{"name":"1. Disiplin","value":"85","res":"12.75"},{"name":"2. Komunikasi","value":"90","res":"9"},{"name":"3. Kerja Tim","value":"90","res":"13.5"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"85","res":"8.5"},{"name":"6. Sikap dan Etika","value":"89","res":"17.8"},{"name":"7. Pengetahuan","value":"88","res":"17.6"}]', 271),
+(118, '87.50', '[{"name":"1. Disiplin","value":"90","res":"13.5"},{"name":"2. Komunikasi","value":"80","res":"8"},{"name":"3. Kerja Tim","value":"80","res":"12"},{"name":"4. Kerja Mandiri","value":"90","res":"9"},{"name":"5. Penampilan","value":"90","res":"9"},{"name":"6. Sikap dan Etika","value":"90","res":"18"},{"name":"7. Pengetahuan","value":"90","res":"18"}]', 277);
 
 -- --------------------------------------------------------
 
@@ -9859,7 +10035,7 @@ CREATE TABLE IF NOT EXISTS `tb_perusahaan_review` (
   `rating_perusahaan` varchar(10) NOT NULL,
   `komentar` mediumtext NOT NULL,
   `tanggal_review_perusahaan` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9876,7 +10052,7 @@ CREATE TABLE IF NOT EXISTS `tb_perusahaan_sementara` (
   `bukti_diterima` mediumtext,
   `tanggal_konfirmasi` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `nomor_surat` mediumtext
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_perusahaan_sementara`
@@ -9925,7 +10101,6 @@ INSERT INTO `tb_perusahaan_sementara` (`id_perusahaan_sementara`, `nim`, `id_per
 (81, 'A1317081', 107, 'terima', '2020-01-17 02:21:01', '/var/flexshare/shares/simpkl/file_upload/bukti/SURAT_DITERIMA_PKL.pdf', '2020-01-17 02:32:02', 'B/10/PL40/PK.01.06/2020'),
 (82, 'A1317094', 111, 'terima', '2020-01-17 02:21:26', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Penerimaan_Perusahaan.pdf', '2020-01-17 02:40:39', 'B/10/PL40/PK.01.06/2020'),
 (83, 'A1317111', 111, 'terima', '2020-01-17 02:23:01', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_Penerimaan_Perusahaan.pdf', '2020-01-17 02:40:39', 'B/10/PL40/PK.01.06/2020'),
-(84, 'A1316021', 83, 'kirim', '2020-01-17 02:25:39', '/var/flexshare/shares/simpkl/file_upload/bukti/130-441-1-PB1.pdf', '2020-01-17 02:42:55', 'B/10/PL40/PK.01.06/2020'),
 (85, 'A1317064', 81, 'terima', '2020-01-17 02:31:53', '/var/flexshare/shares/simpkl/file_upload/bukti/penerimaan_pkl_ipeh.pdf', '2020-01-17 02:40:31', 'B/10/PL40/PK.01.06/2020'),
 (86, 'A1317067', 109, 'terima', '2020-01-17 02:41:51', '/var/flexshare/shares/simpkl/file_upload/bukti/Dok_baru_2020-01-16_09_01_36_2.pdf', '2020-01-17 06:50:01', 'B/10/PL40/PK.01.06/2020'),
 (87, 'A1317041', 54, 'terima', '2020-01-17 02:43:28', '/var/flexshare/shares/simpkl/file_upload/bukti/balasan_PKL1.pdf', '2020-01-17 06:49:03', 'B/10/PL40/PK.01.06/2020'),
@@ -9965,7 +10140,10 @@ INSERT INTO `tb_perusahaan_sementara` (`id_perusahaan_sementara`, `nim`, `id_per
 (123, 'A1317098', 93, 'terima', '2020-01-17 06:25:20', '/var/flexshare/shares/simpkl/file_upload/bukti/surat_magang_wahzun(1).pdf', '2020-01-17 06:47:27', 'B/10/PL40/PK.01.06/2020'),
 (124, 'A1317005', 100, 'terima', '2020-01-17 06:25:32', '/var/flexshare/shares/simpkl/file_upload/bukti/Pernyataan_Diterima_(PLN).pdf', '2020-01-17 06:47:22', 'B/10/PL40/PK.01.06/2020'),
 (125, 'A1317108', 85, 'terima', '2020-01-17 06:29:51', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_permohonan_Pkl_Politeknik_PLI.pdf', '2020-01-17 06:47:16', 'B/10/PL40/PK.01.06/2020'),
-(126, 'A1317107', 85, 'terima', '2020-01-17 06:31:54', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_permohonan_Pkl_Politeknik_PLI.pdf', '2020-01-17 06:47:16', 'B/10/PL40/PK.01.06/2020');
+(126, 'A1317107', 85, 'terima', '2020-01-17 06:31:54', '/var/flexshare/shares/simpkl/file_upload/bukti/Jawaban_permohonan_Pkl_Politeknik_PLI.pdf', '2020-01-17 06:47:16', 'B/10/PL40/PK.01.06/2020'),
+(127, 'A1317093', 52, 'terima', '2020-01-19 06:23:04', '/var/flexshare/shares/simpkl/file_upload/bukti/140_Suart_Balasan_Mahasiswa_Magang_POLITALA.pdf', '2020-01-20 02:08:34', 'B/10/PL40/PK.01.06/2020'),
+(128, 'A1317071', 70, 'terima', '2020-01-20 03:12:27', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_pernyataan_diterima_PKL_PT_PPA1.pdf', '2020-01-20 04:43:17', 'B/10/PL40/PK.01.06/2020'),
+(129, 'A1317020', 70, 'terima', '2020-01-20 03:41:41', '/var/flexshare/shares/simpkl/file_upload/bukti/Surat_pernyataan_diterima_PKL_PT_PPA1.pdf', '2020-01-20 04:43:17', 'B/10/PL40/PK.01.06/2020');
 
 -- --------------------------------------------------------
 
@@ -10055,15 +10233,185 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_jadwal` (
   `berakhir` varchar(255) DEFAULT NULL,
   `mulai` varchar(255) DEFAULT NULL,
   `id_penguji_2` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_seminar_jadwal`
 --
 
 INSERT INTO `tb_seminar_jadwal` (`id`, `id_dosen_bimbingan_mhs`, `id_penguji_1`, `id_seminar_ruangan`, `berakhir`, `mulai`, `id_penguji_2`) VALUES
-(29, 250, 293, 10, '2020-01-24T10:00:00', '2020-01-24T08:30:00', 267),
-(30, 290, 290, 11, '2020-01-28T14:30', '2020-01-28T13:00', 277);
+(31, 260, 286, 10, '2020-01-23T10:00:00', '2020-01-23T08:30:00', 282),
+(32, 261, 286, 10, '2020-01-23T11:45:00', '2020-01-23T10:15:00', 282),
+(33, 297, 286, 10, '2020-01-23T14:30:00', '2020-01-23T13:00:00', 282),
+(34, 298, 286, 10, '2020-01-23T14:30:00', '2020-01-23T13:00:00', 282),
+(35, 256, 285, 12, '2020-01-23T10:00', '2020-01-23T08:30', 268),
+(36, 314, 285, 12, '2020-01-23T11:45', '2020-01-23T10:15', 268),
+(37, 262, 285, 12, '2020-01-23T14:30', '2020-01-23T13:00', 273),
+(38, 248, 285, 12, '2020-01-23T16:00', '2020-01-23T14:30', 271),
+(39, 250, 293, 10, '2020-01-24T10:00', '2020-01-24T08:30', 267),
+(40, 251, 284, 10, '2020-01-24T11:45', '2020-01-24T10:15', 275),
+(41, 252, 284, 10, '2020-01-24T14:45', '2020-01-24T13:30', 275),
+(42, 258, 284, 10, '2020-01-24T16:15', '2020-01-24T14:45', 275),
+(43, 259, 289, 14, '2020-01-24T10:00:00', '2020-01-24T08:30:00', 281),
+(44, 265, 289, 14, '2020-01-24T14:45:00', '2020-01-24T13:30:00', 281),
+(45, 303, 288, 10, '2020-01-27T10:00', '2020-01-27T08:30', 268),
+(46, 320, 288, 10, '2020-01-27T10:00', '2020-01-27T08:30', 268),
+(47, 304, 288, 10, '2020-01-27T10:00', '2020-01-27T08:30', 268),
+(48, 301, 289, 10, '2020-01-27T11:45:00', '2020-01-27T10:15:00', 268),
+(49, 302, 289, 10, '2020-01-27T11:45:00', '2020-01-27T10:15:00', 268),
+(50, 266, 289, 10, '2020-01-27T14:30', '2020-01-27T13:00', 271),
+(51, 267, 289, 10, '2020-01-27T16:00', '2020-01-27T14:30', 271),
+(52, 254, 290, 14, '2020-01-27T10:00:00', '2020-01-27T08:30:00', 282),
+(53, 316, 286, 14, '2020-01-27T11:45:00', '2020-01-27T10:15:00', 282),
+(54, 263, 297, 11, '2020-01-27T11:45', '2020-01-27T10:15', 278),
+(57, 293, 283, 8, '2020-01-27T10:00', '2020-01-27T08:30', 276),
+(58, 255, 283, 8, '2020-01-27T10:00', '2020-01-27T08:30', 276),
+(59, 321, 283, 8, '2020-01-27T10:00', '2020-01-27T08:30', 276),
+(61, 287, 288, 8, '2020-01-27T16:00:00', '2020-01-27T14:30', 276),
+(62, 237, 288, 8, '2020-01-27T16:00', '2020-01-27T14:30', 276),
+(63, 279, 296, 10, '2020-01-28T10:00', '2020-01-28T08:30', 279),
+(64, 280, 296, 10, '2020-01-28T11:45', '2020-01-28T10:15', 279),
+(65, 274, 296, 10, '2020-01-28T14:30', '2020-01-28T13:00', 279),
+(66, 275, 296, 10, '2020-01-28T16:00', '2020-01-28T14:30', 279),
+(67, 317, 288, 14, '2020-01-28T10:00:00', '2020-01-28T08:30:00', 273),
+(68, 318, 288, 14, '2020-01-28T10:00:00', '2020-01-28T08:30:00', 273),
+(70, 289, 287, 14, '2020-01-28T16:00:00', '2020-01-28T14:30:00', 278),
+(71, 273, 290, 11, '2020-01-28T10:00', '2020-01-28T08:30', 281),
+(73, 290, 283, 11, '2020-01-28T14:30:00', '2020-01-28T13:00:00', 277),
+(74, 264, 297, 10, '2020-01-31T10:00', '2020-01-31T08:30', 277),
+(76, 306, 287, 8, '2020-01-28T11:45', '2020-01-28T10:15', 270),
+(77, 242, 288, 8, '2020-01-28T14:30', '2020-01-28T13:00', 270),
+(78, 281, 288, 8, '2020-01-28T14:30', '2020-01-28T13:00', 270),
+(79, 244, 284, 8, '2020-01-28T16:00', '2020-01-28T14:30', 270),
+(80, 269, 295, 10, '2020-01-29T10:00:00', '2020-01-29T08:30:00', 276),
+(81, 315, 295, 10, '2020-01-29T11:45:00', '2020-01-29T10:15:00', 275),
+(82, 307, 295, 10, '2020-01-29T14:30', '2020-01-29T13:00', 267),
+(83, 246, 295, 10, '2020-01-29T16:00', '2020-01-29T14:30', 267),
+(84, 240, 289, 14, '2020-01-29T10:00:00', '2020-01-29T08:30:00', 269),
+(85, 241, 289, 14, '2020-01-29T11:45:00', '2020-01-29T10:15:00', 269),
+(86, 277, 284, 14, '2020-01-29T14:30:00', '2020-01-29T13:00:00', 273),
+(87, 305, 290, 14, '2020-01-29T16:00:00', '2020-01-29T14:30:00', 271),
+(88, 294, 297, 11, '2020-01-29T10:00', '2020-01-29T08:30', 280),
+(89, 295, 297, 11, '2020-01-29T11:45', '2020-01-29T10:15', 280),
+(90, 296, 290, 11, '2020-01-29T14:30', '2020-01-29T13:00', 280),
+(91, 284, 297, 11, '2020-01-29T16:00', '2020-01-29T14:30', 280),
+(92, 312, 293, 8, '2020-01-29T14:30', '2020-01-29T13:00', 275),
+(93, 313, 293, 8, '2020-01-29T16:00:00', '2020-01-29T14:30:00', 278),
+(94, 282, 295, 9, '2020-01-30T10:00:00', '2020-01-30T08:30:00', 272),
+(96, 309, 287, 14, '2020-01-30T14:30:00', '2020-01-30T13:00:00', 275),
+(97, 311, 287, 9, '2020-01-30T16:00:00', '2020-01-30T14:30:00', 279),
+(98, 245, 287, 12, '2020-01-30T10:00:00', '2020-01-30T08:30:00', 280),
+(99, 270, 295, 9, '2020-01-30T11:45:00', '2020-01-30T10:15:00', 268),
+(100, 308, 296, 14, '2020-01-30T14:30:00', '2020-01-30T13:00:00', 272),
+(101, 283, 296, 14, '2020-01-30T16:00:00', '2020-01-30T14:30:00', 272),
+(104, 247, 293, 13, '2020-01-30T14:30', '2020-01-30T13:00', 279),
+(105, 249, 293, 15, '2020-01-30T16:00:00', '2020-01-30T14:30:00', 269),
+(106, 310, 283, 8, '2020-01-30T10:00', '2020-01-30T08:30', 274),
+(112, 327, 290, 8, '2020-01-29T11:45', '2020-01-29T10:15', 278),
+(113, 326, 293, 8, '2020-01-29T10:00', '2020-01-29T08:30', 278),
+(114, 331, 286, 14, '2020-01-27T14:30:00', '2020-01-27T13:00:00', 276),
+(115, 324, 290, 11, '2020-01-28T10:00', '2020-01-28T08:30', 281),
+(116, 330, 297, 11, '2020-01-28T11:45:00', '2020-01-28T10:15:00', 277),
+(117, 278, 284, 10, '2020-01-31T11:45', '2020-01-31T10:15', 270),
+(118, 239, 287, 10, '2020-02-06T14:30:00', '2020-02-06T13:00:00', 270),
+(119, 268, 286, 14, '2020-02-07T14:30:00', '2020-02-07T13:00:00', 277),
+(120, 299, 297, 11, '2020-02-13T10:00', '2020-02-13T08:30', 278),
+(121, 300, 297, 11, '2020-02-13T10:00', '2020-02-13T08:30', 278);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_seminar_pendaftaran`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_seminar_pendaftaran` (
+  `id` int(11) NOT NULL,
+  `id_jadwal_seminar` int(11) DEFAULT NULL,
+  `file` text,
+  `size` varchar(10) DEFAULT NULL,
+  `status` enum('accept','reupload','','') DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_seminar_pendaftaran`
+--
+
+INSERT INTO `tb_seminar_pendaftaran` (`id`, `id_jadwal_seminar`, `file`, `size`, `status`) VALUES
+(7, 43, 'A1317003_-_Adela_Valiandra1.pdf', '1664.68', 'accept'),
+(8, 35, 'A1317083_-_Riska_Hartati1.pdf', '1214.11', 'accept'),
+(12, 38, 'A1317061_-_Nigmah2.pdf', '1997.86', 'accept'),
+(13, 33, 'A1317098_-_Wahzuni_Sri_Rahayu2.pdf', '1482.18', 'accept'),
+(15, 31, 'A1317031_-_Istiqomah.pdf', '944.14', 'accept'),
+(16, 34, 'A1317099_-_Winda_Dwi_Sulistia2.pdf', '1772.65', 'accept'),
+(19, 32, 'A1317046_-_Melda_Hikma2.pdf', '649.27', 'accept'),
+(23, 36, 'A1317001_-_Achmad_Syah_Maulana.pdf', '1388.63', 'accept'),
+(26, 37, 'A1317037_-_Lidya_Novita2.pdf', '1511.38', 'accept'),
+(29, 54, 'A1317047_-_Melda_Rosalina.pdf', '1171.31', 'accept'),
+(30, 39, 'A1317058_-_Nadya_Alfisyah.pdf', '895.83', 'accept'),
+(31, 44, 'A1317073_-_Reka_Nur_Andinni2.pdf', '1209.38', 'accept'),
+(33, 40, 'A1317081_-_Rindiyani1.pdf', '926.17', 'accept'),
+(36, 42, 'A1317060_-_Nanda_Sejati_Ningtyas1.pdf', '1259.78', 'accept'),
+(38, 46, 'A1317057_-_Muhammad_Thayib_Ramadan.pdf', '678.9', 'accept'),
+(39, 41, 'A1317017_-_Cahya_Aprilia1.pdf', '1860.76', 'accept'),
+(40, 51, 'A1317088_-_Selvya_Meirida_Andani.pdf', '480.46', 'accept'),
+(41, 50, 'A1317034_-_Kiki_Maulida.pdf', '1506.88', 'accept'),
+(42, 47, 'A1317009_-_Andri_Ade_Irawan.pdf', '1316.56', 'accept'),
+(43, 58, 'A1317021_-_Erna_Sulistyowati.pdf', '847.67', 'accept'),
+(46, 78, 'A1317078_-_Retno_Fratiwi.pdf', '930.68', 'accept'),
+(47, 59, 'A1317011_-_Anita_Nurlaila1.pdf', '1378.95', 'accept'),
+(48, 49, 'A1317035_-_Koko_Hermawan1.pdf', '890.74', 'accept'),
+(49, 61, 'A1317026_-_Helmi_Tri_Budi_Yulianto.pdf', '1035.97', 'accept'),
+(50, 113, 'A1317020_-_Dita_Ayu_Lestari.pdf', '457.63', 'accept'),
+(51, 77, 'A1317002_-_Ade_Ardha_Reswari2.pdf', '451.47', 'accept'),
+(52, 112, 'A1317071_-_Rahma_Dwi_Cahyani.pdf', '366.27', 'accept'),
+(53, 79, 'A1317040_-_Mahriani.pdf', '1297.72', 'accept'),
+(54, 52, 'A1317097_-_Tsamara_Dara_Rizkita.pdf', '1509.45', 'accept'),
+(55, 57, 'A1317019_-_Dicky_Sulis_Stiawan.pdf', '1729.01', 'accept'),
+(56, 98, 'A1317079_-_Reyfindy.pdf', '636.9', 'accept'),
+(57, 114, 'A1317093_-_Suci_Febriani.pdf', '1360.54', 'accept'),
+(58, 104, 'A1317048_-_Meliana.pdf', '1514.48', 'accept'),
+(59, 53, 'A1317080_-_Riki_Hidayat.pdf', '1361', 'accept'),
+(60, 45, 'A1317076_-_Rendy_Saputra.pdf', '626.8', 'accept'),
+(61, 62, 'A1317104_-_Yunita_Anggraini.pdf', '1371.17', 'accept'),
+(62, 116, 'A1317100_-_Yeremia_Handoyo.pdf', '927.87', 'accept'),
+(63, 67, 'A1317075_-_Rendy_Saputera.pdf', '943.92', 'accept'),
+(64, 68, 'A1317004_-_Agi_Munawa.pdf', '961.78', 'accept'),
+(65, 73, 'A1317013_-_Ari_Setia_Budi.pdf', '859.21', 'accept'),
+(66, 76, 'A1317066_-_Norhatiah.pdf', '825.93', 'accept'),
+(67, 48, 'A1317074_-_Renaldi_Haris_Aksara.pdf', '1349.31', 'accept'),
+(68, 70, 'A1317109_-_Muhammad_Muslih_Amirudin.pdf', '1977.2', 'accept'),
+(69, 93, 'A1317044_-_Maya_Gian_Sister.pdf', '596.94', 'accept'),
+(70, 115, 'A1317065_-_Nor_Janah.pdf', '1719.09', 'accept'),
+(71, 71, 'A1317041_-_Mariana.pdf', '2039.91', 'accept'),
+(72, 63, 'A1317111_-_Siti_Naziha.pdf', '1236.05', 'accept'),
+(73, 92, 'A1317012_-_Annisa.pdf', '570.17', 'accept'),
+(74, 64, 'A1317094_-_Susanti.pdf', '702.64', 'accept'),
+(75, 66, 'A1317050_-_Meyhastanti_Cahyaning_Fijar.pdf', '915.25', 'accept'),
+(76, 65, 'A1317064_-_Noor_Latipah.pdf', '676.75', 'accept'),
+(77, 80, 'A1317087_-_Sari_Maryani.pdf', '779.47', 'accept'),
+(78, 82, 'A1317025_-_Gusti_Ahmad_Hafi.pdf', '1691.88', 'accept'),
+(79, 96, 'A1317033_-_Khoirul_Imam_Safi’i.pdf', '783.98', 'accept'),
+(80, 85, 'A1317051_-_Mila_Camelia3.pdf', '1691.25', 'accept'),
+(81, 84, 'A1317082_-_Rini_Yuliani.pdf', '1226.77', 'accept'),
+(82, 88, 'A1317006_-_Ahmad_Laily_Misfi.pdf', '1100.05', 'accept'),
+(84, 90, 'A1317023_-_Fajar.pdf', '1923.49', 'accept'),
+(85, 89, 'A1317014_-_Ari_Wahyudi.pdf', '1782.06', 'accept'),
+(86, 81, 'A1317077_-_Restu_Adji_Saputra.pdf', '1699.04', 'accept'),
+(88, 83, 'A1317092_-_Siti_Purnama1.pdf', '1531.86', 'accept'),
+(89, 86, 'A1317027_-_Hesti_Ratih_Ningtias.pdf', '462.52', 'accept'),
+(90, 91, 'A1317055_-_Muhammad_Rizky_Ansyari1.pdf', '872.62', 'accept'),
+(91, 106, 'A1317054_-_Muhammad_Khairi.pdf', '743.61', 'accept'),
+(92, 87, 'A1317045_-_Megawati.pdf', '682.11', 'accept'),
+(93, 105, 'A1317086_-_Sapniah.pdf', '632.18', 'accept'),
+(94, 94, 'A1317042_-_Mariatul_Kiftiah.pdf', '1957.27', 'accept'),
+(97, 101, 'A1317052_-_Mita_Maulinda1.pdf', '865.85', 'accept'),
+(98, 99, 'A1317036_-_Lia_Merliana.pdf', '578.28', 'accept'),
+(99, 100, 'A1317067_-_Norida_Alisa1.pdf', '937.77', 'accept'),
+(100, 74, 'A1317030_-_Inka_Nurjanah.pdf', '2040.32', 'accept'),
+(101, 117, 'A1317068_-_Novia_Sari.pdf', '1511.01', 'accept'),
+(102, 118, 'A1317101_-_Yeyen_Nurul_Imama.pdf', '1401.65', 'accept'),
+(103, 97, 'A1317056_-_Muhammad_Teddy_Taufani.pdf', '804.99', 'accept'),
+(105, 119, 'A1317008_-_Aiga_Putri_Oktovianda1.pdf', '1218.01', 'accept');
 
 -- --------------------------------------------------------
 
@@ -10075,7 +10423,7 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_penguji` (
   `id` int(11) NOT NULL,
   `id_dosen` int(11) DEFAULT NULL,
   `status` text
-) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_seminar_penguji`
@@ -10129,7 +10477,237 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_penilaian` (
   `id_dosen` varchar(20) DEFAULT NULL,
   `status_dosen` varchar(25) DEFAULT NULL,
   `status_revisi` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `tb_seminar_penilaian`
+--
+
+INSERT INTO `tb_seminar_penilaian` (`id`, `nilai_seminar`, `detail_nilai_seminar`, `id_seminar_jadwal`, `id_dosen`, `status_dosen`, `status_revisi`) VALUES
+(13, '76.10', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"78","res":"19.5"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"76","res":"15.2"},{"name":"5. Sikap / Etika","value":"72","res":"14.4"}]', 31, '160201151', 'p3', 1),
+(14, '60.9', '[{"name":"1. Penyajian Presentasi","value":"69","res":"6.9"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 31, '120102079', 'p1', 0),
+(15, '77.00', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 31, '197006071995122003', 'p2', 1),
+(16, '73.65', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 35, '140102098', 'p1', 1),
+(17, '70.05', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"67","res":"10.05"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', 35, '09081015', 'p2', 1),
+(18, '83.70', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"87","res":"21.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', 35, '110103048', 'p3', 1),
+(19, '60', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 32, '120102079', 'p1', 0),
+(20, '75.94', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', 36, '140102098', 'p1', 1),
+(21, '73.65', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"73","res":"10.95"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 36, '09081015', 'p2', 1),
+(22, '79.20', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', 36, '199007112015041001', 'p3', 1),
+(23, '72.30', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"76","res":"11.4"},{"name":"4. Kemampuan penulisan laporan","value":"72","res":"14.4"},{"name":"5. Sikap / Etika","value":"75","res":"15"}]', 32, '160201151', 'p3', 1),
+(24, '76.95', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 32, '197006071995122003', 'p2', 1),
+(25, '77.00', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 37, '160801168', 'p2', 1),
+(26, '73.3', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"69","res":"10.35"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 37, '140102098', 'p1', 1),
+(27, '80.10', '[{"name":"1. Penguasaan teori","value":"74","res":"14.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"83","res":"20.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"74","res":"14.8"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 37, '150203104', 'p3', 1),
+(28, '60.00', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 34, '120102079', 'p1', 0),
+(29, '60.00', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 33, '120102079', 'p1', 0),
+(30, '73.00', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 34, '197006071995122003', 'p2', 1),
+(31, '72.05', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 33, '197006071995122003', 'p2', 1),
+(32, '70.00', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"70","res":"14"}]', 34, '160201151', 'p3', 1),
+(33, '70.00', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"70","res":"14"}]', 33, '160201151', 'p3', 1),
+(34, '82.5', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 38, '160801168', 'p3', 1),
+(35, '78.05', '[{"name":"1. Penyajian Presentasi","value":"82","res":"8.2"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 38, '090801016', 'p2', 1),
+(36, '77.10', '[{"name":"1. Penyajian Presentasi","value":"79","res":"7.9"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 38, '140102098', 'p1', 1),
+(37, '68', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 39, '160201153', 'p2', 1),
+(38, '84', '[{"name":"1. Penguasaan teori","value":"83","res":"16.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"86","res":"21.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"84","res":"16.8"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 39, '090801031', 'p3', 1),
+(39, '78.75', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', 39, '199007112015041001', 'p1', 1),
+(40, '70.75', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 43, '160801168', 'p1', 0),
+(41, '70.95', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 43, '110103048', 'p2', 0),
+(42, '70.50', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"72","res":"10.8"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"71","res":"14.2"}]', 43, '160201151', 'p3', 0),
+(43, '87', '[{"name":"1. Penguasaan teori","value":"89","res":"17.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"88","res":"22"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"89","res":"17.8"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 40, '090801031', 'p3', 1),
+(44, '73.10', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', 40, '09081015', 'p1', 1),
+(45, '81', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"85","res":"17"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 40, '140825117', 'p2', 1),
+(46, '70.45', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"67","res":"26.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 41, '09081015', 'p1', 1),
+(47, '84', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"87","res":"17.4"},{"name":"5. Penulisan laporan","value":"87","res":"13.05"}]', 41, '140825117', 'p2', 1),
+(48, '86', '[{"name":"1. Penguasaan teori","value":"87","res":"17.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"89","res":"22.25"},{"name":"3. Keaktifan bimbingan","value":"82","res":"12.3"},{"name":"4. Kemampuan penulisan laporan","value":"90","res":"18"},{"name":"5. Sikap / Etika","value":"87","res":"17.4"}]', 41, '090801031', 'p3', 1),
+(49, '74.75', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 44, '160801168', 'p1', 1),
+(50, '71.75', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 42, '140825117', 'p2', 1),
+(51, '72.6', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 44, '110103048', 'p2', 1),
+(52, '82.20', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"82","res":"20.5"},{"name":"3. Keaktifan bimbingan","value":"86","res":"12.9"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"86","res":"17.2"}]', 44, '150203104', 'p3', 1),
+(53, '70.10', '[{"name":"1. Penguasaan teori","value":"65","res":"13"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"60","res":"12"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', 42, '110103048', 'p3', 0),
+(54, '70.00', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 42, '09081015', 'p1', 1),
+(55, '89.00', '[{"name":"1. Penguasaan teori","value":"90","res":"18"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"90","res":"22.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"85","res":"17"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 45, '150801145', 'p3', 0),
+(56, '75.20', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"76","res":"30.4"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 52, '197006071995122003', 'p2', 1),
+(57, '71.75', '[{"name":"1. Penguasaan teori","value":"60","res":"12"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"68","res":"17"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 52, '110103048', 'p3', 0),
+(58, '75.10', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"73","res":"10.95"},{"name":"3. Hasil yang dicapai","value":"77","res":"30.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 52, '150203104', 'p1', 1),
+(59, '44.00', '[{"name":"1. Penyajian Presentasi","value":"30","res":"3"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"50","res":"20"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"0","res":"0"}]', 53, '120102079', 'p1', 0),
+(60, '73.75', '[{"name":"1. Penyajian Presentasi","value":"71","res":"7.1"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 46, '09081015', 'p2', 1),
+(61, '75.30', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"77","res":"11.55"},{"name":"3. Hasil yang dicapai","value":"76","res":"30.4"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 46, '160201151', 'p1', 1),
+(62, '72.30', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"73","res":"29.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"71","res":"14.2"},{"name":"5. Penulisan laporan","value":"74","res":"11.1"}]', 47, '09081015', 'p2', 1),
+(63, '77.80', '[{"name":"1. Penyajian Presentasi","value":"76","res":"7.6"},{"name":"2. Pemahaman Materi","value":"78","res":"11.7"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"78","res":"11.7"}]', 45, '160201151', 'p1', 1),
+(64, '75.25', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 45, '09081015', 'p2', 1),
+(65, '70.00', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 47, '160201151', 'p1', 1),
+(66, '76.60', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"75","res":"11.25"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 47, '150801145', 'p3', 1),
+(67, '82.60', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"78","res":"19.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 46, '150801145', 'p3', 1),
+(68, '68.95', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"71","res":"10.65"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 58, '160201153', 'p1', 1),
+(69, '68.90', '[{"name":"1. Penyajian Presentasi","value":"68","res":"6.8"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"67","res":"13.4"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', 57, '160201153', 'p1', 1),
+(70, '70.70', '[{"name":"1. Penyajian Presentasi","value":"69","res":"6.9"},{"name":"2. Pemahaman Materi","value":"68","res":"10.2"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', 59, '160201153', 'p1', 1),
+(71, '81.60', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 59, '140814113', 'p2', 1),
+(72, '81.50', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"78","res":"11.7"}]', 57, '140814113', 'p2', 1),
+(73, '83.30', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"85","res":"17"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', 58, '140814113', 'p2', 1),
+(74, '60.00', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 53, '197006071995122003', 'p2', 0),
+(75, '83.40', '[{"name":"1. Penyajian Presentasi","value":"83","res":"8.3"},{"name":"2. Pemahaman Materi","value":"82","res":"12.3"},{"name":"3. Hasil yang dicapai","value":"84","res":"33.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"83","res":"16.6"},{"name":"5. Penulisan laporan","value":"84","res":"12.6"}]', 54, '090801031', 'p2', 1),
+(76, '76.25', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 54, '110103048', 'p1', 1),
+(77, '84.65', '[{"name":"1. Penguasaan teori","value":"84","res":"16.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"83","res":"20.75"},{"name":"3. Keaktifan bimbingan","value":"86","res":"12.9"},{"name":"4. Kemampuan penulisan laporan","value":"84","res":"16.8"},{"name":"5. Sikap / Etika","value":"87","res":"17.4"}]', 54, '150203104', 'p3', 1),
+(79, '75.30', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 49, '09081015', 'p2', 1),
+(80, '64.10', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"62","res":"12.4"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 48, '09081015', 'p2', 1),
+(81, '80', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 49, '160801168', 'p1', 1),
+(82, '60.00', '[{"name":"1. Penguasaan teori","value":"60","res":"12"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"61","res":"15.25"},{"name":"3. Keaktifan bimbingan","value":"65","res":"9.75"},{"name":"4. Kemampuan penulisan laporan","value":"50","res":"10"},{"name":"5. Sikap / Etika","value":"65","res":"13"}]', 53, '199007112015041001', 'p3', 0),
+(83, '84.1', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', 59, '090801016', 'p3', 1),
+(84, '90.00', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"90","res":"22.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"90","res":"18"},{"name":"5. Sikap / Etika","value":"95","res":"19"}]', 58, '090801016', 'p3', 1),
+(85, '90.15', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"94","res":"23.5"},{"name":"3. Keaktifan bimbingan","value":"95","res":"14.25"},{"name":"4. Kemampuan penulisan laporan","value":"89","res":"17.8"},{"name":"5. Sikap / Etika","value":"95","res":"19"}]', 57, '090801016', 'p3', 1),
+(86, '82.25', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"85","res":"17"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 50, '160801168', 'p1', 1),
+(87, '84.60', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"85","res":"21.25"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"85","res":"17"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', 49, '150801145', 'p3', 1),
+(88, '73.00', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"75","res":"15"}]', 48, '150801145', 'p3', 0),
+(89, '68.20', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"71","res":"10.65"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"64","res":"12.8"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 114, '120102079', 'p1', 1),
+(90, '84.10', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"83","res":"16.6"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 50, '150801145', 'p3', 0),
+(91, '74.9', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 50, '090801016', 'p2', 1),
+(92, '81.25', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 51, '150801145', 'p3', 0),
+(93, '69', '[{"name":"1. Penyajian Presentasi","value":"77","res":"7.7"},{"name":"2. Pemahaman Materi","value":"71","res":"10.65"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 51, '160801168', 'p1', 1),
+(94, '70.50', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 51, '090801016', 'p2', 1),
+(95, '91.55', '[{"name":"1. Penguasaan teori","value":"92","res":"18.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"90","res":"22.5"},{"name":"3. Keaktifan bimbingan","value":"91","res":"13.65"},{"name":"4. Kemampuan penulisan laporan","value":"92","res":"18.4"},{"name":"5. Sikap / Etika","value":"93","res":"18.6"}]', 61, '160201153', 'p3', 1),
+(96, '90.50', '[{"name":"1. Penguasaan teori","value":"91","res":"18.2"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"90","res":"22.5"},{"name":"3. Keaktifan bimbingan","value":"92","res":"13.8"},{"name":"4. Kemampuan penulisan laporan","value":"90","res":"18"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 62, '160201153', 'p3', 1),
+(97, '86.75', '[{"name":"1. Penyajian Presentasi","value":"82","res":"8.2"},{"name":"2. Pemahaman Materi","value":"87","res":"13.05"},{"name":"3. Hasil yang dicapai","value":"89","res":"35.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"88","res":"17.6"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', 61, '160201151', 'p1', 1),
+(98, '86.60', '[{"name":"1. Penyajian Presentasi","value":"86","res":"8.6"},{"name":"2. Pemahaman Materi","value":"88","res":"13.2"},{"name":"3. Hasil yang dicapai","value":"87","res":"34.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"84","res":"16.8"},{"name":"5. Penulisan laporan","value":"88","res":"13.2"}]', 62, '160201151', 'p1', 1),
+(99, '63.25', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"55","res":"22"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 48, '160801168', 'p1', 1),
+(100, '80.10', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"78","res":"11.7"},{"name":"3. Hasil yang dicapai","value":"82","res":"32.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 114, '140814113', 'p2', 1),
+(101, '92.25', '[{"name":"1. Penyajian Presentasi","value":"90","res":"9"},{"name":"2. Pemahaman Materi","value":"90","res":"13.5"},{"name":"3. Hasil yang dicapai","value":"95","res":"38"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"95","res":"19"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 61, '140814113', 'p2', 1),
+(102, '92.25', '[{"name":"1. Penyajian Presentasi","value":"90","res":"9"},{"name":"2. Pemahaman Materi","value":"90","res":"13.5"},{"name":"3. Hasil yang dicapai","value":"95","res":"38"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"95","res":"19"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 62, '140814113', 'p2', 1),
+(103, '83', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"83","res":"20.75"},{"name":"3. Keaktifan bimbingan","value":"88","res":"13.2"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"89","res":"17.8"}]', 115, '140825117', 'p3', 1),
+(104, '84', '[{"name":"1. Penguasaan teori","value":"87","res":"17.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"87","res":"21.75"},{"name":"3. Keaktifan bimbingan","value":"87","res":"13.05"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"89","res":"17.8"}]', 71, '140825117', 'p3', 1),
+(106, '80.50', '[{"name":"1. Penyajian Presentasi","value":"81","res":"8.1"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"81","res":"32.4"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 71, '150203104', 'p1', 1),
+(107, '84.20', '[{"name":"1. Penyajian Presentasi","value":"85","res":"8.5"},{"name":"2. Pemahaman Materi","value":"83","res":"12.45"},{"name":"3. Hasil yang dicapai","value":"84","res":"33.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"86","res":"17.2"},{"name":"5. Penulisan laporan","value":"83","res":"12.45"}]', 115, '150203104', 'p1', 0),
+(108, '75.90', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"74","res":"18.5"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"72","res":"14.4"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 63, '140102098', 'p3', 0),
+(109, '77.35', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"79","res":"11.85"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 71, '110103048', 'p2', 1),
+(110, '81.80', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"89","res":"17.8"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 114, '199007112015041001', 'p3', 1),
+(111, '71.05', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"67","res":"10.05"}]', 115, '110103048', 'p2', 0),
+(112, '76.05', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"77","res":"30.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 68, '160201151', 'p1', 1),
+(113, '72.90', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 67, '160201151', 'p1', 0),
+(114, '70.5', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 68, '160801168', 'p2', 1),
+(115, '74.50', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 67, '160801168', 'p2', 0),
+(116, '70.00', '[{"name":"1. Penyajian Presentasi","value":"77","res":"7.7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', 63, '120102070', 'p1', 0),
+(117, '83', '[{"name":"1. Penguasaan teori","value":"85","res":"17"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"85","res":"21.25"},{"name":"3. Keaktifan bimbingan","value":"88","res":"13.2"},{"name":"4. Kemampuan penulisan laporan","value":"79","res":"15.8"},{"name":"5. Sikap / Etika","value":"88","res":"17.6"}]', 116, '140825117', 'p3', 1),
+(118, '67.70', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"69","res":"10.35"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', 76, '120102079', 'p2', 0),
+(119, '71.30', '[{"name":"1. Penyajian Presentasi","value":"77","res":"7.7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"73","res":"14.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 63, '150801145', 'p2', 0),
+(120, '71.35', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"67","res":"10.05"},{"name":"3. Hasil yang dicapai","value":"77","res":"30.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 116, '110103048', 'p1', 0),
+(121, '78.45', '[{"name":"1. Penguasaan teori","value":"79","res":"15.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"78","res":"19.5"},{"name":"3. Keaktifan bimbingan","value":"77","res":"11.55"},{"name":"4. Kemampuan penulisan laporan","value":"78","res":"15.6"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 67, '199007112015041001', 'p3', 0),
+(122, '79.75', '[{"name":"1. Penguasaan teori","value":"82","res":"16.4"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"78","res":"19.5"},{"name":"3. Keaktifan bimbingan","value":"79","res":"11.85"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 68, '199007112015041001', 'p3', 1),
+(123, '74.55', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"76","res":"15.2"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 116, '199007112015041001', 'p2', 0),
+(124, '75.30', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"73","res":"18.25"},{"name":"3. Keaktifan bimbingan","value":"83","res":"12.45"},{"name":"4. Kemampuan penulisan laporan","value":"73","res":"14.6"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 64, '140102098', 'p3', 0),
+(125, '67.70', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"63","res":"25.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 64, '150801145', 'p2', 0),
+(126, '67.65', '[{"name":"1. Penyajian Presentasi","value":"74","res":"7.4"},{"name":"2. Pemahaman Materi","value":"67","res":"10.05"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', 64, '120102070', 'p1', 0),
+(127, '60.05', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"58","res":"23.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"59","res":"8.85"}]', 65, '120102070', 'p1', 0),
+(128, '71.35', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"75","res":"11.25"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"73","res":"14.6"}]', 65, '140102098', 'p3', 0),
+(129, '68.55', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', 73, '160201153', 'p1', 1),
+(130, '81.40', '[{"name":"1. Penguasaan teori","value":"84","res":"16.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"83","res":"16.6"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 70, '160201153', 'p3', 1),
+(131, '66.60', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"69","res":"10.35"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 77, '120102079', 'p2', 0),
+(132, '69.25', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 78, '120102079', 'p2', 0),
+(133, '76.10', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"74","res":"18.5"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', 77, '09081015', 'p3', 1),
+(134, '78.25', '[{"name":"1. Penguasaan teori","value":"78","res":"15.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"77","res":"19.25"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"79","res":"15.8"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', 78, '09081015', 'p3', 1),
+(135, '70.70', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 78, '160201151', 'p1', 1),
+(136, '70.30', '[{"name":"1. Penyajian Presentasi","value":"67","res":"6.7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"69","res":"13.8"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 77, '160201151', 'p1', 1),
+(137, '74.00', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"76","res":"19"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"75","res":"15"}]', 73, '110103048', 'p3', 0),
+(138, '73.25', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 73, '199007112015041001', 'p2', 1),
+(139, '62.00', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 65, '150801145', 'p2', 0),
+(140, '73.75', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 79, '160801168', 'p3', 0),
+(141, '89.25', '[{"name":"1. Penyajian Presentasi","value":"88","res":"8.8"},{"name":"2. Pemahaman Materi","value":"90","res":"13.5"},{"name":"3. Hasil yang dicapai","value":"90","res":"36"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"88","res":"17.6"},{"name":"5. Penulisan laporan","value":"89","res":"13.35"}]', 70, '090801031', 'p2', 1),
+(142, '73.70', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"73","res":"10.95"}]', 66, '150801145', 'p2', 0),
+(143, '73.45', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"73","res":"29.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 66, '120102070', 'p1', 0),
+(144, '81.45', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"82","res":"32.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 70, '090801016', 'p1', 1),
+(145, '70.00', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 79, '120102079', 'p2', 0),
+(146, '65.80', '[{"name":"1. Penyajian Presentasi","value":"69","res":"6.9"},{"name":"2. Pemahaman Materi","value":"66","res":"9.9"},{"name":"3. Hasil yang dicapai","value":"69","res":"27.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"62","res":"12.4"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 79, '09081015', 'p1', 0),
+(147, '77.50', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 113, '120102079', 'p3', 1),
+(148, '83.65', '[{"name":"1. Penyajian Presentasi","value":"83","res":"8.3"},{"name":"2. Pemahaman Materi","value":"84","res":"12.6"},{"name":"3. Hasil yang dicapai","value":"84","res":"33.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 113, '090801031', 'p2', 1),
+(149, '77.30', '[{"name":"1. Penyajian Presentasi","value":"79","res":"7.9"},{"name":"2. Pemahaman Materi","value":"78","res":"11.7"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"78","res":"11.7"}]', 88, '110103048', 'p1', 1),
+(150, '75.45', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"76","res":"30.4"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', 88, '120102070', 'p2', 0),
+(151, '80.35', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"77","res":"19.25"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"78","res":"15.6"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 88, '090801016', 'p3', 1),
+(152, '63.50', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 80, '150801145', 'p1', 0),
+(153, '83.00', '[{"name":"1. Penyajian Presentasi","value":"82","res":"8.2"},{"name":"2. Pemahaman Materi","value":"83","res":"12.45"},{"name":"3. Hasil yang dicapai","value":"83","res":"33.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 112, '090801031', 'p2', 1),
+(154, '77.15', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"77","res":"30.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"79","res":"15.8"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 113, '199007112015041001', 'p1', 1);
+INSERT INTO `tb_seminar_penilaian` (`id`, `nilai_seminar`, `detail_nilai_seminar`, `id_seminar_jadwal`, `id_dosen`, `status_dosen`, `status_revisi`) VALUES
+(155, '76.05', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 89, '120102070', 'p2', 0),
+(156, '73.70', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', 89, '110103048', 'p1', 0),
+(157, '75.85', '[{"name":"1. Penguasaan teori","value":"73","res":"14.6"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 112, '120102079', 'p3', 1),
+(158, '80', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 89, '090801016', 'p3', 1),
+(159, '80.60', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"78","res":"11.7"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"83","res":"16.6"},{"name":"5. Penulisan laporan","value":"82","res":"12.3"}]', 112, '150203104', 'p1', 1),
+(160, '70.55', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 84, '160801168', 'p1', 0),
+(161, '71.30', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 85, '160801168', 'p1', 1),
+(162, '69.25', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 84, '140102098', 'p2', 0),
+(163, '69.25', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 85, '140102098', 'p2', 1),
+(164, '76.35', '[{"name":"1. Penguasaan teori","value":"74","res":"14.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"77","res":"15.4"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', 84, '09081015', 'p3', 1),
+(165, '76.35', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"77","res":"15.4"},{"name":"5. Sikap / Etika","value":"76","res":"15.2"}]', 85, '09081015', 'p3', 1),
+(166, '83.2', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"88","res":"35.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 81, '150801145', 'p1', 1),
+(167, '93.35', '[{"name":"1. Penyajian Presentasi","value":"99","res":"9.9"},{"name":"2. Pemahaman Materi","value":"99","res":"14.85"},{"name":"3. Hasil yang dicapai","value":"89","res":"35.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"99","res":"19.8"},{"name":"5. Penulisan laporan","value":"88","res":"13.2"}]', 81, '140825117', 'p2', 1),
+(168, '80.00', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 92, '140825117', 'p2', 1),
+(169, '76.50', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 92, '120102079', 'p3', 1),
+(170, '73.10', '[{"name":"1. Penguasaan teori","value":"69","res":"13.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"69","res":"13.8"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 86, '140102098', 'p3', 0),
+(171, '67.35', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"64","res":"9.6"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 86, '09081015', 'p1', 0),
+(172, '67.25', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 86, '160801168', 'p2', 0),
+(173, '70.15', '[{"name":"1. Penyajian Presentasi","value":"68","res":"6.8"},{"name":"2. Pemahaman Materi","value":"68","res":"10.2"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', 82, '160201153', 'p2', 0),
+(174, '82.10', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"82","res":"12.3"},{"name":"4. Kemampuan penulisan laporan","value":"87","res":"17.4"},{"name":"5. Sikap / Etika","value":"82","res":"16.4"}]', 81, '199007112015041001', 'p3', 1),
+(175, '70.40', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"72","res":"14.4"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 92, '199007112015041001', 'p1', 1),
+(176, '71.50', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"73","res":"29.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 82, '150801145', 'p1', 0),
+(177, '70.05', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', 90, '120102070', 'p2', 0),
+(178, '75.35', '[{"name":"1. Penyajian Presentasi","value":"74","res":"7.4"},{"name":"2. Pemahaman Materi","value":"73","res":"10.95"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"72","res":"10.8"}]', 90, '150203104', 'p1', 0),
+(179, '81.75', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 93, '120102079', 'p3', 1),
+(180, '84.40', '[{"name":"1. Penyajian Presentasi","value":"83","res":"8.3"},{"name":"2. Pemahaman Materi","value":"85","res":"12.75"},{"name":"3. Hasil yang dicapai","value":"85","res":"34"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"83","res":"16.6"},{"name":"5. Penulisan laporan","value":"85","res":"12.75"}]', 93, '090801031', 'p2', 1),
+(181, '77.25', '[{"name":"1. Penguasaan teori","value":"65","res":"13"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 83, '160801168', 'p3', 0),
+(182, '77.50', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"79","res":"19.75"},{"name":"3. Keaktifan bimbingan","value":"77","res":"11.55"},{"name":"4. Kemampuan penulisan laporan","value":"76","res":"15.2"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 82, '120102070', 'p3', 0),
+(183, '80.80', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"84","res":"12.6"}]', 93, '199007112015041001', 'p1', 1),
+(184, '79.85', '[{"name":"1. Penyajian Presentasi","value":"78","res":"7.8"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"80","res":"32"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"83","res":"12.45"}]', 83, '150801145', 'p1', 0),
+(185, '60.80', '[{"name":"1. Penyajian Presentasi","value":"68","res":"6.8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 91, '120102070', 'p2', 0),
+(186, '69.35', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 91, '110103048', 'p1', 0),
+(187, '70.00', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"70","res":"14"}]', 91, '140825117', 'p3', 0),
+(188, '76.75', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 66, '140102098', 'p3', 0),
+(189, '77.50', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"72","res":"18"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 90, '090801016', 'p3', 0),
+(190, '75.00', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"60","res":"12"},{"name":"5. Sikap / Etika","value":"75","res":"15"}]', 106, '120102079', 'p3', 1),
+(191, '73.00', '[{"name":"1. Penguasaan teori","value":"60","res":"12"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"65","res":"16.25"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 98, '160801168', 'p3', 0),
+(192, '76.55', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"77","res":"15.4"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', 94, '09081015', 'p3', 1),
+(193, '76.40', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"77","res":"11.55"},{"name":"3. Hasil yang dicapai","value":"77","res":"30.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 94, '150801145', 'p1', 0),
+(194, '70.05', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"68","res":"27.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"69","res":"13.8"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 94, '160201151', 'p2', 0),
+(195, '72.40', '[{"name":"1. Penyajian Presentasi","value":"68","res":"6.8"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 106, '160201153', 'p1', 1),
+(196, '80.10', '[{"name":"1. Penyajian Presentasi","value":"81","res":"8.1"},{"name":"2. Pemahaman Materi","value":"82","res":"12.3"},{"name":"3. Hasil yang dicapai","value":"83","res":"33.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"80","res":"16"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 106, '150203104', 'p2', 1),
+(197, '80.00', '[{"name":"1. Penyajian Presentasi","value":"80","res":"8"},{"name":"2. Pemahaman Materi","value":"79","res":"11.85"},{"name":"3. Hasil yang dicapai","value":"79","res":"31.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"82","res":"16.4"},{"name":"5. Penulisan laporan","value":"81","res":"12.15"}]', 83, '160201153', 'p2', 1),
+(206, '67.00', '[{"name":"1. Penguasaan teori","value":"60","res":"12"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"60","res":"15"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"60","res":"12"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 99, '120102070', 'p3', 0),
+(207, '60.20', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"63","res":"25.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"50","res":"7.5"}]', 99, '09081015', 'p2', 0),
+(208, '51.20', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"58","res":"23.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"","res":"0"}]', 99, '150801145', 'p1', 0),
+(209, '74.15', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"79","res":"11.85"},{"name":"4. Kemampuan penulisan laporan","value":"75","res":"15"},{"name":"5. Sikap / Etika","value":"79","res":"15.8"}]', 87, '120102070', 'p3', 0),
+(210, '81.60', '[{"name":"1. Penguasaan teori","value":"79","res":"15.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"81","res":"20.25"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"81","res":"16.2"},{"name":"5. Sikap / Etika","value":"83","res":"16.6"}]', 80, '120102070', 'p3', 0),
+(211, '61.85', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"65","res":"13"},{"name":"5. Penulisan laporan","value":"59","res":"8.85"}]', 96, '140825117', 'p2', 0),
+(212, '72.50', '[{"name":"1. Penguasaan teori","value":"65","res":"13"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"60","res":"15"},{"name":"3. Keaktifan bimbingan","value":"90","res":"13.5"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 104, '160801168', 'p3', 0),
+(213, '74.60', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"71","res":"10.65"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"77","res":"15.4"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 104, '199007112015041001', 'p1', 1),
+(214, '74.90', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"75","res":"11.25"},{"name":"3. Hasil yang dicapai","value":"74","res":"29.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"77","res":"11.55"}]', 104, '150801145', 'p2', 0),
+(215, '76.55', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"77","res":"15.4"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', 100, '09081015', 'p3', 1),
+(216, '76.55', '[{"name":"1. Penguasaan teori","value":"75","res":"15"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"75","res":"18.75"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"77","res":"15.4"},{"name":"5. Sikap / Etika","value":"77","res":"15.4"}]', 101, '09081015', 'p3', 1),
+(217, '75.00', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"76","res":"30.4"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"74","res":"11.1"}]', 101, '160201151', 'p2', 1),
+(218, '73.45', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"72","res":"28.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"74","res":"14.8"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 100, '160201151', 'p2', 1),
+(219, '71.80', '[{"name":"1. Penguasaan teori","value":"69","res":"13.8"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"69","res":"17.25"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"60","res":"12"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 97, '120102079', 'p3', 0),
+(220, '70.75', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"73","res":"10.95"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 101, '120102070', 'p1', 0),
+(221, '70.50', '[{"name":"1. Penyajian Presentasi","value":"72","res":"7.2"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 100, '120102070', 'p1', 0),
+(222, '67.50', '[{"name":"1. Penguasaan teori","value":"60","res":"12"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"59","res":"14.75"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"55","res":"11"},{"name":"5. Sikap / Etika","value":"85","res":"17"}]', 96, '120102079', 'p3', 0),
+(223, '77.55', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"80","res":"12"},{"name":"3. Hasil yang dicapai","value":"78","res":"31.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"78","res":"15.6"},{"name":"5. Penulisan laporan","value":"75","res":"11.25"}]', 97, '150801145', 'p2', 0),
+(224, '72.05', '[{"name":"1. Penyajian Presentasi","value":"75","res":"7.5"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 97, '090801016', 'p1', 0),
+(225, '70.75', '[{"name":"1. Penguasaan teori","value":"60","res":"12"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"60","res":"15"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"90","res":"18"}]', 105, '160801168', 'p3', 0),
+(226, '70.00', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"70","res":"10.5"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"70","res":"10.5"}]', 105, '140102098', 'p2', 0),
+(227, '70.30', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"72","res":"10.8"},{"name":"3. Hasil yang dicapai","value":"73","res":"29.2"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"67","res":"13.4"},{"name":"5. Penulisan laporan","value":"66","res":"9.9"}]', 105, '199007112015041001', 'p1', 0),
+(228, '49.20', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"50","res":"7.5"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"56","res":"11.2"},{"name":"5. Penulisan laporan","value":"","res":"0"}]', 76, '090801016', 'p1', 0),
+(229, '75.60', '[{"name":"1. Penyajian Presentasi","value":"73","res":"7.3"},{"name":"2. Pemahaman Materi","value":"74","res":"11.1"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"76","res":"15.2"},{"name":"5. Penulisan laporan","value":"80","res":"12"}]', 74, '199007112015041001', 'p2', 1),
+(230, '69.65', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"67","res":"10.05"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 74, '110103048', 'p1', 0),
+(231, '67.95', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"69","res":"10.35"},{"name":"3. Hasil yang dicapai","value":"69","res":"27.6"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"60","res":"9"}]', 117, '120102079', 'p2', 0),
+(232, '74.15', '[{"name":"1. Penyajian Presentasi","value":"74","res":"7.4"},{"name":"2. Pemahaman Materi","value":"76","res":"11.4"},{"name":"3. Hasil yang dicapai","value":"75","res":"30"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"75","res":"15"},{"name":"5. Penulisan laporan","value":"69","res":"10.35"}]', 117, '09081015', 'p1', 0),
+(233, '73.50', '[{"name":"1. Penguasaan teori","value":"70","res":"14"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"70","res":"17.5"},{"name":"3. Keaktifan bimbingan","value":"80","res":"12"},{"name":"4. Kemampuan penulisan laporan","value":"70","res":"14"},{"name":"5. Sikap / Etika","value":"80","res":"16"}]', 117, '140102098', 'p3', 0),
+(234, '81.20', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"81","res":"20.25"},{"name":"3. Keaktifan bimbingan","value":"85","res":"12.75"},{"name":"4. Kemampuan penulisan laporan","value":"80","res":"16"},{"name":"5. Sikap / Etika","value":"81","res":"16.2"}]', 74, '150203104', 'p3', 0),
+(235, '68.80', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"68","res":"10.2"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"67","res":"13.4"},{"name":"5. Penulisan laporan","value":"68","res":"10.2"}]', 87, '150203104', 'p1', 0),
+(236, '67.05', '[{"name":"1. Penguasaan teori","value":"66","res":"13.2"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"67","res":"16.75"},{"name":"3. Keaktifan bimbingan","value":"70","res":"10.5"},{"name":"4. Kemampuan penulisan laporan","value":"65","res":"13"},{"name":"5. Sikap / Etika","value":"68","res":"13.6"}]', 76, '120102070', 'p3', 0),
+(237, '55.80', '[{"name":"1. Penyajian Presentasi","value":"68","res":"6.8"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"","res":"0"}]', 98, '090801016', 'p1', 0),
+(238, '56.85', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"55","res":"8.25"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"68","res":"13.6"},{"name":"5. Penulisan laporan","value":"","res":"0"}]', 87, '090801016', 'p2', 0),
+(239, '66.50', '[{"name":"1. Penyajian Presentasi","value":"70","res":"7"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"70","res":"28"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 80, '140814113', 'p2', 0),
+(240, '78.90', '[{"name":"1. Penguasaan teori","value":"80","res":"16"},{"name":"2. Kemampuan analisis dan pemecahan masalah","value":"80","res":"20"},{"name":"3. Keaktifan bimbingan","value":"78","res":"11.7"},{"name":"4. Kemampuan penulisan laporan","value":"78","res":"15.6"},{"name":"5. Sikap / Etika","value":"78","res":"15.6"}]', 118, '160201153', 'p3', 0),
+(241, '53.50', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"58","res":"8.7"},{"name":"3. Hasil yang dicapai","value":"67","res":"26.8"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"","res":"0"}]', 96, '090801016', 'p1', 0),
+(242, '60.25', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"50","res":"7.5"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"55","res":"11"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 118, '090801016', 'p1', 0),
+(243, '48.25', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"50","res":"7.5"},{"name":"3. Hasil yang dicapai","value":"45","res":"18"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"50","res":"10"},{"name":"5. Penulisan laporan","value":"45","res":"6.75"}]', 118, '120102079', 'p2', 0),
+(244, '59.25', '[{"name":"1. Penyajian Presentasi","value":"60","res":"6"},{"name":"2. Pemahaman Materi","value":"60","res":"9"},{"name":"3. Hasil yang dicapai","value":"60","res":"24"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"60","res":"12"},{"name":"5. Penulisan laporan","value":"55","res":"8.25"}]', 119, '120102079', 'p1', 0),
+(245, '66.00', '[{"name":"1. Penyajian Presentasi","value":"65","res":"6.5"},{"name":"2. Pemahaman Materi","value":"65","res":"9.75"},{"name":"3. Hasil yang dicapai","value":"65","res":"26"},{"name":"4. Objektifitas menganggapi pertanyaan","value":"70","res":"14"},{"name":"5. Penulisan laporan","value":"65","res":"9.75"}]', 119, '199007112015041001', 'p2', 0);
 
 -- --------------------------------------------------------
 
@@ -10141,7 +10719,7 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_tanggal` (
   `id` int(11) NOT NULL,
   `hari` varchar(11) DEFAULT NULL,
   `tanggal` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -10152,7 +10730,7 @@ CREATE TABLE IF NOT EXISTS `tb_seminar_tanggal` (
 CREATE TABLE IF NOT EXISTS `tb_seminar_tempat` (
   `id` int(11) NOT NULL,
   `nama` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `tb_seminar_tempat`
@@ -10162,7 +10740,11 @@ INSERT INTO `tb_seminar_tempat` (`id`, `nama`) VALUES
 (8, 'Bootstrap'),
 (9, 'Mysql'),
 (10, 'Lab A'),
-(11, 'Lab B');
+(11, 'Lab B'),
+(12, 'Java'),
+(13, 'CI'),
+(14, 'PHP'),
+(15, 'Lab Jaringan');
 
 -- --------------------------------------------------------
 
@@ -10173,7 +10755,7 @@ INSERT INTO `tb_seminar_tempat` (`id`, `nama`) VALUES
 CREATE TABLE IF NOT EXISTS `tb_seminar_waktu` (
   `id` int(11) NOT NULL,
   `jam` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -10573,6 +11155,13 @@ ALTER TABLE `tb_seminar_jadwal`
   ADD KEY `id_penguji_2` (`id_penguji_2`);
 
 --
+-- Indexes for table `tb_seminar_pendaftaran`
+--
+ALTER TABLE `tb_seminar_pendaftaran`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_jadwal_seminar` (`id_jadwal_seminar`);
+
+--
 -- Indexes for table `tb_seminar_penguji`
 --
 ALTER TABLE `tb_seminar_penguji`
@@ -10653,7 +11242,7 @@ ALTER TABLE `tabel_file`
 -- AUTO_INCREMENT for table `tabel_foto`
 --
 ALTER TABLE `tabel_foto`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `tabel_gambar`
 --
@@ -10668,12 +11257,12 @@ ALTER TABLE `tabel_halaman`
 -- AUTO_INCREMENT for table `tabel_kategori`
 --
 ALTER TABLE `tabel_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_akun`
 --
 ALTER TABLE `tb_akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=621;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=622;
 --
 -- AUTO_INCREMENT for table `tb_data_kuisioner`
 --
@@ -10688,12 +11277,12 @@ ALTER TABLE `tb_dosen`
 -- AUTO_INCREMENT for table `tb_dosen_bimbingan_mhs`
 --
 ALTER TABLE `tb_dosen_bimbingan_mhs`
-  MODIFY `id_dosen_bimbingan_mhs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=325;
+  MODIFY `id_dosen_bimbingan_mhs` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=332;
 --
 -- AUTO_INCREMENT for table `tb_ga_component`
 --
 ALTER TABLE `tb_ga_component`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_golongan`
 --
@@ -10713,7 +11302,7 @@ ALTER TABLE `tb_history_pemilihan`
 -- AUTO_INCREMENT for table `tb_history_seminar_penilaian`
 --
 ALTER TABLE `tb_history_seminar_penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT for table `tb_jabatan`
 --
@@ -10723,17 +11312,17 @@ ALTER TABLE `tb_jabatan`
 -- AUTO_INCREMENT for table `tb_jawaban_kuisioner`
 --
 ALTER TABLE `tb_jawaban_kuisioner`
-  MODIFY `id_jawaban_kuisioner` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_jawaban_kuisioner` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_jenis_surat`
 --
 ALTER TABLE `tb_jenis_surat`
-  MODIFY `id_jenis_surat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id_jenis_surat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_kelengkapan_berkas`
 --
 ALTER TABLE `tb_kelengkapan_berkas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_konsultasi_bimbingan`
 --
@@ -10743,27 +11332,27 @@ ALTER TABLE `tb_konsultasi_bimbingan`
 -- AUTO_INCREMENT for table `tb_konsultasi_bimbingan_offline`
 --
 ALTER TABLE `tb_konsultasi_bimbingan_offline`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT for table `tb_level`
 --
 ALTER TABLE `tb_level`
-  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3888;
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3889;
 --
 -- AUTO_INCREMENT for table `tb_mhs_pilih_perusahaan`
 --
 ALTER TABLE `tb_mhs_pilih_perusahaan`
-  MODIFY `id_mhs_pilih_perusahaan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1050;
+  MODIFY `id_mhs_pilih_perusahaan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1053;
 --
 -- AUTO_INCREMENT for table `tb_monev`
 --
 ALTER TABLE `tb_monev`
-  MODIFY `id_monev` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_monev` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_notification`
 --
 ALTER TABLE `tb_notification`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=563;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=576;
 --
 -- AUTO_INCREMENT for table `tb_perusahaan`
 --
@@ -10773,22 +11362,27 @@ ALTER TABLE `tb_perusahaan`
 -- AUTO_INCREMENT for table `tb_perusahaan_penilaian`
 --
 ALTER TABLE `tb_perusahaan_penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=119;
 --
 -- AUTO_INCREMENT for table `tb_perusahaan_review`
 --
 ALTER TABLE `tb_perusahaan_review`
-  MODIFY `id_perusahaan_review` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id_perusahaan_review` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_perusahaan_sementara`
 --
 ALTER TABLE `tb_perusahaan_sementara`
-  MODIFY `id_perusahaan_sementara` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=127;
+  MODIFY `id_perusahaan_sementara` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT for table `tb_seminar_jadwal`
 --
 ALTER TABLE `tb_seminar_jadwal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=122;
+--
+-- AUTO_INCREMENT for table `tb_seminar_pendaftaran`
+--
+ALTER TABLE `tb_seminar_pendaftaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=106;
 --
 -- AUTO_INCREMENT for table `tb_seminar_penguji`
 --
@@ -10798,22 +11392,22 @@ ALTER TABLE `tb_seminar_penguji`
 -- AUTO_INCREMENT for table `tb_seminar_penilaian`
 --
 ALTER TABLE `tb_seminar_penilaian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=246;
 --
 -- AUTO_INCREMENT for table `tb_seminar_tanggal`
 --
 ALTER TABLE `tb_seminar_tanggal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_seminar_tempat`
 --
 ALTER TABLE `tb_seminar_tempat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tb_seminar_waktu`
 --
 ALTER TABLE `tb_seminar_waktu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tb_ttd_pimpinan`
 --
@@ -10982,6 +11576,12 @@ ALTER TABLE `tb_seminar_jadwal`
   ADD CONSTRAINT `tb_seminar_jadwal_ibfk_3` FOREIGN KEY (`id_seminar_ruangan`) REFERENCES `tb_seminar_tempat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_seminar_jadwal_ibfk_5` FOREIGN KEY (`id_penguji_1`) REFERENCES `tb_seminar_penguji` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_seminar_jadwal_ibfk_6` FOREIGN KEY (`id_penguji_2`) REFERENCES `tb_seminar_penguji` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_seminar_pendaftaran`
+--
+ALTER TABLE `tb_seminar_pendaftaran`
+  ADD CONSTRAINT `tb_seminar_pendaftaran_ibfk_1` FOREIGN KEY (`id_jadwal_seminar`) REFERENCES `tb_seminar_jadwal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_seminar_penguji`

@@ -7,7 +7,7 @@ class Kelengkapan extends CI_Controller
 		parent::__construct();
 		$this->load->model(array('kelengkapan_model', 'penilaian_model'));
 		$this->load->helper('upload');
-		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
+		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
 	}
 
 	public function index()
@@ -26,12 +26,46 @@ class Kelengkapan extends CI_Controller
 		}
 		$nim = $this->session->userdata('id');
 		$dsn_bimbingan = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs id');
-		if(isset($dsn_bimbingan->id)){
-			$file = masterdata('tb_kelengkapan_berkas',"id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'",'nama_file');
-			$data['file'] = $file;
-			$data['allow'] = true;
+		if (isset($dsn_bimbingan->id)) {
+			$file = masterdata('tb_kelengkapan_berkas', "id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'", 'nama_file,status', true);
+			$join = array(
+				array('tb_history_seminar_penilaian thsp', 'thsp.id_seminar_penilaian = tsp.id', 'LEFT OUTER'),
+				array('tb_seminar_jadwal tsj', 'tsj.id = tsp.id_seminar_jadwal', 'INNER')
+			);
+			$revisi = datajoin('tb_seminar_penilaian tsp', "id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'", 'thsp.id', $join);
+			if (count($revisi) > 0) {
+				$belum_revisi = array();
+				foreach ($revisi as $rev) {
+					if ($rev->id != "" || $rev->id != null) {
+						array_push($belum_revisi, 0);
+					} else {
+						array_push($belum_revisi, 1);
+					}
+				}
+				//verifikasi, apakah sudah revisi atau belum, jika $belum revisi msh terdapat 1, maka belum bisa.
+				if (in_array(1, $belum_revisi)) {
+					$data['allow'] = false;
+				} else {
+					$data['allow'] = true;
+				}
+				$data['file'] = $file;
+				if (count($file) > 0) {
+					if ($file[0]->nama_file != "") {
+						$data['allow'] = false;
+						$data['status'] = (object)array("message" => "<b>Menunggu</b> Mohon untuk menunggu koordinator memverifikasi","color" => "alert-dark");
+						if ($file[0]->status == 'reupload') {
+							$data['allow'] = true;
+							$data['status'] = (object)array("message" => "<b>Gagal</b> Berkas tidak disetujui, silahkan upload ulang","color" => "alert-danger");
+						}
+						if ($file[0]->status == 'approve') {
+							$data['allow'] = false;
+							$data['status'] = (object)array("message" => "<b>Sukses</b> Pemberkasan berhasil disetujui koordinator, ada berhak untuk melanjutkan Tugas Akhir (TA)","color" => "alert-success");
+						}
+					}
+				}
+			}
 		}
-		$this->load->view('user/kelengkapan_berkas',$data);
+		$this->load->view('user/kelengkapan_berkas', $data);
 	}
 
 	public function upload_berkas()
@@ -41,8 +75,9 @@ class Kelengkapan extends CI_Controller
 		$file_name = isset($res['upload_data']['file_name']) ? $res['upload_data']['file_name'] : null;
 		$dsn_bimbingan = masterdata('tb_dosen_bimbingan_mhs', "nim = '$nim'", 'id_dosen_bimbingan_mhs id');
 		$is_exits = masterdata('tb_kelengkapan_berkas', "id_dosen_bimbingan_mhs = '$dsn_bimbingan->id'", 'id');
-		$id = isset($is_exits->id) ? $is_exits->id : null;
-		if ($this->db->query("REPLACE INTO tb_kelengkapan_berkas VALUES('$id','$dsn_bimbingan->id','$file_name')")) {
+		$id = isset($is_exits->id) ? $is_exits->id : 0;
+		$now = date('Y-m-d');
+		if ($this->db->query("REPLACE INTO tb_kelengkapan_berkas VALUES('$id','$dsn_bimbingan->id','$file_name','$now','pending')")) {
 			echo $this->db->insert_id();
 		} else {
 			show_error('failed upload', 500);

@@ -34,12 +34,6 @@ class Mahasiswa extends MY_Controller
 						'icon' => 'fas fa-users',
 						'desc' => 'Daftar perserta pengajuan magang seluruh program studi'
 					),
-//					array(
-//						'name' => 'Berhak Sidang',
-//						'href' => site_url( 'mahasiswa?m=sidang' ),
-//						'icon' => 'fas fa-user-graduate',
-//						'desc' => 'Pengelolaan mahasiswa yang berhak dan tidak berhak untuk melaksanakan sidang'
-//					),
 					array(
 						'name' => "Data Mahasiswa Magang {$tahunAkademik[0]->tahun_akademik}",
 						'href' => site_url('mahasiswa?m=fixmagang'),
@@ -202,21 +196,6 @@ class Mahasiswa extends MY_Controller
 	{
 		$data['mahasiswas'] = $this->mahasiswa_model->getAll();//need filter only magang
 		$this->load->view('admin/mahasiswa_magang', $data);
-	}
-
-	public function create_magang()
-	{
-
-	}
-
-	public function edit_magang()
-	{
-
-	}
-
-	public function remove_magang()
-	{
-
 	}
 
 	//pengajuan

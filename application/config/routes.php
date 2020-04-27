@@ -62,6 +62,7 @@ $route['surat/(:any)'] = 'Surat/$1';
 $route['surat/(:any)/(:any)'] = 'Surat/$1/$2';
 $route['akun/(:any)'] = 'Akun/$1';
 $route['akun/(:any)/(:any)'] = 'Akun/$1/$2';
+$route['ga'] = 'GA/GAGenerator';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

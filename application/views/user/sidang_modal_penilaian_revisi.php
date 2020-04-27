@@ -4,6 +4,18 @@
 		<div class="modal-content">
 			<!-- Modal body -->
 			<div class="modal-body pb-1">
+				<div class="accordion" id="accordionExample" style="border-radius: 4px">
+					<div class="card" style="border-radius: 8px">
+						<div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							<h5 class="mb-0">Penilaian Perusahaan</h5>
+						</div>
+						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body" id="place-penilaian-perusahaan">
+
+							</div>
+						</div>
+					</div>
+				</div>
 				<form class="new-event--form">
 					<p id="detail-jadwal" class="h2"></p>
 					<ul class="list-group">

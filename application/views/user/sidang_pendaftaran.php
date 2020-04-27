@@ -2,7 +2,30 @@
 <?php $level = $this->session->userdata('level') ?>
 <?php $temp_date = "" ?>
 <?php $nim = $this->session->userdata('id');
+function check_already_upload($id)
+{
+	$ci =& get_instance();
+	$ci->db->select('file,size,status');
+	$ci->db->where('id_jadwal_seminar', $id);
+	return $ci->db->get('tb_seminar_pendaftaran')->result();
+}
+
 $pendaftaran = isset($pendaftaran) ? $pendaftaran : null;
+$data_seminar = isset($data_seminar) ? $data_seminar : null;
+$is_file = null;
+$reupload = false;
+$success = false;
+if (count($data_seminar) > 0) {
+	$is_file = check_already_upload($data_seminar[0]->id_jadwal);
+	if (count($is_file) > 0) {
+		if ($is_file[0]->status == 'reupload') {
+			$reupload = true;
+		}
+		if ($is_file[0]->status == 'accept') {
+			$success = true;
+		}
+	}
+}
 $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 <!DOCTYPE html>
 <html>
@@ -29,27 +52,56 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 					<div class="h3">Pendaftaran Seminar</div>
 				</div>
 				<div class="card-body">
+					<?php if ($reupload): ?>
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>Pendaftaran Gagal</strong>
+							<small>Koordinator menginginkan anda mengupload ulang berkas pendaftaran seminar</small>
+						</div>
+					<?php endif; ?>
 					<?php $allow = isset($allow) ? $allow : false; ?>
 					<?php $ontime = isset($ontime) ? $ontime : false; ?>
-					<?php if (!$allow): ?>
-						<div class="h2">Anda belum bisa upload kelengkapan berkas pendaftaran seminar karena belum
-							dijadwalkan di aplikasi
-						</div>
-					<?php elseif (!$ontime): ?>
-						<div class="h2">Anda terlambat mengupload berkas pendaftaran, silahkan hubungi koordinator untuk
-							di jadwalkan ulang
-						</div>
+					<?php if ($is_file == null or $reupload == true): ?>
+						<?php if (!$allow): ?>
+							<div class="h2">Anda belum bisa upload kelengkapan berkas pendaftaran seminar karena belum
+								dijadwalkan di aplikasi
+							</div>
+						<?php elseif (!$ontime): ?>
+							<div class="h2">Anda terlambat mengupload berkas pendaftaran, silahkan hubungi koordinator
+								untuk
+								di jadwalkan ulang
+							</div>
+						<?php else: ?>
+							<div class="h5">* Catatan</div>
+							<div class="h6 font-weight-normal">- Pendafaran seminar akan hilang ketika waktu sidang
+								kurang
+								dari 2 hari
+							</div>
+							<div class="h6 font-weight-normal">- Harap mengecek kembali file pdf sebelum di
+								<i>upload</i>
+							</div>
+							<div class="h6 font-weight-normal">- Segera lakukan pendaftaran jika jadwal sudah di
+								informasikan oleh koordinator Prakerin
+							</div>
+							<div class="h6 font-weight-normal">- Pastikan ukuran pdf tidak lebih dari 2MB (2048kb)
+							</div>
+							<input type="file" class="my-pond">
+						<?php endif; ?>
 					<?php else: ?>
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong><?php echo $success ? 'Sukses' : 'Pending' ?></strong>
+							<small><?php echo $success ? 'Pendaftaran telah di konfirmasi, anda di ijinkan untuk seminar' : 'Menunggu pendaftaran di verifikasi oleh koordinator' ?></small>
+						</div>
+						<div class="h3">ANDA TELAH MENGUPLOAD BERKAS PENDAFTARAN</div>
 						<div class="h5">* Catatan</div>
-						<div class="h6 font-weight-normal">- Pendafaran seminar akan hilang ketika waktu sidang kurang
-							dari 2 hari
+						<div class="h6 font-weight-normal">- Apabila berkas yang kalian upload kurang lengkap,
+							koordinator akan mengintruksikan kalian untuk upload ulang
 						</div>
-						<div class="h6 font-weight-normal">- Harap mengecek kembali file pdf sebelum di <i>upload</i>
-						</div>
-						<div class="h6 font-weight-normal">- Segera lakukan pendaftaran jika jadwal sudah di
-							informasikan oleh koordinator Prakerin
-						</div>
-						<input type="file" class="my-pond">
 					<?php endif; ?>
 				</div>
 			</div>
@@ -104,12 +156,11 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		})
 		let pond = $('.my-pond').filepond({
 			server: "<?php echo site_url('sidang?m=upload_pendaftaran') ?>"
+		});
+		$('.my-pond').on('FilePond:processfile', function (e) {
+			console.log('success');
+			window.location.reload();
 		})
-		<?php if(isset($pendaftaran->file) && $pendaftaran->file != ''): ?>
-		setTimeout(function () {
-			$('.my-pond').filepond('addFile', '<?php echo base_url('file_upload/pendaftaran_seminar/') . $pendaftaran->file ?>')
-		}, <?php echo $pendaftaran->size ?>);
-		<?php endif ?>
 	})
 </script>
 <!-- Demo JS - remove this in your project -->

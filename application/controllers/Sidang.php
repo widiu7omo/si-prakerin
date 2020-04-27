@@ -8,7 +8,7 @@ class Sidang extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model(array('perusahaan_model', 'pengajuan_model', 'seminar_model', 'penilaian_model'));
-		$this->load->helper(array('notification', 'master','upload'));
+		$this->load->helper(array('notification', 'master', 'upload'));
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
 		$id = $this->session->userdata('id');
 		$mahasiswa = masterdata('tb_mahasiswa', array('nim' => $id), array('alamat_mhs', 'email_mhs', 'jenis_kelamin_mhs'), false);
@@ -43,11 +43,11 @@ class Sidang extends CI_Controller
 					array('name' => 'Jadwal Seminar',
 						'href' => site_url('sidang?m=jadwal'),
 						'icon' => 'fas fa-id-badge',
-						'desc' => 'Informasi terkait jadwal seminar peserta prakerin'),
-					array('name' => 'Penilaian',
+						'desc' => 'Informasi terkait jadwal seminar peserta Praktik Kerja Industri'),
+					array('name' => 'Penilaian Seminar',
 						'href' => site_url('sidang?m=penilaian'),
 						'icon' => 'fas fa-id-badge',
-						'desc' => 'Penilaian mahasiswa seminar')
+						'desc' => 'Penilaian peserta seminar Praktik Kerja Industri')
 				);
 				break;
 			default:
@@ -71,6 +71,12 @@ class Sidang extends CI_Controller
 					if (isset($_GET['q']) and $_GET['q'] == 'u') {
 						return $this->update_penilaian();
 					}
+					if (isset($_GET['q']) and $_GET['q'] == 'fetch_company_val') {
+						return $this->fetch_penilaian_perusahaan();
+					}
+					if (isset($_GET['q']) and $_GET['q'] == 'get_temp_nilai') {
+						return $this->get_temp_nilai();
+					}
 					return $this->index_penilaian_seminar();
 					break;
 				case 'pendaftaran':
@@ -85,6 +91,30 @@ class Sidang extends CI_Controller
 		}
 		$data['intro'] = array(array('step_intro' => 1, 'message_intro' => 'Selamat datang di bimbingan, klik tanggal anda ingin mengajukan konsultasi'));
 		return $this->load->view('user/sidang', $data);
+	}
+
+	public function get_temp_nilai()
+	{
+		$penilaian = $this->penilaian_model;
+		$nilai_sementara = $penilaian->get_penilaian_seminar_sementara();
+		echo json_encode($nilai_sementara);
+	}
+
+	public function fetch_penilaian_perusahaan()
+	{
+		$penilaian = $this->penilaian_model;
+		$post = $this->input->post();
+		$jadwal = masterdata('tb_seminar_jadwal', "id = '$post[id_jadwal]'", 'id_dosen_bimbingan_mhs', true);
+		$id = 0;
+		if (count($jadwal) > 0) {
+			$id = $jadwal[0]->id_dosen_bimbingan_mhs;
+		}
+		$nilai_perusahaan = $penilaian->get_penilaian_perusahaan(array('id_dosen_bimbingan_mhs' => $id));
+		if (count($nilai_perusahaan) > 0) {
+			$decode_detail_nilai = json_decode($nilai_perusahaan[0]->detail_nilai_pkl);
+			$nilai_perusahaan[0]->detail_nilai_pkl = $decode_detail_nilai;
+		}
+		echo json_encode($nilai_perusahaan);
 	}
 
 	public function index_pendaftaran_seminar()
@@ -104,11 +134,11 @@ class Sidang extends CI_Controller
 			//check diff date
 			$now = new DateTime('now');
 			$schedule_date = $data_seminar[0]->tanggal_seminar;
-			$schedule_expolode = explode('T',$schedule_date);
+			$schedule_expolode = explode('T', $schedule_date);
 			$schedule_only_date = $schedule_expolode[0];
 			$scheduled = new DateTime($schedule_only_date);
 			$interval = $scheduled->diff($now);
-			if($interval->d >= 1){
+			if ($interval->d >= 1) {
 				$data['ontime'] = true;
 			}
 
@@ -120,8 +150,8 @@ class Sidang extends CI_Controller
 	{
 		$response = do_upload_pendaftaran_seminar();
 		$seminar = $this->seminar_model;
-		if(isset($response['upload_data'])){
-			if($seminar->save_pendaftaran($response['upload_data'])){
+		if (isset($response['upload_data'])) {
+			if ($seminar->save_pendaftaran($response['upload_data'])) {
 				$response['status'] = 'success';
 			}
 		}
@@ -185,7 +215,7 @@ class Sidang extends CI_Controller
 				$id = $this->session->userdata('nip_nik');
 				$date = date('Y-m-d');
 				$time = date('H:i');
-				if (isset($get['section']) and $get['section'] == 'history') {
+				if ((isset($get['section']) and $get['section'] == 'history') || (isset($get['section']) and $get['section'] == 'hasil')) {
 					//history revisi
 					$riwayat_uji = $seminar->get_jadwal_past($id, $date, $time);
 					$pegawai = masterdata('tb_pegawai', "nip_nik = '$id'", 'nama_pegawai', false);

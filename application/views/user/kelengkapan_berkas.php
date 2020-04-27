@@ -31,12 +31,29 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 					<div class="card-body">
 						<!-- List group -->
 						<?php $allow = isset($allow) ? $allow : false; ?>
-						<?php if (!$allow): ?>
+						<?php if (!$allow && !isset($status)): ?>
 							<div class="h2">Anda belum bisa upload kelengkapan berkas</div>
+						<?php elseif (!$allow && isset($status)): ?>
+							<div class="h3">ANDA TELAH MENGUPLOAD FILE PEMBERKASAN</div>
 						<?php else: ?>
-							<div class="h5">Pastikan bahwa anda sudah mendapatkan nilai revisi dosen penguji</div>
+							<div class="h5">Silahkan upload berkas anda disini</div>
 							<input type="file" class="my-pond">
 						<?php endif; ?>
+						<?php
+						if (isset($status->message)): ?>
+							<div class="alert <?php echo $status->color ?> alert-dismissible fade show"
+								 role="alert">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<strong><?php echo $status->message ?></strong>
+							</div>
+						<?php endif; ?>
+						<div class="h5">* Catatan</div>
+						<div class="h6 font-weight-normal">- Apabila berkas yang kalian upload kurang lengkap,
+							koordinator akan mengintruksikan kalian untuk upload ulang
+						</div>
+						<?php ?>
 					</div>
 				</div>
 			</div>
@@ -67,7 +84,7 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		FilePond.registerPlugin(FilePondPluginFileValidateSize);
 		FilePond.registerPlugin(FilePondPluginFileValidateType);
 		FilePond.setOptions({
-			maxFileSize: '1MB',
+			maxFileSize: '2560KB',
 			acceptedFileTypes: ['application/pdf'],
 			fileRenameFunction: (file) => {
 				console.log(file);
@@ -77,11 +94,9 @@ $mhs = masterdata('tb_mahasiswa', "nim = '$nim'", 'nama_mahasiswa nama') ?>
 		let pond = $('.my-pond').filepond({
 			server: "<?php echo site_url('kelengkapan?m=upload') ?>"
 		})
-		<?php if(isset($file->nama_file) && $file->nama_file != ''): ?>
-		setTimeout(function () {
-			$('.my-pond').filepond('addFile', '<?php echo base_url('file_upload/berkas/') . $file->nama_file ?>')
-		}, 1250)
-		<?php endif ?>
+		$('.my-pond').on('FilePond:processfile', function (e) {
+			window.location.reload();
+		})
 	})
 </script>
 <!-- Demo JS - remove this in your project -->

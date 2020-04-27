@@ -16,106 +16,108 @@ class GAGenerator extends CI_Controller
 	{
 		$seminar = $this->seminar_model;
 		$pembimbing = $this->pembimbing_model;
-		$komponent_kromosom_1 = $pembimbing->get_all_approved_judul();
 		$this->db->truncate('tb_ga_component');
-		$tempat = $seminar->get_tempat_seminar();
-		$waktu = $seminar->get_waktu_seminar();
+
+		//gen 1
+		$subGen1 = [];
+		$mhs = $pembimbing->get_all_approved_judul();
+		foreach ($mhs as $sub) {
+			array_push($subGen1, (object)['id' => $sub->id_dosen_bimbingan_mhs, 'name' => $sub->nama_pegawai]);
+		}
+		//gen 2
+		$subGen2 = [];
 		$tanggal = $seminar->get_tanggal_seminar();
+		$waktu = $seminar->get_waktu_seminar();
+		$tempat = $seminar->get_tempat_seminar();
+		foreach ($tanggal as $tg) {
+			foreach ($waktu as $wk) {
+				foreach ($tempat as $tm) {
+					$sub = (object)['wt' => $tg->id . '-' . $wk->id . '-' . $tm->id];
+					array_push($subGen2, $sub);
+				}
+			}
+		}
+//		echo json_encode($subGen2);
+		//gen 3
+		$subGen3 = [];
 		$penguji_1 = $seminar->get_all_penguji('p1');
 		$penguji_2 = $seminar->get_all_penguji('p2');
-//		echo "Banyak kemungkinan kombinasi komponen 2 tidak sama adalah :" . (count($tempat) *count($tanggal) * count($waktu) * count($penguji_1) * count($penguji_2))/2;
-		foreach ($tempat as $r) {
-			foreach ($tanggal as $t) {
-				foreach ($waktu as $w) {
-					foreach ($penguji_1 as $p1) {
-						foreach ($penguji_2 as $p2) {
-							$kemungkinanx['ruangan'] = $r->nama;
-							$kemungkinanx['tanggal'] = $t->hari.', '.$t->tanggal;
-							$kemungkinanx['waktu'] = $w->jam;
-							$kemungkinanx['penguji1'] = $p1->nama_pegawai;
-							$kemungkinanx['penguji2'] = $p2->nama_pegawai;
-							if ($p1 != $p2) {
-								$kemungkinans[] = (object)$kemungkinanx;
-							}
-						}
-					}
-				}
+		foreach ($penguji_1 as $p1) {
+			foreach ($penguji_2 as $p2) {
+//				if ($p1->nama_pegawai != $p2->nama_pegawai) {
+				$sub = (object)['p1' => (object)['id' => $p1->id, 'name' => $p1->nama_pegawai], 'p2' => (object)['id' => $p2->id, 'name' => $p2->nama_pegawai]];
+				array_push($subGen3, $sub);
+//				}
 			}
 		}
-		$this->db->insert_batch('tb_ga_component', $kemungkinans);
-//		echo json_encode($kemungkinans, JSON_PRETTY_PRINT);
-		//gen 1
-		$components[] = $komponent_kromosom_1;
-		//gen 2
-		$components[] = $kemungkinans;
-		//total individu in population
-		$population = 50;
-		$individuals = array();
-		$fitnessIndividuals = array();
-		$totalFitness = 0;
-		for($i = 0;$i<$population;$i++){
-			$GaMain = new Main($components);
-			$populations = $GaMain->generateChromosomes();
-			$populationWithFitnessValue = $GaMain->checkFitnessValue($populations);
-			$fitnessChromosome = 0;
-			foreach ($populationWithFitnessValue as $fitnesBySlot){
-				$fitnessChromosome = $fitnessChromosome+$fitnesBySlot['fitness_value'];
-			}
-			//input
-			//roulette wheel
-			//nilai fitness masing2 individu
-			$fitnessIndividu = $fitnessChromosome/(count($populationWithFitnessValue)*6);
-			$fitnessIndividuals[$i] = round($fitnessIndividu,3);
-			//total fitnes
-			$totalFitness = $totalFitness+$fitnessIndividu;
-			$individuals[$i] = array('chromosomes'=>$populationWithFitnessValue,'fitness_individu'=>round($fitnessIndividu,3));
-		}
-		//probabilitas fitnes masing2 individu
-		$probIndividu = $this->probilitasIndividu($individuals,$totalFitness);
-		echo json_encode($probIndividu);
-		$selectedIndividual = $this->rouletteWheel($probIndividu);
-//		echo json_encode($selectedIndividual);
-		$res = 0;
-		foreach ($individuals as $individual){
-			$res = $res+$individual['fitness_individu'];
-		}
-//		var_dump($res);
-//		echo json_encode($individuals);
-//		echo json_encode($pembimbing->get_all_approved_judul(),JSON_PRETTY_PRINT);
+
+		$ga = new Main();
+		$ga->chromosomeLength = count($subGen1);
+		$ga->components = [$subGen1, $subGen2, $subGen3];
+		$ga->population = 100;
+		$ga->getChromosomesByPopulation();
+//		echo json_encode($ga->chromosomes);
+		$ga->getFitnessValue();
+//		var_dump($ga->totalFitness);
+		$probabilitas = $this->probilitasIndividu($ga->fitnessChromosomes, $ga->totalFitness);
+		$max = $probabilitas[count($probabilitas) - 1]->max_prob;
+		$selection = $this->rouletteWheel($probabilitas, $max, $ga->chromosomes);
+		$ga->components = $selection;
+		$ga->crossOverRate = 0.5;
+		$ga->crossOver($max);
+//		echo json_encode(['new'=>$selection,'old'=>$ga->chromosomes]);
 	}
-	public function rouletteWheel($individuals){
-		$count = 5;
+
+	public function rouletteWheel($probs, $max_prob, $chromosomes)
+	{
 		$parentSelected = array();
-		for($i = 0;$i<$count;$i++){
-			$randomNumber = $this->getRandDecimal();
-			foreach ($individuals as $individual){
-				if($randomNumber >= $individual->min and $randomNumber <= $individual->max){
-					array_push($parentSelected,$individual);
+//		$probChromosomePast = 0;
+		foreach ($probs as $key => $individual) {
+			$randomNumber = $this->getRandDecimal($max_prob);
+			if ($key == 0) {
+				if ($randomNumber < $individual->min_prob) {
+					array_push($parentSelected, $chromosomes[0]);
+				} else {
+					array_push($parentSelected, $chromosomes[$key + 1]);
+				}
+			} else {
+				if ($randomNumber > $individual->min_prob && $randomNumber < $probs[$key + 1]->max_prob) {
+					array_push($parentSelected, $chromosomes[$key]);
+				} else {
+					array_push($parentSelected, $chromosomes[$key - 1]);
 				}
 			}
+//			$probChromosomePast = $individual->prob_individu;
 		}
 		return $parentSelected;
 	}
-	public function getParents(){
+
+	public function getParents()
+	{
 
 	}
-	public function getRandDecimal(){
+
+	public function getRandDecimal($max_dec)
+	{
 		$min = 0;
-		$max = 100;
-		$decimals = 3;
+		$max = $max_dec;
+		$decimals = 4;
 
 		$divisor = pow(10, $decimals);
 		return $randomFloat = mt_rand($min, $max * $divisor) / $divisor;
 	}
-	public function probilitasIndividu($fitnessIndividuals,$totalFitness){
+
+	public function probilitasIndividu($fitnessIndividuals, $totalFitness)
+	{
 		$min = 0;
 		$max = 0;
-		foreach($fitnessIndividuals as $key=> $fi){
-			$prob_individu = $fi['fitness_individu']/$totalFitness;
-			$percentage_prob = $prob_individu*100;
-			$max = $min + ($percentage_prob/100*100);
-			$final[$key] =(object) array("chromosomes"=>$fi['chromosomes'],"prob_individu"=>round($prob_individu,3),"percentage_prob"=>round($percentage_prob,3),"min"=>round($min,3),"max"=>round($max,3));
-			$min = $min + ($percentage_prob/100*100)+0.001;
+		$final = [];
+		foreach ($fitnessIndividuals as $key => $fi) {
+			$prob_individu = $fi->fitness / $totalFitness;
+			$percentage_prob = $prob_individu * 100;
+			$max = $min + ($prob_individu / 100 * 100);
+			$final[$key] = (object)["prob_individu" => round($prob_individu, 4), "percentage_prob" => round($percentage_prob, 4), "min_prob" => round($min, 4), "max_prob" => round($max, 4)];
+			$min = $min + ($prob_individu / 100 * 100) + 0.001;
 		};
 		return $final;
 	}

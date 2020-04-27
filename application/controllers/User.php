@@ -5,11 +5,11 @@ class User extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('mahasiswa_model', 'konsultasi_model','pembimbing_model'));
+		$this->load->model(array('mahasiswa_model', 'konsultasi_model', 'pembimbing_model', 'penilaian_model'));
 		$this->load->model('pegawai_model');
 		$this->load->library('form_validation');
 		$this->load->helper('notification');
-		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
+		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
 	}
 
 	//dashboard user
@@ -29,7 +29,15 @@ class User extends CI_Controller
 				$data['mahasiswa'] = $this->mahasiswa_model->getById();
 				$data['latest_bimbingan'] = $this->konsultasi_model->show_latest_bimbingan();
 				$data['get_pembimbing'] = $this->pembimbing_model->is_has();
-				$data['intro'] = array(array('step_intro' => '5','message_intro'=>'Pastikan melihat informasi terlebih dahulu'),array('step_intro' => '6','message_intro'=>'Klik foto profil, dan pergi ke My Profile, dan ubah profil anda ketika pertama kali login. Hal ini bertujuan agar kalian bisa melakukan proses pengajuan magang'));
+				if (count($data['get_pembimbing']) > 0) {
+					$id_dosen_bimbingan_mhs = $data['get_pembimbing'][0]->id_dosen_bimbingan_mhs;
+					$penilaian_perusahaan = $this->penilaian_model->get_penilaian_perusahaan(array("id_dosen_bimbingan_mhs"=>$id_dosen_bimbingan_mhs));
+					count($penilaian_perusahaan);
+					if (count($penilaian_perusahaan) == 0) {
+						$data['informasi'] = (object)array('pesan' => 'Anda belum mengisi penilaian perusahaan, segera lakukan pengisian. Penguji tidak akan memberikan anda penilaian jika penilaian dari perusahaan kosong', 'uri' => site_url('magang?m=penilaian'));
+					}
+				}
+				$data['intro'] = array(array('step_intro' => '5', 'message_intro' => 'Pastikan melihat informasi terlebih dahulu'), array('step_intro' => '6', 'message_intro' => 'Klik foto profil, dan pergi ke My Profile, dan ubah profil anda ketika pertama kali login. Hal ini bertujuan agar kalian bisa melakukan proses pengajuan magang'));
 				$data['intro_dashboard'] = true;
 				break;
 			case 'dosen':

@@ -1,8 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-use Tools\Excel;
+//use Tools\Excel;
 
-require APPPATH . 'libraries/Excel.php';
+//require APPPATH . 'libraries/Excel.php';
 
 class Ajax extends CI_Controller
 {

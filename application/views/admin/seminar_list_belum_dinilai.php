@@ -1,4 +1,5 @@
 <?php $section = isset($_GET['section']) ? $_GET['section'] : null ?>
+<?php $belum_dinilai = isset($belum_dinilai) ? $belum_dinilai : array(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -26,15 +27,11 @@
 				<div class="col-md-12 col-lg-12 col-sm-12">
 					<div class="card">
 						<div class="card-header">
-							<div class="d-flex justify-content-between">
-								<div class="h3">Nilai Prakerin Perusahaan</div>
-								<?php if (isset($_GET['filter'])): ?>
-									<a href="<?php echo site_url('perusahaan?m=penilaian') ?>"
-									   class="btn btn-sm btn-primary">Sudah mengisi penilaian</a>
-								<?php else: ?>
-									<a href="<?php echo site_url('perusahaan?m=penilaian&filter=belum') ?>"
-									   class="btn btn-sm btn-primary">Belum mengisi penilaian</a>
-								<?php endif; ?>
+							<div class="h3">Mahasiswa Belum dinilai per tanggal
+								< <?php echo convert_date(date('Y-m-d')) ?></div>
+							<div class="text-right">
+								<a href="<?php echo site_url('seminar?m=data_penilaian') ?>"
+								   class="btn btn-sm btn-primary">Sudah dinilai</a>
 							</div>
 						</div>
 						<div class="card-body">
@@ -44,21 +41,32 @@
 									<tr>
 										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
-										<th>Pembimbing</th>
-										<th>Total Nilai</th>
-										<th>Detail Nilai</th>
+										<th>Ruangan</th>
+										<th>Waktu Seminar</th>
+										<th>Status Penilaian</th>
 									</tr>
 									</thead>
 									<tfoot>
 									<tr>
 										<th>NIM</th>
 										<th>Nama Mahasiswa</th>
-										<th>Pembimbing</th>
-										<th>Total Nilai</th>
-										<th>Detail Nilai</th>
+										<th>Ruangan</th>
+										<th>Waktu Seminar</th>
+										<th>Status Penilaian</th>
 									</tr>
 									</tfoot>
-									<tbody></tbody>
+									<tbody>
+									<?php foreach ($belum_dinilai as $item): ?>
+										<tr>
+											<td><?php echo $item->nim ?></td>
+											<td><?php echo $item->nama_mahasiswa ?></td>
+											<td><?php echo $item->nama_tempat ?></td>
+											<td><?php echo convert_date(get_time_range($item->START, $item->END, 'datestart'), 'long') ?>
+												Pukul <?php echo substr(get_time_range($item->START, $item->END, 'start'), 0, 5) ?></td>
+											<td><?php echo $item->p3 ?></td>
+										</tr>
+									<?php endforeach; ?>
+									</tbody>
 								</table>
 							</div>
 						</div>
@@ -72,10 +80,11 @@
 	<!-- Scripts PHP-->
 	<?php $this->load->view('admin/_partials/modal.php'); ?>
 	<?php $this->load->view('admin/_partials/js.php'); ?>
-	<?php $uri = site_url('perusahaan?m=penilaian');
-	$uri = isset($_GET['filter']) ? $uri . "&filter=belum" : $uri;
-	?>
 	<script>
+		function format(value) {
+			return '<div>Hidden Value: ' + value + '</div>';
+		}
+
 		let t = $('#datatable-jadwal').dataTable({
 			dom: 'Bfrtip',
 			language: {
@@ -84,32 +93,17 @@
 					next: "<i class='fas fa-angle-right'>"
 				}
 			},
-			ajax: {
-				url: "<?php echo $uri?>",
-				type: "POST",
-				data: {
-					"ajax": "true"
-				}
-			},
-			buttons: [
-				'excel', 'pdf', 'print'
-			],
-			"order": [[0, 'asc']],
-			columns: [
-				{"data": "nim"},
-				{"data": "nama_mahasiswa"},
-				{"data": "nama_pembimbing"},
-				{"data": "nilai_pkl"},
+			buttons: [],
+			"order": [[3, 'asc'],[2,'asc']],
+			columnsDefs: [
 				{
-					"data": "detail_nilai_pkl",
-					"render": function (data) {
-						let encodedData = JSON.parse(data);
-						let lists = encodedData.map(function (item) {
-							return '<li><span>' + item.name + '</span> : <span>' + item.res + '</span></li>'
-						});
-						return '<ul>' + lists.join(" ") + '</ul>';
-					}
+					"targets": [2],
+					"visible": false,
 				},
+				{
+					"targets": [3],
+					"visible": false
+				}
 			]
 		}).on('init.dt', function () {
 			$('.dt-buttons .btn').removeClass('btn-secondary').addClass('btn-sm btn-default');
@@ -117,3 +111,4 @@
 	</script>
 </body>
 </html>
+
