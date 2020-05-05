@@ -9045,6 +9045,100 @@ CREATE TABLE `tb_kop_surat` (
 
 
 --
+-- Table structure for table `tb_kuesioner_bobot`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_kuesioner_bobot` (
+  `id` int(20) NOT NULL,
+  `bobot` int(2) DEFAULT NULL,
+  `id_master_level` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `bobot_with_master_level` (`id_master_level`),
+  CONSTRAINT `bobot_with_master_level` FOREIGN KEY (`id_master_level`) REFERENCES `tb_master_level` (`id_master_level`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_kuesioner_bobot`
+--
+
+INSERT INTO `tb_kuesioner_bobot` VALUES (2,1,'IML006');
+INSERT INTO `tb_kuesioner_bobot` VALUES (3,2,'IML006');
+INSERT INTO `tb_kuesioner_bobot` VALUES (4,3,'IML006');
+INSERT INTO `tb_kuesioner_bobot` VALUES (5,4,'IML006');
+INSERT INTO `tb_kuesioner_bobot` VALUES (6,5,'IML006');
+
+--
+-- Table structure for table `tb_kuesioner_bobot_ahp`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_kuesioner_bobot_ahp` (
+  `id` int(20) NOT NULL,
+  `bobot_ahp` varchar(255) DEFAULT NULL,
+  `id_kriteria` int(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `bobot_ahp_with_kriteria` (`id_kriteria`),
+  CONSTRAINT `bobot_ahp_with_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `tb_kuesioner_kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_kuesioner_bobot_ahp`
+--
+
+
+--
+-- Table structure for table `tb_kuesioner_bobot_fuzzy_ahp`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_kuesioner_bobot_fuzzy_ahp` (
+  `id` int(20) NOT NULL,
+  `bobot_fuzzy_ahp` varchar(255) DEFAULT NULL,
+  `id_kriteria` int(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `bobot_fuzzy_ahp_with_kriteria` (`id_kriteria`),
+  CONSTRAINT `bobot_fuzzy_ahp_with_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `tb_kuesioner_kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_kuesioner_bobot_fuzzy_ahp`
+--
+
+
+--
+-- Table structure for table `tb_kuesioner_jawaban_responder`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_kuesioner_jawaban_responder` (
+  `id` int(20) NOT NULL,
+  `id_pertanyaan` int(20) DEFAULT NULL,
+  `id_mhs_pilih_perusahaan` int(11) DEFAULT NULL,
+  `id_bobot` int(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pertanyaan_with_jawab` (`id_pertanyaan`),
+  KEY `mhs_pil_per_with_jawab` (`id_mhs_pilih_perusahaan`),
+  KEY `bobot_with_jawab` (`id_bobot`),
+  CONSTRAINT `bobot_with_jawab` FOREIGN KEY (`id_bobot`) REFERENCES `tb_kuesioner_bobot` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `mhs_pil_per_with_jawab` FOREIGN KEY (`id_mhs_pilih_perusahaan`) REFERENCES `tb_mhs_pilih_perusahaan` (`id_mhs_pilih_perusahaan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pertanyaan_with_jawab` FOREIGN KEY (`id_pertanyaan`) REFERENCES `tb_kuesioner_pertanyaan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_kuesioner_jawaban_responder`
+--
+
+
+--
 -- Table structure for table `tb_kuesioner_kriteria`
 --
 
@@ -9053,8 +9147,10 @@ CREATE TABLE `tb_kop_surat` (
 CREATE TABLE `tb_kuesioner_kriteria` (
   `id` int(20) NOT NULL,
   `kriteria` varchar(255) DEFAULT NULL,
-  `id_master_level` int(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_master_level` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kues_kriteria_with_master` (`id_master_level`),
+  CONSTRAINT `kues_kriteria_with_master` FOREIGN KEY (`id_master_level`) REFERENCES `tb_master_level` (`id_master_level`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -9062,6 +9158,30 @@ CREATE TABLE `tb_kuesioner_kriteria` (
 -- Dumping data for table `tb_kuesioner_kriteria`
 --
 
+INSERT INTO `tb_kuesioner_kriteria` VALUES (1,'KESESUAIAN JURUSAN  DAN CORE PERUSAHAAN','IML006');
+INSERT INTO `tb_kuesioner_kriteria` VALUES (3,'KREDIBILITAS','IML006');
+
+--
+-- Table structure for table `tb_kuesioner_pertanyaan`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_kuesioner_pertanyaan` (
+  `id` int(20) NOT NULL,
+  `pertanyaan` text DEFAULT NULL,
+  `id_kriteria` int(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pertanyaan_with_kriteria` (`id_kriteria`),
+  CONSTRAINT `pertanyaan_with_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `tb_kuesioner_kriteria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_kuesioner_pertanyaan`
+--
+
+INSERT INTO `tb_kuesioner_pertanyaan` VALUES (1,'Apakah Perusahaan tempat anda PKL sudah sesuai dengan Jurusan Anda (dalam artian terdapat divisi untuk mendukung kompetensi anda dalam meningkatkan skill dan pengetahuan sesuai dengan jurusan anda)?\r\n',1);
 
 --
 -- Table structure for table `tb_level`
@@ -11381,4 +11501,4 @@ INSERT INTO `tb_waktu` VALUES (13,'TA002');
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-05 22:04:06
+-- Dump completed on 2020-05-06  1:09:28
