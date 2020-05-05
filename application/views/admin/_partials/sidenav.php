@@ -67,6 +67,12 @@
 								</div>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link" href="<?php echo site_url('kuesioner') ?>">
+									<i class="fas fa-industry text-info"></i>
+									<span class="nav-link-text">Kuesioner</span>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" href="<?php echo site_url('perusahaan') ?>">
 									<i class="fas fa-industry text-info"></i>
 									<span class="nav-link-text">Perusahaan</span>
@@ -261,32 +267,32 @@
 					<!-- Heading -->
 					<h6 class="navbar-heading p-0 text-muted">Documentation</h6>
 					<!-- Navigation -->
-<!--					<ul class="navbar-nav mb-md-3">-->
-<!--						<li class="nav-item">-->
-<!--							<a class="nav-link" href="../../docs/getting-started/overview.html" target="_blank">-->
-<!--								<i class="ni ni-spaceship"></i>-->
-<!--								<span class="nav-link-text">Getting started</span>-->
-<!--							</a>-->
-<!--						</li>-->
-<!--						<li class="nav-item">-->
-<!--							<a class="nav-link" href="../../docs/foundation/colors.html" target="_blank">-->
-<!--								<i class="ni ni-palette"></i>-->
-<!--								<span class="nav-link-text">Foundation</span>-->
-<!--							</a>-->
-<!--						</li>-->
-<!--						<li class="nav-item">-->
-<!--							<a class="nav-link" href="../../docs/components/alerts.html" target="_blank">-->
-<!--								<i class="ni ni-ui-04"></i>-->
-<!--								<span class="nav-link-text">Components</span>-->
-<!--							</a>-->
-<!--						</li>-->
-<!--						<li class="nav-item">-->
-<!--							<a class="nav-link" href="../../docs/plugins/charts.html" target="_blank">-->
-<!--								<i class="ni ni-chart-pie-35"></i>-->
-<!--								<span class="nav-link-text">Plugins</span>-->
-<!--							</a>-->
-<!--						</li>-->
-<!--					</ul>-->
+					<!--					<ul class="navbar-nav mb-md-3">-->
+					<!--						<li class="nav-item">-->
+					<!--							<a class="nav-link" href="../../docs/getting-started/overview.html" target="_blank">-->
+					<!--								<i class="ni ni-spaceship"></i>-->
+					<!--								<span class="nav-link-text">Getting started</span>-->
+					<!--							</a>-->
+					<!--						</li>-->
+					<!--						<li class="nav-item">-->
+					<!--							<a class="nav-link" href="../../docs/foundation/colors.html" target="_blank">-->
+					<!--								<i class="ni ni-palette"></i>-->
+					<!--								<span class="nav-link-text">Foundation</span>-->
+					<!--							</a>-->
+					<!--						</li>-->
+					<!--						<li class="nav-item">-->
+					<!--							<a class="nav-link" href="../../docs/components/alerts.html" target="_blank">-->
+					<!--								<i class="ni ni-ui-04"></i>-->
+					<!--								<span class="nav-link-text">Components</span>-->
+					<!--							</a>-->
+					<!--						</li>-->
+					<!--						<li class="nav-item">-->
+					<!--							<a class="nav-link" href="../../docs/plugins/charts.html" target="_blank">-->
+					<!--								<i class="ni ni-chart-pie-35"></i>-->
+					<!--								<span class="nav-link-text">Plugins</span>-->
+					<!--							</a>-->
+					<!--						</li>-->
+					<!--					</ul>-->
 				</div>
 			</div>
 		</div>
