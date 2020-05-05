@@ -281,8 +281,7 @@ class Kuesioner extends CI_Controller
 						}
 						return $this->index_kuesioner_mahasiswa();
 					}
-//					$this->index_kuesioner_mahasiswa();
-					return;
+					return $this->index_kuesioner_mahasiswa();
 					break;
 				case 'dosen':
 					break;

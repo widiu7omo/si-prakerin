@@ -105,7 +105,7 @@
 						</div>
 						<div class="card-body pt-0">
 							<div class="table-responsive py-4">
-								<table class="table table-flush" id="datatable-mhs-kriteria">
+								<table class="table table-flush compact" id="datatable-mhs-kriteria">
 									<thead class="thead-light">
 									<tr role="row">
 										<th>Aksi</th>
@@ -191,7 +191,7 @@
 						</div>
 						<div class="card-body pt-0">
 							<div class="table-responsive py-4">
-								<table class="table" id="datatable-mhs-pertanyaan">
+								<table class="table compact" id="datatable-mhs-pertanyaan">
 									<thead class="thead-light">
 									<tr role="row">
 										<th>Aksi</th>
@@ -276,7 +276,7 @@
 						</div>
 						<div class="card-body pt-0">
 							<div class="table-responsive py-4">
-								<table class="table table-flush" id="datatable-mhs-bobot">
+								<table class="table table-flush compact" id="datatable-mhs-bobot">
 									<thead class="thead-light">
 									<tr role="row">
 										<th>Aksi</th>
