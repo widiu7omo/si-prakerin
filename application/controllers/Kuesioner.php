@@ -12,6 +12,46 @@ class Kuesioner extends CI_Controller
 		$this->load->model(['Kuesioner_model']);
 	}
 
+	public function simpan_bobot_ahp()
+	{
+		$kuesioner = $this->Kuesioner_model;
+		if ($kuesioner->insert_bobot_ahp()) {
+			echo json_encode(['status' => 'success']);
+		} else {
+			echo json_encode(['status' => 'error']);
+		}
+	}
+
+	public function ambil_random_index()
+	{
+		$random_index = [
+			['om' => 1, 'ri' => '0.00'],
+			['om' => 2, 'ri' => '0.00'],
+			['om' => 3, 'ri' => '0.58'],
+			['om' => 4, 'ri' => '0.90'],
+			['om' => 5, 'ri' => '1.12'],
+			['om' => 6, 'ri' => '1.24'],
+			['om' => 7, 'ri' => '1.32'],
+			['om' => 8, 'ri' => '1.41'],
+			['om' => 9, 'ri' => '1.45'],
+			['om' => 10, 'ri' => '1.49'],
+			['om' => 11, 'ri' => '1.51'],
+			['om' => 12, 'ri' => '1.48'],
+			['om' => 13, 'ri' => '1.56'],
+			['om' => 14, 'ri' => '1.57'],
+			['om' => 15, 'ri' => '1.59']
+		];
+		echo json_encode($random_index);
+	}
+
+	public function index_matriks_perbandingan()
+	{
+		$data = [];
+		$kuesioner = $this->Kuesioner_model;
+		$data['kriteria'] = $kuesioner->get_kriteria();
+		$this->load->view('admin/kuesioner_mahasiswa_matriks', $data);
+	}
+
 	public function index_kuesioner_mahasiswa($data_only = false)
 	{
 		$data['rows'] = [];
@@ -223,8 +263,21 @@ class Kuesioner extends CI_Controller
 
 	public function hasil_kuesioner_mahasiswa()
 	{
-
 		$this->load->view('admin/kuesioner_mahasiswa_hasil');
+	}
+
+	public function jawaban_hasil()
+	{
+		$kuesioner = $this->Kuesioner_model;
+		$res['data'] = $kuesioner->get_jawaban_responder();
+		echo json_encode($res);
+	}
+
+	public function jawaban_rekap()
+	{
+		$kuesioner = $this->Kuesioner_model;
+		$res['data'] = $kuesioner->get_rekap_responder();
+		echo json_encode($res);
 	}
 
 	public function index()
@@ -232,8 +285,14 @@ class Kuesioner extends CI_Controller
 		$get = $this->input->get();
 		if (isset($get['m'])) {
 			switch ($get['m']) {
+				case 'matriks':
+					return $this->index_matriks_perbandingan();
+					break;
 				case 'mahasiswa':
 					if (isset($get['sec']) and $get['sec'] == 'hasil') {
+						return $this->hasil_kuesioner_mahasiswa();
+					}
+					if (isset($get['sec']) and $get['sec'] == 'rekap') {
 						return $this->hasil_kuesioner_mahasiswa();
 					}
 					if (isset($get['sec']) and $get['sec'] == 'kriteria') {
@@ -290,23 +349,16 @@ class Kuesioner extends CI_Controller
 			}
 		}
 		$session = $this->session->userdata();
+		!isset($session['level']) ? redirect('/') : null;
 		if ($session['level'] == 'admin') {
 			$data['menus'] = array(
 				array(
-					'name' => 'Atribut Kuesioner Dosen',
+					'name' => 'Pendefinsian Bobot SPK',
 					'step_intro' => '1',
-					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Dosen',
-					'href' => site_url('kuesioner?m=dosen'),
+					'message_intro' => 'Matriks Perbandingan, Normalisasi, Validasi Bobot',
+					'href' => site_url('kuesioner?m=matriks'),
 					'icon' => 'fas fa-id-badge',
-					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Dosen'
-				),
-				array(
-					'name' => 'Atribut Kuesioner Mahasiswa',
-					'step_intro' => '2',
-					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa',
-					'href' => site_url('kuesioner?m=mahasiswa'),
-					'icon' => 'fas fa-star',
-					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa'
+					'desc' => 'Pengelolaan nilai bobot terkait Matriks Perbandingan, Normalisasi, Validasi Bobot'
 				),
 				array(
 					'name' => 'Atribut Kuesioner Perusahaan',
@@ -323,6 +375,22 @@ class Kuesioner extends CI_Controller
 					'href' => site_url('kuesioner?m=dosen&sec=hasil'),
 					'icon' => 'fas fa-id-badge',
 					'desc' => 'Hasil Kuesioner dari responder Dosen yang telah mengisi kuesioner'
+				),
+				array(
+					'name' => 'Atribut Kuesioner Dosen',
+					'step_intro' => '1',
+					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Dosen',
+					'href' => site_url('kuesioner?m=dosen'),
+					'icon' => 'fas fa-id-badge',
+					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Dosen'
+				),
+				array(
+					'name' => 'Atribut Kuesioner Mahasiswa',
+					'step_intro' => '2',
+					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa',
+					'href' => site_url('kuesioner?m=mahasiswa'),
+					'icon' => 'fas fa-star',
+					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa'
 				),
 				array(
 					'name' => 'Hasil Kuesioner Mahasiswa',

@@ -105,7 +105,7 @@
 						</div>
 						<div class="card-body pt-0">
 							<div class="table-responsive py-4">
-								<table class="table table-flush compact" id="datatable-mhs-kriteria">
+								<table class="table table-flush compact" id="datatable-mhs-kriteria" style="width:100%">
 									<thead class="thead-light">
 									<tr role="row">
 										<th>Aksi</th>
@@ -191,7 +191,7 @@
 						</div>
 						<div class="card-body pt-0">
 							<div class="table-responsive py-4">
-								<table class="table compact" id="datatable-mhs-pertanyaan">
+								<table class="table compact" id="datatable-mhs-pertanyaan" style="width:100%">
 									<thead class="thead-light">
 									<tr role="row">
 										<th>Aksi</th>
@@ -325,6 +325,11 @@
 <?php $this->load->view('admin/_partials/js.php'); ?>
 <!-- Demo JS - remove this in your project -->
 <!-- <script src="../aset/js/demo.min.js"></script> -->
+<script>
+	$('#datatable-mhs-bobot').dataTable({});
+	$('#datatable-mhs-pertanyaan').dataTable({});
+	$('#datatable-mhs-kriteria').dataTable({});
+</script>
 </body>
 
 </html>
