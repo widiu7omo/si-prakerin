@@ -14,14 +14,25 @@ class Kuesioner_model extends CI_Model
 		//Do your magic here
 	}
 
+	public function get_bobot_awal()
+	{
+		$this->db->select('bobot_awal')->limit(1);
+		return $this->db->get('tb_kuesioner_bobot_awal')->row();
+	}
+
 	public function insert_bobot_ahp()
 	{
 		$bobot = json_decode($_POST['bobot']);
+		$bobot_ori = json_decode($_POST['bobot_ori']);
+		$encode_bobot_ori = json_encode($bobot_ori);
+
 		$values = [];
 		foreach ($bobot as $item) {
 			array_push($values, ['bobot_ahp' => $item->rata2, 'id_kriteria' => $item->id]);
 		}
 		$this->db->query('TRUNCATE tb_kuesioner_bobot_ahp');
+		$this->db->query('TRUNCATE tb_kuesioner_bobot_awal');
+		$this->db->query("INSERT INTO tb_kuesioner_bobot_awal(bobot_awal) VALUE('$encode_bobot_ori')");
 		return $this->db->insert_batch('tb_kuesioner_bobot_ahp', $values);
 	}
 

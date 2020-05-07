@@ -22,6 +22,34 @@ class Kuesioner extends CI_Controller
 		}
 	}
 
+	public function get_bobot_awal()
+	{
+		$kuesioner = $this->Kuesioner_model;
+		$result = $kuesioner->get_bobot_awal();
+		if ($result) {
+			echo json_encode($result);
+		} else {
+			echo json_encode(['status' => 'error']);
+		}
+	}
+
+	public function ambil_skala_fuzzy()
+	{
+		$skala_fuzzy = [
+			['skala_ahp' => '1', 'desc' => 'Perbandingan dua kriteria yang sama (diagonal)', 'skala_fuzzy' => ['1', '1', '1',], 'invers_skala_fuzzy' => ['1', '1', '1',]],
+			['skala_ahp' => '1', 'desc' => 'Perbandingan dua kriteria yang sama (selain diagonal)', 'skala_fuzzy' => ['1', '1', '3',], 'invers_skala_fuzzy' => ['1/3', '1', '1',]],
+			['skala_ahp' => '3', 'desc' => 'Dua elemen mempunyai kepentingan yang sama', 'skala_fuzzy' => ['1', '3', '5',], 'invers_skala_fuzzy' => ['1/5', '1/3', '1',]],
+			['skala_ahp' => '5', 'desc' => 'Satu elemen sedikit lebih penting dari yang lain', 'skala_fuzzy' => ['3', '5', '7',], 'invers_skala_fuzzy' => ['1/7', '1/5', '1/3',]],
+			['skala_ahp' => '7', 'desc' => 'Satu elemen lebih penting dari yang lain', 'skala_fuzzy' => ['5', '7', '9',], 'invers_skala_fuzzy' => ['1/9', '1/7', '1/5',]],
+			['skala_ahp' => '9', 'desc' => 'Satu elemen sangat lebih penting dari yang lain', 'skala_fuzzy' => ['7', '9', '9',], 'invers_skala_fuzzy' => ['1/9', '1/9', '1/7',]],
+			['skala_ahp' => '2', 'desc' => 'Nilai-nilai di antara dua pertimbangan yang berdekatan', 'skala_fuzzy' => ['1', '2', '4',], 'invers_skala_fuzzy' => ['1/4', '1/2', '1',]],
+			['skala_ahp' => '4', 'desc' => 'Nilai-nilai di antara dua pertimbangan yang berdekatan', 'skala_fuzzy' => ['2', '4', '6',], 'invers_skala_fuzzy' => ['1/6', '1/4', '1/2',]],
+			['skala_ahp' => '6', 'desc' => 'Nilai-nilai di antara dua pertimbangan yang berdekatan', 'skala_fuzzy' => ['4', '6', '8',], 'invers_skala_fuzzy' => ['1/8', '1/6', '1/4',]],
+			['skala_ahp' => '8', 'desc' => 'Nilai-nilai di antara dua pertimbangan yang berdekatan', 'skala_fuzzy' => ['6', '8', '9',], 'invers_skala_fuzzy' => ['1/9', '1/8', '1/6',]],
+		];
+		echo json_encode($skala_fuzzy);
+	}
+
 	public function ambil_random_index()
 	{
 		$random_index = [
