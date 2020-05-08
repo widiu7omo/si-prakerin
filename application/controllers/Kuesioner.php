@@ -304,6 +304,60 @@ class Kuesioner extends CI_Controller
 		$this->load->view('admin/kuesioner_mahasiswa_hasil');
 	}
 
+	public function hasil_topsis_mahasiswa()
+	{
+		$kuesioner = $this->Kuesioner_model;
+		$rekap_responder = $kuesioner->get_rekap_responder();
+		$bobot_fuzzy = $kuesioner->get_bobot_fuzzy();
+		//kuadratkan 2 rata2 rekap responder
+		foreach ($rekap_responder as $i => $responder) {
+//			echo '<pre>' . var_export($responder['nama_perusahaan'].'='.$responder['kriteria'][4]['average'], true) . '</pre>';;
+			foreach ($responder['kriteria'] as $j => $kriteria) {
+				$responder['kriteria'][$j]['average_k2'] = pow($kriteria['average'], 2);
+			}
+			$rekap_responder[$i] = $responder;
+		}
+		//sum kuadrat dan akar
+		$total_kuadrat_kriteria = $this->sum_kuadrat_kriteria($rekap_responder);
+		//pembagian dengan hasil sum kuadrat
+		foreach ($rekap_responder as $i => $responder) {
+//			echo '<pre>' . var_export($responder['nama_perusahaan'].'='.$responder['kriteria'][4]['average'], true) . '</pre>';;
+			foreach ($responder['kriteria'] as $j => $kriteria) {
+				$divided_sqrt = 0;
+				if ($total_kuadrat_kriteria[$j]['id'] == $kriteria['id_kriteria']) {
+					$divided_sqrt = $kriteria['average'] / $total_kuadrat_kriteria[$j]['sqrt_sum'];
+					$responder['kriteria'][$j]['divided_sqrt'] = $divided_sqrt;
+				}
+				if ($bobot_fuzzy[$j]->id_kriteria == $kriteria['id_kriteria']) {
+					$sqrt_with_fuzzy = 0;
+					$sqrt_with_fuzzy = $divided_sqrt * $bobot_fuzzy[$j]->bobot_fuzzy_ahp;
+					$responder['kriteria'][$j]['sqlrt_with_fuzzy'] = $sqrt_with_fuzzy;
+				}
+			}
+			$rekap_responder[$i] = $responder;
+		}
+		echo json_encode($rekap_responder);
+	}
+
+	private function sum_kuadrat_kriteria($rekap_responder)
+	{
+		$kuesioner = $this->Kuesioner_model;
+		$criterias = $kuesioner->get_kriteria();
+		$sum_each_criteria = [];
+		foreach ($criterias as $criteria_master) {
+			$sum = 0;
+			foreach ($rekap_responder as $responder) {
+				foreach ($responder['kriteria'] as $criteria) {
+					if ($criteria_master->id == $criteria['id_kriteria']) {
+						$sum += $criteria['average_k2'];
+					}
+				}
+			}
+			$sum_each_criteria[] = ['sum' => $sum, 'id' => $criteria_master->id, 'sqrt_sum' => sqrt($sum)];
+		}
+		return $sum_each_criteria;
+	}
+
 	public function jawaban_hasil()
 	{
 		$kuesioner = $this->Kuesioner_model;
@@ -331,6 +385,9 @@ class Kuesioner extends CI_Controller
 						return $this->hasil_kuesioner_mahasiswa();
 					}
 					if (isset($get['sec']) and $get['sec'] == 'rekap') {
+						return $this->hasil_kuesioner_mahasiswa();
+					}
+					if (isset($get['sec']) and $get['sec'] == 'topsis') {
 						return $this->hasil_kuesioner_mahasiswa();
 					}
 					if (isset($get['sec']) and $get['sec'] == 'kriteria') {
@@ -399,12 +456,20 @@ class Kuesioner extends CI_Controller
 					'desc' => 'Pengelolaan nilai bobot terkait Matriks Perbandingan, Normalisasi, Validasi Bobot'
 				),
 				array(
-					'name' => 'Atribut Kuesioner Perusahaan',
-					'step_intro' => '3',
-					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Perusahaan',
-					'href' => site_url('kuesioner?m=perusahaan'),
-					'icon' => 'fas fa-building',
-					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Perusahaan'
+					'name' => 'Atribut Kuesioner Mahasiswa',
+					'step_intro' => '2',
+					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa',
+					'href' => site_url('kuesioner?m=mahasiswa'),
+					'icon' => 'fas fa-star',
+					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa'
+				),
+				array(
+					'name' => 'Hasil Kuesioner Mahasiswa',
+					'step_intro' => '2',
+					'message_intro' => 'Hasil Kuesioner dari responder Mahasiswa yang telah mengisi kuesioner',
+					'href' => site_url('kuesioner?m=mahasiswa&sec=hasil'),
+					'icon' => 'fas fa-star',
+					'desc' => 'Hasil Kuesioner dari responder Mahasiswa yang telah mengisi kuesioner'
 				),
 				array(
 					'name' => 'Hasil Kuesioner Dosen',
@@ -423,20 +488,12 @@ class Kuesioner extends CI_Controller
 					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Dosen'
 				),
 				array(
-					'name' => 'Atribut Kuesioner Mahasiswa',
-					'step_intro' => '2',
-					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa',
-					'href' => site_url('kuesioner?m=mahasiswa'),
-					'icon' => 'fas fa-star',
-					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Mahasiswa'
-				),
-				array(
-					'name' => 'Hasil Kuesioner Mahasiswa',
-					'step_intro' => '2',
-					'message_intro' => 'Hasil Kuesioner dari responder Mahasiswa yang telah mengisi kuesioner',
-					'href' => site_url('kuesioner?m=mahasiswa&sec=hasil'),
-					'icon' => 'fas fa-star',
-					'desc' => 'Hasil Kuesioner dari responder Mahasiswa yang telah mengisi kuesioner'
+					'name' => 'Atribut Kuesioner Perusahaan',
+					'step_intro' => '3',
+					'message_intro' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Perusahaan',
+					'href' => site_url('kuesioner?m=perusahaan'),
+					'icon' => 'fas fa-building',
+					'desc' => 'Pengelolaan Kuesioner, termasuk Kriteria, dan Pembobotan khusus Perusahaan'
 				),
 				array(
 					'name' => 'Hasil Kuesioner Perusahaan',

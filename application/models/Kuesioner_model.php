@@ -20,6 +20,11 @@ class Kuesioner_model extends CI_Model
 		return $this->db->get('tb_kuesioner_bobot_awal')->row();
 	}
 
+	public function get_bobot_fuzzy()
+	{
+		return $this->db->get('tb_kuesioner_bobot_fuzzy_ahp')->result();
+	}
+
 	public function insert_bobot_fuzzy()
 	{
 		$bobot_fuzzy = $_POST['fuzzy'];
@@ -184,7 +189,7 @@ class Kuesioner_model extends CI_Model
 				}
 				$average = $total_weight_criteria / $count;
 				$total_per_criteria['nama_perusahaan'] = $item->nama_perusahaan;
-				$total_per_criteria['kriteria'][] = ['kriteria' => $item->kriteria, 'total_bobot' => $total_weight_criteria, 'average' => $average];
+				$total_per_criteria['kriteria'][] = ['id_kriteria' => $item->id_kriteria, 'kriteria' => $item->kriteria, 'total_bobot' => $total_weight_criteria, 'average' => $average];
 			}
 			$count_perusahaan++;
 			$total_per_criteria['no'] = $count_perusahaan;
