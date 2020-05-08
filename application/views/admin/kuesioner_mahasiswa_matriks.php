@@ -190,6 +190,16 @@
 								</table>
 							</div>
 						</div>
+						<div class="row mt-4">
+							<div class="col-md-12 col-xs-12">
+								<hr>
+								<div class="card" style="height: 400px">
+									<div class="card-body">
+										<canvas id="canvas"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -614,7 +624,20 @@
 			let sumExtendedFuzzy = sumFuzzyExtend(extendedFuzzy);
 			let transposedFuzzy = transposeSummedFuzzyExtend(sumExtendedFuzzy);
 			let synteticedFuzzy = syntectingFuzzy(extendedFuzzy, transposedFuzzy);
-			console.log(synteticedFuzzy);
+			let comparedValueOfFuzzy = countComparisonPosibiliyBetweenFuzzy(synteticedFuzzy)
+			let finalFuzzyValue = getFinalResultW(comparedValueOfFuzzy);
+			console.log(finalFuzzyValue);
+			//update chart JS
+			barChartData.datasets.forEach(function (dataset) {
+				dataset.data = finalFuzzyValue.map(function (value) {
+					return value.w_value.toFixed(5);
+				});
+				dataset.labels = finalFuzzyValue.map(function (value, index) {
+					return 'Kriteria ' + index;
+				});
+				console.log(dataset)
+			});
+			window.myBar.update();
 			$('#tabel-konversi-fuzzy').find('td').each(function (index, item) {
 				let id = $(item).prop('id');
 				// console.log(id);
@@ -690,10 +713,82 @@
 		}
 
 		function syntectingFuzzy(extendedFuzzy, transposedFuzzy) {
-			console.log(extendedFuzzy);
-			console.log(transposedFuzzy);
+			// console.log(extendedFuzzy);
+			// console.log(transposedFuzzy);
+			let synteticedFuzzy = [];
+			extendedFuzzy.forEach(function (extended) {
+				let synteticedObject = {};
+				let [low, med, up] = transposedFuzzy;
+				synteticedObject.syntetics = [low * extended.fuzzy_extend[0], med * extended.fuzzy_extend[1], up * extended.fuzzy_extend[2]];
+				synteticedObject.key = extended.key;
+				synteticedFuzzy.push(synteticedObject);
+			})
+			// console.log(synteticedFuzzy);
+			return synteticedFuzzy;
 		}
 
+		function countComparisonPosibiliyBetweenFuzzy(synteticedFuzzy) {
+			// console.log(synteticedFuzzy);
+			let dValues = [];
+			synteticedFuzzy.forEach(function (synteticI) {
+				// console.log(synteticI);
+				let result = [];
+				let dObject = {};
+				synteticedFuzzy.forEach(function (synteticJ) {
+					if (synteticI.key !== synteticJ.key) {
+						let [lowI, mediumI, upI] = synteticI.syntetics;
+						let [lowJ, mediumJ, upJ] = synteticJ.syntetics;
+						if (lowI >= lowJ) {
+							result.push(1)
+						} else {
+							let countVal = 0;
+							countVal = (lowJ - upI) / ((mediumI - upI) - (mediumJ - lowJ));
+							result.push(countVal);
+						}
+					}
+				})
+				// console.log(result);
+				//inject id criteria on result
+				dObject.key = synteticI.key;
+				if (isAllEqual(result)) {
+					//if all value on array is equal 1, then minimal value is 1
+					dObject.d_value = 1;
+					dValues.push(dObject);
+				} else {
+					dObject.d_value = Math.min.apply(null, result);
+					dValues.push(dObject);
+				}
+			})
+			// console.log(dValues);
+			return dValues;
+		}
+
+		function getTotalDValue(dValue) {
+			// console.log(dValue)
+			let totalDValue = 0;
+			dValue.forEach(function (d) {
+				totalDValue += d.d_value;
+			})
+			return totalDValue;
+		}
+
+		function getFinalResultW(dValue) {
+			let wValues = [];
+			let totalD = getTotalDValue(dValue);
+			dValue.forEach(function (d) {
+				let wValue = {}
+				wValue.key = d.key;
+				wValue.w_value = d.d_value / totalD;
+				wValues.push(wValue);
+			})
+			return wValues;
+		}
+
+		const isAllEqual = function (arr) {
+			return arr.every(function (v) {
+				return v === arr[0];
+			})
+		}
 		$(document).ready(function () {
 			//looking bobot on localstorage (temporary)
 			if (localStorage.getItem('bobot_ori')) {
@@ -732,6 +827,40 @@
 				}
 			})
 		})
+		//chartjs
+
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels: ['C1', 'C2', 'C3', 'C4', 'C5',],
+			datasets: [{
+				data: [
+					0, 0, 0, 0, 0
+				]
+			}]
+
+		};
+
+		window.onload = function () {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					scaleOverride: true,
+					scaleSteps: 0.0002,
+					scaleStepWidth: 1,
+					scaleStartValue: 0,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Visualisasi Bobot Kriteria'
+					},
+				}
+			});
+		};
 	</script>
 <?php endif; ?>
 <!-- Demo JS - remove this in your project -->
