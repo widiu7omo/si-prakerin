@@ -336,7 +336,68 @@ class Kuesioner extends CI_Controller
 			}
 			$rekap_responder[$i] = $responder;
 		}
-		echo json_encode($rekap_responder);
+		//get ymax ymin
+		$ymin_max = $this->get_ymin_max($rekap_responder);
+
+		//looking for D-max
+		foreach ($rekap_responder as $i => $responder) {
+//			echo '<pre>' . var_export($responder['nama_perusahaan'].'='.$responder['kriteria'][4]['average'], true) . '</pre>';;
+			$sum_d_max = 0;
+			$sum_d_min = 0;
+			foreach ($responder['kriteria'] as $j => $kriteria) {
+				$d_min = 0;
+				$d_max = 0;
+				if ($ymin_max[$j]['id'] == $kriteria['id_kriteria']) {
+					//pembulatan (rounding)
+					$round_sqlrt_fuzzy = round($kriteria['sqlrt_with_fuzzy'], 5);
+					$round_ymax = round($ymin_max[$j]['max'], 5);
+					$round_ymin = round($ymin_max[$j]['min'], 5);
+					$d_max = pow($round_sqlrt_fuzzy - $round_ymax, 2);
+					$d_min = pow($round_sqlrt_fuzzy - $round_ymin, 2);
+					$sum_d_max += $d_max;
+					$sum_d_min += $d_min;
+					$responder['kriteria'][$j]['d_max'] = round($d_max, 5);
+					$responder['kriteria'][$j]['d_min'] = round($d_min, 5);
+				}
+			}
+			$responder['d_max'] = sqrt($sum_d_max);
+			$responder['d_min'] = sqrt($sum_d_min);
+			$responder['final_result'] = sqrt($sum_d_min) / (sqrt($sum_d_min) + sqrt($sum_d_max));
+			//hapus array kriteria
+			unset($responder['kriteria']);
+			$rekap_responder[$i] = $responder;
+		}
+		//looing for D-min
+		usort($rekap_responder, function ($a, $b) {
+			return $a['final_result'] < $b['final_result'];
+		});
+		$sorted_result = [];
+		foreach ($rekap_responder as $i => $item) {
+			$item['no'] = $i + 1;
+			array_push($sorted_result, $item);
+		}
+		echo json_encode(['data' => $sorted_result]);
+	}
+
+	private function get_ymin_max($rekap_responder)
+	{
+
+		$kuesioner = $this->Kuesioner_model;
+		$criterias = $kuesioner->get_kriteria();
+		$ymin_max = [];
+		foreach ($criterias as $criteria_master) {
+			$array_criteria = [];
+			foreach ($rekap_responder as $responder) {
+				foreach ($responder['kriteria'] as $criteria) {
+					if ($criteria_master->id == $criteria['id_kriteria']) {
+						$array_criteria[] = $criteria['sqlrt_with_fuzzy'];
+					}
+				}
+			}
+
+			$ymin_max[] = ['id' => $criteria_master->id, 'min' => min($array_criteria), 'max' => max($array_criteria)];
+		}
+		return $ymin_max;
 	}
 
 	private function sum_kuadrat_kriteria($rekap_responder)

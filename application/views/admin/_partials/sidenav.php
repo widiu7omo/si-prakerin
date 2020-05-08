@@ -68,7 +68,7 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="<?php echo site_url('kuesioner') ?>">
-									<i class="fas fa-industry text-info"></i>
+									<i class="fas fa-question-circle text-info"></i>
 									<span class="nav-link-text">Kuesioner</span>
 								</a>
 							</li>

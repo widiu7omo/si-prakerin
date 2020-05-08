@@ -250,17 +250,7 @@
 						}
 					},
 					{
-						"data": "kriteria",
-						"render": function (item) {
-							let htmlItem = "";
-							item.forEach(function (item) {
-								htmlItem += "<p>" + item.kriteria + "</p><ul>" +
-										"<li>Total Bobot : " + item.total_bobot + "</li>" +
-										"<li>Rata-rata : " + item.average + "</li>" +
-										"</ul>";
-							})
-							return htmlItem;
-						}
+						"data": "final_result"
 					}]
 			})
 		</script>
