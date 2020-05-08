@@ -20,6 +20,17 @@ class Kuesioner_model extends CI_Model
 		return $this->db->get('tb_kuesioner_bobot_awal')->row();
 	}
 
+	public function insert_bobot_fuzzy()
+	{
+		$bobot_fuzzy = $_POST['fuzzy'];
+		$values = [];
+		foreach ($bobot_fuzzy as $item) {
+			array_push($values, ['bobot_fuzzy_ahp' => $item['w_value'], 'id_kriteria' => $item['id']]);
+		}
+		$this->db->query('TRUNCATE tb_kuesioner_bobot_fuzzy_ahp');
+		return $this->db->insert_batch('tb_kuesioner_bobot_fuzzy_ahp', $values);
+	}
+
 	public function insert_bobot_ahp()
 	{
 		$bobot = json_decode($_POST['bobot']);

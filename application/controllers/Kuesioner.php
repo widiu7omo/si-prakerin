@@ -22,6 +22,16 @@ class Kuesioner extends CI_Controller
 		}
 	}
 
+	public function simpan_bobot_fuzzy()
+	{
+		$kuesioner = $this->Kuesioner_model;
+		if ($kuesioner->insert_bobot_fuzzy()) {
+			echo json_encode(['status' => 'success']);
+		} else {
+			echo json_encode(['status' => 'success']);
+		}
+	}
+
 	public function get_bobot_awal()
 	{
 		$kuesioner = $this->Kuesioner_model;

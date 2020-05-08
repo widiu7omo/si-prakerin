@@ -28,7 +28,7 @@
 							<a class="nav-link mb-sm-3 mb-md-0 <?php echo $this->input->get('sec') == 'standar' ? 'active' : null ?>"
 							   id="tabs-text-1-tab"
 							   href="<?php echo site_url('kuesioner?m=matriks&sec=standar') ?>" role="tab"
-							   aria-controls="tabs-text-1" aria-selected="true">AHP Konvensional</a>
+							   aria-controls="tabs-text-1" aria-selected="true">Validasi AHP</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link mb-sm-3 mb-md-0 <?php echo $this->input->get('sec') == 'fuzzy' ? 'active' : null ?>"
@@ -459,6 +459,7 @@
 					alert('Pengisian ada yang terlewat');
 					return false;
 				}
+				let id_kriteria = $(item).data('id');
 				let key = $(item).prop('id');
 				let value = $(item).text();
 				//create object that original
@@ -466,6 +467,7 @@
 				let newOriginalObject = {};
 				newOriginalObject.key = key;
 				newOriginalObject.value = value;
+				newOriginalObject.id = id_kriteria;
 				originalCriteria.push(newOriginalObject);
 
 				//create object that has been converted to float
@@ -478,7 +480,6 @@
 				groupedCriteria.push(newObject);
 
 				let splitedKey = key.split('_');
-				let id_kriteria = $(item).data('id');
 				keysI.push(splitedKey[1]);
 				keysJ.push(splitedKey[2]);
 				keysId.push(id_kriteria);
@@ -579,11 +580,10 @@
 		}
 
 		function konversi_fuzzy(acuan_fuzzy, bobot_awal) {
-			console.log(bobot_awal);
-			console.log(acuan_fuzzy);
 			let newBobotFuzzy = [];
 			let keysI = [];
 			let keysJ = [];
+			let keysID = [];
 			bobot_awal.forEach(function (bobot) {
 				let splitedKey = bobot.key.split('_');
 				let indexI = splitedKey[1];
@@ -591,6 +591,7 @@
 				let fuzzyValue = {};
 				keysI.push(indexI);
 				keysJ.push(indexJ);
+				keysID.push(bobot.id)
 				//if index i and j in same point, then
 				if (indexI.substring(1) === indexJ.substring(1)) {
 					//take first fuzzy, cz i and j in same point
@@ -620,13 +621,14 @@
 			})
 			let uniqueI = keysI.filter(unique);
 			let uniqueJ = keysJ.filter(unique);
+			let uniqueID = keysID.filter(unique);
 			let extendedFuzzy = fuzzyExtend(newBobotFuzzy, uniqueI, uniqueJ);
 			let sumExtendedFuzzy = sumFuzzyExtend(extendedFuzzy);
 			let transposedFuzzy = transposeSummedFuzzyExtend(sumExtendedFuzzy);
 			let synteticedFuzzy = syntectingFuzzy(extendedFuzzy, transposedFuzzy);
 			let comparedValueOfFuzzy = countComparisonPosibiliyBetweenFuzzy(synteticedFuzzy)
-			let finalFuzzyValue = getFinalResultW(comparedValueOfFuzzy);
-			console.log(finalFuzzyValue);
+			let finalFuzzyValue = getFinalResultW(comparedValueOfFuzzy, uniqueID);
+
 			//update chart JS
 			barChartData.datasets.forEach(function (dataset) {
 				dataset.data = finalFuzzyValue.map(function (value) {
@@ -635,7 +637,6 @@
 				dataset.labels = finalFuzzyValue.map(function (value, index) {
 					return 'Kriteria ' + index;
 				});
-				console.log(dataset)
 			});
 			window.myBar.update();
 			$('#tabel-konversi-fuzzy').find('td').each(function (index, item) {
@@ -649,6 +650,41 @@
 						}
 					}
 				})
+			})
+			Swal.fire({
+				title: 'Konversi Bobot ke Fuzzy Selesai',
+				text: "Apakah anda ingin menyimpan bobot ini?",
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				confirmButtonClass: 'btn btn-sm btn-success',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Simpan'
+			}).then((result) => {
+				if (result.value) {
+					$.ajax({
+						url: '<?php echo site_url('kuesioner/simpan_bobot_fuzzy')?>',
+						dataType: 'json',
+						data: {
+							fuzzy: finalFuzzyValue
+						},
+						method: "POST",
+						success: function (res) {
+							Swal.fire(
+									'Tersimpan',
+									'Bobot Fuzzy Berhasil disimpan',
+									'success'
+							)
+						},
+						error: function (err) {
+							Swal.fire(
+									'Gagal',
+									'Bobot Fuzzy gagal disimpan',
+									'error'
+							)
+						}
+					})
+				}
 			})
 		}
 
@@ -690,7 +726,6 @@
 				fuzzyExtends.fuzzy_extend = [low, medium, up]
 				eachCriteriaFuzzyExtend.push(fuzzyExtends);
 			})
-			console.log(eachCriteriaFuzzyExtend);
 			return eachCriteriaFuzzyExtend;
 		}
 
@@ -772,15 +807,17 @@
 			return totalDValue;
 		}
 
-		function getFinalResultW(dValue) {
+		function getFinalResultW(dValue, keysID) {
 			let wValues = [];
 			let totalD = getTotalDValue(dValue);
-			dValue.forEach(function (d) {
+			dValue.forEach(function (d, index) {
 				let wValue = {}
 				wValue.key = d.key;
+				wValue.id = keysID[index];
 				wValue.w_value = d.d_value / totalD;
 				wValues.push(wValue);
 			})
+			// console.log(wValues);
 			return wValues;
 		}
 
