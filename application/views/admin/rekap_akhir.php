@@ -23,10 +23,61 @@
 		<div class="header-body">
 			<!-- Card stats -->
 			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="h3">Atur Persentase Peniliaian Akhir <?php echo $tahun ?? 'null' ?></div>
+						</div>
+						<div class="card-body">
+							<?php if ($this->session->flashdata('status')): ?>
+								<?php $status = $this->session->flashdata('status'); ?>
+								<div class="alert alert-<?php echo $status->alert ?> alert-dismissible fade show"
+									 role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										<span class="sr-only">Close</span>
+									</button>
+									<strong><?php echo $status->status ?></strong>&nbsp;<?php echo $status->message ?>
+								</div>
+							<?php endif; ?>
+							<p class="text-sm mb-0">Persentase Penilaian Akhir Saat Ini saat ini :</p>
+							<?php foreach ($persen as $per): ?>
+							<h2>Nilai Pembimbing: <?php echo $per->pembimbing ?> % | Nilai Penguji 1 & 2 : masing-masing <?php echo $per->penguji12 ?> % | Nilai Perusahaan : <?php echo $per->perusahaan ?> % </h2>
+							
+							<form action="<?php echo site_url('seminar/updatepersen') ?>" method="POST">
+								<input type="hidden" name="id" value="<?php echo $per->id ?>">
+								<label class="form-control-label" for="persen">Tentukan Persentase Nilai Akhir</label>
+			
+								<div class="form-group">
+									<label class="form-control-label" >Persentase Pembimbing</label>
+									<input class="form-control" value="<?php echo $per->pembimbing ?>" name="pembimbing" placeholder="Pembimbing" type="text">
+								</div>
+
+								<div class="form-group">
+									<label class="form-control-label" >Persentase Penguji 1 & 2</label>
+									<input class="form-control" value="<?php echo $per->penguji12 ?> " name="penguji12" placeholder="Penguji 1 & 2" type="text">
+								</div>
+
+								<div class="form-group">
+									<label class="form-control-label" >Persentase Perusahaan</label>
+									<input class="form-control" value="<?php echo $per->perusahaan ?>" name="perusahaan" placeholder="Perusahaan" type="text">
+									<div class="text-md-right align-content-end mt-3 mb--4">
+										<button type="submit" class="btn btn-success">Simpan</button>
+									</div>
+								</div>
+							</form>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
 				<div class="col-md-12 col-lg-12 col-sm-12">
 					<div class="card">
 						<div class="card-header">
 							<div class="h3">Rekap Akhir <?php echo $tahun ?? 'null' ?></div>
+							
 							<div class="text-right">
 								<div class="d-flex align-items-center justify-content-end">Auto Refresh &nbsp;
 									<label class="custom-toggle">
@@ -91,6 +142,8 @@
 	<?php $this->load->view('admin/_partials/modal.php'); ?>
 	<?php $this->load->view('admin/_partials/js.php'); ?>
 	<script>
+
+	
 		function get_nilai_revisi(status, nilai = null) {
 			if (status === "Sudah Revisi") {
 				return "dengan Nilai Revisi = " + nilai;
@@ -219,20 +272,26 @@
 							if (row.status_pemberkasan !== 'approve') {
 								return "0"
 							}
+
 							if (row.detail.length === 3) {
 								let nilai = row.detail;
 								let nilai_total = 0;
 								let nilai_dosen = 0;
 								let nilai_perusahaan = row.nilai_perusahaan;
+								<?php foreach ($persen as $p): ?>
+								let pp1 = "<?php echo $p->pembimbing ?>";
+								let pp2 = "<?php echo $p->penguji12 ?>";
+								let pp3 = "<?php echo $p->perusahaan ?>";
+								<?php endforeach ?>
 								nilai.forEach(function (item) {
 									if (item.status === 'Pembimbing') {
-										nilai_dosen = (parseFloat(item.nilai_1) * 30) / 100;
+										nilai_dosen = (parseFloat(item.nilai_1) * pp1) / 100;
 									} else {
-										nilai_dosen = (parseFloat(item.nilai_1) * 10) / 100;
+										nilai_dosen = (parseFloat(item.nilai_1) * pp2) / 100;
 									}
 									nilai_total += parseFloat(nilai_dosen)
 								})
-								nilai_perusahaan = (parseFloat(nilai_perusahaan) * 50) / 100;
+								nilai_perusahaan = (parseFloat(nilai_perusahaan) * pp3) / 100;
 								nilai_total += nilai_perusahaan;
 								return nilai_total.toFixed(2);
 							} else if (row.detail.length > 3) {
@@ -254,15 +313,20 @@
 								let nilai_total = 0;
 								let nilai_dosen = 0;
 								let nilai_perusahaan = row.nilai_perusahaan;
+								<?php foreach ($persen as $p): ?>
+								let pp1 = "<?php echo $p->pembimbing ?>";
+								let pp2 = "<?php echo $p->penguji12 ?>";
+								let pp3 = "<?php echo $p->perusahaan ?>";
+								<?php endforeach ?>
 								nilai.forEach(function (item) {
 									if (item.status === 'Pembimbing') {
-										nilai_dosen = (parseFloat(item.nilai_1) * 30) / 100;
+										nilai_dosen = (parseFloat(item.nilai_1) * pp1) / 100;
 									} else {
-										nilai_dosen = (parseFloat(item.nilai_1) * 10) / 100;
+										nilai_dosen = (parseFloat(item.nilai_1) * pp2) / 100;
 									}
 									nilai_total += parseFloat(nilai_dosen)
 								})
-								nilai_perusahaan = (parseFloat(nilai_perusahaan) * 50) / 100;
+								nilai_perusahaan = (parseFloat(nilai_perusahaan) * pp3) / 100;
 								nilai_total += nilai_perusahaan;
 								return getMutu(nilai_total);
 							} else if (row.detail.length > 3) {

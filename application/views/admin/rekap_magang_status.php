@@ -46,10 +46,11 @@
 							<form action="<?php echo site_url('rekap?m=magang_status') ?>" method="POST">
 								<div class="float-right btn-group" role="group" aria-label="Basic example">
 									<button type="submit" name="prodi" value="all" class="btn btn-sm btn-primary <?php echo ($post_prodi=='all')?'active':null ?>">Semua</button>
-									<?php $pr = masterdata('tb_program_studi', null, 'alias,id_program_studi'); ?>
+									<?php $pr = masterdata('tb_program_studi', null, 'nama_program_studi, id_program_studi'); ?>
+						
 									<?php foreach ($pr as $p): ?>
 										<button type="submit" name="prodi" value="<?php echo $p->id_program_studi ?>"
-												class="btn btn-sm btn-primary <?php echo $p->id_program_studi == $post_prodi?"active":null?>"><?php echo $p->alias ?></button>
+												class="btn btn-sm btn-primary <?php echo $p->id_program_studi == $post_prodi?"active":null?>"><?php echo $p->nama_program_studi ?></button>
 									<?php endforeach; ?>
 								</div>
 							</form>

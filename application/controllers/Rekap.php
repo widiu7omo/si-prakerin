@@ -5,7 +5,7 @@ class Rekap extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('seminar_model');
+		$this->load->model(array('seminar_model','tahunakademik_model'));
 		$this->load->helper('master');
 		! $this->session->userdata( 'level' ) ? redirect( site_url( 'main' ) ) : null;
 	}
@@ -82,6 +82,9 @@ class Rekap extends CI_Controller
 				case 'finishing':
 					return $this->index_finishing();
 					break;
+				case 'belum_lulus':
+					return $this->index_belumfinishing();
+					break;
 				default:
 					redirect(site_url('rekap'));
 			}
@@ -142,7 +145,40 @@ class Rekap extends CI_Controller
 
 	public function index_finishing()
 	{
+		$data['ta'] = array();
+		$data['mahselesai'] = array();
+		$sem_model = $this->seminar_model;
+		$ta_model= $this->tahunakademik_model;
+		
+		$data['ta'] = $ta_model->getAll();
 
+		$id_ta = isset($_GET['filta']) ? $_GET['filta'] : null;
+
+		if ($id_ta) {
+			$data['mahselesai'] = $sem_model->get($id_ta, true);
+		} else {
+			$data['mahselesai'] = $sem_model->get(null, true);
+		}
+		$this->load->view('admin/rekap_mahselesai', $data);
+	}
+
+	public function index_belumfinishing()
+	{
+		$data['ta'] = array();
+		$data['mahbelumselesai'] = array();
+		$sem_model = $this->seminar_model;
+		$ta_model= $this->tahunakademik_model;
+		
+		$data['ta'] = $ta_model->getAll();
+
+		$id_ta = isset($_GET['filta']) ? $_GET['filta'] : null;
+
+		if ($id_ta) {
+			$data['mahbelumselesai'] = $sem_model->geta($id_ta, true);
+		} else {
+			$data['mahbelumselesai'] = $sem_model->geta(null, true);
+		}
+		$this->load->view('admin/rekap_mahbelumselesai', $data);
 	}
 
 

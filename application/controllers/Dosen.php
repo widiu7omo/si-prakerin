@@ -8,7 +8,7 @@ class Dosen extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->helper(array('upload', 'master', 'notification'));
-		$this->load->model(array('pembimbing_model', 'akun_model', 'pilihperusahaan_model', 'dosen_prodi_model'));
+		$this->load->model(array('pembimbing_model', 'akun_model', 'pilihperusahaan_model', 'dosen_prodi_model','prodi_model'));
 		$this->load->library('form_validation');
 		//middleware
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
@@ -111,16 +111,22 @@ class Dosen extends MY_Controller
 	//pembimbing
 	public function index_pembimbing()
 	{
+		$data['prodi'] = array();
 		$data['mahasiswa'] = array();
 		$data['dosens'] = array();
 		$dosen_prodi = $this->dosen_prodi_model;
+		$prodi_model= $this->prodi_model;
+		
+		$data['prodi'] = $prodi_model->getAll();
 
 		//id harus nip nik, karena mereka pegawai yang login pada tampilan backend
 		$nip_nik = $this->session->userdata('id');
 //		var_dump($_SESSION);
 		$id_prodi = masterdata('tb_dosen', "nip_nik = '$nip_nik'", 'id_program_studi', false);
+		$id_prodi = isset($_GET['filpro']) ? $_GET['filpro'] : null;
+
 		if ($id_prodi) {
-			$data['dosens'] = $dosen_prodi->get($id_prodi, null, true);
+			$data['dosens'] = $dosen_prodi->get(null, $id_prodi, true);
 		} else {
 			$data['dosens'] = $dosen_prodi->get(null, null, true);
 		}

@@ -3,6 +3,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Seminar_model extends CI_Model
 {
+	private $_table = "tb_peserta_lihat_seminar";
+	private $_table2 = "tb_dosen_bimbingan_mhs";
+	private $_table3 = "tb_kelengkapan_berkas";
+	private $_primary_key = "id_lihat";
+
+	public $id_lihat;
+	public $nimpes;
+	public $id;
+	public $status;
+
+	public function rules()
+	{
+		return [
+			['field' => 'nimpes',
+			'label' => 'NIMPeserta',
+			'rules' => 'required'],
+
+			['field' => 'id',
+			'label' => 'IDSeminar',
+			'rules' => 'required'],
+
+			['field' => 'status',
+			'label' => 'Status',
+			'rules' => 'required'],
+		];
+	}
+
 	public function get_tempat_seminar($alias = null)
 	{
 		$post = $this->input->post();
@@ -491,5 +518,127 @@ class Seminar_model extends CI_Model
 			return $this->db->trans_status();
 		}
 		return false;
+	}
+
+	public function tampil_tgl($id)
+
+	{
+		$hasil=$this->db->query("SELECT tsj.id, tm.nama_mahasiswa, tsj.id_dosen_bimbingan_mhs, tsj.mulai, tsj.berakhir FROM tb_seminar_jadwal tsj
+		 INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+		 INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim WHERE tm.nim = '$id'")->result();
+		return $hasil;
+	}
+
+	public function get_jadwal_sempes($date, $time=null)
+	{
+		$where = "WHERE ";
+		$datetime = $time ? $date . 'T' . $time : $date;
+		$where .= " tsj.mulai like '$datetime%'";
+		$hasil=$this->db->query("SELECT tsj.id, tm.nim, tm.nama_mahasiswa, tdbm.judul_laporan_mhs, tst.nama, tsj.mulai start, tsj.berakhir end, tpg.nama_pegawai, tp.nama_perusahaan FROM tb_seminar_jadwal tsj
+			INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+			INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
+			INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
+			INNER JOIN tb_mhs_pilih_perusahaan tmpp ON tmpp.nim = tm.nim
+			INNER JOIN tb_perusahaan tp ON tmpp.id_perusahaan = tp.id_perusahaan
+			INNER JOIN tb_pegawai tpg ON tdbm.nip_nik = tpg.nip_nik $where ORDER BY start")->result();
+		return $hasil;
+	// 	// return $this->db->query("
+	// 	// 	SELECT tsj.id, tm.nim, tm.nama_mahasiswa, tdbm.judul_laporan_mhs, tst.nama, tsj.mulai, tsj.berakhir, tp.nama_perusahaan FROM tb_seminar_jadwal tsj
+	// 	// 	INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tsj.id_dosen_bimbingan_mhs = tdbm.id_dosen_bimbingan_mhs
+	// 	// 	INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
+	// 	// 	INNER JOIN tb_seminar_tempat tst ON tst.id = tsj.id_seminar_ruangan
+	// 	// 	INNER JOIN tb_mhs_pilih_perusahaan tmpp ON tmpp.nim = tm.nim
+	// 	// 	INNER JOIN tb_perusahaan tp ON tmpp.id_perusahaan = tp.id_perusahaan")->result();
+	}
+
+	public function gabung_seminar(){
+		$post = $this->input->post();
+		$this->nimpes = $post["nimpes"];
+		$this->id = $post["id"];
+		$this->status= $post["status"];
+		return $this->db->insert($this->_table, $this);
+	}
+	
+	public function get_all_with_pes($id = null)
+	{
+		$this->db->reset_query();
+		$where = null;
+		if ($id) {
+			$where = array('tb_dosen_bimbingan_mhs.nip_nik' => $id);
+		}
+		$join = array('tb_mahasiswa', 'tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim', 'inner join');
+		return datajoin($this->_table2, $where, 'tb_mahasiswa.nama_mahasiswa,tb_dosen_bimbingan_mhs.*', $join);
+	}
+
+	public function accept()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$this->db->set(array('status' => 'accept'));
+			$this->db->where(array($this->_primary_key => $get['id']));
+			return $this->db->update($this->_table);
+		}
+		return false;
+	}
+
+	public function decline()
+	{
+		$get = $this->input->get();
+		if (isset($get['id'])) {
+			$this->db->set(array('status' => 'reject'));
+			$this->db->where(array($this->_primary_key => $get['id']));
+			return $this->db->update($this->_table);
+		}
+		return false;
+	}
+
+	public function count_lihatsem($id)
+	{
+		$hasil=$this->db->query("SELECT nimpes, COUNT(status) AS jumlah FROM tb_peserta_lihat_seminar WHERE status='accept' AND nimpes='$id'")->result();
+		return $hasil;
+	}
+
+	public function accberjamaah($id)
+	{
+		$this->db->set(array('status' => 'accept'));
+		$this->db->where('id_lihat', $id);
+		$this->db->update($this->_table);
+	}
+
+	public function getMahSelesai()
+	{
+		$hasil=$this->db->query("SELECT tdbm.nim, tm.nama_mahasiswa, tdbm.nip_nik, tp.nama_pegawai, tdbm.id_tahun_akademik, tta.tahun_akademik, tm.id_program_studi, tps.nama_program_studi FROM tb_kelengkapan_berkas tkb INNER JOIN tb_dosen_bimbingan_mhs tdbm ON tdbm.id_dosen_bimbingan_mhs = tkb.id_dosen_bimbingan_mhs
+		INNER JOIN tb_mahasiswa tm ON tm.nim = tdbm.nim
+		INNER JOIN tb_pegawai tp ON tp.nip_nik = tdbm.nip_nik
+		INNER JOIN tahun_akademik tta ON tta.id_tahun_akademik = tdbm.id_tahun_akademik
+		INNER JOIN tb_program_studi tps ON tps.id_program_studi = tm.id_program_studi WHERE tkb.status='approve'")->result();
+		return $hasil;
+	}
+
+	public function get($id_ta = null){
+		$where = "tb_kelengkapan_berkas.status='approve'";
+		
+		if($id_ta){
+			$where .= "AND tahun_akademik.id_tahun_akademik = '$id_ta'";
+		}
+		return datajoin($this->_table3 ,$where,'tb_dosen_bimbingan_mhs.nim, tb_mahasiswa.nama_mahasiswa, tb_dosen_bimbingan_mhs.nip_nik, tb_pegawai.nama_pegawai, tb_dosen_bimbingan_mhs.id_tahun_akademik, tahun_akademik.tahun_akademik, tb_mahasiswa.id_program_studi, tb_program_studi.nama_program_studi',
+		array(array('tb_dosen_bimbingan_mhs','tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs = tb_kelengkapan_berkas.id_dosen_bimbingan_mhs','INNER JOIN'),
+		array('tb_mahasiswa','tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim','INNER JOIN'),
+		array('tb_pegawai','tb_pegawai.nip_nik = tb_dosen_bimbingan_mhs.nip_nik','INNER JOIN'),
+		array('tahun_akademik','tahun_akademik.id_tahun_akademik = tb_dosen_bimbingan_mhs.id_tahun_akademik','INNER JOIN'),
+		array('tb_program_studi','tb_program_studi.id_program_studi = tb_mahasiswa.id_program_studi','INNER JOIN')),null,'tahun_akademik.tahun_akademik');
+	}
+
+	public function geta($id_ta = null){
+		$where = "tb_dosen_bimbingan_mhs.id_dosen_bimbingan_mhs NOT IN (SELECT id_dosen_bimbingan_mhs FROM tb_kelengkapan_berkas WHERE status='approve')";
+		
+		if($id_ta){
+			$where .= "AND tahun_akademik.id_tahun_akademik = '$id_ta'";
+		}
+		return datajoin($this->_table2 ,$where,'tb_dosen_bimbingan_mhs.nim, tb_mahasiswa.nama_mahasiswa, tb_dosen_bimbingan_mhs.nip_nik, tb_pegawai.nama_pegawai, tb_dosen_bimbingan_mhs.id_tahun_akademik, tahun_akademik.tahun_akademik, tb_mahasiswa.id_program_studi, tb_program_studi.nama_program_studi',
+		array(array('tb_mahasiswa','tb_mahasiswa.nim = tb_dosen_bimbingan_mhs.nim','INNER JOIN'),
+		array('tb_pegawai','tb_pegawai.nip_nik = tb_dosen_bimbingan_mhs.nip_nik','INNER JOIN'),
+		array('tahun_akademik','tahun_akademik.id_tahun_akademik = tb_dosen_bimbingan_mhs.id_tahun_akademik','INNER JOIN'),
+		array('tb_program_studi','tb_program_studi.id_program_studi = tb_mahasiswa.id_program_studi','INNER JOIN')),null,'tb_mahasiswa.nim');
 	}
 }

@@ -119,6 +119,7 @@ class Sidang extends CI_Controller
 
 	public function index_pendaftaran_seminar()
 	{
+		$id = $this->session->userdata('id');
 		$data = array();
 		$seminar = $this->seminar_model;
 		$data_seminar = $seminar->get_self_mahasiswa_seminar();
@@ -143,6 +144,7 @@ class Sidang extends CI_Controller
 			}
 
 		}
+		$data['jadwalku'] = $this->seminar_model->tampil_tgl($id);
 		$this->load->view('user/sidang_pendaftaran', $data);
 	}
 

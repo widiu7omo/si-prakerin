@@ -353,6 +353,7 @@ class Seminar extends MY_Controller
 		}
 		$tahunAkademik = masterdata('tb_waktu',null,'(select tahun_akademik from tahun_akademik where id_tahun_akademik = tb_waktu.id_tahun_akademik) tahun_akademik',true);
 		$data['tahun'] = $tahunAkademik[0]->tahun_akademik;
+		$data['persen'] = $penilaian->getpersentase();
 		$this->load->view('admin/rekap_akhir', $data);
 	}
 
@@ -640,6 +641,18 @@ class Seminar extends MY_Controller
 			$data['penguji_2'] = $seminar->count_penguji('p2');
 		}
 		return $this->load->view('admin/seminar_jadwal', $data);
+	}
+
+	public function updatepersen()
+	{
+		$perzen = $this->penilaian_model;
+		if ($perzen->editpersen()) {
+			$this->session->set_flashdata('status', (object)array('status' => 'Success', 'message' => 'Berhasil diubah', 'alert' => 'success'));
+		} else {
+			$this->session->set_flashdata('status', (object)array('status' => 'Error', 'message' => 'Gagal diubah', 'alert' => 'danger'));
+		}
+		redirect(site_url('seminar?m=rekap_akhir'));
+
 	}
 
 } ?>

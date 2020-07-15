@@ -27,19 +27,10 @@
 					<ul class="navbar-nav">
 						<?php if (!isset($development)): ?>
 							<li class="nav-item">
-								<a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse"
-								   role="button"
-								   aria-expanded="true" aria-controls="navbar-dashboards">
+								<a class="nav-link active" href="<?php echo site_url('dashboard') ?>">
 									<i class="fas fa-tachometer-alt text-primary"></i>
 									<span class="nav-link-text">Dashboards</span>
 								</a>
-								<div class="collapse show" id="navbar-dashboards">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item">
-											<a href="<?php echo site_url('dashboard') ?>" class="nav-link">Statistik</a>
-										</li>
-									</ul>
-								</div>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#navbar-master" data-toggle="collapse" role="button"
@@ -88,6 +79,12 @@
 								<a class="nav-link" href="<?php echo site_url('dosen') ?>">
 									<i class="fas fa-university text-danger"></i>
 									<span class="nav-link-text">Dosen</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="<?php echo site_url('peserta') ?>">
+									<i class="fas fa-users text-warning"></i>
+									<span class="nav-link-text">Peserta Seminar</span>
 								</a>
 							</li>
 							<li class="nav-item">

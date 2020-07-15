@@ -825,7 +825,10 @@
 									buttonsStyling: false,
 									confirmButtonClass: 'btn btn-primary btn-sm'
 								});
+								
+								
 							},
+
 							error: function () {
 								swal({
 									title: 'Error',
@@ -835,7 +838,9 @@
 									confirmButtonClass: 'btn btn-primary btn-sm'
 								});
 							}
+							
 						});
+						window.location.reload();
 						$('.new-event--form')[0].reset();
 						$('.new-event--title').closest('.form-group').removeClass('has-danger');
 						$('#new-event').modal('hide');

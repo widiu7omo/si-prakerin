@@ -96,6 +96,9 @@ $mahasiswas = datajoin('tb_mhs_pilih_perusahaan', $where, '*', $join, null, "tb_
 					<div class="card border-primary">
 						<div class="card-body">
 							<h4 class="card-title">Dosen </h4>
+                             <?php foreach ($prodi as $prodie): ?>
+                            <a href="<?php echo site_url("dosen?m=pembimbing&filpro=$prodie->id_program_studi") ?>" class="btn btn-primary btn-sm <?php echo (isset($_GET['filpro']) && $_GET['filpro']== $prodie->id_program_studi) ? 'active' : null ?>"> <?php echo "$prodie->nama_program_studi" ?></a>
+                            <?php endforeach ?>
 							<p class="card-text text-sm">*&nbsp;Drag dan Drop ke arah mahasiswa untuk mengembalikan</p>
 							<div style="height: 100%;max-height: 500px;overflow-y: scroll;padding:10px">
 								<?php foreach ($dosens as $dosen): ?>

@@ -58,12 +58,12 @@
 								<select id="select-ruangan-edit" class="form-control"></select>
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-12">
 							<div class="form-group">
 								<select id="select-penguji1-edit" class="form-control"></select>
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-12">
 							<div class="from-group">
 								<select id="select-penguji2-edit" class="form-control"></select>
 							</div>

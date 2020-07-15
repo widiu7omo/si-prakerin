@@ -5,19 +5,23 @@ class User extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('mahasiswa_model', 'konsultasi_model', 'pembimbing_model', 'penilaian_model'));
+		$this->load->model(array('mahasiswa_model', 'konsultasi_model', 'pembimbing_model', 'penilaian_model', 'seminar_model', 'peserta_model'));
 		$this->load->model('pegawai_model');
 		$this->load->library('form_validation');
-		$this->load->helper('notification');
+		$this->load->helper('notification','tanggal_indo');
 		!$this->session->userdata('level') ? redirect(site_url('main')) : null;
 	}
 
 	//dashboard user
 	public function index()
 	{
+		$id = $this->session->userdata('id');
 		$level = $this->session->userdata('level');
+		
 		switch ($level) {
-			case 'mahasiswa':
+			case 'mahasiswa' :
+				$data=array();
+				
 				$data['menus'] = array(
 					array('name' => 'SIG Perusahaan',
 						'href' => 'https://simpkl.politala.ac.id/sig/home',
@@ -26,6 +30,9 @@ class User extends CI_Controller
 						'message_intro' => 'SIG Perusahaan merupakan aplikasi geografis perusahaan, meliputi letak geografis, dan data penting terkait perusahaan magang anda',
 						'desc' => 'Sistem Informasi Pemetaan Mahasiswa yang melaksanakan Praktik Kerja Industri Politeknik Negeri Tanah Laut'),
 				);
+				
+				
+
 				$data['mahasiswa'] = $this->mahasiswa_model->getById();
 				$data['latest_bimbingan'] = $this->konsultasi_model->show_latest_bimbingan();
 				$data['get_pembimbing'] = $this->pembimbing_model->is_has();
@@ -39,6 +46,10 @@ class User extends CI_Controller
 				}
 				$data['intro'] = array(array('step_intro' => '5', 'message_intro' => 'Pastikan melihat informasi terlebih dahulu'), array('step_intro' => '6', 'message_intro' => 'Klik foto profil, dan pergi ke My Profile, dan ubah profil anda ketika pertama kali login. Hal ini bertujuan agar kalian bisa melakukan proses pengajuan magang'));
 				$data['intro_dashboard'] = true;
+
+				$data['jadwalku'] = $this->seminar_model->tampil_tgl($id);
+
+
 				break;
 			case 'dosen':
 				$data['menus'] = array(
@@ -51,6 +62,18 @@ class User extends CI_Controller
 				);
 				$data['dosen'] = $this->pegawai_model->getById();
 				$data['all_latest_bimbingan'] = $this->konsultasi_model->show_all_latest_bimbingan();
+				break;
+			case 'peserta':
+				$data['menus'] = array(
+					array('name' => 'SIG Perusahaan',
+						'href' => 'https://simpkl.politala.ac.id/sig/home',
+						'icon' => 'ni ni-square-pin',
+						'step_intro' => '2',
+						'message_intro' => 'SIG Perusahaan merupakan aplikasi geografis perusahaan, meliputi letak geografis, dan data penting terkait perusahaan magang anda',
+						'desc' => 'Sistem Informasi Pemetaan Mahasiswa yang melaksanakan Praktik Kerja Industri Politeknik Negeri Tanah Laut'),
+				);
+
+				$data['lihat'] = $this->seminar_model->count_lihatsem($id);
 				break;
 			default:
 				$data['menus'] = array();
@@ -69,6 +92,9 @@ class User extends CI_Controller
 				break;
 			case 'dosen':
 				$data['profile'] = $this->pegawai_model->getById($id);
+				break;
+			case 'peserta':
+				$data['profile'] = $this->peserta_model->getById($id);
 				break;
 			default:
 				$data['profile'] = null;
@@ -97,6 +123,20 @@ class User extends CI_Controller
 				break;
 			case 'dosen':
 				$data['profile'] = $this->pegawai_model->getById($id);
+				break;
+			case 'peserta':
+				if (!isset($id)) redirect('prodi');
+				$peserta = $this->$peserta_model;
+				$validation = $this->form_validation;
+				$validation->set_rules($peserta->rules());
+				if ($validation->run()) {
+					$peserta->update();
+					update_notification('read', 'profil', $id);
+					$this->session->set_flashdata('status', 'Berhasil dirubah');
+
+				} else {
+					$this->session->set_flashdata('status', 'Gagal Mengubah');
+				}
 				break;
 			default:
 				$data['profile'] = null;

@@ -66,12 +66,12 @@
 								<select required id="select-ruangan" class="form-control"></select>
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-12">
 							<div class="form-group">
 								<select required id="select-penguji1" class="form-control"></select>
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-12">
 							<div class="from-group">
 								<select required id="select-penguji2" class="form-control"></select>
 							</div>

@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Penilaian_model extends CI_Model
 {
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -323,5 +324,22 @@ class Penilaian_model extends CI_Model
 			INNER JOIN tb_pegawai tp2 ON tp2.nip_nik = td2.nip_nik
 		$where
 			ORDER BY status_dosen")->result();
+
 	}
+
+	public function getpersentase()
+	{
+		$hasil=$this->db->query("SELECT * FROM tb_persentase_nilai_akhir WHERE id='1'")->result();
+		return $hasil;
+	}
+
+	public function editpersen(){
+		$post = $this->input->post();
+		$id = $post['id'];
+		$data = array('pembimbing' => $post['pembimbing'],
+			'penguji12' => $post['penguji12'],
+			'perusahaan' => $post['perusahaan']);
+		return $this->db->update('tb_persentase_nilai_akhir', $data, "id = $id");
+	}
+
 }
